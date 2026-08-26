@@ -1,20 +1,933 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You by Dé</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FOR YOU | Maquiagem & Beleza</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffafc;
+      color: #333;
+    }
+
+    /* TOPO */
+    header {
+      background: white;
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .cart-button {
+      background: #222;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* BANNER */
+    .banner {
+      min-height: 480px;
+      padding: 70px 8%;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(120deg, #fbe8ef, #fff5f8);
+    }
+
+    .banner-content {
+      max-width: 600px;
+    }
+
+    .banner small {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    .banner h1 {
+      font-size: 55px;
+      margin: 18px 0;
+      line-height: 1.05;
+    }
+
+    .banner p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #222;
+      color: white;
+      padding: 15px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* SEÇÕES */
+    section {
+      padding: 70px 6%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #777;
+    }
+
+    /* CATEGORIAS */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .category {
+      background: white;
+      padding: 25px 15px;
+      text-align: center;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .category:hover {
+      transform: translateY(-5px);
+    }
+
+    .category span {
+      display: block;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* ACHADINHO */
+    .weekly {
+      background: #222;
+      color: white;
+      border-radius: 25px;
+      padding: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .weekly-text {
+      max-width: 600px;
+    }
+
+    .weekly h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .weekly p {
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    .weekly .button {
+      background: white;
+      color: #222;
+      white-space: nowrap;
+    }
+
+    /* PRODUTOS */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    }
+
+    .product-image {
+      height: 230px;
+      background: #f5e9ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .add-cart {
+      width: 100%;
+      border: none;
+      background: #222;
+      color: white;
+      padding: 12px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* BENEFÍCIOS */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .benefit {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .benefit span {
+      font-size: 35px;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .benefit h3 {
+      margin-bottom: 10px;
+    }
+
+    .benefit p {
+      color: #777;
+      line-height: 1.5;
+    }
+
+    /* WHATSAPP */
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 200;
+    }
+
+    /* RODAPÉ */
+    footer {
+      background: #222;
+      color: white;
+      padding: 45px 6%;
+      text-align: center;
+    }
+
+    footer h2 {
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      color: #bbb;
+      margin: 8px 0;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 900px) {
+
+      nav {
+        display: none;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .weekly {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 18px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .banner {
+        padding: 55px 25px;
+        min-height: 420px;
+      }
+
+      .banner h1 {
+        font-size: 40px;
+      }
+
+      section {
+        padding: 50px 20px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .product-image {
+        height: 170px;
+      }
+
+      .product-info {
+        padding: 14px;
+      }
+
+      .product-info h3 {
+        font-size: 14px;
+      }
+
+      .price {
+        font-size: 17px;
+      }
+
+      .weekly {
+        padding: 30px 25px;
+      }
+
+      .weekly h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <h1>For You by Dé</h1>
+  <!-- TOPO -->
+  <header>
 
-    <h2>✨ Tudo escolhido para você ✨</h2>
+    <div class="logo">FOR YOU</div>
 
-    <p>Bem-vinda à nossa loja!</p>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#envio">Envio</a>
+    </nav>
 
-    <button>Conheça nossos produtos</button>
+    <button class="cart-button" onclick="abrirCarrinho()">
+      🛒 Carrinho (<span id="cartCount">0</span>)
+    </button>
+
+  </header>
+
+
+  <!-- BANNER -->
+  <section class="banner" id="inicio">
+
+    <div class="banner-content">
+
+      <small>FOR YOU • MAQUIAGEM & BELEZA</small>
+
+      <h1>
+        Beleza que combina com você.
+      </h1>
+
+      <p>
+        Maquiagens escolhidas com carinho,
+        produtos que amamos e achadinhos
+        que merecem estar na sua nécessaire.
+      </p>
+
+      <a href="#produtos" class="button">
+        Comprar agora
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORIAS -->
+  <section id="categorias">
+
+    <div class="section-title">
+
+      <h2>✨ Encontre o que você procura</h2>
+
+      <p>
+        Explore nossas categorias
+      </p>
+
+    </div>
+
+    <div class="categories">
+
+      <div class="category">
+        <span>💄</span>
+        Batom
+      </div>
+
+      <div class="category">
+        <span>💋</span>
+        Gloss
+      </div>
+
+      <div class="category">
+        <span>✨</span>
+        Base
+      </div>
+
+      <div class="category">
+        <span>🤍</span>
+        Corretivo
+      </div>
+
+      <div class="category">
+        <span>🌸</span>
+        Blush
+      </div>
+
+      <div class="category">
+        <span>👁️</span>
+        Máscara de cílios
+      </div>
+
+      <div class="category">
+        <span>🎨</span>
+        Paletas
+      </div>
+
+      <div class="category">
+        <span>👜</span>
+        Acessórios
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ACHADINHO DA SEMANA -->
+  <section>
+
+    <div class="weekly">
+
+      <div class="weekly-text">
+
+        <h2>✨ ACHADINHO DA SEMANA</h2>
+
+        <p>
+          Toda semana escolhemos um produto especial
+          que chamou nossa atenção. Pode ser uma novidade,
+          uma promoção ou simplesmente aquele produto
+          que vale muito a pena conhecer.
+        </p>
+
+      </div>
+
+      <a href="#produtos" class="button">
+        Ver achadinho
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUTOS -->
+  <section id="produtos">
+
+    <div class="section-title">
+
+      <h2>💄 Produtos em destaque</h2>
+
+      <p>
+        Testamos, gostamos e colocamos na loja.
+      </p>
+
+    </div>
+
+    <div class="products">
+
+      <!-- PRODUTO 1 -->
+      <div class="product">
+
+        <div class="product-image">
+          💄
+        </div>
+
+        <div class="product-info">
+
+          <h3>Batom Matte</h3>
+
+          <p>
+            Acabamento confortável e longa duração.
+          </p>
+
+          <div class="price">
+            R$ 19,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Batom Matte', 19.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 2 -->
+      <div class="product">
+
+        <div class="product-image">
+          💋
+        </div>
+
+        <div class="product-info">
+
+          <h3>Gloss Labial</h3>
+
+          <p>
+            Brilho bonito e efeito confortável.
+          </p>
+
+          <div class="price">
+            R$ 15,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Gloss Labial', 15.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 3 -->
+      <div class="product">
+
+        <div class="product-image">
+          🌸
+        </div>
+
+        <div class="product-info">
+
+          <h3>Blush</h3>
+
+          <p>
+            Cor delicada para deixar a maquiagem linda.
+          </p>
+
+          <div class="price">
+            R$ 22,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Blush', 22.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 4 -->
+      <div class="product">
+
+        <div class="product-image">
+          ✨
+        </div>
+
+        <div class="product-info">
+
+          <h3>Base Líquida</h3>
+
+          <p>
+            Cobertura bonita para o dia a dia.
+          </p>
+
+          <div class="price">
+            R$ 29,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Base Líquida', 29.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 5 -->
+      <div class="product">
+
+        <div class="product-image">
+          🤍
+        </div>
+
+        <div class="product-info">
+
+          <h3>Corretivo</h3>
+
+          <p>
+            Textura leve e fácil de espalhar.
+          </p>
+
+          <div class="price">
+            R$ 21,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Corretivo', 21.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 6 -->
+      <div class="product">
+
+        <div class="product-image">
+          👁️
+        </div>
+
+        <div class="product-info">
+
+          <h3>Máscara de Cílios</h3>
+
+          <p>
+            Volume e definição para os cílios.
+          </p>
+
+          <div class="price">
+            R$ 24,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Máscara de Cílios', 24.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 7 -->
+      <div class="product">
+
+        <div class="product-image">
+          🎨
+        </div>
+
+        <div class="product-info">
+
+          <h3>Paleta de Sombras</h3>
+
+          <p>
+            Cores para criar vários looks.
+          </p>
+
+          <div class="price">
+            R$ 34,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Paleta de Sombras', 34.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUTO 8 -->
+      <div class="product">
+
+        <div class="product-image">
+          👜
+        </div>
+
+        <div class="product-info">
+
+          <h3>Nécessaire</h3>
+
+          <p>
+            Prática para guardar suas maquiagens.
+          </p>
+
+          <div class="price">
+            R$ 27,90
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="adicionarCarrinho('Nécessaire', 27.90)">
+            Adicionar ao carrinho
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BENEFÍCIOS -->
+  <section id="envio">
+
+    <div class="section-title">
+
+      <h2>💗 Por que comprar na FOR YOU?</h2>
+
+    </div>
+
+    <div class="benefits">
+
+      <div class="benefit">
+
+        <span>💗</span>
+
+        <h3>Escolhidos com carinho</h3>
+
+        <p>
+          Testamos, gostamos e colocamos na loja.
+        </p>
+
+      </div>
+
+      <div class="benefit">
+
+        <span>📦</span>
+
+        <h3>Enviamos para todo o Brasil</h3>
+
+        <p>
+          Receba seus produtos onde estiver.
+        </p>
+
+      </div>
+
+      <div class="benefit">
+
+        <span>✨</span>
+
+        <h3>Novidades toda semana</h3>
+
+        <p>
+          Sempre temos novidades e achadinhos para você.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WHATSAPP -->
+  <a
+    class="whatsapp"
+    href="https://wa.me/5500000000000"
+    target="_blank"
+    title="Fale conosco pelo WhatsApp">
+
+    📱
+
+  </a>
+
+
+  <!-- RODAPÉ -->
+  <footer>
+
+    <h2>FOR YOU</h2>
+
+    <p>
+      Testamos, gostamos e colocamos na loja.
+    </p>
+
+    <p>
+      💄 Maquiagem • Beleza • Achadinhos
+    </p>
+
+    <p>
+      © 2026 FOR YOU — Todos os direitos reservados.
+    </p>
+
+  </footer>
+
+
+  <!-- CARRINHO -->
+  <script>
+
+    let carrinho = [];
+
+    function adicionarCarrinho(nome, preco) {
+
+      carrinho.push({
+        nome: nome,
+        preco: preco
+      });
+
+      atualizarCarrinho();
+
+      alert(nome + " foi adicionado ao carrinho! 💗");
+    }
+
+
+    function atualizarCarrinho() {
+
+      document.getElementById("cartCount").innerText =
+        carrinho.length;
+
+    }
+
+
+    function abrirCarrinho() {
+
+      if (carrinho.length === 0) {
+
+        alert("Seu carrinho está vazio. 🛒");
+
+        return;
+
+      }
+
+      let mensagem = "🛍️ SEU CARRINHO%0A%0A";
+
+      let total = 0;
+
+      carrinho.forEach(function(item) {
+
+        mensagem +=
+          "• " + item.nome +
+          " - R$ " +
+          item.preco.toFixed(2).replace(".", ",") +
+          "%0A";
+
+        total += item.preco;
+
+      });
+
+      mensagem +=
+        "%0A💰 Total: R$ " +
+        total.toFixed(2).replace(".", ",");
+
+      mensagem +=
+        "%0A%0A📱 Quero finalizar meu pedido!";
+
+      window.open(
+        "https://wa.me/5500000000000?text=" + mensagem,
+        "_blank"
+      );
+
+    }
+
+  </script>
 
 </body>
 </html>
