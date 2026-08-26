@@ -1333,6 +1333,37 @@ alert(
 }
 
 </script>
+</script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://gqsmewyjwhoajhozjkqu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_L7tQ9H99_WSpsR2I6AboNg_ixEpIyf1";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function testarSupabase() {
+    const { data, error } = await supabaseClient
+        .from("produtos")
+        .select("*")
+        .eq("ativo", true);
+
+    if (error) {
+        console.error("Erro:", error);
+        return;
+    }
+
+    console.log("Produtos da FOR YOU:", data);
+}
+
+testarSupabase();
+</script>
+
+</body>
+</html>
 </body>
 </html>
