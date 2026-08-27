@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -155,30 +154,24 @@ header{
 }
 
 .menu-btn{
-  border:1px solid #ead9de;
-  border-radius:8px;
+  border:1.5px solid #e39aae;
   background:#fff;
-  color:#351f27;
-  padding:11px 16px;
+  color:#b83f61;
+  padding:11px 17px;
   font-size:11px;
   font-weight:bold;
   letter-spacing:.5px;
-  transition:all .25s ease;
-  box-shadow:0 2px 6px #351f2710;
+  border-radius:22px;
+  transition:.25s ease;
+  box-shadow:0 3px 10px rgba(184,63,97,.08);
 }
 
-.menu-btn:hover{
-  color:#b83f61;
-  border-color:#b83f61;
-  background:#fff5f7;
-  box-shadow:0 4px 12px #b83f6120;
-}
-
+.menu-btn:hover,
 .menu-btn.ativo{
-  color:#fff;
+  color:white;
   background:#b83f61;
   border-color:#b83f61;
-  box-shadow:0 4px 12px #b83f6130;
+  box-shadow:0 5px 15px rgba(184,63,97,.20);
 }
 
 /* =========================
@@ -188,13 +181,13 @@ header{
 .dropdown{
   display:none;
   position:absolute;
-  top:50px;
+  top:52px;
   left:50%;
   transform:translateX(-50%);
   width:245px;
   background:white;
-  border:1px solid #ead9de;
-  border-radius:8px;
+  border:1px solid #e39aae;
+  border-radius:12px;
   box-shadow:0 15px 35px #0002;
   z-index:300;
   text-align:left;
@@ -211,6 +204,7 @@ header{
   font-size:23px;
   color:#b83f61;
   border-bottom:1px solid #ead9de;
+  background:#fff0f4;
 }
 
 .dropdown a{
@@ -228,7 +222,7 @@ header{
 }
 
 /* =========================
-   OFERTAS E KITS
+   DESTAQUES
 ========================= */
 
 .destaques-menu{
@@ -240,7 +234,6 @@ header{
 
 .destaque-btn{
   border:1px solid #b83f61;
-  border-radius:7px;
   background:#fff5f7;
   color:#b83f61;
   padding:11px 24px;
@@ -248,6 +241,7 @@ header{
   font-weight:bold;
   letter-spacing:1px;
   transition:.2s;
+  border-radius:20px;
 }
 
 .destaque-btn:hover{
@@ -350,14 +344,9 @@ header{
   background:#351f27;
   color:white;
   border:0;
-  border-radius:5px;
   font-size:10px;
   font-weight:bold;
   letter-spacing:1px;
-}
-
-.btn:hover{
-  background:#b83f61;
 }
 
 /* =========================
@@ -405,14 +394,6 @@ header{
 .produto{
   background:white;
   border:1px solid #ead9de;
-  border-radius:6px;
-  overflow:hidden;
-  transition:.25s;
-}
-
-.produto:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 25px #351f2715;
 }
 
 .produto-img{
@@ -437,7 +418,6 @@ header{
   padding:7px 10px;
   font-size:8px;
   z-index:2;
-  border-radius:3px;
 }
 
 .produto-info{
@@ -469,10 +449,8 @@ header{
   margin-top:12px;
   background:white;
   border:1px solid #351f27;
-  border-radius:4px;
   font-size:9px;
   font-weight:bold;
-  transition:.2s;
 }
 
 .adicionar:hover{
@@ -514,7 +492,6 @@ header{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   background:white;
-  border:1px solid #ead9de;
 }
 
 .beneficio{
@@ -614,10 +591,6 @@ footer a{
   font-size:10px;
   margin:10px 0;
   text-decoration:none;
-}
-
-footer a:hover{
-  color:#efaebe;
 }
 
 footer p{
@@ -931,11 +904,15 @@ footer p{
     font-size:7px;
   }
 
+  .menu-principal{
+    overflow:visible;
+  }
+
   .menu-lista{
     justify-content:flex-start;
     overflow-x:auto;
     flex-wrap:nowrap;
-    padding:4px 2px 8px;
+    padding:4px 2px 10px;
   }
 
   .menu-btn{
@@ -994,6 +971,15 @@ footer p{
     font-size:21px;
   }
 
+  .menu-lista{
+    gap:7px;
+  }
+
+  .menu-btn{
+    padding:9px 13px;
+    font-size:10px;
+  }
+
   .produtos{
     gap:10px;
   }
@@ -1014,15 +1000,6 @@ footer p{
     min-height:470px;
   }
 
-  .hero h2{
-    font-size:40px;
-  }
-
-  .menu-btn{
-    padding:10px 13px;
-    font-size:10px;
-  }
-
 }
 
 </style>
@@ -1031,9 +1008,18 @@ footer p{
 
 <body>
 
+<!-- =========================
+     TOPO
+========================= -->
+
 <div class="topo">
 ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 </div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -1075,6 +1061,11 @@ id="contador"
 
 </div>
 
+
+<!-- =========================
+     MENU PRINCIPAL
+========================= -->
+
 <div class="menu-principal">
 
 <div class="menu-titulo">
@@ -1082,6 +1073,8 @@ MENU PRINCIPAL
 </div>
 
 <div class="menu-lista">
+
+<!-- LÁBIOS -->
 
 <div class="menu-item">
 
@@ -1111,6 +1104,9 @@ id="dropdown-labios"
 </div>
 
 </div>
+
+
+<!-- PELE -->
 
 <div class="menu-item">
 
@@ -1143,6 +1139,9 @@ id="dropdown-pele"
 
 </div>
 
+
+<!-- SKINCARE -->
+
 <div class="menu-item">
 
 <button
@@ -1173,6 +1172,9 @@ id="dropdown-skincare"
 
 </div>
 
+
+<!-- OLHOS -->
+
 <div class="menu-item">
 
 <button
@@ -1201,6 +1203,9 @@ id="dropdown-olhos"
 </div>
 
 </div>
+
+
+<!-- FACE -->
 
 <div class="menu-item">
 
@@ -1231,6 +1236,9 @@ id="dropdown-face"
 
 </div>
 
+
+<!-- ACESSÓRIOS -->
+
 <div class="menu-item">
 
 <button
@@ -1258,6 +1266,9 @@ id="dropdown-acessorios"
 </div>
 
 </div>
+
+
+<!-- CORPO -->
 
 <div class="menu-item">
 
@@ -1287,34 +1298,12 @@ id="dropdown-corpo"
 
 </div>
 
-<div class="menu-item">
-
-<button
-class="menu-btn"
-onclick="abrirMenu('ofertas',event)"
->
-Ofertas ▾
-</button>
-
-<div
-class="dropdown"
-id="dropdown-ofertas"
->
-
-<h3>Ofertas</h3>
-
-<a href="#ofertas">Ofertas da Semana</a>
-<a href="#kits">Kits Promocionais</a>
-<a href="#ofertas">Descontos</a>
-<a href="#ofertas">Últimas Unidades</a>
-<a href="#ofertas">Achadinhos em Oferta</a>
-<a href="#validade">Próximo da Validade</a>
-
 </div>
 
-</div>
 
-</div>
+<!-- =========================
+     DESTAQUES
+========================= -->
 
 <div class="destaques-menu">
 
@@ -1334,6 +1323,9 @@ onclick="document.getElementById('kits').scrollIntoView()"
 
 </div>
 
+
+<!-- BUSCA -->
+
 <div class="busca">
 
 <input
@@ -1351,6 +1343,11 @@ onkeyup="buscarProdutos()"
 
 </header>
 
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
 <div class="hero-content">
@@ -1360,17 +1357,24 @@ BEM-VINDA À FOR YOU
 </small>
 
 <h2>
+
 Beleza do seu jeito,
+
 <br>
+
 <span>
 escolhida por nós.
 </span>
+
 </h2>
 
 <p>
+
 Testamos, gostamos e colocamos na loja.
+
 Maquiagem, skincare, corpo, acessórios
 e aqueles achadinhos que você vai amar.
+
 </p>
 
 <button
@@ -1383,6 +1387,11 @@ VER NOVIDADES
 </div>
 
 </section>
+
+
+<!-- =========================
+     NOVIDADES
+========================= -->
 
 <section
 class="secao"
@@ -1417,7 +1426,6 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-alt="Base Glow"
 >
 
 </div>
@@ -1447,6 +1455,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1457,7 +1466,6 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
-alt="Gloss Rosé"
 >
 
 </div>
@@ -1487,6 +1495,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1497,7 +1506,6 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
-alt="Hidratante Facial"
 >
 
 </div>
@@ -1527,6 +1535,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1537,7 +1546,6 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
-alt="Paleta Glow"
 >
 
 </div>
@@ -1570,6 +1578,11 @@ ADICIONAR AO CARRINHO
 </div>
 
 </section>
+
+
+<!-- =========================
+     OFERTAS
+========================= -->
 
 <section
 class="secao ofertas"
@@ -1604,7 +1617,6 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
-alt="Batom Especial"
 >
 
 </div>
@@ -1634,6 +1646,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1644,7 +1657,6 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
-alt="Hidratante Glow"
 >
 
 </div>
@@ -1674,6 +1686,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1684,7 +1697,6 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
-alt="Body Splash"
 >
 
 </div>
@@ -1714,6 +1726,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto">
 
 <div class="produto-img">
@@ -1724,7 +1737,6 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-alt="Blush Rosé"
 >
 
 </div>
@@ -1757,6 +1769,11 @@ ADICIONAR AO CARRINHO
 </div>
 
 </section>
+
+
+<!-- =========================
+     KITS
+========================= -->
 
 <section
 class="secao kits"
@@ -1791,7 +1808,6 @@ KIT
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-alt="Kit Glow"
 >
 
 </div>
@@ -1821,6 +1837,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto kit-card">
 
 <div class="produto-img">
@@ -1831,7 +1848,6 @@ KIT
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
-alt="Kit Skincare"
 >
 
 </div>
@@ -1861,6 +1877,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto kit-card">
 
 <div class="produto-img">
@@ -1871,7 +1888,6 @@ KIT
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
-alt="Kit Lábios"
 >
 
 </div>
@@ -1901,6 +1917,7 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 <div class="produto kit-card">
 
 <div class="produto-img">
@@ -1911,7 +1928,6 @@ KIT
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
-alt="Kit Olhar"
 >
 
 </div>
@@ -1945,6 +1961,11 @@ ADICIONAR AO CARRINHO
 
 </section>
 
+
+<!-- =========================
+     CATEGORIAS
+========================= -->
+
 <section class="secao">
 
 <div class="titulo">
@@ -1971,7 +1992,6 @@ Encontre seus favoritos por categoria.
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
-alt="Batom Rosé"
 >
 
 </div>
@@ -2001,13 +2021,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="pele">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-alt="Base Glow"
 >
 
 </div>
@@ -2037,13 +2057,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="skincare">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
-alt="Hidratante Facial"
 >
 
 </div>
@@ -2073,13 +2093,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="olhos">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
-alt="Paleta Glow"
 >
 
 </div>
@@ -2109,13 +2129,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="face">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
-alt="Blush Rosé"
 >
 
 </div>
@@ -2145,13 +2165,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="acessorios">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
-alt="Kit de Pincéis"
 >
 
 </div>
@@ -2181,13 +2201,13 @@ ADICIONAR
 
 </div>
 
+
 <div class="produto" id="corpo">
 
 <div class="produto-img">
 
 <img
 src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
-alt="Body Splash"
 >
 
 </div>
@@ -2221,6 +2241,11 @@ ADICIONAR
 
 </section>
 
+
+<!-- =========================
+     BENEFÍCIOS
+========================= -->
+
 <section class="secao">
 
 <div class="beneficios">
@@ -2239,6 +2264,7 @@ Achadinhos selecionados para você.
 
 </div>
 
+
 <div class="beneficio">
 
 <div>✦</div>
@@ -2252,6 +2278,7 @@ Sempre tem novidade na FOR YOU.
 </span>
 
 </div>
+
 
 <div class="beneficio">
 
@@ -2270,6 +2297,11 @@ Escolha a melhor forma de entrega.
 </div>
 
 </section>
+
+
+<!-- =========================
+     NEWSLETTER
+========================= -->
 
 <section class="newsletter">
 
@@ -2297,6 +2329,11 @@ CADASTRAR
 
 </section>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
 <div class="footer-grid">
@@ -2314,6 +2351,7 @@ com carinho.
 </p>
 
 </div>
+
 
 <div>
 
@@ -2334,6 +2372,7 @@ Kits Promocionais
 </a>
 
 </div>
+
 
 <div>
 
@@ -2359,6 +2398,7 @@ Olhos
 
 </div>
 
+
 <div>
 
 <h3>
@@ -2381,6 +2421,7 @@ Dúvidas
 
 </div>
 
+
 <div class="copyright">
 
 © 2026 FOR YOU • Todos os direitos reservados.
@@ -2389,12 +2430,22 @@ Dúvidas
 
 </footer>
 
+
+<!-- =========================
+     OVERLAY
+========================= -->
+
 <div
 class="overlay"
 id="overlay"
 onclick="fecharCarrinho()"
 >
 </div>
+
+
+<!-- =========================
+     CARRINHO
+========================= -->
 
 <aside
 class="carrinho"
@@ -2416,11 +2467,13 @@ onclick="fecharCarrinho()"
 
 </div>
 
+
 <div
 class="itens"
 id="itens"
 >
 </div>
+
 
 <div class="frete">
 
@@ -2443,6 +2496,7 @@ CALCULAR
 
 </div>
 
+
 <a
 class="cep-link"
 href="https://buscacepinter.correios.com.br/app/endereco/index.php"
@@ -2450,6 +2504,7 @@ target="_blank"
 >
 Não sei meu CEP
 </a>
+
 
 <div
 class="endereco"
@@ -2461,6 +2516,7 @@ class="endereco-box"
 id="enderecoBox"
 >
 </div>
+
 
 <div class="campos">
 
@@ -2482,11 +2538,13 @@ placeholder="Ponto de referência (opcional)"
 
 </div>
 
+
 <div class="entregas">
 
 <h4>
 FORMA DE ENTREGA
 </h4>
+
 
 <label class="entrega">
 
@@ -2522,6 +2580,7 @@ R$ 0,00
 
 </label>
 
+
 <label class="entrega">
 
 <div class="entrega-esq">
@@ -2555,6 +2614,7 @@ R$ 0,00
 </div>
 
 </label>
+
 
 <label class="entrega">
 
@@ -2593,6 +2653,7 @@ GRÁTIS
 
 </div>
 
+
 <div class="resumo">
 
 <div class="linha">
@@ -2607,6 +2668,7 @@ R$ 0,00
 
 </div>
 
+
 <div class="linha">
 
 <span>
@@ -2618,6 +2680,7 @@ R$ 0,00
 </strong>
 
 </div>
+
 
 <div class="linha total">
 
@@ -2631,6 +2694,7 @@ R$ 0,00
 
 </div>
 
+
 <button
 class="whatsapp"
 onclick="finalizarWhatsApp()"
@@ -2642,6 +2706,7 @@ FINALIZAR PEDIDO PELO WHATSAPP
 
 </aside>
 
+
 <script>
 
 /* =========================
@@ -2649,6 +2714,7 @@ FINALIZAR PEDIDO PELO WHATSAPP
 ========================= */
 
 const WHATSAPP = "5511999999999";
+
 
 /* =========================
    CARRINHO
@@ -2670,6 +2736,7 @@ let valoresFrete = {
   expressa:0
 };
 
+
 /* =========================
    MOEDA
 ========================= */
@@ -2686,6 +2753,7 @@ function moeda(valor){
 
 }
 
+
 /* =========================
    SALVAR
 ========================= */
@@ -2698,6 +2766,7 @@ function salvar(){
   );
 
 }
+
 
 /* =========================
    ADICIONAR
@@ -2732,6 +2801,7 @@ function adicionar(nome,preco){
 
 }
 
+
 /* =========================
    ATUALIZAR
 ========================= */
@@ -2744,6 +2814,7 @@ function atualizar(){
   let quantidade = 0;
 
   let subtotal = 0;
+
 
   if(carrinho.length === 0){
 
@@ -2772,10 +2843,12 @@ function atualizar(){
         produto.preco *
         produto.quantidade;
 
+
         const item =
         document.createElement("div");
 
         item.className = "item";
+
 
         item.innerHTML = `
 
@@ -2829,19 +2902,23 @@ function atualizar(){
 
   }
 
+
   document.getElementById(
     "contador"
   ).textContent = quantidade;
+
 
   document.getElementById(
     "subtotal"
   ).textContent =
   moeda(subtotal);
 
+
   document.getElementById(
     "frete"
   ).textContent =
   moeda(freteAtual);
+
 
   document.getElementById(
     "total"
@@ -2851,6 +2928,7 @@ function atualizar(){
   );
 
 }
+
 
 /* =========================
    QUANTIDADE
@@ -2874,6 +2952,7 @@ function alterar(index,valor){
 
 }
 
+
 /* =========================
    REMOVER
 ========================= */
@@ -2887,6 +2966,7 @@ function remover(index){
   atualizar();
 
 }
+
 
 /* =========================
    CARRINHO
@@ -2904,6 +2984,7 @@ function abrirCarrinho(){
 
 }
 
+
 function fecharCarrinho(){
 
   document
@@ -2916,6 +2997,7 @@ function fecharCarrinho(){
 
 }
 
+
 /* =========================
    MENU CATEGORIAS
 ========================= */
@@ -2923,14 +3005,6 @@ function fecharCarrinho(){
 function abrirMenu(nome,event){
 
   event.stopPropagation();
-
-  const menuAtual =
-  document.getElementById(
-    "dropdown-" + nome
-  );
-
-  const estavaAberto =
-  menuAtual.classList.contains("aberto");
 
   document
   .querySelectorAll(".dropdown")
@@ -2940,6 +3014,7 @@ function abrirMenu(nome,event){
 
   });
 
+
   document
   .querySelectorAll(".menu-btn")
   .forEach(botao => {
@@ -2948,15 +3023,23 @@ function abrirMenu(nome,event){
 
   });
 
-  if(!estavaAberto){
 
-    menuAtual.classList.add("aberto");
+  const menu =
+  document.getElementById(
+    "dropdown-" + nome
+  );
 
-    event.currentTarget.classList.add("ativo");
 
-  }
+  const botao =
+  event.currentTarget;
+
+
+  menu.classList.add("aberto");
+
+  botao.classList.add("ativo");
 
 }
+
 
 /* =========================
    CLICAR FORA
@@ -2978,6 +3061,7 @@ document.addEventListener(
 
       });
 
+
       document
       .querySelectorAll(".menu-btn")
       .forEach(botao => {
@@ -2991,6 +3075,7 @@ document.addEventListener(
   }
 );
 
+
 /* =========================
    CEP
 ========================= */
@@ -3001,6 +3086,7 @@ function mascaraCEP(input){
   input.value
   .replace(/\D/g,"")
   .substring(0,8);
+
 
   if(valor.length > 5){
 
@@ -3013,9 +3099,11 @@ function mascaraCEP(input){
 
   }
 
+
   input.value = valor;
 
 }
+
 
 /* =========================
    BUSCAR CEP
@@ -3029,6 +3117,7 @@ async function buscarCEP(){
   .value
   .replace(/\D/g,"");
 
+
   if(cep.length !== 8){
 
     alert(
@@ -3039,20 +3128,24 @@ async function buscarCEP(){
 
   }
 
+
   const endereco =
   document.getElementById(
     "endereco"
   );
+
 
   const box =
   document.getElementById(
     "enderecoBox"
   );
 
+
   endereco.classList.add("ativo");
 
   box.innerHTML =
   "Consultando endereço...";
+
 
   try{
 
@@ -3061,8 +3154,10 @@ async function buscarCEP(){
       `https://viacep.com.br/ws/${cep}/json/`
     );
 
+
     const dados =
     await resposta.json();
+
 
     if(dados.erro){
 
@@ -3073,7 +3168,9 @@ async function buscarCEP(){
 
     }
 
+
     enderecoDados = dados;
+
 
     box.innerHTML = `
 
@@ -3098,9 +3195,11 @@ async function buscarCEP(){
 
     `;
 
+
     calcularFrete(
       dados.uf
     );
+
 
   }catch(error){
 
@@ -3110,6 +3209,7 @@ async function buscarCEP(){
   }
 
 }
+
 
 /* =========================
    FRETE
@@ -3153,6 +3253,7 @@ function calcularFrete(uf){
 
   };
 
+
   const valores =
   tabela[uf] ||
   {
@@ -3160,17 +3261,21 @@ function calcularFrete(uf){
     expressa:32
   };
 
+
   valoresFrete = valores;
+
 
   document.getElementById(
     "valorPadrao"
   ).textContent =
   moeda(valores.padrao);
 
+
   document.getElementById(
     "valorExpressa"
   ).textContent =
   moeda(valores.expressa);
+
 
   if(entregaSelecionada){
 
@@ -3182,6 +3287,7 @@ function calcularFrete(uf){
 
 }
 
+
 /* =========================
    ENTREGA
 ========================= */
@@ -3189,6 +3295,7 @@ function calcularFrete(uf){
 function selecionarEntrega(tipo){
 
   entregaSelecionada = tipo;
+
 
   if(tipo === "retirada"){
 
@@ -3209,12 +3316,14 @@ function selecionarEntrega(tipo){
 
     }
 
+
     if(tipo === "padrao"){
 
       freteAtual =
       valoresFrete.padrao;
 
     }
+
 
     if(tipo === "expressa"){
 
@@ -3225,9 +3334,11 @@ function selecionarEntrega(tipo){
 
   }
 
+
   atualizar();
 
 }
+
 
 /* =========================
    BUSCA
@@ -3241,6 +3352,7 @@ function buscarProdutos(){
   .value
   .toLowerCase();
 
+
   document
   .querySelectorAll(".produto")
   .forEach(
@@ -3250,15 +3362,17 @@ function buscarProdutos(){
       produto.innerText
       .toLowerCase();
 
+
       produto.style.display =
       texto.includes(termo)
-      ? ""
+      ? "block"
       : "none";
 
     }
   );
 
 }
+
 
 /* =========================
    WHATSAPP
@@ -3276,11 +3390,13 @@ function finalizarWhatsApp(){
 
   }
 
+
   const cep =
   document
   .getElementById("cep")
   .value
   .trim();
+
 
   if(
     cep.replace(/\D/g,"").length !== 8
@@ -3294,11 +3410,13 @@ function finalizarWhatsApp(){
 
   }
 
+
   const numero =
   document
   .getElementById("numero")
   .value
   .trim();
+
 
   if(!numero){
 
@@ -3310,6 +3428,7 @@ function finalizarWhatsApp(){
 
   }
 
+
   if(!entregaSelecionada){
 
     alert(
@@ -3320,13 +3439,17 @@ function finalizarWhatsApp(){
 
   }
 
+
   let subtotal = 0;
+
 
   let mensagem =
   "Olá! Quero fazer um pedido na FOR YOU.\n\n";
 
+
   mensagem +=
   "*MEU PEDIDO*\n";
+
 
   carrinho.forEach(
     produto => {
@@ -3335,7 +3458,9 @@ function finalizarWhatsApp(){
       produto.preco *
       produto.quantidade;
 
+
       subtotal += valor;
+
 
       mensagem +=
       "• " +
@@ -3349,25 +3474,31 @@ function finalizarWhatsApp(){
     }
   );
 
+
   mensagem +=
   "\n*RESUMO*\n";
+
 
   mensagem +=
   "Subtotal: " +
   moeda(subtotal) +
   "\n";
 
+
   mensagem +=
   "Frete: " +
   moeda(freteAtual) +
   "\n";
+
 
   mensagem +=
   "Total: " +
   moeda(subtotal + freteAtual) +
   "\n\n";
 
+
   let nomeEntrega = "";
+
 
   if(
     entregaSelecionada === "padrao"
@@ -3378,6 +3509,7 @@ function finalizarWhatsApp(){
 
   }
 
+
   if(
     entregaSelecionada === "expressa"
   ){
@@ -3386,6 +3518,7 @@ function finalizarWhatsApp(){
     "Entrega expressa";
 
   }
+
 
   if(
     entregaSelecionada === "retirada"
@@ -3396,13 +3529,16 @@ function finalizarWhatsApp(){
 
   }
 
+
   mensagem +=
   "*FORMA DE ENTREGA*\n" +
   nomeEntrega +
   "\n\n";
 
+
   mensagem +=
   "*ENDEREÇO*\n";
+
 
   if(enderecoDados){
 
@@ -3412,11 +3548,13 @@ function finalizarWhatsApp(){
     numero +
     "\n";
 
+
     const complemento =
     document
     .getElementById("complemento")
     .value
     .trim();
+
 
     if(complemento){
 
@@ -3427,9 +3565,11 @@ function finalizarWhatsApp(){
 
     }
 
+
     mensagem +=
     enderecoDados.bairro +
     "\n";
+
 
     mensagem +=
     enderecoDados.localidade +
@@ -3439,16 +3579,19 @@ function finalizarWhatsApp(){
 
   }
 
+
   const referencia =
   document
   .getElementById("referencia")
   .value
   .trim();
 
+
   mensagem +=
   "CEP: " +
   cep +
   "\n";
+
 
   if(referencia){
 
@@ -3459,6 +3602,7 @@ function finalizarWhatsApp(){
 
   }
 
+
   const url =
   "https://wa.me/" +
   WHATSAPP +
@@ -3467,12 +3611,14 @@ function finalizarWhatsApp(){
     mensagem
   );
 
+
   window.open(
     url,
     "_blank"
   );
 
 }
+
 
 /* =========================
    NEWSLETTER
@@ -3488,6 +3634,7 @@ function newsletter(){
 
 }
 
+
 /* =========================
    INICIAR
 ========================= */
@@ -3498,4 +3645,3 @@ atualizar();
 
 </body>
 </html>
-```
