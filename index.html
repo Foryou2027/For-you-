@@ -63,53 +63,48 @@ header{
     display:flex;
     align-items:center;
     gap:18px;
-    position:relative;
 }
 
-/* =========================
-   LOGO CENTRALIZADA
-========================= */
+/* FOR YOU VOLTOU AO FORMATO ANTERIOR */
 
 .logo-area{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-
     display:flex;
     align-items:center;
-    gap:7px;
-
-    z-index:5;
+    gap:8px;
+    min-width:max-content;
 }
 
 .logo{
     font-size:30px;
     font-weight:900;
     letter-spacing:-1px;
-    color:#000;
+    color:var(--rosa);
     font-family:Georgia,serif;
-    white-space:nowrap;
 }
 
 .logo-sub{
-    display:none;
+    font-size:10px;
+    color:#999;
+    letter-spacing:2px;
+    margin-top:20px;
+    margin-left:-3px;
 }
 
-/* coração ao lado do FOR YOU */
+/* CORAÇÃO VOLTOU PARA PERTO DO CARRINHO */
 
 .favoritos-topo{
     border:0;
-    background:transparent;
+    background:#fff;
     color:#e53935;
-    font-size:29px;
-    width:42px;
-    height:42px;
+    font-size:25px;
+    width:45px;
+    height:45px;
+    border-radius:12px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:50%;
     transition:.2s;
+    position:relative;
 }
 
 .favoritos-topo:hover{
@@ -117,15 +112,9 @@ header{
     transform:scale(1.08);
 }
 
-/* =========================
-   BUSCA
-========================= */
-
 .busca{
     flex:1;
     position:relative;
-    margin-right:auto;
-    max-width:520px;
 }
 
 .busca input{
@@ -156,15 +145,10 @@ header{
     color:#fff;
 }
 
-/* =========================
-   AÇÕES
-========================= */
-
 .acoes{
     display:flex;
     align-items:center;
     gap:7px;
-    margin-left:auto;
 }
 
 .acao{
@@ -199,7 +183,7 @@ header{
 }
 
 /* =========================
-   MENU PRINCIPAL
+   MENU
 ========================= */
 
 .menu{
@@ -219,7 +203,7 @@ header{
     flex:none;
     border:1px solid var(--rosa-borda);
     background:#fff;
-    color:#000;
+    color:var(--rosa-escuro);
     border-radius:22px;
     padding:10px 17px;
     font-size:13px;
@@ -229,9 +213,9 @@ header{
 
 .menu-btn:hover,
 .menu-btn.ativo{
-    background:#000;
+    background:var(--rosa);
     color:#fff;
-    border-color:#000;
+    border-color:var(--rosa);
 }
 
 .menu-btn.oferta{
@@ -242,15 +226,6 @@ header{
 .menu-btn.kit{
     background:#fff0f5;
     color:#d81b60;
-}
-
-.menu-btn.oferta:hover,
-.menu-btn.oferta.ativo,
-.menu-btn.kit:hover,
-.menu-btn.kit.ativo{
-    background:#000;
-    color:#fff;
-    border-color:#000;
 }
 
 /* =========================
@@ -267,10 +242,6 @@ header{
 .pagina.ativa{
     display:block;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
     background:linear-gradient(135deg,#fff0f6,#fff8fb);
@@ -291,10 +262,6 @@ header{
 .hero p{
     color:#777;
 }
-
-/* =========================
-   TÍTULOS
-========================= */
 
 .titulo-secao{
     display:flex;
@@ -455,11 +422,6 @@ header{
     font-size:22px;
     box-shadow:0 2px 8px rgba(0,0,0,.10);
     z-index:2;
-    transition:.2s;
-}
-
-.favoritar-produto:hover{
-    transform:scale(1.1);
 }
 
 .favoritar-produto.favoritado{
@@ -579,7 +541,7 @@ header{
 }
 
 /* =========================
-   VAZIO
+   FAVORITOS
 ========================= */
 
 .vazio{
@@ -908,36 +870,21 @@ footer strong{
 @media(max-width:650px){
 
     .topo{
-        min-height:125px;
         flex-wrap:wrap;
         gap:8px;
-        padding-top:65px;
-    }
-
-    .logo-area{
-        top:30px;
     }
 
     .logo{
         font-size:25px;
     }
 
-    .favoritos-topo{
-        font-size:26px;
-        width:36px;
-        height:36px;
+    .logo-sub{
+        display:none;
     }
 
     .busca{
         order:3;
         flex-basis:100%;
-        max-width:none;
-    }
-
-    .acoes{
-        position:absolute;
-        right:12px;
-        top:18px;
     }
 
     .produtos{
@@ -1003,26 +950,11 @@ footer strong{
 
     <div class="topo">
 
-        <!-- LOGO CENTRALIZADA + CORAÇÃO -->
-
+        <!-- LOGO NO FORMATO ANTERIOR -->
         <div class="logo-area">
-
-            <div class="logo">
-                FOR YOU
-            </div>
-
-            <button
-                class="favoritos-topo"
-                onclick="abrirPagina('favoritos')"
-                title="Meus favoritos"
-                aria-label="Meus favoritos">
-                ♥
-            </button>
-
+            <div class="logo">FOR YOU</div>
+            <div class="logo-sub">STORE</div>
         </div>
-
-
-        <!-- BUSCA -->
 
         <div class="busca">
 
@@ -1033,14 +965,9 @@ footer strong{
                 oninput="buscarProdutos()"
             >
 
-            <button onclick="buscarProdutos()">
-                🔍
-            </button>
+            <button onclick="buscarProdutos()">🔍</button>
 
         </div>
-
-
-        <!-- AÇÕES -->
 
         <div class="acoes">
 
@@ -1049,6 +976,14 @@ footer strong{
                 onclick="abrirPagina('inicio')"
                 title="Início">
                 🏠
+            </button>
+
+            <!-- CORAÇÃO VOLTOU PARA PERTO DO CARRINHO -->
+            <button
+                class="acao favoritos-topo"
+                onclick="abrirPagina('favoritos')"
+                title="Meus favoritos">
+                ♥
             </button>
 
             <button
@@ -1069,9 +1004,6 @@ footer strong{
         </div>
 
     </div>
-
-
-    <!-- MENU -->
 
     <nav class="menu">
 
@@ -1103,7 +1035,6 @@ footer strong{
 
 </header>
 
-
 <!-- =========================
      INÍCIO
 ========================= -->
@@ -1112,9 +1043,7 @@ footer strong{
 
     <section class="hero">
 
-        <h1>
-            FOR YOU
-        </h1>
+        <h1>FOR YOU</h1>
 
         <p>
             Encontre aquilo que foi feito especialmente para você 💗
@@ -1122,12 +1051,9 @@ footer strong{
 
     </section>
 
-
     <div class="titulo-secao">
 
-        <h2>
-            Categorias
-        </h2>
+        <h2>Categorias</h2>
 
         <span>
             Escolha uma categoria
@@ -1135,102 +1061,69 @@ footer strong{
 
     </div>
 
-
     <section class="categorias">
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Feminino')">
 
-            <div class="icone">
-                👗
-            </div>
+            <div class="icone">👗</div>
 
-            <strong>
-                Feminino
-            </strong>
+            <strong>Feminino</strong>
 
         </button>
-
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Masculino')">
 
-            <div class="icone">
-                👔
-            </div>
+            <div class="icone">👔</div>
 
-            <strong>
-                Masculino
-            </strong>
+            <strong>Masculino</strong>
 
         </button>
-
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Beleza')">
 
-            <div class="icone">
-                💄
-            </div>
+            <div class="icone">💄</div>
 
-            <strong>
-                Beleza
-            </strong>
+            <strong>Beleza</strong>
 
         </button>
-
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Acessórios')">
 
-            <div class="icone">
-                💍
-            </div>
+            <div class="icone">💍</div>
 
-            <strong>
-                Acessórios
-            </strong>
+            <strong>Acessórios</strong>
 
         </button>
-
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Casa')">
 
-            <div class="icone">
-                🏠
-            </div>
+            <div class="icone">🏠</div>
 
-            <strong>
-                Casa
-            </strong>
+            <strong>Casa</strong>
 
         </button>
-
 
         <button
             class="categoria"
             onclick="filtrarCategoria('Presentes')">
 
-            <div class="icone">
-                🎀
-            </div>
+            <div class="icone">🎀</div>
 
-            <strong>
-                Presentes
-            </strong>
+            <strong>Presentes</strong>
 
         </button>
 
     </section>
-
-
-    <!-- DESTAQUES -->
 
     <section class="destaques">
 
@@ -1238,9 +1131,7 @@ footer strong{
             class="destaque ofertas"
             onclick="abrirPagina('ofertas')">
 
-            <h3>
-                🏷️ Ofertas
-            </h3>
+            <h3>🏷️ Ofertas</h3>
 
             <p>
                 Produtos selecionados com preços especiais.
@@ -1248,14 +1139,11 @@ footer strong{
 
         </div>
 
-
         <div
             class="destaque kits"
             onclick="abrirPagina('kits')">
 
-            <h3>
-                🎁 Kits Promocionais
-            </h3>
+            <h3>🎁 Kits Promocionais</h3>
 
             <p>
                 Combinações especiais para você aproveitar.
@@ -1264,9 +1152,6 @@ footer strong{
         </div>
 
     </section>
-
-
-    <!-- PRODUTOS -->
 
     <div class="titulo-secao">
 
@@ -1278,14 +1163,12 @@ footer strong{
 
     </div>
 
-
     <section
         class="produtos"
         id="listaProdutos">
     </section>
 
 </main>
-
 
 <!-- =========================
      OFERTAS
@@ -1295,9 +1178,7 @@ footer strong{
 
     <div class="pagina-banner banner-ofertas">
 
-        <h1>
-            🏷️ Ofertas
-        </h1>
+        <h1>🏷️ Ofertas</h1>
 
         <p>
             Aproveite nossos produtos com preços especiais.
@@ -1312,7 +1193,6 @@ footer strong{
 
 </section>
 
-
 <!-- =========================
      KITS
 ========================= -->
@@ -1321,9 +1201,7 @@ footer strong{
 
     <div class="pagina-banner banner-kits">
 
-        <h1>
-            🎁 Kits Promocionais
-        </h1>
+        <h1>🎁 Kits Promocionais</h1>
 
         <p>
             Kits preparados especialmente para você.
@@ -1338,7 +1216,6 @@ footer strong{
 
 </section>
 
-
 <!-- =========================
      FAVORITOS
 ========================= -->
@@ -1347,9 +1224,7 @@ footer strong{
 
     <div class="pagina-banner banner-ofertas">
 
-        <h1>
-            ❤️ Meus Favoritos
-        </h1>
+        <h1>❤️ Meus Favoritos</h1>
 
         <p>
             Aqui ficam os produtos que você marcou com coração.
@@ -1364,7 +1239,6 @@ footer strong{
 
 </section>
 
-
 <!-- =========================
      CARRINHO
 ========================= -->
@@ -1373,16 +1247,13 @@ footer strong{
 
     <div class="pagina-banner banner-ofertas">
 
-        <h1>
-            🛒 Meu Carrinho
-        </h1>
+        <h1>🛒 Meu Carrinho</h1>
 
         <p>
             Confira seus produtos antes de finalizar.
         </p>
 
     </div>
-
 
     <div class="carrinho-layout">
 
@@ -1393,21 +1264,13 @@ footer strong{
                 id="listaCarrinho">
             </div>
 
-
-            <!-- CHECKOUT -->
-
             <div class="checkout">
 
-                <h3>
-                    📦 Entrega
-                </h3>
-
+                <h3>📦 Entrega</h3>
 
                 <div class="form-grupo">
 
-                    <label>
-                        CEP
-                    </label>
+                    <label>CEP</label>
 
                     <div class="cep-box">
 
@@ -1431,14 +1294,11 @@ footer strong{
 
                 </div>
 
-
                 <div class="form-grid">
 
                     <div class="form-grupo">
 
-                        <label>
-                            Nome
-                        </label>
+                        <label>Nome</label>
 
                         <input
                             id="clienteNome"
@@ -1447,12 +1307,9 @@ footer strong{
 
                     </div>
 
-
                     <div class="form-grupo">
 
-                        <label>
-                            Telefone
-                        </label>
+                        <label>Telefone</label>
 
                         <input
                             id="clienteTelefone"
@@ -1463,12 +1320,9 @@ footer strong{
 
                 </div>
 
-
                 <div class="form-grupo">
 
-                    <label>
-                        Endereço
-                    </label>
+                    <label>Endereço</label>
 
                     <input
                         id="clienteEndereco"
@@ -1477,14 +1331,9 @@ footer strong{
 
                 </div>
 
-
-                <!-- ENTREGA -->
-
                 <div class="form-grupo">
 
-                    <label>
-                        Opções de entrega
-                    </label>
+                    <label>Opções de entrega</label>
 
                     <div class="entregas">
 
@@ -1503,7 +1352,6 @@ footer strong{
 
                         </label>
 
-
                         <label class="entrega">
 
                             <input
@@ -1517,7 +1365,6 @@ footer strong{
                             ⚡ Entrega expressa — R$ 20,00
 
                         </label>
-
 
                         <label class="entrega">
 
@@ -1537,35 +1384,35 @@ footer strong{
 
                 </div>
 
-
-                <!-- PAGAMENTO -->
-
-                <h3>
-                    💳 Forma de pagamento
-                </h3>
+                <h3>💳 Forma de pagamento</h3>
 
                 <div class="pagamentos">
 
                     <div
                         class="pagamento selecionado"
                         onclick="selecionarPagamento(this,'Pix')">
+
                         💚 Pix
+
                     </div>
 
                     <div
                         class="pagamento"
                         onclick="selecionarPagamento(this,'Cartão')">
+
                         💳 Cartão
+
                     </div>
 
                     <div
                         class="pagamento"
                         onclick="selecionarPagamento(this,'Dinheiro')">
+
                         💵 Dinheiro
+
                     </div>
 
                 </div>
-
 
                 <button
                     class="btn-whatsapp"
@@ -1579,20 +1426,13 @@ footer strong{
 
         </div>
 
-
-        <!-- RESUMO -->
-
         <aside class="resumo">
 
-            <h3>
-                Resumo do pedido
-            </h3>
+            <h3>Resumo do pedido</h3>
 
             <div class="linha">
 
-                <span>
-                    Subtotal
-                </span>
+                <span>Subtotal</span>
 
                 <strong id="subtotal">
                     R$ 0,00
@@ -1600,12 +1440,9 @@ footer strong{
 
             </div>
 
-
             <div class="linha">
 
-                <span>
-                    Entrega
-                </span>
+                <span>Entrega</span>
 
                 <strong id="valorEntrega">
                     R$ 10,00
@@ -1613,12 +1450,9 @@ footer strong{
 
             </div>
 
-
             <div class="linha total">
 
-                <span>
-                    Total
-                </span>
+                <span>Total</span>
 
                 <strong id="total">
                     R$ 10,00
@@ -1632,16 +1466,9 @@ footer strong{
 
 </section>
 
-
-<!-- =========================
-     RODAPÉ
-========================= -->
-
 <footer>
 
-    <strong>
-        FOR YOU
-    </strong>
+    <strong>FOR YOU</strong>
 
     <p style="margin-top:8px;">
         Feito com carinho para você 💗
@@ -1649,12 +1476,10 @@ footer strong{
 
 </footer>
 
-
 <div
     class="toast"
     id="toast">
 </div>
-
 
 <script>
 
@@ -1834,7 +1659,6 @@ const produtos = [
 
 ];
 
-
 /* =====================================================
    ESTADO
 ===================================================== */
@@ -1846,7 +1670,6 @@ let carrinho =
     JSON.parse(localStorage.getItem("forYouCarrinho")) || [];
 
 let pagamento = "Pix";
-
 
 /* =====================================================
    FORMATAÇÃO
@@ -1861,9 +1684,8 @@ function dinheiro(valor){
 
 }
 
-
 /* =====================================================
-   CARD DO PRODUTO
+   CARD
 ===================================================== */
 
 function criarCard(produto){
@@ -1891,7 +1713,6 @@ function criarCard(produto){
 
     }
 
-
     let estoqueTag = "";
 
     if(produto.estoque <= 3){
@@ -1903,7 +1724,6 @@ function criarCard(produto){
         `;
 
     }
-
 
     let precoHTML = "";
 
@@ -1937,7 +1757,6 @@ function criarCard(produto){
 
     }
 
-
     return `
 
         <article class="produto">
@@ -1945,7 +1764,6 @@ function criarCard(produto){
             ${tag}
 
             ${estoqueTag}
-
 
             <button
                 class="favoritar-produto ${favoritado ? "favoritado":""}"
@@ -1956,7 +1774,6 @@ function criarCard(produto){
 
             </button>
 
-
             <div class="produto-img">
 
                 <div class="produto-placeholder">
@@ -1965,13 +1782,11 @@ function criarCard(produto){
 
             </div>
 
-
             <div class="produto-info">
 
                 <div class="produto-nome">
                     ${produto.nome}
                 </div>
-
 
                 <div class="avaliacao">
 
@@ -1983,9 +1798,7 @@ function criarCard(produto){
 
                 </div>
 
-
                 ${precoHTML}
-
 
                 ${
                     produto.estoque <= 3
@@ -1998,7 +1811,6 @@ function criarCard(produto){
                     :
                     ""
                 }
-
 
                 <button
                     class="btn-comprar"
@@ -2016,9 +1828,8 @@ function criarCard(produto){
 
 }
 
-
 /* =====================================================
-   RENDERIZAR PRODUTOS
+   RENDERIZAÇÃO
 ===================================================== */
 
 function renderizarProdutos(lista = produtos){
@@ -2029,11 +1840,11 @@ function renderizarProdutos(lista = produtos){
     area.innerHTML =
         lista.map(criarCard).join("");
 
-    document.getElementById("resultadoBusca").textContent =
+    document.getElementById("resultadoBusca")
+        .textContent =
         `${lista.length} produto(s)`;
 
 }
-
 
 function renderizarOfertas(){
 
@@ -2048,7 +1859,6 @@ function renderizarOfertas(){
 
 }
 
-
 function renderizarKits(){
 
     const area =
@@ -2062,7 +1872,6 @@ function renderizarKits(){
 
 }
 
-
 function renderizarFavoritos(){
 
     const area =
@@ -2072,7 +1881,6 @@ function renderizarFavoritos(){
         produtos.filter(p =>
             favoritos.includes(p.id)
         );
-
 
     if(lista.length === 0){
 
@@ -2103,12 +1911,10 @@ function renderizarFavoritos(){
 
     }
 
-
     area.innerHTML =
         lista.map(criarCard).join("");
 
 }
-
 
 /* =====================================================
    FAVORITOS
@@ -2135,12 +1941,10 @@ function alternarFavorito(id){
 
     }
 
-
     localStorage.setItem(
         "forYouFavoritos",
         JSON.stringify(favoritos)
     );
-
 
     renderizarProdutos();
     renderizarOfertas();
@@ -2148,7 +1952,6 @@ function alternarFavorito(id){
     renderizarFavoritos();
 
 }
-
 
 /* =====================================================
    NAVEGAÇÃO
@@ -2161,23 +1964,17 @@ function abrirPagina(id, botao = null){
             p.classList.remove("ativa")
         );
 
-
     const pagina =
         document.getElementById(id);
 
-
     if(pagina){
-
         pagina.classList.add("ativa");
-
     }
-
 
     document.querySelectorAll(".menu-btn")
         .forEach(btn =>
             btn.classList.remove("ativo")
         );
-
 
     if(botao){
 
@@ -2193,16 +1990,16 @@ function abrirPagina(id, botao = null){
 
                 if(
                     (id === "inicio" &&
-                    texto.includes("início")) ||
+                     texto.includes("início")) ||
 
                     (id === "ofertas" &&
-                    texto.includes("ofertas")) ||
+                     texto.includes("ofertas")) ||
 
                     (id === "kits" &&
-                    texto.includes("kits")) ||
+                     texto.includes("kits")) ||
 
                     (id === "favoritos" &&
-                    texto.includes("favoritos"))
+                     texto.includes("favoritos"))
                 ){
 
                     btn.classList.add("ativo");
@@ -2213,20 +2010,13 @@ function abrirPagina(id, botao = null){
 
     }
 
-
     if(id === "carrinho"){
-
         atualizarCarrinho();
-
     }
-
 
     if(id === "favoritos"){
-
         renderizarFavoritos();
-
     }
-
 
     window.scrollTo({
         top:0,
@@ -2234,7 +2024,6 @@ function abrirPagina(id, botao = null){
     });
 
 }
-
 
 /* =====================================================
    CATEGORIA
@@ -2244,28 +2033,23 @@ function filtrarCategoria(categoria){
 
     abrirPagina("inicio");
 
-
     const lista =
         produtos.filter(
             p => p.categoria === categoria
         );
 
-
     document.getElementById("tituloProdutos")
         .textContent = categoria;
-
 
     document.getElementById("resultadoBusca")
         .textContent =
         `${lista.length} produto(s)`;
-
 
     document.getElementById("listaProdutos")
         .innerHTML =
         lista.map(criarCard).join("");
 
 }
-
 
 /* =====================================================
    BUSCA
@@ -2279,9 +2063,7 @@ function buscarProdutos(){
         .toLowerCase()
         .trim();
 
-
     abrirPagina("inicio");
-
 
     if(!termo){
 
@@ -2294,37 +2076,27 @@ function buscarProdutos(){
 
     }
 
-
     const lista =
         produtos.filter(p =>
 
             p.nome.toLowerCase().includes(termo) ||
-
             p.categoria.toLowerCase().includes(termo)
 
         );
 
-
     document.getElementById("tituloProdutos")
         .textContent = "Resultados da busca";
-
 
     document.getElementById("resultadoBusca")
         .textContent =
         `${lista.length} produto(s) encontrado(s)`;
 
-
     document.getElementById("listaProdutos")
         .innerHTML =
-
         lista.length
-
         ?
-
         lista.map(criarCard).join("")
-
         :
-
         `
         <div
             class="vazio"
@@ -2347,7 +2119,6 @@ function buscarProdutos(){
 
 }
 
-
 /* =====================================================
    CARRINHO
 ===================================================== */
@@ -2356,7 +2127,6 @@ function adicionarCarrinho(id){
 
     const existente =
         carrinho.find(item => item.id === id);
-
 
     if(existente){
 
@@ -2371,24 +2141,6 @@ function adicionarCarrinho(id){
 
     }
 
-
-    const produto =
-        produtos.find(p => p.id === id);
-
-
-    if(existente &&
-       existente.quantidade > produto.estoque){
-
-        existente.quantidade =
-            produto.estoque;
-
-        mostrarToast(
-            "Quantidade máxima disponível atingida."
-        );
-
-    }
-
-
     salvarCarrinho();
 
     atualizarCarrinho();
@@ -2398,7 +2150,6 @@ function adicionarCarrinho(id){
     );
 
 }
-
 
 function removerCarrinho(id){
 
@@ -2411,18 +2162,14 @@ function removerCarrinho(id){
 
 }
 
-
 function alterarQuantidade(id, quantidade){
 
     const item =
         carrinho.find(item => item.id === id);
 
-
     if(!item) return;
 
-
     item.quantidade += quantidade;
-
 
     if(item.quantidade <= 0){
 
@@ -2432,10 +2179,8 @@ function alterarQuantidade(id, quantidade){
 
     }
 
-
     const produto =
         produtos.find(p => p.id === id);
-
 
     if(item.quantidade > produto.estoque){
 
@@ -2448,13 +2193,11 @@ function alterarQuantidade(id, quantidade){
 
     }
 
-
     salvarCarrinho();
 
     atualizarCarrinho();
 
 }
-
 
 function salvarCarrinho(){
 
@@ -2465,7 +2208,6 @@ function salvarCarrinho(){
 
 }
 
-
 function atualizarContador(){
 
     const quantidade =
@@ -2475,21 +2217,20 @@ function atualizarContador(){
             0
         );
 
-
-    document.getElementById("contadorCarrinho")
-        .textContent = quantidade;
+    document.getElementById(
+        "contadorCarrinho"
+    ).textContent = quantidade;
 
 }
-
 
 function atualizarCarrinho(){
 
     atualizarContador();
 
-
     const area =
-        document.getElementById("listaCarrinho");
-
+        document.getElementById(
+            "listaCarrinho"
+        );
 
     if(carrinho.length === 0){
 
@@ -2523,11 +2264,9 @@ function atualizarCarrinho(){
                         p => p.id === item.id
                     );
 
-
                 const subtotal =
                     produto.preco *
                     item.quantidade;
-
 
                 return `
 
@@ -2536,7 +2275,6 @@ function atualizarCarrinho(){
                         <div class="item-img">
                             ${produto.emoji}
                         </div>
-
 
                         <div class="item-info">
 
@@ -2550,7 +2288,6 @@ function atualizarCarrinho(){
                             </small>
 
                         </div>
-
 
                         <div class="quantidade">
 
@@ -2570,11 +2307,9 @@ function atualizarCarrinho(){
 
                         </div>
 
-
                         <strong>
                             ${dinheiro(subtotal)}
                         </strong>
-
 
                         <button
                             class="remover"
@@ -2589,7 +2324,6 @@ function atualizarCarrinho(){
             }).join("");
 
     }
-
 
     const subtotal =
         carrinho.reduce(
@@ -2608,12 +2342,10 @@ function atualizarCarrinho(){
             0
         );
 
-
     const radio =
         document.querySelector(
             'input[name="entrega"]:checked'
         );
-
 
     const entrega =
         radio
@@ -2622,27 +2354,22 @@ function atualizarCarrinho(){
         :
         0;
 
-
     const total =
         subtotal + entrega;
-
 
     document.getElementById("subtotal")
         .textContent =
         dinheiro(subtotal);
 
-
     document.getElementById("valorEntrega")
         .textContent =
         dinheiro(entrega);
-
 
     document.getElementById("total")
         .textContent =
         dinheiro(total);
 
 }
-
 
 /* =====================================================
    CEP
@@ -2653,34 +2380,31 @@ function calcularCEP(){
     const input =
         document.getElementById("cep");
 
-
     let cep =
         input.value.replace(/\D/g,"");
 
-
     if(cep.length !== 8){
 
-        document.getElementById("resultadoCEP")
-            .textContent =
+        document.getElementById(
+            "resultadoCEP"
+        ).textContent =
             "Digite um CEP válido com 8 números.";
 
         return;
 
     }
 
-
     input.value =
         cep.substring(0,5) +
         "-" +
         cep.substring(5);
 
-
-    document.getElementById("resultadoCEP")
-        .textContent =
+    document.getElementById(
+        "resultadoCEP"
+    ).textContent =
         "CEP informado. Escolha uma opção de entrega abaixo. 📦";
 
 }
-
 
 /* =====================================================
    PAGAMENTO
@@ -2690,17 +2414,18 @@ function selecionarPagamento(elemento, forma){
 
     document.querySelectorAll(".pagamento")
         .forEach(item =>
-            item.classList.remove("selecionado")
+            item.classList.remove(
+                "selecionado"
+            )
         );
 
-
-    elemento.classList.add("selecionado");
-
+    elemento.classList.add(
+        "selecionado"
+    );
 
     pagamento = forma;
 
 }
-
 
 /* =====================================================
    WHATSAPP
@@ -2718,36 +2443,34 @@ function finalizarWhatsApp(){
 
     }
 
-
     const nome =
-        document.getElementById("clienteNome")
-        .value ||
+        document.getElementById(
+            "clienteNome"
+        ).value ||
         "Não informado";
-
 
     const telefone =
-        document.getElementById("clienteTelefone")
-        .value ||
+        document.getElementById(
+            "clienteTelefone"
+        ).value ||
         "Não informado";
-
 
     const endereco =
-        document.getElementById("clienteEndereco")
-        .value ||
+        document.getElementById(
+            "clienteEndereco"
+        ).value ||
         "Não informado";
-
 
     const cep =
-        document.getElementById("cep")
-        .value ||
+        document.getElementById(
+            "cep"
+        ).value ||
         "Não informado";
-
 
     const entregaSelecionada =
         document.querySelector(
             'input[name="entrega"]:checked'
         );
-
 
     const tipoEntrega =
         entregaSelecionada
@@ -2756,42 +2479,34 @@ function finalizarWhatsApp(){
         :
         "Não informado";
 
-
     let mensagem =
         "Olá! 💗 Gostaria de fazer um pedido na FOR YOU.%0A%0A";
 
-
     mensagem +=
         "*DADOS DO CLIENTE*%0A";
-
 
     mensagem +=
         "Nome: " +
         encodeURIComponent(nome) +
         "%0A";
 
-
     mensagem +=
         "Telefone: " +
         encodeURIComponent(telefone) +
         "%0A";
-
 
     mensagem +=
         "CEP: " +
         encodeURIComponent(cep) +
         "%0A";
 
-
     mensagem +=
         "Endereço: " +
         encodeURIComponent(endereco) +
         "%0A%0A";
 
-
     mensagem +=
         "*PRODUTOS*%0A";
-
 
     carrinho.forEach(item => {
 
@@ -2800,11 +2515,9 @@ function finalizarWhatsApp(){
                 p => p.id === item.id
             );
 
-
         const subtotal =
             produto.preco *
             item.quantidade;
-
 
         mensagem +=
             encodeURIComponent(
@@ -2813,7 +2526,6 @@ function finalizarWhatsApp(){
             "%0A";
 
     });
-
 
     const subtotal =
         carrinho.reduce(
@@ -2832,7 +2544,6 @@ function finalizarWhatsApp(){
             0
         );
 
-
     const frete =
         entregaSelecionada
         ?
@@ -2842,25 +2553,20 @@ function finalizarWhatsApp(){
         :
         0;
 
-
     const total =
         subtotal + frete;
 
-
     mensagem += "%0A";
-
 
     mensagem +=
         "Entrega: " +
         encodeURIComponent(tipoEntrega) +
         "%0A";
 
-
     mensagem +=
         "Pagamento: " +
         encodeURIComponent(pagamento) +
         "%0A";
-
 
     mensagem +=
         "Subtotal: " +
@@ -2869,14 +2575,12 @@ function finalizarWhatsApp(){
         ) +
         "%0A";
 
-
     mensagem +=
         "Frete: " +
         encodeURIComponent(
             dinheiro(frete)
         ) +
         "%0A";
-
 
     mensagem +=
         "*Total: " +
@@ -2885,16 +2589,11 @@ function finalizarWhatsApp(){
         ) +
         "*%0A%0A";
 
-
     mensagem +=
         "Aguardo confirmação do pedido. 💕";
 
-
     /*
        TROQUE PELO NÚMERO DO WHATSAPP DA SUA LOJA.
-
-       Coloque código do país + DDD + número.
-
        Exemplo:
        5511999999999
     */
@@ -2902,13 +2601,11 @@ function finalizarWhatsApp(){
     const numeroWhatsApp =
         "5500000000000";
 
-
     const url =
         "https://wa.me/" +
         numeroWhatsApp +
         "?text=" +
         mensagem;
-
 
     window.open(
         url,
@@ -2917,7 +2614,6 @@ function finalizarWhatsApp(){
 
 }
 
-
 /* =====================================================
    TOAST
 ===================================================== */
@@ -2925,15 +2621,13 @@ function finalizarWhatsApp(){
 function mostrarToast(texto){
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
-
-    toast.textContent =
-        texto;
-
+    toast.textContent = texto;
 
     toast.classList.add("show");
-
 
     setTimeout(() => {
 
@@ -2942,7 +2636,6 @@ function mostrarToast(texto){
     },2500);
 
 }
-
 
 /* =====================================================
    INICIALIZAÇÃO
