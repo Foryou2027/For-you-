@@ -2,23 +2,20 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For You by Dé | Beleza & Maquiagem</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root{
     --creme:#fbf8f5;
-    --nude:#eee0da;
+    --nude:#f0e2dd;
     --rose:#c88996;
-    --rose-escuro:#925967;
+    --roseEscuro:#925967;
     --marrom:#2d2527;
     --dourado:#b99a67;
     --branco:#ffffff;
@@ -30,6 +27,10 @@ content="width=device-width, initial-scale=1.0">
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -65,11 +66,11 @@ button{
 
 
 /* =========================
-   CABEÇALHO
+   HEADER
 ========================= */
 
 header{
-    background:rgba(251,248,245,.97);
+    background:rgba(251,248,245,.98);
     border-bottom:1px solid var(--linha);
     position:sticky;
     top:0;
@@ -79,22 +80,21 @@ header{
 .header{
     width:min(1250px,92%);
     margin:auto;
-    height:88px;
+    min-height:88px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:35px;
+    gap:30px;
 }
 
 .logo{
-    text-align:center;
     min-width:190px;
+    text-align:center;
 }
 
 .logo-nome{
     font-family:"Playfair Display",serif;
     font-size:29px;
-    letter-spacing:.5px;
 }
 
 .logo-sub{
@@ -135,25 +135,25 @@ header{
 
 .acoes{
     display:flex;
-    align-items:center;
     gap:20px;
+    align-items:center;
 }
 
 .icone{
     font-size:21px;
-    position:relative;
     cursor:pointer;
+    position:relative;
 }
 
 .contador{
     position:absolute;
     top:-9px;
     right:-10px;
-    background:var(--rose-escuro);
-    color:white;
     width:18px;
     height:18px;
     border-radius:50%;
+    background:var(--roseEscuro);
+    color:white;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -172,22 +172,88 @@ header{
 .menu-interno{
     width:min(1100px,92%);
     margin:auto;
-    height:45px;
+    min-height:45px;
     display:flex;
-    align-items:center;
     justify-content:center;
-    gap:42px;
+    align-items:center;
+    gap:45px;
 }
 
-.menu a{
+.menu-item{
+    position:relative;
+}
+
+.menu-link{
+    border:0;
+    background:none;
     font-size:10px;
     font-weight:700;
     letter-spacing:1.5px;
     text-transform:uppercase;
+    color:var(--marrom);
 }
 
-.menu a:hover{
-    color:var(--rose-escuro);
+.menu-link:hover{
+    color:var(--roseEscuro);
+}
+
+
+/* =========================
+   MENU CATEGORIAS
+========================= */
+
+.dropdown{
+    position:absolute;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+    width:650px;
+    background:white;
+    border:1px solid var(--linha);
+    box-shadow:0 20px 50px rgba(40,25,30,.12);
+    padding:30px;
+    display:none;
+    z-index:200;
+}
+
+.menu-item:hover .dropdown{
+    display:block;
+}
+
+.dropdown-titulo{
+    text-align:center;
+    font-family:"Playfair Display",serif;
+    font-size:26px;
+    margin-bottom:25px;
+}
+
+.categorias-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.categoria-box{
+    border-top:1px solid var(--linha);
+    padding-top:15px;
+}
+
+.categoria-box h3{
+    font-family:"Playfair Display",serif;
+    font-weight:400;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.categoria-box a{
+    display:block;
+    color:var(--cinza);
+    font-size:11px;
+    padding:4px 0;
+}
+
+.categoria-box a:hover{
+    color:var(--roseEscuro);
 }
 
 
@@ -197,26 +263,22 @@ header{
 
 .hero{
     min-height:650px;
-    position:relative;
-    overflow:hidden;
-
     background:
     linear-gradient(
         90deg,
         rgba(251,248,245,.98) 0%,
-        rgba(251,248,245,.90) 42%,
-        rgba(239,219,216,.35) 100%
+        rgba(251,248,245,.88) 43%,
+        rgba(239,219,216,.30) 100%
     ),
     url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
-
     background-size:cover;
     background-position:center;
 }
 
 .hero-conteudo{
     width:min(1250px,92%);
-    margin:auto;
     min-height:650px;
+    margin:auto;
     display:flex;
     align-items:center;
 }
@@ -226,7 +288,7 @@ header{
 }
 
 .pequeno{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
     font-size:10px;
     font-weight:700;
     letter-spacing:3px;
@@ -242,7 +304,7 @@ header{
 }
 
 .hero h1 em{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
 }
 
 .hero p{
@@ -260,9 +322,9 @@ header{
 }
 
 .botao{
-    border:0;
     min-height:50px;
     padding:0 28px;
+    border:0;
     background:var(--marrom);
     color:white;
     font-size:10px;
@@ -271,18 +333,18 @@ header{
 }
 
 .botao:hover{
-    background:var(--rose-escuro);
+    background:var(--roseEscuro);
 }
 
 .botao-claro{
     background:transparent;
-    border:1px solid var(--marrom);
     color:var(--marrom);
+    border:1px solid var(--marrom);
 }
 
 
 /* =========================
-   FRASE DA MARCA
+   FRASE
 ========================= */
 
 .frase{
@@ -300,8 +362,8 @@ header{
 
 .frase h2{
     font-family:"Playfair Display",serif;
-    font-size:clamp(30px,4vw,45px);
     font-weight:400;
+    font-size:clamp(30px,4vw,45px);
     margin:15px 0;
 }
 
@@ -331,8 +393,8 @@ header{
 
 .titulo small{
     color:var(--dourado);
-    letter-spacing:3px;
     font-size:9px;
+    letter-spacing:3px;
     text-transform:uppercase;
     font-weight:700;
 }
@@ -347,59 +409,6 @@ header{
 .titulo p{
     color:var(--cinza);
     font-size:13px;
-}
-
-
-/* =========================
-   CATEGORIAS
-========================= */
-
-.categorias{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:14px;
-}
-
-.categoria{
-    background:white;
-    border:1px solid var(--linha);
-    min-height:185px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    transition:.3s;
-}
-
-.categoria:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(60,40,45,.08);
-}
-
-.categoria-foto{
-    width:85px;
-    height:85px;
-    border-radius:50%;
-    overflow:hidden;
-    margin-bottom:18px;
-}
-
-.categoria-foto img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.categoria strong{
-    font-family:"Playfair Display",serif;
-    font-size:18px;
-    font-weight:400;
-}
-
-.categoria span{
-    color:#999;
-    font-size:9px;
-    margin-top:4px;
 }
 
 
@@ -420,9 +429,7 @@ header{
 
 .achadinho-foto{
     min-height:500px;
-    background:
-    url("https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1000&q=85")
-    center/cover;
+    background:url("https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1000&q=85") center/cover;
 }
 
 .achadinho-info{
@@ -433,7 +440,7 @@ header{
 }
 
 .selo{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
     font-size:10px;
     letter-spacing:3px;
     font-weight:700;
@@ -462,7 +469,7 @@ header{
 }
 
 .preco{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
     font-size:30px;
     font-weight:700;
     margin:3px 0 25px;
@@ -518,6 +525,7 @@ header{
     font-size:8px;
     letter-spacing:1px;
     text-transform:uppercase;
+    z-index:2;
 }
 
 .coracao{
@@ -532,6 +540,7 @@ header{
     align-items:center;
     justify-content:center;
     font-size:17px;
+    z-index:2;
 }
 
 .produto-info{
@@ -552,12 +561,12 @@ header{
 }
 
 .estrelas{
-    color:#b99a67;
+    color:var(--dourado);
     font-size:10px;
 }
 
 .produto-preco{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
     font-weight:700;
     font-size:17px;
     margin-top:9px;
@@ -890,7 +899,7 @@ footer{
 }
 
 .item-preco{
-    color:var(--rose-escuro);
+    color:var(--roseEscuro);
     font-weight:700;
     margin-top:5px;
 }
@@ -942,14 +951,10 @@ footer{
 
 
 /* =========================
-   CELULAR
+   RESPONSIVO
 ========================= */
 
 @media(max-width:1000px){
-
-    .categorias{
-        grid-template-columns:repeat(3,1fr);
-    }
 
     .produtos{
         grid-template-columns:repeat(2,1fr);
@@ -972,11 +977,10 @@ footer{
     }
 }
 
-
 @media(max-width:650px){
 
     .header{
-        height:auto;
+        min-height:auto;
         padding:15px 0;
         flex-wrap:wrap;
     }
@@ -1002,9 +1006,22 @@ footer{
         gap:25px;
     }
 
+    .dropdown{
+        position:fixed;
+        top:135px;
+        left:5%;
+        transform:none;
+        width:90%;
+        max-height:75vh;
+        overflow:auto;
+    }
+
+    .categorias-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
     .hero{
         min-height:580px;
-        background-position:65% center;
     }
 
     .hero-conteudo{
@@ -1013,10 +1030,6 @@ footer{
 
     .hero h1{
         font-size:48px;
-    }
-
-    .categorias{
-        grid-template-columns:repeat(2,1fr);
     }
 
     .produtos{
@@ -1069,16 +1082,14 @@ footer{
 }
 
 </style>
-
 </head>
+
 
 <body>
 
 
 <div class="aviso">
-
 ✨ ENVIO PARA TODO O BRASIL • ACHADINHOS NOVOS TODA SEMANA ✨
-
 </div>
 
 
@@ -1144,25 +1155,214 @@ id="contador"
 
 <div class="menu-interno">
 
-<a href="#">
+
+<a
+href="#"
+class="menu-link"
+>
 Início
 </a>
 
-<a href="#categorias">
-Categorias
+
+<!-- CATEGORIAS -->
+
+<div class="menu-item">
+
+<button class="menu-link">
+Categorias ▾
+</button>
+
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+Explore nossas categorias
+</div>
+
+
+<div class="categorias-grid">
+
+
+<div class="categoria-box">
+
+<h3>
+💋 Lábios
+</h3>
+
+<a href="#produtos">
+Batom
 </a>
 
-<a href="#achadinho">
+<a href="#produtos">
+Gloss
+</a>
+
+<a href="#produtos">
+Lip Tint
+</a>
+
+<a href="#produtos">
+Lápis de boca
+</a>
+
+</div>
+
+
+<div class="categoria-box">
+
+<h3>
+✨ Pele
+</h3>
+
+<a href="#produtos">
+Base
+</a>
+
+<a href="#produtos">
+Corretivo
+</a>
+
+<a href="#produtos">
+Pó
+</a>
+
+<a href="#produtos">
+Primer
+</a>
+
+</div>
+
+
+<div class="categoria-box">
+
+<h3>
+👁️ Olhos
+</h3>
+
+<a href="#produtos">
+Máscara de cílios
+</a>
+
+<a href="#produtos">
+Delineador
+</a>
+
+<a href="#produtos">
+Lápis
+</a>
+
+<a href="#produtos">
+Paleta de sombras
+</a>
+
+</div>
+
+
+<div class="categoria-box">
+
+<h3>
+🌸 Face
+</h3>
+
+<a href="#produtos">
+Blush
+</a>
+
+<a href="#produtos">
+Iluminador
+</a>
+
+<a href="#produtos">
+Bronzer
+</a>
+
+<a href="#produtos">
+Contorno
+</a>
+
+</div>
+
+
+<div class="categoria-box">
+
+<h3>
+👜 Acessórios
+</h3>
+
+<a href="#produtos">
+Pincéis
+</a>
+
+<a href="#produtos">
+Esponjas
+</a>
+
+<a href="#produtos">
+Cílios
+</a>
+
+<a href="#produtos">
+Necessaires
+</a>
+
+</div>
+
+
+<div class="categoria-box">
+
+<h3>
+✨ Cuidados
+</h3>
+
+<a href="#produtos">
+Skincare
+</a>
+
+<a href="#produtos">
+Lip Care
+</a>
+
+<a href="#produtos">
+Cuidados faciais
+</a>
+
+<a href="#produtos">
+Outros
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<a
+href="#achadinho"
+class="menu-link"
+>
 Achadinho da Semana
 </a>
 
-<a href="#novidades">
+
+<a
+href="#novidades"
+class="menu-link"
+>
 Novidades
 </a>
 
-<a href="#ofertas">
+
+<a
+href="#ofertas"
+class="menu-link"
+>
 Ofertas
 </a>
+
 
 </div>
 
@@ -1170,6 +1370,8 @@ Ofertas
 
 </header>
 
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -1198,13 +1400,14 @@ que fazem a gente pensar:
 
 </p>
 
+
 <div class="botoes">
 
 <a
-href="#produtos"
+href="#novidades"
 class="botao"
 >
-COMPRAR AGORA
+VER NOVIDADES
 </a>
 
 <a
@@ -1223,10 +1426,12 @@ VER ACHADINHO
 </section>
 
 
+<!-- FRASE -->
+
 <section class="frase">
 
 <small>
-o jeito for you
+O jeito For You
 </small>
 
 <h2>
@@ -1240,165 +1445,7 @@ Porque não basta ser bonito. Tem que fazer sentido para você.
 </section>
 
 
-<section
-class="secao"
-id="categorias"
->
-
-<div class="container">
-
-<div class="titulo">
-
-<small>
-explore
-</small>
-
-<h2>
-Encontre seus favoritos
-</h2>
-
-<p>
-Tudo para criar sua maquiagem do seu jeito.
-</p>
-
-</div>
-
-
-<div class="categorias">
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Lábios
-</strong>
-
-<span>
-Batons • Gloss
-</span>
-
-</a>
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Pele
-</strong>
-
-<span>
-Base • Pó
-</span>
-
-</a>
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Olhos
-</strong>
-
-<span>
-Máscara • Delineador
-</span>
-
-</a>
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Blush
-</strong>
-
-<span>
-Cor • Glow
-</span>
-
-</a>
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Iluminador
-</strong>
-
-<span>
-Glow • Brilho
-</span>
-
-</a>
-
-
-<a class="categoria" href="#produtos">
-
-<div class="categoria-foto">
-
-<img
-src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=300&q=80"
->
-
-</div>
-
-<strong>
-Acessórios
-</strong>
-
-<span>
-Pincéis • Esponjas
-</span>
-
-</a>
-
-
-</div>
-
-</div>
-
-</section>
-
+<!-- ACHADINHO -->
 
 <section
 class="secao achadinho"
@@ -1412,6 +1459,7 @@ id="achadinho"
 <div class="achadinho-foto">
 </div>
 
+
 <div class="achadinho-info">
 
 <div class="selo">
@@ -1419,15 +1467,11 @@ id="achadinho"
 </div>
 
 <h2>
-O queridinho da vez.
+Aquele produto que a gente encontrou, testou e simplesmente se apaixonou.
 </h2>
 
 <p>
-
-Toda semana escolhemos um produto
-especial. Testamos, gostamos e
-colocamos na loja.
-
+Toda semana escolhemos um produto especial para receber um destaque aqui na For You by Dé.
 </p>
 
 <div class="preco-antigo">
@@ -1453,18 +1497,20 @@ QUERO MEU ACHADINHO
 
 </section>
 
-<!-- =========================
-     NOVIDADES
-========================= -->
 
-<section class="secao" id="novidades">
+<!-- NOVIDADES -->
+
+<section
+class="secao"
+id="novidades"
+>
 
 <div class="container">
 
 <div class="titulo">
 
 <small>
-acabou de chegar
+Acabou de chegar
 </small>
 
 <h2>
@@ -1678,6 +1724,10 @@ ADICIONAR AO CARRINHO
 </div>
 
 </section>
+
+
+<!-- MAIS VENDIDOS -->
+
 <section
 class="secao"
 id="produtos"
@@ -1688,7 +1738,7 @@ id="produtos"
 <div class="titulo">
 
 <small>
-seleção for you
+Seleção For You
 </small>
 
 <h2>
@@ -1696,7 +1746,7 @@ Os queridinhos
 </h2>
 
 <p>
-Produtos escolhidos especialmente para você.
+Os produtos que mais combinam com a nossa comunidade.
 </p>
 
 </div>
@@ -1806,7 +1856,7 @@ ADICIONAR AO CARRINHO
 <div class="produto-imagem">
 
 <div class="etiqueta">
-Novo
+Favorito
 </div>
 
 <div class="coracao">
@@ -1904,6 +1954,124 @@ ADICIONAR AO CARRINHO
 </section>
 
 
+<!-- OFERTAS -->
+
+<section
+class="secao"
+id="ofertas"
+>
+
+<div class="container">
+
+<div class="titulo">
+
+<small>
+Preços especiais
+</small>
+
+<h2>
+🏷️ Ofertas
+</h2>
+
+<p>
+Produtos selecionados com condições especiais.
+</p>
+
+</div>
+
+
+<div class="produtos">
+
+
+<div class="produto">
+
+<div class="produto-imagem">
+
+<div class="etiqueta">
+Oferta
+</div>
+
+<img
+src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+>
+
+</div>
+
+<div class="produto-info">
+
+<div class="marca">
+Oferta For You
+</div>
+
+<div class="produto-nome">
+Batom Especial
+</div>
+
+<div class="produto-preco">
+R$ 14,90
+</div>
+
+<button
+class="adicionar"
+onclick="adicionarProduto('Batom Especial',14.90)"
+>
+ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+</div>
+
+
+<div class="produto">
+
+<div class="produto-imagem">
+
+<div class="etiqueta">
+Oferta
+</div>
+
+<img
+src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
+>
+
+</div>
+
+<div class="produto-info">
+
+<div class="marca">
+Oferta For You
+</div>
+
+<div class="produto-nome">
+Iluminador Glow
+</div>
+
+<div class="produto-preco">
+R$ 18,90
+</div>
+
+<button
+class="adicionar"
+onclick="adicionarProduto('Iluminador Glow',18.90)"
+>
+ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DIFERENCIAL -->
+
 <section class="diferencial">
 
 <small>
@@ -1981,6 +2149,8 @@ Colocamos na loja
 </section>
 
 
+<!-- BENEFÍCIOS -->
+
 <section class="secao">
 
 <div class="container">
@@ -2044,9 +2214,9 @@ Beleza que combina com seu estilo.
 </section>
 
 
-<section
-class="newsletter"
->
+<!-- NEWSLETTER -->
+
+<section class="newsletter">
 
 <h2>
 Vem fazer parte da For You. ✨
@@ -2071,6 +2241,8 @@ QUERO RECEBER
 
 </section>
 
+
+<!-- INSTAGRAM -->
 
 <section class="instagram">
 
@@ -2112,11 +2284,14 @@ Beleza, achadinhos e inspiração todos os dias.
 </section>
 
 
+<!-- RODAPÉ -->
+
 <footer>
 
 <div class="container">
 
 <div class="footer-grid">
+
 
 <div>
 
@@ -2144,20 +2319,20 @@ escolhidos especialmente para você.
 Loja
 </h3>
 
-<a href="#produtos">
-Maquiagem
-</a>
-
-<a href="#categorias">
-Categorias
+<a href="#novidades">
+Novidades
 </a>
 
 <a href="#achadinho">
 Achadinho da Semana
 </a>
 
-<a href="#">
-Novidades
+<a href="#ofertas">
+Ofertas
+</a>
+
+<a href="#produtos">
+Mais vendidos
 </a>
 
 </div>
@@ -2212,6 +2387,7 @@ Termos de uso
 
 </div>
 
+
 </div>
 
 
@@ -2226,7 +2402,9 @@ Termos de uso
 </footer>
 
 
-<!-- CARRINHO -->
+<!-- =========================
+     CARRINHO
+========================= -->
 
 <div
 class="overlay"
@@ -2327,9 +2505,7 @@ produto.quantidade++;
 carrinho.push({
 
 nome:nome,
-
 preco:preco,
-
 quantidade:1
 
 });
@@ -2351,7 +2527,6 @@ let itens =
 document.getElementById("itens");
 
 let contador = 0;
-
 let total = 0;
 
 
@@ -2445,7 +2620,6 @@ REMOVER
 
 `;
 
-
 itens.appendChild(div);
 
 });
@@ -2534,7 +2708,5 @@ atualizar();
 
 </script>
 
-
 </body>
-
 </html>
