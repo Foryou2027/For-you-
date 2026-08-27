@@ -1,11 +1,19 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FOR YOU | Beleza, Cuidados & Achadinhos</title>
+<title>FOR YOU | Beleza</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,24 +22,28 @@
 ===================================================== */
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:"Trebuchet MS",Arial,sans-serif;
-  background:#fff8fa;
-  color:#351f27;
+    font-family:"DM Sans",Arial,sans-serif;
+    background:#fff9fb;
+    color:#351f27;
 }
 
 button,
 input{
-  font-family:inherit;
+    font-family:inherit;
 }
 
 button{
-  cursor:pointer;
+    cursor:pointer;
 }
 
 /* =====================================================
@@ -39,12 +51,12 @@ button{
 ===================================================== */
 
 .topo{
-  background:#351f27;
-  color:white;
-  text-align:center;
-  padding:8px;
-  font-size:10px;
-  letter-spacing:1.5px;
+    background:#351f27;
+    color:white;
+    text-align:center;
+    padding:9px;
+    font-size:10px;
+    letter-spacing:2px;
 }
 
 /* =====================================================
@@ -52,50 +64,93 @@ button{
 ===================================================== */
 
 header{
-  background:white;
-  border-bottom:1px solid #ead9de;
-  position:sticky;
-  top:0;
-  z-index:100;
+    background:white;
+    border-bottom:1px solid #ead9de;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .header{
-  max-width:1250px;
-  margin:auto;
-  padding:22px 25px 15px;
+    max-width:1250px;
+    margin:auto;
+    padding:20px 25px 0;
 }
 
-/* LOGO */
+/* =====================================================
+   LOGO + AÇÕES
+===================================================== */
+
+.header-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
 
 .logo{
-  text-align:center;
+    text-align:center;
+    flex:1;
 }
 
 .logo h1{
-  font-family:Georgia,serif;
-  font-size:48px;
-  letter-spacing:7px;
-  color:#b83f61;
-  font-weight:normal;
+    font-family:"Playfair Display",Georgia,serif;
+    font-size:48px;
+    font-weight:400;
+    letter-spacing:7px;
+    color:#b83f61;
+    line-height:1;
 }
 
 .logo span{
-  display:block;
-  margin-top:5px;
-  color:#a88955;
-  font-size:9px;
-  letter-spacing:3px;
+    display:block;
+    margin-top:7px;
+    font-size:8px;
+    letter-spacing:3px;
+    color:#a88955;
 }
 
-/* FRASE */
+/* =====================================================
+   AÇÕES
+===================================================== */
 
-.frase{
-  text-align:center;
-  margin-top:8px;
-  color:#77656c;
-  font-family:Georgia,serif;
-  font-size:14px;
-  font-style:italic;
+.acoes{
+    width:120px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:22px;
+    font-size:24px;
+}
+
+.favorito{
+    font-size:27px;
+}
+
+.carrinho-icon{
+    position:relative;
+    cursor:pointer;
+    font-size:25px;
+}
+
+.contador{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+
+    background:#b83f61;
+    color:white;
+
+    width:19px;
+    height:19px;
+
+    border-radius:50%;
+
+    font-size:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 /* =====================================================
@@ -103,150 +158,142 @@ header{
 ===================================================== */
 
 .menu-principal{
-  margin-top:22px;
-  border-top:1px solid #f0e2e6;
-  border-bottom:1px solid #f0e2e6;
+    margin-top:25px;
+    border-top:1px solid #f1e5e8;
 }
 
 .menu-lista{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
 }
 
 .menu-item{
-  position:relative;
+    position:relative;
 }
 
 .menu-item > button{
-  background:none;
-  border:0;
-  padding:17px 0;
-  font-size:10px;
-  font-weight:bold;
-  text-transform:none;
-  color:#351f27;
-  letter-spacing:.5px;
-  white-space:nowrap;
+    background:none;
+    border:0;
+
+    padding:19px 15px;
+
+    color:#351f27;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    transition:.2s;
 }
 
 .menu-item > button:hover{
-  color:#b83f61;
+    color:#b83f61;
 }
 
-/* SETINHA */
-
-.menu-item > button::after{
-  content:"⌄";
-  margin-left:5px;
-  color:#b83f61;
-  font-size:13px;
+.seta{
+    font-size:10px;
+    margin-left:4px;
 }
 
 /* =====================================================
-   DROPDOWNS DAS CATEGORIAS
+   DROPDOWN
 ===================================================== */
 
 .dropdown{
-  display:none;
-  position:absolute;
-  top:50px;
-  left:50%;
-  transform:translateX(-50%);
-  width:270px;
-  background:white;
-  border:1px solid #ead9de;
-  box-shadow:0 15px 35px #0002;
-  z-index:300;
+    display:none;
+
+    position:absolute;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    top:58px;
+
+    width:250px;
+
+    background:white;
+
+    border:1px solid #ead9de;
+
+    box-shadow:0 15px 35px rgba(53,31,39,.15);
+
+    z-index:300;
 }
 
 .menu-item:hover .dropdown{
-  display:block;
+    display:block;
 }
 
 .dropdown h3{
-  padding:17px;
-  font-family:Georgia,serif;
-  font-size:23px;
-  font-weight:normal;
-  color:#b83f61;
-  border-bottom:1px solid #ead9de;
-  background:#fffafa;
+    padding:18px;
+
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:24px;
+    font-weight:400;
+
+    color:#b83f61;
+
+    border-bottom:1px solid #ead9de;
 }
 
 .dropdown a{
-  display:block;
-  padding:11px 17px;
-  color:#5e5056;
-  font-size:10px;
-  text-decoration:none;
-  border-bottom:1px solid #f5eaed;
+    display:block;
+
+    padding:12px 18px;
+
+    color:#66585d;
+
+    font-size:10px;
+
+    text-decoration:none;
+
+    border-bottom:1px solid #f5edef;
+
+    transition:.2s;
 }
 
 .dropdown a:hover{
-  background:#fff0f4;
-  color:#b83f61;
-  padding-left:22px;
+    background:#fff1f5;
+    color:#b83f61;
+    padding-left:23px;
 }
 
 /* =====================================================
-   BUSCA E AÇÕES
+   BUSCA
 ===================================================== */
 
-.barra-acoes{
-  max-width:900px;
-  margin:18px auto 0;
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
 .busca{
-  flex:1;
+    max-width:600px;
+    margin:0 auto;
+    padding:18px 0 22px;
 }
 
 .busca input{
-  width:100%;
-  border:1px solid #dfc8cf;
-  border-radius:30px;
-  padding:14px 20px;
-  outline:none;
-  background:#fff;
-  font-size:12px;
+    width:100%;
+
+    border:1px solid #dfc8cf;
+
+    border-radius:30px;
+
+    padding:15px 22px;
+
+    outline:none;
+
+    font-size:12px;
+
+    background:#fffafa;
+
+    transition:.2s;
 }
 
 .busca input:focus{
-  border-color:#b83f61;
-}
-
-.acoes{
-  display:flex;
-  gap:18px;
-  align-items:center;
-  font-size:23px;
-}
-
-.carrinho-icon{
-  position:relative;
-  cursor:pointer;
-}
-
-.contador{
-  position:absolute;
-  top:-8px;
-  right:-10px;
-  width:19px;
-  height:19px;
-  border-radius:50%;
-  background:#b83f61;
-  color:white;
-  font-size:9px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    border-color:#b83f61;
+    background:white;
 }
 
 /* =====================================================
@@ -254,71 +301,89 @@ header{
 ===================================================== */
 
 .hero{
-  min-height:540px;
 
-  background:
-  linear-gradient(
-    90deg,
-    #fff8fa 0%,
-    #fff8fae8 37%,
-    #fff8fa22 75%
-  ),
-  url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
+    min-height:560px;
 
-  background-size:cover;
-  background-position:center;
+    background:
+    linear-gradient(
+        90deg,
+        #fff8fa 0%,
+        #fff8fae8 38%,
+        #fff8fa22 75%
+    ),
+    url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
 
-  display:flex;
-  align-items:center;
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
 }
 
 .hero-content{
-  max-width:1200px;
-  width:92%;
-  margin:auto;
+    max-width:1200px;
+    width:92%;
+    margin:auto;
 }
 
 .hero small{
-  color:#b83f61;
-  font-weight:bold;
-  letter-spacing:3px;
-  font-size:11px;
+    color:#b83f61;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:3px;
 }
 
 .hero h2{
-  font-family:Georgia,serif;
-  font-weight:normal;
-  font-size:64px;
-  line-height:1.05;
-  max-width:680px;
-  margin:20px 0;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:65px;
+
+    font-weight:400;
+
+    line-height:1.1;
+
+    max-width:700px;
+
+    margin:20px 0;
 }
 
 .hero h2 span{
-  color:#b83f61;
-  font-style:italic;
+    color:#b83f61;
+    font-style:italic;
 }
 
 .hero p{
-  max-width:500px;
-  color:#6d6165;
-  font-size:13px;
-  line-height:1.8;
+    max-width:500px;
+
+    line-height:1.8;
+
+    color:#6d6165;
+
+    font-size:13px;
 }
 
 .btn{
-  margin-top:25px;
-  padding:15px 28px;
-  background:#351f27;
-  color:white;
-  border:0;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1.5px;
+    margin-top:25px;
+
+    padding:15px 27px;
+
+    background:#351f27;
+
+    color:white;
+
+    border:0;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    transition:.2s;
 }
 
 .btn:hover{
-  background:#b83f61;
+    background:#b83f61;
 }
 
 /* =====================================================
@@ -326,30 +391,37 @@ header{
 ===================================================== */
 
 .secao{
-  padding:75px 5%;
+    padding:75px 5%;
 }
 
 .titulo{
-  text-align:center;
-  margin-bottom:40px;
+    text-align:center;
+    margin-bottom:42px;
 }
 
 .titulo small{
-  color:#a88955;
-  letter-spacing:3px;
-  font-size:10px;
+    color:#a88955;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    font-weight:700;
 }
 
 .titulo h2{
-  font-family:Georgia,serif;
-  font-weight:normal;
-  font-size:45px;
-  margin:10px 0;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:46px;
+
+    font-weight:400;
+
+    margin:10px;
 }
 
 .titulo p{
-  color:#776a6f;
-  font-size:12px;
+    color:#776a6f;
+    font-size:12px;
 }
 
 /* =====================================================
@@ -357,115 +429,149 @@ header{
 ===================================================== */
 
 .produtos{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
 }
 
 .produto{
-  background:white;
-  border:1px solid #ead9de;
-  transition:.25s;
+    background:white;
+
+    border:1px solid #ead9de;
+
+    transition:.25s;
 }
 
 .produto:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 25px #00000012;
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(53,31,39,.08);
 }
 
 .produto-img{
-  height:270px;
-  background:#f6e5e9;
-  overflow:hidden;
-  position:relative;
+    height:260px;
+
+    background:#f6e5e9;
+
+    overflow:hidden;
+
+    position:relative;
 }
 
 .produto-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+}
+
+.produto:hover .produto-img img{
+    transform:scale(1.04);
 }
 
 .etiqueta{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#b83f61;
-  color:white;
-  padding:7px 10px;
-  font-size:8px;
-  z-index:2;
-  letter-spacing:.5px;
+    position:absolute;
+
+    top:10px;
+    left:10px;
+
+    background:#b83f61;
+
+    color:white;
+
+    padding:7px 10px;
+
+    font-size:8px;
+
+    z-index:2;
+
+    letter-spacing:.5px;
 }
 
 .produto-info{
-  padding:17px;
+    padding:17px;
 }
 
 .marca{
-  color:#a88955;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:1px;
+    font-size:9px;
+
+    color:#a88955;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
 }
 
 .nome{
-  font-family:Georgia,serif;
-  font-size:21px;
-  margin:7px 0;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:21px;
+
+    margin:6px 0;
 }
 
 .preco{
-  color:#b83f61;
-  font-weight:bold;
-  font-size:17px;
+    color:#b83f61;
+
+    font-weight:700;
+
+    font-size:17px;
 }
 
 .adicionar{
-  width:100%;
-  padding:12px;
-  margin-top:13px;
-  background:white;
-  border:1px solid #351f27;
-  font-size:9px;
-  font-weight:bold;
+    width:100%;
+
+    padding:12px;
+
+    margin-top:12px;
+
+    background:white;
+
+    border:1px solid #351f27;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    transition:.2s;
 }
 
 .adicionar:hover{
-  background:#351f27;
-  color:white;
+    background:#351f27;
+    color:white;
 }
 
 /* =====================================================
-   KITS
+   ACHADINHOS
 ===================================================== */
 
-.kits{
-  background:white;
+.achadinhos{
+    background:#fff;
 }
 
-.kit-destaque{
-  max-width:1200px;
-  margin:auto;
-  padding:25px;
-  background:#fff7f0;
-  border:1px solid #ead9de;
-  text-align:center;
-  margin-bottom:35px;
-}
+.frase-achadinhos{
+    text-align:center;
 
-.kit-destaque strong{
-  font-family:Georgia,serif;
-  font-size:22px;
-  color:#b83f61;
-}
+    margin-top:-25px;
 
-.kit-destaque p{
-  margin-top:7px;
-  font-size:11px;
-  color:#76686d;
+    margin-bottom:35px;
+
+    color:#776a6f;
+
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:18px;
+
+    font-style:italic;
 }
 
 /* =====================================================
@@ -473,24 +579,7 @@ header{
 ===================================================== */
 
 .ofertas{
-  background:#fff;
-}
-
-.alerta{
-  max-width:750px;
-  margin:0 auto 35px;
-  padding:17px;
-  background:#fff3ed;
-  border:1px solid #ead5ca;
-  text-align:center;
-  font-size:11px;
-  line-height:1.7;
-}
-
-.validade-box{
-  margin-top:45px;
-  padding-top:45px;
-  border-top:1px solid #ead9de;
+    background:white;
 }
 
 /* =====================================================
@@ -498,33 +587,41 @@ header{
 ===================================================== */
 
 .beneficios{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  background:white;
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    background:white;
 }
 
 .beneficio{
-  text-align:center;
-  padding:35px;
-  border-right:1px solid #ead9de;
+    text-align:center;
+
+    padding:35px;
+
+    border-right:1px solid #ead9de;
 }
 
 .beneficio:last-child{
-  border:0;
+    border:0;
 }
 
 .beneficio strong{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:20px;
-  margin:10px;
+    display:block;
+
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:20px;
+
+    margin:8px;
 }
 
 .beneficio span{
-  color:#777;
-  font-size:10px;
+    color:#777;
+    font-size:10px;
 }
 
 /* =====================================================
@@ -532,39 +629,57 @@ header{
 ===================================================== */
 
 .newsletter{
-  background:#f8e4e9;
-  text-align:center;
-  padding:70px 20px;
+    background:#f8e4e9;
+
+    text-align:center;
+
+    padding:70px 20px;
 }
 
 .newsletter h2{
-  font-family:Georgia,serif;
-  font-size:40px;
-  font-weight:normal;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:40px;
+
+    font-weight:400;
 }
 
 .newsletter p{
-  margin:10px;
-  color:#6c6064;
+    margin:10px;
+
+    color:#6c6064;
 }
 
 .newsletter form{
-  max-width:500px;
-  margin:25px auto;
-  display:flex;
+    max-width:500px;
+
+    margin:25px auto;
+
+    display:flex;
 }
 
 .newsletter input{
-  flex:1;
-  border:1px solid #dfc8cf;
-  padding:14px;
+    flex:1;
+
+    border:1px solid #dfc8cf;
+
+    padding:14px;
+
+    outline:none;
 }
 
 .newsletter button{
-  border:0;
-  background:#351f27;
-  color:white;
-  padding:0 20px;
+    border:0;
+
+    background:#351f27;
+
+    color:white;
+
+    padding:0 20px;
+
+    font-size:10px;
+
+    font-weight:bold;
 }
 
 /* =====================================================
@@ -572,161 +687,232 @@ header{
 ===================================================== */
 
 footer{
-  background:#291d21;
-  color:white;
-  padding:60px 5% 20px;
+    background:#291d21;
+
+    color:white;
+
+    padding:60px 5% 20px;
 }
 
 .footer-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:30px;
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:30px;
 }
 
 .footer-logo{
-  font-family:Georgia,serif;
-  font-size:40px;
-  color:#efaebe;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:40px;
+
+    color:#efaebe;
 }
 
 footer h3{
-  font-size:10px;
-  letter-spacing:2px;
-  margin-bottom:15px;
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
 }
 
 footer a{
-  display:block;
-  color:#bbb;
-  font-size:10px;
-  margin:10px 0;
-  text-decoration:none;
+    display:block;
+
+    color:#bbb;
+
+    font-size:10px;
+
+    margin:10px 0;
+
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#efaebe;
 }
 
 footer p{
-  color:#aaa;
-  font-size:10px;
-  line-height:1.8;
-  max-width:300px;
+    color:#aaa;
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    max-width:300px;
 }
 
 .copyright{
-  border-top:1px solid #45363b;
-  text-align:center;
-  padding-top:20px;
-  margin-top:40px;
-  color:#777;
-  font-size:9px;
+    border-top:1px solid #45363b;
+
+    text-align:center;
+
+    padding-top:20px;
+
+    margin-top:40px;
+
+    color:#777;
+
+    font-size:9px;
+}
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:#0008;
+
+    z-index:500;
+}
+
+.overlay.ativo{
+    display:block;
 }
 
 /* =====================================================
    CARRINHO
 ===================================================== */
 
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:500;
-}
-
-.overlay.ativo{
-  display:block;
-}
-
 .carrinho{
-  position:fixed;
-  right:0;
-  top:0;
-  height:100vh;
-  width:min(480px,100%);
-  background:white;
-  z-index:501;
-  transform:translateX(100%);
-  transition:.3s;
-  display:flex;
-  flex-direction:column;
+    position:fixed;
+
+    right:0;
+    top:0;
+
+    height:100vh;
+
+    width:min(480px,100%);
+
+    background:white;
+
+    z-index:501;
+
+    transform:translateX(100%);
+
+    transition:.3s;
+
+    display:flex;
+
+    flex-direction:column;
 }
 
 .carrinho.aberto{
-  transform:translateX(0);
+    transform:translateX(0);
 }
 
 .carrinho-header{
-  padding:20px;
-  border-bottom:1px solid #ead9de;
-  display:flex;
-  justify-content:space-between;
+    padding:20px;
+
+    border-bottom:1px solid #ead9de;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
 }
 
 .carrinho-header h2{
-  font-family:Georgia,serif;
-  font-size:28px;
-  font-weight:normal;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:28px;
+
+    font-weight:400;
 }
 
 .fechar{
-  border:0;
-  background:none;
-  font-size:28px;
+    border:0;
+
+    background:none;
+
+    font-size:28px;
 }
 
 .itens{
-  flex:1;
-  overflow:auto;
-  padding:20px;
+    flex:1;
+
+    overflow:auto;
+
+    padding:20px;
 }
 
 .item{
-  display:flex;
-  gap:12px;
-  border-bottom:1px solid #ead9de;
-  padding:14px 0;
+    display:flex;
+
+    gap:12px;
+
+    border-bottom:1px solid #ead9de;
+
+    padding:14px 0;
 }
 
 .item-img{
-  width:65px;
-  height:70px;
-  background:#f5e2e7;
+    width:65px;
+
+    height:70px;
+
+    background:#f5e2e7;
 }
 
 .item-dados{
-  flex:1;
+    flex:1;
 }
 
 .item-dados strong{
-  font-family:Georgia,serif;
-  font-size:18px;
+    font-family:"Playfair Display",Georgia,serif;
+
+    font-size:18px;
 }
 
 .item-preco{
-  color:#b83f61;
-  font-weight:bold;
-  margin:5px 0;
+    color:#b83f61;
+
+    font-weight:bold;
+
+    margin:5px 0;
 }
 
 .quantidade{
-  display:flex;
-  align-items:center;
-  gap:8px;
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
 }
 
 .quantidade button{
-  width:25px;
-  height:25px;
-  border:1px solid #ddd;
-  background:white;
+    width:25px;
+
+    height:25px;
+
+    border:1px solid #ddd;
+
+    background:white;
 }
 
 .remover{
-  border:0;
-  background:none;
-  color:#999;
-  font-size:8px;
-  margin-top:5px;
+    border:0;
+
+    background:none;
+
+    color:#999;
+
+    font-size:8px;
+
+    margin-top:5px;
 }
 
 /* =====================================================
@@ -734,128 +920,173 @@ footer p{
 ===================================================== */
 
 .frete{
-  padding:16px 20px;
-  background:#fffafa;
-  border-top:1px solid #ead9de;
-  max-height:48vh;
-  overflow:auto;
+    padding:16px 20px;
+
+    background:#fffafa;
+
+    border-top:1px solid #ead9de;
+
+    max-height:48vh;
+
+    overflow:auto;
 }
 
 .frete h3{
-  font-size:11px;
-  margin-bottom:12px;
+    font-size:11px;
+
+    margin-bottom:12px;
 }
 
 .cep-linha{
-  display:flex;
-  gap:6px;
+    display:flex;
+
+    gap:6px;
 }
 
 .cep-linha input{
-  flex:1;
-  height:42px;
-  border:1px solid #ddcbd0;
-  padding:10px;
+    flex:1;
+
+    height:42px;
+
+    border:1px solid #ddcbd0;
+
+    padding:10px;
 }
 
 .cep-linha button{
-  background:#351f27;
-  color:white;
-  border:0;
-  padding:0 14px;
-  font-size:9px;
-  font-weight:bold;
+    background:#351f27;
+
+    color:white;
+
+    border:0;
+
+    padding:0 14px;
+
+    font-size:9px;
+
+    font-weight:bold;
 }
 
 .cep-link{
-  font-size:8px;
-  color:#b83f61;
-  display:block;
-  margin:8px 0;
+    font-size:8px;
+
+    color:#b83f61;
+
+    display:block;
+
+    margin:8px 0;
 }
 
 .endereco{
-  display:none;
-  margin-top:10px;
+    display:none;
+
+    margin-top:10px;
 }
 
 .endereco.ativo{
-  display:block;
+    display:block;
 }
 
 .endereco-box{
-  background:white;
-  border:1px solid #ead9de;
-  padding:10px;
-  font-size:9px;
-  line-height:1.7;
-  margin-bottom:10px;
+    background:white;
+
+    border:1px solid #ead9de;
+
+    padding:10px;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+    margin-bottom:10px;
 }
 
 .campos{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
 }
 
 .campos input{
-  width:100%;
-  height:38px;
-  border:1px solid #ddcbd0;
-  padding:8px;
-  font-size:9px;
+    width:100%;
+
+    height:38px;
+
+    border:1px solid #ddcbd0;
+
+    padding:8px;
+
+    font-size:9px;
 }
 
 .completo{
-  grid-column:1/-1;
+    grid-column:1/-1;
 }
 
 .entregas{
-  margin-top:15px;
+    margin-top:15px;
 }
 
 .entregas h4{
-  font-size:9px;
-  margin-bottom:8px;
+    font-size:9px;
+
+    margin-bottom:8px;
 }
 
 .entrega{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border:1px solid #ead9de;
-  background:white;
-  padding:11px;
-  margin-bottom:6px;
-  cursor:pointer;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border:1px solid #ead9de;
+
+    background:white;
+
+    padding:11px;
+
+    margin-bottom:6px;
+
+    cursor:pointer;
 }
 
 .entrega-esq{
-  display:flex;
-  gap:8px;
-  align-items:center;
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
 }
 
 .entrega input{
-  accent-color:#b83f61;
+    accent-color:#b83f61;
 }
 
 .entrega-nome{
-  font-size:9px;
-  font-weight:bold;
+    font-size:9px;
+
+    font-weight:bold;
 }
 
 .prazo{
-  display:block;
-  color:#888;
-  font-size:7px;
-  margin-top:3px;
+    display:block;
+
+    color:#888;
+
+    font-size:7px;
+
+    margin-top:3px;
 }
 
 .valor-entrega{
-  color:#b83f61;
-  font-size:9px;
-  font-weight:bold;
+    color:#b83f61;
+
+    font-size:9px;
+
+    font-weight:bold;
 }
 
 /* =====================================================
@@ -863,32 +1094,45 @@ footer p{
 ===================================================== */
 
 .resumo{
-  padding:17px 20px;
-  border-top:1px solid #ead9de;
+    padding:17px 20px;
+
+    border-top:1px solid #ead9de;
 }
 
 .linha{
-  display:flex;
-  justify-content:space-between;
-  font-size:10px;
-  margin:7px 0;
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:10px;
+
+    margin:7px 0;
 }
 
 .total{
-  font-size:17px;
-  font-weight:bold;
-  margin-top:10px;
+    font-size:17px;
+
+    font-weight:bold;
+
+    margin-top:10px;
 }
 
 .whatsapp{
-  width:100%;
-  height:48px;
-  border:0;
-  background:#25d366;
-  color:white;
-  font-weight:bold;
-  font-size:9px;
-  margin-top:10px;
+    width:100%;
+
+    height:48px;
+
+    border:0;
+
+    background:#25d366;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:9px;
+
+    margin-top:10px;
 }
 
 /* =====================================================
@@ -897,113 +1141,178 @@ footer p{
 
 @media(max-width:900px){
 
-  .menu-lista{
-    overflow-x:auto;
-    justify-content:flex-start;
-    padding:0 20px;
-    gap:22px;
-  }
+    .header{
+        padding:18px 18px 0;
+    }
 
-  .produtos{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .logo h1{
+        font-size:39px;
+    }
 
-  .beneficios{
-    grid-template-columns:1fr;
-  }
+    .menu-lista{
+        overflow-x:auto;
 
-  .beneficio{
-    border-right:0;
-    border-bottom:1px solid #ead9de;
-  }
+        justify-content:flex-start;
 
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
+        padding:0 5px;
 
-  .hero h2{
-    font-size:48px;
-  }
+        scrollbar-width:none;
+    }
+
+    .menu-lista::-webkit-scrollbar{
+        display:none;
+    }
+
+    .menu-item > button{
+        white-space:nowrap;
+
+        padding:17px 10px;
+
+        font-size:9px;
+    }
+
+    .dropdown{
+        position:fixed;
+
+        left:10px;
+        right:10px;
+
+        transform:none;
+
+        width:auto;
+
+        top:150px;
+    }
+
+    .produtos{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .beneficios{
+        grid-template-columns:1fr;
+    }
+
+    .beneficio{
+        border-right:0;
+
+        border-bottom:1px solid #ead9de;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h2{
+        font-size:48px;
+    }
+
 }
 
-@media(max-width:550px){
+@media(max-width:600px){
 
-  .logo h1{
-    font-size:35px;
-    letter-spacing:5px;
-  }
+    .header-top{
+        gap:10px;
+    }
 
-  .logo span{
-    font-size:7px;
-    letter-spacing:2px;
-  }
+    .logo{
+        min-width:0;
+    }
 
-  .frase{
-    font-size:12px;
-  }
+    .logo h1{
+        font-size:31px;
 
-  .barra-acoes{
-    flex-direction:column;
-  }
+        letter-spacing:4px;
+    }
 
-  .busca{
-    width:100%;
-  }
+    .logo span{
+        font-size:6px;
 
-  .acoes{
-    align-self:flex-end;
-  }
+        letter-spacing:1.5px;
+    }
 
-  .produtos{
-    gap:10px;
-  }
+    .acoes{
+        width:auto;
 
-  .produto-img{
-    height:190px;
-  }
+        gap:13px;
+    }
 
-  .nome{
-    font-size:18px;
-  }
+    .favorito{
+        display:none;
+    }
 
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
+    .busca{
+        padding:15px 0 18px;
+    }
 
-  .hero{
-    min-height:500px;
-  }
+    .hero{
+        min-height:500px;
+    }
 
-  .hero h2{
-    font-size:40px;
-  }
+    .hero h2{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:12px;
+    }
+
+    .secao{
+        padding:55px 15px;
+    }
+
+    .titulo h2{
+        font-size:36px;
+    }
+
+    .produtos{
+        gap:10px;
+    }
+
+    .produto-img{
+        height:190px;
+    }
+
+    .produto-info{
+        padding:12px;
+    }
+
+    .nome{
+        font-size:18px;
+    }
+
+    .preco{
+        font-size:15px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .newsletter h2{
+        font-size:32px;
+    }
+
+    .newsletter form{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .newsletter button{
+        height:45px;
+    }
 
 }
 
 /* =====================================================
-   MENU NO CELULAR
+   ESCONDER PRODUTOS DA BUSCA
 ===================================================== */
 
-@media(max-width:700px){
-
-  .dropdown{
-    position:fixed;
-    left:20px;
-    right:20px;
-    top:170px;
-    transform:none;
-    width:auto;
-    max-height:70vh;
-    overflow:auto;
-  }
-
+.produto.escondido{
+    display:none;
 }
-
-/* =====================================================
-   FIM CSS
-===================================================== */
 
 </style>
+
 </head>
 
 <body>
@@ -1013,7 +1322,9 @@ footer p{
 ===================================================== -->
 
 <div class="topo">
+
 ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
+
 </div>
 
 
@@ -1025,7 +1336,12 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="header">
 
-<!-- LOGO -->
+
+<!-- LOGO + CARRINHO -->
+
+<div class="header-top">
+
+<div style="width:120px;"></div>
 
 <div class="logo">
 
@@ -1035,8 +1351,31 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 BELEZA • CUIDADOS • ACHADINHOS
 </span>
 
-<div class="frase">
-“Testamos, gostamos e colocamos na loja.”
+</div>
+
+
+<div class="acoes">
+
+<span class="favorito">
+♡
+</span>
+
+<div
+class="carrinho-icon"
+onclick="abrirCarrinho()"
+>
+
+🛍
+
+<span
+class="contador"
+id="contador"
+>
+0
+</span>
+
+</div>
+
 </div>
 
 </div>
@@ -1051,183 +1390,288 @@ BELEZA • CUIDADOS • ACHADINHOS
 <div class="menu-lista">
 
 
-<!-- ================= LÁBIOS ================= -->
+<!-- =====================================================
+     LÁBIOS
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Lábios</button>
+<button>
+Lábios <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Lábios</h3>
 
-<a href="#labios-batom">Batom</a>
-<a href="#labios-gloss">Gloss</a>
-<a href="#labios-liptint">Lip Tint</a>
-<a href="#labios-balm">Lip Balm</a>
-<a href="#labios-lapis">Lápis de Boca</a>
-<a href="#labios-oleo">Óleo Labial</a>
-<a href="#labios-hidratante">Hidratante Labial</a>
+<a href="#novidades">Batom</a>
+
+<a href="#novidades">Gloss</a>
+
+<a href="#novidades">Lip Tint</a>
+
+<a href="#novidades">Lip Balm</a>
+
+<a href="#novidades">Lápis de Boca</a>
+
+<a href="#novidades">Óleo Labial</a>
+
+<a href="#novidades">Hidratante Labial</a>
+
+<a href="#novidades">Delineador Labial</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= PELE ================= -->
+<!-- =====================================================
+     PELE
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Pele</button>
+<button>
+Pele <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Pele</h3>
 
-<a href="#pele-base">Base</a>
-<a href="#pele-corretivo">Corretivo</a>
-<a href="#pele-primer">Primer</a>
-<a href="#pele-bruma">Bruma</a>
-<a href="#pele-contorno">Contorno</a>
-<a href="#pele-blush">Blush</a>
-<a href="#pele-iluminador">Iluminador</a>
-<a href="#pele-po">Pó Facial</a>
-<a href="#pele-fixador">Fixador</a>
+<a href="#novidades">Base</a>
+
+<a href="#novidades">Corretivo</a>
+
+<a href="#novidades">Primer</a>
+
+<a href="#novidades">Bruma</a>
+
+<a href="#novidades">Pó Facial</a>
+
+<a href="#novidades">Blush</a>
+
+<a href="#novidades">Contorno</a>
+
+<a href="#novidades">Iluminador</a>
+
+<a href="#novidades">Bronzer</a>
+
+<a href="#novidades">Fixador</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= SKINCARE ================= -->
+<!-- =====================================================
+     SKINCARE
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Skincare</button>
+<button>
+Skincare <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Skincare</h3>
 
-<a href="#skin-hidratante">Hidratante Facial</a>
-<a href="#skin-serum">Sérum</a>
-<a href="#skin-sabonete">Sabonete Facial</a>
-<a href="#skin-esfoliante">Esfoliante</a>
-<a href="#skin-micelar">Água Micelar</a>
-<a href="#skin-protetor">Protetor Solar</a>
-<a href="#skin-mascara">Máscara Facial</a>
-<a href="#skin-olios">Óleos Faciais</a>
+<a href="#novidades">Sabonete Facial</a>
+
+<a href="#novidades">Hidratante</a>
+
+<a href="#novidades">Sérum</a>
+
+<a href="#novidades">Esfoliante</a>
+
+<a href="#novidades">Água Micelar</a>
+
+<a href="#novidades">Protetor Solar</a>
+
+<a href="#novidades">Máscara Facial</a>
+
+<a href="#novidades">Tônico</a>
+
+<a href="#novidades">Água Termal</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= OLHOS ================= -->
+<!-- =====================================================
+     OLHOS
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Olhos</button>
+<button>
+Olhos <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Olhos</h3>
 
-<a href="#olhos-paletas">Paletas</a>
-<a href="#olhos-sombras">Sombras</a>
-<a href="#olhos-mascara">Máscara de Cílios</a>
-<a href="#olhos-delineador">Delineador</a>
-<a href="#olhos-lapis">Lápis de Olho</a>
-<a href="#olhos-cilios">Cílios</a>
-<a href="#olhos-sobrancelhas">Sobrancelhas</a>
+<a href="#novidades">Paletas</a>
+
+<a href="#novidades">Sombras</a>
+
+<a href="#novidades">Máscara de Cílios</a>
+
+<a href="#novidades">Delineador</a>
+
+<a href="#novidades">Lápis de Olho</a>
+
+<a href="#novidades">Cílios Postiços</a>
+
+<a href="#novidades">Cola para Cílios</a>
+
+<a href="#novidades">Sobrancelhas</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= FACE ================= -->
+<!-- =====================================================
+     FACE
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Face</button>
+<button>
+Face <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Face</h3>
 
-<a href="#face-blush">Blush</a>
-<a href="#face-iluminador">Iluminador</a>
-<a href="#face-contorno">Contorno</a>
-<a href="#face-bronzer">Bronzer</a>
-<a href="#face-po">Pó</a>
-<a href="#face-primer">Primer</a>
-<a href="#face-fixador">Fixador</a>
+<a href="#novidades">Blush</a>
+
+<a href="#novidades">Iluminador</a>
+
+<a href="#novidades">Contorno</a>
+
+<a href="#novidades">Bronzer</a>
+
+<a href="#novidades">Pó</a>
+
+<a href="#novidades">Primer</a>
+
+<a href="#novidades">Fixador</a>
+
+<a href="#novidades">Bruma</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= ACESSÓRIOS ================= -->
+<!-- =====================================================
+     ACESSÓRIOS
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Acessórios</button>
+<button>
+Acessórios <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Acessórios</h3>
 
-<a href="#acessorios-pinceis">Pincéis</a>
-<a href="#acessorios-esponjas">Esponjas</a>
-<a href="#acessorios-necessaires">Necessaires</a>
-<a href="#acessorios-espelhos">Espelhos</a>
-<a href="#acessorios-cabelo">Acessórios de Cabelo</a>
-<a href="#acessorios-organizadores">Organizadores</a>
+<a href="#novidades">Pincéis</a>
+
+<a href="#novidades">Esponjas</a>
+
+<a href="#novidades">Necessaires</a>
+
+<a href="#novidades">Espelhos</a>
+
+<a href="#novidades">Acessórios de Cabelo</a>
+
+<a href="#novidades">Presilhas</a>
+
+<a href="#novidades">Faixas</a>
+
+<a href="#novidades">Organizadores</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= CORPO ================= -->
+<!-- =====================================================
+     CORPO
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Corpo</button>
+<button>
+Corpo <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Corpo</h3>
 
-<a href="#corpo-body">Body Splash</a>
-<a href="#corpo-hidratante">Hidratante Corporal</a>
-<a href="#corpo-esfoliante">Esfoliante Corporal</a>
-<a href="#corpo-sabonete">Sabonete Corporal</a>
-<a href="#corpo-oleo">Óleo Corporal</a>
-<a href="#corpo-cuidados">Cuidados Corporais</a>
+<a href="#novidades">Body Splash</a>
+
+<a href="#novidades">Hidratante Corporal</a>
+
+<a href="#novidades">Esfoliante Corporal</a>
+
+<a href="#novidades">Sabonete Corporal</a>
+
+<a href="#novidades">Óleo Corporal</a>
+
+<a href="#novidades">Cuidados para as Mãos</a>
+
+<a href="#novidades">Cuidados para os Pés</a>
 
 </div>
 
 </div>
 
 
-<!-- ================= OFERTAS ================= -->
+<!-- =====================================================
+     OFERTAS
+===================================================== -->
 
 <div class="menu-item">
 
-<button>Ofertas</button>
+<button>
+Ofertas <span class="seta">▾</span>
+</button>
 
 <div class="dropdown">
 
 <h3>Ofertas</h3>
 
-<a href="#ofertas">Ofertas da Semana</a>
-<a href="#kits">Kits Promocionais</a>
-<a href="#descontos">Descontos</a>
-<a href="#ultimas">Últimas Unidades</a>
-<a href="#validade">Próximo da Validade</a>
+<a href="#ofertas">
+Ofertas da Semana
+</a>
+
+<a href="#ofertas">
+Kits Promocionais
+</a>
+
+<a href="#ofertas">
+Descontos
+</a>
+
+<a href="#ofertas">
+Últimas Unidades
+</a>
+
+<a href="#ofertas">
+Próximo da Validade
+</a>
 
 </div>
 
@@ -1243,8 +1687,6 @@ BELEZA • CUIDADOS • ACHADINHOS
      BUSCA
 ===================================================== -->
 
-<div class="barra-acoes">
-
 <div class="busca">
 
 <input
@@ -1256,30 +1698,6 @@ onkeyup="buscarProdutos()"
 
 </div>
 
-
-<div class="acoes">
-
-<span>♡</span>
-
-<div
-class="carrinho-icon"
-onclick="abrirCarrinho()"
->
-
-🛍️
-
-<span
-class="contador"
-id="contador"
->
-0
-</span>
-
-</div>
-
-</div>
-
-</div>
 
 </div>
 
@@ -1294,21 +1712,25 @@ id="contador"
 
 <div class="hero-content">
 
-<small>BEM-VINDA À FOR YOU</small>
+<small>
+BEM-VINDA À FOR YOU
+</small>
 
 <h2>
 
 Beleza do seu jeito,
+
 <br>
 
-<span>escolhida por nós.</span>
+<span>
+escolhida por nós.
+</span>
 
 </h2>
 
 <p>
 
-Produtos de beleza, cuidados,
-acessórios, novidades e aqueles
+Maquiagem, skincare, corpo, acessórios e aqueles
 achadinhos que você vai amar.
 
 </p>
@@ -1328,25 +1750,29 @@ VER NOVIDADES
 
 
 <!-- =====================================================
-     NOVIDADES
+     NOVIDADES / ACHADINHOS
 ===================================================== -->
 
 <section
-class="secao"
+class="secao achadinhos"
 id="novidades"
 >
 
 <div class="titulo">
 
-<small>NOVIDADES</small>
+<small>
+ACHADINHOS FOR YOU
+</small>
 
 <h2>
 Acabou de chegar
 </h2>
 
-<p>
-Conheça os novos produtos da FOR YOU.
-</p>
+</div>
+
+<div class="frase-achadinhos">
+
+“Testamos, gostamos e colocamos na loja.”
 
 </div>
 
@@ -1354,9 +1780,12 @@ Conheça os novos produtos da FOR YOU.
 <div class="produtos">
 
 
-<!-- PRODUTO -->
+<!-- PRODUTO 1 -->
 
-<div class="produto">
+<div
+class="produto"
+data-nome="base glow base pele"
+>
 
 <div class="produto-img">
 
@@ -1366,6 +1795,7 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+alt="Base Glow"
 >
 
 </div>
@@ -1396,7 +1826,12 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 2 -->
+
+<div
+class="produto"
+data-nome="gloss rose gloss labios"
+>
 
 <div class="produto-img">
 
@@ -1406,6 +1841,7 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+alt="Gloss Rosé"
 >
 
 </div>
@@ -1436,7 +1872,12 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 3 -->
+
+<div
+class="produto"
+data-nome="hidratante facial skincare"
+>
 
 <div class="produto-img">
 
@@ -1446,6 +1887,7 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
+alt="Hidratante Facial"
 >
 
 </div>
@@ -1476,7 +1918,12 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 4 -->
+
+<div
+class="produto"
+data-nome="paleta glow olhos"
+>
 
 <div class="produto-img">
 
@@ -1486,6 +1933,7 @@ NOVO
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
+alt="Paleta Glow"
 >
 
 </div>
@@ -1521,210 +1969,6 @@ ADICIONAR AO CARRINHO
 
 
 <!-- =====================================================
-     KITS PROMOCIONAIS
-===================================================== -->
-
-<section
-class="secao kits"
-id="kits"
->
-
-<div class="titulo">
-
-<small>ECONOMIZE MAIS</small>
-
-<h2>
-Kits Promocionais
-</h2>
-
-<p>
-Combinações especiais escolhidas pela FOR YOU.
-</p>
-
-</div>
-
-
-<div class="kit-destaque">
-
-<strong>
-✨ Kits especiais da semana
-</strong>
-
-<p>
-Mais produtos juntos, mais vantagens para você.
-</p>
-
-</div>
-
-
-<div class="produtos">
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Kit
-</div>
-
-<div class="nome">
-Kit Beleza
-</div>
-
-<div class="preco">
-R$ 49,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Beleza',49.90)"
->
-ADICIONAR AO CARRINHO
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Skincare
-</div>
-
-<div class="nome">
-Kit Skincare
-</div>
-
-<div class="preco">
-R$ 59,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Skincare',59.90)"
->
-ADICIONAR AO CARRINHO
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Make
-</div>
-
-<div class="nome">
-Kit Make Completa
-</div>
-
-<div class="preco">
-R$ 79,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Make Completa',79.90)"
->
-ADICIONAR AO CARRINHO
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Lábios
-</div>
-
-<div class="nome">
-Kit Lábios
-</div>
-
-<div class="preco">
-R$ 39,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Lábios',39.90)"
->
-ADICIONAR AO CARRINHO
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
      OFERTAS
 ===================================================== -->
 
@@ -1735,7 +1979,9 @@ id="ofertas"
 
 <div class="titulo">
 
-<small>PREÇOS ESPECIAIS</small>
+<small>
+PREÇOS ESPECIAIS
+</small>
 
 <h2>
 Ofertas
@@ -1751,7 +1997,12 @@ Aproveite enquanto durar o estoque.
 <div class="produtos">
 
 
-<div class="produto">
+<!-- OFERTA 1 -->
+
+<div
+class="produto"
+data-nome="batom especial oferta labios"
+>
 
 <div class="produto-img">
 
@@ -1761,6 +2012,7 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+alt="Batom Especial"
 >
 
 </div>
@@ -1791,7 +2043,12 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- OFERTA 2 -->
+
+<div
+class="produto"
+data-nome="hidratante glow skincare oferta"
+>
 
 <div class="produto-img">
 
@@ -1801,6 +2058,7 @@ OFERTA
 
 <img
 src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
+alt="Hidratante Glow"
 >
 
 </div>
@@ -1830,60 +2088,23 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-</div>
 
-
-<!-- =====================================================
-     PRÓXIMO DA VALIDADE
-     FICA DENTRO DE OFERTAS
-===================================================== -->
+<!-- KIT -->
 
 <div
-class="validade-box"
-id="validade"
+class="produto"
+data-nome="kit promocional kit oferta"
 >
-
-<div class="titulo">
-
-<small>OFERTA ESPECIAL</small>
-
-<h2>
-Próximo da Validade
-</h2>
-
-<p>
-Produtos dentro da validade com preço especial.
-</p>
-
-</div>
-
-
-<div class="alerta">
-
-<strong>IMPORTANTE:</strong>
-
-A data de validade será informada
-no cadastro de cada produto.
-
-Não serão cadastrados produtos
-fora da validade.
-
-</div>
-
-
-<div class="produtos">
-
-
-<div class="produto">
 
 <div class="produto-img">
 
 <span class="etiqueta">
-VALIDADE PRÓXIMA
+KIT
 </span>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+alt="Kit Promocional"
 >
 
 </div>
@@ -1895,13 +2116,62 @@ Oferta
 </div>
 
 <div class="nome">
+Kit Beauty
+</div>
+
+<div class="preco">
+R$ 49,90
+</div>
+
+<button
+class="adicionar"
+onclick="adicionar('Kit Beauty',49.90)"
+>
+ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+</div>
+
+
+<!-- PRÓXIMO DA VALIDADE SOMENTE COMO PRODUTO DE OFERTA -->
+
+<div
+class="produto"
+data-nome="produto proximo validade oferta"
+>
+
+<div class="produto-img">
+
+<span class="etiqueta">
+OFERTA
+</span>
+
+<img
+src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+alt="Produto em oferta"
+>
+
+</div>
+
+<div class="produto-info">
+
+<div class="marca">
+Próximo da Validade
+</div>
+
+<div class="nome">
 Produto Especial
 </div>
 
-<div style="font-size:9px;color:#777;margin:5px 0;">
+<div style="
+font-size:9px;
+color:#777;
+margin:5px 0;
+">
 
-Validade:
-informar no produto
+Validade informada na descrição do produto.
 
 </div>
 
@@ -1915,8 +2185,6 @@ onclick="adicionar('Produto Especial - Próximo da Validade',9.90)"
 >
 ADICIONAR AO CARRINHO
 </button>
-
-</div>
 
 </div>
 
@@ -1944,8 +2212,7 @@ Produtos escolhidos
 </strong>
 
 <span>
-Testamos, gostamos e selecionamos
-produtos para você.
+Achadinhos selecionados para você.
 </span>
 
 </div>
@@ -1960,7 +2227,7 @@ Novidades toda semana
 </strong>
 
 <span>
-Sempre tem novidade chegando na FOR YOU.
+Sempre tem novidade na FOR YOU.
 </span>
 
 </div>
@@ -1996,7 +2263,7 @@ Vem fazer parte da FOR YOU.
 </h2>
 
 <p>
-Receba novidades, lançamentos e ofertas.
+Receba novidades e ofertas.
 </p>
 
 <form onsubmit="return newsletter()">
@@ -2033,8 +2300,8 @@ FOR YOU
 
 <p>
 
-Beleza, cuidados, acessórios
-e achadinhos escolhidos
+Maquiagem, skincare, corpo,
+acessórios e achadinhos escolhidos
 com carinho.
 
 </p>
@@ -2052,16 +2319,12 @@ LOJA
 Novidades
 </a>
 
-<a href="#kits">
-Kits Promocionais
-</a>
-
 <a href="#ofertas">
 Ofertas
 </a>
 
-<a href="#validade">
-Próximo da Validade
+<a href="#ofertas">
+Kits Promocionais
 </a>
 
 </div>
@@ -2073,24 +2336,20 @@ Próximo da Validade
 CATEGORIAS
 </h3>
 
-<a href="#">
+<a href="#novidades">
 Lábios
 </a>
 
-<a href="#">
+<a href="#novidades">
 Pele
 </a>
 
-<a href="#">
+<a href="#novidades">
 Skincare
 </a>
 
-<a href="#">
+<a href="#novidades">
 Olhos
-</a>
-
-<a href="#">
-Face
 </a>
 
 </div>
@@ -2174,7 +2433,9 @@ id="itens"
 </div>
 
 
-<!-- FRETE -->
+<!-- =====================================================
+     FRETE
+===================================================== -->
 
 <div class="frete">
 
@@ -2349,14 +2610,17 @@ GRÁTIS
 
 </label>
 
-</div>
 
 </div>
 
 </div>
 
+</div>
 
-<!-- RESUMO -->
+
+<!-- =====================================================
+     RESUMO
+===================================================== -->
 
 <div class="resumo">
 
@@ -2403,7 +2667,9 @@ R$ 0,00
 class="whatsapp"
 onclick="finalizarWhatsApp()"
 >
+
 FINALIZAR PEDIDO PELO WHATSAPP
+
 </button>
 
 </div>
@@ -2411,14 +2677,10 @@ FINALIZAR PEDIDO PELO WHATSAPP
 </aside>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
 
 /* =====================================================
-   WHATSAPP DA LOJA
+   CONFIGURAÇÃO
 ===================================================== */
 
 const WHATSAPP = "5511999999999";
@@ -2440,8 +2702,8 @@ let entregaSelecionada = "";
 let freteAtual = 0;
 
 let valoresFrete = {
-  padrao:0,
-  expressa:0
+    padrao:0,
+    expressa:0
 };
 
 
@@ -2451,27 +2713,27 @@ let valoresFrete = {
 
 function moeda(valor){
 
-  return valor.toLocaleString(
-    "pt-BR",
-    {
-      style:"currency",
-      currency:"BRL"
-    }
-  );
+    return valor.toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
 
 }
 
 
 /* =====================================================
-   SALVAR CARRINHO
+   SALVAR
 ===================================================== */
 
 function salvar(){
 
-  localStorage.setItem(
-    "forYouCarrinho",
-    JSON.stringify(carrinho)
-  );
+    localStorage.setItem(
+        "forYouCarrinho",
+        JSON.stringify(carrinho)
+    );
 
 }
 
@@ -2482,28 +2744,30 @@ function salvar(){
 
 function adicionar(nome,preco){
 
-  const produto =
-  carrinho.find(
-    item => item.nome === nome
-  );
+    const produto =
+    carrinho.find(
+        item => item.nome === nome
+    );
 
-  if(produto){
+    if(produto){
 
-    produto.quantidade++;
+        produto.quantidade++;
 
-  }else{
+    }else{
 
-    carrinho.push({
-      nome:nome,
-      preco:preco,
-      quantidade:1
-    });
+        carrinho.push({
+            nome:nome,
+            preco:preco,
+            quantidade:1
+        });
 
-  }
+    }
 
-  salvar();
-  atualizar();
-  abrirCarrinho();
+    salvar();
+
+    atualizar();
+
+    abrirCarrinho();
 
 }
 
@@ -2514,125 +2778,124 @@ function adicionar(nome,preco){
 
 function atualizar(){
 
-  const container =
-  document.getElementById("itens");
+    const container =
+    document.getElementById("itens");
 
-  let quantidade = 0;
-  let subtotal = 0;
+    let quantidade = 0;
+
+    let subtotal = 0;
 
 
-  if(carrinho.length === 0){
+    if(carrinho.length === 0){
 
-    container.innerHTML = `
-
-      <div style="
-        text-align:center;
-        padding:60px 10px;
-        color:#888;
-        font-size:12px;
-      ">
-
+        container.innerHTML = `
+        
+        <div style="
+            text-align:center;
+            padding:60px 10px;
+            color:#888;
+            font-size:12px;
+        ">
+        
         Seu carrinho está vazio.
 
-      </div>
-
-    `;
-
-  }else{
-
-    container.innerHTML = "";
-
-
-    carrinho.forEach(
-      (produto,index) => {
-
-        quantidade +=
-        produto.quantidade;
-
-        subtotal +=
-        produto.preco *
-        produto.quantidade;
-
-
-        const item =
-        document.createElement("div");
-
-        item.className = "item";
-
-
-        item.innerHTML = `
-
-          <div class="item-img"></div>
-
-          <div class="item-dados">
-
-            <strong>
-              ${produto.nome}
-            </strong>
-
-            <div class="item-preco">
-              ${moeda(produto.preco)}
-            </div>
-
-            <div class="quantidade">
-
-              <button
-                onclick="alterar(${index},-1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${produto.quantidade}
-              </span>
-
-              <button
-                onclick="alterar(${index},1)"
-              >
-                +
-              </button>
-
-            </div>
-
-            <button
-              class="remover"
-              onclick="remover(${index})"
-            >
-              REMOVER
-            </button>
-
-          </div>
-
+        </div>
+        
         `;
 
+    }else{
 
-        container.appendChild(item);
+        container.innerHTML = "";
 
-      }
-    );
+        carrinho.forEach(
+            (produto,index) => {
 
-  }
+                quantidade +=
+                produto.quantidade;
 
-
-  document.getElementById(
-    "contador"
-  ).textContent = quantidade;
-
-
-  document.getElementById(
-    "subtotal"
-  ).textContent = moeda(subtotal);
+                subtotal +=
+                produto.preco *
+                produto.quantidade;
 
 
-  document.getElementById(
-    "frete"
-  ).textContent = moeda(freteAtual);
+                const item =
+                document.createElement("div");
+
+                item.className = "item";
 
 
-  document.getElementById(
-    "total"
-  ).textContent =
-  moeda(subtotal + freteAtual);
+                item.innerHTML = `
+
+                <div class="item-img"></div>
+
+                <div class="item-dados">
+
+                    <strong>
+                        ${produto.nome}
+                    </strong>
+
+                    <div class="item-preco">
+                        ${moeda(produto.preco)}
+                    </div>
+
+                    <div class="quantidade">
+
+                        <button
+                        onclick="alterar(${index},-1)"
+                        >
+                        −
+                        </button>
+
+                        <span>
+                        ${produto.quantidade}
+                        </span>
+
+                        <button
+                        onclick="alterar(${index},1)"
+                        >
+                        +
+                        </button>
+
+                    </div>
+
+                    <button
+                    class="remover"
+                    onclick="remover(${index})"
+                    >
+                    REMOVER
+                    </button>
+
+                </div>
+
+                `;
+
+                container.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    document.getElementById(
+        "contador"
+    ).textContent = quantidade;
+
+
+    document.getElementById(
+        "subtotal"
+    ).textContent = moeda(subtotal);
+
+
+    document.getElementById(
+        "frete"
+    ).textContent = moeda(freteAtual);
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+    moeda(subtotal + freteAtual);
 
 }
 
@@ -2643,20 +2906,21 @@ function atualizar(){
 
 function alterar(index,valor){
 
-  carrinho[index].quantidade += valor;
+    carrinho[index].quantidade += valor;
 
 
-  if(
-    carrinho[index].quantidade <= 0
-  ){
+    if(
+        carrinho[index].quantidade <= 0
+    ){
 
-    carrinho.splice(index,1);
+        carrinho.splice(index,1);
 
-  }
+    }
 
 
-  salvar();
-  atualizar();
+    salvar();
+
+    atualizar();
 
 }
 
@@ -2667,10 +2931,11 @@ function alterar(index,valor){
 
 function remover(index){
 
-  carrinho.splice(index,1);
+    carrinho.splice(index,1);
 
-  salvar();
-  atualizar();
+    salvar();
+
+    atualizar();
 
 }
 
@@ -2681,14 +2946,14 @@ function remover(index){
 
 function abrirCarrinho(){
 
-  document
-  .getElementById("carrinho")
-  .classList.add("aberto");
+    document
+    .getElementById("carrinho")
+    .classList.add("aberto");
 
 
-  document
-  .getElementById("overlay")
-  .classList.add("ativo");
+    document
+    .getElementById("overlay")
+    .classList.add("ativo");
 
 }
 
@@ -2699,43 +2964,43 @@ function abrirCarrinho(){
 
 function fecharCarrinho(){
 
-  document
-  .getElementById("carrinho")
-  .classList.remove("aberto");
+    document
+    .getElementById("carrinho")
+    .classList.remove("aberto");
 
 
-  document
-  .getElementById("overlay")
-  .classList.remove("ativo");
+    document
+    .getElementById("overlay")
+    .classList.remove("ativo");
 
 }
 
 
 /* =====================================================
-   CEP
+   MÁSCARA CEP
 ===================================================== */
 
 function mascaraCEP(input){
 
-  let valor =
-  input.value
-  .replace(/\D/g,"")
-  .substring(0,8);
+    let valor =
+    input.value
+    .replace(/\D/g,"")
+    .substring(0,8);
 
 
-  if(valor.length > 5){
+    if(valor.length > 5){
 
-    valor =
-    valor.substring(0,5)
-    +
-    "-"
-    +
-    valor.substring(5);
+        valor =
+        valor.substring(0,5)
+        +
+        "-"
+        +
+        valor.substring(5);
 
-  }
+    }
 
 
-  input.value = valor;
+    input.value = valor;
 
 }
 
@@ -2746,102 +3011,102 @@ function mascaraCEP(input){
 
 async function buscarCEP(){
 
-  const cep =
-  document
-  .getElementById("cep")
-  .value
-  .replace(/\D/g,"");
+    const cep =
+    document
+    .getElementById("cep")
+    .value
+    .replace(/\D/g,"");
 
 
-  if(cep.length !== 8){
+    if(cep.length !== 8){
 
-    alert(
-      "Digite um CEP válido."
-    );
+        alert(
+            "Digite um CEP válido."
+        );
 
-    return;
-
-  }
-
-
-  const endereco =
-  document.getElementById(
-    "endereco"
-  );
-
-
-  const box =
-  document.getElementById(
-    "enderecoBox"
-  );
-
-
-  endereco.classList.add("ativo");
-
-  box.innerHTML =
-  "Consultando endereço...";
-
-
-  try{
-
-    const resposta =
-    await fetch(
-      `https://viacep.com.br/ws/${cep}/json/`
-    );
-
-
-    const dados =
-    await resposta.json();
-
-
-    if(dados.erro){
-
-      box.innerHTML =
-      "CEP não encontrado.";
-
-      return;
+        return;
 
     }
 
 
-    enderecoDados = dados;
-
-
-    box.innerHTML = `
-
-      <strong>
-        ${dados.logradouro || ""}
-      </strong>
-
-      <br>
-
-      ${dados.bairro || ""}
-
-      <br>
-
-      ${dados.localidade || ""}
-      -
-      ${dados.uf || ""}
-
-      <br>
-
-      CEP:
-      ${dados.cep || cep}
-
-    `;
-
-
-    calcularFrete(
-      dados.uf
+    const endereco =
+    document.getElementById(
+        "endereco"
     );
 
 
-  }catch(error){
+    const box =
+    document.getElementById(
+        "enderecoBox"
+    );
+
+
+    endereco.classList.add("ativo");
 
     box.innerHTML =
-    "Não foi possível consultar o CEP. Verifique sua conexão.";
+    "Consultando endereço...";
 
-  }
+
+    try{
+
+        const resposta =
+        await fetch(
+            `https://viacep.com.br/ws/${cep}/json/`
+        );
+
+
+        const dados =
+        await resposta.json();
+
+
+        if(dados.erro){
+
+            box.innerHTML =
+            "CEP não encontrado.";
+
+            return;
+
+        }
+
+
+        enderecoDados = dados;
+
+
+        box.innerHTML = `
+
+        <strong>
+            ${dados.logradouro || ""}
+        </strong>
+
+        <br>
+
+        ${dados.bairro || ""}
+
+        <br>
+
+        ${dados.localidade || ""}
+        -
+        ${dados.uf || ""}
+
+        <br>
+
+        CEP:
+        ${dados.cep || cep}
+
+        `;
+
+
+        calcularFrete(
+            dados.uf
+        );
+
+
+    }catch(error){
+
+        box.innerHTML =
+        "Não foi possível consultar o CEP. Verifique sua conexão e tente novamente.";
+
+    }
 
 }
 
@@ -2852,125 +3117,149 @@ async function buscarCEP(){
 
 function calcularFrete(uf){
 
-  const tabela = {
+    const tabela = {
 
-    SP:{padrao:12,expressa:20},
-    RJ:{padrao:15,expressa:25},
-    MG:{padrao:15,expressa:25},
-    ES:{padrao:15,expressa:25},
+        SP:{padrao:12,expressa:20},
 
-    PR:{padrao:18,expressa:29},
-    SC:{padrao:18,expressa:29},
-    RS:{padrao:18,expressa:29},
+        RJ:{padrao:15,expressa:25},
 
-    GO:{padrao:20,expressa:32},
-    MT:{padrao:20,expressa:32},
-    MS:{padrao:20,expressa:32},
-    DF:{padrao:20,expressa:32},
+        MG:{padrao:15,expressa:25},
 
-    BA:{padrao:23,expressa:36},
-    PE:{padrao:23,expressa:36},
-    CE:{padrao:23,expressa:36},
-    AL:{padrao:23,expressa:36},
-    SE:{padrao:23,expressa:36},
-    PB:{padrao:23,expressa:36},
-    RN:{padrao:23,expressa:36},
-    PI:{padrao:23,expressa:36},
-    MA:{padrao:23,expressa:36},
+        ES:{padrao:15,expressa:25},
 
-    PA:{padrao:28,expressa:42},
-    AM:{padrao:28,expressa:42},
-    AC:{padrao:28,expressa:42},
-    AP:{padrao:28,expressa:42},
-    RO:{padrao:28,expressa:42},
-    RR:{padrao:28,expressa:42},
-    TO:{padrao:28,expressa:42}
+        PR:{padrao:18,expressa:29},
 
-  };
+        SC:{padrao:18,expressa:29},
+
+        RS:{padrao:18,expressa:29},
+
+        GO:{padrao:20,expressa:32},
+
+        MT:{padrao:20,expressa:32},
+
+        MS:{padrao:20,expressa:32},
+
+        DF:{padrao:20,expressa:32},
+
+        BA:{padrao:23,expressa:36},
+
+        PE:{padrao:23,expressa:36},
+
+        CE:{padrao:23,expressa:36},
+
+        AL:{padrao:23,expressa:36},
+
+        SE:{padrao:23,expressa:36},
+
+        PB:{padrao:23,expressa:36},
+
+        RN:{padrao:23,expressa:36},
+
+        PI:{padrao:23,expressa:36},
+
+        MA:{padrao:23,expressa:36},
+
+        PA:{padrao:28,expressa:42},
+
+        AM:{padrao:28,expressa:42},
+
+        AC:{padrao:28,expressa:42},
+
+        AP:{padrao:28,expressa:42},
+
+        RO:{padrao:28,expressa:42},
+
+        RR:{padrao:28,expressa:42},
+
+        TO:{padrao:28,expressa:42}
+
+    };
 
 
-  const valores =
-  tabela[uf] ||
-  {
-    padrao:20,
-    expressa:32
-  };
+    const valores =
+    tabela[uf] ||
+    {
+        padrao:20,
+        expressa:32
+    };
 
 
-  valoresFrete = valores;
+    valoresFrete = valores;
 
 
-  document.getElementById(
-    "valorPadrao"
-  ).textContent =
-  moeda(valores.padrao);
+    document.getElementById(
+        "valorPadrao"
+    ).textContent =
+    moeda(valores.padrao);
 
 
-  document.getElementById(
-    "valorExpressa"
-  ).textContent =
-  moeda(valores.expressa);
+    document.getElementById(
+        "valorExpressa"
+    ).textContent =
+    moeda(valores.expressa);
 
 
-  if(entregaSelecionada){
+    if(
+        entregaSelecionada
+    ){
 
-    selecionarEntrega(
-      entregaSelecionada
-    );
+        selecionarEntrega(
+            entregaSelecionada
+        );
 
-  }
+    }
 
 }
 
 
 /* =====================================================
-   ENTREGA
+   SELECIONAR ENTREGA
 ===================================================== */
 
 function selecionarEntrega(tipo){
 
-  entregaSelecionada = tipo;
+    entregaSelecionada = tipo;
 
 
-  if(tipo === "retirada"){
+    if(tipo === "retirada"){
 
-    freteAtual = 0;
+        freteAtual = 0;
 
-  }else{
+    }else{
 
-    if(
-      !valoresFrete ||
-      valoresFrete.padrao === 0
-    ){
+        if(
+            !valoresFrete ||
+            valoresFrete.padrao === 0
+        ){
 
-      alert(
-        "Primeiro consulte seu CEP."
-      );
+            alert(
+                "Primeiro consulte seu CEP."
+            );
 
-      return;
+            return;
+
+        }
+
+
+        if(tipo === "padrao"){
+
+            freteAtual =
+            valoresFrete.padrao;
+
+        }
+
+
+        if(tipo === "expressa"){
+
+            freteAtual =
+            valoresFrete.expressa;
+
+        }
 
     }
 
 
-    if(tipo === "padrao"){
-
-      freteAtual =
-      valoresFrete.padrao;
-
-    }
-
-
-    if(tipo === "expressa"){
-
-      freteAtual =
-      valoresFrete.expressa;
-
-    }
-
-  }
-
-
-  atualizar();
+    atualizar();
 
 }
 
@@ -2981,30 +3270,44 @@ function selecionarEntrega(tipo){
 
 function buscarProdutos(){
 
-  const termo =
-  document
-  .getElementById("busca")
-  .value
-  .toLowerCase();
+    const termo =
+    document
+    .getElementById("busca")
+    .value
+    .toLowerCase()
+    .trim();
 
 
-  document
-  .querySelectorAll(".produto")
-  .forEach(
-    produto => {
+    document
+    .querySelectorAll(".produto")
+    .forEach(
+        produto => {
 
-      const texto =
-      produto.innerText
-      .toLowerCase();
+            const texto =
+            (
+                produto.dataset.nome ||
+                produto.innerText
+            ).toLowerCase();
 
 
-      produto.style.display =
-      texto.includes(termo)
-      ? ""
-      : "none";
+            if(
+                texto.includes(termo)
+            ){
 
-    }
-  );
+                produto.classList.remove(
+                    "escondido"
+                );
+
+            }else{
+
+                produto.classList.add(
+                    "escondido"
+                );
+
+            }
+
+        }
+    );
 
 }
 
@@ -3015,242 +3318,242 @@ function buscarProdutos(){
 
 function finalizarWhatsApp(){
 
-  if(carrinho.length === 0){
+    if(carrinho.length === 0){
 
-    alert(
-      "Seu carrinho está vazio."
-    );
+        alert(
+            "Seu carrinho está vazio."
+        );
 
-    return;
-
-  }
-
-
-  const cep =
-  document
-  .getElementById("cep")
-  .value
-  .trim();
-
-
-  if(
-    cep.replace(/\D/g,"").length !== 8
-  ){
-
-    alert(
-      "Digite seu CEP e calcule o frete."
-    );
-
-    return;
-
-  }
-
-
-  const numero =
-  document
-  .getElementById("numero")
-  .value
-  .trim();
-
-
-  if(!numero){
-
-    alert(
-      "Informe o número do endereço."
-    );
-
-    return;
-
-  }
-
-
-  if(!entregaSelecionada){
-
-    alert(
-      "Escolha uma forma de entrega."
-    );
-
-    return;
-
-  }
-
-
-  let subtotal = 0;
-
-
-  let mensagem =
-  "Olá! Quero fazer um pedido na FOR YOU.\n\n";
-
-
-  mensagem +=
-  "*MEU PEDIDO*\n";
-
-
-  carrinho.forEach(
-    produto => {
-
-      const valor =
-      produto.preco *
-      produto.quantidade;
-
-
-      subtotal += valor;
-
-
-      mensagem +=
-      "• " +
-      produto.nome +
-      " — " +
-      produto.quantidade +
-      "x — " +
-      moeda(valor) +
-      "\n";
+        return;
 
     }
-  );
 
 
-  mensagem +=
-  "\n*RESUMO*\n";
-
-
-  mensagem +=
-  "Subtotal: " +
-  moeda(subtotal) +
-  "\n";
-
-
-  mensagem +=
-  "Frete: " +
-  moeda(freteAtual) +
-  "\n";
-
-
-  mensagem +=
-  "Total: " +
-  moeda(subtotal + freteAtual) +
-  "\n\n";
-
-
-  let nomeEntrega = "";
-
-
-  if(
-    entregaSelecionada === "padrao"
-  ){
-
-    nomeEntrega =
-    "Entrega padrão";
-
-  }
-
-
-  if(
-    entregaSelecionada === "expressa"
-  ){
-
-    nomeEntrega =
-    "Entrega expressa";
-
-  }
-
-
-  if(
-    entregaSelecionada === "retirada"
-  ){
-
-    nomeEntrega =
-    "Retirada";
-
-  }
-
-
-  mensagem +=
-  "*FORMA DE ENTREGA*\n" +
-  nomeEntrega +
-  "\n\n";
-
-
-  mensagem +=
-  "*ENDEREÇO*\n";
-
-
-  if(enderecoDados){
-
-    mensagem +=
-    enderecoDados.logradouro +
-    ", " +
-    numero +
-    "\n";
-
-
-    const complemento =
+    const cep =
     document
-    .getElementById("complemento")
+    .getElementById("cep")
     .value
     .trim();
 
 
-    if(complemento){
+    if(
+        cep.replace(/\D/g,"").length !== 8
+    ){
 
-      mensagem +=
-      "Complemento: " +
-      complemento +
-      "\n";
+        alert(
+            "Digite seu CEP e calcule o frete."
+        );
+
+        return;
+
+    }
+
+
+    const numero =
+    document
+    .getElementById("numero")
+    .value
+    .trim();
+
+
+    if(!numero){
+
+        alert(
+            "Informe o número do endereço."
+        );
+
+        return;
+
+    }
+
+
+    if(!entregaSelecionada){
+
+        alert(
+            "Escolha uma forma de entrega."
+        );
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+
+    let mensagem =
+    "Olá! Quero fazer um pedido na FOR YOU.\n\n";
+
+
+    mensagem +=
+    "*MEU PEDIDO*\n";
+
+
+    carrinho.forEach(
+        produto => {
+
+            const valor =
+            produto.preco *
+            produto.quantidade;
+
+
+            subtotal += valor;
+
+
+            mensagem +=
+            "• " +
+            produto.nome +
+            " — " +
+            produto.quantidade +
+            "x — " +
+            moeda(valor) +
+            "\n";
+
+        }
+    );
+
+
+    mensagem +=
+    "\n*RESUMO*\n";
+
+
+    mensagem +=
+    "Subtotal: " +
+    moeda(subtotal) +
+    "\n";
+
+
+    mensagem +=
+    "Frete: " +
+    moeda(freteAtual) +
+    "\n";
+
+
+    mensagem +=
+    "Total: " +
+    moeda(subtotal + freteAtual) +
+    "\n\n";
+
+
+    let nomeEntrega = "";
+
+
+    if(
+        entregaSelecionada === "padrao"
+    ){
+
+        nomeEntrega =
+        "Entrega padrão";
+
+    }
+
+
+    if(
+        entregaSelecionada === "expressa"
+    ){
+
+        nomeEntrega =
+        "Entrega expressa";
+
+    }
+
+
+    if(
+        entregaSelecionada === "retirada"
+    ){
+
+        nomeEntrega =
+        "Retirada";
 
     }
 
 
     mensagem +=
-    enderecoDados.bairro +
-    "\n";
+    "*FORMA DE ENTREGA*\n" +
+    nomeEntrega +
+    "\n\n";
 
 
     mensagem +=
-    enderecoDados.localidade +
-    " - " +
-    enderecoDados.uf +
-    "\n";
-
-  }
+    "*ENDEREÇO*\n";
 
 
-  const referencia =
-  document
-  .getElementById("referencia")
-  .value
-  .trim();
+    if(enderecoDados){
+
+        mensagem +=
+        enderecoDados.logradouro +
+        ", " +
+        numero +
+        "\n";
 
 
-  mensagem +=
-  "CEP: " +
-  cep +
-  "\n";
+        const complemento =
+        document
+        .getElementById("complemento")
+        .value
+        .trim();
 
 
-  if(referencia){
+        if(complemento){
+
+            mensagem +=
+            "Complemento: " +
+            complemento +
+            "\n";
+
+        }
+
+
+        mensagem +=
+        enderecoDados.bairro +
+        "\n";
+
+
+        mensagem +=
+        enderecoDados.localidade +
+        " - " +
+        enderecoDados.uf +
+        "\n";
+
+    }
+
+
+    const referencia =
+    document
+    .getElementById("referencia")
+    .value
+    .trim();
+
 
     mensagem +=
-    "Referência: " +
-    referencia +
+    "CEP: " +
+    cep +
     "\n";
 
-  }
+
+    if(referencia){
+
+        mensagem +=
+        "Referência: " +
+        referencia +
+        "\n";
+
+    }
 
 
-  const url =
-  "https://wa.me/" +
-  WHATSAPP +
-  "?text=" +
-  encodeURIComponent(
-    mensagem
-  );
+    const url =
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(
+        mensagem
+    );
 
 
-  window.open(
-    url,
-    "_blank"
-  );
+    window.open(
+        url,
+        "_blank"
+    );
 
 }
 
@@ -3261,11 +3564,11 @@ function finalizarWhatsApp(){
 
 function newsletter(){
 
-  alert(
-    "Cadastro realizado com sucesso! 💕"
-  );
+    alert(
+        "Cadastro realizado com sucesso! 💕"
+    );
 
-  return false;
+    return false;
 
 }
 
@@ -3279,5 +3582,6 @@ atualizar();
 </script>
 
 </body>
+
 </html>
 ```
