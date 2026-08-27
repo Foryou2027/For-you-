@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FOR YOU | Beleza</title>
+<title>FOR YOU by Dé | Beleza e Achadinhos</title>
 
 <style>
+
+/* =====================================================
+   CONFIGURAÇÃO GERAL
+===================================================== */
 
 *{
   box-sizing:border-box;
@@ -14,10 +18,22 @@
   padding:0;
 }
 
+:root{
+  --vinho:#351f27;
+  --rosa:#b83f61;
+  --rosa-claro:#f8e7ec;
+  --rosa-fundo:#fff8fa;
+  --dourado:#a88955;
+  --borda:#ead9de;
+  --texto:#351f27;
+  --cinza:#766a6f;
+  --branco:#ffffff;
+}
+
 body{
   font-family:"Trebuchet MS",Arial,sans-serif;
-  background:#fff9fb;
-  color:#352027;
+  background:var(--rosa-fundo);
+  color:var(--texto);
 }
 
 button,
@@ -29,26 +45,28 @@ button{
   cursor:pointer;
 }
 
-/* =========================================
-   BARRA SUPERIOR
-========================================= */
+
+/* =====================================================
+   TOPO
+===================================================== */
 
 .topo{
-  background:#352027;
+  background:var(--vinho);
   color:white;
   text-align:center;
-  padding:9px;
+  padding:9px 15px;
   font-size:10px;
-  letter-spacing:2px;
+  letter-spacing:1.8px;
 }
 
-/* =========================================
+
+/* =====================================================
    CABEÇALHO
-========================================= */
+===================================================== */
 
 header{
-  background:#fff;
-  border-bottom:1px solid #ead9df;
+  background:white;
+  border-bottom:1px solid var(--borda);
   position:sticky;
   top:0;
   z-index:100;
@@ -57,72 +75,76 @@ header{
 .header{
   max-width:1250px;
   margin:auto;
-  padding:22px 25px 12px;
+  padding:20px 25px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:30px;
 }
-
-/* =========================================
-   FOR YOU EM DESTAQUE
-========================================= */
 
 .logo{
   text-align:center;
-  margin-bottom:18px;
+  min-width:220px;
 }
 
 .logo h1{
-  font-family:Georgia,serif;
-  font-size:58px;
-  letter-spacing:9px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:43px;
   font-weight:normal;
-  color:#b83f61;
-  line-height:1;
-  text-shadow:0 3px 12px #b83f6120;
+  letter-spacing:6px;
+  color:var(--rosa);
 }
 
 .logo span{
   display:block;
-  margin-top:8px;
-  font-size:9px;
-  letter-spacing:4px;
-  color:#a88955;
+  margin-top:3px;
+  font-size:8px;
+  letter-spacing:2px;
+  color:var(--dourado);
 }
 
-/* =========================================
-   BUSCA + CARRINHO
-========================================= */
 
-.area-superior{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:25px;
-  margin-bottom:12px;
-}
+/* =====================================================
+   BUSCA
+===================================================== */
 
 .busca{
-  width:500px;
-  max-width:60%;
+  flex:1;
+  max-width:450px;
 }
 
 .busca input{
   width:100%;
+  height:44px;
   border:1px solid #dfc8cf;
   border-radius:30px;
-  padding:13px 20px;
+  padding:0 20px;
   outline:none;
-  background:#fffafa;
+  color:var(--texto);
+  background:#fff;
   font-size:12px;
 }
 
 .busca input:focus{
-  border-color:#b83f61;
+  border-color:var(--rosa);
+  box-shadow:0 0 0 3px #b83f6115;
 }
+
+
+/* =====================================================
+   AÇÕES
+===================================================== */
 
 .acoes{
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:22px;
   font-size:25px;
+}
+
+.favorito{
+  cursor:pointer;
+  color:var(--vinho);
 }
 
 .carrinho-icon{
@@ -132,33 +154,46 @@ header{
 
 .contador{
   position:absolute;
-  top:-7px;
+  top:-9px;
   right:-10px;
+  background:var(--rosa);
+  color:white;
   width:19px;
   height:19px;
   border-radius:50%;
-  background:#b83f61;
-  color:white;
   font-size:9px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* =========================================
+
+/* =====================================================
    MENU PRINCIPAL
-========================================= */
+===================================================== */
 
 .menu{
-  border-top:1px solid #f1e5e8;
+  background:white;
+  border-top:1px solid #f1e4e8;
+}
+
+.menu-titulo{
+  text-align:center;
+  padding-top:12px;
+  font-size:8px;
+  letter-spacing:3px;
+  color:var(--dourado);
+  font-weight:bold;
 }
 
 .menu-lista{
+  max-width:1250px;
+  margin:auto;
   display:flex;
-  justify-content:center;
   align-items:center;
-  gap:30px;
-  white-space:nowrap;
+  justify-content:center;
+  gap:28px;
+  padding:4px 20px 15px;
 }
 
 .menu-item{
@@ -168,143 +203,166 @@ header{
 .menu-item > button{
   background:none;
   border:0;
-  padding:16px 0;
-  color:#352027;
+  padding:12px 0;
   font-size:11px;
   font-weight:bold;
-  letter-spacing:1px;
+  color:var(--vinho);
+  white-space:nowrap;
   transition:.2s;
 }
 
-.menu-item > button:hover,
-.menu-item.aberto > button{
-  color:#b83f61;
+.menu-item > button:hover{
+  color:var(--rosa);
 }
 
-/* =========================================
-   DROPDOWN DAS CATEGORIAS
-========================================= */
+.seta{
+  color:var(--rosa);
+  font-size:10px;
+  margin-left:3px;
+}
+
+
+/* =====================================================
+   DROPDOWN
+===================================================== */
 
 .dropdown{
   display:none;
   position:absolute;
+  top:43px;
   left:50%;
   transform:translateX(-50%);
-  top:49px;
   width:245px;
   background:white;
-  border:1px solid #ead9df;
-  box-shadow:0 15px 40px #0002;
+  border:1px solid var(--borda);
+  box-shadow:0 15px 40px #351f2720;
   z-index:300;
-  text-align:left;
+  padding-bottom:8px;
 }
 
-.dropdown.aberto{
+.menu-item:hover .dropdown{
   display:block;
 }
 
 .dropdown h3{
-  padding:17px;
-  font-family:Georgia,serif;
-  font-size:23px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:22px;
   font-weight:normal;
-  color:#b83f61;
-  border-bottom:1px solid #ead9df;
-  background:#fff9fb;
+  color:var(--rosa);
+  padding:17px 18px 13px;
+  border-bottom:1px solid var(--borda);
 }
 
 .dropdown a{
   display:block;
-  padding:10px 17px;
-  color:#62575b;
-  text-decoration:none;
+  padding:9px 18px;
+  color:#66585d;
   font-size:10px;
-  border-bottom:1px solid #f5ecef;
+  text-decoration:none;
+  border-bottom:1px solid #f7edef;
   transition:.2s;
 }
 
 .dropdown a:hover{
-  background:#fff0f4;
-  color:#b83f61;
-  padding-left:22px;
+  background:#fff1f4;
+  color:var(--rosa);
+  padding-left:23px;
 }
 
-/* =========================================
+
+/* =====================================================
    HERO
-========================================= */
+===================================================== */
 
 .hero{
-  min-height:560px;
-
+  min-height:510px;
   background:
-  linear-gradient(
-    90deg,
-    #fff9fb 0%,
-    #fff9fbe8 35%,
-    #fff9fb22 75%
-  ),
-  url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
-
-  background-size:cover;
-  background-position:center;
-
+    linear-gradient(
+      90deg,
+      #fff8fa 0%,
+      #fff8fa 55%,
+      #fff8fa 100%
+    );
   display:flex;
   align-items:center;
+  text-align:center;
 }
 
 .hero-content{
-  width:90%;
-  max-width:1250px;
+  max-width:900px;
+  width:92%;
   margin:auto;
 }
 
 .hero small{
-  color:#b83f61;
+  color:var(--dourado);
   font-size:10px;
   font-weight:bold;
   letter-spacing:4px;
 }
 
 .hero h2{
-  font-family:Georgia,serif;
-  font-size:67px;
-  line-height:1.05;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:68px;
   font-weight:normal;
-  max-width:650px;
-  margin:20px 0;
+  line-height:1.05;
+  margin:20px auto;
+  color:var(--vinho);
 }
 
 .hero h2 span{
-  color:#b83f61;
+  color:var(--rosa);
   font-style:italic;
 }
 
 .hero p{
-  max-width:500px;
-  color:#6d6165;
+  max-width:550px;
+  margin:auto;
   line-height:1.8;
+  color:var(--cinza);
   font-size:13px;
 }
 
 .btn{
   margin-top:28px;
-  padding:15px 28px;
-  background:#352027;
+  padding:15px 30px;
+  background:var(--vinho);
   color:white;
   border:0;
   font-size:10px;
   font-weight:bold;
-  letter-spacing:2px;
+  letter-spacing:1.5px;
   transition:.2s;
 }
 
 .btn:hover{
-  background:#b83f61;
+  background:var(--rosa);
 }
 
-/* =========================================
+
+/* =====================================================
+   FRASE DA MARCA
+===================================================== */
+
+.frase-marca{
+  background:white;
+  text-align:center;
+  padding:32px 20px;
+  border-top:1px solid var(--borda);
+  border-bottom:1px solid var(--borda);
+}
+
+.frase-marca p{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:25px;
+  font-style:italic;
+  color:var(--vinho);
+}
+
+
+/* =====================================================
    SEÇÕES
-========================================= */
+===================================================== */
 
 .secao{
   padding:75px 5%;
@@ -312,79 +370,132 @@ header{
 
 .titulo{
   text-align:center;
-  margin-bottom:42px;
+  margin-bottom:40px;
 }
 
 .titulo small{
-  color:#a88955;
+  color:var(--dourado);
   font-size:9px;
+  letter-spacing:3px;
   font-weight:bold;
-  letter-spacing:4px;
 }
 
 .titulo h2{
-  font-family:Georgia,serif;
+  font-family:Georgia,"Times New Roman",serif;
   font-size:46px;
   font-weight:normal;
-  margin:10px 0;
+  margin:10px;
+  color:var(--vinho);
 }
 
 .titulo p{
-  color:#776a6f;
+  color:var(--cinza);
   font-size:12px;
 }
 
-/* =========================================
+
+/* =====================================================
+   ÁREA DE DESTAQUE SEM FOTOS
+===================================================== */
+
+.destaques{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.destaque{
+  background:white;
+  border:1px solid var(--borda);
+  padding:35px 25px;
+  text-align:center;
+  transition:.25s;
+}
+
+.destaque:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px #351f2712;
+}
+
+.destaque-icone{
+  width:55px;
+  height:55px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  background:var(--rosa-claro);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--rosa);
+  font-size:23px;
+}
+
+.destaque h3{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:22px;
+  font-weight:normal;
+  margin-bottom:8px;
+}
+
+.destaque p{
+  color:var(--cinza);
+  font-size:10px;
+  line-height:1.7;
+}
+
+
+/* =====================================================
    PRODUTOS
-========================================= */
+===================================================== */
 
 .produtos{
-  max-width:1250px;
+  max-width:1200px;
   margin:auto;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:22px;
+  gap:18px;
 }
 
 .produto{
   background:white;
-  border:1px solid #ead9df;
+  border:1px solid var(--borda);
+  overflow:hidden;
   transition:.25s;
 }
 
 .produto:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 30px #00000010;
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px #351f2712;
 }
 
-.produto-img{
-  height:260px;
-  background:#f7e8ec;
+.produto-topo{
+  height:170px;
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f4,
+      #f8e0e7
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--rosa);
+  font-family:Georgia,serif;
+  font-size:30px;
   position:relative;
-  overflow:hidden;
-}
-
-.produto-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.4s;
-}
-
-.produto:hover .produto-img img{
-  transform:scale(1.04);
 }
 
 .etiqueta{
   position:absolute;
-  left:10px;
   top:10px;
-  z-index:2;
-  background:#b83f61;
+  left:10px;
+  background:var(--rosa);
   color:white;
   padding:7px 10px;
   font-size:8px;
-  letter-spacing:1px;
+  letter-spacing:.5px;
 }
 
 .produto-info{
@@ -392,107 +503,138 @@ header{
 }
 
 .marca{
-  color:#a88955;
-  font-size:9px;
+  font-size:8px;
+  color:var(--dourado);
   text-transform:uppercase;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
 }
 
 .nome{
-  font-family:Georgia,serif;
+  font-family:Georgia,"Times New Roman",serif;
   font-size:20px;
   margin:7px 0;
 }
 
 .preco{
-  color:#b83f61;
+  color:var(--rosa);
   font-weight:bold;
-  font-size:17px;
+  font-size:16px;
 }
 
 .adicionar{
   width:100%;
-  padding:12px;
-  margin-top:13px;
+  padding:11px;
+  margin-top:12px;
   background:white;
-  border:1px solid #352027;
-  color:#352027;
-  font-size:9px;
+  border:1px solid var(--vinho);
+  color:var(--vinho);
+  font-size:8px;
   font-weight:bold;
-  letter-spacing:1px;
+  letter-spacing:.8px;
   transition:.2s;
 }
 
 .adicionar:hover{
-  background:#352027;
+  background:var(--vinho);
   color:white;
 }
 
-/* =========================================
-   ACHADINHO
-========================================= */
 
-.achadinho{
-  background:#fff;
-}
-
-.frase-achadinho{
-  text-align:center;
-  margin:-20px auto 40px;
-  color:#75666b;
-  font-family:Georgia,serif;
-  font-size:17px;
-  font-style:italic;
-}
-
-/* =========================================
-   KITS
-========================================= */
-
-.kits{
-  background:#f8e7ec;
-}
-
-/* =========================================
+/* =====================================================
    OFERTAS
-========================================= */
+===================================================== */
 
 .ofertas{
   background:white;
 }
 
-/* =========================================
+.ofertas-lista{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.oferta-card{
+  border:1px solid var(--borda);
+  padding:22px;
+  text-align:center;
+  background:#fffafa;
+}
+
+.oferta-card strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.oferta-card span{
+  color:var(--cinza);
+  font-size:10px;
+}
+
+.oferta-card.destaque-oferta{
+  background:var(--vinho);
+  color:white;
+}
+
+.oferta-card.destaque-oferta span{
+  color:#e7dadd;
+}
+
+
+/* =====================================================
+   ALERTA VALIDADE
+===================================================== */
+
+.alerta{
+  max-width:750px;
+  margin:0 auto 30px;
+  padding:18px;
+  background:#fff4ee;
+  border:1px solid #ead5ca;
+  text-align:center;
+  font-size:10px;
+  line-height:1.7;
+}
+
+
+/* =====================================================
    BENEFÍCIOS
-========================================= */
+===================================================== */
 
 .beneficios{
-  max-width:1250px;
+  max-width:1200px;
   margin:auto;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   background:white;
-  border:1px solid #ead9df;
+  border:1px solid var(--borda);
 }
 
 .beneficio{
   text-align:center;
   padding:35px;
-  border-right:1px solid #ead9df;
+  border-right:1px solid var(--borda);
 }
 
 .beneficio:last-child{
-  border-right:0;
+  border:0;
 }
 
-.beneficio div{
-  font-size:25px;
+.beneficio .icone{
+  font-size:22px;
+  color:var(--rosa);
 }
 
 .beneficio strong{
   display:block;
   font-family:Georgia,serif;
   font-size:20px;
-  margin:8px;
+  font-weight:normal;
+  margin:9px;
 }
 
 .beneficio span{
@@ -500,18 +642,19 @@ header{
   font-size:10px;
 }
 
-/* =========================================
+
+/* =====================================================
    NEWSLETTER
-========================================= */
+===================================================== */
 
 .newsletter{
   background:#f8e4e9;
   text-align:center;
-  padding:75px 20px;
+  padding:70px 20px;
 }
 
 .newsletter h2{
-  font-family:Georgia,serif;
+  font-family:Georgia,"Times New Roman",serif;
   font-size:40px;
   font-weight:normal;
 }
@@ -519,6 +662,7 @@ header{
 .newsletter p{
   margin:10px;
   color:#6c6064;
+  font-size:12px;
 }
 
 .newsletter form{
@@ -536,14 +680,17 @@ header{
 
 .newsletter button{
   border:0;
-  background:#352027;
+  background:var(--vinho);
   color:white;
-  padding:0 22px;
+  padding:0 20px;
+  font-size:9px;
+  font-weight:bold;
 }
 
-/* =========================================
+
+/* =====================================================
    FOOTER
-========================================= */
+===================================================== */
 
 footer{
   background:#291d21;
@@ -552,7 +699,7 @@ footer{
 }
 
 .footer-grid{
-  max-width:1250px;
+  max-width:1200px;
   margin:auto;
   display:grid;
   grid-template-columns:2fr 1fr 1fr 1fr;
@@ -563,10 +710,11 @@ footer{
   font-family:Georgia,serif;
   font-size:40px;
   color:#efaebe;
+  letter-spacing:4px;
 }
 
 footer h3{
-  font-size:10px;
+  font-size:9px;
   letter-spacing:2px;
   margin-bottom:15px;
 }
@@ -599,9 +747,10 @@ footer p{
   font-size:9px;
 }
 
-/* =========================================
+
+/* =====================================================
    CARRINHO
-========================================= */
+===================================================== */
 
 .overlay{
   display:none;
@@ -635,9 +784,10 @@ footer p{
 
 .carrinho-header{
   padding:20px;
-  border-bottom:1px solid #ead9de;
+  border-bottom:1px solid var(--borda);
   display:flex;
   justify-content:space-between;
+  align-items:center;
 }
 
 .carrinho-header h2{
@@ -650,6 +800,7 @@ footer p{
   border:0;
   background:none;
   font-size:28px;
+  color:var(--vinho);
 }
 
 .itens{
@@ -661,7 +812,7 @@ footer p{
 .item{
   display:flex;
   gap:12px;
-  border-bottom:1px solid #ead9de;
+  border-bottom:1px solid var(--borda);
   padding:14px 0;
 }
 
@@ -669,6 +820,14 @@ footer p{
   width:65px;
   height:70px;
   background:#f5e2e7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--rosa);
+}
+
+.item-img::after{
+  content:"♡";
 }
 
 .item-dados{
@@ -677,11 +836,12 @@ footer p{
 
 .item-dados strong{
   font-family:Georgia,serif;
-  font-size:18px;
+  font-size:17px;
+  font-weight:normal;
 }
 
 .item-preco{
-  color:#b83f61;
+  color:var(--rosa);
   font-weight:bold;
   margin:5px 0;
 }
@@ -707,20 +867,22 @@ footer p{
   margin-top:5px;
 }
 
-/* =========================================
+
+/* =====================================================
    FRETE
-========================================= */
+===================================================== */
 
 .frete{
   padding:16px 20px;
   background:#fffafa;
-  border-top:1px solid #ead9de;
+  border-top:1px solid var(--borda);
   max-height:48vh;
   overflow:auto;
 }
 
 .frete h3{
-  font-size:11px;
+  font-size:10px;
+  letter-spacing:1px;
   margin-bottom:12px;
 }
 
@@ -737,7 +899,7 @@ footer p{
 }
 
 .cep-linha button{
-  background:#352027;
+  background:var(--vinho);
   color:white;
   border:0;
   padding:0 14px;
@@ -747,7 +909,7 @@ footer p{
 
 .cep-link{
   font-size:8px;
-  color:#b83f61;
+  color:var(--rosa);
   display:block;
   margin:8px 0;
 }
@@ -763,7 +925,7 @@ footer p{
 
 .endereco-box{
   background:white;
-  border:1px solid #ead9de;
+  border:1px solid var(--borda);
   padding:10px;
   font-size:9px;
   line-height:1.7;
@@ -801,7 +963,7 @@ footer p{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border:1px solid #ead9de;
+  border:1px solid var(--borda);
   background:white;
   padding:11px;
   margin-bottom:6px;
@@ -815,7 +977,7 @@ footer p{
 }
 
 .entrega input{
-  accent-color:#b83f61;
+  accent-color:var(--rosa);
 }
 
 .entrega-nome{
@@ -831,18 +993,19 @@ footer p{
 }
 
 .valor-entrega{
-  color:#b83f61;
+  color:var(--rosa);
   font-size:9px;
   font-weight:bold;
 }
 
-/* =========================================
+
+/* =====================================================
    RESUMO
-========================================= */
+===================================================== */
 
 .resumo{
   padding:17px 20px;
-  border-top:1px solid #ead9de;
+  border-top:1px solid var(--borda);
 }
 
 .linha{
@@ -869,24 +1032,46 @@ footer p{
   margin-top:10px;
 }
 
-/* =========================================
-   RESPONSIVO
-========================================= */
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:900px){
 
-  .logo h1{
-    font-size:48px;
+  .header{
+    flex-wrap:wrap;
+  }
+
+  .logo{
+    flex:1;
+  }
+
+  .busca{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
   }
 
   .menu-lista{
     overflow-x:auto;
     justify-content:flex-start;
-    padding:0 20px;
-    gap:25px;
+    gap:24px;
+  }
+
+  .menu-item > button{
+    white-space:nowrap;
   }
 
   .produtos{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .destaques{
+    grid-template-columns:1fr;
+  }
+
+  .ofertas-lista{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -896,7 +1081,7 @@ footer p{
 
   .beneficio{
     border-right:0;
-    border-bottom:1px solid #ead9de;
+    border-bottom:1px solid var(--borda);
   }
 
   .footer-grid{
@@ -909,49 +1094,119 @@ footer p{
 
 }
 
+
 @media(max-width:600px){
 
+  .topo{
+    font-size:8px;
+  }
+
+  .header{
+    padding:15px 15px 10px;
+  }
+
   .logo h1{
-    font-size:37px;
-    letter-spacing:6px;
+    font-size:34px;
+    letter-spacing:4px;
   }
 
   .logo span{
-    font-size:7px;
-    letter-spacing:2px;
+    font-size:6px;
   }
 
-  .area-superior{
+  .acoes{
     gap:12px;
+    font-size:21px;
   }
 
-  .busca{
-    max-width:none;
-    width:100%;
+  .menu-titulo{
+    padding-top:10px;
   }
 
-  .produtos{
-    gap:10px;
+  .menu-lista{
+    gap:20px;
+    padding-left:15px;
+    padding-right:15px;
+    justify-content:flex-start;
   }
 
-  .produto-img{
-    height:190px;
+  .menu-item > button{
+    font-size:9px;
   }
 
-  .nome{
-    font-size:17px;
+  .dropdown{
+    position:fixed;
+    top:125px;
+    left:10px;
+    right:10px;
+    width:auto;
+    transform:none;
   }
 
   .hero{
-    min-height:500px;
+    min-height:470px;
   }
 
   .hero h2{
     font-size:43px;
   }
 
+  .hero p{
+    font-size:11px;
+  }
+
+  .frase-marca p{
+    font-size:19px;
+  }
+
+  .secao{
+    padding:55px 15px;
+  }
+
   .titulo h2{
     font-size:36px;
+  }
+
+  .produtos{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .produto-topo{
+    height:140px;
+  }
+
+  .produto-info{
+    padding:12px;
+  }
+
+  .nome{
+    font-size:17px;
+  }
+
+  .preco{
+    font-size:14px;
+  }
+
+  .ofertas-lista{
+    grid-template-columns:1fr;
+  }
+
+  .newsletter h2{
+    font-size:30px;
+  }
+
+  .newsletter form{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .newsletter input{
+    height:45px;
+  }
+
+  .newsletter button{
+    height:45px;
   }
 
   .footer-grid{
@@ -963,1569 +1218,1346 @@ footer p{
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================================
+
+<!-- =====================================================
      BARRA SUPERIOR
-========================================= -->
+===================================================== -->
 
 <div class="topo">
 ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 </div>
 
 
-<!-- =========================================
-     CABEÇALHO
-========================================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
-<div class="header">
+  <div class="header">
 
-<!-- FOR YOU EM DESTAQUE -->
+    <div class="logo">
 
-<div class="logo">
+      <h1>FOR YOU</h1>
 
-<h1>FOR YOU</h1>
+      <span>
+        BY DÉ • BELEZA • CUIDADOS • ACHADINHOS
+      </span>
 
-<span>
-BELEZA • CUIDADOS • ACHADINHOS
-</span>
+    </div>
 
-</div>
 
+    <div class="busca">
 
-<!-- BUSCA + CARRINHO -->
+      <input
+        id="busca"
+        type="text"
+        placeholder="Buscar produto..."
+        onkeyup="buscarProdutos()"
+      >
 
-<div class="area-superior">
+    </div>
 
-<div class="busca">
 
-<input
-id="busca"
-type="text"
-placeholder="Buscar produto..."
-onkeyup="buscarProdutos()"
->
+    <div class="acoes">
 
-</div>
+      <span class="favorito">
+        ♡
+      </span>
 
-<div class="acoes">
 
-<span>♡</span>
+      <div
+        class="carrinho-icon"
+        onclick="abrirCarrinho()"
+      >
 
-<div
-class="carrinho-icon"
-onclick="abrirCarrinho()"
->
+        🛍
 
-🛍️
+        <span
+          class="contador"
+          id="contador"
+        >
+          0
+        </span>
 
-<span
-class="contador"
-id="contador"
->
-0
-</span>
+      </div>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
-</div>
 
+  <!-- =================================================
+       MENU PRINCIPAL
+  ================================================== -->
 
-<!-- =========================================
-     MENU PRINCIPAL
-========================================= -->
+  <nav class="menu">
 
-<nav class="menu">
+    <div class="menu-titulo">
+      MENU PRINCIPAL
+    </div>
 
-<div class="menu-lista">
 
+    <div class="menu-lista">
 
-<!-- LÁBIOS -->
 
-<div class="menu-item">
+      <!-- ================= LÁBIOS ================= -->
 
-<button onclick="abrirMenu('labios')">
-Lábios ▾
-</button>
+      <div class="menu-item">
 
-<div
-class="dropdown"
-id="dropdown-labios"
->
+        <button>
+          Lábios <span class="seta">▾</span>
+        </button>
 
-<h3>Lábios</h3>
+        <div class="dropdown">
 
-<a href="#labios">
-Batom
-</a>
+          <h3>Lábios</h3>
 
-<a href="#labios">
-Gloss
-</a>
+          <a href="#labios">Batom</a>
+          <a href="#labios">Gloss</a>
+          <a href="#labios">Lip Tint</a>
+          <a href="#labios">Lip Balm</a>
+          <a href="#labios">Óleo Labial</a>
+          <a href="#labios">Lápis de Boca</a>
+          <a href="#labios">Hidratante Labial</a>
+          <a href="#labios">Esfoliante Labial</a>
 
-<a href="#labios">
-Lip Tint
-</a>
+        </div>
 
-<a href="#labios">
-Lip Balm
-</a>
+      </div>
 
-<a href="#labios">
-Óleo Labial
-</a>
 
-<a href="#labios">
-Lápis de Boca
-</a>
+      <!-- ================= PELE ================= -->
 
-<a href="#labios">
-Contorno Labial
-</a>
+      <div class="menu-item">
 
-<a href="#labios">
-Hidratante Labial
-</a>
+        <button>
+          Pele <span class="seta">▾</span>
+        </button>
 
-<a href="#labios">
-Primer Labial
-</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Pele</h3>
 
-</div>
+          <a href="#pele">Base</a>
+          <a href="#pele">Corretivo</a>
+          <a href="#pele">Primer</a>
+          <a href="#pele">Bruma</a>
+          <a href="#pele">Blush</a>
+          <a href="#pele">Contorno</a>
+          <a href="#pele">Iluminador</a>
+          <a href="#pele">Pó Facial</a>
+          <a href="#pele">Bronzer</a>
+          <a href="#pele">Fixador</a>
 
+        </div>
 
-<!-- PELE -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('pele')">
-Pele ▾
-</button>
+      <!-- ================= SKINCARE ================= -->
 
-<div
-class="dropdown"
-id="dropdown-pele"
->
+      <div class="menu-item">
 
-<h3>Pele</h3>
+        <button>
+          Skincare <span class="seta">▾</span>
+        </button>
 
-<a href="#pele">Base</a>
-<a href="#pele">Corretivo</a>
-<a href="#pele">Primer</a>
-<a href="#pele">Bruma</a>
-<a href="#pele">Pó Facial</a>
-<a href="#pele">Blush</a>
-<a href="#pele">Contorno</a>
-<a href="#pele">Bronzer</a>
-<a href="#pele">Iluminador</a>
-<a href="#pele">Fixador</a>
-<a href="#pele">BB Cream</a>
-<a href="#pele">CC Cream</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Skincare</h3>
 
-</div>
+          <a href="#skincare">Sabonete Facial</a>
+          <a href="#skincare">Água Micelar</a>
+          <a href="#skincare">Hidratante Facial</a>
+          <a href="#skincare">Sérum</a>
+          <a href="#skincare">Protetor Solar</a>
+          <a href="#skincare">Esfoliante Facial</a>
+          <a href="#skincare">Máscara Facial</a>
+          <a href="#skincare">Tônico</a>
+          <a href="#skincare">Demaquilante</a>
 
+        </div>
 
-<!-- SKINCARE -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('skincare')">
-Skincare ▾
-</button>
+      <!-- ================= OLHOS ================= -->
 
-<div
-class="dropdown"
-id="dropdown-skincare"
->
+      <div class="menu-item">
 
-<h3>Skincare</h3>
+        <button>
+          Olhos <span class="seta">▾</span>
+        </button>
 
-<a href="#skincare">Sabonete Facial</a>
-<a href="#skincare">Gel de Limpeza</a>
-<a href="#skincare">Água Micelar</a>
-<a href="#skincare">Tônico</a>
-<a href="#skincare">Sérum</a>
-<a href="#skincare">Hidratante Facial</a>
-<a href="#skincare">Protetor Solar</a>
-<a href="#skincare">Esfoliante Facial</a>
-<a href="#skincare">Máscara Facial</a>
-<a href="#skincare">Demaquilante</a>
-<a href="#skincare">Creme para Olhos</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Olhos</h3>
 
-</div>
+          <a href="#olhos">Paletas</a>
+          <a href="#olhos">Sombras</a>
+          <a href="#olhos">Máscara de Cílios</a>
+          <a href="#olhos">Delineador</a>
+          <a href="#olhos">Lápis de Olho</a>
+          <a href="#olhos">Cílios Postiços</a>
+          <a href="#olhos">Cola para Cílios</a>
+          <a href="#olhos">Produtos para Sobrancelhas</a>
 
+        </div>
 
-<!-- OLHOS -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('olhos')">
-Olhos ▾
-</button>
+      <!-- ================= FACE ================= -->
 
-<div
-class="dropdown"
-id="dropdown-olhos"
->
+      <div class="menu-item">
 
-<h3>Olhos</h3>
+        <button>
+          Face <span class="seta">▾</span>
+        </button>
 
-<a href="#olhos">Paletas</a>
-<a href="#olhos">Sombras</a>
-<a href="#olhos">Máscara de Cílios</a>
-<a href="#olhos">Delineador</a>
-<a href="#olhos">Lápis de Olho</a>
-<a href="#olhos">Cílios Postiços</a>
-<a href="#olhos">Cola para Cílios</a>
-<a href="#olhos">Curvex</a>
-<a href="#olhos">Glitter</a>
-<a href="#olhos">Pigmentos</a>
-<a href="#olhos">Sobrancelhas</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Face</h3>
 
-</div>
+          <a href="#face">Blush</a>
+          <a href="#face">Contorno</a>
+          <a href="#face">Iluminador</a>
+          <a href="#face">Bronzer</a>
+          <a href="#face">Pó</a>
+          <a href="#face">Primer</a>
+          <a href="#face">Fixador</a>
 
+        </div>
 
-<!-- FACE -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('face')">
-Face ▾
-</button>
+      <!-- ================= ACESSÓRIOS ================= -->
 
-<div
-class="dropdown"
-id="dropdown-face"
->
+      <div class="menu-item">
 
-<h3>Face</h3>
+        <button>
+          Acessórios <span class="seta">▾</span>
+        </button>
 
-<a href="#face">Blush</a>
-<a href="#face">Contorno</a>
-<a href="#face">Bronzer</a>
-<a href="#face">Iluminador</a>
-<a href="#face">Pó</a>
-<a href="#face">Paleta de Face</a>
-<a href="#face">Fixador</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Acessórios</h3>
 
-</div>
+          <a href="#acessorios">Pincéis</a>
+          <a href="#acessorios">Esponjas</a>
+          <a href="#acessorios">Necessaires</a>
+          <a href="#acessorios">Espelhos</a>
+          <a href="#acessorios">Curvador de Cílios</a>
+          <a href="#acessorios">Acessórios de Cabelo</a>
+          <a href="#acessorios">Organizadores</a>
 
+        </div>
 
-<!-- ACESSÓRIOS -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('acessorios')">
-Acessórios ▾
-</button>
+      <!-- ================= CORPO ================= -->
 
-<div
-class="dropdown"
-id="dropdown-acessorios"
->
+      <div class="menu-item">
 
-<h3>Acessórios</h3>
+        <button>
+          Corpo <span class="seta">▾</span>
+        </button>
 
-<a href="#acessorios">Pincéis</a>
-<a href="#acessorios">Esponjas</a>
-<a href="#acessorios">Necessaires</a>
-<a href="#acessorios">Espelhos</a>
-<a href="#acessorios">Pinças</a>
-<a href="#acessorios">Curvex</a>
-<a href="#acessorios">Acessórios de Cabelo</a>
-<a href="#acessorios">Organizadores</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Corpo</h3>
 
-</div>
+          <a href="#corpo">Body Splash</a>
+          <a href="#corpo">Hidratante Corporal</a>
+          <a href="#corpo">Esfoliante Corporal</a>
+          <a href="#corpo">Sabonete Corporal</a>
+          <a href="#corpo">Óleo Corporal</a>
+          <a href="#corpo">Desodorante</a>
 
+        </div>
 
-<!-- CORPO -->
+      </div>
 
-<div class="menu-item">
 
-<button onclick="abrirMenu('corpo')">
-Corpo ▾
-</button>
+      <!-- ================= OFERTAS ================= -->
 
-<div
-class="dropdown"
-id="dropdown-corpo"
->
+      <div class="menu-item">
 
-<h3>Corpo</h3>
+        <button>
+          Ofertas <span class="seta">▾</span>
+        </button>
 
-<a href="#corpo">Body Splash</a>
-<a href="#corpo">Hidratante Corporal</a>
-<a href="#corpo">Esfoliante Corporal</a>
-<a href="#corpo">Sabonete Corporal</a>
-<a href="#corpo">Óleo Corporal</a>
-<a href="#corpo">Creme para Mãos</a>
-<a href="#corpo">Cuidados para os Pés</a>
+        <div class="dropdown">
 
-</div>
+          <h3>Ofertas</h3>
 
-</div>
+          <a href="#ofertas">
+            Ofertas da Semana
+          </a>
 
+          <a href="#kits">
+            Kits Promocionais
+          </a>
 
-<!-- OFERTAS -->
+          <a href="#ofertas">
+            Descontos
+          </a>
 
-<div class="menu-item">
+          <a href="#ofertas">
+            Últimas Unidades
+          </a>
 
-<button onclick="abrirMenu('ofertasMenu')">
-Ofertas ▾
-</button>
+          <a href="#validade">
+            Próximo da Validade
+          </a>
 
-<div
-class="dropdown"
-id="dropdown-ofertasMenu"
->
+        </div>
 
-<h3>Ofertas</h3>
+      </div>
 
-<a href="#ofertas">
-Ofertas da Semana
-</a>
 
-<a href="#kits">
-Kits Promocionais
-</a>
+    </div>
 
-<a href="#ofertas">
-Últimas Unidades
-</a>
-
-<a href="#validade">
-Próximo da Validade
-</a>
-
-</div>
-
-</div>
-
-
-</div>
-
-</nav>
-
-</div>
+  </nav>
 
 </header>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      HERO
-========================================= -->
+===================================================== -->
 
 <section class="hero">
 
-<div class="hero-content">
+  <div class="hero-content">
 
-<small>
-BEM-VINDA À FOR YOU
-</small>
+    <small>
+      BEM-VINDA À FOR YOU BY DÉ
+    </small>
 
-<h2>
+    <h2>
+      Beleza do seu jeito,
+      <br>
+      <span>escolhida por nós.</span>
+    </h2>
 
-Beleza do seu jeito,
+    <p>
+      Maquiagem, skincare, corpo, acessórios
+      e aqueles achadinhos que você vai amar.
+    </p>
 
-<br>
+    <button
+      class="btn"
+      onclick="document.getElementById('novidades').scrollIntoView()"
+    >
+      VER NOVIDADES
+    </button>
 
-<span>
-escolhida por nós.
-</span>
-
-</h2>
-
-<p>
-
-Maquiagem, skincare, corpo, acessórios
-e aqueles achadinhos que você vai amar.
-
-</p>
-
-<button
-class="btn"
-onclick="document.getElementById('achadinhos').scrollIntoView()"
->
-
-VER NOVIDADES
-
-</button>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================================
-     ACHADINHO DA SEMANA
-========================================= -->
+
+<!-- =====================================================
+     FRASE DA MARCA
+===================================================== -->
+
+<section class="frase-marca">
+
+  <p>
+    “Testamos, gostamos e colocamos na loja.”
+  </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     NOVIDADES
+===================================================== -->
 
 <section
-class="secao achadinho"
-id="achadinhos"
+  class="secao"
+  id="novidades"
 >
 
-<div class="titulo">
+  <div class="titulo">
 
-<small>
-✨ ACHADINHO DA SEMANA
-</small>
+    <small>
+      NOVIDADES
+    </small>
 
-<h2>
-Acabou de chegar
-</h2>
+    <h2>
+      Acabou de chegar
+    </h2>
 
-</div>
+    <p>
+      Produtos novos selecionados para você.
+    </p>
 
-<div class="frase-achadinho">
+  </div>
 
-“Testamos, gostamos e colocamos na loja.”
 
-</div>
+  <div class="destaques">
 
+    <div class="destaque">
 
-<div class="produtos">
+      <div class="destaque-icone">
+        ✦
+      </div>
 
+      <h3>
+        Produtos Novos
+      </h3>
 
-<!-- PRODUTO 1 -->
+      <p>
+        Aqui entram os produtos que acabaram
+        de chegar na FOR YOU.
+      </p>
 
-<div class="produto">
+    </div>
 
-<div class="produto-img">
 
-<span class="etiqueta">
-NOVO
-</span>
+    <div class="destaque">
 
-<img
-src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
->
+      <div class="destaque-icone">
+        ♡
+      </div>
 
-</div>
+      <h3>
+        Achadinhos
+      </h3>
 
-<div class="produto-info">
+      <p>
+        Produtos diferentes, novidades e
+        itens escolhidos especialmente para a loja.
+      </p>
 
-<div class="marca">
-Pele
-</div>
+    </div>
 
-<div class="nome">
-Base Glow
-</div>
 
-<div class="preco">
-R$ 39,90
-</div>
+    <div class="destaque">
 
-<button
-class="adicionar"
-onclick="adicionar('Base Glow',39.90)"
->
+      <div class="destaque-icone">
+        ✧
+      </div>
 
-ADICIONAR AO CARRINHO
+      <h3>
+        Escolhidos por nós
+      </h3>
 
-</button>
+      <p>
+        Produtos que combinam com a proposta
+        da FOR YOU.
+      </p>
 
-</div>
+    </div>
 
-</div>
-
-
-<!-- PRODUTO 2 -->
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-NOVO
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Lábios
-</div>
-
-<div class="nome">
-Gloss Rosé
-</div>
-
-<div class="preco">
-R$ 24,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Gloss Rosé',24.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PRODUTO 3 -->
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-NOVO
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Skincare
-</div>
-
-<div class="nome">
-Hidratante Facial
-</div>
-
-<div class="preco">
-R$ 29,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Hidratante Facial',29.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PRODUTO 4 -->
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-NOVO
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Olhos
-</div>
-
-<div class="nome">
-Paleta Glow
-</div>
-
-<div class="preco">
-R$ 34,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Paleta Glow',34.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      KITS PROMOCIONAIS
-========================================= -->
+===================================================== -->
 
 <section
-class="secao kits"
-id="kits"
+  class="secao ofertas"
+  id="kits"
 >
 
-<div class="titulo">
+  <div class="titulo">
 
-<small>
-🎁 OFERTA ESPECIAL
-</small>
+    <small>
+      OFERTAS ESPECIAIS
+    </small>
 
-<h2>
-Kits Promocionais
-</h2>
+    <h2>
+      Kits Promocionais
+    </h2>
 
-<p>
-Combinações especiais por um preço melhor.
-</p>
+    <p>
+      Combinações especiais para você aproveitar mais.
+    </p>
 
-</div>
+  </div>
 
 
-<div class="produtos">
+  <div class="ofertas-lista">
 
+    <div class="oferta-card destaque-oferta">
 
-<div class="produto">
+      <strong>
+        Kit Completo
+      </strong>
 
-<div class="produto-img">
+      <span>
+        Produtos combinados com preço especial.
+      </span>
 
-<span class="etiqueta">
-KIT
-</span>
+    </div>
 
-<img
-src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
->
 
-</div>
+    <div class="oferta-card">
 
-<div class="produto-info">
+      <strong>
+        Kit Lábios
+      </strong>
 
-<div class="marca">
-Kit
-</div>
+      <span>
+        Combinações de batom, gloss e lip tint.
+      </span>
 
-<div class="nome">
-Kit Beleza Glow
-</div>
+    </div>
 
-<div class="preco">
-R$ 59,90
-</div>
 
-<button
-class="adicionar"
-onclick="adicionar('Kit Beleza Glow',59.90)"
->
+    <div class="oferta-card">
 
-ADICIONAR AO CARRINHO
+      <strong>
+        Kit Skincare
+      </strong>
 
-</button>
+      <span>
+        Produtos para completar sua rotina.
+      </span>
 
-</div>
+    </div>
 
-</div>
 
+    <div class="oferta-card">
 
-<div class="produto">
+      <strong>
+        Kit Presente
+      </strong>
 
-<div class="produto-img">
+      <span>
+        Opções especiais para presentear.
+      </span>
 
-<span class="etiqueta">
-KIT
-</span>
+    </div>
 
-<img
-src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Kit
-</div>
-
-<div class="nome">
-Kit Pele Perfeita
-</div>
-
-<div class="preco">
-R$ 69,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Pele Perfeita',69.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Kit
-</div>
-
-<div class="nome">
-Kit Lábios
-</div>
-
-<div class="preco">
-R$ 39,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Lábios',39.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-KIT
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Kit
-</div>
-
-<div class="nome">
-Kit Olhar
-</div>
-
-<div class="preco">
-R$ 49,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Olhar',49.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      OFERTAS
-========================================= -->
+===================================================== -->
 
 <section
-class="secao ofertas"
-id="ofertas"
+  class="secao ofertas"
+  id="ofertas"
 >
 
-<div class="titulo">
+  <div class="titulo">
 
-<small>
-🔥 PREÇOS ESPECIAIS
-</small>
+    <small>
+      PREÇOS ESPECIAIS
+    </small>
 
-<h2>
-Ofertas da Semana
-</h2>
+    <h2>
+      Ofertas
+    </h2>
 
-<p>
-Aproveite enquanto durar o estoque.
-</p>
+    <p>
+      Aproveite enquanto durar o estoque.
+    </p>
 
-</div>
+  </div>
 
 
-<div class="produtos">
+  <div class="ofertas-lista">
 
+    <div class="oferta-card">
 
-<div class="produto">
+      <strong>
+        Ofertas da Semana
+      </strong>
 
-<div class="produto-img">
+      <span>
+        Produtos selecionados com preço especial.
+      </span>
 
-<span class="etiqueta">
-OFERTA
-</span>
+    </div>
 
-<img
-src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
->
 
-</div>
+    <div class="oferta-card">
 
-<div class="produto-info">
+      <strong>
+        Descontos
+      </strong>
 
-<div class="marca">
-Lábios
-</div>
+      <span>
+        Aproveite nossas melhores oportunidades.
+      </span>
 
-<div class="nome">
-Batom Especial
-</div>
+    </div>
 
-<div class="preco">
-R$ 14,90
-</div>
 
-<button
-class="adicionar"
-onclick="adicionar('Batom Especial',14.90)"
->
+    <div class="oferta-card">
 
-ADICIONAR AO CARRINHO
+      <strong>
+        Últimas Unidades
+      </strong>
 
-</button>
+      <span>
+        Produtos com poucas unidades disponíveis.
+      </span>
 
-</div>
+    </div>
 
-</div>
 
+    <div
+      class="oferta-card"
+      id="validade"
+    >
 
-<div class="produto">
+      <strong>
+        Próximo da Validade
+      </strong>
 
-<div class="produto-img">
+      <span>
+        Produtos dentro da validade com preço especial.
+      </span>
 
-<span class="etiqueta">
-OFERTA
-</span>
+    </div>
 
-<img
-src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Skincare
-</div>
-
-<div class="nome">
-Hidratante Glow
-</div>
-
-<div class="preco">
-R$ 18,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Hidratante Glow',18.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-OFERTA
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Pele
-</div>
-
-<div class="nome">
-Blush Rosé
-</div>
-
-<div class="preco">
-R$ 19,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Blush Rosé',19.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="produto">
-
-<div class="produto-img">
-
-<span class="etiqueta">
-OFERTA
-</span>
-
-<img
-src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
->
-
-</div>
-
-<div class="produto-info">
-
-<div class="marca">
-Acessórios
-</div>
-
-<div class="nome">
-Kit Pincéis
-</div>
-
-<div class="preco">
-R$ 29,90
-</div>
-
-<button
-class="adicionar"
-onclick="adicionar('Kit Pincéis',29.90)"
->
-
-ADICIONAR AO CARRINHO
-
-</button>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================================
-     BENEFÍCIOS
-========================================= -->
+
+<!-- =====================================================
+     ÁREA PRÓXIMO DA VALIDADE
+     NÃO FICA NA PÁGINA PRINCIPAL COMO PRODUTO
+     FICA DISPONÍVEL ATRAVÉS DE OFERTAS
+===================================================== -->
+
+<section
+  class="secao"
+  style="display:none;"
+>
+
+  <div class="alerta">
+
+    <strong>
+      IMPORTANTE:
+    </strong>
+
+    A data de validade será informada
+    no cadastro de cada produto.
+
+    Não serão cadastrados produtos
+    fora da validade.
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORIAS
+===================================================== -->
 
 <section class="secao">
 
-<div class="beneficios">
+  <div class="titulo">
 
-<div class="beneficio">
+    <small>
+      FOR YOU BY DÉ
+    </small>
 
-<div>♡</div>
+    <h2>
+      Encontre o que procura
+    </h2>
 
-<strong>
-Produtos escolhidos
-</strong>
+    <p>
+      Escolha uma categoria no menu acima
+      para encontrar seus produtos.
+    </p>
 
-<span>
-Achadinhos selecionados para você.
-</span>
-
-</div>
-
-
-<div class="beneficio">
-
-<div>✦</div>
-
-<strong>
-Novidades toda semana
-</strong>
-
-<span>
-Sempre tem novidade na FOR YOU.
-</span>
-
-</div>
+  </div>
 
 
-<div class="beneficio">
+  <div class="destaques">
 
-<div>🚚</div>
 
-<strong>
-Enviamos para todo Brasil
-</strong>
+    <div
+      class="destaque"
+      id="labios"
+    >
 
-<span>
-Escolha a melhor forma de entrega.
-</span>
+      <div class="destaque-icone">
+        ♡
+      </div>
 
-</div>
+      <h3>
+        Lábios
+      </h3>
 
-</div>
+      <p>
+        Batons, gloss, lip tint,
+        lip balm e muito mais.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="pele"
+    >
+
+      <div class="destaque-icone">
+        ✦
+      </div>
+
+      <h3>
+        Pele
+      </h3>
+
+      <p>
+        Base, corretivo, primer,
+        bruma, blush e outros.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="skincare"
+    >
+
+      <div class="destaque-icone">
+        ✧
+      </div>
+
+      <h3>
+        Skincare
+      </h3>
+
+      <p>
+        Produtos para cuidar
+        da sua pele.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="olhos"
+    >
+
+      <div class="destaque-icone">
+        ♢
+      </div>
+
+      <h3>
+        Olhos
+      </h3>
+
+      <p>
+        Paletas, sombras, máscaras,
+        delineadores e mais.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="face"
+    >
+
+      <div class="destaque-icone">
+        ✦
+      </div>
+
+      <h3>
+        Face
+      </h3>
+
+      <p>
+        Blush, contorno, iluminador,
+        bronzer e pó.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="acessorios"
+    >
+
+      <div class="destaque-icone">
+        ♡
+      </div>
+
+      <h3>
+        Acessórios
+      </h3>
+
+      <p>
+        Pincéis, esponjas,
+        necessaires e muito mais.
+      </p>
+
+    </div>
+
+
+    <div
+      class="destaque"
+      id="corpo"
+    >
+
+      <div class="destaque-icone">
+        ✧
+      </div>
+
+      <h3>
+        Corpo
+      </h3>
+
+      <p>
+        Body splash, hidratantes,
+        sabonetes e cuidados.
+      </p>
+
+    </div>
+
+
+  </div>
 
 </section>
 
 
-<!-- =========================================
+
+<!-- =====================================================
+     BENEFÍCIOS
+===================================================== -->
+
+<section class="secao">
+
+  <div class="beneficios">
+
+
+    <div class="beneficio">
+
+      <div class="icone">
+        ♡
+      </div>
+
+      <strong>
+        Produtos escolhidos
+      </strong>
+
+      <span>
+        Achadinhos selecionados com carinho.
+      </span>
+
+    </div>
+
+
+    <div class="beneficio">
+
+      <div class="icone">
+        ✦
+      </div>
+
+      <strong>
+        Novidades toda semana
+      </strong>
+
+      <span>
+        Sempre tem novidade na FOR YOU.
+      </span>
+
+    </div>
+
+
+    <div class="beneficio">
+
+      <div class="icone">
+        🚚
+      </div>
+
+      <strong>
+        Enviamos para todo Brasil
+      </strong>
+
+      <span>
+        Escolha a melhor forma de entrega.
+      </span>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
      NEWSLETTER
-========================================= -->
+===================================================== -->
 
 <section class="newsletter">
 
-<h2>
-Vem fazer parte da FOR YOU.
-</h2>
+  <h2>
+    Vem fazer parte da FOR YOU.
+  </h2>
 
-<p>
-Receba novidades e ofertas.
-</p>
+  <p>
+    Receba novidades e ofertas.
+  </p>
 
-<form onsubmit="return newsletter()">
 
-<input
-type="email"
-placeholder="Seu melhor e-mail"
-required
->
+  <form onsubmit="return newsletter()">
 
-<button>
-CADASTRAR
-</button>
+    <input
+      type="email"
+      placeholder="Seu melhor e-mail"
+      required
+    >
 
-</form>
+    <button>
+      CADASTRAR
+    </button>
+
+  </form>
 
 </section>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      FOOTER
-========================================= -->
+===================================================== -->
 
 <footer>
 
-<div class="footer-grid">
-
-<div>
-
-<div class="footer-logo">
-FOR YOU
-</div>
-
-<p>
-
-Maquiagem, skincare, corpo,
-acessórios e achadinhos escolhidos
-com carinho.
-
-</p>
-
-</div>
+  <div class="footer-grid">
 
 
-<div>
+    <div>
 
-<h3>
-LOJA
-</h3>
+      <div class="footer-logo">
+        FOR YOU
+      </div>
 
-<a href="#achadinhos">
-Achadinho da Semana
-</a>
+      <p>
+        Maquiagem, skincare, corpo,
+        acessórios e achadinhos escolhidos
+        com carinho.
+      </p>
 
-<a href="#kits">
-Kits Promocionais
-</a>
-
-<a href="#ofertas">
-Ofertas
-</a>
-
-</div>
+    </div>
 
 
-<div>
+    <div>
 
-<h3>
-CATEGORIAS
-</h3>
+      <h3>
+        LOJA
+      </h3>
 
-<a href="#labios">
-Lábios
-</a>
+      <a href="#novidades">
+        Novidades
+      </a>
 
-<a href="#pele">
-Pele
-</a>
+      <a href="#kits">
+        Kits Promocionais
+      </a>
 
-<a href="#skincare">
-Skincare
-</a>
+      <a href="#ofertas">
+        Ofertas
+      </a>
 
-<a href="#olhos">
-Olhos
-</a>
-
-</div>
+    </div>
 
 
-<div>
+    <div>
 
-<h3>
-ATENDIMENTO
-</h3>
+      <h3>
+        CATEGORIAS
+      </h3>
 
-<a href="#">
-WhatsApp
-</a>
+      <a href="#labios">
+        Lábios
+      </a>
 
-<a href="#">
-Trocas
-</a>
+      <a href="#pele">
+        Pele
+      </a>
 
-<a href="#">
-Dúvidas
-</a>
+      <a href="#skincare">
+        Skincare
+      </a>
 
-</div>
+      <a href="#olhos">
+        Olhos
+      </a>
 
-</div>
+    </div>
 
 
-<div class="copyright">
+    <div>
 
-© 2026 FOR YOU • Todos os direitos reservados.
+      <h3>
+        ATENDIMENTO
+      </h3>
 
-</div>
+      <a href="#">
+        WhatsApp
+      </a>
+
+      <a href="#">
+        Trocas
+      </a>
+
+      <a href="#">
+        Dúvidas
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="copyright">
+
+    © 2026 FOR YOU BY DÉ • Todos os direitos reservados.
+
+  </div>
 
 </footer>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      OVERLAY
-========================================= -->
+===================================================== -->
 
 <div
-class="overlay"
-id="overlay"
-onclick="fecharCarrinho()"
+  class="overlay"
+  id="overlay"
+  onclick="fecharCarrinho()"
 >
 </div>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      CARRINHO
-========================================= -->
+===================================================== -->
 
 <aside
-class="carrinho"
-id="carrinho"
+  class="carrinho"
+  id="carrinho"
 >
 
-<div class="carrinho-header">
 
-<h2>
-Seu carrinho
-</h2>
+  <div class="carrinho-header">
 
-<button
-class="fechar"
-onclick="fecharCarrinho()"
->
-×
-</button>
+    <h2>
+      Seu carrinho
+    </h2>
 
-</div>
+    <button
+      class="fechar"
+      onclick="fecharCarrinho()"
+    >
+      ×
+    </button>
 
+  </div>
 
-<div
-class="itens"
-id="itens"
->
-</div>
 
+  <div
+    class="itens"
+    id="itens"
+  >
+  </div>
 
-<!-- FRETE -->
 
-<div class="frete">
+  <!-- =================================================
+       FRETE
+  ================================================== -->
 
-<h3>
-CALCULE SUA ENTREGA
-</h3>
+  <div class="frete">
 
-<div class="cep-linha">
+    <h3>
+      CALCULE SUA ENTREGA
+    </h3>
 
-<input
-id="cep"
-placeholder="Digite seu CEP"
-maxlength="9"
-oninput="mascaraCEP(this)"
->
 
-<button onclick="buscarCEP()">
-CALCULAR
-</button>
+    <div class="cep-linha">
 
-</div>
+      <input
+        id="cep"
+        placeholder="Digite seu CEP"
+        maxlength="9"
+        oninput="mascaraCEP(this)"
+      >
 
+      <button onclick="buscarCEP()">
+        CALCULAR
+      </button>
 
-<a
-class="cep-link"
-href="https://buscacepinter.correios.com.br/app/endereco/index.php"
-target="_blank"
->
-Não sei meu CEP
-</a>
+    </div>
 
 
-<div
-class="endereco"
-id="endereco"
->
+    <a
+      class="cep-link"
+      href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+      target="_blank"
+    >
+      Não sei meu CEP
+    </a>
 
-<div
-class="endereco-box"
-id="enderecoBox"
->
-</div>
 
+    <div
+      class="endereco"
+      id="endereco"
+    >
 
-<div class="campos">
+      <div
+        class="endereco-box"
+        id="enderecoBox"
+      >
+      </div>
 
-<input
-id="numero"
-placeholder="Número"
->
 
-<input
-id="complemento"
-placeholder="Complemento"
->
+      <div class="campos">
 
-<input
-class="completo"
-id="referencia"
-placeholder="Ponto de referência (opcional)"
->
+        <input
+          id="numero"
+          placeholder="Número"
+        >
 
-</div>
+        <input
+          id="complemento"
+          placeholder="Complemento"
+        >
 
+        <input
+          class="completo"
+          id="referencia"
+          placeholder="Ponto de referência (opcional)"
+        >
 
-<div class="entregas">
+      </div>
 
-<h4>
-FORMA DE ENTREGA
-</h4>
 
+      <div class="entregas">
 
-<label class="entrega">
+        <h4>
+          FORMA DE ENTREGA
+        </h4>
 
-<div class="entrega-esq">
 
-<input
-type="radio"
-name="tipoEntrega"
-value="padrao"
-onclick="selecionarEntrega('padrao')"
->
+        <label class="entrega">
 
-<div>
+          <div class="entrega-esq">
 
-<div class="entrega-nome">
-Entrega padrão
-</div>
+            <input
+              type="radio"
+              name="tipoEntrega"
+              value="padrao"
+              onclick="selecionarEntrega('padrao')"
+            >
 
-<span class="prazo">
-5 a 10 dias úteis
-</span>
+            <div>
 
-</div>
+              <div class="entrega-nome">
+                Entrega padrão
+              </div>
 
-</div>
+              <span class="prazo">
+                5 a 10 dias úteis
+              </span>
 
-<div
-class="valor-entrega"
-id="valorPadrao"
->
-R$ 0,00
-</div>
+            </div>
 
-</label>
+          </div>
 
+          <div
+            class="valor-entrega"
+            id="valorPadrao"
+          >
+            R$ 0,00
+          </div>
 
-<label class="entrega">
+        </label>
 
-<div class="entrega-esq">
 
-<input
-type="radio"
-name="tipoEntrega"
-value="expressa"
-onclick="selecionarEntrega('expressa')"
->
+        <label class="entrega">
 
-<div>
+          <div class="entrega-esq">
 
-<div class="entrega-nome">
-Entrega expressa
-</div>
+            <input
+              type="radio"
+              name="tipoEntrega"
+              value="expressa"
+              onclick="selecionarEntrega('expressa')"
+            >
 
-<span class="prazo">
-2 a 5 dias úteis
-</span>
+            <div>
 
-</div>
+              <div class="entrega-nome">
+                Entrega expressa
+              </div>
 
-</div>
+              <span class="prazo">
+                2 a 5 dias úteis
+              </span>
 
-<div
-class="valor-entrega"
-id="valorExpressa"
->
-R$ 0,00
-</div>
+            </div>
 
-</label>
+          </div>
 
+          <div
+            class="valor-entrega"
+            id="valorExpressa"
+          >
+            R$ 0,00
+          </div>
 
-<label class="entrega">
+        </label>
 
-<div class="entrega-esq">
 
-<input
-type="radio"
-name="tipoEntrega"
-value="retirada"
-onclick="selecionarEntrega('retirada')"
->
+        <label class="entrega">
 
-<div>
+          <div class="entrega-esq">
 
-<div class="entrega-nome">
-Retirada
-</div>
+            <input
+              type="radio"
+              name="tipoEntrega"
+              value="retirada"
+              onclick="selecionarEntrega('retirada')"
+            >
 
-<span class="prazo">
-Consulte disponibilidade
-</span>
+            <div>
 
-</div>
+              <div class="entrega-nome">
+                Retirada
+              </div>
 
-</div>
+              <span class="prazo">
+                Consulte disponibilidade
+              </span>
 
-<div class="valor-entrega">
-GRÁTIS
-</div>
+            </div>
 
-</label>
+          </div>
 
-</div>
+          <div class="valor-entrega">
+            GRÁTIS
+          </div>
 
-</div>
+        </label>
 
-</div>
 
+      </div>
 
-<!-- RESUMO -->
+    </div>
 
-<div class="resumo">
+  </div>
 
-<div class="linha">
 
-<span>
-Subtotal
-</span>
+  <!-- =================================================
+       RESUMO
+  ================================================== -->
 
-<strong id="subtotal">
-R$ 0,00
-</strong>
+  <div class="resumo">
 
-</div>
+    <div class="linha">
 
+      <span>
+        Subtotal
+      </span>
 
-<div class="linha">
+      <strong id="subtotal">
+        R$ 0,00
+      </strong>
 
-<span>
-Frete
-</span>
+    </div>
 
-<strong id="frete">
-R$ 0,00
-</strong>
 
-</div>
+    <div class="linha">
 
+      <span>
+        Frete
+      </span>
 
-<div class="linha total">
+      <strong id="frete">
+        R$ 0,00
+      </strong>
 
-<span>
-Total
-</span>
+    </div>
 
-<strong id="total">
-R$ 0,00
-</strong>
 
-</div>
+    <div class="linha total">
 
+      <span>
+        Total
+      </span>
 
-<button
-class="whatsapp"
-onclick="finalizarWhatsApp()"
->
+      <strong id="total">
+        R$ 0,00
+      </strong>
 
-FINALIZAR PEDIDO PELO WHATSAPP
+    </div>
 
-</button>
 
-</div>
+    <button
+      class="whatsapp"
+      onclick="finalizarWhatsApp()"
+    >
+      FINALIZAR PEDIDO PELO WHATSAPP
+    </button>
+
+  </div>
 
 </aside>
 
 
+
 <script>
 
-/* =========================================
+
+/* =====================================================
    CONFIGURAÇÃO
-========================================= */
+===================================================== */
 
 const WHATSAPP = "5511999999999";
 
 
-/* =========================================
-   MENU DAS CATEGORIAS
-========================================= */
-
-function abrirMenu(nome){
-
-  const todos =
-  document.querySelectorAll(".dropdown");
-
-  const escolhido =
-  document.getElementById(
-    "dropdown-" + nome
-  );
-
-  const estavaAberto =
-  escolhido.classList.contains("aberto");
-
-  todos.forEach(menu => {
-    menu.classList.remove("aberto");
-  });
-
-  if(!estavaAberto){
-    escolhido.classList.add("aberto");
-  }
-
-}
-
-
-/* Fecha menus quando clicar fora */
-
-document.addEventListener(
-  "click",
-  function(event){
-
-    if(
-      !event.target.closest(".menu-item")
-    ){
-
-      document
-      .querySelectorAll(".dropdown")
-      .forEach(menu => {
-
-        menu.classList.remove("aberto");
-
-      });
-
-    }
-
-  }
-);
-
-
-/* =========================================
-   CARRINHO
-========================================= */
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
 let carrinho =
 JSON.parse(
-localStorage.getItem("forYouCarrinho")
+  localStorage.getItem("forYouCarrinho")
 ) || [];
 
 let enderecoDados = null;
@@ -2540,9 +2572,9 @@ let valoresFrete = {
 };
 
 
-/* =========================================
+/* =====================================================
    MOEDA
-========================================= */
+===================================================== */
 
 function moeda(valor){
 
@@ -2557,9 +2589,9 @@ function moeda(valor){
 }
 
 
-/* =========================================
+/* =====================================================
    SALVAR
-========================================= */
+===================================================== */
 
 function salvar(){
 
@@ -2571,16 +2603,16 @@ function salvar(){
 }
 
 
-/* =========================================
+/* =====================================================
    ADICIONAR
-========================================= */
+===================================================== */
 
 function adicionar(nome,preco){
 
   const produto =
-  carrinho.find(
-    item => item.nome === nome
-  );
+    carrinho.find(
+      item => item.nome === nome
+    );
 
   if(produto){
 
@@ -2605,14 +2637,14 @@ function adicionar(nome,preco){
 }
 
 
-/* =========================================
+/* =====================================================
    ATUALIZAR
-========================================= */
+===================================================== */
 
 function atualizar(){
 
   const container =
-  document.getElementById("itens");
+    document.getElementById("itens");
 
   let quantidade = 0;
 
@@ -2622,33 +2654,38 @@ function atualizar(){
   if(carrinho.length === 0){
 
     container.innerHTML = `
+
       <div style="
         text-align:center;
         padding:60px 10px;
         color:#888;
         font-size:12px;
       ">
+
         Seu carrinho está vazio.
+
       </div>
+
     `;
 
   }else{
 
     container.innerHTML = "";
 
+
     carrinho.forEach(
       (produto,index) => {
 
         quantidade +=
-        produto.quantidade;
+          produto.quantidade;
 
         subtotal +=
-        produto.preco *
-        produto.quantidade;
+          produto.preco *
+          produto.quantidade;
 
 
         const item =
-        document.createElement("div");
+          document.createElement("div");
 
         item.className = "item";
 
@@ -2698,7 +2735,6 @@ function atualizar(){
 
         `;
 
-
         container.appendChild(item);
 
       }
@@ -2725,18 +2761,19 @@ function atualizar(){
   document.getElementById(
     "total"
   ).textContent =
-  moeda(subtotal + freteAtual);
+    moeda(subtotal + freteAtual);
 
 }
 
 
-/* =========================================
+/* =====================================================
    ALTERAR QUANTIDADE
-========================================= */
+===================================================== */
 
 function alterar(index,valor){
 
   carrinho[index].quantidade += valor;
+
 
   if(
     carrinho[index].quantidade <= 0
@@ -2746,6 +2783,7 @@ function alterar(index,valor){
 
   }
 
+
   salvar();
 
   atualizar();
@@ -2753,9 +2791,9 @@ function alterar(index,valor){
 }
 
 
-/* =========================================
+/* =====================================================
    REMOVER
-========================================= */
+===================================================== */
 
 function remover(index){
 
@@ -2768,78 +2806,80 @@ function remover(index){
 }
 
 
-/* =========================================
+/* =====================================================
    ABRIR CARRINHO
-========================================= */
+===================================================== */
 
 function abrirCarrinho(){
 
   document
-  .getElementById("carrinho")
-  .classList.add("aberto");
+    .getElementById("carrinho")
+    .classList.add("aberto");
 
   document
-  .getElementById("overlay")
-  .classList.add("ativo");
+    .getElementById("overlay")
+    .classList.add("ativo");
 
 }
 
 
-/* =========================================
+/* =====================================================
    FECHAR CARRINHO
-========================================= */
+===================================================== */
 
 function fecharCarrinho(){
 
   document
-  .getElementById("carrinho")
-  .classList.remove("aberto");
+    .getElementById("carrinho")
+    .classList.remove("aberto");
 
   document
-  .getElementById("overlay")
-  .classList.remove("ativo");
+    .getElementById("overlay")
+    .classList.remove("ativo");
 
 }
 
 
-/* =========================================
-   CEP
-========================================= */
+/* =====================================================
+   MÁSCARA CEP
+===================================================== */
 
 function mascaraCEP(input){
 
   let valor =
-  input.value
-  .replace(/\D/g,"")
-  .substring(0,8);
+    input.value
+      .replace(/\D/g,"")
+      .substring(0,8);
+
 
   if(valor.length > 5){
 
     valor =
-    valor.substring(0,5)
-    +
-    "-"
-    +
-    valor.substring(5);
+      valor.substring(0,5)
+      +
+      "-"
+      +
+      valor.substring(5);
 
   }
+
 
   input.value = valor;
 
 }
 
 
-/* =========================================
+/* =====================================================
    BUSCAR CEP
-========================================= */
+===================================================== */
 
 async function buscarCEP(){
 
   const cep =
-  document
-  .getElementById("cep")
-  .value
-  .replace(/\D/g,"");
+    document
+      .getElementById("cep")
+      .value
+      .replace(/\D/g,"");
 
 
   if(cep.length !== 8){
@@ -2854,39 +2894,39 @@ async function buscarCEP(){
 
 
   const endereco =
-  document.getElementById(
-    "endereco"
-  );
+    document.getElementById(
+      "endereco"
+    );
 
 
   const box =
-  document.getElementById(
-    "enderecoBox"
-  );
+    document.getElementById(
+      "enderecoBox"
+    );
 
 
   endereco.classList.add("ativo");
 
   box.innerHTML =
-  "Consultando endereço...";
+    "Consultando endereço...";
 
 
   try{
 
     const resposta =
-    await fetch(
-      `https://viacep.com.br/ws/${cep}/json/`
-    );
+      await fetch(
+        `https://viacep.com.br/ws/${cep}/json/`
+      );
 
 
     const dados =
-    await resposta.json();
+      await resposta.json();
 
 
     if(dados.erro){
 
       box.innerHTML =
-      "CEP não encontrado.";
+        "CEP não encontrado.";
 
       return;
 
@@ -2928,16 +2968,16 @@ async function buscarCEP(){
   }catch(error){
 
     box.innerHTML =
-    "Não foi possível consultar o CEP. Verifique sua conexão.";
+      "Não foi possível consultar o CEP. Verifique sua conexão.";
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    FRETE
-========================================= */
+===================================================== */
 
 function calcularFrete(uf){
 
@@ -3001,11 +3041,11 @@ function calcularFrete(uf){
 
 
   const valores =
-  tabela[uf] ||
-  {
-    padrao:20,
-    expressa:32
-  };
+    tabela[uf] ||
+    {
+      padrao:20,
+      expressa:32
+    };
 
 
   valoresFrete = valores;
@@ -3014,13 +3054,13 @@ function calcularFrete(uf){
   document.getElementById(
     "valorPadrao"
   ).textContent =
-  moeda(valores.padrao);
+    moeda(valores.padrao);
 
 
   document.getElementById(
     "valorExpressa"
   ).textContent =
-  moeda(valores.expressa);
+    moeda(valores.expressa);
 
 
   if(entregaSelecionada){
@@ -3034,9 +3074,9 @@ function calcularFrete(uf){
 }
 
 
-/* =========================================
-   SELECIONAR ENTREGA
-========================================= */
+/* =====================================================
+   ENTREGA
+===================================================== */
 
 function selecionarEntrega(tipo){
 
@@ -3050,6 +3090,7 @@ function selecionarEntrega(tipo){
   }else{
 
     if(
+      !valoresFrete ||
       valoresFrete.padrao === 0
     ){
 
@@ -3065,7 +3106,7 @@ function selecionarEntrega(tipo){
     if(tipo === "padrao"){
 
       freteAtual =
-      valoresFrete.padrao;
+        valoresFrete.padrao;
 
     }
 
@@ -3073,7 +3114,7 @@ function selecionarEntrega(tipo){
     if(tipo === "expressa"){
 
       freteAtual =
-      valoresFrete.expressa;
+        valoresFrete.expressa;
 
     }
 
@@ -3085,43 +3126,43 @@ function selecionarEntrega(tipo){
 }
 
 
-/* =========================================
+/* =====================================================
    BUSCA DE PRODUTOS
-========================================= */
+===================================================== */
 
 function buscarProdutos(){
 
   const termo =
-  document
-  .getElementById("busca")
-  .value
-  .toLowerCase();
-
-
-  document
-  .querySelectorAll(".produto")
-  .forEach(
-    produto => {
-
-      const texto =
-      produto.innerText
+    document
+      .getElementById("busca")
+      .value
       .toLowerCase();
 
 
-      produto.style.display =
-      texto.includes(termo)
-      ? "block"
-      : "none";
+  document
+    .querySelectorAll(".produto")
+    .forEach(
+      produto => {
 
-    }
-  );
+        const texto =
+          produto.innerText
+            .toLowerCase();
+
+
+        produto.style.display =
+          texto.includes(termo)
+          ? "block"
+          : "none";
+
+      }
+    );
 
 }
 
 
-/* =========================================
+/* =====================================================
    WHATSAPP
-========================================= */
+===================================================== */
 
 function finalizarWhatsApp(){
 
@@ -3137,10 +3178,10 @@ function finalizarWhatsApp(){
 
 
   const cep =
-  document
-  .getElementById("cep")
-  .value
-  .trim();
+    document
+      .getElementById("cep")
+      .value
+      .trim();
 
 
   if(
@@ -3157,10 +3198,10 @@ function finalizarWhatsApp(){
 
 
   const numero =
-  document
-  .getElementById("numero")
-  .value
-  .trim();
+    document
+      .getElementById("numero")
+      .value
+      .trim();
 
 
   if(!numero){
@@ -3189,56 +3230,57 @@ function finalizarWhatsApp(){
 
 
   let mensagem =
-  "Olá! Quero fazer um pedido na FOR YOU.\n\n";
+    "Olá! Quero fazer um pedido na FOR YOU BY DÉ.\n\n";
 
 
   mensagem +=
-  "*MEU PEDIDO*\n";
+    "*MEU PEDIDO*\n";
 
 
   carrinho.forEach(
     produto => {
 
       const valor =
-      produto.preco *
-      produto.quantidade;
+        produto.preco *
+        produto.quantidade;
 
 
       subtotal += valor;
 
 
       mensagem +=
-      "• " +
-      produto.nome +
-      " — " +
-      produto.quantidade +
-      "x — " +
-      moeda(valor) +
-      "\n";
+        "• " +
+        produto.nome +
+        " — " +
+        produto.quantidade +
+        "x — " +
+        moeda(valor) +
+        "\n";
 
     }
   );
 
 
-  mensagem += "\n*RESUMO*\n";
+  mensagem +=
+    "\n*RESUMO*\n";
 
 
   mensagem +=
-  "Subtotal: " +
-  moeda(subtotal) +
-  "\n";
+    "Subtotal: " +
+    moeda(subtotal) +
+    "\n";
 
 
   mensagem +=
-  "Frete: " +
-  moeda(freteAtual) +
-  "\n";
+    "Frete: " +
+    moeda(freteAtual) +
+    "\n";
 
 
   mensagem +=
-  "Total: " +
-  moeda(subtotal + freteAtual) +
-  "\n\n";
+    "Total: " +
+    moeda(subtotal + freteAtual) +
+    "\n\n";
 
 
   let nomeEntrega = "";
@@ -3249,7 +3291,7 @@ function finalizarWhatsApp(){
   ){
 
     nomeEntrega =
-    "Entrega padrão";
+      "Entrega padrão";
 
   }
 
@@ -3259,7 +3301,7 @@ function finalizarWhatsApp(){
   ){
 
     nomeEntrega =
-    "Entrega expressa";
+      "Entrega expressa";
 
   }
 
@@ -3269,91 +3311,91 @@ function finalizarWhatsApp(){
   ){
 
     nomeEntrega =
-    "Retirada";
+      "Retirada";
 
   }
 
 
   mensagem +=
-  "*FORMA DE ENTREGA*\n" +
-  nomeEntrega +
-  "\n\n";
+    "*FORMA DE ENTREGA*\n" +
+    nomeEntrega +
+    "\n\n";
 
 
   mensagem +=
-  "*ENDEREÇO*\n";
+    "*ENDEREÇO*\n";
 
 
   if(enderecoDados){
 
     mensagem +=
-    enderecoDados.logradouro +
-    ", " +
-    numero +
-    "\n";
+      enderecoDados.logradouro +
+      ", " +
+      numero +
+      "\n";
 
 
     const complemento =
-    document
-    .getElementById("complemento")
-    .value
-    .trim();
+      document
+        .getElementById("complemento")
+        .value
+        .trim();
 
 
     if(complemento){
 
       mensagem +=
-      "Complemento: " +
-      complemento +
-      "\n";
+        "Complemento: " +
+        complemento +
+        "\n";
 
     }
 
 
     mensagem +=
-    enderecoDados.bairro +
-    "\n";
+      enderecoDados.bairro +
+      "\n";
 
 
     mensagem +=
-    enderecoDados.localidade +
-    " - " +
-    enderecoDados.uf +
-    "\n";
+      enderecoDados.localidade +
+      " - " +
+      enderecoDados.uf +
+      "\n";
 
   }
 
 
   const referencia =
-  document
-  .getElementById("referencia")
-  .value
-  .trim();
+    document
+      .getElementById("referencia")
+      .value
+      .trim();
 
 
   mensagem +=
-  "CEP: " +
-  cep +
-  "\n";
+    "CEP: " +
+    cep +
+    "\n";
 
 
   if(referencia){
 
     mensagem +=
-    "Referência: " +
-    referencia +
-    "\n";
+      "Referência: " +
+      referencia +
+      "\n";
 
   }
 
 
   const url =
-  "https://wa.me/" +
-  WHATSAPP +
-  "?text=" +
-  encodeURIComponent(
-    mensagem
-  );
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(
+      mensagem
+    );
 
 
   window.open(
@@ -3364,9 +3406,9 @@ function finalizarWhatsApp(){
 }
 
 
-/* =========================================
+/* =====================================================
    NEWSLETTER
-========================================= */
+===================================================== */
 
 function newsletter(){
 
@@ -3379,9 +3421,9 @@ function newsletter(){
 }
 
 
-/* =========================================
+/* =====================================================
    INICIAR
-========================================= */
+===================================================== */
 
 atualizar();
 
