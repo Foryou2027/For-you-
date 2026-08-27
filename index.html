@@ -47,9 +47,9 @@ button{
     cursor:pointer;
 }
 
-/* =====================
+/* =========================
    AVISO
-===================== */
+========================= */
 
 .aviso{
     background:var(--marrom);
@@ -61,9 +61,9 @@ button{
     text-transform:uppercase;
 }
 
-/* =====================
-   HEADER
-===================== */
+/* =========================
+   CABEÇALHO
+========================= */
 
 header{
     background:rgba(251,248,245,.98);
@@ -156,9 +156,9 @@ header{
     font-size:9px;
 }
 
-/* =====================
+/* =========================
    MENU
-===================== */
+========================= */
 
 .menu{
     border-top:1px solid var(--linha);
@@ -167,11 +167,15 @@ header{
 .menu-interno{
     width:min(1200px,94%);
     margin:auto;
-    min-height:48px;
+    min-height:50px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:30px;
+    gap:28px;
+}
+
+.menu-item{
+    position:relative;
 }
 
 .menu-link{
@@ -182,30 +186,27 @@ header{
     letter-spacing:1.3px;
     text-transform:uppercase;
     color:var(--marrom);
+    padding:17px 0;
 }
 
 .menu-link:hover{
     color:var(--roseescuro);
 }
 
-.menu-item{
-    position:relative;
-}
-
-/* =====================
-   CATEGORIAS
-===================== */
+/* =========================
+   LISTA SUSPENSA
+========================= */
 
 .dropdown{
     position:absolute;
-    top:32px;
+    top:50px;
     left:50%;
     transform:translateX(-50%);
-    width:680px;
+    width:270px;
     background:white;
     border:1px solid var(--linha);
-    box-shadow:0 20px 50px rgba(40,25,30,.12);
-    padding:30px;
+    box-shadow:0 18px 45px rgba(40,25,30,.14);
+    padding:10px 0;
     display:none;
     z-index:200;
 }
@@ -215,44 +216,34 @@ header{
 }
 
 .dropdown-titulo{
-    text-align:center;
-    font-family:"Playfair Display",serif;
-    font-size:27px;
-    margin-bottom:25px;
-}
-
-.categorias-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.categoria-box{
-    border-top:1px solid var(--linha);
-    padding-top:15px;
-}
-
-.categoria-box h3{
-    font-family:"Playfair Display",serif;
-    font-weight:400;
-    font-size:18px;
-    margin-bottom:10px;
-}
-
-.categoria-box a{
-    display:block;
-    color:var(--cinza);
-    font-size:11px;
-    padding:4px 0;
-}
-
-.categoria-box a:hover{
+    padding:14px 20px;
     color:var(--roseescuro);
+    font-family:"Playfair Display",serif;
+    font-size:20px;
+    border-bottom:1px solid var(--linha);
 }
 
-/* =====================
+.dropdown a{
+    display:block;
+    padding:12px 20px;
+    font-size:11px;
+    color:var(--cinza);
+    border-bottom:1px solid #f2ece9;
+}
+
+.dropdown a:last-child{
+    border-bottom:0;
+}
+
+.dropdown a:hover{
+    background:#faf4f1;
+    color:var(--roseescuro);
+    padding-left:25px;
+}
+
+/* =========================
    HERO
-===================== */
+========================= */
 
 .hero{
     min-height:650px;
@@ -260,8 +251,8 @@ header{
     linear-gradient(
         90deg,
         rgba(251,248,245,.98) 0%,
-        rgba(251,248,245,.88) 43%,
-        rgba(239,219,216,.30) 100%
+        rgba(251,248,245,.90) 42%,
+        rgba(239,219,216,.25) 100%
     ),
     url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
     background-size:cover;
@@ -335,9 +326,9 @@ header{
     border:1px solid var(--marrom);
 }
 
-/* =====================
+/* =========================
    FRASE
-===================== */
+========================= */
 
 .frase{
     background:white;
@@ -364,9 +355,9 @@ header{
     font-size:13px;
 }
 
-/* =====================
+/* =========================
    SEÇÕES
-===================== */
+========================= */
 
 .secao{
     padding:90px 0;
@@ -402,9 +393,9 @@ header{
     font-size:13px;
 }
 
-/* =====================
+/* =========================
    ACHADINHO
-===================== */
+========================= */
 
 .achadinho{
     background:#f0e1dc;
@@ -464,9 +455,9 @@ header{
     margin:3px 0 25px;
 }
 
-/* =====================
+/* =========================
    PRODUTOS
-===================== */
+========================= */
 
 .produtos{
     display:grid;
@@ -580,9 +571,17 @@ header{
     color:white;
 }
 
-/* =====================
-   KIT
-===================== */
+/* =========================
+   NOVOS PRODUTOS
+========================= */
+
+.novidades{
+    background:#fff;
+}
+
+/* =========================
+   KITS
+========================= */
 
 .kits{
     background:#f7efeb;
@@ -631,7 +630,6 @@ header{
     color:var(--cinza);
     font-size:13px;
     line-height:1.8;
-    max-width:450px;
 }
 
 .kit-itens{
@@ -650,7 +648,6 @@ header{
 .kit-antigo{
     color:#aaa;
     text-decoration:line-through;
-    display:block;
     font-size:12px;
 }
 
@@ -661,9 +658,9 @@ header{
     margin-bottom:25px;
 }
 
-/* =====================
+/* =========================
    VALIDADE
-===================== */
+========================= */
 
 .validade{
     background:#f8eee9;
@@ -685,9 +682,9 @@ header{
     color:#965d4c;
 }
 
-/* =====================
+/* =========================
    DIFERENCIAL
-===================== */
+========================= */
 
 .diferencial{
     background:var(--marrom);
@@ -744,9 +741,9 @@ header{
     color:#8e7d81;
 }
 
-/* =====================
+/* =========================
    BENEFÍCIOS
-===================== */
+========================= */
 
 .beneficios{
     display:grid;
@@ -783,9 +780,9 @@ header{
     font-size:11px;
 }
 
-/* =====================
+/* =========================
    NEWSLETTER
-===================== */
+========================= */
 
 .newsletter{
     background:#f4e7e2;
@@ -829,9 +826,9 @@ header{
     letter-spacing:1px;
 }
 
-/* =====================
+/* =========================
    INSTAGRAM
-===================== */
+========================= */
 
 .instagram{
     padding:90px 0;
@@ -850,9 +847,9 @@ header{
     object-fit:cover;
 }
 
-/* =====================
+/* =========================
    RODAPÉ
-===================== */
+========================= */
 
 footer{
     background:#241e20;
@@ -903,9 +900,9 @@ footer{
     font-size:9px;
 }
 
-/* =====================
+/* =========================
    CARRINHO
-===================== */
+========================= */
 
 .overlay{
     position:fixed;
@@ -1040,9 +1037,9 @@ footer{
     letter-spacing:1px;
 }
 
-/* =====================
+/* =========================
    RESPONSIVO
-===================== */
+========================= */
 
 @media(max-width:1000px){
 
@@ -1103,18 +1100,22 @@ footer{
         padding:0 5px;
     }
 
+    .menu-item:hover .dropdown{
+        display:none;
+    }
+
+    .dropdown.aberto{
+        display:block;
+    }
+
     .dropdown{
         position:fixed;
-        top:135px;
+        top:145px;
         left:5%;
         transform:none;
         width:90%;
-        max-height:75vh;
+        max-height:70vh;
         overflow:auto;
-    }
-
-    .categorias-grid{
-        grid-template-columns:1fr 1fr;
     }
 
     .hero{
@@ -1183,9 +1184,14 @@ footer{
 
 <body>
 
+<!-- AVISO -->
+
 <div class="aviso">
 ✨ ENVIO PARA TODO O BRASIL • ACHADINHOS TODA SEMANA ✨
 </div>
+
+
+<!-- CABEÇALHO -->
 
 <header>
 
@@ -1203,6 +1209,7 @@ maquiagem & beleza
 
 </a>
 
+
 <div class="busca">
 
 <input
@@ -1213,6 +1220,7 @@ placeholder="Buscar produto, marca ou achadinho..."
 <button>⌕</button>
 
 </div>
+
 
 <div class="acoes">
 
@@ -1241,130 +1249,229 @@ id="contador"
 </div>
 
 
+<!-- MENU -->
+
 <div class="menu">
 
 <div class="menu-interno">
+
 
 <a href="#" class="menu-link">
 Início
 </a>
 
 
+<!-- CATEGORIAS -->
+
 <div class="menu-item">
 
-<button class="menu-link">
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
 Categorias ▾
 </button>
 
 <div class="dropdown">
 
 <div class="dropdown-titulo">
-Explore nossas categorias
+Categorias
 </div>
 
-<div class="categorias-grid">
-
-<div class="categoria-box">
-
-<h3>💋 Lábios</h3>
-
-<a href="#produtos">Batom</a>
-<a href="#produtos">Gloss</a>
-<a href="#produtos">Lip Tint</a>
-<a href="#produtos">Lápis de boca</a>
-
-</div>
-
-
-<div class="categoria-box">
-
-<h3>✨ Pele</h3>
-
-<a href="#produtos">Base</a>
-<a href="#produtos">Corretivo</a>
-<a href="#produtos">Pó</a>
-<a href="#produtos">Primer</a>
-
-</div>
-
-
-<div class="categoria-box">
-
-<h3>👁️ Olhos</h3>
-
-<a href="#produtos">Máscara de cílios</a>
-<a href="#produtos">Delineador</a>
-<a href="#produtos">Lápis</a>
-<a href="#produtos">Paletas</a>
-
-</div>
-
-
-<div class="categoria-box">
-
-<h3>🌸 Face</h3>
-
-<a href="#produtos">Blush</a>
-<a href="#produtos">Iluminador</a>
-<a href="#produtos">Bronzer</a>
-<a href="#produtos">Contorno</a>
-
-</div>
-
-
-<div class="categoria-box">
-
-<h3>👜 Acessórios</h3>
-
-<a href="#produtos">Pincéis</a>
-<a href="#produtos">Esponjas</a>
-<a href="#produtos">Cílios</a>
-<a href="#produtos">Necessaires</a>
-
-</div>
-
-
-<div class="categoria-box">
-
-<h3>✨ Cuidados</h3>
-
-<a href="#produtos">Skincare</a>
-<a href="#produtos">Lip Care</a>
-<a href="#produtos">Cuidados faciais</a>
-<a href="#produtos">Outros</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<a href="#achadinho" class="menu-link">
-Achadinho da Semana
+<a href="#labios">
+💋 Lábios
 </a>
 
-
-<a href="#novidades" class="menu-link">
-Novidades
+<a href="#pele">
+✨ Pele
 </a>
 
-
-<a href="#kits" class="menu-link">
-Kits Promocionais
+<a href="#olhos">
+👁️ Olhos
 </a>
 
-
-<a href="#ofertas" class="menu-link">
-Ofertas
+<a href="#face">
+🌸 Face
 </a>
 
-
-<a href="#validade" class="menu-link">
-Próximo da Validade
+<a href="#acessorios">
+👜 Acessórios
 </a>
+
+<a href="#cuidados">
+🧴 Cuidados
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ACHADINHO -->
+
+<div class="menu-item">
+
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
+Achadinho da Semana ▾
+</button>
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+✨ Achadinho
+</div>
+
+<a href="#achadinho">
+Produto da semana
+</a>
+
+<a href="#achadinho">
+Ver achadinho
+</a>
+
+</div>
+
+</div>
+
+
+<!-- NOVIDADES -->
+
+<div class="menu-item">
+
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
+Novidades ▾
+</button>
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+🆕 Novidades
+</div>
+
+<a href="#novidades">
+Recém-chegados
+</a>
+
+<a href="#novidades">
+Lançamentos
+</a>
+
+<a href="#novidades">
+Ver novidades
+</a>
+
+</div>
+
+</div>
+
+
+<!-- KITS -->
+
+<div class="menu-item">
+
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
+Kits Promocionais ▾
+</button>
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+🎁 Kits
+</div>
+
+<a href="#kits">
+Kit Glow Essencial
+</a>
+
+<a href="#kits">
+Kits em promoção
+</a>
+
+<a href="#kits">
+Ver todos os kits
+</a>
+
+</div>
+
+</div>
+
+
+<!-- OFERTAS -->
+
+<div class="menu-item">
+
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
+Ofertas ▾
+</button>
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+🏷️ Ofertas
+</div>
+
+<a href="#ofertas">
+Ofertas da semana
+</a>
+
+<a href="#ofertas">
+Produtos com desconto
+</a>
+
+<a href="#ofertas">
+Ver ofertas
+</a>
+
+</div>
+
+</div>
+
+
+<!-- VALIDADE -->
+
+<div class="menu-item">
+
+<button
+class="menu-link"
+onclick="abrirMenu(this)"
+>
+Próximo da Validade ▾
+</button>
+
+<div class="dropdown">
+
+<div class="dropdown-titulo">
+⏳ Validade
+</div>
+
+<a href="#validade">
+Produtos próximos da validade
+</a>
+
+<a href="#validade">
+Ofertas especiais
+</a>
+
+<a href="#validade">
+Ver produtos
+</a>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -1489,7 +1596,7 @@ QUERO MEU ACHADINHO
 <!-- NOVIDADES -->
 
 <section
-class="secao"
+class="secao novidades"
 id="novidades"
 >
 
@@ -1717,7 +1824,7 @@ ADICIONAR AO CARRINHO
 </section>
 
 
-<!-- KIT PROMOCIONAL -->
+<!-- KITS -->
 
 <section
 class="secao kits"
@@ -1807,7 +1914,7 @@ ADICIONAR KIT AO CARRINHO
 </section>
 
 
-<!-- QUERIDINHOS -->
+<!-- PRODUTOS -->
 
 <section
 class="secao"
@@ -1836,7 +1943,7 @@ Os produtos que mais combinam com a nossa comunidade.
 <div class="produtos">
 
 
-<div class="produto">
+<div class="produto" id="labios">
 
 <div class="produto-imagem">
 
@@ -1858,7 +1965,7 @@ alt="Batom"
 <div class="produto-info">
 
 <div class="marca">
-For You
+Lábios
 </div>
 
 <div class="produto-nome">
@@ -1885,7 +1992,7 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<div class="produto" id="pele">
 
 <div class="produto-imagem">
 
@@ -1907,7 +2014,7 @@ alt="Gloss"
 <div class="produto-info">
 
 <div class="marca">
-For You
+Pele
 </div>
 
 <div class="produto-nome">
@@ -1934,7 +2041,7 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<div class="produto" id="face">
 
 <div class="produto-imagem">
 
@@ -1956,7 +2063,7 @@ alt="Blush"
 <div class="produto-info">
 
 <div class="marca">
-For You
+Face
 </div>
 
 <div class="produto-nome">
@@ -1983,7 +2090,7 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<div class="produto" id="olhos">
 
 <div class="produto-imagem">
 
@@ -2005,7 +2112,7 @@ alt="Paleta"
 <div class="produto-info">
 
 <div class="marca">
-For You
+Olhos
 </div>
 
 <div class="produto-nome">
@@ -2148,7 +2255,6 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
 </div>
 
 </div>
@@ -2156,7 +2262,7 @@ ADICIONAR AO CARRINHO
 </section>
 
 
-<!-- PRÓXIMO DA VALIDADE -->
+<!-- VALIDADE -->
 
 <section
 class="secao validade"
@@ -2292,7 +2398,6 @@ ADICIONAR AO CARRINHO
 </div>
 
 </div>
-
 
 </div>
 
@@ -2711,6 +2816,10 @@ FINALIZAR PEDIDO
 
 <script>
 
+/* =========================
+   CARRINHO
+========================= */
+
 let carrinho =
 JSON.parse(localStorage.getItem("forYouCarrinho")) || [];
 
@@ -2748,19 +2857,20 @@ quantidade:1
 
 salvar();
 
-atualizar();
+atualizarCarrinho();
 
 abrirCarrinho();
 
 }
 
 
-function atualizar(){
+function atualizarCarrinho(){
 
 let itens =
 document.getElementById("itens");
 
 let contador = 0;
+
 let total = 0;
 
 
@@ -2825,7 +2935,7 @@ R$ ${item.preco.toFixed(2).replace(".",",")}
 
 <div class="quantidade">
 
-<button onclick="alterar(${index},-1)">
+<button onclick="alterarQuantidade(${index},-1)">
 −
 </button>
 
@@ -2833,7 +2943,7 @@ R$ ${item.preco.toFixed(2).replace(".",",")}
 ${item.quantidade}
 </span>
 
-<button onclick="alterar(${index},1)">
+<button onclick="alterarQuantidade(${index},1)">
 +
 </button>
 
@@ -2841,7 +2951,7 @@ ${item.quantidade}
 
 <button
 class="remover"
-onclick="remover(${index})"
+onclick="removerProduto(${index})"
 >
 REMOVER
 </button>
@@ -2857,7 +2967,7 @@ itens.appendChild(div);
 }
 
 
-function alterar(index,valor){
+function alterarQuantidade(index,valor){
 
 carrinho[index].quantidade += valor;
 
@@ -2873,21 +2983,25 @@ carrinho.splice(index,1);
 
 salvar();
 
-atualizar();
+atualizarCarrinho();
 
 }
 
 
-function remover(index){
+function removerProduto(index){
 
 carrinho.splice(index,1);
 
 salvar();
 
-atualizar();
+atualizarCarrinho();
 
 }
 
+
+/* =========================
+   ABRIR CARRINHO
+========================= */
 
 function abrirCarrinho(){
 
@@ -2915,6 +3029,10 @@ document
 }
 
 
+/* =========================
+   FINALIZAR
+========================= */
+
 function finalizarPedido(){
 
 if(carrinho.length === 0){
@@ -2931,6 +3049,10 @@ alert(
 
 }
 
+
+/* =========================
+   NEWSLETTER
+========================= */
 
 function cadastrarEmail(){
 
@@ -2952,7 +3074,44 @@ return false;
 }
 
 
-atualizar();
+/* =========================
+   MENUS NO CELULAR
+========================= */
+
+function abrirMenu(botao){
+
+if(window.innerWidth > 650){
+
+return;
+
+}
+
+let dropdown =
+botao.nextElementSibling;
+
+document
+.querySelectorAll(".dropdown")
+.forEach(menu => {
+
+if(menu !== dropdown){
+
+menu.classList.remove("aberto");
+
+}
+
+});
+
+
+dropdown.classList.toggle("aberto");
+
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+atualizarCarrinho();
 
 </script>
 
