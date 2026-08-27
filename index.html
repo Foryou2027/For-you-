@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For You by Dé | Beleza do seu jeito</title>
+<title>For You by Dé | Maquiagem & Beleza</title>
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 :root{
@@ -17,9 +16,8 @@
     --rose-dark:#8d5362;
     --brown:#302628;
     --gold:#b89562;
-    --white:#ffffff;
+    --white:#fff;
     --line:#e8ded9;
-    --text:#51474a;
 }
 
 *{
@@ -43,14 +41,11 @@ a{
     color:inherit;
 }
 
-button,
-input{
+button,input{
     font-family:inherit;
 }
 
-/* =========================
-   BARRA SUPERIOR
-========================= */
+/* TOPO */
 
 .top{
     background:var(--brown);
@@ -62,12 +57,10 @@ input{
     text-transform:uppercase;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
-    background:rgba(251,247,243,.97);
+    background:rgba(251,247,243,.98);
     border-bottom:1px solid var(--line);
     position:sticky;
     top:0;
@@ -77,7 +70,7 @@ header{
 .header{
     width:min(1250px,92%);
     margin:auto;
-    min-height:92px;
+    min-height:90px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -99,7 +92,6 @@ header{
     font-size:9px;
     letter-spacing:3px;
     text-transform:uppercase;
-    margin-top:2px;
 }
 
 .search{
@@ -114,22 +106,20 @@ header{
     border:1px solid var(--line);
     background:white;
     border-radius:30px;
-    padding:0 48px 0 20px;
+    padding:0 50px 0 20px;
     outline:none;
-    color:var(--brown);
 }
 
 .search button{
     position:absolute;
     right:5px;
     top:5px;
-    border:0;
     width:33px;
     height:33px;
+    border:0;
     border-radius:50%;
     background:var(--brown);
     color:white;
-    cursor:pointer;
 }
 
 .icons{
@@ -147,8 +137,8 @@ header{
     position:absolute;
     top:-9px;
     right:-10px;
-    width:17px;
-    height:17px;
+    width:18px;
+    height:18px;
     border-radius:50%;
     background:var(--rose);
     color:white;
@@ -158,9 +148,7 @@ header{
     justify-content:center;
 }
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu{
     border-top:1px solid var(--line);
@@ -181,31 +169,24 @@ header{
     font-weight:600;
     letter-spacing:1px;
     text-transform:uppercase;
-    transition:.2s;
 }
 
 .menu a:hover{
     color:var(--rose-dark);
 }
 
-.menu .special{
-    color:var(--rose-dark);
-}
-
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero{
-    min-height:650px;
+    min-height:600px;
     background:
-        radial-gradient(circle at 75% 35%, #ead3d5 0%, transparent 27%),
-        radial-gradient(circle at 82% 70%, #dcc0bd 0%, transparent 23%),
+        radial-gradient(circle at 75% 35%,#ead3d5 0%,transparent 27%),
+        radial-gradient(circle at 82% 70%,#dcc0bd 0%,transparent 23%),
         linear-gradient(110deg,#fbf7f3 0%,#f6e9e4 55%,#ead4d1 100%);
     display:flex;
     align-items:center;
-    overflow:hidden;
     position:relative;
+    overflow:hidden;
 }
 
 .hero:after{
@@ -216,7 +197,7 @@ header{
     border:1px solid rgba(184,149,98,.4);
     border-radius:50%;
     right:7%;
-    top:80px;
+    top:70px;
 }
 
 .hero-inner{
@@ -227,7 +208,7 @@ header{
 }
 
 .hero-text{
-    max-width:610px;
+    max-width:620px;
 }
 
 .eyebrow{
@@ -236,7 +217,7 @@ header{
     letter-spacing:3px;
     text-transform:uppercase;
     font-weight:700;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
 
 .hero h1{
@@ -253,11 +234,11 @@ header{
 }
 
 .hero-description{
-    max-width:510px;
-    color:var(--text);
+    color:#51474a;
     font-size:16px;
     line-height:1.8;
-    margin-bottom:34px;
+    max-width:510px;
+    margin-bottom:30px;
 }
 
 .buttons{
@@ -274,15 +255,15 @@ header{
     padding:0 29px;
     background:var(--brown);
     color:white;
+    border:0;
     font-size:11px;
     letter-spacing:1.5px;
     font-weight:700;
-    transition:.25s;
+    cursor:pointer;
 }
 
 .btn:hover{
     background:var(--rose-dark);
-    transform:translateY(-2px);
 }
 
 .btn-outline{
@@ -291,19 +272,12 @@ header{
     color:var(--brown);
 }
 
-.btn-outline:hover{
-    color:white;
-}
-
-/* =========================
-   FRASE
-========================= */
+/* FRASE */
 
 .brand-statement{
     background:white;
     padding:65px 20px;
     text-align:center;
-    border-bottom:1px solid var(--line);
 }
 
 .brand-statement small{
@@ -325,9 +299,7 @@ header{
     font-size:14px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* GERAL */
 
 .container{
     width:min(1150px,92%);
@@ -363,9 +335,7 @@ header{
     font-size:13px;
 }
 
-/* =========================
-   CATEGORIAS
-========================= */
+/* CATEGORIAS */
 
 .categories{
     display:grid;
@@ -381,18 +351,7 @@ header{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    position:relative;
-    overflow:hidden;
     transition:.25s;
-}
-
-.category:before{
-    content:"";
-    position:absolute;
-    width:105px;
-    height:105px;
-    border:1px solid var(--nude);
-    border-radius:50%;
 }
 
 .category:hover{
@@ -402,14 +361,10 @@ header{
 
 .category-symbol{
     font-size:32px;
-    position:relative;
-    z-index:2;
     margin-bottom:20px;
 }
 
 .category-name{
-    position:relative;
-    z-index:2;
     font-family:"Playfair Display",serif;
     font-size:18px;
 }
@@ -420,9 +375,7 @@ header{
     margin-top:5px;
 }
 
-/* =========================
-   ACHADINHO
-========================= */
+/* ACHADINHO */
 
 .weekly{
     background:#f2e4df;
@@ -438,7 +391,6 @@ header{
 
 .weekly-art{
     position:relative;
-    overflow:hidden;
     background:
         radial-gradient(circle at 50% 45%,#e9c8c7 0%,transparent 30%),
         linear-gradient(135deg,#ead5d0,#d9b5b2);
@@ -505,7 +457,6 @@ header{
     font-size:44px;
     line-height:1.05;
     font-weight:500;
-    margin-bottom:18px;
 }
 
 .weekly-content p{
@@ -513,7 +464,7 @@ header{
     line-height:1.8;
     font-size:14px;
     max-width:420px;
-    margin-bottom:22px;
+    margin:18px 0;
 }
 
 .price-old{
@@ -529,9 +480,7 @@ header{
     margin:4px 0 25px;
 }
 
-/* =========================
-   PRODUTOS
-========================= */
+/* PRODUTOS */
 
 .product-grid{
     display:grid;
@@ -557,7 +506,6 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
 }
 
 .product-visual:after{
@@ -582,7 +530,6 @@ header{
 .makeup-item.lipstick{
     width:48px;
     height:140px;
-    border-radius:7px 7px 13px 13px;
 }
 
 .makeup-item.pot{
@@ -678,7 +625,6 @@ header{
     font-size:10px;
     font-weight:700;
     letter-spacing:1px;
-    transition:.2s;
 }
 
 .buy:hover{
@@ -686,9 +632,7 @@ header{
     color:white;
 }
 
-/* =========================
-   MANIFESTO
-========================= */
+/* MANIFESTO */
 
 .manifesto{
     background:var(--brown);
@@ -709,7 +653,6 @@ header{
     font-weight:500;
     max-width:800px;
     margin:18px auto 45px;
-    line-height:1.1;
 }
 
 .steps{
@@ -718,10 +661,6 @@ header{
     align-items:center;
     gap:30px;
     flex-wrap:wrap;
-}
-
-.step{
-    text-align:center;
 }
 
 .step-number{
@@ -746,9 +685,7 @@ header{
     color:#9d858b;
 }
 
-/* =========================
-   OFERTAS
-========================= */
+/* OFERTAS */
 
 .offers{
     background:#f6ece8;
@@ -764,17 +701,7 @@ header{
     background:white;
     padding:35px;
     min-height:190px;
-    position:relative;
     border:1px solid var(--line);
-}
-
-.offer-number{
-    position:absolute;
-    right:25px;
-    top:20px;
-    font-family:"Playfair Display",serif;
-    color:#eee1dd;
-    font-size:45px;
 }
 
 .offer h3{
@@ -789,9 +716,7 @@ header{
     font-size:13px;
 }
 
-/* =========================
-   NEWSLETTER
-========================= */
+/* NEWSLETTER */
 
 .newsletter{
     background:white;
@@ -833,12 +758,9 @@ header{
     font-size:10px;
     font-weight:700;
     letter-spacing:1px;
-    cursor:pointer;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
     background:#241d20;
@@ -881,58 +803,162 @@ footer{
     margin-bottom:12px;
 }
 
-.footer-column a:hover{
-    color:white;
-}
-
-.social{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.social a{
-    width:35px;
-    height:35px;
-    border:1px solid #554b4f;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.bottom{
-    border-top:1px solid #40373a;
-    padding:20px;
-    text-align:center;
-    color:#81777a;
-    font-size:10px;
-}
-
 /* =========================
-   WHATSAPP
+   CARRINHO
 ========================= */
 
-.whatsapp{
+.cart-overlay{
     position:fixed;
-    right:20px;
-    bottom:20px;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#5d8b68;
-    color:white;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:500;
+    display:none;
+}
+
+.cart-overlay.active{
+    display:block;
+}
+
+.cart{
+    position:fixed;
+    right:0;
+    top:0;
+    width:min(430px,100%);
+    height:100vh;
+    background:white;
+    z-index:501;
+    transform:translateX(100%);
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+}
+
+.cart.active{
+    transform:translateX(0);
+}
+
+.cart-header{
+    padding:25px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.cart-header h2{
+    font-family:"Playfair Display",serif;
+    font-size:27px;
+    font-weight:500;
+}
+
+.close-cart{
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.cart-items{
+    flex:1;
+    overflow:auto;
+    padding:20px;
+}
+
+.empty-cart{
+    text-align:center;
+    color:#888;
+    padding:70px 20px;
+}
+
+.cart-item{
+    display:flex;
+    gap:14px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.cart-item-image{
+    width:75px;
+    height:85px;
+    background:linear-gradient(145deg,#f7e9e7,#d9b5b2);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
-    z-index:200;
-    box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+.cart-item-image div{
+    width:30px;
+    height:55px;
+    background:linear-gradient(145deg,#f8f1ed,#b97988);
+    border-radius:5px 5px 10px 10px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-name{
+    font-family:"Playfair Display",serif;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.cart-item-price{
+    color:var(--rose-dark);
+    font-weight:700;
+    font-size:14px;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+.quantity button{
+    width:25px;
+    height:25px;
+    border:1px solid var(--line);
+    background:white;
+    cursor:pointer;
+}
+
+.remove{
+    border:0;
+    background:none;
+    color:#999;
+    font-size:11px;
+    margin-top:8px;
+    cursor:pointer;
+}
+
+.cart-footer{
+    border-top:1px solid var(--line);
+    padding:22px;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.checkout{
+    width:100%;
+    min-height:50px;
+    border:0;
+    background:var(--brown);
+    color:white;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* RESPONSIVO */
 
 @media(max-width:1000px){
 
@@ -964,7 +990,6 @@ footer{
 @media(max-width:650px){
 
     .header{
-        min-height:75px;
         flex-wrap:wrap;
         padding:13px 0;
     }
@@ -987,13 +1012,7 @@ footer{
     }
 
     .hero{
-        min-height:610px;
-    }
-
-    .hero:after{
-        width:330px;
-        height:330px;
-        right:-80px;
+        min-height:600px;
     }
 
     .hero h1{
@@ -1004,10 +1023,6 @@ footer{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .category{
-        min-height:160px;
-    }
-
     .product-grid{
         grid-template-columns:1fr 1fr;
         gap:12px;
@@ -1015,14 +1030,6 @@ footer{
 
     .product-visual{
         height:220px;
-    }
-
-    .product-info{
-        padding:13px;
-    }
-
-    .product-name{
-        font-size:16px;
     }
 
     .weekly-content{
@@ -1035,7 +1042,6 @@ footer{
 
     .footer-grid{
         grid-template-columns:1fr;
-        gap:30px;
     }
 
     .newsletter-form{
@@ -1048,1084 +1054,995 @@ footer{
         height:48px;
     }
 
-    .steps{
-        gap:18px;
-    }
-
     .arrow{
         display:none;
     }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="top">
-    ✦ Envio para todo o Brasil • novidades toda semana ✦
+✦ Envio para todo o Brasil • novidades toda semana ✦
 </div>
-
 
 <header>
 
-    <div class="header">
+<div class="header">
 
-        <a href="#" class="logo">
+<a href="#" class="logo">
+<div class="logo-main">For You by Dé</div>
+<div class="logo-sub">maquiagem & beleza</div>
+</a>
 
-            <div class="logo-main">
-                For You by Dé
-            </div>
+<div class="search">
+<input type="text" placeholder="Buscar maquiagem, produto ou marca...">
+<button>⌕</button>
+</div>
 
-            <div class="logo-sub">
-                maquiagem & beleza
-            </div>
+<div class="icons">
 
-        </a>
+<div class="icon">
+♡
+</div>
 
+<div class="icon" onclick="abrirCarrinho()">
+🛍️
+<span class="cart-count" id="cartCount">0</span>
+</div>
 
-        <div class="search">
+</div>
 
-            <input
-                type="text"
-                placeholder="Buscar maquiagem, produto ou marca..."
-            >
+</div>
 
-            <button>
-                ⌕
-            </button>
+<div class="menu">
 
-        </div>
+<div class="menu-inner">
 
+<a href="#">Início</a>
+<a href="#categorias">Categorias</a>
+<a href="#maquiagem">Maquiagem</a>
+<a href="#achadinho">Achadinho da Semana</a>
+<a href="#novidades">Novidades</a>
+<a href="#ofertas">Ofertas</a>
 
-        <div class="icons">
+</div>
 
-            <div class="icon">
-                ♡
-            </div>
-
-            <div class="icon">
-
-                🛍️
-
-                <span class="cart-count">
-                    0
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="menu">
-
-        <div class="menu-inner">
-
-            <a href="#">Início</a>
-
-            <a href="#categorias">
-                Categorias
-            </a>
-
-            <a href="#maquiagem">
-                Maquiagem
-            </a>
-
-            <a href="#achadinho">
-                Achadinho da Semana
-            </a>
-
-            <a href="#novidades">
-                Novidades
-            </a>
-
-            <a href="#ofertas" class="special">
-                Ofertas
-            </a>
-
-        </div>
-
-    </div>
+</div>
 
 </header>
 
 
-<!-- HERO -->
-
 <section class="hero">
 
-    <div class="hero-inner">
+<div class="hero-inner">
 
-        <div class="hero-text">
+<div class="hero-text">
 
-            <div class="eyebrow">
-                Bem-vinda à For You by Dé
-            </div>
+<div class="eyebrow">
+Bem-vinda à For You by Dé
+</div>
 
-            <h1>
-                Beleza do seu jeito,
-                <span>escolhida por nós.</span>
-            </h1>
+<h1>
+Beleza do seu jeito,
+<span>escolhida por nós.</span>
+</h1>
 
-            <p class="hero-description">
+<p class="hero-description">
+Maquiagens, beleza e aqueles achadinhos
+que fazem a gente pensar:
+“isso precisa estar na loja”.
+</p>
 
-                Maquiagens, beleza e aqueles achadinhos
-                que fazem a gente pensar:
-                “isso precisa estar na loja”.
+<div class="buttons">
 
-            </p>
+<a href="#maquiagem" class="btn">
+COMPRAR AGORA
+</a>
 
-            <div class="buttons">
+<a href="#achadinho" class="btn btn-outline">
+VER ACHADINHO
+</a>
 
-                <a href="#maquiagem" class="btn">
-                    COMPRAR AGORA
-                </a>
+</div>
 
-                <a href="#achadinho" class="btn btn-outline">
-                    VER ACHADINHO
-                </a>
+</div>
 
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- FRASE DA MARCA -->
 
 <section class="brand-statement">
 
-    <small>
-        nossa filosofia
-    </small>
+<small>
+nossa filosofia
+</small>
 
-    <h2>
-        “Testamos, gostamos e colocamos na loja.”
-    </h2>
+<h2>
+“Testamos, gostamos e colocamos na loja.”
+</h2>
 
-    <p>
-        Porque não basta ser bonito. Tem que fazer sentido para você.
-    </p>
+<p>
+Porque não basta ser bonito. Tem que fazer sentido para você.
+</p>
 
 </section>
 
-
-<!-- CATEGORIAS -->
 
 <section class="section" id="categorias">
 
-    <div class="container">
+<div class="container">
 
-        <div class="section-head">
+<div class="section-head">
 
-            <small>
-                explore
-            </small>
+<small>explore</small>
 
-            <h2>
-                Encontre seus favoritos
-            </h2>
+<h2>
+Encontre seus favoritos
+</h2>
 
-            <p>
-                Tudo para criar sua maquiagem do seu jeito.
-            </p>
+<p>
+Tudo para criar sua maquiagem do seu jeito.
+</p>
 
-        </div>
+</div>
 
+<div class="categories">
 
-        <div class="categories">
+<a href="#" class="category">
+<div class="category-symbol">♡</div>
+<div class="category-name">Lábios</div>
+<div class="category-desc">Batons • Gloss • Lip Tint</div>
+</a>
 
-            <a href="#" class="category">
+<a href="#" class="category">
+<div class="category-symbol">✦</div>
+<div class="category-name">Pele</div>
+<div class="category-desc">Base • Corretivo • Pó</div>
+</a>
 
-                <div class="category-symbol">
-                    ♡
-                </div>
+<a href="#" class="category">
+<div class="category-symbol">◌</div>
+<div class="category-name">Blush</div>
+<div class="category-desc">Cor • Glow • Natural</div>
+</a>
 
-                <div class="category-name">
-                    Lábios
-                </div>
+<a href="#" class="category">
+<div class="category-symbol">◇</div>
+<div class="category-name">Olhos</div>
+<div class="category-desc">Máscara • Delineador</div>
+</a>
 
-                <div class="category-desc">
-                    Batons • Gloss • Lip Tint
-                </div>
+<a href="#" class="category">
+<div class="category-symbol">✧</div>
+<div class="category-name">Iluminador</div>
+<div class="category-desc">Glow • Brilho</div>
+</a>
 
-            </a>
+<a href="#" class="category">
+<div class="category-symbol">♢</div>
+<div class="category-name">Acessórios</div>
+<div class="category-desc">Pincéis • Esponjas</div>
+</a>
 
+</div>
 
-            <a href="#" class="category">
-
-                <div class="category-symbol">
-                    ✦
-                </div>
-
-                <div class="category-name">
-                    Pele
-                </div>
-
-                <div class="category-desc">
-                    Base • Corretivo • Pó
-                </div>
-
-            </a>
-
-
-            <a href="#" class="category">
-
-                <div class="category-symbol">
-                    ◌
-                </div>
-
-                <div class="category-name">
-                    Blush
-                </div>
-
-                <div class="category-desc">
-                    Cor • Glow • Natural
-                </div>
-
-            </a>
-
-
-            <a href="#" class="category">
-
-                <div class="category-symbol">
-                    ◇
-                </div>
-
-                <div class="category-name">
-                    Olhos
-                </div>
-
-                <div class="category-desc">
-                    Máscara • Delineador
-                </div>
-
-            </a>
-
-
-            <a href="#" class="category">
-
-                <div class="category-symbol">
-                    ✧
-                </div>
-
-                <div class="category-name">
-                    Iluminador
-                </div>
-
-                <div class="category-desc">
-                    Glow • Brilho
-                </div>
-
-            </a>
-
-
-            <a href="#" class="category">
-
-                <div class="category-symbol">
-                    ♢
-                </div>
-
-                <div class="category-name">
-                    Acessórios
-                </div>
-
-                <div class="category-desc">
-                    Pincéis • Esponjas
-                </div>
-
-            </a>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- ACHADINHO -->
 
 <section class="section weekly" id="achadinho">
 
-    <div class="container">
+<div class="container">
 
-        <div class="weekly-box">
+<div class="weekly-box">
 
-            <div class="weekly-art">
+<div class="weekly-art">
 
-                <div class="product-shape"></div>
+<div class="product-shape"></div>
+<div class="product-cap"></div>
 
-                <div class="product-cap"></div>
+</div>
 
-            </div>
+<div class="weekly-content">
 
+<div class="weekly-label">
+✦ ACHADINHO DA SEMANA ✦
+</div>
 
-            <div class="weekly-content">
+<h2>
+O queridinho da vez.
+</h2>
 
-                <div class="weekly-label">
-                    ✦ ACHADINHO DA SEMANA ✦
-                </div>
+<p>
+Toda semana, um produto escolhido especialmente por nós.
+Testamos, gostamos e colocamos na loja.
+</p>
 
-                <h2>
-                    O queridinho
-                    da vez.
-                </h2>
+<div class="price-old">
+De R$ 29,90
+</div>
 
-                <p>
+<div class="price">
+R$ 19,90
+</div>
 
-                    Toda semana, um produto escolhido
-                    especialmente por nós.
+<button class="btn" onclick="adicionarProduto('Achadinho da Semana',19.90)">
+QUERO MEU ACHADINHO
+</button>
 
-                    Testamos, gostamos e colocamos na loja.
+</div>
 
-                </p>
+</div>
 
-                <div class="price-old">
-                    De R$ 29,90
-                </div>
-
-                <div class="price">
-                    R$ 19,90
-                </div>
-
-                <a href="#" class="btn">
-                    QUERO MEU ACHADINHO
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- PRODUTOS -->
 
 <section class="section" id="maquiagem">
 
-    <div class="container">
+<div class="container">
 
-        <div class="section-head">
+<div class="section-head">
 
-            <small>
-                seleção for you
-            </small>
+<small>seleção for you</small>
 
-            <h2>
-                Os queridinhos
-            </h2>
+<h2>
+Os queridinhos
+</h2>
 
-            <p>
-                Produtos que ganharam nosso selo de aprovação.
-            </p>
+<p>
+Produtos que ganharam nosso selo de aprovação.
+</p>
 
-        </div>
+</div>
 
 
-        <div class="product-grid">
+<div class="product-grid">
 
 
-            <div class="product">
+<div class="product">
 
-                <div class="product-visual">
+<div class="product-visual">
 
-                    <span class="tag">
-                        mais vendido
-                    </span>
+<span class="tag">mais vendido</span>
+<span class="heart">♡</span>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+<div class="makeup-item lipstick"></div>
 
-                    <div class="makeup-item lipstick"></div>
+</div>
 
-                </div>
+<div class="product-info">
 
-                <div class="product-info">
+<div class="product-brand">For You</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<div class="product-name">
+Batom acabamento cremoso
+</div>
 
-                    <div class="product-name">
-                        Batom acabamento cremoso
-                    </div>
+<div class="stars">
+★★★★★
+</div>
 
-                    <div class="stars">
-                        ★★★★★
-                    </div>
+<div class="product-price">
+R$ 15,00
+</div>
 
-                    <div class="product-price">
-                        R$ 15,00
-                    </div>
+<button class="buy"
+onclick="adicionarProduto('Batom acabamento cremoso',15)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <button class="buy">
-                        ADICIONAR AO CARRINHO
-                    </button>
+</div>
 
-                </div>
+</div>
 
-            </div>
 
+<div class="product">
 
-            <div class="product">
+<div class="product-visual">
 
-                <div class="product-visual">
+<span class="tag">queridinho</span>
+<span class="heart">♡</span>
 
-                    <span class="tag">
-                        queridinho
-                    </span>
+<div class="makeup-item"></div>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+</div>
 
-                    <div class="makeup-item"></div>
+<div class="product-info">
 
-                </div>
+<div class="product-brand">For You</div>
 
-                <div class="product-info">
+<div class="product-name">
+Gloss brilho intenso
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<div class="stars">
+★★★★★
+</div>
 
-                    <div class="product-name">
-                        Gloss brilho intenso
-                    </div>
+<div class="product-price">
+R$ 12,00
+</div>
 
-                    <div class="stars">
-                        ★★★★★
-                    </div>
+<button class="buy"
+onclick="adicionarProduto('Gloss brilho intenso',12)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <div class="product-price">
-                        R$ 12,00
-                    </div>
+</div>
 
-                    <button class="buy">
-                        ADICIONAR AO CARRINHO
-                    </button>
+</div>
 
-                </div>
 
-            </div>
+<div class="product">
 
+<div class="product-visual">
 
-            <div class="product">
+<span class="tag">novo</span>
+<span class="heart">♡</span>
 
-                <div class="product-visual">
+<div class="makeup-item pot"></div>
 
-                    <span class="tag">
-                        novo
-                    </span>
+</div>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+<div class="product-info">
 
-                    <div class="makeup-item pot"></div>
+<div class="product-brand">For You</div>
 
-                </div>
+<div class="product-name">
+Blush efeito natural
+</div>
 
-                <div class="product-info">
+<div class="stars">
+★★★★★
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<div class="product-price">
+R$ 20,00
+</div>
 
-                    <div class="product-name">
-                        Blush efeito natural
-                    </div>
+<button class="buy"
+onclick="adicionarProduto('Blush efeito natural',20)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <div class="stars">
-                        ★★★★★
-                    </div>
+</div>
 
-                    <div class="product-price">
-                        R$ 20,00
-                    </div>
+</div>
 
-                    <button class="buy">
-                        ADICIONAR AO CARRINHO
-                    </button>
 
-                </div>
+<div class="product">
 
-            </div>
+<div class="product-visual">
 
+<span class="tag">favorito</span>
+<span class="heart">♡</span>
 
-            <div class="product">
+<div class="makeup-item palette"></div>
 
-                <div class="product-visual">
+</div>
 
-                    <span class="tag">
-                        favorito
-                    </span>
+<div class="product-info">
 
-                    <span class="heart">
-                        ♡
-                    </span>
+<div class="product-brand">For You</div>
 
-                    <div class="makeup-item palette"></div>
+<div class="product-name">
+Paleta de sombras
+</div>
 
-                </div>
+<div class="stars">
+★★★★★
+</div>
 
-                <div class="product-info">
+<div class="product-price">
+R$ 39,90
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<button class="buy"
+onclick="adicionarProduto('Paleta de sombras',39.90)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <div class="product-name">
-                        Paleta de sombras
-                    </div>
+</div>
 
-                    <div class="stars">
-                        ★★★★★
-                    </div>
+</div>
 
-                    <div class="product-price">
-                        R$ 39,90
-                    </div>
+</div>
 
-                    <button class="buy">
-                        ADICIONAR AO CARRINHO
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- MANIFESTO -->
 
 <section class="manifesto">
 
-    <small>
-        o jeito for you
-    </small>
+<small>
+o jeito for you
+</small>
 
-    <h2>
-        Não colocamos qualquer produto na loja.
-    </h2>
+<h2>
+Não colocamos qualquer produto na loja.
+</h2>
 
+<div class="steps">
 
-    <div class="steps">
+<div class="step">
+<div class="step-number">01</div>
+<span>Testamos</span>
+</div>
 
-        <div class="step">
+<div class="arrow">→</div>
 
-            <div class="step-number">
-                01
-            </div>
+<div class="step">
+<div class="step-number">02</div>
+<span>Gostamos</span>
+</div>
 
-            <span>
-                Testamos
-            </span>
+<div class="arrow">→</div>
 
-        </div>
+<div class="step">
+<div class="step-number">03</div>
+<span>Selecionamos</span>
+</div>
 
-        <div class="arrow">
-            →
-        </div>
+<div class="arrow">→</div>
 
-        <div class="step">
+<div class="step">
+<div class="step-number">04</div>
+<span>Colocamos na loja</span>
+</div>
 
-            <div class="step-number">
-                02
-            </div>
-
-            <span>
-                Gostamos
-            </span>
-
-        </div>
-
-        <div class="arrow">
-            →
-        </div>
-
-        <div class="step">
-
-            <div class="step-number">
-                03
-            </div>
-
-            <span>
-                Selecionamos
-            </span>
-
-        </div>
-
-        <div class="arrow">
-            →
-        </div>
-
-        <div class="step">
-
-            <div class="step-number">
-                04
-            </div>
-
-            <span>
-                Colocamos na loja
-            </span>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- NOVIDADES -->
 
 <section class="section" id="novidades">
 
-    <div class="container">
+<div class="container">
 
-        <div class="section-head">
+<div class="section-head">
 
-            <small>
-                acabou de chegar
-            </small>
+<small>acabou de chegar</small>
 
-            <h2>
-                Novidades
-            </h2>
+<h2>
+Novidades
+</h2>
 
-            <p>
-                Descobertas novas para você.
-            </p>
+<p>
+Descobertas novas para você.
+</p>
 
-        </div>
+</div>
 
+<div class="product-grid">
 
-        <div class="product-grid">
 
+<div class="product">
 
-            <div class="product">
+<div class="product-visual">
+<span class="tag">novo</span>
+<div class="makeup-item palette"></div>
+</div>
 
-                <div class="product-visual">
+<div class="product-info">
 
-                    <span class="tag">
-                        novo
-                    </span>
+<div class="product-brand">For You</div>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+<div class="product-name">
+Paleta Glow
+</div>
 
-                    <div class="makeup-item palette"></div>
+<div class="product-price">
+R$ 39,90
+</div>
 
-                </div>
+<button class="buy"
+onclick="adicionarProduto('Paleta Glow',39.90)">
+ADICIONAR AO CARRINHO
+</button>
 
-                <div class="product-info">
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+</div>
 
-                    <div class="product-name">
-                        Paleta Glow
-                    </div>
 
-                    <div class="product-price">
-                        R$ 39,90
-                    </div>
+<div class="product">
 
-                    <button class="buy">
-                        VER PRODUTO
-                    </button>
+<div class="product-visual">
+<span class="tag">novo</span>
+<div class="makeup-item pot"></div>
+</div>
 
-                </div>
+<div class="product-info">
 
-            </div>
+<div class="product-brand">For You</div>
 
+<div class="product-name">
+Blush Rosé
+</div>
 
-            <div class="product">
+<div class="product-price">
+R$ 22,90
+</div>
 
-                <div class="product-visual">
+<button class="buy"
+onclick="adicionarProduto('Blush Rosé',22.90)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <span class="tag">
-                        novo
-                    </span>
+</div>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+</div>
 
-                    <div class="makeup-item pot"></div>
 
-                </div>
+<div class="product">
 
-                <div class="product-info">
+<div class="product-visual">
+<span class="tag">novo</span>
+<div class="makeup-item lipstick"></div>
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<div class="product-info">
 
-                    <div class="product-name">
-                        Blush Rosé
-                    </div>
+<div class="product-brand">For You</div>
 
-                    <div class="product-price">
-                        R$ 22,90
-                    </div>
+<div class="product-name">
+Lip Tint
+</div>
 
-                    <button class="buy">
-                        VER PRODUTO
-                    </button>
+<div class="product-price">
+R$ 18,90
+</div>
 
-                </div>
+<button class="buy"
+onclick="adicionarProduto('Lip Tint',18.90)">
+ADICIONAR AO CARRINHO
+</button>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="product">
 
-                <div class="product-visual">
+<div class="product">
 
-                    <span class="tag">
-                        novo
-                    </span>
+<div class="product-visual">
+<span class="tag">novo</span>
+<div class="makeup-item"></div>
+</div>
 
-                    <span class="heart">
-                        ♡
-                    </span>
+<div class="product-info">
 
-                    <div class="makeup-item lipstick"></div>
+<div class="product-brand">For You</div>
 
-                </div>
+<div class="product-name">
+Gloss Crystal
+</div>
 
-                <div class="product-info">
+<div class="product-price">
+R$ 16,90
+</div>
 
-                    <div class="product-brand">
-                        For You
-                    </div>
+<button class="buy"
+onclick="adicionarProduto('Gloss Crystal',16.90)">
+ADICIONAR AO CARRINHO
+</button>
 
-                    <div class="product-name">
-                        Lip Tint
-                    </div>
+</div>
 
-                    <div class="product-price">
-                        R$ 18,90
-                    </div>
+</div>
 
-                    <button class="buy">
-                        VER PRODUTO
-                    </button>
+</div>
 
-                </div>
-
-            </div>
-
-
-            <div class="product">
-
-                <div class="product-visual">
-
-                    <span class="tag">
-                        novo
-                    </span>
-
-                    <span class="heart">
-                        ♡
-                    </span>
-
-                    <div class="makeup-item"></div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-brand">
-                        For You
-                    </div>
-
-                    <div class="product-name">
-                        Gloss Crystal
-                    </div>
-
-                    <div class="product-price">
-                        R$ 16,90
-                    </div>
-
-                    <button class="buy">
-                        VER PRODUTO
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- OFERTAS -->
 
 <section class="section offers" id="ofertas">
 
-    <div class="container">
+<div class="container">
 
-        <div class="section-head">
+<div class="section-head">
 
-            <small>
-                aproveite
-            </small>
+<small>aproveite</small>
 
-            <h2>
-                Ofertas especiais
-            </h2>
+<h2>
+Ofertas especiais
+</h2>
 
-            <p>
-                Porque encontrar um achadinho bom e barato é tudo.
-            </p>
+<p>
+Porque encontrar um achadinho bom e barato é tudo.
+</p>
 
-        </div>
+</div>
 
+<div class="offer-grid">
 
-        <div class="offer-grid">
+<div class="offer">
+<h3>
+Produtos a partir de R$ 10
+</h3>
 
-            <div class="offer">
+<p>
+Seleção de maquiagens e acessórios com preços especiais.
+</p>
+</div>
 
-                <div class="offer-number">
-                    01
-                </div>
+<div class="offer">
+<h3>
+Combos For You
+</h3>
 
-                <h3>
-                    Produtos a partir de R$ 10
-                </h3>
+<p>
+Combine produtos e aproveite condições especiais.
+</p>
+</div>
 
-                <p>
-                    Seleção de maquiagens e acessórios
-                    com preços especiais.
-                </p>
+<div class="offer">
+<h3>
+Achadinhos
+</h3>
 
-            </div>
+<p>
+Produtos que descobrimos e queremos compartilhar com você.
+</p>
+</div>
 
+</div>
 
-            <div class="offer">
-
-                <div class="offer-number">
-                    02
-                </div>
-
-                <h3>
-                    Combos For You
-                </h3>
-
-                <p>
-                    Combine produtos e aproveite
-                    condições especiais.
-                </p>
-
-            </div>
-
-
-            <div class="offer">
-
-                <div class="offer-number">
-                    03
-                </div>
-
-                <h3>
-                    Achadinhos
-                </h3>
-
-                <p>
-                    Produtos que descobrimos e
-                    queremos compartilhar com você.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<!-- NEWSLETTER -->
 
 <section class="newsletter">
 
-    <h2>
-        Vem fazer parte da For You. ✨
-    </h2>
+<h2>
+Vem fazer parte da For You. ✨
+</h2>
 
-    <p>
-        Receba novidades, lançamentos e nossos próximos achadinhos.
-    </p>
+<p>
+Receba novidades, lançamentos e nossos próximos achadinhos.
+</p>
 
-    <form class="newsletter-form">
+<form class="newsletter-form">
 
-        <input
-            type="email"
-            placeholder="Digite seu melhor e-mail"
-        >
+<input type="email" placeholder="Digite seu melhor e-mail">
 
-        <button type="submit">
-            QUERO RECEBER
-        </button>
+<button type="submit">
+QUERO RECEBER
+</button>
 
-    </form>
+</form>
 
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
-    <div class="container footer-grid">
+<div class="container footer-grid">
+
+<div>
+
+<div class="footer-logo">
+For You by Dé
+</div>
+
+<div class="footer-text">
+Testamos, gostamos e colocamos na loja. ✨
+<br><br>
+Maquiagem, beleza e achadinhos escolhidos especialmente para você.
+</div>
+
+</div>
 
 
-        <div>
+<div class="footer-column">
 
-            <div class="footer-logo">
-                For You by Dé
-            </div>
+<h3>Loja</h3>
 
-            <div class="footer-text">
+<a href="#maquiagem">Maquiagem</a>
+<a href="#categorias">Categorias</a>
+<a href="#novidades">Novidades</a>
+<a href="#ofertas">Ofertas</a>
 
-                Testamos, gostamos e colocamos
-                na loja. ✨
-
-                <br><br>
-
-                Maquiagem, beleza e achadinhos
-                escolhidos especialmente para você.
-
-            </div>
+</div>
 
 
-            <div class="social">
+<div class="footer-column">
 
-                <a href="#">
-                    ◎
-                </a>
+<h3>Atendimento</h3>
 
-                <a href="#">
-                    ♪
-                </a>
+<a href="#">Fale conosco</a>
+<a href="#">WhatsApp</a>
+<a href="#">Trocas e devoluções</a>
+<a href="#">Dúvidas frequentes</a>
 
-                <a href="#">
-                    ♡
-                </a>
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="footer-column">
+<div class="footer-column">
 
-            <h3>
-                Loja
-            </h3>
+<h3>Institucional</h3>
 
-            <a href="#maquiagem">
-                Maquiagem
-            </a>
+<a href="#">Sobre nós</a>
+<a href="#">Privacidade</a>
+<a href="#">Termos de uso</a>
+<a href="#">Pagamento</a>
 
-            <a href="#categorias">
-                Categorias
-            </a>
+</div>
 
-            <a href="#novidades">
-                Novidades
-            </a>
-
-            <a href="#ofertas">
-                Ofertas
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Atendimento
-            </h3>
-
-            <a href="#">
-                Fale conosco
-            </a>
-
-            <a href="#">
-                WhatsApp
-            </a>
-
-            <a href="#">
-                Trocas e devoluções
-            </a>
-
-            <a href="#">
-                Dúvidas frequentes
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Institucional
-            </h3>
-
-            <a href="#">
-                Sobre nós
-            </a>
-
-            <a href="#">
-                Privacidade
-            </a>
-
-            <a href="#">
-                Termos de uso
-            </a>
-
-            <a href="#">
-                Pagamento
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="bottom">
-
-        © 2026 For You by Dé • Todos os direitos reservados.
-
-    </div>
+</div>
 
 </footer>
 
 
-<a href="#" class="whatsapp">
-    ☎
-</a>
+<!-- CARRINHO -->
 
+<div class="cart-overlay" id="cartOverlay" onclick="fecharCarrinho()"></div>
+
+<div class="cart" id="cart">
+
+<div class="cart-header">
+
+<h2>
+Seu carrinho
+</h2>
+
+<button class="close-cart" onclick="fecharCarrinho()">
+×
+</button>
+
+</div>
+
+
+<div class="cart-items" id="cartItems">
+
+<div class="empty-cart">
+Seu carrinho está vazio. 🛍️
+</div>
+
+</div>
+
+
+<div class="cart-footer">
+
+<div class="cart-total">
+
+<span>
+Total
+</span>
+
+<span id="cartTotal">
+R$ 0,00
+</span>
+
+</div>
+
+<button class="checkout" onclick="finalizarPedido()">
+FINALIZAR PEDIDO
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+let carrinho = JSON.parse(localStorage.getItem("forYouCarrinho")) || [];
+
+function salvarCarrinho(){
+
+localStorage.setItem(
+"forYouCarrinho",
+JSON.stringify(carrinho)
+);
+
+}
+
+function adicionarProduto(nome,preco){
+
+let produto = carrinho.find(
+item => item.nome === nome
+);
+
+if(produto){
+
+produto.quantidade++;
+
+}else{
+
+carrinho.push({
+nome:nome,
+preco:preco,
+quantidade:1
+});
+
+}
+
+salvarCarrinho();
+
+atualizarCarrinho();
+
+abrirCarrinho();
+
+}
+
+
+function atualizarCarrinho(){
+
+let container =
+document.getElementById("cartItems");
+
+let count = 0;
+let total = 0;
+
+carrinho.forEach(item => {
+
+count += item.quantidade;
+
+total += item.preco * item.quantidade;
+
+});
+
+
+document.getElementById("cartCount").textContent = count;
+
+document.getElementById("cartTotal").textContent =
+"R$ " + total.toFixed(2).replace(".",",");
+
+
+if(carrinho.length === 0){
+
+container.innerHTML =
+'<div class="empty-cart">Seu carrinho está vazio. 🛍️</div>';
+
+return;
+
+}
+
+
+container.innerHTML = "";
+
+
+carrinho.forEach((item,index) => {
+
+let div =
+document.createElement("div");
+
+div.className = "cart-item";
+
+div.innerHTML = `
+
+<div class="cart-item-image">
+<div></div>
+</div>
+
+<div class="cart-item-info">
+
+<div class="cart-item-name">
+${item.nome}
+</div>
+
+<div class="cart-item-price">
+R$ ${item.preco.toFixed(2).replace(".",",")}
+</div>
+
+<div class="quantity">
+
+<button onclick="alterarQuantidade(${index},-1)">
+−
+</button>
+
+<span>
+${item.quantidade}
+</span>
+
+<button onclick="alterarQuantidade(${index},1)">
++
+</button>
+
+</div>
+
+<button class="remove"
+onclick="removerProduto(${index})">
+REMOVER
+</button>
+
+</div>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+
+function alterarQuantidade(index,valor){
+
+carrinho[index].quantidade += valor;
+
+if(carrinho[index].quantidade <= 0){
+
+carrinho.splice(index,1);
+
+}
+
+salvarCarrinho();
+
+atualizarCarrinho();
+
+}
+
+
+function removerProduto(index){
+
+carrinho.splice(index,1);
+
+salvarCarrinho();
+
+atualizarCarrinho();
+
+}
+
+
+function abrirCarrinho(){
+
+document
+.getElementById("cart")
+.classList.add("active");
+
+document
+.getElementById("cartOverlay")
+.classList.add("active");
+
+}
+
+
+function fecharCarrinho(){
+
+document
+.getElementById("cart")
+.classList.remove("active");
+
+document
+.getElementById("cartOverlay")
+.classList.remove("active");
+
+}
+
+
+function finalizarPedido(){
+
+if(carrinho.length === 0){
+
+alert("Seu carrinho está vazio.");
+
+return;
+
+}
+
+alert(
+"Seu carrinho está pronto! 🛍️\n\n" +
+"Na próxima etapa vamos conectar o checkout e o pagamento."
+);
+
+}
+
+
+atualizarCarrinho();
+
+</script>
 
 </body>
 </html>
