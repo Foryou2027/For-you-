@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For You by Dé | Beleza & Achadinhos</title>
+<title>For You | Beleza & Achadinhos</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -59,7 +58,7 @@ button{
 }
 
 header{
-    background:rgba(251,247,245,.97);
+    background:rgba(251,247,245,.98);
     position:sticky;
     top:0;
     z-index:100;
@@ -79,12 +78,12 @@ header{
 
 .logo{
     text-align:center;
-    min-width:190px;
+    min-width:170px;
 }
 
 .logo-nome{
     font-family:"Cormorant Garamond",serif;
-    font-size:38px;
+    font-size:40px;
     line-height:.8;
     font-weight:600;
 }
@@ -152,7 +151,8 @@ header{
     margin:auto;
     display:flex;
     justify-content:center;
-    gap:30px;
+    align-items:center;
+    gap:34px;
 }
 
 .menu-item{
@@ -162,17 +162,20 @@ header{
 .menu-botao{
     border:0;
     background:none;
-    padding:16px 0;
+    padding:17px 0;
     color:var(--marrom);
     font-size:9px;
     font-weight:700;
     letter-spacing:1.2px;
     text-transform:uppercase;
+    white-space:nowrap;
 }
 
 .menu-botao:hover{
     color:var(--rosaescuro);
 }
+
+/* DROPDOWN */
 
 .dropdown{
     display:none;
@@ -180,7 +183,9 @@ header{
     top:49px;
     left:50%;
     transform:translateX(-50%);
-    width:255px;
+    width:270px;
+    max-height:480px;
+    overflow-y:auto;
     background:white;
     border:1px solid var(--linha);
     box-shadow:0 20px 45px rgba(50,30,35,.13);
@@ -194,7 +199,7 @@ header{
 .dropdown-titulo{
     padding:15px 20px;
     font-family:"Cormorant Garamond",serif;
-    font-size:23px;
+    font-size:24px;
     color:var(--rosaescuro);
     border-bottom:1px solid var(--linha);
 }
@@ -205,11 +210,13 @@ header{
     font-size:10px;
     color:var(--cinza);
     border-bottom:1px solid #f5eeee;
+    transition:.2s;
 }
 
 .dropdown a:hover{
     background:#fcf6f4;
     color:var(--rosaescuro);
+    padding-left:25px;
 }
 
 /* HERO */
@@ -217,7 +224,12 @@ header{
 .hero{
     min-height:650px;
     background:
-    linear-gradient(90deg,rgba(251,247,245,.97) 0%,rgba(251,247,245,.88) 45%,rgba(251,247,245,.15) 100%),
+    linear-gradient(
+        90deg,
+        rgba(251,247,245,.97) 0%,
+        rgba(251,247,245,.88) 45%,
+        rgba(251,247,245,.15) 100%
+    ),
     url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
     background-size:cover;
     background-position:center;
@@ -580,26 +592,33 @@ header{
     margin:5px 0 20px;
 }
 
-/* VALIDADE */
+/* OFERTAS */
 
-.validade{
+.ofertas{
     background:#f8eee9;
 }
 
-.alerta{
-    max-width:700px;
-    margin:0 auto 35px;
-    padding:17px 25px;
-    background:white;
-    border:1px solid #ead3ca;
-    text-align:center;
-    color:#725c58;
-    font-size:10px;
-    line-height:1.7;
+.oferta-menu{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:35px;
 }
 
-.alerta strong{
-    color:#9a5e50;
+.filtro{
+    background:white;
+    border:1px solid var(--linha);
+    padding:11px 16px;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.filtro:hover,
+.filtro.ativo{
+    background:var(--marrom);
+    color:white;
 }
 
 /* DIFERENCIAL */
@@ -930,9 +949,16 @@ footer{
     letter-spacing:1px;
 }
 
-/* CELULAR */
+/* MOBILE */
 
 @media(max-width:900px){
+
+    .menu-interno{
+        justify-content:flex-start;
+        overflow-x:auto;
+        gap:25px;
+        padding:0 10px;
+    }
 
     .produtos{
         grid-template-columns:repeat(2,1fr);
@@ -946,7 +972,6 @@ footer{
     .footer-grid{
         grid-template-columns:1fr 1fr;
     }
-
 }
 
 @media(max-width:650px){
@@ -970,9 +995,14 @@ footer{
     }
 
     .menu-interno{
-        overflow-x:auto;
         justify-content:flex-start;
-        gap:25px;
+        overflow-x:auto;
+        gap:24px;
+        scrollbar-width:none;
+    }
+
+    .menu-interno::-webkit-scrollbar{
+        display:none;
     }
 
     .menu-item:hover .dropdown{
@@ -1057,6 +1087,13 @@ footer{
         height:48px;
     }
 
+    .oferta-menu{
+        justify-content:flex-start;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        padding-bottom:8px;
+    }
+
 }
 
 </style>
@@ -1065,7 +1102,7 @@ footer{
 <body>
 
 <div class="aviso">
-✨ ENVIO PARA TODO O BRASIL • NOVIDADES TODA SEMANA ✨
+ENVIO PARA TODO O BRASIL • NOVIDADES TODA SEMANA
 </div>
 
 <header>
@@ -1073,20 +1110,27 @@ footer{
 <div class="topo">
 
 <a href="#" class="logo">
-<div class="logo-nome">For You by Dé</div>
+<div class="logo-nome">For You</div>
 <div class="logo-sub">beleza • achadinhos • carinho</div>
 </a>
 
 <div class="busca">
-<input type="text" placeholder="Buscar produto, marca ou achadinho...">
+<input
+type="text"
+id="busca"
+placeholder="Buscar produto, marca ou achadinho..."
+oninput="buscarProdutos()"
+>
 </div>
 
 <div class="acoes">
 
-<div class="acao">♡</div>
+<div class="acao">
+♡
+</div>
 
 <div class="acao" onclick="abrirCarrinho()">
-🛍️
+🛍
 <span class="contador" id="contador">0</span>
 </div>
 
@@ -1095,19 +1139,19 @@ footer{
 </div>
 
 
+<!-- MENU PRINCIPAL -->
+
 <div class="menu">
 
 <div class="menu-interno">
 
-<a class="menu-botao" href="#">
-Início
-</a>
 
+<!-- CATEGORIAS -->
 
 <div class="menu-item">
 
 <button class="menu-botao">
-Categorias ▾
+CATEGORIAS ▾
 </button>
 
 <div class="dropdown">
@@ -1116,42 +1160,70 @@ Categorias ▾
 Categorias
 </div>
 
-<a href="#labios">💋 Lábios</a>
-<a href="#pele">✨ Pele</a>
-<a href="#olhos">👁️ Olhos</a>
-<a href="#face">🌸 Face</a>
-<a href="#acessorios">👜 Acessórios</a>
-<a href="#cuidados">🧴 Cuidados</a>
+<a href="#labios">Lábios</a>
+<a href="#batons">Batons</a>
+<a href="#gloss">Gloss</a>
+<a href="#lip-tint">Lip Tint</a>
+
+<a href="#pele">Pele</a>
+<a href="#base">Base</a>
+<a href="#corretivo">Corretivo</a>
+<a href="#po">Pó</a>
+<a href="#blush">Blush</a>
+<a href="#iluminador">Iluminador</a>
+<a href="#contorno">Contorno</a>
+
+<a href="#olhos">Olhos</a>
+<a href="#paletas">Paletas</a>
+<a href="#mascara">Máscara de cílios</a>
+<a href="#delineador">Delineador</a>
+<a href="#sobrancelhas">Sobrancelhas</a>
+
+<a href="#acessorios">Acessórios</a>
+<a href="#pinceis">Pincéis</a>
+<a href="#esponjas">Esponjas</a>
+
+<a href="#cuidados">Cuidados</a>
+<a href="#skincare">Skincare</a>
+<a href="#hidratantes">Hidratantes</a>
+<a href="#limpeza">Limpeza facial</a>
 
 </div>
 
 </div>
 
+
+<!-- ACHADINHOS -->
 
 <div class="menu-item">
 
 <button class="menu-botao">
-✨ Achadinho da Semana ▾
+ACHADINHOS ▾
 </button>
 
 <div class="dropdown">
 
 <div class="dropdown-titulo">
-Achadinho
+Achadinhos
 </div>
 
-<a href="#achadinho">✨ Achadinho atual</a>
-<a href="#achadinho">⭐ Últimos achadinhos</a>
+<a href="#achadinho">Achadinho da semana</a>
+<a href="#queridinhos">Mais vendidos</a>
+<a href="#queridinhos">Queridinhos da Dé</a>
+<a href="#achadinho">Achadinhos até R$ 20</a>
+<a href="#achadinho">Achadinhos até R$ 30</a>
 
 </div>
 
 </div>
 
+
+<!-- NOVIDADES -->
 
 <div class="menu-item">
 
 <button class="menu-botao">
-🆕 Novidades ▾
+NOVIDADES ▾
 </button>
 
 <div class="dropdown">
@@ -1162,40 +1234,47 @@ Novidades
 
 <a href="#novidades">Recém-chegados</a>
 <a href="#novidades">Lançamentos</a>
-<a href="#novidades">Todos os produtos novos</a>
+<a href="#novidades">Novidades da semana</a>
+<a href="#novidades">Mais vendidos</a>
+<a href="#novidades">Todos os produtos</a>
 
 </div>
 
 </div>
 
+
+<!-- KITS -->
 
 <div class="menu-item">
 
 <button class="menu-botao">
-🎁 Kits Promocionais ▾
+KITS PROMOCIONAIS ▾
 </button>
 
 <div class="dropdown">
 
 <div class="dropdown-titulo">
-Kits
+Kits Promocionais
 </div>
 
-<a href="#kits">Kit Glow</a>
-<a href="#kits">Kit Lábios</a>
-<a href="#kits">Kit Pele</a>
-<a href="#kits">Kits com desconto</a>
-<a href="#kits">Todos os kits</a>
+<a href="#kit-glow">Kit Glow</a>
+<a href="#kit-labios">Kit Lábios</a>
+<a href="#kit-pele">Kit Pele</a>
+<a href="#kit-olhos">Kit Olhos</a>
+<a href="#kit-completo">Kit Completo</a>
+<a href="#kits-desconto">Kits com desconto</a>
 
 </div>
 
 </div>
 
+
+<!-- OFERTAS -->
 
 <div class="menu-item">
 
 <button class="menu-botao">
-🏷️ Ofertas ▾
+OFERTAS ▾
 </button>
 
 <div class="dropdown">
@@ -1204,30 +1283,17 @@ Kits
 Ofertas
 </div>
 
-<a href="#ofertas">Ofertas da semana</a>
-<a href="#ofertas">Descontos</a>
-<a href="#ofertas">Últimas unidades</a>
+<a href="#ofertas">Todas as ofertas</a>
+<a href="#desconto10">10% de desconto</a>
+<a href="#desconto20">20% de desconto</a>
+<a href="#desconto30">30% de desconto</a>
+<a href="#desconto40">40% de desconto</a>
+<a href="#desconto50">50% de desconto</a>
+<a href="#ultimas-unidades">Últimas unidades</a>
 
-</div>
-
-</div>
-
-
-<div class="menu-item">
-
-<button class="menu-botao">
-⏳ Próximo da Validade ▾
-</button>
-
-<div class="dropdown">
-
-<div class="dropdown-titulo">
-Validade
-</div>
-
-<a href="#validade">Produtos próximos da validade</a>
-<a href="#validade">Ofertas especiais</a>
-<a href="#validade">Últimas unidades</a>
+<a href="#validade">
+Próximo da validade
+</a>
 
 </div>
 
@@ -1240,6 +1306,8 @@ Validade
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
 <div class="hero-conteudo">
@@ -1247,7 +1315,7 @@ Validade
 <div class="hero-texto">
 
 <div class="hero-pequeno">
-Bem-vinda à For You by Dé
+Bem-vinda à For You
 </div>
 
 <h1>
@@ -1281,6 +1349,8 @@ VER ACHADINHO
 </section>
 
 
+<!-- FRASE -->
+
 <section class="frase">
 
 <small>
@@ -1298,6 +1368,8 @@ Porque não basta ser bonito. Tem que fazer sentido para você.
 </section>
 
 
+<!-- ACHADINHO -->
+
 <section class="secao achadinho" id="achadinho">
 
 <div class="container">
@@ -1309,7 +1381,7 @@ Porque não basta ser bonito. Tem que fazer sentido para você.
 <div class="achadinho-info">
 
 <div class="selo">
-✨ ACHADINHO DA SEMANA
+ACHADINHO DA SEMANA
 </div>
 
 <h2>
@@ -1317,7 +1389,7 @@ Um produto novo que ganhou nosso coração.
 </h2>
 
 <p>
-Toda semana escolhemos um produto especial para destacar na For You by Dé.
+Toda semana escolhemos um produto especial para destacar na For You.
 </p>
 
 <div class="preco-antigo">
@@ -1328,8 +1400,10 @@ De R$ 29,90
 R$ 19,90
 </div>
 
-<button class="botao"
-onclick="adicionarProduto('Achadinho da Semana',19.90)">
+<button
+class="botao"
+onclick="adicionarProduto('Achadinho da Semana',19.90)"
+>
 QUERO MEU ACHADINHO
 </button>
 
@@ -1342,6 +1416,8 @@ QUERO MEU ACHADINHO
 </section>
 
 
+<!-- NOVIDADES -->
+
 <section class="secao" id="novidades">
 
 <div class="container">
@@ -1353,7 +1429,7 @@ ACABOU DE CHEGAR
 </small>
 
 <h2>
-🆕 Novidades
+Novidades
 </h2>
 
 <p>
@@ -1363,9 +1439,14 @@ Produtos novos que acabaram de chegar na loja.
 </div>
 
 
-<div class="produtos">
+<div class="produtos" id="listaProdutos">
 
-<div class="produto">
+
+<!-- PRODUTO 1 -->
+
+<div class="produto"
+data-nome="Produto Novo 01"
+data-categoria="novidades labios batons">
 
 <div class="produto-img">
 
@@ -1395,8 +1476,10 @@ Produto Novo 01
 R$ 19,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Produto Novo 01',19.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Produto Novo 01',19.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1405,7 +1488,11 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 2 -->
+
+<div class="produto"
+data-nome="Produto Novo 02"
+data-categoria="novidades pele">
 
 <div class="produto-img">
 
@@ -1435,8 +1522,10 @@ Produto Novo 02
 R$ 24,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Produto Novo 02',24.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Produto Novo 02',24.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1445,7 +1534,11 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 3 -->
+
+<div class="produto"
+data-nome="Produto Novo 03"
+data-categoria="novidades face">
 
 <div class="produto-img">
 
@@ -1475,8 +1568,10 @@ Produto Novo 03
 R$ 29,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Produto Novo 03',29.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Produto Novo 03',29.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1485,7 +1580,11 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- PRODUTO 4 -->
+
+<div class="produto"
+data-nome="Produto Novo 04"
+data-categoria="novidades olhos">
 
 <div class="produto-img">
 
@@ -1515,8 +1614,10 @@ Produto Novo 04
 R$ 34,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Produto Novo 04',34.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Produto Novo 04',34.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1531,6 +1632,8 @@ ADICIONAR AO CARRINHO
 </section>
 
 
+<!-- KITS -->
+
 <section class="secao kits" id="kits">
 
 <div class="container">
@@ -1542,7 +1645,7 @@ COMBINAÇÃO ESPECIAL
 </small>
 
 <h2>
-🎁 Kits Promocionais
+Kits Promocionais
 </h2>
 
 <p>
@@ -1563,7 +1666,7 @@ Kits pensados para você aproveitar ainda mais.
 <div class="kit-info">
 
 <div class="kit-selo">
-✨ KIT ESPECIAL
+KIT ESPECIAL
 </div>
 
 <h2>
@@ -1577,15 +1680,15 @@ Uma combinação especial para deixar sua maquiagem ainda mais linda.
 <div class="kit-itens">
 
 <div class="kit-item">
-✨ Blush
+Blush
 </div>
 
 <div class="kit-item">
-✨ Iluminador
+Iluminador
 </div>
 
 <div class="kit-item">
-✨ Gloss
+Gloss
 </div>
 
 </div>
@@ -1598,8 +1701,10 @@ De R$ 59,90
 R$ 44,90
 </div>
 
-<button class="botao"
-onclick="adicionarProduto('Kit Glow',44.90)">
+<button
+class="botao"
+onclick="adicionarProduto('Kit Glow',44.90)"
+>
 ADICIONAR KIT AO CARRINHO
 </button>
 
@@ -1612,7 +1717,9 @@ ADICIONAR KIT AO CARRINHO
 </section>
 
 
-<section class="secao" id="ofertas">
+<!-- OFERTAS -->
+
+<section class="secao ofertas" id="ofertas">
 
 <div class="container">
 
@@ -1623,7 +1730,7 @@ PREÇOS ESPECIAIS
 </small>
 
 <h2>
-🏷️ Ofertas
+Ofertas
 </h2>
 
 <p>
@@ -1633,14 +1740,82 @@ Produtos selecionados com preços especiais.
 </div>
 
 
+<div class="oferta-menu">
+
+<button
+class="filtro ativo"
+onclick="filtrarOferta('todos',this)"
+>
+TODAS
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('10',this)"
+>
+10% OFF
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('20',this)"
+>
+20% OFF
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('30',this)"
+>
+30% OFF
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('40',this)"
+>
+40% OFF
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('50',this)"
+>
+50% OFF
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('ultima',this)"
+>
+ÚLTIMAS UNIDADES
+</button>
+
+<button
+class="filtro"
+onclick="filtrarOferta('validade',this)"
+>
+PRÓXIMO DA VALIDADE
+</button>
+
+</div>
+
+
 <div class="produtos">
 
-<div class="produto">
+
+<!-- OFERTA 10 -->
+
+<div
+class="produto oferta-produto"
+data-oferta="10"
+id="desconto10"
+>
 
 <div class="produto-img">
 
 <div class="etiqueta">
-OFERTA
+10% OFF
 </div>
 
 <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85">
@@ -1661,8 +1836,10 @@ Batom Especial
 R$ 14,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Batom Especial',14.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Batom Especial',14.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1671,12 +1848,18 @@ ADICIONAR AO CARRINHO
 </div>
 
 
-<div class="produto">
+<!-- OFERTA 20 -->
+
+<div
+class="produto oferta-produto"
+data-oferta="20"
+id="desconto20"
+>
 
 <div class="produto-img">
 
 <div class="etiqueta">
-OFERTA
+20% OFF
 </div>
 
 <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85">
@@ -1697,8 +1880,10 @@ Glow Especial
 R$ 18,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Glow Especial',18.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Glow Especial',18.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1706,51 +1891,19 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-</div>
 
-</div>
+<!-- VALIDADE -->
 
-</section>
-
-
-<section class="secao validade" id="validade">
-
-<div class="container">
-
-<div class="titulo">
-
-<small>
-PREÇOS ESPECIAIS
-</small>
-
-<h2>
-⏳ Próximo da Validade
-</h2>
-
-<p>
-Produtos dentro da validade, mas com vencimento mais próximo.
-</p>
-
-</div>
-
-<div class="alerta">
-
-<strong>⚠️ Importante</strong><br>
-
-Todos os produtos desta seção estão dentro do prazo de validade.
-A data de validade deverá ser conferida na descrição do produto.
-
-</div>
-
-
-<div class="produtos">
-
-<div class="produto">
+<div
+class="produto oferta-produto"
+data-oferta="validade"
+id="validade"
+>
 
 <div class="produto-img">
 
 <div class="etiqueta">
-VALIDADE PRÓXIMA
+OFERTA ESPECIAL
 </div>
 
 <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85">
@@ -1760,23 +1913,65 @@ VALIDADE PRÓXIMA
 <div class="produto-info">
 
 <div class="marca">
-Preço especial
+Próximo da validade
 </div>
 
 <div class="produto-nome">
 Produto Especial
 </div>
 
-<p style="font-size:9px;color:#777;margin-top:6px;">
-Validade: INFORMAR DATA
-</p>
-
 <div class="produto-preco">
 R$ 9,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Produto Especial - Validade Próxima',9.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Produto Especial - Próximo da Validade',9.90)"
+>
+ADICIONAR AO CARRINHO
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ÚLTIMA UNIDADE -->
+
+<div
+class="produto oferta-produto"
+data-oferta="ultima"
+id="ultimas-unidades"
+>
+
+<div class="produto-img">
+
+<div class="etiqueta">
+ÚLTIMA UNIDADE
+</div>
+
+<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85">
+
+</div>
+
+<div class="produto-info">
+
+<div class="marca">
+Última unidade
+</div>
+
+<div class="produto-nome">
+Paleta Especial
+</div>
+
+<div class="produto-preco">
+R$ 29,90
+</div>
+
+<button
+class="adicionar"
+onclick="adicionarProduto('Paleta Especial',29.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1791,7 +1986,9 @@ ADICIONAR AO CARRINHO
 </section>
 
 
-<section class="secao">
+<!-- QUERIDINHOS -->
+
+<section class="secao" id="queridinhos">
 
 <div class="container">
 
@@ -1813,6 +2010,7 @@ Produtos escolhidos para você.
 
 
 <div class="produtos">
+
 
 <div class="produto" id="labios">
 
@@ -1836,8 +2034,10 @@ Batom Rosé
 R$ 15,00
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Batom Rosé',15)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Batom Rosé',15)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1868,8 +2068,10 @@ Glow Skin
 R$ 22,00
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Glow Skin',22)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Glow Skin',22)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1900,8 +2102,10 @@ Blush Rosé
 R$ 20,00
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Blush Rosé',20)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Blush Rosé',20)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1932,8 +2136,10 @@ Paleta Glow
 R$ 39,90
 </div>
 
-<button class="adicionar"
-onclick="adicionarProduto('Paleta Glow',39.90)">
+<button
+class="adicionar"
+onclick="adicionarProduto('Paleta Glow',39.90)"
+>
 ADICIONAR AO CARRINHO
 </button>
 
@@ -1941,12 +2147,15 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+
 </div>
 
 </div>
 
 </section>
 
+
+<!-- DIFERENCIAL -->
 
 <section class="diferencial">
 
@@ -1961,47 +2170,37 @@ Não colocamos qualquer produto na loja.
 <div class="passos">
 
 <div class="passo">
-
 <div class="numero">01</div>
-
 <span>Testamos</span>
-
 </div>
 
 <div class="seta">→</div>
 
 <div class="passo">
-
 <div class="numero">02</div>
-
 <span>Gostamos</span>
-
 </div>
 
 <div class="seta">→</div>
 
 <div class="passo">
-
 <div class="numero">03</div>
-
 <span>Selecionamos</span>
-
 </div>
 
 <div class="seta">→</div>
 
 <div class="passo">
-
 <div class="numero">04</div>
-
 <span>Colocamos na loja</span>
-
 </div>
 
 </div>
 
 </section>
 
+
+<!-- BENEFÍCIOS -->
 
 <section class="secao">
 
@@ -2058,10 +2257,12 @@ Beleza que combina com seu estilo.
 </section>
 
 
+<!-- NEWSLETTER -->
+
 <section class="newsletter">
 
 <h2>
-Vem fazer parte da For You. ✨
+Vem fazer parte da For You.
 </h2>
 
 <p>
@@ -2086,6 +2287,8 @@ QUERO RECEBER
 </section>
 
 
+<!-- RODAPÉ -->
+
 <footer>
 
 <div class="footer">
@@ -2095,11 +2298,11 @@ QUERO RECEBER
 <div>
 
 <div class="footer-logo">
-For You by Dé
+For You
 </div>
 
 <p>
-“Testamos, gostamos e colocamos na loja.” ✨
+“Testamos, gostamos e colocamos na loja.”
 <br><br>
 Maquiagem, beleza e achadinhos escolhidos especialmente para você.
 </p>
@@ -2113,10 +2316,21 @@ Maquiagem, beleza e achadinhos escolhidos especialmente para você.
 Loja
 </h3>
 
-<a href="#novidades">Novidades</a>
-<a href="#achadinho">Achadinho</a>
-<a href="#kits">Kits Promocionais</a>
-<a href="#ofertas">Ofertas</a>
+<a href="#novidades">
+Novidades
+</a>
+
+<a href="#achadinho">
+Achadinho
+</a>
+
+<a href="#kits">
+Kits Promocionais
+</a>
+
+<a href="#ofertas">
+Ofertas
+</a>
 
 </div>
 
@@ -2127,10 +2341,21 @@ Loja
 Atendimento
 </h3>
 
-<a href="#">WhatsApp</a>
-<a href="#">Fale conosco</a>
-<a href="#">Trocas</a>
-<a href="#">Dúvidas</a>
+<a href="#">
+WhatsApp
+</a>
+
+<a href="#">
+Fale conosco
+</a>
+
+<a href="#">
+Trocas
+</a>
+
+<a href="#">
+Dúvidas
+</a>
 
 </div>
 
@@ -2141,10 +2366,21 @@ Atendimento
 For You
 </h3>
 
-<a href="#">Sobre nós</a>
-<a href="#">Instagram</a>
-<a href="#">Privacidade</a>
-<a href="#">Termos</a>
+<a href="#">
+Sobre nós
+</a>
+
+<a href="#">
+Instagram
+</a>
+
+<a href="#">
+Privacidade
+</a>
+
+<a href="#">
+Termos
+</a>
 
 </div>
 
@@ -2153,7 +2389,7 @@ For You
 
 <div class="copyright">
 
-© 2026 For You by Dé • Todos os direitos reservados.
+© 2026 For You • Todos os direitos reservados.
 
 </div>
 
@@ -2162,10 +2398,20 @@ For You
 </footer>
 
 
-<div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+<!-- CARRINHO -->
+
+<div
+class="overlay"
+id="overlay"
+onclick="fecharCarrinho()"
+>
+</div>
 
 
-<div class="carrinho" id="carrinho">
+<div
+class="carrinho"
+id="carrinho"
+>
 
 <div class="carrinho-topo">
 
@@ -2173,17 +2419,23 @@ For You
 Seu carrinho
 </h2>
 
-<button class="fechar" onclick="fecharCarrinho()">
+<button
+class="fechar"
+onclick="fecharCarrinho()"
+>
 ×
 </button>
 
 </div>
 
 
-<div class="itens" id="itens">
+<div
+class="itens"
+id="itens"
+>
 
 <div class="vazio">
-Seu carrinho está vazio. 🛍️
+Seu carrinho está vazio.
 </div>
 
 </div>
@@ -2203,7 +2455,10 @@ R$ 0,00
 
 </div>
 
-<button class="finalizar" onclick="finalizar()">
+<button
+class="finalizar"
+onclick="finalizar()"
+>
 FINALIZAR PEDIDO
 </button>
 
@@ -2213,6 +2468,8 @@ FINALIZAR PEDIDO
 
 
 <script>
+
+/* CARRINHO */
 
 let carrinho =
 JSON.parse(localStorage.getItem("forYouCarrinho")) || [];
@@ -2262,18 +2519,23 @@ let itens =
 document.getElementById("itens");
 
 let contador = 0;
+
 let total = 0;
 
 carrinho.forEach(item => {
 
 contador += item.quantidade;
 
-total += item.preco * item.quantidade;
+total +=
+item.preco *
+item.quantidade;
 
 });
 
 
-document.getElementById("contador").textContent = contador;
+document.getElementById("contador").textContent =
+contador;
+
 
 document.getElementById("total").textContent =
 "R$ " +
@@ -2283,7 +2545,7 @@ total.toFixed(2).replace(".",",");
 if(carrinho.length === 0){
 
 itens.innerHTML =
-'<div class="vazio">Seu carrinho está vazio. 🛍️</div>';
+'<div class="vazio">Seu carrinho está vazio.</div>';
 
 return;
 
@@ -2291,6 +2553,7 @@ return;
 
 
 itens.innerHTML = "";
+
 
 carrinho.forEach((item,index) => {
 
@@ -2405,31 +2668,111 @@ function finalizar(){
 
 if(carrinho.length === 0){
 
-alert("Seu carrinho está vazio. 🛍️");
+alert("Seu carrinho está vazio.");
 
 return;
 
 }
 
 alert(
-"Seu pedido está pronto! ✨\n\nNa próxima etapa vamos conectar o WhatsApp e o pagamento."
+"Seu pedido está pronto!\n\nNa próxima etapa vamos conectar o WhatsApp e o pagamento."
 );
 
 }
 
 
+/* NEWSLETTER */
+
 function cadastrar(){
 
-let email =
-document.getElementById("email").value;
-
 alert(
-"Cadastro realizado com sucesso! 💕"
+"Cadastro realizado com sucesso!"
 );
 
 document.getElementById("email").value = "";
 
 return false;
+
+}
+
+
+/* FILTRO DE OFERTAS */
+
+function filtrarOferta(tipo,botao){
+
+let produtos =
+document.querySelectorAll(".oferta-produto");
+
+document
+.querySelectorAll(".filtro")
+.forEach(btn => {
+
+btn.classList.remove("ativo");
+
+});
+
+
+botao.classList.add("ativo");
+
+
+produtos.forEach(produto => {
+
+if(
+tipo === "todos" ||
+produto.dataset.oferta === tipo
+){
+
+produto.style.display = "block";
+
+}else{
+
+produto.style.display = "none";
+
+}
+
+});
+
+}
+
+
+/* BUSCA */
+
+function buscarProdutos(){
+
+let busca =
+document
+.getElementById("busca")
+.value
+.toLowerCase()
+.trim();
+
+let produtos =
+document.querySelectorAll(".produto");
+
+
+produtos.forEach(produto => {
+
+let nome =
+produto.dataset.nome ||
+produto.innerText;
+
+nome =
+nome.toLowerCase();
+
+
+if(
+nome.includes(busca)
+){
+
+produto.style.display = "block";
+
+}else{
+
+produto.style.display = "none";
+
+}
+
+});
 
 }
 
