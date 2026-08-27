@@ -4,375 +4,1164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>For You by Dé | Maquiagens</title>
+    <title>For You by Dé | Maquiagem & Beleza</title>
+
+    <meta name="description"
+        content="For You by Dé — maquiagens e produtos de beleza escolhidos especialmente para você. Testamos, gostamos e colocamos na loja.">
 
     <style>
+
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #fffafa;
-            color: #333;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* TOPO */
-        header {
-            background: white;
-            padding: 20px;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #292328;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+
+        /* =========================
+           BARRA SUPERIOR
+        ========================= */
+
+        .topbar {
+            background: #2d2529;
+            color: white;
             text-align: center;
+            padding: 9px 15px;
+            font-size: 13px;
+            letter-spacing: .3px;
+        }
+
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header {
+            background: #fff;
             border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 1000;
+        }
+
+        .header-main {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
         }
 
         .logo {
-            font-size: 30px;
-            font-weight: bold;
-            color: #c97898;
+            min-width: 190px;
         }
 
-        .slogan {
-            margin-top: 5px;
+        .logo h1 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            letter-spacing: 1px;
+            color: #a95676;
+        }
+
+        .logo p {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .search {
+            flex: 1;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            padding: 0 48px 0 20px;
+            outline: none;
+            font-size: 14px;
+            background: #fafafa;
+        }
+
+        .search input:focus {
+            border-color: #c9829f;
+            background: white;
+        }
+
+        .search button {
+            position: absolute;
+            right: 6px;
+            top: 5px;
+            width: 33px;
+            height: 33px;
+            border: none;
+            border-radius: 50%;
+            background: #a95676;
+            color: white;
+            cursor: pointer;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .header-icon {
+            position: relative;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+        .cart-number {
+            position: absolute;
+            top: -8px;
+            right: -9px;
+            background: #a95676;
+            color: white;
+            font-size: 10px;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        nav {
+            border-top: 1px solid #f1f1f1;
+        }
+
+        .menu {
+            min-height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .menu a {
+            font-size: 13px;
+            font-weight: bold;
+            color: #4e464a;
+            transition: .2s;
+        }
+
+        .menu a:hover {
+            color: #a95676;
+        }
+
+        .menu .sale {
+            color: #c34f70;
+        }
+
+
+        /* =========================
+           BANNER PRINCIPAL
+        ========================= */
+
+        .hero {
+            min-height: 500px;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,245,248,.98) 0%,
+                    rgba(255,245,248,.88) 48%,
+                    rgba(255,245,248,.15) 100%
+                ),
+                url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 540px;
+            padding: 70px 0;
+        }
+
+        .hero-small {
+            color: #a95676;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: 1.02;
+            color: #30262b;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 span {
+            color: #a95676;
+        }
+
+        .hero p {
+            color: #62575c;
+            line-height: 1.7;
+            font-size: 16px;
+            max-width: 460px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #a95676;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: .8px;
+            transition: .2s;
+        }
+
+        .button:hover {
+            background: #873e5d;
+            transform: translateY(-2px);
+        }
+
+        .button-light {
+            background: white;
+            color: #a95676;
+            border: 1px solid #a95676;
+            margin-left: 8px;
+        }
+
+        .button-light:hover {
+            background: #a95676;
+            color: white;
+        }
+
+
+        /* =========================
+           BENEFÍCIOS
+        ========================= */
+
+        .benefits {
+            border-bottom: 1px solid #eee;
+            background: white;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .benefit {
+            padding: 25px 15px;
+            text-align: center;
+            border-right: 1px solid #eee;
+        }
+
+        .benefit:last-child {
+            border-right: none;
+        }
+
+        .benefit-icon {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .benefit strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .benefit span {
+            font-size: 11px;
+            color: #777;
+        }
+
+
+        /* =========================
+           TÍTULOS
+        ========================= */
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .section-heading small {
+            color: #a95676;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 11px;
+        }
+
+        .section-heading h2 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+            color: #30262b;
+            margin: 8px 0;
+        }
+
+        .section-heading p {
             color: #777;
             font-size: 14px;
         }
 
-        nav {
-            margin-top: 18px;
+
+        /* =========================
+           CATEGORIAS
+        ========================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
         }
 
-        nav a {
-            text-decoration: none;
-            color: #444;
-            margin: 0 8px;
+        .category {
+            height: 180px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .category::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                transparent 30%,
+                rgba(0,0,0,.65)
+            );
+        }
+
+        .category span {
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-weight: bold;
             font-size: 14px;
-        }
-
-        /* BANNER */
-        .banner {
-            padding: 70px 25px;
+            padding: 18px;
+            width: 100%;
             text-align: center;
-            background: #f9e3eb;
         }
 
-        .banner h1 {
+        .cat-1 {
+            background-image: url("https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=80");
+        }
+
+        .cat-2 {
+            background-image: url("https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=500&q=80");
+        }
+
+        .cat-3 {
+            background-image: url("https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=500&q=80");
+        }
+
+        .cat-4 {
+            background-image: url("https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80");
+        }
+
+        .cat-5 {
+            background-image: url("https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=500&q=80");
+        }
+
+        .cat-6 {
+            background-image: url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=500&q=80");
+        }
+
+
+        /* =========================
+           ACHADINHO DA SEMANA
+        ========================= */
+
+        .weekly {
+            background: #fbf0f4;
+        }
+
+        .weekly-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            min-height: 440px;
+            overflow: hidden;
+            box-shadow: 0 8px 35px rgba(0,0,0,.06);
+        }
+
+        .weekly-image {
+            background:
+                url("https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=1000&q=85")
+                center / cover;
+            min-height: 440px;
+        }
+
+        .weekly-content {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .weekly-label {
+            color: #a95676;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .weekly-content h2 {
+            font-family: Georgia, serif;
             font-size: 38px;
             margin-bottom: 15px;
-            color: #5b414b;
         }
 
-        .banner p {
-            font-size: 18px;
-            margin-bottom: 25px;
-            color: #6b555d;
-        }
-
-        .botao {
-            display: inline-block;
-            padding: 14px 28px;
-            background: #c97898;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-        }
-
-        /* SEÇÕES */
-        section {
-            padding: 45px 20px;
-        }
-
-        .titulo {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 26px;
-            color: #5b414b;
-        }
-
-        /* CATEGORIAS */
-        .categorias {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .categoria {
-            background: white;
-            border: 1px solid #efd7df;
-            padding: 14px 20px;
-            border-radius: 25px;
-        }
-
-        /* ACHADINHO */
-        .achadinho {
-            background: #fcecf2;
-            text-align: center;
-        }
-
-        .achadinho h2 {
-            color: #c05f83;
+        .weekly-content h3 {
+            font-size: 19px;
             margin-bottom: 12px;
         }
 
-        .achadinho p {
-            margin-bottom: 20px;
+        .weekly-content p {
+            color: #6f6569;
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 22px;
         }
 
-        /* PRODUTOS */
-        .produtos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .price-old {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 13px;
+        }
+
+        .price {
+            color: #a95676;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 4px 0 22px;
+        }
+
+
+        /* =========================
+           PRODUTOS
+        ========================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
 
-        .produto {
-            background: white;
-            width: 230px;
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        .product {
+            position: relative;
         }
 
-        .foto {
-            height: 220px;
-            background: #f4e3e8;
-            border-radius: 12px;
+        .product-image {
+            height: 310px;
+            background: #f8f3f5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s;
+        }
+
+        .product:hover .product-image img {
+            transform: scale(1.04);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 2;
+            background: #a95676;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 7px 10px;
+            text-transform: uppercase;
+        }
+
+        .badge.sale {
+            background: #333;
+        }
+
+        .favorite {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 3;
+            width: 34px;
+            height: 34px;
+            background: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
-            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
         }
 
-        .produto h3 {
+        .product-info {
+            padding: 15px 2px;
+        }
+
+        .stars {
+            color: #d59a3d;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .product-info h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .product-brand {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
             margin-bottom: 8px;
         }
 
-        .preco {
-            font-size: 19px;
+        .product-price {
+            font-size: 17px;
             font-weight: bold;
-            color: #c05f83;
+            color: #a95676;
+        }
+
+        .installment {
+            color: #777;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .add-cart {
+            width: 100%;
+            margin-top: 12px;
+            border: 1px solid #a95676;
+            background: white;
+            color: #a95676;
+            padding: 11px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: .2s;
+        }
+
+        .add-cart:hover {
+            background: #a95676;
+            color: white;
+        }
+
+
+        /* =========================
+           BANNER INTERMEDIÁRIO
+        ========================= */
+
+        .mid-banner {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(47,36,41,.9),
+                    rgba(47,36,41,.45)
+                ),
+                url("https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=1800&q=85")
+                center / cover;
+
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .mid-content {
+            max-width: 560px;
+        }
+
+        .mid-content small {
+            letter-spacing: 2px;
+            font-size: 11px;
+        }
+
+        .mid-content h2 {
+            font-family: Georgia, serif;
+            font-size: 43px;
+            margin: 12px 0;
+        }
+
+        .mid-content p {
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 25px;
+            color: #eee;
+        }
+
+
+        /* =========================
+           SOBRE A LOJA
+        ========================= */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 440px;
+            background:
+                url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85")
+                center / cover;
+        }
+
+        .about-content small {
+            color: #a95676;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-content h2 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            margin: 12px 0 20px;
+        }
+
+        .about-content p {
+            color: #6f6569;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            border-left: 3px solid #a95676;
+            padding-left: 18px;
+            margin: 25px 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           NEWSLETTER
+        ========================= */
+
+        .newsletter {
+            background: #f8e8ee;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .newsletter h2 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            color: #6f6569;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            height: 48px;
+            border: 1px solid #ddd;
+            padding: 0 15px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            border: none;
+            background: #a95676;
+            color: white;
+            padding: 0 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+            background: #2d2529;
+            color: white;
+            padding-top: 55px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 45px;
+            padding-bottom: 45px;
+        }
+
+        .footer-logo {
+            font-family: Georgia, serif;
+            font-size: 27px;
+            color: #f4cbd9;
             margin-bottom: 12px;
         }
 
-        .comprar {
-            display: block;
-            text-align: center;
-            background: #c97898;
-            color: white;
-            padding: 10px;
-            border-radius: 20px;
-            text-decoration: none;
+        footer p {
+            color: #c6bec1;
+            line-height: 1.7;
+            font-size: 13px;
         }
 
-        /* RODAPÉ */
-        footer {
-            background: #4d3a41;
+        .footer-column h3 {
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #c6bec1;
+            font-size: 12px;
+            margin-bottom: 11px;
+        }
+
+        .footer-column a:hover {
             color: white;
-            text-align: center;
-            padding: 30px 20px;
+        }
+
+        .social {
+            display: flex;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        footer p {
-            margin: 7px;
+        .social a {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #655b60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 0;
         }
 
-        /* CELULAR */
-        @media (max-width: 600px) {
+        .footer-bottom {
+            border-top: 1px solid #463d41;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           WHATSAPP
+        ========================= */
+
+        .whatsapp {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0,0,0,.2);
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .header-main {
+                flex-wrap: wrap;
+                padding: 15px 0;
+            }
 
             .logo {
-                font-size: 26px;
+                min-width: auto;
             }
 
-            .banner h1 {
-                font-size: 30px;
+            .search {
+                order: 3;
+                max-width: none;
+                flex-basis: 100%;
             }
 
-            nav a {
-                margin: 0 4px;
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefit-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefit:nth-child(2) {
+                border-right: none;
+            }
+
+            .weekly-box,
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .weekly-image {
+                min-height: 350px;
+            }
+
+            .about {
+                gap: 30px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                font-size: 11px;
+            }
+
+            .header-main {
+                gap: 12px;
+            }
+
+            .logo h1 {
+                font-size: 23px;
+            }
+
+            .header-icons {
+                gap: 10px;
+            }
+
+            .menu {
+                overflow-x: auto;
+                justify-content: flex-start;
+                gap: 22px;
+                padding: 12px 0;
+                white-space: nowrap;
+            }
+
+            .hero {
+                min-height: 540px;
+                background-position: 62% center;
+            }
+
+            .hero-content {
+                padding: 50px 0;
+            }
+
+            .hero h2 {
+                font-size: 42px;
+            }
+
+            .button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .button-light {
+                margin: 10px 0 0;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .benefit {
+                padding: 20px 8px;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category {
+                height: 150px;
+            }
+
+            .weekly-content {
+                padding: 35px 25px;
+            }
+
+            .weekly-content h2 {
+                font-size: 31px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-image {
+                height: 210px;
+            }
+
+            .product-info h3 {
                 font-size: 13px;
             }
 
-            .produto {
-                width: 100%;
-                max-width: 330px;
+            .product-price {
+                font-size: 15px;
+            }
+
+            .mid-banner {
+                min-height: 400px;
+            }
+
+            .mid-content h2 {
+                font-size: 35px;
+            }
+
+            .about-image {
+                height: 330px;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                height: 48px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .whatsapp {
+                width: 52px;
+                height: 52px;
+                right: 15px;
+                bottom: 15px;
             }
         }
+
     </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     BARRA SUPERIOR
+========================= -->
+
+<div class="topbar">
+    ✨ Envio para todo o Brasil • Produtos escolhidos com carinho
+</div>
+
+
+<!-- =========================
+     CABEÇALHO
+========================= -->
 
 <header>
 
-    <div class="logo">
-        FOR YOU BY DÉ
+    <div class="container header-main">
+
+        <a href="#" class="logo">
+            <h1>For You by Dé</h1>
+            <p>Maquiagem & Beleza</p>
+        </a>
+
+
+        <div class="search">
+
+            <input
+                type="text"
+                placeholder="O que você está procurando?"
+            >
+
+            <button>
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="header-icons">
+
+            <div class="header-icon" title="Minha conta">
+                ♡
+            </div>
+
+            <div class="header-icon" title="Carrinho">
+                🛒
+                <span class="cart-number">0</span>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="slogan">
-        Testamos, gostamos e colocamos na loja. ✨
-    </div>
 
     <nav>
-        <a href="#">Início</a>
-        <a href="#maquiagem">Maquiagem</a>
-        <a href="#achadinho">Achadinho da Semana</a>
-        <a href="#ofertas">Ofertas</a>
+
+        <div class="container menu">
+
+            <a href="#">Início</a>
+
+            <a href="#categorias">
+                Categorias
+            </a>
+
+            <a href="#maquiagem">
+                Maquiagem
+            </a>
+
+            <a href="#achadinho">
+                Achadinho da Semana
+            </a>
+
+            <a href="#novidades">
+                Novidades
+            </a>
+
+            <a href="#ofertas" class="sale">
+                🔥 Ofertas
+            </a>
+
+        </div>
+
     </nav>
 
 </header>
 
 
-<section class="banner">
+<!-- =========================
+     BANNER PRINCIPAL
+========================= -->
 
-    <h1>Maquiagem para realçar você. 💄</h1>
+<section class="hero">
 
-    <p>
-        Produtos escolhidos com carinho para você se sentir ainda mais linda.
-    </p>
+    <div class="container">
 
-    <a href="#maquiagem" class="botao">
-        COMPRAR AGORA
-    </a>
+        <div class="hero-content">
 
-</section>
-
-
-<section>
-
-    <h2 class="titulo">
-        💕 Encontre o que você procura
-    </h2>
-
-    <div class="categorias">
-
-        <div class="categoria">💄 Batons</div>
-
-        <div class="categoria">✨ Gloss</div>
-
-        <div class="categoria">🌸 Blush</div>
-
-        <div class="categoria">👁️ Olhos</div>
-
-        <div class="categoria">✨ Iluminador</div>
-
-        <div class="categoria">🧴 Pele</div>
-
-    </div>
-
-</section>
-
-
-<section class="achadinho" id="achadinho">
-
-    <h2>✨ ACHADINHO DA SEMANA ✨</h2>
-
-    <p>
-        Testamos, gostamos e colocamos na loja. 💕
-    </p>
-
-    <h3>
-        Produto destaque da semana
-    </h3>
-
-    <p>
-        Aqui vamos colocar o produto que você quer destacar.
-    </p>
-
-    <a href="#" class="botao">
-        CONHECER O ACHADINHO
-    </a>
-
-</section>
-
-
-<section id="maquiagem">
-
-    <h2 class="titulo">
-        💄 Mais vendidos
-    </h2>
-
-    <div class="produtos">
-
-        <div class="produto">
-
-            <div class="foto">
-                FOTO DO PRODUTO
+            <div class="hero-small">
+                Bem-vinda à For You by Dé
             </div>
 
-            <h3>Gloss</h3>
+            <h2>
+                Beleza que combina
+                <span>com você.</span>
+            </h2>
 
-            <p class="preco">
-                R$ 10,00
+            <p>
+                Maquiagens e produtos de beleza escolhidos
+                especialmente para você. Porque aqui,
+                cada produto precisa valer a pena.
             </p>
 
-            <a href="#" class="comprar">
-                Comprar
+            <a href="#maquiagem" class="button">
+                COMPRAR AGORA
             </a>
 
-        </div>
-
-
-        <div class="produto">
-
-            <div class="foto">
-                FOTO DO PRODUTO
-            </div>
-
-            <h3>Batom</h3>
-
-            <p class="preco">
-                R$ 15,00
-            </p>
-
-            <a href="#" class="comprar">
-                Comprar
-            </a>
-
-        </div>
-
-
-        <div class="produto">
-
-            <div class="foto">
-                FOTO DO PRODUTO
-            </div>
-
-            <h3>Blush</h3>
-
-            <p class="preco">
-                R$ 20,00
-            </p>
-
-            <a href="#" class="comprar">
-                Comprar
-            </a>
-
-        </div>
-
-
-        <div class="produto">
-
-            <div class="foto">
-                FOTO DO PRODUTO
-            </div>
-
-            <h3>Iluminador</h3>
-
-            <p class="preco">
-                R$ 18,00
-            </p>
-
-            <a href="#" class="comprar">
-                Comprar
+            <a href="#achadinho" class="button button-light">
+                VER ACHADINHO
             </a>
 
         </div>
@@ -382,28 +1171,115 @@
 </section>
 
 
-<section id="ofertas">
+<!-- =========================
+     BENEFÍCIOS
+========================= -->
 
-    <h2 class="titulo">
-        🔥 Ofertas
-    </h2>
+<section class="benefits">
 
-    <div class="produtos">
+    <div class="container benefit-grid">
 
-        <div class="produto">
+        <div class="benefit">
 
-            <div class="foto">
-                FOTO DO PRODUTO
-            </div>
+            <div class="benefit-icon">✨</div>
 
-            <h3>Achadinho especial</h3>
+            <strong>Produtos escolhidos</strong>
 
-            <p class="preco">
-                R$ 10,00
+            <span>
+                Testamos antes de colocar na loja
+            </span>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">📦</div>
+
+            <strong>Envio para todo Brasil</strong>
+
+            <span>
+                Receba onde estiver
+            </span>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">💳</div>
+
+            <strong>Pagamento seguro</strong>
+
+            <span>
+                Compre com tranquilidade
+            </span>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">💕</div>
+
+            <strong>Atendimento especial</strong>
+
+            <span>
+                Estamos aqui para ajudar
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CATEGORIAS
+========================= -->
+
+<section class="section" id="categorias">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <small>Encontre seu favorito</small>
+
+            <h2>Compre por categoria</h2>
+
+            <p>
+                Tudo para deixar sua maquiagem ainda mais completa.
             </p>
 
-            <a href="#" class="comprar">
-                Aproveitar
+        </div>
+
+
+        <div class="categories">
+
+            <a href="#" class="category cat-1">
+                <span>💄 Batons</span>
+            </a>
+
+            <a href="#" class="category cat-2">
+                <span>✨ Gloss</span>
+            </a>
+
+            <a href="#" class="category cat-3">
+                <span>🌸 Blush</span>
+            </a>
+
+            <a href="#" class="category cat-4">
+                <span>👁️ Olhos</span>
+            </a>
+
+            <a href="#" class="category cat-5">
+                <span>✨ Iluminador</span>
+            </a>
+
+            <a href="#" class="category cat-6">
+                <span>🧴 Pele</span>
             </a>
 
         </div>
@@ -412,26 +1288,952 @@
 
 </section>
 
+
+<!-- =========================
+     ACHADINHO DA SEMANA
+========================= -->
+
+<section class="section weekly" id="achadinho">
+
+    <div class="container">
+
+        <div class="weekly-box">
+
+            <div class="weekly-image"></div>
+
+
+            <div class="weekly-content">
+
+                <div class="weekly-label">
+                    ✨ ACHADINHO DA SEMANA ✨
+                </div>
+
+                <h2>
+                    O queridinho da vez.
+                </h2>
+
+                <h3>
+                    Produto destaque da semana
+                </h3>
+
+                <p>
+                    Aquele produto que a gente testou,
+                    gostou e pensou:
+                    <strong>“Esse precisa estar na loja!”</strong>
+                </p>
+
+                <div class="price-old">
+                    De R$ 29,90
+                </div>
+
+                <div class="price">
+                    R$ 19,90
+                </div>
+
+                <a href="#" class="button">
+                    QUERO MEU ACHADINHO
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MAIS VENDIDOS
+========================= -->
+
+<section class="section" id="maquiagem">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <small>Os queridinhos</small>
+
+            <h2>Mais vendidos</h2>
+
+            <p>
+                Os produtos que estão fazendo sucesso.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <!-- PRODUTO 1 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Mais vendido
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+                        alt="Batom"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Batom acabamento cremoso
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 15,00
+                    </div>
+
+                    <div class="installment">
+                        ou 2x de R$ 7,50
+                    </div>
+
+                    <button class="add-cart">
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTO 2 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Queridinho
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=700&q=85"
+                        alt="Gloss"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Gloss brilho intenso
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 12,00
+                    </div>
+
+                    <div class="installment">
+                        ou 2x de R$ 6,00
+                    </div>
+
+                    <button class="add-cart">
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTO 3 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge sale">
+                        Oferta
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=700&q=85"
+                        alt="Blush"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Blush efeito natural
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 20,00
+                    </div>
+
+                    <div class="installment">
+                        ou 2x de R$ 10,00
+                    </div>
+
+                    <button class="add-cart">
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTO 4 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Novo
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=700&q=85"
+                        alt="Iluminador"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Iluminador glow
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 18,00
+                    </div>
+
+                    <div class="installment">
+                        ou 2x de R$ 9,00
+                    </div>
+
+                    <button class="add-cart">
+                        ADICIONAR AO CARRINHO
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BANNER
+========================= -->
+
+<section class="mid-banner">
+
+    <div class="container">
+
+        <div class="mid-content">
+
+            <small>
+                FOR YOU BY DÉ
+            </small>
+
+            <h2>
+                Não é só maquiagem.
+                É se sentir bem.
+            </h2>
+
+            <p>
+                A gente acredita que cada produto precisa
+                fazer você se sentir ainda mais você.
+            </p>
+
+            <a href="#categorias" class="button">
+                EXPLORAR PRODUTOS
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     NOVIDADES
+========================= -->
+
+<section class="section" id="novidades">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <small>Acabou de chegar</small>
+
+            <h2>✨ Novidades</h2>
+
+            <p>
+                Produtos novos escolhidos especialmente para você.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Novo
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
+                        alt="Paleta de maquiagem"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Paleta de sombras
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 39,90
+                    </div>
+
+                    <button class="add-cart">
+                        VER PRODUTO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Novo
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
+                        alt="Produtos de maquiagem"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Kit maquiagem
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 49,90
+                    </div>
+
+                    <button class="add-cart">
+                        VER PRODUTO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Novo
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=85"
+                        alt="Cosméticos"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Kit cuidados
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 34,90
+                    </div>
+
+                    <button class="add-cart">
+                        VER PRODUTO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        Novo
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+                        alt="Batom"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-brand">
+                        For You
+                    </div>
+
+                    <h3>
+                        Lip combo
+                    </h3>
+
+                    <div class="product-price">
+                        R$ 29,90
+                    </div>
+
+                    <button class="add-cart">
+                        VER PRODUTO
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOBRE A FOR YOU
+========================= -->
+
+<section class="section">
+
+    <div class="container about">
+
+        <div class="about-image"></div>
+
+
+        <div class="about-content">
+
+            <small>
+                Sobre a For You by Dé
+            </small>
+
+            <h2>
+                Escolher também é cuidar.
+            </h2>
+
+            <p>
+                A For You by Dé nasceu com uma ideia simples:
+                encontrar produtos de beleza que realmente
+                façam sentido para você.
+            </p>
+
+            <p>
+                Aqui, não queremos colocar qualquer produto
+                na loja. Queremos descobrir, testar, gostar
+                e só então compartilhar com você.
+            </p>
+
+            <div class="quote">
+                “Testamos, gostamos e colocamos na loja.”
+            </div>
+
+            <a href="#" class="button">
+                CONHEÇA A FOR YOU
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     OFERTAS
+========================= -->
+
+<section class="section weekly" id="ofertas">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <small>Preços especiais</small>
+
+            <h2>🔥 Ofertas</h2>
+
+            <p>
+                Aproveite enquanto durar o estoque.
+            </p>
+
+        </div>
+
+
+        <div class="product-grid">
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge sale">
+                        -20%
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+                        alt="Batom em oferta"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Batom especial
+                    </h3>
+
+                    <div class="price-old">
+                        R$ 25,00
+                    </div>
+
+                    <div class="product-price">
+                        R$ 20,00
+                    </div>
+
+                    <button class="add-cart">
+                        APROVEITAR OFERTA
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge sale">
+                        -15%
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=700&q=85"
+                        alt="Blush em oferta"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Blush queridinho
+                    </h3>
+
+                    <div class="price-old">
+                        R$ 30,00
+                    </div>
+
+                    <div class="product-price">
+                        R$ 25,50
+                    </div>
+
+                    <button class="add-cart">
+                        APROVEITAR OFERTA
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge sale">
+                        -25%
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
+                        alt="Kit de maquiagem"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Kit especial
+                    </h3>
+
+                    <div class="price-old">
+                        R$ 60,00
+                    </div>
+
+                    <div class="product-price">
+                        R$ 45,00
+                    </div>
+
+                    <button class="add-cart">
+                        APROVEITAR OFERTA
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <span class="badge sale">
+                        -10%
+                    </span>
+
+                    <span class="favorite">
+                        ♡
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=85"
+                        alt="Produtos de beleza"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Kit beleza
+                    </h3>
+
+                    <div class="price-old">
+                        R$ 40,00
+                    </div>
+
+                    <div class="product-price">
+                        R$ 36,00
+                    </div>
+
+                    <button class="add-cart">
+                        APROVEITAR OFERTA
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     NEWSLETTER
+========================= -->
+
+<section class="newsletter">
+
+    <h2>
+        💕 Fique por dentro das novidades
+    </h2>
+
+    <p>
+        Receba lançamentos, achadinhos e ofertas especiais.
+    </p>
+
+
+    <form class="newsletter-form">
+
+        <input
+            type="email"
+            placeholder="Seu melhor e-mail"
+        >
+
+        <button type="submit">
+            QUERO RECEBER
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- =========================
+     RODAPÉ
+========================= -->
 
 <footer>
 
-    <h3>
-        FOR YOU BY DÉ 💕
-    </h3>
+    <div class="container footer-grid">
 
-    <p>
-        Testamos, gostamos e colocamos na loja.
-    </p>
 
-    <p>
-        Maquiagem, beleza e achadinhos para você.
-    </p>
+        <div>
 
-    <p>
-        © 2026 For You by Dé
-    </p>
+            <div class="footer-logo">
+                For You by Dé
+            </div>
+
+            <p>
+                Testamos, gostamos e colocamos na loja. ✨
+            </p>
+
+            <p style="margin-top:10px;">
+                Maquiagens e produtos de beleza
+                escolhidos especialmente para você.
+            </p>
+
+
+            <div class="social">
+
+                <a href="#" title="Instagram">
+                    ◎
+                </a>
+
+                <a href="#" title="TikTok">
+                    ♪
+                </a>
+
+                <a href="#" title="WhatsApp">
+                    ☎
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Loja
+            </h3>
+
+            <a href="#maquiagem">
+                Maquiagem
+            </a>
+
+            <a href="#novidades">
+                Novidades
+            </a>
+
+            <a href="#achadinho">
+                Achadinho da Semana
+            </a>
+
+            <a href="#ofertas">
+                Ofertas
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Atendimento
+            </h3>
+
+            <a href="#">
+                Fale conosco
+            </a>
+
+            <a href="#">
+                WhatsApp
+            </a>
+
+            <a href="#">
+                Trocas e devoluções
+            </a>
+
+            <a href="#">
+                Dúvidas frequentes
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Informações
+            </h3>
+
+            <a href="#">
+                Quem somos
+            </a>
+
+            <a href="#">
+                Política de privacidade
+            </a>
+
+            <a href="#">
+                Termos de uso
+            </a>
+
+            <a href="#">
+                Formas de pagamento
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 For You by Dé — Todos os direitos reservados.
+
+    </div>
 
 </footer>
+
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<a
+    href="#"
+    class="whatsapp"
+    title="Fale conosco pelo WhatsApp"
+>
+    ☎
+</a>
+
 
 </body>
 </html>
