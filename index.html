@@ -3132,6 +3132,86 @@ body.fy23-open .fy23-drawer{transform:translateX(0)}
 @media(min-width:901px){.fy23-overlay,.fy23-drawer{display:none!important}}
 </style>
 
+
+<style id="foryou-v24-category-menu">
+/* ===== FOR YOU V24 — Categorias integradas ao menu ===== */
+@media(min-width:901px){
+  /* Remove the old horizontal category strip completely.
+     Categories now live inside the main navigation. */
+  body.foryou-v19 .fy19-category-nav,
+  .fy19-category-nav{
+    display:none!important;
+  }
+
+  .fy22-links{
+    position:relative;
+  }
+
+  .fy24-mega{
+    position:absolute;
+    left:50%;
+    top:100%;
+    width:min(820px,calc(100vw - 80px));
+    transform:translate(-50%,8px);
+    background:rgba(255,255,255,.98);
+    border:1px solid #eee5e8;
+    box-shadow:0 20px 50px rgba(36,26,30,.11);
+    padding:28px 34px 30px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:38px;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+  }
+
+  .fy24-mega-wrap:hover .fy24-mega,
+  .fy24-mega:hover{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translate(-50%,0);
+  }
+
+  .fy24-mega-title{
+    grid-column:1/-1;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.14em;
+    color:#e91e63;
+    text-transform:uppercase;
+    padding-bottom:12px;
+    border-bottom:1px solid #f1e7ea;
+  }
+
+  .fy24-mega h4{
+    margin:0 0 10px;
+    font-family:Georgia,serif;
+    font-weight:400;
+    font-size:17px;
+    color:#241a1e;
+  }
+
+  .fy24-mega a{
+    display:block;
+    padding:5px 0;
+    color:#75696e;
+    text-decoration:none;
+    font-size:10px;
+  }
+
+  .fy24-mega a:hover{
+    color:#e91e63;
+  }
+}
+
+/* Remove the old category area on all screen sizes. */
+.fy19-category-nav{
+  display:none!important;
+}
+</style>
+
 </head>
 
 <body>
@@ -7578,6 +7658,65 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(build,300));
+})();
+</script>
+
+
+<script id="foryou-v24-category-menu-script">
+(function(){
+  function buildMegaMenu(){
+    const links=document.querySelector('.fy22-links');
+    if(!links || document.querySelector('.fy24-mega-wrap')) return;
+
+    const makeup=[...links.querySelectorAll('a')].find(a=>
+      (a.textContent||'').trim().toLowerCase()==='maquiagem'
+    );
+    if(!makeup)return;
+
+    const wrap=document.createElement('div');
+    wrap.className='fy24-mega-wrap';
+    wrap.style.display='contents';
+
+    const mega=document.createElement('div');
+    mega.className='fy24-mega';
+    mega.innerHTML=`
+      <div class="fy24-mega-title">MAQUIAGEM</div>
+
+      <div>
+        <h4>Rosto</h4>
+        <a href="#">Base</a>
+        <a href="#">Corretivo</a>
+        <a href="#">Blush</a>
+        <a href="#">Contorno</a>
+      </div>
+
+      <div>
+        <h4>Olhos</h4>
+        <a href="#">Máscara</a>
+        <a href="#">Delineador</a>
+        <a href="#">Sombras</a>
+        <a href="#">Sobrancelhas</a>
+      </div>
+
+      <div>
+        <h4>Lábios</h4>
+        <a href="#">Batom</a>
+        <a href="#">Gloss</a>
+        <a href="#">Lip tint</a>
+        <a href="#">Contorno labial</a>
+      </div>`;
+
+    makeup.parentNode.insertBefore(wrap,makeup);
+    wrap.appendChild(makeup);
+    wrap.appendChild(mega);
+
+    // The old V22 hover menu is replaced by this cleaner version.
+    const oldMega=links.querySelector('.fy22-mega');
+    if(oldMega)oldMega.remove();
+    makeup.classList.add('fy24-makeup');
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(buildMegaMenu,350));
 })();
 </script>
 
