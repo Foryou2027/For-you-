@@ -2783,7 +2783,7 @@ required
 
 <div>
 
-<div class="footer-logo">FOR YOU</div>
+<div class="footer-logo" id="adminSecretLogo" title="FOR YOU">FOR YOU</div>
 
 <p>
 Maquiagem, skincare, corpo,
@@ -5414,7 +5414,12 @@ function renderFidelidade(){const conta=contaSalva();const pontos=conta&&Number(
 const ADMIN_PASSWORD='ForYouAdmin2026';
 function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1';}
 function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');if(card)card.style.display=adminAutenticado()?'block':'none';}
+let toquesAdminLogo=0,ultimoToqueAdminLogo=0;
+function iniciarAcessoAdminLogo(){const agora=Date.now();if(agora-ultimoToqueAdminLogo>1800)toquesAdminLogo=0;ultimoToqueAdminLogo=agora;toquesAdminLogo++;if(toquesAdminLogo>=5){toquesAdminLogo=0;abrirAdminLogin();}}
+document.addEventListener('DOMContentLoaded',function(){const logo=document.getElementById('adminSecretLogo');if(logo){logo.style.cursor='pointer';logo.addEventListener('click',iniciarAcessoAdminLogo);}});
 function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito à administração\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
+// Acesso administrativo discreto: Ctrl + Shift + A
+document.addEventListener('keydown',function(event){if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==='a'){event.preventDefault();abrirAdminLogin();}});
 function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
 function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
 function renderAdmin(){
