@@ -1,204 +1,491 @@
-<header class="top-header">
+<!-- =========================
+     MENU PRINCIPAL
+========================= -->
 
-    <!-- FOR YOU CENTRALIZADO -->
-    <div class="logo">
-        FOR YOU
+<nav class="menu-principal">
+
+  <div class="menu-lista">
+
+    <a href="#" class="menu-link" onclick="irInicio(event)">
+      Início
+    </a>
+
+    <div class="menu-item">
+      <button class="menu-link" onclick="toggleSubmenu('menuMaquiagem', event)">
+        Maquiagem <span>⌄</span>
+      </button>
+
+      <div class="mega-menu" id="menuMaquiagem">
+
+        <div class="mega-coluna">
+          <h3>Rosto</h3>
+          <a href="#">Base</a>
+          <a href="#">Corretivo</a>
+          <a href="#">Blush</a>
+          <a href="#">Contorno</a>
+          <a href="#">Iluminador</a>
+        </div>
+
+        <div class="mega-coluna">
+          <h3>Olhos</h3>
+          <a href="#">Máscara</a>
+          <a href="#">Delineador</a>
+          <a href="#">Sombras</a>
+          <a href="#">Paletas</a>
+          <a href="#">Sobrancelhas</a>
+        </div>
+
+        <div class="mega-coluna">
+          <h3>Lábios</h3>
+          <a href="#">Batom</a>
+          <a href="#">Gloss</a>
+          <a href="#">Lip Tint</a>
+          <a href="#">Lip Balm</a>
+          <a href="#">Lápis de Boca</a>
+        </div>
+
+      </div>
     </div>
 
-    <!-- ÍCONES À DIREITA -->
-    <div class="header-actions">
 
-        <!-- FAVORITOS -->
-        <button
-            class="favorite-header"
-            onclick="abrirFavoritos()"
-            aria-label="Favoritos"
-            title="Favoritos">
-            ♥
-        </button>
+    <div class="menu-item">
+      <button class="menu-link" onclick="toggleSubmenu('menuSkincare', event)">
+        Skincare <span>⌄</span>
+      </button>
 
-        <!-- CARRINHO -->
-        <button
-            class="cart-button"
-            onclick="abrirCarrinho()"
-            aria-label="Carrinho"
-            title="Carrinho">
-            🛒
-            <span id="cartCount">0</span>
-        </button>
+      <div class="mega-menu" id="menuSkincare">
 
+        <div class="mega-coluna">
+          <h3>Cuidados</h3>
+          <a href="#">Limpeza</a>
+          <a href="#">Sérum</a>
+          <a href="#">Hidratante</a>
+          <a href="#">Máscara Facial</a>
+        </div>
+
+        <div class="mega-coluna">
+          <h3>Proteção</h3>
+          <a href="#">Protetor Solar</a>
+          <a href="#">Água Micelar</a>
+          <a href="#">Bruma</a>
+        </div>
+
+      </div>
     </div>
 
-</header>
+
+    <div class="menu-item">
+      <button class="menu-link" onclick="toggleSubmenu('menuCabelos', event)">
+        Cabelos <span>⌄</span>
+      </button>
+
+      <div class="mega-menu" id="menuCabelos">
+
+        <div class="mega-coluna">
+          <h3>Cuidados</h3>
+          <a href="#">Shampoo</a>
+          <a href="#">Condicionador</a>
+          <a href="#">Máscaras</a>
+          <a href="#">Finalizadores</a>
+        </div>
+
+        <div class="mega-coluna">
+          <h3>Acessórios</h3>
+          <a href="#">Escovas</a>
+          <a href="#">Pentes</a>
+          <a href="#">Presilhas</a>
+          <a href="#">Elásticos</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="menu-item">
+      <button class="menu-link" onclick="toggleSubmenu('menuPerfumes', event)">
+        Perfumes <span>⌄</span>
+      </button>
+
+      <div class="mega-menu" id="menuPerfumes">
+
+        <div class="mega-coluna">
+          <h3>Perfumes</h3>
+          <a href="#">Femininos</a>
+          <a href="#">Masculinos</a>
+          <a href="#">Body Splash</a>
+          <a href="#">Miniaturas</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="menu-item">
+      <button class="menu-link" onclick="toggleSubmenu('menuCorpo', event)">
+        Corpo <span>⌄</span>
+      </button>
+
+      <div class="mega-menu" id="menuCorpo">
+
+        <div class="mega-coluna">
+          <h3>Cuidados</h3>
+          <a href="#">Hidratante Corporal</a>
+          <a href="#">Esfoliante</a>
+          <a href="#">Sabonete</a>
+          <a href="#">Óleo Corporal</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <a href="#" class="menu-link oferta-menu" onclick="abrirOfertas(event)">
+      Ofertas
+    </a>
+
+  </div>
+
+</nav>
+
 
 <style>
-/* ==============================
-   CABEÇALHO FOR YOU
-================================ */
 
-.top-header {
-    position: relative;
-    width: 100%;
-    height: 78px;
+/* =========================
+   MENU EM LINHA RETA
+========================= */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #fff;
-    border-bottom: 1px solid #f8dce8;
+.menu-principal{
+  width:100%;
+  background:#fff;
+  border-top:1px solid #f3e8eb;
+  border-bottom:1px solid #ead9de;
 }
 
-/* ==============================
-   NOME FOR YOU
-================================ */
+.menu-lista{
+  max-width:1250px;
+  margin:auto;
 
-.top-header .logo {
-    position: absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    left: 50%;
-    top: 50%;
+  flex-wrap:nowrap;
 
-    transform: translate(-50%, -50%);
+  gap:4px;
 
-    margin: 0;
-    padding: 0;
-
-    color: #000;
-
-    font-size: 30px;
-    font-weight: 800;
-
-    letter-spacing: 3px;
-
-    text-align: center;
-
-    white-space: nowrap;
-
-    cursor: pointer;
+  padding:12px 20px;
 }
 
-/* ==============================
-   ÁREA DOS ÍCONES
-================================ */
-
-.header-actions {
-    position: absolute;
-
-    right: 25px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    display: flex;
-    align-items: center;
-
-    gap: 15px;
+.menu-item{
+  position:relative;
+  flex-shrink:0;
 }
 
-/* ==============================
-   CORAÇÃO
-================================ */
+.menu-link{
+  display:flex;
+  align-items:center;
+  gap:6px;
 
-.favorite-header {
-    position: relative;
+  height:38px;
 
-    border: none;
-    background: transparent;
+  padding:0 17px;
 
-    color: #e60023;
+  border:0;
+  background:transparent;
 
-    font-size: 30px;
-    line-height: 1;
+  color:#351f27;
 
-    cursor: pointer;
+  text-decoration:none;
 
-    padding: 5px;
+  font-size:11px;
+  font-weight:bold;
 
-    transition: transform 0.2s ease;
+  letter-spacing:.4px;
+
+  white-space:nowrap;
+
+  cursor:pointer;
+
+  transition:.2s ease;
 }
 
-.favorite-header:hover {
-    transform: scale(1.15);
+.menu-link:hover{
+  color:#b83f61;
 }
 
-/* ==============================
-   CARRINHO
-================================ */
-
-.cart-button {
-    position: relative;
-
-    border: none;
-    background: transparent;
-
-    font-size: 27px;
-    line-height: 1;
-
-    cursor: pointer;
-
-    padding: 5px;
-
-    transition: transform 0.2s ease;
+.menu-link span{
+  font-size:12px;
+  transition:.2s;
 }
 
-.cart-button:hover {
-    transform: scale(1.1);
+.menu-link.aberto span{
+  transform:rotate(180deg);
 }
 
-/* ==============================
-   CONTADOR DO CARRINHO
-================================ */
 
-#cartCount {
-    position: absolute;
+/* =========================
+   MEGA MENU
+========================= */
 
-    top: -7px;
-    right: -8px;
+.mega-menu{
+  position:absolute;
 
-    min-width: 18px;
-    height: 18px;
+  top:48px;
+  left:50%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  transform:translateX(-50%) translateY(8px);
 
-    background: #e60023;
-    color: #fff;
+  width:600px;
 
-    border-radius: 50%;
+  background:#fff;
 
-    font-size: 11px;
-    font-weight: 700;
+  border:1px solid #ead9de;
+
+  border-radius:0 0 14px 14px;
+
+  box-shadow:
+    0 18px 45px rgba(53,31,39,.12);
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:30px;
+
+  padding:28px;
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease,
+    visibility .2s ease;
+
+  z-index:500;
 }
 
-/* ==============================
+.mega-menu.aberto{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+
+  transform:translateX(-50%) translateY(0);
+}
+
+
+/* =========================
+   COLUNAS
+========================= */
+
+.mega-coluna h3{
+  font-family:Georgia,serif;
+
+  font-size:17px;
+
+  font-weight:normal;
+
+  color:#351f27;
+
+  margin-bottom:12px;
+
+  padding-bottom:9px;
+
+  border-bottom:1px solid #f0e3e7;
+}
+
+.mega-coluna a{
+  display:block;
+
+  padding:6px 0;
+
+  color:#74666c;
+
+  text-decoration:none;
+
+  font-size:10px;
+
+  transition:.2s;
+}
+
+.mega-coluna a:hover{
+  color:#b83f61;
+
+  padding-left:4px;
+}
+
+
+/* =========================
+   OFERTAS
+========================= */
+
+.oferta-menu{
+  color:#e91e63;
+  font-weight:bold;
+}
+
+.oferta-menu:hover{
+  color:#c2185b;
+}
+
+
+/* =========================
    CELULAR
-================================ */
+========================= */
 
-@media (max-width: 600px) {
+@media(max-width:900px){
 
-    .top-header {
-        height: 68px;
-    }
+  .menu-lista{
+    justify-content:flex-start;
 
-    .top-header .logo {
-        font-size: 24px;
-        letter-spacing: 2px;
-    }
+    overflow-x:auto;
 
-    .header-actions {
-        right: 12px;
-        gap: 8px;
-    }
+    flex-wrap:nowrap;
 
-    .favorite-header {
-        font-size: 25px;
-    }
+    scrollbar-width:none;
 
-    .cart-button {
-        font-size: 23px;
-    }
+    padding:10px 14px;
+  }
+
+  .menu-lista::-webkit-scrollbar{
+    display:none;
+  }
+
+  .menu-link{
+    padding:0 13px;
+    font-size:10px;
+  }
+
+  .mega-menu{
+    position:fixed;
+
+    top:115px;
+    left:15px;
+    right:15px;
+
+    width:auto;
+
+    transform:translateY(8px);
+
+    grid-template-columns:1fr 1fr;
+
+    max-height:70vh;
+
+    overflow:auto;
+
+    border-radius:14px;
+  }
+
+  .mega-menu.aberto{
+    transform:translateY(0);
+  }
 
 }
+
 </style>
+
+
+<script>
+
+/* =========================
+   ABRIR / FECHAR SUBMENU
+========================= */
+
+function toggleSubmenu(id,event){
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const menu=document.getElementById(id);
+
+  if(!menu) return;
+
+  const jaAberto=menu.classList.contains("aberto");
+
+  // fecha todos
+  document.querySelectorAll(".mega-menu").forEach(function(item){
+    item.classList.remove("aberto");
+  });
+
+  document.querySelectorAll(".menu-link").forEach(function(item){
+    item.classList.remove("aberto");
+  });
+
+  // abre o escolhido
+  if(!jaAberto){
+
+    menu.classList.add("aberto");
+
+    const botao=event.currentTarget;
+
+    if(botao){
+      botao.classList.add("aberto");
+    }
+
+  }
+
+}
+
+
+/* =========================
+   CLICAR FORA
+========================= */
+
+document.addEventListener("click",function(event){
+
+  if(
+    !event.target.closest(".menu-item") &&
+    !event.target.closest(".mega-menu")
+  ){
+
+    document.querySelectorAll(".mega-menu").forEach(function(item){
+      item.classList.remove("aberto");
+    });
+
+    document.querySelectorAll(".menu-link").forEach(function(item){
+      item.classList.remove("aberto");
+    });
+
+  }
+
+});
+
+
+/* =========================
+   INÍCIO
+========================= */
+
+function irInicio(event){
+
+  if(event){
+    event.preventDefault();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   OFERTAS
+========================= */
+
+function abrirOfertas(event){
+
+  if(event){
+    event.preventDefault();
+  }
+
+  // Se sua loja já possui a função abrirOfertas,
+  // ela continuará sendo utilizada.
+  if(typeof window.mostrarOfertas==="function"){
+    window.mostrarOfertas();
+  }
+
+}
+
+</script>
