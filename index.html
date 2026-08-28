@@ -2641,6 +2641,92 @@ header, .header, .topo, .navbar{
 }
 </style>
 
+
+<style id="foryou-v19-categories">
+/* ===== FOR YOU V19 — Categorias em lista ===== */
+.fy19-category-nav{
+  max-width:1240px;
+  margin:0 auto;
+  padding:8px 24px 0;
+  border-bottom:1px solid #eee5e8;
+  background:#fff;
+  overflow:hidden;
+}
+.fy19-category-list{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:30px;
+  min-height:48px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.fy19-category-list::-webkit-scrollbar{display:none}
+.fy19-category-list a{
+  position:relative;
+  flex:0 0 auto;
+  padding:13px 1px 12px;
+  color:#55484d;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  text-decoration:none;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  transition:color .2s ease;
+}
+.fy19-category-list a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:2px;
+  border-radius:2px;
+  background:#e91e63;
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .2s ease;
+}
+.fy19-category-list a:hover{
+  color:#e91e63!important;
+  transform:none!important;
+}
+.fy19-category-list a:hover::after,
+.fy19-category-list a.active::after,
+.fy19-category-list a[aria-current="page"]::after{
+  transform:scaleX(1);
+}
+.fy19-category-list a.active,
+.fy19-category-list a[aria-current="page"]{
+  color:#e91e63!important;
+}
+
+/* Hide the old boxed category presentation if the generated list is present. */
+body.foryou-v19 .categorias:not(.fy19-original-hidden),
+body.foryou-v19 .categories:not(.fy19-original-hidden),
+body.foryou-v19 .category-list:not(.fy19-original-hidden){
+  display:none!important;
+}
+@media(max-width:700px){
+  .fy19-category-nav{
+    padding:4px 16px 0;
+  }
+  .fy19-category-list{
+    justify-content:flex-start;
+    gap:23px;
+    min-height:45px;
+  }
+  .fy19-category-list a{
+    font-size:9px;
+    padding:12px 0 11px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -6760,6 +6846,56 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(polishEntry,120));
+})();
+</script>
+
+
+<script id="foryou-v19-categories-script">
+(function(){
+  function makeCategoryList(){
+    if(document.querySelector('.fy19-category-nav')) return;
+
+    const original =
+      document.querySelector('.categorias') ||
+      document.querySelector('.categories') ||
+      document.querySelector('.category-list');
+
+    if(!original) return;
+
+    const links=[...original.querySelectorAll('a')].filter(a=>(a.textContent||'').trim());
+    if(!links.length) return;
+
+    const nav=document.createElement('nav');
+    nav.className='fy19-category-nav';
+    nav.setAttribute('aria-label','Categorias');
+
+    const list=document.createElement('div');
+    list.className='fy19-category-list';
+
+    links.forEach((oldLink,index)=>{
+      const a=document.createElement('a');
+      a.href=oldLink.getAttribute('href') || '#';
+      a.textContent=(oldLink.textContent||'').trim();
+      a.dataset.categoryIndex=index;
+      a.addEventListener('click',function(){
+        list.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+        a.classList.add('active');
+      });
+      list.appendChild(a);
+    });
+
+    nav.appendChild(list);
+    original.parentNode.insertBefore(nav,original);
+    original.classList.add('fy19-original-hidden');
+
+    // First item starts as the active navigation state.
+    if(list.firstElementChild) list.firstElementChild.classList.add('active');
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    document.body.classList.add('foryou-v19');
+    setTimeout(makeCategoryList,180);
+  });
 })();
 </script>
 
