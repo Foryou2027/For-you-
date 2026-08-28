@@ -146,7 +146,8 @@ header{
 }
 
 /* =========================
-   CATEGORIAS COM BORDAS
+   CATEGORIAS
+   COR DO MENU PRINCIPAL
 ========================= */
 
 .menu-item{
@@ -154,16 +155,16 @@ header{
 }
 
 .menu-btn{
-  border:1.5px solid #e39aae;
-  background:#fff;
-  color:#b83f61;
+  border:1.5px solid #351f27;
+  background:#351f27;
+  color:white;
   padding:11px 17px;
   font-size:11px;
   font-weight:bold;
   letter-spacing:.5px;
   border-radius:22px;
   transition:.25s ease;
-  box-shadow:0 3px 10px rgba(184,63,97,.08);
+  box-shadow:0 3px 10px rgba(53,31,39,.12);
 }
 
 .menu-btn:hover,
@@ -267,13 +268,14 @@ header{
 .busca{
   max-width:620px;
   margin:17px auto 0;
+  position:relative;
 }
 
 .busca input{
   width:100%;
   border:1px solid #dfc8cf;
   border-radius:30px;
-  padding:14px 20px;
+  padding:14px 50px 14px 20px;
   outline:none;
   background:#fff;
   font-size:12px;
@@ -281,6 +283,58 @@ header{
 
 .busca input:focus{
   border-color:#b83f61;
+}
+
+.resultado-busca{
+  display:none;
+  position:absolute;
+  top:52px;
+  left:0;
+  right:0;
+  background:white;
+  border:1px solid #ead9de;
+  border-radius:12px;
+  box-shadow:0 10px 25px #0002;
+  z-index:400;
+  overflow:hidden;
+  text-align:left;
+}
+
+.resultado-busca.ativo{
+  display:block;
+}
+
+.resultado-item{
+  padding:12px 16px;
+  border-bottom:1px solid #f3e6e9;
+  cursor:pointer;
+}
+
+.resultado-item:last-child{
+  border-bottom:0;
+}
+
+.resultado-item:hover{
+  background:#fff0f4;
+}
+
+.resultado-item strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:15px;
+  color:#351f27;
+}
+
+.resultado-item span{
+  font-size:9px;
+  color:#a88955;
+}
+
+.sem-resultado{
+  padding:16px;
+  text-align:center;
+  color:#888;
+  font-size:10px;
 }
 
 /* =========================
@@ -463,7 +517,7 @@ header{
 ========================= */
 
 .ofertas{
-  background:white;
+  background:#fff8fa;
 }
 
 /* =========================
@@ -1332,8 +1386,15 @@ onclick="document.getElementById('kits').scrollIntoView()"
 id="busca"
 type="text"
 placeholder="Buscar produto..."
-onkeyup="buscarProdutos()"
+oninput="buscarProdutos()"
+autocomplete="off"
 >
+
+<div
+class="resultado-busca"
+id="resultadoBusca"
+>
+</div>
 
 </div>
 
@@ -3341,37 +3402,198 @@ function selecionarEntrega(tipo){
 
 
 /* =========================
-   BUSCA
+   BUSCA DE PRODUTOS
 ========================= */
 
 function buscarProdutos(){
 
+  const campo =
+  document.getElementById("busca");
+
+  const resultado =
+  document.getElementById("resultadoBusca");
+
   const termo =
-  document
-  .getElementById("busca")
-  .value
-  .toLowerCase();
+  campo.value
+  .toLowerCase()
+  .trim();
 
 
-  document
-  .querySelectorAll(".produto")
-  .forEach(
-    produto => {
+  if(!termo){
 
-      const texto =
-      produto.innerText
-      .toLowerCase();
+    resultado.innerHTML = "";
+
+    resultado.classList.remove("ativo");
+
+    return;
+
+  }
 
 
-      produto.style.display =
-      texto.includes(termo)
-      ? "block"
-      : "none";
+  const produtos =
+  document.querySelectorAll(".produto");
+
+  const encontrados = [];
+
+
+  produtos.forEach(produto => {
+
+    const nome =
+    produto.querySelector(".nome");
+
+    const marca =
+    produto.querySelector(".marca");
+
+    if(!nome) return;
+
+    const nomeTexto =
+    nome.innerText.toLowerCase();
+
+    const marcaTexto =
+    marca
+    ? marca.innerText.toLowerCase()
+    : "";
+
+
+    if(
+      nomeTexto.includes(termo) ||
+      marcaTexto.includes(termo)
+    ){
+
+      if(
+        !encontrados.some(
+          item =>
+          item.nome === nome.innerText
+        )
+      ){
+
+        encontrados.push({
+          nome:nome.innerText,
+          marca:marca
+            ? marca.innerText
+            : "",
+          elemento:produto
+        });
+
+      }
 
     }
-  );
+
+  });
+
+
+  if(encontrados.length === 0){
+
+    resultado.innerHTML = `
+      <div class="sem-resultado">
+        Nenhum produto encontrado.
+      </div>
+    `;
+
+    resultado.classList.add("ativo");
+
+    return;
+
+  }
+
+
+  resultado.innerHTML = encontrados
+  .map((item,index) => `
+
+    <div
+      class="resultado-item"
+      onclick="abrirResultadoBusca(${index})"
+    >
+
+      <strong>
+        ${item.nome}
+      </strong>
+
+      <span>
+        ${item.marca}
+      </span>
+
+    </div>
+
+  `)
+  .join("");
+
+
+  window.resultadosBusca =
+  encontrados;
+
+  resultado.classList.add("ativo");
 
 }
+
+
+function abrirResultadoBusca(index){
+
+  const resultado =
+  window.resultadosBusca[index];
+
+  if(!resultado) return;
+
+
+  document
+  .getElementById("resultadoBusca")
+  .classList.remove("ativo");
+
+
+  document
+  .getElementById("busca")
+  .value =
+  resultado.nome;
+
+
+  resultado.elemento.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+
+  resultado.elemento.style.transition =
+  "box-shadow .3s";
+
+
+  resultado.elemento.style.boxShadow =
+  "0 0 0 3px #b83f61";
+
+
+  setTimeout(() => {
+
+    resultado.elemento.style.boxShadow =
+    "";
+
+  },2000);
+
+}
+
+
+/* =========================
+   CLICAR FORA DA BUSCA
+========================= */
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const busca =
+    document.querySelector(".busca");
+
+    if(
+      busca &&
+      !busca.contains(event.target)
+    ){
+
+      document
+      .getElementById("resultadoBusca")
+      .classList.remove("ativo");
+
+    }
+
+  }
+);
 
 
 /* =========================
