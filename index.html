@@ -2371,7 +2371,7 @@ Promoções de datas especiais
 
 <div class="conta-card" onclick="abrirFidelidade()"><h3>✨ FOR YOU Club</h3><p>Acompanhe seus pontos e benefícios.</p></div>
 
-<div class="conta-card" onclick="abrirAdmin()"><h3>⚙️ Painel administrativo</h3><p>Gerencie produtos, estoque, pedidos e ofertas.</p></div>
+<div class="conta-card" id="adminCard" onclick="abrirAdminLogin()" style="display:none"><h3>⚙️ Painel administrativo</h3><p>Gerencie produtos, estoque, pedidos e ofertas.</p></div>
 
 <div class="conta-card" onclick="abrirFavoritos()">
 <h3>♡ Favoritos</h3>
@@ -2544,7 +2544,8 @@ Promoções de datas especiais
     </div>
     <div class="admin-card">
       <h3>Gestão de produtos</h3>
-      <div class="admin-actions"><button class="principal" onclick="adminAdicionarProduto()">+ ADICIONAR PRODUTO</button><button onclick="adminAlterarEstoque()">ALTERAR ESTOQUE</button><button onclick="adminPromocao()">CRIAR PROMOÇÃO</button></div>
+      <div class="admin-actions"><button class="principal" onclick="adminAdicionarProduto()">+ ADICIONAR PRODUTO</button><button onclick="adminEditarProduto()">EDITAR PRODUTO</button><button onclick="adminExcluirProduto()">EXCLUIR PRODUTO</button><button onclick="adminAlterarEstoque()">ALTERAR ESTOQUE</button><button onclick="adminPromocao()">CRIAR PROMOÇÃO</button><button onclick="adminRestaurarCatalogo()">RESTAURAR CATÁLOGO</button><div style="margin-top:12px"><button class="admin-btn" onclick="sairAdmin()">🔒 SAIR DO ADMINISTRADOR</button></div>
+      </div>
       <div style="overflow:auto;margin-top:15px"><table class="admin-table"><thead><tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Status</th></tr></thead><tbody id="adminTabelaProdutos"></tbody></table></div>
     </div>
     <div class="admin-card">
@@ -2986,7 +2987,7 @@ const VALOR_FRETE_GRATIS = 150;
    PRODUTOS
 ========================= */
 
-const produtos = [
+let produtos = [
 
 {
 id:1,
@@ -3167,6 +3168,12 @@ descricao:"Uma combinação especial para presentear."
 
 ];
 
+
+/* Catálogo persistente do administrador */
+try {
+  const catalogoSalvo = JSON.parse(localStorage.getItem('forYouCatalogo') || 'null');
+  if(Array.isArray(catalogoSalvo) && catalogoSalvo.length) produtos = catalogoSalvo;
+} catch(e) {}
 
 /* =========================
    ESTADOS
@@ -3726,6 +3733,8 @@ favoritos.push(id);
 }
 
 salvarFavoritos();
+
+atualizarAcessoAdmin();
 
 renderProdutos();
 
@@ -5141,11 +5150,20 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharPoliti
 ========================= */
 function abrirFidelidade(){fecharTodasPaginas();document.getElementById('paginaFidelidade').classList.add('ativa');renderFidelidade();window.scrollTo({top:0,behavior:'smooth'});}
 function renderFidelidade(){const conta=contaSalva();const pontos=conta&&Number(conta.pontos||0)||0;const el=document.getElementById('pontosCliente');if(el)el.textContent=pontos.toLocaleString('pt-BR');const nivel=pontos>=1000?'FOR YOU DIAMOND':pontos>=500?'FOR YOU GOLD':'FOR YOU';const prox=pontos>=1000?0:pontos>=500?1000-pontos:500-pontos;const pct=pontos>=1000?100:Math.min(100,(pontos%500)/5);const n=document.getElementById('nivelCliente');const b=document.getElementById('barraPontos');const t=document.getElementById('textoProgresso');if(n)n.textContent='Nível '+nivel;if(b)b.style.width=pct+'%';if(t)t.textContent=prox?`Faltam ${prox} pontos para o próximo nível.`:'Você alcançou o nível máximo atual.';}
-function abrirAdmin(){fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
+const ADMIN_PASSWORD='ForYouAdmin2026';
+function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1';}
+function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');if(card)card.style.display=adminAutenticado()?'block':'none';}
+function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito à administração\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
+function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
+function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
 function renderAdmin(){const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;const pedidos=Object.values(localStorage).filter(k=>k).reduce((n,v)=>{try{const x=JSON.parse(v);return n+(Array.isArray(x)?x.filter(i=>i&&i.numero).length:0)}catch(e){return n}},0);document.getElementById('adminProdutos').textContent=produtos.length;document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;document.getElementById('adminPedidos').textContent=pedidos;document.getElementById('adminClientes').textContent=localStorage.getItem('forYouConta')?1:0;const tb=document.getElementById('adminTabelaProdutos');tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');const pedidosEl=document.getElementById('adminTabelaPedidos');const conta=contaSalva();const lista=(conta&&conta.pedidos)||[];pedidosEl.innerHTML=lista.length?lista.slice(-8).reverse().map(p=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))} • <span>${p.status||'Confirmado'}</span></div>`).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';const total=lista.reduce((s,p)=>s+Number(p.total||0),0);document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(total)}</p><p><strong>Ticket médio:</strong> ${lista.length?moeda(total/lista.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;}
-function adminAdicionarProduto(){const nome=prompt('Nome do produto:');if(!nome)return;const preco=Number((prompt('Preço:')||'0').replace(',','.'));if(!preco)return;const estoque=Math.max(0,Number(prompt('Estoque inicial:')||0));produtos.push({id:'admin-'+Date.now(),nome:nome.trim(),preco,estoque,categoria:'Novidades',marca:'FOR YOU'});renderAdmin();renderProdutos();renderMaisVendidos();renderUltimasUnidades();alert('Produto adicionado ao catálogo desta sessão.');}
-function adminAlterarEstoque(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const n=Number(prompt('Novo estoque:',p.estoque||0));if(Number.isNaN(n)||n<0)return;p.estoque=n;renderAdmin();renderProdutos();renderUltimasUnidades();alert('Estoque atualizado.');}
-function adminPromocao(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novo=Number((prompt('Novo preço promocional:',p.preco)||'0').replace(',','.'));if(!novo||novo>=p.preco){alert('O preço promocional deve ser menor que o atual.');return;}p.precoAntigo=p.preco;p.preco=novo;renderAdmin();renderProdutos();renderOfertas();alert('Promoção criada.');}
+function salvarCatalogoAdmin(){localStorage.setItem('forYouCatalogo',JSON.stringify(produtos));}
+function adminAdicionarProduto(){const nome=prompt('Nome do produto:');if(!nome)return;const preco=Number((prompt('Preço:')||'0').replace(',','.'));if(Number.isNaN(preco)||preco<0)return;const estoque=Math.max(0,Number(prompt('Estoque inicial:')||0));const categoria=prompt('Categoria:','Novidades')||'Novidades';const marca=prompt('Marca:','FOR YOU')||'FOR YOU';produtos.push({id:'admin-'+Date.now(),nome:nome.trim(),preco,estoque,categoria:categoria.trim(),marca:marca.trim()});salvarCatalogoAdmin();renderAdmin();renderProdutos();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto adicionado e salvo neste navegador.');}
+function adminEditarProduto(){const nome=prompt('Digite o nome exato do produto que deseja editar:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novoNome=prompt('Nome:',p.nome);if(novoNome===null)return;const novoPreco=Number((prompt('Preço:',p.preco)||p.preco).replace(',','.'));if(Number.isNaN(novoPreco)||novoPreco<0)return;const categoria=prompt('Categoria:',p.categoria||'Novidades');if(categoria===null)return;const marca=prompt('Marca:',p.marca||'FOR YOU');if(marca===null)return;p.nome=novoNome.trim()||p.nome;p.preco=novoPreco;p.categoria=categoria.trim()||p.categoria;p.marca=marca.trim()||p.marca;salvarCatalogoAdmin();renderAdmin();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto atualizado.');}
+function adminExcluirProduto(){const nome=prompt('Digite o nome exato do produto que deseja excluir:');if(!nome)return;const i=produtos.findIndex(x=>x.nome.toLowerCase()===nome.toLowerCase());if(i<0){alert('Produto não encontrado.');return;}if(!confirm('Excluir definitivamente este produto do catálogo deste navegador?'))return;const id=produtos[i].id;produtos.splice(i,1);carrinho=carrinho.filter(x=>x.id!==id);favoritos=favoritos.filter(x=>x!==id);salvarCatalogoAdmin();localStorage.setItem('forYouCarrinho',JSON.stringify(carrinho));localStorage.setItem('forYouFavoritos',JSON.stringify(favoritos));renderAdmin();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();atualizar();alert('Produto excluído.');}
+function adminRestaurarCatalogo(){if(!confirm('Restaurar o catálogo original? As alterações feitas pelo administrador serão perdidas.'))return;localStorage.removeItem('forYouCatalogo');location.reload();}
+function adminAlterarEstoque(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const n=Number(prompt('Novo estoque:',p.estoque||0));if(Number.isNaN(n)||n<0)return;p.estoque=n;salvarCatalogoAdmin();renderAdmin();renderProdutos();renderUltimasUnidades();alert('Estoque atualizado.');}
+function adminPromocao(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novo=Number((prompt('Novo preço promocional:',p.preco)||'0').replace(',','.'));if(!novo||novo>=p.preco){alert('O preço promocional deve ser menor que o atual.');return;}p.precoAntigo=p.preco;p.preco=novo;salvarCatalogoAdmin();renderAdmin();renderProdutos();renderOfertas();alert('Promoção criada.');}
 
 /* =========================
    INICIALIZAR
