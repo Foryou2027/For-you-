@@ -2031,6 +2031,34 @@ footer p{
 }
 
 </style>
+
+<style id="cards-premium-v11">
+.produto{border:1px solid #eee1e5;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 3px 14px rgba(53,31,39,.035);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+.produto:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(53,31,39,.10);border-color:#e8cbd3;}
+.produto-img{height:310px;background:#faf5f7;}
+.produto-img img{object-fit:cover;transition:transform .45s ease;}
+.produto:hover .produto-img img{transform:scale(1.035);}
+.etiqueta,.selo-vendido,.selo-ultimas,.selo-desconto{border-radius:999px;padding:7px 10px;font-size:8px;letter-spacing:.4px;font-weight:700;}
+.etiqueta{top:12px;left:12px;}
+.selo-vendido{position:absolute;top:48px;left:12px;background:#351f27;color:#fff;z-index:3;}
+.selo-ultimas{position:absolute;top:84px;left:12px;background:#b83f61;color:#fff;z-index:3;}
+.selo-desconto{position:absolute;top:12px;right:58px;background:#a88955;color:#fff;z-index:3;}
+.favoritar{right:12px;top:12px;width:38px;height:38px;border:1px solid #eee1e5;font-size:20px;box-shadow:0 5px 14px rgba(53,31,39,.10);transition:.2s;}
+.favoritar:hover{transform:scale(1.06);}
+.produto-info{padding:18px 18px 20px;}
+.marca{font-size:9px;letter-spacing:1.3px;}
+.nome{font-size:19px;line-height:1.28;min-height:49px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:7px 0 5px;}
+.estrelas{margin:8px 0 9px;font-size:11px;}
+.preco{font-size:20px;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;}
+.preco-antigo{font-size:11px;}
+.desconto-percentual{font-size:9px;color:#a88955;font-weight:700;letter-spacing:.3px;}
+.estoque{font-size:9px;margin-top:8px;min-height:14px;}
+.adicionar{border-radius:10px;padding:13px;margin-top:14px;background:#351f27;color:#fff;border-color:#351f27;font-size:9px;letter-spacing:.4px;transition:.2s;}
+.adicionar:hover{background:#b83f61;border-color:#b83f61;transform:translateY(-1px);}
+.adicionar:disabled{opacity:.5;transform:none;}
+@media(max-width:900px){.produto-img{height:260px}.produtos{grid-template-columns:repeat(2,1fr);gap:14px}.produto-info{padding:14px}.nome{font-size:17px;min-height:44px}}
+@media(max-width:520px){.produtos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.produto-img{height:210px}.produto-info{padding:12px}.nome{font-size:15px}.preco{font-size:17px}.adicionar{padding:11px 8px}}
+</style>
 </head>
 
 <body>
@@ -3667,6 +3695,8 @@ ${produto.precoAntigo ? "OFERTA" : (produto.nota>=4.9 ? "NOVIDADE" : "DESTAQUE")
 ${produto.nota>=4.9 ? '<span class="selo-vendido">MAIS VENDIDO</span>' : ''}
 ${produto.estoque<=5 ? '<span class="selo-ultimas">ÚLTIMAS UNIDADES</span>' : ''}
 
+${produto.precoAntigo ? `<span class="selo-desconto">-${Math.round((1-(Number(produto.preco)/Number(produto.precoAntigo)))*100)}%</span>` : ''}
+
 <button
 class="favoritar ${favorito ? "favoritado":""}"
 onclick="event.stopPropagation();alternarFavorito(${produto.id})"
@@ -3694,11 +3724,9 @@ ${produto.nome}
 
 <div class="preco">
 
-${produto.precoAntigo ?
-`<span class="preco-antigo">${moeda(produto.precoAntigo)}</span>`
-:""}
-
+${produto.precoAntigo ? `<span class="preco-antigo">${moeda(produto.precoAntigo)}</span>` : ""}
 ${moeda(produto.preco)}
+${produto.precoAntigo ? `<span class="desconto-percentual">-${Math.round((1-(Number(produto.preco)/Number(produto.precoAntigo)))*100)}%</span>` : ""}
 
 </div>
 
