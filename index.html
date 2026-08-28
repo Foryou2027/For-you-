@@ -2342,6 +2342,94 @@ footer small,.footer small{color:#bcaeb3}
 }
 </style>
 
+
+<style id="foryou-v16-home">
+/* ===== FOR YOU V16 — Página inicial limpa ===== */
+:root{
+  --fy16-ink:#241a1e;
+  --fy16-muted:#817378;
+  --fy16-pink:#e91e63;
+  --fy16-soft:#fff7f9;
+}
+#inicio .secao,
+#home .secao,
+.home .secao{
+  max-width:1240px;
+  margin:0 auto;
+}
+.fy16-section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:24px;
+}
+.fy16-section-head h2{
+  margin:0!important;
+  font-family:Georgia,serif;
+  font-size:clamp(26px,3vw,36px)!important;
+  font-weight:400!important;
+}
+.fy16-section-head p{
+  margin:6px 0 0!important;
+  color:var(--fy16-muted);
+  font-size:12px!important;
+}
+.fy16-see-all{
+  color:var(--fy16-pink);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.fy16-see-all:hover{text-decoration:underline}
+
+/* Keep only one strong call-to-action area in the hero. */
+.hero-content p,.hero-banner p,.banner-hero p{
+  max-width:420px;
+}
+.hero-actions{
+  margin-top:22px!important;
+}
+.hero-actions .secondary{
+  opacity:.86;
+}
+
+/* Reduce visual noise from generic badges. */
+.product-card .badge,
+.product-card .selo,
+.produto-card .badge,
+.produto-card .selo{
+  font-size:9px!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+}
+.product-card .discount,
+.produto-card .discount,
+.product-card .desconto,
+.produto-card .desconto{
+  font-size:10px!important;
+  font-weight:800;
+}
+
+/* Product grids breathe more. */
+.product-grid,.produtos-grid,.grid-produtos{
+  gap:20px!important;
+}
+
+/* Hide accidental duplicate section headings created by old markup. */
+.fy16-hidden{display:none!important}
+
+/* Mobile: compact section headers. */
+@media(max-width:700px){
+  .fy16-section-head{align-items:center;margin-bottom:17px}
+  .fy16-section-head h2{font-size:25px!important}
+  .fy16-section-head p{display:none}
+  .fy16-see-all{font-size:10px}
+}
+</style>
+
 </head>
 
 <body>
@@ -6231,6 +6319,61 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(reveal,150));
+})();
+</script>
+
+
+<script id="foryou-v16-home-script">
+(function(){
+  const sectionCopy = {
+    "mais vendidos":"Os favoritos da FOR YOU",
+    "novidades":"Descubra o que acabou de chegar",
+    "últimas unidades":"Aproveite enquanto está disponível",
+    "ofertas":"Seleção especial de ofertas",
+    "recentemente visualizados":"Continue de onde parou",
+    "recomendados para você":"Selecionados para você"
+  };
+
+  function cleanHome(){
+    const headings=[...document.querySelectorAll('h2,h3')];
+    headings.forEach(h=>{
+      const raw=(h.textContent||'').trim().toLowerCase();
+      const key=Object.keys(sectionCopy).find(k=>raw===k || raw.includes(k));
+      if(!key || h.dataset.fy16Done) return;
+      h.dataset.fy16Done='1';
+
+      const section=h.closest('section,.secao,.home-section,.product-section') || h.parentElement;
+      if(!section) return;
+
+      // Replace heading with a clean editorial heading and one short subtitle.
+      h.textContent=key.replace(/\b\w/g,c=>c.toUpperCase());
+      h.classList.add('fy16-title');
+
+      let p=section.querySelector(':scope > p');
+      if(!p){
+        p=document.createElement('p');
+        h.insertAdjacentElement('afterend',p);
+      }
+      p.textContent=sectionCopy[key];
+
+      const parent=h.parentElement;
+      if(parent && !parent.querySelector('.fy16-section-head')){
+        const wrap=document.createElement('div');
+        wrap.className='fy16-section-head';
+        h.parentElement.insertBefore(wrap,h);
+        wrap.appendChild(h);
+        wrap.appendChild(p);
+
+        const link=[...section.querySelectorAll('a,button')].find(x=>/ver todos|ver mais/i.test(x.textContent||''));
+        if(link){
+          link.classList.add('fy16-see-all');
+          wrap.appendChild(link);
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(cleanHome,250));
 })();
 </script>
 
