@@ -2430,6 +2430,85 @@ footer small,.footer small{color:#bcaeb3}
 }
 </style>
 
+
+<style id="foryou-v17-cart">
+/* ===== FOR YOU V17 — Carrinho Premium ===== */
+.fy17-cart{
+  max-width:1180px;margin:0 auto;padding:20px 22px 70px;
+}
+.fy17-cart-head{
+  display:flex;justify-content:space-between;align-items:end;gap:15px;margin:12px 0 28px;
+}
+.fy17-cart-head h1{font-family:Georgia,serif;font-size:40px;font-weight:400;margin:0;letter-spacing:-1px}
+.fy17-cart-head p{margin:6px 0 0;color:#817378;font-size:12px}
+.fy17-cart-layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:24px;align-items:start}
+.fy17-cart-list,.fy17-cart-summary,.fy17-cart-box{
+  background:#fff;border-radius:22px;box-shadow:0 9px 30px rgba(36,26,30,.055);
+}
+.fy17-cart-list{padding:8px 24px}
+.fy17-cart-item{
+  display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:18px;align-items:center;
+  padding:20px 0;border-bottom:1px solid #f0e7ea;
+}
+.fy17-cart-item:last-child{border-bottom:0}
+.fy17-cart-item img{width:100px;height:110px;object-fit:cover;border-radius:16px;background:#faf7f8}
+.fy17-cart-item h3{font-size:14px;margin:0 0 6px}
+.fy17-cart-item .brand{font-size:10px;color:#918488;margin-bottom:10px}
+.fy17-price{font-weight:800;font-size:15px;color:#e91e63}
+.fy17-old{text-decoration:line-through;color:#aaa;font-size:11px;margin-left:7px}
+.fy17-qty{display:flex;align-items:center;border:1px solid #eadfe3;border-radius:999px;width:max-content;overflow:hidden;margin-top:12px}
+.fy17-qty button{width:30px;height:30px;border:0;background:#fff;cursor:pointer}
+.fy17-qty span{min-width:28px;text-align:center;font-size:11px;font-weight:700}
+.fy17-remove{border:0;background:none;color:#9a8c91;font-size:10px;cursor:pointer;margin-top:9px}
+.fy17-remove:hover{color:#e91e63}
+.fy17-item-total{font-weight:800;font-size:14px;white-space:nowrap}
+.fy17-progress{padding:19px 22px;margin-bottom:16px;border-radius:20px;background:#fff7f9}
+.fy17-progress strong{font-size:12px}
+.fy17-progress small{display:block;color:#817378;font-size:10px;margin-top:7px}
+.fy17-progress-bar{height:7px;border-radius:99px;background:#f0dfe5;overflow:hidden;margin-top:12px}
+.fy17-progress-fill{height:100%;width:0;background:#e91e63;border-radius:99px;transition:width .35s ease}
+.fy17-cart-summary{padding:25px;position:sticky;top:105px}
+.fy17-cart-summary h2{font-family:Georgia,serif;font-size:25px;font-weight:400;margin:0 0 20px}
+.fy17-line{display:flex;justify-content:space-between;gap:12px;font-size:12px;margin:13px 0;color:#6f6267}
+.fy17-line.discount{color:#b21e53}
+.fy17-total{border-top:1px solid #eee3e6;margin-top:18px;padding-top:18px;display:flex;justify-content:space-between;font-size:17px;font-weight:800}
+.fy17-coupon{margin:22px 0;padding-top:18px;border-top:1px solid #eee3e6}
+.fy17-coupon label{display:block;font-size:10px;font-weight:800;margin-bottom:8px}
+.fy17-coupon-row{display:flex;gap:7px}
+.fy17-coupon input{flex:1;min-width:0;height:42px;border:1px solid #e5d9dd;border-radius:10px;padding:0 12px;outline:none}
+.fy17-coupon button{height:42px;border:0;background:#241a1e;color:#fff;border-radius:10px;padding:0 14px;font-size:10px;font-weight:800;cursor:pointer}
+.fy17-checkout{width:100%;height:50px;border:0;border-radius:999px;background:#e91e63;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 9px 20px rgba(233,30,99,.17)}
+.fy17-checkout:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(233,30,99,.23)}
+.fy17-trust{text-align:center;color:#95878c;font-size:9px;margin-top:13px}
+.fy17-save{border:0;background:none;color:#817378;font-size:10px;cursor:pointer;padding:0}
+.fy17-save:hover{color:#e91e63}
+.fy17-recommend{margin-top:24px}
+.fy17-recommend h2{font-family:Georgia,serif;font-size:27px;font-weight:400;margin:0 0 16px}
+.fy17-recommend-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fy17-mini{background:#fff;border-radius:18px;padding:10px;box-shadow:0 7px 25px rgba(36,26,30,.05)}
+.fy17-mini img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:13px;background:#faf7f8}
+.fy17-mini-name{font-size:10px;line-height:1.35;margin:9px 2px 5px;min-height:27px}
+.fy17-mini-price{font-size:12px;font-weight:800;color:#e91e63;margin:0 2px 7px}
+.fy17-mini button{width:100%;border:0;border-radius:999px;background:#fff0f4;color:#b21e53;height:34px;font-size:9px;font-weight:800;cursor:pointer}
+.fy17-empty{text-align:center;padding:65px 20px;color:#817378}
+.fy17-empty strong{display:block;font-family:Georgia,serif;font-size:25px;color:#241a1e;margin-bottom:8px}
+.fy17-empty button{margin-top:18px;border:0;border-radius:999px;background:#e91e63;color:#fff;padding:12px 22px;font-weight:800}
+@media(max-width:850px){
+ .fy17-cart-layout{grid-template-columns:1fr}
+ .fy17-cart-summary{position:static}
+ .fy17-recommend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ .fy17-cart{padding:12px 14px 50px}
+ .fy17-cart-head h1{font-size:32px}
+ .fy17-cart-list{padding:0 14px}
+ .fy17-cart-item{grid-template-columns:76px minmax(0,1fr);gap:12px}
+ .fy17-cart-item img{width:76px;height:86px}
+ .fy17-item-total{grid-column:2}
+ .fy17-cart-summary{padding:20px}
+}
+</style>
+
 </head>
 
 <body>
@@ -3352,6 +3431,56 @@ required
       <button onclick="abrirPolitica('trocas')">Política de troca/devolução</button>
       <button onclick="abrirPolitica('pagamento')">Informações de pagamento</button>
       <button onclick="abrirPolitica('seguranca')">Compra segura</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="paginaCarrinhoV17" class="pagina secao" style="display:none">
+  <div class="fy17-cart">
+    <button class="voltar" onclick="voltarLoja()">← CONTINUAR COMPRANDO</button>
+    <div class="fy17-cart-head">
+      <div>
+        <h1>Seu carrinho</h1>
+        <p id="fy17CartCount">0 itens selecionados</p>
+      </div>
+    </div>
+
+    <div class="fy17-progress">
+      <strong id="fy17ProgressTitle">Frete grátis acima de R$ 199</strong>
+      <div class="fy17-progress-bar"><div class="fy17-progress-fill" id="fy17ProgressFill"></div></div>
+      <small id="fy17ProgressText">Adicione produtos ao carrinho para acompanhar seu progresso.</small>
+    </div>
+
+    <div class="fy17-cart-layout">
+      <div>
+        <div class="fy17-cart-list" id="fy17CartList"></div>
+
+        <div class="fy17-recommend">
+          <h2>Você também pode gostar</h2>
+          <div class="fy17-recommend-grid" id="fy17Recommendations"></div>
+        </div>
+      </div>
+
+      <aside class="fy17-cart-summary">
+        <h2>Resumo do pedido</h2>
+        <div class="fy17-line"><span>Subtotal</span><strong id="fy17Subtotal">R$ 0,00</strong></div>
+        <div class="fy17-line discount"><span>Desconto</span><strong id="fy17Discount">− R$ 0,00</strong></div>
+        <div class="fy17-line"><span>Frete</span><strong id="fy17Shipping">A calcular</strong></div>
+
+        <div class="fy17-coupon">
+          <label for="fy17CouponInput">Tem um cupom?</label>
+          <div class="fy17-coupon-row">
+            <input id="fy17CouponInput" placeholder="Digite seu cupom">
+            <button type="button" onclick="aplicarCupomV17()">APLICAR</button>
+          </div>
+          <small id="fy17CouponMessage" style="display:block;margin-top:8px;color:#817378;font-size:9px"></small>
+        </div>
+
+        <div class="fy17-total"><span>Total</span><strong id="fy17Total">R$ 0,00</strong></div>
+        <button class="fy17-checkout" type="button" onclick="finalizarCompraV17()">FINALIZAR COMPRA</button>
+        <div class="fy17-trust">🔒 Compra segura · 💳 Pagamento protegido</div>
+      </aside>
     </div>
   </div>
 </section>
@@ -6374,6 +6503,110 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   document.addEventListener('DOMContentLoaded',()=>setTimeout(cleanHome,250));
+})();
+</script>
+
+
+<script id="foryou-v17-cart-script">
+(function(){
+  const CART_KEY='foryou_cart_v17';
+  const COUPON_KEY='foryou_coupon_v17';
+  const THRESHOLD=199;
+
+  function money(v){return 'R$ '+Number(v||0).toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+  function getCart(){try{return JSON.parse(localStorage.getItem(CART_KEY)||'[]')}catch(e){return[]}}
+  function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));}
+  function getProducts(){
+    return [...document.querySelectorAll('[data-product],.product-card,.produto-card,.product,.card')].map((el,i)=>{
+      const img=el.querySelector('img');
+      const name=(el.querySelector('h3,h2,.nome,.product-name,.produto-nome')||{}).textContent || (el.innerText||'').split('\n')[0] || 'Produto FOR YOU';
+      const text=el.innerText||'';
+      const m=text.match(/R\$\s*[\d.]+,\d{2}/);
+      return {id:el.dataset.productId||'p'+i,name:name.trim(),price:m?Number(m[0].replace(/[^\d,]/g,'').replace('.','').replace(',','.')):0,image:img?img.src:''};
+    }).filter(x=>x.name);
+  }
+  function syncFromExisting(){
+    const existing=window.cart||window.carrinho||window.cartItems;
+    if(Array.isArray(existing)&&existing.length&&!getCart().length){
+      const normalized=existing.map((x,i)=>({id:x.id||'p'+i,name:x.name||x.nome||'Produto',price:Number(x.price||x.preco||0),oldPrice:Number(x.oldPrice||x.precoAntigo||0),qty:Number(x.qty||x.quantidade||1),image:x.image||x.imagem||''}));
+      saveCart(normalized);
+    }
+  }
+  function render(){
+    syncFromExisting();
+    const c=getCart();
+    const list=document.getElementById('fy17CartList');
+    if(!list)return;
+    const count=c.reduce((s,x)=>s+(x.qty||1),0);
+    document.getElementById('fy17CartCount').textContent=count+' '+(count===1?'item selecionado':'itens selecionados');
+    if(!c.length){
+      list.innerHTML='<div class="fy17-empty"><strong>Seu carrinho está vazio</strong><span>Encontre seus favoritos e comece sua compra.</span><br><button onclick="voltarLoja()">EXPLORAR PRODUTOS</button></div>';
+    }else{
+      list.innerHTML=c.map((x,i)=>`
+        <div class="fy17-cart-item">
+          <img src="${x.image||''}" alt="">
+          <div>
+            <h3>${escapeHTML(x.name)}</h3>
+            <div class="brand">FOR YOU</div>
+            <span class="fy17-price">${money(x.price)}</span>${x.oldPrice?`<span class="fy17-old">${money(x.oldPrice)}</span>`:''}
+            <div class="fy17-qty"><button onclick="alterarQtdV17(${i},-1)">−</button><span>${x.qty||1}</span><button onclick="alterarQtdV17(${i},1)">+</button></div>
+            <br><button class="fy17-save" onclick="salvarDepoisV17(${i})">♡ Salvar para depois</button>
+            <br><button class="fy17-remove" onclick="removerV17(${i})">Remover</button>
+          </div>
+          <div class="fy17-item-total">${money((x.price||0)*(x.qty||1))}</div>
+        </div>`).join('');
+    }
+    updateSummary(c);
+    renderRecommendations(c);
+  }
+  function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function updateSummary(c){
+    const subtotal=c.reduce((s,x)=>s+(Number(x.price)||0)*(x.qty||1),0);
+    const discount=c.reduce((s,x)=>s+Math.max(0,(Number(x.oldPrice)||0)-(Number(x.price)||0))*(x.qty||1),0);
+    const shipping=subtotal>=THRESHOLD||!subtotal?0:0;
+    const coupon=Number(localStorage.getItem(COUPON_KEY)||0);
+    document.getElementById('fy17Subtotal').textContent=money(subtotal);
+    document.getElementById('fy17Discount').textContent='− '+money(discount+coupon);
+    document.getElementById('fy17Shipping').textContent=subtotal>=THRESHOLD?'Grátis':'A calcular';
+    document.getElementById('fy17Total').textContent=money(Math.max(0,subtotal-discount-coupon+shipping));
+    const pct=Math.min(100,subtotal/THRESHOLD*100);
+    document.getElementById('fy17ProgressFill').style.width=pct+'%';
+    document.getElementById('fy17ProgressText').textContent=subtotal>=THRESHOLD?'✓ Você ganhou frete grátis!':'Falta '+money(THRESHOLD-subtotal)+' para ganhar frete grátis.';
+  }
+  function renderRecommendations(c){
+    const chosen=new Set(c.map(x=>x.name));
+    const p=getProducts().filter(x=>!chosen.has(x.name)).slice(0,4);
+    document.getElementById('fy17Recommendations').innerHTML=p.map(x=>`
+      <div class="fy17-mini"><img src="${x.image||''}" alt=""><div class="fy17-mini-name">${escapeHTML(x.name)}</div><div class="fy17-mini-price">${money(x.price)}</div><button onclick='adicionarV17(${JSON.stringify(x).replace(/'/g,"&#39;")})'>+ ADICIONAR</button></div>`).join('') || '<p style="color:#817378;font-size:11px">Produtos recomendados aparecerão aqui.</p>';
+  }
+  window.alterarQtdV17=function(i,d){const c=getCart();if(!c[i])return;c[i].qty=Math.max(1,(c[i].qty||1)+d);saveCart(c);render();}
+  window.removerV17=function(i){const c=getCart();c.splice(i,1);saveCart(c);render();}
+  window.salvarDepoisV17=function(i){const c=getCart();const x=c.splice(i,1)[0];let s=JSON.parse(localStorage.getItem('foryou_saved_later_v17')||'[]');s.push(x);localStorage.setItem('foryou_saved_later_v17',JSON.stringify(s));saveCart(c);render();}
+  window.adicionarV17=function(x){const c=getCart();const found=c.find(y=>y.id===x.id||y.name===x.name);if(found)found.qty=(found.qty||1)+1;else c.push({...x,qty:1});saveCart(c);render();}
+  window.aplicarCupomV17=function(){
+    const input=document.getElementById('fy17CouponInput'), msg=document.getElementById('fy17CouponMessage');
+    const code=(input.value||'').trim().toUpperCase();
+    // Demo-ready validation; actual coupons can later be loaded from the admin/backend.
+    const coupons={'BEMVINDO10':10,'FORYOU10':10};
+    if(coupons[code]){localStorage.setItem(COUPON_KEY,coupons[code]);msg.textContent='✓ Cupom aplicado: '+money(coupons[code])+' de desconto.';msg.style.color='#2c8a55';}
+    else{localStorage.removeItem(COUPON_KEY);msg.textContent=code?'Cupom não encontrado.':'Digite seu cupom.';msg.style.color='#b21e53';}
+    render();
+  };
+  window.finalizarCompraV17=function(){
+    if(!getCart().length){alert('Seu carrinho está vazio.');return;}
+    if(typeof abrirPagina==='function') abrirPagina('checkout');
+    else if(typeof abrirCheckout==='function') abrirCheckout();
+    else alert('O checkout será conectado nesta próxima etapa. 💗');
+  };
+  window.abrirCarrinhoV17=function(){
+    document.querySelectorAll('.pagina').forEach(x=>x.style.display='none');
+    const p=document.getElementById('paginaCarrinhoV17');if(p){p.style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});}
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    render();
+    // Make common cart buttons open the new premium cart.
+    document.querySelectorAll('[href="#carrinho"],[data-cart-link],.abrir-carrinho').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();abrirCarrinhoV17()}));
+  });
 })();
 </script>
 
