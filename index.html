@@ -2095,6 +2095,82 @@ footer p{
 }
 </style>
 
+
+<style id="foryou-v13-header">
+/* FOR YOU V13 — Header premium */
+.fy-header-v13{
+  position:sticky;top:0;z-index:1200;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.06);
+  transition:box-shadow .25s ease,transform .25s ease;
+}
+.fy-header-v13 .fy-top{
+  max-width:1240px;margin:auto;min-height:76px;padding:12px 22px;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;
+}
+.fy-logo-v13{
+  border:0;background:none;cursor:pointer;font-size:27px;font-weight:900;
+  letter-spacing:2px;color:#e91e63;
+}
+.fy-search-v13{position:relative;max-width:600px;width:100%;margin:auto}
+.fy-search-v13 input{
+  width:100%;height:46px;border:1px solid #e8e8e8;border-radius:999px;
+  padding:0 48px 0 18px;font-size:14px;outline:none;background:#fafafa;
+  transition:.2s;
+}
+.fy-search-v13 input:focus{background:#fff;border-color:#f2a2bb;box-shadow:0 0 0 4px rgba(233,30,99,.08)}
+.fy-search-v13 button{
+  position:absolute;right:5px;top:5px;width:36px;height:36px;border:0;
+  border-radius:50%;background:#e91e63;color:#fff;cursor:pointer;
+}
+.fy-actions-v13{display:flex;align-items:center;gap:8px}
+.fy-icon-btn-v13{
+  position:relative;width:42px;height:42px;border:0;background:transparent;
+  border-radius:50%;cursor:pointer;font-size:20px;display:grid;place-items:center;
+}
+.fy-icon-btn-v13:hover{background:#fff0f5}
+.fy-count-v13{
+  position:absolute;top:1px;right:0;min-width:17px;height:17px;padding:0 4px;
+  border-radius:99px;background:#e91e63;color:#fff;font-size:10px;
+  display:grid;place-items:center;font-weight:800;
+}
+.fy-nav-v13{
+  max-width:1240px;margin:auto;padding:0 22px 12px;display:flex;
+  justify-content:center;gap:28px;align-items:center;
+}
+.fy-nav-v13 a{
+  color:#222;text-decoration:none;font-size:13px;font-weight:700;
+  padding:7px 0;position:relative;
+}
+.fy-nav-v13 a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;
+  background:#e91e63;transition:right .2s;
+}
+.fy-nav-v13 a:hover::after{right:0}
+.fy-nav-v13 a.fy-sale{color:#e91e63}
+.fy-mobile-toggle{display:none}
+
+.fy-category-strip-v13{
+  max-width:1240px;margin:0 auto;padding:18px 22px;display:flex;gap:12px;
+  overflow:auto;scrollbar-width:none;
+}
+.fy-category-strip-v13::-webkit-scrollbar{display:none}
+.fy-cat-v13{
+  flex:0 0 auto;border:0;background:#fafafa;border-radius:999px;padding:10px 16px;
+  font-size:13px;font-weight:700;color:#333;cursor:pointer;transition:.2s;
+}
+.fy-cat-v13:hover{background:#fff0f5;color:#e91e63;transform:translateY(-1px)}
+
+@media(max-width:800px){
+  .fy-header-v13 .fy-top{grid-template-columns:auto 1fr auto;gap:8px;padding:10px 14px}
+  .fy-logo-v13{font-size:21px}
+  .fy-search-v13{grid-column:1/-1;grid-row:2;max-width:none}
+  .fy-actions-v13 .fy-account-text,.fy-actions-v13 .fy-notify{display:none}
+  .fy-nav-v13{justify-content:flex-start;gap:20px;overflow:auto;scrollbar-width:none;padding-left:14px;padding-right:14px}
+  .fy-nav-v13::-webkit-scrollbar{display:none}
+  .fy-category-strip-v13{padding-left:14px;padding-right:14px}
+}
+</style>
+
 </head>
 
 <body>
@@ -5858,6 +5934,18 @@ document.addEventListener("DOMContentLoaded",()=>{
     buildSearchPanel(); enhanceCards(); addCartProgress();
     setTimeout(()=>{buildSearchPanel();enhanceCards();addCartProgress()},800);
   });
+})();
+</script>
+
+
+<script id="foryou-v13-header-script">
+(function(){
+  function updateHeader(){
+    const h=document.querySelector('.fy-header-v13');
+    if(h) h.style.boxShadow=window.scrollY>8?'0 8px 28px rgba(0,0,0,.07)':'none';
+  }
+  window.addEventListener('scroll',updateHeader,{passive:true});
+  document.addEventListener('DOMContentLoaded',updateHeader);
 })();
 </script>
 
