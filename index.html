@@ -4377,6 +4377,533 @@ header button:hover,
   }
 }
 
+
+
+/* =========================================================
+   ATUALIZAÇÃO — PALETA OFICIAL: ROSA + PRETO + VINHO
+========================================================= */
+
+:root{
+  --vinho:#5A1020;
+  --vinho-claro:#73152A;
+  --rosa:#E83E6F;
+  --rosa-hover:#C92D59;
+  --rosa-suave:#FCE1E8;
+  --preto:#111111;
+  --texto:#111111;
+  --texto-suave:#74656A;
+  --bege:#FFF8FA;
+  --off-white:#FFFFFF;
+  --borda:#F0D8E0;
+}
+
+/* Base */
+body{
+  background:var(--bege)!important;
+  color:var(--preto)!important;
+}
+
+/* Logo */
+.logo,
+.logo *,
+#logo,
+#logo *,
+.brand,
+.brand *,
+.site-logo,
+.site-logo *,
+.logo-text,
+.logo-text *{
+  color:var(--vinho)!important;
+  -webkit-text-fill-color:var(--vinho)!important;
+}
+
+/* Títulos */
+h1,h2,h3,
+.titulo h2,
+.section-title h2,
+.secao-titulo h2{
+  color:var(--vinho)!important;
+}
+
+/* Textos e navegação */
+p,
+.menu-btn,
+nav a,
+.menu a,
+.menu-principal a{
+  color:var(--preto)!important;
+}
+
+/* Rosa para destaques */
+.preco,
+.desconto,
+.estoque,
+.fy17-price,
+.favoritar.favoritado,
+.menu-btn:hover,
+.menu-btn.ativo{
+  color:var(--rosa)!important;
+}
+
+/* Botões principais */
+.btn,
+.btn-detalhe,
+.checkout-btn,
+.conta-principal-btn,
+.adicionar,
+.fy17-checkout,
+.fy17-cart-summary button,
+.newsletter button{
+  background:var(--vinho)!important;
+  color:#fff!important;
+}
+
+.btn:hover,
+.btn-detalhe:hover,
+.checkout-btn:hover,
+.conta-principal-btn:hover,
+.adicionar:hover,
+.fy17-checkout:hover,
+.fy17-cart-summary button:hover,
+.newsletter button:hover{
+  background:var(--rosa)!important;
+}
+
+/* Menu em lista */
+.menu-principal{
+  background:#fff!important;
+  border-color:var(--borda)!important;
+}
+
+.menu-titulo{
+  color:var(--vinho)!important;
+}
+
+.menu-item{
+  border-bottom-color:#F3E4E8!important;
+}
+
+.menu-btn{
+  color:var(--preto)!important;
+}
+
+.menu-btn:hover,
+.menu-btn.ativo{
+  background:var(--rosa-suave)!important;
+  color:var(--vinho)!important;
+}
+
+.menu-item .dropdown{
+  background:#FFF8FA!important;
+  border-left-color:var(--rosa)!important;
+}
+
+.menu-item .dropdown h3{
+  color:var(--vinho)!important;
+}
+
+.menu-item .dropdown a{
+  color:var(--preto)!important;
+}
+
+.menu-item .dropdown a:hover{
+  color:var(--rosa)!important;
+}
+
+/* Inputs e filtros */
+input,select,textarea{
+  color:var(--preto)!important;
+  border-color:var(--borda)!important;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:var(--rosa)!important;
+  box-shadow:0 0 0 3px rgba(232,62,111,.12)!important;
+}
+
+/* Newsletter */
+.newsletter{
+  background:
+    radial-gradient(circle at top left,rgba(232,62,111,.22),transparent 38%),
+    var(--vinho)!important;
+}
+
+.newsletter h2 span{
+  color:#FF9BB6!important;
+}
+
+/* Carrinho */
+#paginaCarrinhoV17,
+.fy17-cart{
+  background:var(--bege)!important;
+}
+
+#paginaCarrinhoV17 .fy17-cart-list,
+#paginaCarrinhoV17 .fy17-cart-summary,
+#paginaCarrinhoV17 .fy17-cart-box{
+  border-color:var(--borda)!important;
+}
+
+#paginaCarrinhoV17 .fy17-progress-fill{
+  background:linear-gradient(90deg,var(--vinho),var(--rosa))!important;
+}
+
+#paginaCarrinhoV17 .fy17-item-total,
+#paginaCarrinhoV17 .fy17-total{
+  color:var(--vinho)!important;
+}
+
+
+
+/* =========================================================
+   ATUALIZAÇÃO — MENU POR CATEGORIAS COM SUBCATEGORIAS AO CLICAR
+   Preto + vinho + detalhes em rosa
+========================================================= */
+
+.menu-principal{
+  width:min(1180px,calc(100% - 32px))!important;
+  margin:14px auto 0!important;
+  padding:0!important;
+  background:#fff!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* Cabeçalho discreto da área de categorias */
+.menu-titulo{
+  color:#5A1020!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  letter-spacing:1.8px!important;
+  padding:8px 0 14px!important;
+  margin:0!important;
+}
+
+/* Categorias lado a lado */
+.menu-lista{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  width:100%!important;
+}
+
+.menu-item{
+  position:relative!important;
+  width:auto!important;
+  border:0!important;
+}
+
+/* Categoria */
+.menu-btn{
+  width:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:7px!important;
+  padding:11px 15px!important;
+  background:transparent!important;
+  color:#111111!important;
+  border:0!important;
+  border-radius:9px!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.04em!important;
+  text-align:left!important;
+  box-shadow:none!important;
+  transition:background .2s ease,color .2s ease!important;
+}
+
+.menu-btn::after{
+  content:"+"!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  color:#5A1020!important;
+  margin-left:2px!important;
+  transition:transform .2s ease!important;
+}
+
+/* Categorias sem submenu não precisam do + */
+.menu-item:not(:has(.dropdown)) .menu-btn::after{
+  content:""!important;
+}
+
+.menu-btn:hover,
+.menu-btn.ativo{
+  background:#FCE1E8!important;
+  color:#5A1020!important;
+  padding-left:15px!important;
+}
+
+.menu-item:has(.dropdown.aberto) .menu-btn::after,
+.menu-item:has(.dropdown.show) .menu-btn::after,
+.menu-item:has(.dropdown.ativo) .menu-btn::after{
+  content:"−"!important;
+  color:#E83E6F!important;
+}
+
+/* Subcategorias fechadas por padrão */
+.menu-item .dropdown{
+  position:absolute!important;
+  z-index:999!important;
+  top:calc(100% + 8px)!important;
+  left:0!important;
+  display:none!important;
+  width:220px!important;
+  margin:0!important;
+  padding:10px!important;
+  background:#fff!important;
+  border:1px solid #F0D8E0!important;
+  border-top:3px solid #5A1020!important;
+  border-radius:12px!important;
+  box-shadow:0 16px 35px rgba(17,17,17,.12)!important;
+}
+
+/* Só aparece quando a lógica existente marcar como aberto */
+.menu-item .dropdown.aberto,
+.menu-item .dropdown.ativo,
+.menu-item .dropdown.show{
+  display:block!important;
+  animation:fyMenuOpen .18s ease both;
+}
+
+@keyframes fyMenuOpen{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.menu-item .dropdown h3{
+  color:#5A1020!important;
+  font-size:9px!important;
+  letter-spacing:1px!important;
+  margin:4px 8px 7px!important;
+}
+
+.menu-item .dropdown a{
+  display:block!important;
+  padding:10px 10px!important;
+  color:#111111!important;
+  background:transparent!important;
+  border-radius:7px!important;
+  font-size:10px!important;
+  text-decoration:none!important;
+  transition:background .18s ease,color .18s ease!important;
+}
+
+.menu-item .dropdown a:hover{
+  background:#FCE1E8!important;
+  color:#E83E6F!important;
+}
+
+/* Mobile: categorias em coluna, subcategoria aparece abaixo */
+@media(max-width:760px){
+  .menu-principal{
+    width:calc(100% - 24px)!important;
+  }
+
+  .menu-lista{
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:2px!important;
+  }
+
+  .menu-item{
+    width:100%!important;
+  }
+
+  .menu-btn{
+    width:100%!important;
+  }
+
+  .menu-item .dropdown{
+    position:static!important;
+    width:100%!important;
+    margin:0 0 5px!important;
+    border-top:0!important;
+    border-left:3px solid #5A1020!important;
+    border-radius:0 0 10px 10px!important;
+    box-shadow:none!important;
+  }
+}
+
+
+
+/* =========================================================
+   ATUALIZAÇÃO — MENU DE CATEGORIAS NA LATERAL ESQUERDA
+   Categorias fechadas + subcategorias ao clicar
+========================================================= */
+
+/* Remove a aparência do menu no topo */
+.menu-principal{
+  position:fixed!important;
+  top:88px!important;
+  left:18px!important;
+  z-index:900!important;
+  width:250px!important;
+  max-height:calc(100vh - 110px)!important;
+  margin:0!important;
+  padding:18px 14px!important;
+  overflow-y:auto!important;
+  background:#fff!important;
+  border:1px solid #f0d8e0!important;
+  border-radius:16px!important;
+  box-shadow:0 14px 35px rgba(17,17,17,.10)!important;
+}
+
+/* Título da lateral */
+.menu-titulo{
+  display:block!important;
+  padding:4px 10px 14px!important;
+  margin-bottom:4px!important;
+  color:#5A1020!important;
+  border-bottom:1px solid #f3e4e8!important;
+}
+
+/* Lista vertical */
+.menu-lista{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:2px!important;
+}
+
+.menu-item{
+  position:relative!important;
+  width:100%!important;
+  border:0!important;
+}
+
+/* Botão da categoria */
+.menu-btn{
+  width:100%!important;
+  min-height:46px!important;
+  padding:12px 12px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  color:#111!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:10px!important;
+  font-size:10px!important;
+  font-weight:750!important;
+  letter-spacing:.05em!important;
+  transition:background .2s ease,color .2s ease!important;
+}
+
+.menu-btn:hover,
+.menu-btn.ativo{
+  background:#fce1e8!important;
+  color:#5A1020!important;
+}
+
+/* Indicador + */
+.menu-btn::after{
+  content:"+"!important;
+  color:#e83e6f!important;
+  font-size:17px!important;
+  font-weight:400!important;
+  line-height:1!important;
+}
+
+.menu-item:not(:has(.dropdown)) .menu-btn::after{
+  content:""!important;
+}
+
+.menu-item:has(.dropdown.aberto) .menu-btn::after,
+.menu-item:has(.dropdown.show) .menu-btn::after,
+.menu-item:has(.dropdown.ativo) .menu-btn::after{
+  content:"−"!important;
+}
+
+/* Subcategorias aparecem dentro da lateral */
+.menu-item .dropdown{
+  position:static!important;
+  display:none!important;
+  width:100%!important;
+  margin:2px 0 7px!important;
+  padding:7px 8px 8px 14px!important;
+  background:#fff8fa!important;
+  border:0!important;
+  border-left:2px solid #e83e6f!important;
+  border-radius:0 9px 9px 0!important;
+  box-shadow:none!important;
+}
+
+.menu-item .dropdown.aberto,
+.menu-item .dropdown.show,
+.menu-item .dropdown.ativo{
+  display:block!important;
+}
+
+.menu-item .dropdown h3{
+  color:#5A1020!important;
+  font-size:9px!important;
+  letter-spacing:1px!important;
+  margin:5px 5px 7px!important;
+}
+
+.menu-item .dropdown a{
+  display:block!important;
+  padding:9px 7px!important;
+  color:#111!important;
+  background:transparent!important;
+  border-radius:7px!important;
+  font-size:10px!important;
+  text-decoration:none!important;
+}
+
+.menu-item .dropdown a:hover{
+  background:#fce1e8!important;
+  color:#e83e6f!important;
+}
+
+/* Abre espaço para o conteúdo não ficar escondido atrás do menu */
+@media(min-width:901px){
+  main,
+  .conteudo,
+  .conteudo-principal,
+  .page-content,
+  .catalogo,
+  .produtos-container{
+    margin-left:290px!important;
+  }
+}
+
+/* Barra de rolagem discreta */
+.menu-principal::-webkit-scrollbar{
+  width:5px;
+}
+
+.menu-principal::-webkit-scrollbar-thumb{
+  background:#f0d8e0;
+  border-radius:10px;
+}
+
+/* No celular, o menu volta para fluxo normal para não ocupar a tela */
+@media(max-width:900px){
+  .menu-principal{
+    position:relative!important;
+    top:auto!important;
+    left:auto!important;
+    width:calc(100% - 24px)!important;
+    max-height:none!important;
+    margin:10px 12px!important;
+  }
+
+  main,
+  .conteudo,
+  .conteudo-principal,
+  .page-content,
+  .catalogo,
+  .produtos-container{
+    margin-left:0!important;
+  }
+}
+
 </style>
 
 </head>
@@ -8673,6 +9200,40 @@ document.addEventListener("DOMContentLoaded",()=>{
   const target=document.getElementById('paginaCarrinhoV17');
   if(target)observer.observe(target,{childList:true,subtree:true});
 })();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const menuItems = document.querySelectorAll('.menu-principal .menu-item');
+
+  menuItems.forEach(function(item){
+    const btn = item.querySelector('.menu-btn');
+    const dropdown = item.querySelector('.dropdown');
+    if(!btn || !dropdown) return;
+
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      const isOpen = dropdown.classList.contains('aberto') ||
+                     dropdown.classList.contains('show') ||
+                     dropdown.classList.contains('ativo');
+
+      menuItems.forEach(function(other){
+        if(other === item) return;
+        const otherDrop = other.querySelector('.dropdown');
+        const otherBtn = other.querySelector('.menu-btn');
+        if(otherDrop){
+          otherDrop.classList.remove('aberto','show','ativo');
+        }
+        if(otherBtn) otherBtn.classList.remove('ativo');
+      });
+
+      dropdown.classList.toggle('aberto', !isOpen);
+      dropdown.classList.toggle('show', !isOpen);
+      btn.classList.toggle('ativo', !isOpen);
+    });
+  });
+});
 </script>
 
 </body>
