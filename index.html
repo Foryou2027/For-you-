@@ -761,35 +761,101 @@ function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&co
    BENEFÍCIOS
 ========================= */
 
+/* =========================
+   BENEFÍCIOS
+========================= */
+
 .beneficios{
   max-width:1200px;
-  margin:auto;
+  margin:0 auto;
+  padding:18px 20px;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  background:white;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  background:#fff;
 }
 
 .beneficio{
+  min-height:108px;
+  padding:18px 12px;
   text-align:center;
-  padding:35px;
-  border-right:1px solid #ead9de;
+  background:#fff;
+  border:1px solid #eee4e7;
+  border-radius:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
-.beneficio:last-child{
-  border:0;
+.beneficio:hover{
+  transform:translateY(-2px);
+  border-color:#f0c5d0;
+  box-shadow:0 8px 24px #351f2710;
+}
+
+.beneficio .beneficio-icone{
+  width:38px;
+  height:38px;
+  border:1px solid #f0c5d0;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:9px;
+  color:#d81b60;
+  background:#fff8fa;
+}
+
+.beneficio .beneficio-icone svg{
+  width:19px;
+  height:19px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
 .beneficio strong{
   display:block;
-  font-family:Georgia,serif;
-  font-size:20px;
-  margin:8px;
+  margin:0;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.1px;
+  color:#21191c;
 }
 
 .beneficio span{
+  display:block;
+  margin-top:4px;
   color:#777;
-  font-size:10px;
+  font-size:9px;
+  line-height:1.4;
 }
+
+@media(max-width:900px){
+  .beneficios{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .beneficios{
+    grid-template-columns:repeat(2,1fr);
+    padding:14px 12px;
+    gap:9px;
+  }
+  .beneficio{
+    min-height:100px;
+    padding:14px 8px;
+  }
+  .beneficio:last-child{
+    grid-column:1 / -1;
+  }
+}
+
 
 /* =========================
    NEWSLETTER
@@ -2144,11 +2210,36 @@ VER PRODUTOS
 </section>
 
 <section class="beneficios destaque-beneficios">
-  <div class="beneficio"><div>🚚</div><strong>Frete grátis</strong><span>Acima de R$ 199</span></div>
-  <div class="beneficio"><div>🔒</div><strong>Compra segura</strong><span>Seus dados protegidos</span></div>
-  <div class="beneficio"><div>💳</div><strong>Pagamento facilitado</strong><span>Escolha sua forma de pagar</span></div>
-  <div class="beneficio"><div>↩️</div><strong>Troca fácil</strong><span>Consulte as condições</span></div>
-  <div class="beneficio"><div>💗</div><strong>Atendimento FOR YOU</strong><span>Estamos aqui para ajudar</span></div>
+  <div class="beneficio">
+    <div class="beneficio-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M3 6h11v10H3z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+    </div>
+    <strong>Frete grátis</strong><span>Acima de R$ 199</span>
+  </div>
+  <div class="beneficio">
+    <div class="beneficio-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+    </div>
+    <strong>Compra segura</strong><span>Seus dados protegidos</span>
+  </div>
+  <div class="beneficio">
+    <div class="beneficio-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+    </div>
+    <strong>Pagamento seguro</strong><span>Escolha sua forma de pagar</span>
+  </div>
+  <div class="beneficio">
+    <div class="beneficio-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M3 7v5h5"/><path d="M5 12a7 7 0 1 0 2-5"/></svg>
+    </div>
+    <strong>Troca fácil</strong><span>Consulte as condições</span>
+  </div>
+  <div class="beneficio">
+    <div class="beneficio-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 1-2.3-5.7"/><path d="M20 5v6h-6"/><path d="M8.5 14.5c.7.8 1.7 1.2 3 1.2 1.5 0 2.5-.7 2.5-1.8 0-1.2-1-1.7-2.8-2.1-1.7-.4-2.7-.9-2.7-2.1 0-1.1 1-1.8 2.5-1.8 1.2 0 2.1.4 2.8 1.1"/></svg>
+    </div>
+    <strong>Atendimento FOR YOU</strong><span>Estamos aqui para ajudar</span>
+  </div>
 </section>
 
 
