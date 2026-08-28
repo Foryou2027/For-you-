@@ -133,7 +133,7 @@ function atualizarMinhaConta(){
     loginBox.style.display="none"; cadastroBox.style.display="none"; logada.style.display="block";
     document.getElementById("contaNome").textContent=contaAtual.nome;
     document.getElementById("contaEmail").textContent=contaAtual.email;
-    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase();
+    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase(); renderPedidosConta();
   } else { loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none"; }
 }
 function mostrarCadastro(){ document.getElementById("contaLoginBox").style.display="none"; document.getElementById("contaCadastroBox").style.display="block"; document.getElementById("loginMensagem").textContent=""; }
@@ -148,7 +148,7 @@ function atualizarMinhaConta(){
     loginBox.style.display="none"; cadastroBox.style.display="none"; logada.style.display="block";
     document.getElementById("contaNome").textContent=contaAtual.nome;
     document.getElementById("contaEmail").textContent=contaAtual.email;
-    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase();
+    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase(); renderPedidosConta();
   } else { loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none"; }
 }
 function mostrarCadastro(){document.getElementById("contaLoginBox").style.display="none";document.getElementById("contaCadastroBox").style.display="block";document.getElementById("loginMensagem").textContent="";}
@@ -159,14 +159,14 @@ function cadastrarConta(event){
   if(senha.length<6){msg.textContent="A senha precisa ter pelo menos 6 caracteres.";return false;}
   if(senha!==confirmar){msg.textContent="As senhas não são iguais.";return false;}
   const existente=contaSalva(); if(existente && existente.email===email){msg.textContent="Já existe uma conta com este e-mail.";return false;}
-  salvarConta({nome,email,telefone,endereco,senha,pedidos:[]}); contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); atualizarMinhaConta(); document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
+  salvarConta({nome,email,telefone,endereco,senha,pedidos:[]}); contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados(); document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
 }
 function fazerLogin(event){
   event.preventDefault();
   const email=document.getElementById("loginEmail").value.trim().toLowerCase(), senha=document.getElementById("loginSenha").value, msg=document.getElementById("loginMensagem"), conta=contaSalva();
   if(!conta){mostrarCadastro();document.getElementById("cadastroMensagem").textContent="Você ainda não possui uma conta. Faça seu cadastro.";return false;}
   if(conta.email!==email||conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
-  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};salvarContaAtual();atualizarMinhaConta();document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕";return false;
+  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};salvarContaAtual();carregarDadosDaConta();atualizarMinhaConta();atualizar();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderRecomendados();document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕";return false;
 }
 function sairDaConta(){contaAtual=null;salvarContaAtual();atualizarMinhaConta();mostrarLogin();}
 function editarDadosConta(){
@@ -651,6 +651,7 @@ function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&co
   background:#b83f61;
   color:white;
 }
+
 
 /* =========================
    FILTROS
@@ -1587,6 +1588,16 @@ footer p{
   }
 }
 
+
+/* =========================
+   NOVOS RECURSOS — EXPERIÊNCIA DE COMPRA
+========================= */
+.compartilhar-produto{border:1px solid #351f27;background:white;color:#351f27;padding:10px 15px;font-size:8px;font-weight:bold;letter-spacing:1px;border-radius:20px;}
+.compartilhar-produto:hover{background:#351f27;color:white}
+.produtos-relacionados,.compre-junto{margin-top:35px;padding-top:30px;border-top:1px solid #ead9de}.produtos-relacionados h2,.compre-junto h2{font-family:Georgia,serif;font-size:28px;font-weight:normal;margin-bottom:8px}.produtos-relacionados p,.compre-junto>p{font-size:10px;color:#777;margin-bottom:18px}.combo-box{background:#fff;border:1px solid #ead9de;padding:20px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.combo-lista{display:flex;gap:12px;flex-wrap:wrap}.combo-item{border:1px solid #ead9de;padding:10px;background:#fff8fa;font-size:9px}.combo-total{font-size:18px;font-family:Georgia,serif}.combo-btn{background:#351f27;color:white;border:0;padding:12px 18px;font-size:8px;font-weight:bold;letter-spacing:1px;margin-top:8px}.estoque-alerta{font-weight:bold;color:#a36d00}
+.checkout-layout{display:grid;grid-template-columns:1.5fr .8fr;gap:25px;max-width:1100px;margin:auto}.checkout-card{background:white;border:1px solid #ead9de;padding:25px}.checkout-card h2{font-family:Georgia,serif;font-weight:normal;font-size:25px;margin-bottom:18px}.checkout-etapas{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:20px}.checkout-etapa{border:1px solid #ead9de;padding:10px 5px;text-align:center;font-size:8px;color:#777}.checkout-etapa.ativa{background:#351f27;color:white;border-color:#351f27}.checkout-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.checkout-form input,.checkout-form select{width:100%;border:1px solid #ddcbd0;padding:12px;background:#fff;font-size:10px;outline:none}.checkout-form .completo{grid-column:1/-1}.pagamento-opcoes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.pagamento-opcao{border:1px solid #ead9de;background:white;padding:13px;text-align:center;font-size:9px}.pagamento-opcao.ativa{border-color:#351f27;background:#fff8fa}.checkout-resumo{background:#fff8fa;border:1px solid #ead9de;padding:20px}.checkout-resumo h3{font-family:Georgia,serif;font-weight:normal;font-size:21px;margin-bottom:15px}.checkout-linha{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #ead9de;font-size:10px}.checkout-total{font-size:16px;font-weight:bold;border-bottom:0}.checkout-acoes{display:flex;gap:8px;margin-top:15px}.checkout-btn{flex:1;border:1px solid #351f27;background:#351f27;color:white;padding:13px;font-size:8px;font-weight:bold;letter-spacing:1px}.checkout-btn.sec{background:white;color:#351f27}.pedido-status{border:1px solid #ead9de;background:white;padding:18px;margin-top:10px}.status-linha{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:10px}.status-bolinha{width:11px;height:11px;border-radius:50%;border:2px solid #cfc4c7}.status-linha.concluido .status-bolinha{background:#351f27;border-color:#351f27}.pedido-meta{font-size:9px;color:#777;margin-bottom:10px}.conta-pedidos-lista{margin-top:15px}.conta-pedido{border:1px solid #ead9de;background:#fff;padding:15px;margin-bottom:10px}.conta-pedido-top{display:flex;justify-content:space-between;gap:10px;font-size:10px}.pedido-badge{font-size:7px;background:#fff8fa;border:1px solid #ead9de;padding:5px 7px}.sincronizado-aviso{font-size:8px;color:#777;margin-top:10px}.share-toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#351f27;color:white;padding:11px 18px;border-radius:22px;font-size:9px;z-index:1000;box-shadow:0 10px 25px #0003}
+@media(max-width:800px){.checkout-layout{grid-template-columns:1fr}.checkout-etapas{grid-template-columns:1fr 1fr}.checkout-form{grid-template-columns:1fr}.checkout-form .completo{grid-column:auto}.pagamento-opcoes{grid-template-columns:1fr}.combo-box{grid-template-columns:1fr}}
+
 /* =========================
    NOVOS RECURSOS
 ========================= */
@@ -2369,6 +2380,68 @@ Promoções de datas especiais
 </section>
 
 
+
+<div class="conta-pedidos-lista" id="contaPedidosDetalhados">
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:25px;margin:28px 0 8px">Acompanhamento dos pedidos</h2>
+  <p style="font-size:10px;color:#777">Veja o status dos pedidos realizados nesta conta.</p>
+  <div id="listaPedidosConta"></div>
+</div>
+
+<!-- =========================
+     CHECKOUT
+========================= -->
+<section class="pagina secao" id="paginaCheckout">
+  <button class="voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
+  <div class="titulo"><small>FOR YOU</small><h2>Finalizar pedido</h2><p>Confira seus dados, entrega, pagamento e pedido antes de concluir.</p></div>
+  <div class="checkout-layout">
+    <div class="checkout-card">
+      <div class="checkout-etapas">
+        <div class="checkout-etapa ativa">👤<br>Seus dados</div>
+        <div class="checkout-etapa ativa">📍<br>Endereço</div>
+        <div class="checkout-etapa ativa">🚚<br>Entrega</div>
+        <div class="checkout-etapa ativa">💳<br>Pagamento</div>
+        <div class="checkout-etapa ativa">✅<br>Revisão</div>
+      </div>
+      <h2>Seus dados</h2>
+      <div class="checkout-form">
+        <input id="checkoutNome" placeholder="Nome completo">
+        <input id="checkoutEmail" type="email" placeholder="E-mail">
+        <input id="checkoutTelefone" placeholder="Telefone">
+        <input id="checkoutCEP" placeholder="CEP" maxlength="9" oninput="mascaraCEP(this)">
+        <input id="checkoutEndereco" class="completo" placeholder="Endereço completo">
+        <input id="checkoutNumero" placeholder="Número">
+        <input id="checkoutComplemento" placeholder="Complemento">
+      </div>
+      <h2 style="margin-top:25px">Forma de entrega</h2>
+      <div class="pagamento-opcoes">
+        <button class="pagamento-opcao ativa" type="button" onclick="selecionarCheckoutEntrega('padrao',this)">🚚 Entrega padrão<br><small>5 a 10 dias úteis</small></button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('expressa',this)">⚡ Entrega expressa<br><small>2 a 5 dias úteis</small></button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('retirada',this)">📦 Retirada<br><small>Consulte disponibilidade</small></button>
+      </div>
+      <h2 style="margin-top:25px">Pagamento</h2>
+      <div class="pagamento-opcoes">
+        <button class="pagamento-opcao ativa" type="button" onclick="selecionarPagamento('PIX',this)">💠 PIX</button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('Cartão',this)">💳 Cartão</button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('A combinar',this)">💬 A combinar</button>
+      </div>
+      <div class="checkout-acoes">
+        <button class="checkout-btn sec" onclick="abrirCarrinho()">VOLTAR AO CARRINHO</button>
+        <button class="checkout-btn" onclick="confirmarPedido()">CONFIRMAR PEDIDO</button>
+      </div>
+      <div class="conta-mensagem" id="checkoutMensagem"></div>
+    </div>
+    <div class="checkout-resumo">
+      <h3>Resumo do pedido</h3>
+      <div id="checkoutItens"></div>
+      <div class="checkout-linha"><span>Subtotal</span><strong id="checkoutSubtotal">R$ 0,00</strong></div>
+      <div class="checkout-linha"><span>Desconto</span><strong id="checkoutDesconto">R$ 0,00</strong></div>
+      <div class="checkout-linha"><span>Frete</span><strong id="checkoutFrete">R$ 0,00</strong></div>
+      <div class="checkout-linha checkout-total"><span>Total</span><strong id="checkoutTotal">R$ 0,00</strong></div>
+      <div class="sincronizado-aviso">🔒 Confira todas as informações antes de confirmar.</div>
+    </div>
+  </div>
+</section>
+
 <!-- =========================
      PÁGINA INDIVIDUAL
 ========================= -->
@@ -2380,6 +2453,7 @@ Promoções de datas especiais
 </button>
 
 <div class="produto-detalhe" id="produtoDetalhe"></div>
+<div id="produtoExtras"></div>
 
 <div class="avaliacoes">
 
@@ -2819,12 +2893,8 @@ APLICAR
 <strong id="total">R$ 0,00</strong>
 </div>
 
-<button
-class="whatsapp"
-onclick="finalizarWhatsApp()"
->
-FINALIZAR PEDIDO PELO WHATSAPP
-</button>
+<button class="whatsapp" onclick="abrirCheckout()">FINALIZAR PEDIDO</button>
+<button class="whatsapp" style="margin-top:7px;background:white;color:#351f27;border:1px solid #351f27" onclick="finalizarWhatsApp()">FINALIZAR PELO WHATSAPP</button>
 
 </div>
 
@@ -3085,23 +3155,27 @@ currency:"BRL"
    SALVAR
 ========================= */
 
+function chaveContaDados(tipo){
+  return contaAtual ? "forYou"+tipo+"_"+String(contaAtual.email||"").toLowerCase().replace(/[^a-z0-9]/g,"") : "forYou"+tipo;
+}
 function salvar(){
-
-localStorage.setItem(
-"forYouCarrinho",
-JSON.stringify(carrinho)
-);
-
+  localStorage.setItem(chaveContaDados("Carrinho"),JSON.stringify(carrinho));
+  if(contaAtual) localStorage.setItem("forYouCarrinho",JSON.stringify(carrinho));
 }
-
 function salvarFavoritos(){
-
-localStorage.setItem(
-"forYouFavoritos",
-JSON.stringify(favoritos)
-);
-
+  localStorage.setItem(chaveContaDados("Favoritos"),JSON.stringify(favoritos));
+  if(contaAtual) localStorage.setItem("forYouFavoritos",JSON.stringify(favoritos));
 }
+function carregarDadosDaConta(){
+  if(!contaAtual) return;
+  const chaveC=chaveContaDados("Carrinho"), chaveF=chaveContaDados("Favoritos");
+  const salvoC=localStorage.getItem(chaveC), salvoF=localStorage.getItem(chaveF);
+  if(salvoC!==null) carrinho=JSON.parse(salvoC)||[];
+  if(salvoF!==null) favoritos=JSON.parse(salvoF)||[];
+  localStorage.setItem("forYouCarrinho",JSON.stringify(carrinho));
+  localStorage.setItem("forYouFavoritos",JSON.stringify(favoritos));
+}
+
 
 
 /* =========================
@@ -3229,18 +3303,11 @@ ${moeda(produto.preco)}
 
 </div>
 
-<div class="estoque">
-${produto.estoque <= 5 ?
-`🔥 Últimas ${produto.estoque} unidades`
-:"Em estoque"}
+<div class="estoque ${produto.estoque===0?'estoque-alerta':''}">
+${produto.estoque===0 ? 'ESGOTADO' : (produto.estoque <= 5 ? `⚠️ Restam apenas ${produto.estoque} unidades` : "Em estoque")}
 </div>
 
-<button
-class="adicionar"
-onclick="adicionar('${produto.nome}',${produto.preco})"
->
-ADICIONAR AO CARRINHO
-</button>
+<button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="adicionar('${produto.nome}',${produto.preco},${produto.id})">${produto.estoque===0?'ESGOTADO':'ADICIONAR AO CARRINHO'}</button>
 
 </div>
 `;
@@ -3319,7 +3386,7 @@ container.appendChild(criarCard(produto));
    ADICIONAR
 ========================= */
 
-function adicionar(nome,preco){
+function adicionar(nome,preco,id=null){
 
 const produto =
 carrinho.find(
@@ -3333,6 +3400,7 @@ produto.quantidade++;
 }else{
 
 carrinho.push({
+id:id,
 nome:nome,
 preco:preco,
 quantidade:1
@@ -4105,6 +4173,8 @@ onclick="alternarFavorito(${produto.id});abrirProduto(${produto.id})"
 ${favorito?"♥":"♡"}
 </button>
 
+<button class="compartilhar-produto" onclick="compartilharProduto(${produto.id})">↗️ COMPARTILHAR</button>
+
 </div>
 
 </div>
@@ -4114,6 +4184,7 @@ window.produtoAtualDetalhe=produto;
 
 window.quantidadeDetalhe=1;
 renderAvaliacoes();
+renderProdutoExtras(produto);
 selecionarEstrela(5);
 
 window.scrollTo({
@@ -4153,13 +4224,83 @@ i++
 
 adicionar(
 produto.nome,
-produto.preco
+produto.preco,
+produto.id
 );
 
 }
 
 }
 
+
+
+/* =========================
+   COMPARTILHAR / RELACIONADOS / COMPRE JUNTO
+========================= */
+function mostrarToast(texto){
+  const antigo=document.querySelector('.share-toast'); if(antigo) antigo.remove();
+  const t=document.createElement('div'); t.className='share-toast'; t.textContent=texto; document.body.appendChild(t); setTimeout(()=>t.remove(),2600);
+}
+async function compartilharProduto(id){
+  const p=encontrarProduto(id); if(!p)return;
+  const texto=`${p.nome} — ${moeda(p.preco)} | FOR YOU`;
+  const dados={title:p.nome,text:texto,url:window.location.href};
+  try{
+    if(navigator.share){await navigator.share(dados);}
+    else if(navigator.clipboard){await navigator.clipboard.writeText(`${texto}\n${window.location.href}`);mostrarToast('Link do produto copiado! 💗');}
+    else{window.prompt('Copie o link do produto:',window.location.href);}
+  }catch(e){if(e&&e.name!=='AbortError') mostrarToast('Não foi possível compartilhar agora.');}
+}
+function renderProdutoExtras(produto){
+  const c=document.getElementById('produtoExtras'); if(!c)return;
+  const relacionados=[...produtos,...kits].filter(p=>p.id!==produto.id && p.marca===produto.marca).slice(0,4);
+  const outros=[...produtos,...kits].filter(p=>p.id!==produto.id && p.marca!==produto.marca).slice(0,2);
+  const combo=[produto,...outros];
+  const comboTotal=combo.reduce((s,p)=>s+p.preco,0);
+  c.innerHTML=`
+    <div class="produtos-relacionados"><h2>Você também pode gostar</h2><p>Produtos relacionados a ${produto.nome}.</p><div class="produtos" id="relacionadosGrid"></div></div>
+    <div class="compre-junto"><h2>Compre junto</h2><p>Monte uma combinação com este produto.</p><div class="combo-box"><div class="combo-lista">${combo.map(p=>`<div class="combo-item">${p.nome}<br><strong>${moeda(p.preco)}</strong></div>`).join('')}</div><div><div class="combo-total">${moeda(comboTotal)}</div><button class="combo-btn" onclick="adicionarCombo(${JSON.stringify(combo.map(p=>p.id))})">ADICIONAR COMBO</button></div></div></div>`;
+  const grid=document.getElementById('relacionadosGrid'); relacionados.forEach(p=>grid.appendChild(criarCard(p)));
+}
+function adicionarCombo(ids){ids.forEach(id=>{const p=encontrarProduto(id);if(p)adicionar(p.nome,p.preco,p.id);});}
+function abrirCheckout(){
+  if(!carrinho.length){alert('Seu carrinho está vazio.');return;}
+  fecharCarrinho();fecharTodasPaginas();document.getElementById('paginaCheckout').classList.add('ativa');preencherCheckout();renderCheckout();window.scrollTo({top:0,behavior:'smooth'});
+}
+function preencherCheckout(){
+  const c=contaSalva();
+  if(c){
+    document.getElementById('checkoutNome').value=c.nome||'';document.getElementById('checkoutEmail').value=c.email||'';document.getElementById('checkoutTelefone').value=c.telefone||'';document.getElementById('checkoutEndereco').value=c.endereco||'';
+  }
+  const cep=document.getElementById('cep')?.value||'';document.getElementById('checkoutCEP').value=cep;
+  document.getElementById('checkoutNumero').value=document.getElementById('numero')?.value||'';document.getElementById('checkoutComplemento').value=document.getElementById('complemento')?.value||'';
+}
+function selecionarCheckoutEntrega(tipo,btn){entregaSelecionada=tipo;document.querySelectorAll('#paginaCheckout .pagamento-opcao').forEach((b)=>{if(b.parentElement===btn.parentElement)b.classList.remove('ativa')});btn.classList.add('ativa');renderCheckout();}
+let pagamentoSelecionado='PIX';
+function selecionarPagamento(tipo,btn){pagamentoSelecionado=tipo;const grupo=btn.parentElement;grupo.querySelectorAll('.pagamento-opcao').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');}
+function renderCheckout(){
+  let subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);const desconto=subtotal*descontoAtual;const total=subtotal-desconto+freteAtual;
+  document.getElementById('checkoutItens').innerHTML=carrinho.map(p=>`<div class="checkout-linha"><span>${p.nome} × ${p.quantidade}</span><strong>${moeda(p.preco*p.quantidade)}</strong></div>`).join('');
+  document.getElementById('checkoutSubtotal').textContent=moeda(subtotal);document.getElementById('checkoutDesconto').textContent='-'+moeda(desconto);document.getElementById('checkoutFrete').textContent=freteAtual?moeda(freteAtual):'GRÁTIS';document.getElementById('checkoutTotal').textContent=moeda(total);
+}
+function confirmarPedido(){
+  if(!carrinho.length){alert('Seu carrinho está vazio.');return;}
+  const nome=document.getElementById('checkoutNome').value.trim(),email=document.getElementById('checkoutEmail').value.trim(),telefone=document.getElementById('checkoutTelefone').value.trim(),endereco=document.getElementById('checkoutEndereco').value.trim(),numero=document.getElementById('checkoutNumero').value.trim(),cep=document.getElementById('checkoutCEP').value.trim();
+  if(!nome||!email||!telefone||!endereco||!numero||cep.replace(/\D/g,'').length!==8){document.getElementById('checkoutMensagem').textContent='Preencha nome, e-mail, telefone, CEP, endereço e número.';return;}
+  const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0),desconto=subtotal*descontoAtual,total=subtotal-desconto+freteAtual;
+  const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];const numeroPedido='000'+(pedidos.length+1);const pedido={numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),status:'confirmado',etapa:1,total,itens:carrinho.map(p=>({nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado};
+  if(contaAtual&&conta){conta.pedidos=[pedido,...pedidos];conta.nome=nome;conta.email=email;conta.telefone=telefone;conta.endereco=endereco;salvarConta(conta);contaAtual={nome,email,telefone,endereco};salvarContaAtual();}
+  localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));renderPedidosConta();
+  document.getElementById('checkoutMensagem').textContent='Pedido '+pedido.numero+' registrado! Você pode acompanhar o status em Minha conta. 💗';
+  abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total);
+}
+function abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total){
+  let msg=`Olá! Quero confirmar o pedido ${pedido.numero} na FOR YOU.\n\n*PEDIDO*\n`;pedido.itens.forEach(i=>msg+=`• ${i.nome} — ${i.quantidade}x — ${moeda(i.preco*i.quantidade)}\n`);msg+=`\nTotal: ${moeda(total)}\nEntrega: ${pedido.entrega}\nPagamento: ${pedido.pagamento}\n\nCliente: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEndereço: ${endereco}, ${numero}\nCEP: ${cep}`;window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
+function renderPedidosConta(){
+  const c=document.getElementById('listaPedidosConta');if(!c)return;const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
+  if(!pedidos.length){c.innerHTML='<div class="pedido-status"><strong>Nenhum pedido ainda.</strong><p style="font-size:9px;color:#777;margin-top:6px">Quando você finalizar uma compra, ela aparecerá aqui.</p></div>';return;}
+  c.innerHTML=pedidos.map(p=>{const e=p.etapa||1;return `<div class="conta-pedido"><div class="conta-pedido-top"><strong>Pedido ${p.numero}</strong><span class="pedido-badge">${moeda(p.total)}</span></div><div class="pedido-meta">Realizado em ${p.data} • ${p.pagamento||'Pagamento a combinar'}</div><div class="pedido-status"><div class="status-linha concluido"><span class="status-bolinha"></span> Pedido confirmado</div><div class="status-linha ${e>=2?'concluido':''}"><span class="status-bolinha"></span> Preparando</div><div class="status-linha ${e>=3?'concluido':''}"><span class="status-bolinha"></span> Enviado</div><div class="status-linha ${e>=4?'concluido':''}"><span class="status-bolinha"></span> Entregue</div></div></div>`}).join('');
+}
 
 /* =========================
    FILTROS
@@ -4940,6 +5081,7 @@ renderRecentes();
 renderRecomendados();
 atualizarBanner();
 atualizarMinhaConta();
+renderPedidosConta();
 atualizar();
 
 </script>
