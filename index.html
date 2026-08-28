@@ -2223,6 +2223,125 @@ display:grid;place-items:center;font-family:Georgia,serif;font-size:29px;font-we
 }
 </style>
 
+
+<style id="foryou-v15-visual">
+/* ===== FOR YOU V15 — Identidade Visual Premium ===== */
+:root{
+  --fy-rose:#e91e63;
+  --fy-rose-soft:#fff5f8;
+  --fy-ink:#241a1e;
+  --fy-muted:#786c71;
+  --fy-line:#eee5e8;
+  --fy-surface:#fff;
+}
+body{
+  background:#fff;
+  color:var(--fy-ink);
+}
+h1,h2,h3{
+  letter-spacing:-.035em;
+}
+button,a{transition:all .22s ease}
+.secao{
+  padding-top:62px;
+  padding-bottom:62px;
+}
+.secao h2{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(27px,3vw,38px);
+  margin-bottom:8px;
+}
+.secao h2 + p{
+  color:var(--fy-muted);
+  font-size:13px;
+  margin-bottom:28px;
+}
+
+/* Product cards — lighter and more editorial */
+.product-card,.produto-card,.product,.card{
+  border:0!important;
+  box-shadow:0 8px 28px rgba(36,26,30,.055)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  overflow:hidden;
+}
+.product-card:hover,.produto-card:hover,.product:hover,.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 38px rgba(36,26,30,.10)!important;
+}
+.product-card img,.produto-card img,.product img,.card img{
+  border-radius:0!important;
+  background:#faf8f9;
+}
+.product-card .preco,.produto-card .preco,.product .preco{
+  color:var(--fy-rose);
+  font-weight:800;
+}
+.product-card button,.produto-card button,.product button,.card button{
+  border-radius:999px!important;
+}
+
+/* Benefits — remove boxed/card feeling */
+.beneficios,.benefits,.barra-beneficios{
+  background:#fff!important;
+  border:0!important;
+  box-shadow:none!important;
+  display:flex;
+  justify-content:center;
+  gap:38px;
+  padding:22px 18px;
+}
+.beneficios > div,.benefits > div,.barra-beneficios > div{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:5px 0!important;
+}
+.beneficios strong,.benefits strong,.barra-beneficios strong{font-size:11px}
+.beneficios p,.benefits p,.barra-beneficios p{font-size:10px;color:var(--fy-muted)}
+
+/* Global buttons */
+.btn,.button,.botao,button{
+  font-weight:700;
+}
+.primary,.btn-primary,.botao-principal{
+  box-shadow:0 8px 18px rgba(233,30,99,.15);
+}
+.primary:hover,.btn-primary:hover,.botao-principal:hover{
+  transform:translateY(-1px);
+  box-shadow:0 11px 24px rgba(233,30,99,.22);
+}
+
+/* Footer */
+footer,.footer{
+  margin-top:40px;
+  background:#241a1e!important;
+  color:#fff!important;
+  border:0!important;
+  padding-top:55px!important;
+  padding-bottom:28px!important;
+}
+footer a,.footer a{color:#eadde1!important}
+footer a:hover,.footer a:hover{color:#fff!important}
+footer small,.footer small{color:#bcaeb3}
+
+/* subtle selection */
+::selection{background:#f8b6ca;color:#241a1e}
+
+@media(max-width:800px){
+  .secao{padding-top:44px;padding-bottom:44px}
+  .beneficios,.benefits,.barra-beneficios{
+    gap:16px;
+    justify-content:flex-start;
+    overflow:auto;
+    scrollbar-width:none;
+  }
+  .beneficios::-webkit-scrollbar,.benefits::-webkit-scrollbar,.barra-beneficios::-webkit-scrollbar{display:none}
+  .beneficios > div,.benefits > div,.barra-beneficios > div{min-width:135px}
+}
+</style>
+
 </head>
 
 <body>
@@ -6085,6 +6204,33 @@ document.addEventListener("DOMContentLoaded",()=>{
    renderEnderecoV14();
  }
  document.addEventListener('DOMContentLoaded',()=>setTimeout(atualizarContaV14,100));
+})();
+</script>
+
+
+<script id="foryou-v15-visual-script">
+(function(){
+  function reveal(){
+    const els=document.querySelectorAll('.secao, .product-card, .produto-card');
+    els.forEach((el,i)=>{
+      if(el.dataset.fyReveal) return;
+      el.dataset.fyReveal='1';
+      el.style.transition='opacity .45s ease, transform .45s ease';
+      el.style.opacity='0';
+      el.style.transform='translateY(12px)';
+      const io=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.style.opacity='1';
+            e.target.style.transform='translateY(0)';
+            io.unobserve(e.target);
+          }
+        });
+      },{threshold:.08});
+      io.observe(el);
+    });
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(reveal,150));
 })();
 </script>
 
