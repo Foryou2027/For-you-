@@ -1825,6 +1825,9 @@ footer p{
 @media(max-width:800px){.admin-grid{grid-template-columns:repeat(2,1fr)}.beneficio-pontos{grid-template-columns:1fr}.pontos-box{flex-direction:column;align-items:flex-start}}
 @media(max-width:500px){.admin-grid{grid-template-columns:1fr}}
 
+
+.pagamento-detalhes{margin-top:15px}.pagamento-extra{padding:16px;border:1px solid #eee;border-radius:14px;background:#fff;margin-bottom:15px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.checkout-grid input{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px}.pix-placeholder{width:150px;height:150px;margin:12px auto;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed #d9a441;border-radius:12px;font-weight:700;color:#9b721b}.checkout-revisao{margin-top:15px;padding:16px;border-radius:14px;background:#fafafa;border:1px solid #eee}.checkout-revisao h3{margin-top:0}.checkout-revisao div{margin:5px 0}
+@media(max-width:700px){.checkout-grid{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -2498,6 +2501,13 @@ Promoções de datas especiais
         <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('Cartão',this)">💳 Cartão</button>
         <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('A combinar',this)">💬 A combinar</button>
       </div>
+      <div id="pagamentoDetalhes" class="pagamento-detalhes"></div>
+
+      <div class="checkout-revisao" id="checkoutRevisao">
+        <h3>🔎 Revisão do pedido</h3>
+        <div id="revisaoResumo">Confira seus dados e valores antes de confirmar.</div>
+      </div>
+
       <div class="checkout-acoes">
         <button class="checkout-btn sec" onclick="abrirCarrinho()">VOLTAR AO CARRINHO</button>
         <button class="checkout-btn" onclick="confirmarPedido()">CONFIRMAR PEDIDO</button>
@@ -4405,7 +4415,7 @@ function renderProdutoExtras(produto){
 function adicionarCombo(ids){ids.forEach(id=>{const p=encontrarProduto(id);if(p)adicionar(p.nome,p.preco,p.id);});}
 function abrirCheckout(){
   if(!carrinho.length){alert('Seu carrinho está vazio.');return;}
-  fecharCarrinho();fecharTodasPaginas();document.getElementById('paginaCheckout').classList.add('ativa');preencherCheckout();renderCheckout();window.scrollTo({top:0,behavior:'smooth'});
+  fecharCarrinho();fecharTodasPaginas();document.getElementById('paginaCheckout').classList.add('ativa');preencherCheckout();renderCheckout();selecionarPagamento(pagamentoSelecionado,document.querySelector('#paginaCheckout .pagamento-opcao.ativa:last-of-type')||document.querySelector('#paginaCheckout .pagamento-opcao.ativa'));window.scrollTo({top:0,behavior:'smooth'});
 }
 function preencherCheckout(){
   const c=contaSalva();
@@ -4417,11 +4427,36 @@ function preencherCheckout(){
 }
 function selecionarCheckoutEntrega(tipo,btn){entregaSelecionada=tipo;document.querySelectorAll('#paginaCheckout .pagamento-opcao').forEach((b)=>{if(b.parentElement===btn.parentElement)b.classList.remove('ativa')});btn.classList.add('ativa');renderCheckout();}
 let pagamentoSelecionado='PIX';
-function selecionarPagamento(tipo,btn){pagamentoSelecionado=tipo;const grupo=btn.parentElement;grupo.querySelectorAll('.pagamento-opcao').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');}
+function selecionarPagamento(tipo,btn){
+  pagamentoSelecionado=tipo;
+  const grupo=btn.parentElement;
+  grupo.querySelectorAll('.pagamento-opcao').forEach(b=>b.classList.remove('ativa'));
+  btn.classList.add('ativa');
+  const box=document.getElementById('pagamentoDetalhes');
+  if(!box)return;
+  if(tipo==='PIX'){
+    box.innerHTML=`<div class="pagamento-extra pix-extra"><strong>💠 Pagamento via PIX</strong><p>Após confirmar, seu pedido ficará aguardando pagamento. Em uma integração real, o QR Code será gerado automaticamente.</p><div class="pix-placeholder">QR CODE PIX<br><small>Pagamento seguro</small></div></div>`;
+  }else if(tipo==='Cartão'){
+    box.innerHTML=`<div class="pagamento-extra"><strong>💳 Dados do cartão</strong><div class="checkout-grid"><input id="cartaoNumero" inputmode="numeric" maxlength="19" placeholder="Número do cartão"><input id="cartaoNome" placeholder="Nome no cartão"><input id="cartaoValidade" maxlength="5" placeholder="Validade MM/AA"><input id="cartaoCVV" inputmode="numeric" maxlength="4" placeholder="CVV"></div><small>Seus dados serão enviados apenas quando o pagamento estiver conectado a um gateway seguro.</small></div>`;
+  }else{
+    box.innerHTML=`<div class="pagamento-extra"><strong>💬 Pagamento a combinar</strong><p>Você poderá combinar a forma de pagamento com a FOR YOU pelo atendimento.</p></div>`;
+  }
+  atualizarRevisaoCheckout();
+}
+function atualizarRevisaoCheckout(){
+  const el=document.getElementById('revisaoResumo');
+  if(!el)return;
+  const nome=document.getElementById('checkoutNome')?.value.trim()||'—';
+  const endereco=document.getElementById('checkoutEndereco')?.value.trim()||'—';
+  const numero=document.getElementById('checkoutNumero')?.value.trim()||'—';
+  const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);
+  const desconto=subtotal*descontoAtual; const total=subtotal-desconto+freteAtual;
+  el.innerHTML=`<div><strong>Cliente:</strong> ${nome}</div><div><strong>Entrega:</strong> ${endereco}, ${numero}</div><div><strong>Pagamento:</strong> ${pagamentoSelecionado}</div><div><strong>Total:</strong> ${moeda(total)}</div>`;
+}
 function renderCheckout(){
   let subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);const desconto=subtotal*descontoAtual;const total=subtotal-desconto+freteAtual;
   document.getElementById('checkoutItens').innerHTML=carrinho.map(p=>`<div class="checkout-linha"><span>${p.nome} × ${p.quantidade}</span><strong>${moeda(p.preco*p.quantidade)}</strong></div>`).join('');
-  document.getElementById('checkoutSubtotal').textContent=moeda(subtotal);document.getElementById('checkoutDesconto').textContent='-'+moeda(desconto);document.getElementById('checkoutFrete').textContent=freteAtual?moeda(freteAtual):'GRÁTIS';document.getElementById('checkoutTotal').textContent=moeda(total);
+  document.getElementById('checkoutSubtotal').textContent=moeda(subtotal);document.getElementById('checkoutDesconto').textContent='-'+moeda(desconto);document.getElementById('checkoutFrete').textContent=freteAtual?moeda(freteAtual):'GRÁTIS';document.getElementById('checkoutTotal').textContent=moeda(total);atualizarRevisaoCheckout();
 }
 function confirmarPedido(){
   if(!carrinho.length){alert('Seu carrinho está vazio.');return;}
@@ -4430,6 +4465,13 @@ function confirmarPedido(){
   if(!nome||!email||!telefone||!endereco||!numero||cep.replace(/\D/g,'').length!==8){document.getElementById('checkoutMensagem').textContent='Preencha nome, e-mail, telefone, CEP, endereço e número.';return;}
   const indisponivel=carrinho.find(item=>{const p=encontrarProduto(item.id);return !p || Number(p.estoque||0)<Number(item.quantidade||0);});
   if(indisponivel){document.getElementById('checkoutMensagem').textContent='Um dos produtos não possui estoque suficiente. Atualize o carrinho antes de continuar.';return;}
+  if(pagamentoSelecionado==='Cartão'){
+    const numeroCartao=(document.getElementById('cartaoNumero')?.value||'').replace(/\D/g,'');
+    const nomeCartao=(document.getElementById('cartaoNome')?.value||'').trim();
+    const validade=(document.getElementById('cartaoValidade')?.value||'').trim();
+    const cvv=(document.getElementById('cartaoCVV')?.value||'').replace(/\D/g,'');
+    if(numeroCartao.length<13 || !nomeCartao || !/^\d{2}\/\d{2}$/.test(validade) || cvv.length<3){document.getElementById('checkoutMensagem').textContent='Preencha corretamente os dados do cartão.';return;}
+  }
   const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0),desconto=subtotal*descontoAtual,total=subtotal-desconto+freteAtual;
   let todosPedidos=[];try{todosPedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]');}catch(e){todosPedidos=[];}
   const sequencia=todosPedidos.reduce((m,p)=>Math.max(m,parseInt(String(p.numero||'').replace(/\D/g,''))||0),0)+1;
