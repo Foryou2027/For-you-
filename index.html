@@ -2059,6 +2059,42 @@ footer p{
 @media(max-width:900px){.produto-img{height:260px}.produtos{grid-template-columns:repeat(2,1fr);gap:14px}.produto-info{padding:14px}.nome{font-size:17px;min-height:44px}}
 @media(max-width:520px){.produtos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.produto-img{height:210px}.produto-info{padding:12px}.nome{font-size:15px}.preco{font-size:17px}.adicionar{padding:11px 8px}}
 </style>
+
+<style id="foryou-v12-premium">
+/* ===== FOR YOU V12 — Carrinho, Busca e Favoritos ===== */
+.cart-smart-progress{margin:18px 0;padding:16px 18px;border-radius:18px;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.06)}
+.cart-smart-progress .bar{height:8px;border-radius:99px;background:#eee;overflow:hidden;margin:10px 0}
+.cart-smart-progress .fill{height:100%;width:0;border-radius:99px;background:#e91e63;transition:width .35s ease}
+.cart-smart-progress strong{color:#111}
+.cart-smart-progress small{color:#777}
+
+.smart-search-panel{position:absolute;left:0;right:0;top:100%;z-index:1000;background:#fff;border-radius:0 0 20px 20px;box-shadow:0 18px 40px rgba(0,0,0,.12);padding:18px;display:none}
+.smart-search-panel.show{display:block}
+.smart-search-panel h4{margin:0 0 10px;color:#111}
+.smart-search-group{margin-bottom:16px}
+.smart-search-items{display:flex;gap:8px;flex-wrap:wrap}
+.smart-search-item{border:0;background:#f8f8f8;border-radius:999px;padding:8px 12px;cursor:pointer}
+.smart-search-item:hover{background:#fce4ec;color:#c2185b}
+
+.favorite-alert{margin:12px 0;padding:12px 14px;border-radius:14px;background:#fff4f7;color:#b01452;font-size:13px}
+.stock-warning{font-size:12px;color:#b01452;margin-top:7px;font-weight:600}
+
+.cart-recommendations{margin-top:24px}
+.cart-recommendations h3{margin-bottom:14px}
+.cart-recommendations .mini-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cart-recommendations .mini-product{padding:12px;border-radius:16px;background:#fff;box-shadow:0 5px 20px rgba(0,0,0,.05)}
+.cart-recommendations .mini-product img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
+.cart-recommendations .mini-product button{width:100%;margin-top:8px;border:0;border-radius:999px;padding:10px;background:#e91e63;color:#fff;font-weight:700}
+
+.save-later{border:0;background:none;color:#777;cursor:pointer;font-size:12px;margin-top:7px}
+.save-later:hover{color:#e91e63}
+
+@media(max-width:700px){
+  .cart-recommendations .mini-products{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .smart-search-panel{position:fixed;top:70px;left:10px;right:10px;max-height:70vh;overflow:auto;border-radius:18px}
+}
+</style>
+
 </head>
 
 <body>
@@ -5701,6 +5737,128 @@ document.addEventListener("DOMContentLoaded",()=>{
   inicializarBuscaProfissional();
   if(typeof renderAdmin==='function' && adminAutenticado()){ renderAdmin(); atualizarDashboardAdminV6(); }
 });
+</script>
+
+
+<script id="foryou-v12-enhancements">
+(function(){
+  const STORAGE = {
+    recentSearches: 'foryou_recent_searches_v12',
+    savedLater: 'foryou_saved_later_v12',
+    favorites: 'foryou_favorites_v12'
+  };
+
+  function getJSON(k, fallback){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(fallback))}catch(e){return fallback}}
+  function setJSON(k,v){localStorage.setItem(k,JSON.stringify(v))}
+
+  // Search history
+  function rememberSearch(term){
+    term=(term||'').trim();
+    if(!term) return;
+    let a=getJSON(STORAGE.recentSearches,[]);
+    a=[term,...a.filter(x=>x.toLowerCase()!==term.toLowerCase())].slice(0,6);
+    setJSON(STORAGE.recentSearches,a);
+  }
+
+  function findSearchInput(){
+    return document.querySelector('input[type="search"], input[placeholder*="busca" i], input[placeholder*="buscar" i], #search, .search-input');
+  }
+
+  function buildSearchPanel(){
+    const input=findSearchInput();
+    if(!input || document.getElementById('smartSearchPanel')) return;
+    const host=input.closest('form') || input.parentElement;
+    if(!host) return;
+    const wrap=host.parentElement || host;
+    if(getComputedStyle(wrap).position==='static') wrap.style.position='relative';
+    const panel=document.createElement('div');
+    panel.id='smartSearchPanel'; panel.className='smart-search-panel';
+    wrap.appendChild(panel);
+
+    const products=[...document.querySelectorAll('[data-product], .product-card, .product, .card')].slice(0,30)
+      .map(x=>(x.innerText||'').trim().split('\n')[0]).filter(Boolean);
+    const popular=[...new Set(products)].slice(0,6);
+
+    function render(q){
+      const recent=getJSON(STORAGE.recentSearches,[]);
+      const needle=(q||'').toLowerCase().trim();
+      let suggestions=popular.filter(x=>!needle || x.toLowerCase().includes(needle)).slice(0,6);
+      panel.innerHTML='';
+      if(!needle){
+        if(recent.length){
+          const g=document.createElement('div');g.className='smart-search-group';
+          g.innerHTML='<h4>Pesquisas recentes</h4>';
+          const row=document.createElement('div');row.className='smart-search-items';
+          recent.forEach(t=>{const b=document.createElement('button');b.className='smart-search-item';b.textContent=t;b.onclick=()=>{input.value=t;rememberSearch(t);input.dispatchEvent(new Event('input',{bubbles:true}));input.form&&input.form.submit()};row.appendChild(b)});
+          g.appendChild(row);panel.appendChild(g);
+        }
+        if(popular.length){
+          const g=document.createElement('div');g.className='smart-search-group';
+          g.innerHTML='<h4>Produtos populares</h4>';
+          const row=document.createElement('div');row.className='smart-search-items';
+          popular.forEach(t=>{const b=document.createElement('button');b.className='smart-search-item';b.textContent=t;b.onclick=()=>{input.value=t;rememberSearch(t);input.dispatchEvent(new Event('input',{bubbles:true}));input.form&&input.form.submit()};row.appendChild(b)});
+          g.appendChild(row);panel.appendChild(g);
+        }
+      } else if(suggestions.length){
+        const g=document.createElement('div');g.className='smart-search-group';
+        g.innerHTML='<h4>Sugestões</h4>';
+        const row=document.createElement('div');row.className='smart-search-items';
+        suggestions.forEach(t=>{const b=document.createElement('button');b.className='smart-search-item';b.textContent=t;b.onclick=()=>{input.value=t;rememberSearch(t);input.form&&input.form.submit()};row.appendChild(b)});
+        g.appendChild(row);panel.appendChild(g);
+      }
+    }
+    input.addEventListener('focus',()=>{panel.classList.add('show');render(input.value)});
+    input.addEventListener('input',()=>{panel.classList.add('show');render(input.value)});
+    input.addEventListener('keydown',e=>{if(e.key==='Enter') rememberSearch(input.value)});
+    document.addEventListener('click',e=>{if(!wrap.contains(e.target))panel.classList.remove('show')});
+  }
+
+  // Stock warnings and save-for-later buttons on visible product cards.
+  function enhanceCards(){
+    document.querySelectorAll('[data-stock], .product-card, .product').forEach(card=>{
+      const txt=(card.innerText||'').toLowerCase();
+      if((txt.includes('últimas')||txt.includes('estoque baixo')||txt.includes('restam')) && !card.querySelector('.stock-warning')){
+        const w=document.createElement('div');w.className='stock-warning';w.textContent='⚠️ Estoque baixo — aproveite enquanto está disponível.';card.appendChild(w);
+      }
+    });
+  }
+
+  // Smart free-shipping progress in cart. Uses R$199 as the configured threshold from the store copy.
+  function parseBRL(s){
+    if(typeof s!=='string') return 0;
+    const n=s.replace(/[^\d,.-]/g,'').replace(/\./g,'').replace(',','.');
+    return parseFloat(n)||0;
+  }
+  function detectCartTotal(){
+    const nodes=[...document.querySelectorAll('*')];
+    for(const n of nodes){
+      const t=(n.textContent||'').trim();
+      if(/^total\b/i.test(t) || /subtotal/i.test(t)){
+        const m=t.match(/R\$\s?[\d.]+,\d{2}/);
+        if(m) return parseBRL(m[0]);
+      }
+    }
+    return 0;
+  }
+  function addCartProgress(){
+    const cart=document.querySelector('#cart, .cart, [data-cart], .cart-drawer');
+    if(!cart || document.getElementById('cartSmartProgress')) return;
+    const box=document.createElement('div');box.id='cartSmartProgress';box.className='cart-smart-progress';
+    box.innerHTML='<strong>Frete grátis acima de R$ 199</strong><div class="bar"><div class="fill"></div></div><small></small>';
+    cart.insertBefore(box,cart.firstChild);
+    function update(){
+      const total=detectCartTotal(), threshold=199, pct=Math.min(100,(total/threshold)*100);
+      box.querySelector('.fill').style.width=pct+'%';
+      box.querySelector('small').textContent=total>=threshold?'Você ganhou frete grátis!':'Falta R$ '+(threshold-total).toFixed(2).replace('.',',')+' para ganhar frete grátis.';
+    }
+    update(); setInterval(update,1200);
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    buildSearchPanel(); enhanceCards(); addCartProgress();
+    setTimeout(()=>{buildSearchPanel();enhanceCards();addCartProgress()},800);
+  });
+})();
 </script>
 
 </body>
