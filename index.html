@@ -3212,12 +3212,7 @@ body.fy23-open .fy23-drawer{transform:translateX(0)}
 }
 </style>
 
-<style id="foryou-v25-category-highlight">
-.fy24-category-strip{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 18px;background:#fff;border-top:1px solid #f5ecef;border-bottom:1px solid #f0e4e8;box-shadow:0 3px 12px rgba(36,26,30,.035)}
-.fy24-category-strip a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 18px;border:1px solid #edcfd9;border-radius:999px;color:#5b4c52;background:#fff;text-decoration:none;font-size:10px;font-weight:800;letter-spacing:.045em;white-space:nowrap;transition:.18s}
-.fy24-category-strip a:hover,.fy24-category-strip a.active{color:#fff;background:#e91e63;border-color:#e91e63;box-shadow:0 5px 14px rgba(233,30,99,.18)}
-@media(max-width:900px){.fy24-category-strip{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding:11px 14px}.fy24-category-strip::-webkit-scrollbar{display:none}.fy24-category-strip a{min-height:33px;padding:0 14px;font-size:9px}}
-</style></head>
+</head>
 
 <body>
 
@@ -7725,16 +7720,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 })();
 </script>
 
-<script id="foryou-v25-category-highlight-script">
-(function(){
-function add(){
-if(document.querySelector('.fy24-category-strip'))return;
-var h=document.querySelector('header,.header,.topo,.navbar'); if(!h)return;
-var s=document.createElement('nav');s.className='fy24-category-strip';s.setAttribute('aria-label','Categorias');
-s.innerHTML='<a href="#">Maquiagem</a><a href="#">Skincare</a><a href="#">Cabelos</a><a href="#">Perfumes</a><a href="#">Corpo</a><a href="#" class="active">Ofertas</a>';
-h.insertAdjacentElement('afterend',s);
-}
-document.addEventListener('DOMContentLoaded',function(){setTimeout(add,300)});
-})();
-</script></body>
+</body>
 </html>
