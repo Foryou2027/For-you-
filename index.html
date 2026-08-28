@@ -2899,6 +2899,59 @@ body.foryou-v19 .category-list:not(.fy19-original-hidden){
 }
 </style>
 
+
+<style id="foryou-v21-cart-features">
+/* ===== V21 — Carrinho completo e elegante ===== */
+#paginaCarrinhoV17 .fy21-delivery,
+#paginaCarrinhoV17 .fy21-shipping-box,
+#paginaCarrinhoV17 .fy21-payment-box,
+#paginaCarrinhoV17 .fy21-saved-box{
+  background:#fff;
+  border:1px solid #eee6e8;
+  border-radius:18px;
+  padding:17px 18px;
+  margin-top:14px;
+}
+#paginaCarrinhoV17 .fy21-title{
+  display:block;font-size:10px;font-weight:800;letter-spacing:.04em;margin-bottom:12px;color:#241a1e;
+}
+.fy21-delivery-option{
+  display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f2ebed;font-size:10px;
+}
+.fy21-delivery-option:last-child{border-bottom:0}
+.fy21-delivery-option input{accent-color:#e91e63}
+.fy21-delivery-option strong{margin-left:auto;font-size:10px}
+.fy21-delivery-option small{display:block;color:#95878c;font-size:8px;margin-top:3px}
+.fy21-cep-row{display:flex;gap:7px}
+.fy21-cep-row input{flex:1;min-width:0;height:39px;border:1px solid #e5dadd;border-radius:9px;padding:0 11px;font-size:10px;background:#fcfafb}
+.fy21-cep-row button{height:39px;border:0;border-radius:9px;background:#241a1e;color:#fff;padding:0 13px;font-size:9px;font-weight:800}
+.fy21-shipping-result{margin-top:10px;padding:10px 11px;background:#fff7f9;border-radius:10px;font-size:9px;color:#66595e}
+.fy21-payment-box p{margin:0;color:#817378;font-size:9px;line-height:1.6}
+.fy21-payment-icons{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.fy21-payment-icons span{border:1px solid #eee3e6;border-radius:999px;padding:6px 9px;font-size:8px;color:#6f6267}
+.fy21-saved-box{margin-top:24px;padding:20px 22px}
+.fy21-saved-box h2{font-family:Georgia,serif;font-weight:400;font-size:24px;margin:0 0 15px}
+.fy21-saved-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #f0e7ea}
+.fy21-saved-item img{width:62px;height:68px;border-radius:12px;object-fit:cover;background:#faf7f8}
+.fy21-saved-info{flex:1}
+.fy21-saved-info strong{display:block;font-size:10px;margin-bottom:5px}
+.fy21-saved-info span{font-size:10px;color:#e91e63;font-weight:800}
+.fy21-saved-actions button{border:0;background:none;font-size:9px;color:#8a7b81;cursor:pointer}
+.fy21-saved-actions button:hover{color:#e91e63}
+.fy21-toast{
+  position:fixed;right:22px;bottom:22px;z-index:9999;background:#241a1e;color:#fff;
+  padding:12px 16px;border-radius:999px;font-size:10px;box-shadow:0 10px 30px rgba(0,0,0,.15);
+  animation:fy21toast .25s ease;
+}
+@keyframes fy21toast{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fy21-savings{color:#2b8758!important;font-size:10px!important;font-weight:700;margin-top:9px}
+.fy21-stock-warning{color:#b21e53;font-size:9px;margin-top:7px}
+@media(max-width:560px){
+  #paginaCarrinhoV17 .fy21-delivery,#paginaCarrinhoV17 .fy21-shipping-box,#paginaCarrinhoV17 .fy21-payment-box{padding:15px}
+  .fy21-toast{left:14px;right:14px;bottom:14px;text-align:center}
+}
+</style>
+
 </head>
 
 <body>
@@ -7084,6 +7137,119 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(coupon) coupon.textContent='Cupom de desconto';
   }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(refineCart,250));
+})();
+</script>
+
+
+<script id="foryou-v21-cart-script">
+(function(){
+  const CART='foryou_cart_v17', SAVED='foryou_saved_later_v17', SHIP='foryou_shipping_v21';
+  function read(k,d){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}}
+  function write(k,v){localStorage.setItem(k,JSON.stringify(v))}
+  function money(v){return 'R$ '+Number(v||0).toFixed(2).replace('.',',')}
+  function toast(t){
+    let x=document.querySelector('.fy21-toast'); if(x)x.remove();
+    x=document.createElement('div');x.className='fy21-toast';x.textContent=t;document.body.appendChild(x);
+    setTimeout(()=>x.remove(),2400);
+  }
+  window.fy21ShowSaved=function(){
+    const root=document.getElementById('fy21SavedBox'); if(!root)return;
+    const items=read(SAVED,[]);
+    root.style.display=items.length?'block':'none';
+    root.innerHTML=items.length?'<h2>Salvos para depois ♡</h2>'+items.map((x,i)=>`
+      <div class="fy21-saved-item">
+        <img src="${x.image||''}" alt="">
+        <div class="fy21-saved-info"><strong>${esc(x.name)}</strong><span>${money(x.price)}</span></div>
+        <div class="fy21-saved-actions"><button onclick="fy21MoveSaved(${i})">Mover para carrinho</button></div>
+      </div>`).join(''):'';
+  }
+  window.fy21MoveSaved=function(i){
+    const s=read(SAVED,[]), c=read(CART,[]);
+    if(!s[i])return;
+    const x=s.splice(i,1)[0], found=c.find(y=>y.id===x.id||y.name===x.name);
+    if(found)found.qty=(found.qty||1)+(x.qty||1); else c.push({...x,qty:x.qty||1});
+    write(SAVED,s);write(CART,c);render();
+    toast('Produto movido para o carrinho ✓');
+  }
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function addInside(){
+    const list=document.getElementById('fy17CartList'); if(!list)return;
+    // Add stock warnings without requiring a backend.
+    list.querySelectorAll('.fy17-cart-item').forEach((item,i)=>{
+      if(item.querySelector('.fy21-stock-warning'))return;
+      const c=read(CART,[]), q=c[i]?.qty||1;
+      if(q>=5){
+        const w=document.createElement('div');w.className='fy21-stock-warning';w.textContent='⚠ Últimas unidades disponíveis';
+        const anchor=item.querySelector('.fy17-qty'); if(anchor)anchor.after(w);
+      }
+    });
+  }
+  function renderExtra(){
+    const summary=document.querySelector('#paginaCarrinhoV17 .fy17-cart-summary'); if(!summary)return;
+    if(!document.getElementById('fy21Delivery')){
+      const d=document.createElement('div');d.id='fy21Delivery';d.className='fy21-delivery';
+      d.innerHTML='<span class="fy21-title">Como você quer receber?</span>'+
+      '<label class="fy21-delivery-option"><input type="radio" name="fy21ship" value="standard" checked><span>Entrega padrão<small>3–6 dias úteis</small></span><strong>R$ 12,90</strong></label>'+
+      '<label class="fy21-delivery-option"><input type="radio" name="fy21ship" value="express"><span>Entrega expressa<small>1–2 dias úteis</small></span><strong>R$ 24,90</strong></label>';
+      summary.insertBefore(d,summary.querySelector('.fy17-coupon'));
+      d.querySelectorAll('input').forEach(r=>r.addEventListener('change',()=>{localStorage.setItem(SHIP,r.value);updateShip()}));
+    }
+    if(!document.getElementById('fy21ShippingBox')){
+      const d=document.createElement('div');d.id='fy21ShippingBox';d.className='fy21-shipping-box';
+      d.innerHTML='<span class="fy21-title">Calcule sua entrega</span><div class="fy21-cep-row"><input id="fy21Cep" inputmode="numeric" maxlength="9" placeholder="00000-000"><button onclick="fy21CalcCep()">CALCULAR</button></div><div id="fy21ShippingResult"></div>';
+      summary.insertBefore(d,document.getElementById('fy21Delivery'));
+    }
+    if(!document.getElementById('fy21PaymentBox')){
+      const d=document.createElement('div');d.id='fy21PaymentBox';d.className='fy21-payment-box';
+      d.innerHTML='<span class="fy21-title">Pagamento seguro</span><p>Escolha a forma de pagamento no checkout.</p><div class="fy21-payment-icons"><span>Pix</span><span>Cartão</span><span>Outros</span></div>';
+      summary.appendChild(d);
+    }
+    let saved=document.getElementById('fy21SavedBox');
+    if(!saved){
+      saved=document.createElement('div');saved.id='fy21SavedBox';saved.className='fy21-saved-box';
+      const layout=document.querySelector('#paginaCarrinhoV17 .fy17-cart-layout');
+      if(layout)layout.parentNode.insertBefore(saved,layout.nextSibling);
+    }
+    fy21ShowSaved(); updateShip(); addInside();
+    const c=read(CART,[]);
+    const savings=c.reduce((s,x)=>s+Math.max(0,(Number(x.oldPrice)||0)-(Number(x.price)||0))*(x.qty||1),0);
+    let el=document.getElementById('fy21Savings');
+    if(!el){
+      el=document.createElement('div');el.id='fy21Savings';el.className='fy21-savings';
+      const total=document.getElementById('fy17Total'); if(total) total.parentNode.after(el);
+    }
+    el.textContent=savings?'Você está economizando '+money(savings)+' 💗':'';
+  }
+  function updateShip(){
+    const c=read(CART,[]), subtotal=c.reduce((s,x)=>s+(Number(x.price)||0)*(x.qty||1),0);
+    const free=subtotal>=199;
+    const selected=localStorage.getItem(SHIP)||'standard';
+    const cost=free?0:(selected==='express'?24.90:12.90);
+    const ship=document.getElementById('fy17Shipping');
+    if(ship)ship.textContent=free?'Grátis':money(cost);
+    const result=document.getElementById('fy21ShippingResult');
+    if(result)result.innerHTML=free?'✓ Frete grátis para este pedido.':'Informe seu CEP para ver a entrega disponível.';
+  }
+  window.fy21CalcCep=function(){
+    const cep=(document.getElementById('fy21Cep').value||'').replace(/\D/g,'');
+    const result=document.getElementById('fy21ShippingResult');
+    if(cep.length!==8){result.textContent='Digite um CEP válido.';return}
+    result.innerHTML='<strong>Entrega disponível</strong><br>Entrega padrão · 3–6 dias úteis · '+(read(CART,[]).reduce((s,x)=>s+(x.price||0)*(x.qty||1),0)>=199?'Grátis':'R$ 12,90');
+    toast('Frete calculado ✓');
+  }
+  const oldRender=window.render;
+  function render(){ if(typeof oldRender==='function')oldRender(); setTimeout(renderExtra,30); }
+  // Hook common add-to-cart buttons to show feedback.
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('button,[role="button"],a'); if(!b)return;
+    if(/adicionar ao carrinho|adicionar|comprar agora/i.test(b.textContent||'') && !b.closest('#paginaCarrinhoV17')){
+      setTimeout(()=>toast('Produto adicionado ao carrinho ✓'),80);
+    }
+  });
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(renderExtra,400));
+  const observer=new MutationObserver(()=>setTimeout(renderExtra,40));
+  const target=document.getElementById('paginaCarrinhoV17');
+  if(target)observer.observe(target,{childList:true,subtree:true});
 })();
 </script>
 
