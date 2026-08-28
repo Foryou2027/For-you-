@@ -194,8 +194,23 @@ function fazerLogin(event){
   document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕"; return false;
 }
 function sairDaConta(){
-  salvar(); salvarFavoritos(); contaAtual=null; salvarContaAtual(); atualizarMinhaConta(); mostrarLogin();
-  document.getElementById("loginEmail").value=""; document.getElementById("loginSenha").value="";
+  // Salva os dados da conta atual antes de encerrar a sessão.
+  if(contaAtual){ salvar(); salvarFavoritos(); }
+  contaAtual=null;
+  salvarContaAtual();
+  // Limpa os dados em memória para que o próximo cliente nunca veja
+  // o carrinho ou favoritos da conta anterior.
+  carrinho=[];
+  favoritos=[];
+  localStorage.removeItem("forYouCarrinho");
+  localStorage.removeItem("forYouFavoritos");
+  atualizar();
+  renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
+  renderFavoritos();
+  atualizarMinhaConta();
+  mostrarLogin();
+  document.getElementById("loginEmail").value="";
+  document.getElementById("loginSenha").value="";
 }
 function editarDadosConta(){
   const conta=contaSalva();if(!conta)return;
@@ -3286,10 +3301,17 @@ function carregarDadosDaConta(){
   if(!contaAtual) return;
   const chaveC=chaveContaDados("Carrinho"), chaveF=chaveContaDados("Favoritos");
   const salvoC=localStorage.getItem(chaveC), salvoF=localStorage.getItem(chaveF);
-  if(salvoC!==null) carrinho=JSON.parse(salvoC)||[];
-  if(salvoF!==null) favoritos=JSON.parse(salvoF)||[];
+
+  // Se a conta nunca usou carrinho/favoritos, começa vazia.
+  // Isso impede que os dados do cliente anterior sejam reutilizados.
+  try{ carrinho=salvoC!==null ? (JSON.parse(salvoC)||[]) : []; }catch(e){ carrinho=[]; }
+  try{ favoritos=salvoF!==null ? (JSON.parse(salvoF)||[]) : []; }catch(e){ favoritos=[]; }
+
   localStorage.setItem("forYouCarrinho",JSON.stringify(carrinho));
   localStorage.setItem("forYouFavoritos",JSON.stringify(favoritos));
+  atualizar();
+  renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
+  renderFavoritos();
 }
 
 
