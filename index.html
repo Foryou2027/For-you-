@@ -3070,6 +3070,68 @@ header, .header, .topo, .navbar{
 .fy22-mobile-menu{display:none}
 </style>
 
+
+<style id="foryou-v23-mobile-menu">
+/* ===== FOR YOU V23 — Gaveta mobile premium ===== */
+.fy23-overlay{
+  position:fixed;inset:0;background:rgba(25,18,21,.28);
+  backdrop-filter:blur(3px);z-index:1998;opacity:0;visibility:hidden;
+  transition:.25s ease;
+}
+.fy23-drawer{
+  position:fixed;top:0;left:0;bottom:0;width:min(355px,88vw);
+  background:#fff;z-index:1999;transform:translateX(-105%);
+  transition:transform .28s cubic-bezier(.2,.75,.2,1);
+  box-shadow:18px 0 45px rgba(36,26,30,.12);
+  display:flex;flex-direction:column;
+}
+body.fy23-open .fy23-overlay{opacity:1;visibility:visible}
+body.fy23-open .fy23-drawer{transform:translateX(0)}
+.fy23-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:23px 22px 18px;border-bottom:1px solid #f0e7ea;
+}
+.fy23-brand{
+  font-size:16px;font-weight:800;letter-spacing:.17em;color:#241a1e;
+}
+.fy23-close{
+  width:34px;height:34px;border:0;background:#faf6f7;border-radius:50%;
+  display:grid;place-items:center;color:#5d5055;cursor:pointer;
+}
+.fy23-body{overflow:auto;padding:10px 22px 28px}
+.fy23-section-title{
+  margin:20px 0 8px;font-size:9px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:#9a8d92;
+}
+.fy23-link{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:13px 0;border:0;background:transparent;color:#352a2f;
+  text-decoration:none;font-size:12px;font-weight:600;text-align:left;cursor:pointer;
+}
+.fy23-link:hover{color:#e91e63}
+.fy23-link svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7}
+.fy23-chevron{width:13px!important;height:13px!important}
+.fy23-offer{color:#e91e63!important}
+.fy23-divider{height:1px;background:#f0e7ea;margin:7px 0}
+.fy23-sub{
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease;
+}
+.fy23-sub>div{overflow:hidden}
+.fy23-sub.open{grid-template-rows:1fr}
+.fy23-sub a{
+  display:block;padding:8px 0 8px 29px;color:#7a6d73;text-decoration:none;font-size:10px;
+}
+.fy23-sub a:hover{color:#e91e63}
+.fy23-account{
+  display:flex;align-items:center;gap:12px;padding:15px;margin-top:12px;
+  background:#fff7f9;border:1px solid #f3e1e7;border-radius:15px;
+}
+.fy23-account svg{width:20px;height:20px;stroke:#e91e63;fill:none;stroke-width:1.6}
+.fy23-account strong{font-size:11px;color:#352a2f;display:block}
+.fy23-account span{font-size:8px;color:#95878c;display:block;margin-top:3px}
+@media(min-width:901px){.fy23-overlay,.fy23-drawer{display:none!important}}
+</style>
+
 </head>
 
 <body>
@@ -7444,6 +7506,78 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(buildHeader,220));
   window.addEventListener('storage',updateCount);
+})();
+</script>
+
+
+<script id="foryou-v23-mobile-menu-script">
+(function(){
+  const icon=(path)=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
+  function build(){
+    if(document.querySelector('.fy23-drawer'))return;
+    const overlay=document.createElement('div');overlay.className='fy23-overlay';
+    const drawer=document.createElement('aside');drawer.className='fy23-drawer';
+    drawer.setAttribute('aria-label','Menu mobile');
+    drawer.innerHTML=`
+      <div class="fy23-head">
+        <div class="fy23-brand">FOR YOU</div>
+        <button class="fy23-close" aria-label="Fechar menu">${icon('M6 6l12 12M18 6L6 18')}</button>
+      </div>
+      <div class="fy23-body">
+        <div class="fy23-account">
+          ${icon('M20 21a8 8 0 0 0-16 0M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8')}
+          <div><strong>Minha conta</strong><span>Entrar ou criar sua conta</span></div>
+        </div>
+
+        <div class="fy23-section-title">Comprar</div>
+        <a class="fy23-link" href="#" data-home>Início ${icon('M5 12h14M13 6l6 6-6 6')}</a>
+        <button class="fy23-link" data-expand="maquiagem">Maquiagem ${icon('M6 9l6 6 6-6')}</button>
+        <div class="fy23-sub" data-sub="maquiagem"><div>
+          <a href="#">Rosto</a><a href="#">Olhos</a><a href="#">Lábios</a><a href="#">Sobrancelhas</a>
+        </div></div>
+        <a class="fy23-link" href="#" data-category="skincare">Skincare ${icon('M5 12h14M13 6l6 6-6 6')}</a>
+        <a class="fy23-link" href="#" data-category="cabelos">Cabelos ${icon('M5 12h14M13 6l6 6-6 6')}</a>
+        <a class="fy23-link" href="#" data-category="perfumes">Perfumes ${icon('M5 12h14M13 6l6 6-6 6')}</a>
+        <a class="fy23-link" href="#" data-category="corpo">Corpo ${icon('M5 12h14M13 6l6 6-6 6')}</a>
+        <a class="fy23-link fy23-offer" href="#" data-category="ofertas">Ofertas ${icon('M20 12H4M12 4l-8 8 8 8')}</a>
+
+        <div class="fy23-divider"></div>
+        <div class="fy23-section-title">Sua FOR YOU</div>
+        <a class="fy23-link" href="#" data-favorite>Favoritos ${icon('M20.8 8.7c0 5-8.8 10.3-8.8 10.3S3.2 13.7 3.2 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 8.8 2.7z')}</a>
+        <a class="fy23-link" href="#" data-account>Minha conta ${icon('M20 21a8 8 0 0 0-16 0M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8')}</a>
+        <a class="fy23-link" href="#" data-cart>Carrinho <span>🛍</span></a>
+      </div>`;
+    document.body.append(overlay,drawer);
+
+    function close(){document.body.classList.remove('fy23-open')}
+    function open(){document.body.classList.add('fy23-open')}
+    overlay.onclick=close;
+    drawer.querySelector('.fy23-close').onclick=close;
+
+    const trigger=document.querySelector('.fy22-mobile-menu');
+    if(trigger){
+      trigger.onclick=(e)=>{e.preventDefault();open()};
+      trigger.innerHTML=icon('M4 7h16M4 12h16M4 17h16');
+    }
+    drawer.querySelector('[data-expand]').onclick=()=>{
+      drawer.querySelector('[data-sub="maquiagem"]').classList.toggle('open');
+    };
+    drawer.querySelector('[data-home]').onclick=(e)=>{
+      e.preventDefault();close();
+      if(typeof voltarLoja==='function')voltarLoja();else window.scrollTo({top:0,behavior:'smooth'});
+    };
+    drawer.querySelectorAll('[data-category]').forEach(a=>a.onclick=(e)=>{
+      e.preventDefault();const n=a.dataset.category;
+      const old=[...document.querySelectorAll('.fy19-category-list a,.categorias a,.categories a')].find(x=>(x.textContent||'').trim().toLowerCase()===n);
+      if(old)old.click();close();
+    });
+    drawer.querySelector('[data-favorite]').onclick=(e)=>{e.preventDefault();close();if(window.abrirFavoritos)window.abrirFavoritos()};
+    drawer.querySelector('[data-account]').onclick=(e)=>{e.preventDefault();close();if(window.abrirConta)window.abrirConta()};
+    drawer.querySelector('.fy23-account').onclick=()=>{close();if(window.abrirConta)window.abrirConta()};
+    drawer.querySelector('[data-cart]').onclick=(e)=>{e.preventDefault();close();if(window.abrirCarrinhoV17)window.abrirCarrinhoV17()};
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(build,300));
 })();
 </script>
 
