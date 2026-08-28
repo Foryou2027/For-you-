@@ -1570,6 +1570,39 @@ footer p{
     grid-template-columns:1fr 1fr;
   }
 }
+
+/* =========================
+   NOVOS RECURSOS
+========================= */
+.banner-rotativo{max-width:1200px;margin:25px auto 0;padding:0 5%;}
+.banner-box{min-height:125px;background:#351f27;color:white;display:flex;align-items:center;justify-content:space-between;padding:25px 35px;position:relative;overflow:hidden;box-shadow:0 10px 25px #0001;}
+.banner-box h3{font-family:Georgia,serif;font-size:30px;font-weight:normal;}
+.banner-box p{font-size:10px;letter-spacing:1px;margin-top:7px;color:#f8e4e9;}
+.banner-dots{display:flex;gap:6px;margin-top:10px;justify-content:center;}
+.banner-dot{width:7px;height:7px;border-radius:50%;background:#d9b9c2;cursor:pointer;border:0;}
+.banner-dot.ativo{background:#351f27;}
+.secao-extra{background:#fff;}
+.selo-vendido{position:absolute;top:10px;left:10px;background:#351f27;color:#fff;padding:7px 9px;font-size:8px;font-weight:bold;z-index:3;}
+.recentes-vazio,.busca-vazia{max-width:800px;margin:auto;background:white;border:1px solid #ead9de;padding:45px;text-align:center;color:#777;font-size:11px;}
+.resultado-busca{max-width:1200px;margin:-15px auto 25px;padding:0 5%;font-size:11px;color:#777;text-align:center;}
+.cupons-disponiveis{margin-top:14px;padding:12px;border:1px solid #ead9de;background:#fff8fa;}
+.cupons-disponiveis h4{font-size:9px;margin-bottom:8px;}
+.cupom-card{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid #f0e1e5;font-size:8px;}
+.cupom-card:first-of-type{border-top:0;}
+.cupom-card strong{font-size:9px;}
+.cupom-card button{border:1px solid #351f27;background:white;padding:6px 8px;font-size:7px;font-weight:bold;}
+.avaliacao-form{margin:20px 0 25px;padding:18px;background:#fff8fa;border:1px solid #ead9de;}
+.avaliacao-form h3{font-family:Georgia,serif;font-weight:normal;font-size:22px;margin-bottom:12px;}
+.avaliacao-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.avaliacao-form input,.avaliacao-form textarea{width:100%;border:1px solid #ddcbd0;background:white;padding:10px;font-size:10px;outline:none;}
+.avaliacao-form textarea{grid-column:1/-1;min-height:85px;resize:vertical;}
+.estrelas-escolha{display:flex;gap:3px;align-items:center;margin:10px 0;}
+.estrelas-escolha button{border:0;background:none;font-size:22px;color:#c9c1c3;padding:0;}
+.estrelas-escolha button.ativa{color:#c49742;}
+.avaliacao-form .btn-enviar-avaliacao{background:#351f27;color:white;border:0;padding:11px 18px;font-size:8px;font-weight:bold;letter-spacing:1px;}
+.positivas{font-size:9px;color:#777;margin-top:-10px;margin-bottom:18px;}
+.recente-card{position:relative;}
+@media(max-width:800px){.banner-box{padding:20px;min-height:110px}.banner-box h3{font-size:23px}.avaliacao-form-grid{grid-template-columns:1fr}.avaliacao-form textarea{grid-column:auto}}
 </style>
 </head>
 
@@ -1811,6 +1844,13 @@ VER NOVIDADES
 
 </section>
 
+<section class="banner-rotativo">
+  <div class="banner-box" id="bannerBox">
+    <div><h3 id="bannerTitulo">Frete grátis acima de R$ 199</h3><p id="bannerTexto">Aproveite e compre seus favoritos.</p></div>
+  </div>
+  <div class="banner-dots" id="bannerDots"></div>
+</section>
+
 
 <section class="secao" id="novidades">
 
@@ -1857,6 +1897,7 @@ VER NOVIDADES
 
 </div>
 
+<div class="resultado-busca" id="resultadoBusca"></div>
 <div class="produtos" id="listaProdutos"></div>
 
 </section>
@@ -1940,6 +1981,20 @@ Kits presenteáveis
 
 </section>
 
+<section class="secao secao-extra">
+  <div class="titulo"><small>ATENÇÃO</small><h2>Últimas unidades</h2><p>Corra antes que acabe.</p></div>
+  <div class="produtos" id="listaUltimasUnidades"></div>
+</section>
+
+<section class="secao">
+  <div class="titulo"><small>VOCÊ VIU</small><h2>Recentemente visualizados</h2><p>Encontre novamente os produtos que acabou de conferir.</p></div>
+  <div id="listaRecentes"></div>
+</section>
+
+<section class="secao secao-extra">
+  <div class="titulo"><small>FOR YOU</small><h2>Produtos recomendados</h2><p>Achadinhos que combinam com seus favoritos.</p></div>
+  <div class="produtos" id="listaRecomendados"></div>
+</section>
 
 <section class="secao">
 
@@ -2152,32 +2207,29 @@ Promoções de datas especiais
 <h2>Avaliações dos clientes</h2>
 
 <div class="nota-geral">
-
 <div class="nota-numero" id="notaGeral">4,8</div>
-
 <div>
-<div class="estrelas">★★★★★</div>
-<div style="font-size:9px;color:#777;">
-127 avaliações
+<div class="estrelas" id="estrelasGeral">★★★★★</div>
+<div style="font-size:9px;color:#777;" id="contadorAvaliacoes">3 avaliações</div>
 </div>
+</div>
+<div class="positivas" id="percentualPositivas">Este produto tem 98% de avaliações positivas.</div>
+
+<div class="avaliacao-form">
+<h3>Avalie este produto</h3>
+<div class="avaliacao-form-grid">
+<input id="avaliacaoNome" placeholder="Seu nome" maxlength="60">
+<input id="avaliacaoData" type="date">
+<textarea id="avaliacaoComentario" placeholder="Conte o que achou do produto..."></textarea>
+</div>
+<div class="estrelas-escolha" id="estrelasEscolha">
+<button type="button" onclick="selecionarEstrela(1)">★</button><button type="button" onclick="selecionarEstrela(2)">★</button><button type="button" onclick="selecionarEstrela(3)">★</button><button type="button" onclick="selecionarEstrela(4)">★</button><button type="button" onclick="selecionarEstrela(5)">★</button>
+</div>
+<button class="btn-enviar-avaliacao" onclick="enviarAvaliacao()">ENVIAR AVALIAÇÃO</button>
+<div class="conta-mensagem" id="avaliacaoMensagem"></div>
 </div>
 
-</div>
-
-<div class="avaliacao">
-<strong>Mariana ⭐⭐⭐⭐⭐</strong>
-<p>Produto maravilhoso! Amei a qualidade e compraria novamente.</p>
-</div>
-
-<div class="avaliacao">
-<strong>Camila ⭐⭐⭐⭐⭐</strong>
-<p>Chegou rapidinho e exatamente como na descrição.</p>
-</div>
-
-<div class="avaliacao">
-<strong>Juliana ⭐⭐⭐⭐</strong>
-<p>Gostei bastante. O produto é lindo e tem ótimo custo-benefício.</p>
-</div>
+<div id="listaAvaliacoes"></div>
 
 </div>
 
@@ -2495,6 +2547,12 @@ APLICAR
 
 <div class="cupom-msg" id="cupomMsg"></div>
 
+<div class="cupons-disponiveis">
+  <h4>CUPONS DISPONÍVEIS</h4>
+  <div class="cupom-card"><span><strong>FORYOU10</strong><br>10% de desconto</span><button onclick="usarCupom('FORYOU10')">USAR</button></div>
+  <div class="cupom-card"><span><strong>BEMVINDA</strong><br>15% de desconto</span><button onclick="usarCupom('BEMVINDA')">USAR</button></div>
+</div>
+
 </div>
 
 
@@ -2755,6 +2813,14 @@ let descontoAtual = 0;
 let cupomAplicado = "";
 
 let contaAtual = JSON.parse(localStorage.getItem("forYouContaAtual")) || null;
+let recentes = JSON.parse(localStorage.getItem("forYouRecentes")) || [];
+let estrelaSelecionada = 5;
+const banners = [
+  {titulo:"Frete grátis acima de R$ 199",texto:"Aproveite e compre seus favoritos."},
+  {titulo:"Novidades toda semana",texto:"Sempre tem um novo achadinho esperando por você."},
+  {titulo:"Cuide de você",texto:"Beleza, cuidados e produtos escolhidos com carinho."}
+];
+let bannerAtual=0;
 
 
 /* =========================
@@ -2798,6 +2864,66 @@ JSON.stringify(favoritos)
 
 
 /* =========================
+   BANNERS / RECENTES / RECOMENDADOS
+========================= */
+function atualizarBanner(){
+  const b=banners[bannerAtual];
+  const t=document.getElementById("bannerTitulo"), p=document.getElementById("bannerTexto"), dots=document.getElementById("bannerDots");
+  if(t)t.textContent=b.titulo;
+  if(p)p.textContent=b.texto;
+  if(dots){dots.innerHTML="";banners.forEach((_,i)=>{const d=document.createElement("button");d.className="banner-dot "+(i===bannerAtual?"ativo":"");d.onclick=()=>{bannerAtual=i;atualizarBanner()};dots.appendChild(d);});}
+}
+setInterval(()=>{bannerAtual=(bannerAtual+1)%banners.length;atualizarBanner()},4500);
+
+function salvarRecentes(){localStorage.setItem("forYouRecentes",JSON.stringify(recentes));}
+function adicionarRecente(id){
+  recentes=[id,...recentes.filter(x=>x!==id)].slice(0,6); salvarRecentes(); renderRecentes();
+}
+function renderRecentes(){
+  const c=document.getElementById("listaRecentes"); if(!c)return;
+  const lista=recentes.map(id=>encontrarProduto(id)).filter(Boolean);
+  if(!lista.length){c.innerHTML='<div class="recentes-vazio">Você ainda não visualizou produtos. Clique em um produto para ele aparecer aqui.</div>';return;}
+  const g=document.createElement("div");g.className="produtos recente-card";lista.forEach(p=>g.appendChild(criarCard(p)));c.innerHTML="";c.appendChild(g);
+}
+function renderUltimasUnidades(){
+  const c=document.getElementById("listaUltimasUnidades"); if(!c)return;
+  c.innerHTML=""; produtos.filter(p=>p.estoque<=5).slice(0,4).forEach(p=>c.appendChild(criarCard(p)));
+}
+function renderRecomendados(){
+  const c=document.getElementById("listaRecomendados"); if(!c)return;
+  const ids=[...favoritos,...recentes];
+  let lista=produtos.filter(p=>ids.includes(p.id));
+  if(!lista.length) lista=[...produtos].sort((a,b)=>b.nota-a.nota).slice(0,4);
+  lista=[...lista,...produtos].filter((p,i,arr)=>arr.findIndex(x=>x.id===p.id)===i).slice(0,4);
+  c.innerHTML="";lista.forEach(p=>c.appendChild(criarCard(p)));
+}
+
+function usarCupom(codigo){document.getElementById("cupom").value=codigo;aplicarCupom();}
+
+/* =========================
+   AVALIAÇÕES PERSISTENTES
+========================= */
+function chaveAvaliacoes(){return "forYouAvaliacoes"+(window.produtoAtualDetalhe?window.produtoAtualDetalhe.id:"");}
+function obterAvaliacoes(){return JSON.parse(localStorage.getItem(chaveAvaliacoes())) || [
+ {nome:"Mariana",nota:5,comentario:"Produto maravilhoso! Amei a qualidade e compraria novamente.",data:"2026-08-20"},
+ {nome:"Camila",nota:5,comentario:"Chegou rapidinho e exatamente como na descrição.",data:"2026-08-18"},
+ {nome:"Juliana",nota:4,comentario:"Gostei bastante. O produto é lindo e tem ótimo custo-benefício.",data:"2026-08-15"}
+];}
+function salvarAvaliacoes(lista){localStorage.setItem(chaveAvaliacoes(),JSON.stringify(lista));}
+function selecionarEstrela(n){estrelaSelecionada=n;document.querySelectorAll("#estrelasEscolha button").forEach((b,i)=>b.classList.toggle("ativa",i<n));}
+function enviarAvaliacao(){
+ const nome=document.getElementById("avaliacaoNome").value.trim(), comentario=document.getElementById("avaliacaoComentario").value.trim(), data=document.getElementById("avaliacaoData").value || new Date().toISOString().slice(0,10), msg=document.getElementById("avaliacaoMensagem");
+ if(!nome||!comentario){msg.textContent="Preencha seu nome e comentário.";return;}
+ const lista=obterAvaliacoes();lista.unshift({nome,nota:estrelaSelecionada,comentario,data});salvarAvaliacoes(lista);renderAvaliacoes();document.getElementById("avaliacaoNome").value="";document.getElementById("avaliacaoComentario").value="";msg.textContent="Avaliação enviada com sucesso! 💕";
+}
+function renderAvaliacoes(){
+ const c=document.getElementById("listaAvaliacoes"); if(!c||!window.produtoAtualDetalhe)return; const lista=obterAvaliacoes();
+ const media=lista.reduce((s,a)=>s+Number(a.nota),0)/lista.length; const positivas=Math.round(lista.filter(a=>a.nota>=4).length/lista.length*100);
+ document.getElementById("notaGeral").textContent=media.toFixed(1).replace(".",",");document.getElementById("estrelasGeral").textContent="★★★★★";document.getElementById("contadorAvaliacoes").textContent=lista.length+" avaliações";document.getElementById("percentualPositivas").textContent="Este produto tem "+positivas+"% de avaliações positivas.";
+ c.innerHTML="";lista.forEach(a=>{const d=document.createElement("div");d.className="avaliacao";d.innerHTML=`<strong>${a.nome} ${"★".repeat(a.nota)}${"☆".repeat(5-a.nota)}</strong><p>${a.comentario}</p><small style="font-size:8px;color:#999">${new Date(a.data+"T12:00:00").toLocaleDateString("pt-BR")}</small>`;c.appendChild(d);});
+}
+
+/* =========================
    CARD
 ========================= */
 
@@ -2822,8 +2948,9 @@ div.innerHTML=`
 onclick="abrirProduto(${produto.id})">
 
 <span class="etiqueta">
-${produto.precoAntigo ? "OFERTA" : "NOVO"}
+${produto.precoAntigo ? "OFERTA" : (produto.nota>=4.9 ? "NOVO" : "DESTAQUE")}
 </span>
+${produto.nota>=4.9 ? '<span class="selo-vendido">MAIS VENDIDO</span>' : ''}
 
 <button
 class="favoritar ${favorito ? "favoritado":""}"
@@ -3227,6 +3354,7 @@ renderOfertas();
 renderKits();
 
 renderMaisVendidos();
+renderRecomendados();
 
 if(document.getElementById("paginaFavoritos").classList.contains("ativa")){
 
@@ -3650,6 +3778,8 @@ encontrarProduto(id);
 
 if(!produto) return;
 
+adicionarRecente(produto.id);
+
 fecharTodasPaginas();
 
 document
@@ -3741,6 +3871,8 @@ ${favorito?"♥":"♡"}
 window.produtoAtualDetalhe=produto;
 
 window.quantidadeDetalhe=1;
+renderAvaliacoes();
+selecionarEstrela(5);
 
 window.scrollTo({
 top:0,
@@ -3922,6 +4054,7 @@ document
 
 if(!termo){
 
+const rb=document.getElementById("resultadoBusca"); if(rb) rb.textContent="";
 renderProdutos();
 
 document
@@ -3961,6 +4094,9 @@ p.classList.remove("ativa");
 document.getElementById("loja").style.display="block";
 
 renderProdutos(lista);
+const rb=document.getElementById("resultadoBusca");
+if(rb) rb.textContent=lista.length ? `${lista.length} produto(s) encontrado(s) para "${termo}".` : `Nenhum produto encontrado para "${termo}".`;
+if(!lista.length) document.getElementById("listaProdutos").innerHTML='<div class="busca-vazia">Não encontramos esse produto. Tente outro nome, categoria ou marca.</div>';
 
 document
 .getElementById("novidades")
@@ -4509,7 +4645,10 @@ renderOfertas();
 renderKits();
 
 renderMaisVendidos();
-
+renderUltimasUnidades();
+renderRecentes();
+renderRecomendados();
+atualizarBanner();
 atualizarMinhaConta();
 atualizar();
 
