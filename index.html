@@ -4106,66 +4106,160 @@ header button:hover,
 }
 
 
-
 /* =========================================================
    ATUALIZAÇÃO — CATEGORIAS SEM BORDAS
 ========================================================= */
 
-/* Remove bordas e aparência de caixa das categorias */
-.categorias,
-.categories{
-  border:0!important;
-  box-shadow:none!important;
-}
-
 .categoria,
 .category-card,
-.categoria-item,
-.category-item{
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-}
-
-/* Imagem da categoria sem moldura */
-.categoria img,
-.category-card img,
-.categoria-item img,
-.category-item img{
-  border:0!important;
-  outline:0!important;
+.categorias .categoria,
+.categories .category-card{
+  border:none!important;
+  outline:none!important;
   box-shadow:none!important;
 }
 
-/* Mantém apenas um efeito sutil no hover */
+/* Mantém apenas um efeito suave no hover, sem bordas */
 .categoria:hover,
 .category-card:hover,
-.categoria-item:hover,
-.category-item:hover{
-  border:0!important;
-  box-shadow:none!important;
-  transform:translateY(-3px)!important;
+.categorias .categoria:hover,
+.categories .category-card:hover{
+  border:none!important;
+  box-shadow:0 10px 24px rgba(110,16,37,.06)!important;
 }
 
-/* Nome da categoria */
-.categoria h3,
-.categoria h4,
-.category-card h3,
-.category-card h4,
-.categoria-item span,
-.category-item span{
+
+
+/* =========================================================
+   ATUALIZAÇÃO — FILTROS MAIS PARA CIMA E VISUAL PERSONALIZADO
+   Sem imagens
+========================================================= */
+
+/* Aproxima a área de filtros do título */
+.filtros,
+.filtro-area,
+.filters,
+#filtros,
+.filter-bar{
+  position:relative!important;
+  margin-top:-10px!important;
+  padding:18px 22px!important;
+  background:#fffdfc!important;
+  border-top:1px solid #ecdde0!important;
+  border-bottom:1px solid #ecdde0!important;
+  box-shadow:0 8px 22px rgba(110,16,37,.035)!important;
+}
+
+/* Linha interna mais organizada */
+.filtros > div,
+.filtro-area > div,
+.filters > div,
+#filtros > div,
+.filter-bar > div{
+  align-items:center!important;
+}
+
+/* Selects personalizados */
+.filtros select,
+.filtro-area select,
+.filters select,
+#filtros select,
+.filter-bar select{
+  min-width:145px!important;
+  height:42px!important;
+  padding:0 38px 0 15px!important;
+  background:#fff8f9!important;
   color:#6E1025!important;
+  border:1px solid #ead5da!important;
+  border-radius:10px!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  cursor:pointer!important;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease!important;
 }
 
-/* Hover do nome */
-.categoria:hover h3,
-.categoria:hover h4,
-.category-card:hover h3,
-.category-card:hover h4,
-.categoria-item:hover span,
-.category-item:hover span{
-  color:#B71C3A!important;
+.filtros select:hover,
+.filtro-area select:hover,
+.filters select:hover,
+#filtros select:hover,
+.filter-bar select:hover{
+  border-color:#B71C3A!important;
+  background:#fff!important;
+}
+
+.filtros select:focus,
+.filtro-area select:focus,
+.filters select:focus,
+#filtros select:focus,
+.filter-bar select:focus{
+  outline:none!important;
+  border-color:#B71C3A!important;
+  box-shadow:0 0 0 3px rgba(183,28,58,.09)!important;
+}
+
+/* Botão limpar filtros */
+.filtros button,
+.filtro-area button,
+.filters button,
+#filtros button,
+.filter-bar button{
+  height:42px!important;
+  padding:0 18px!important;
+  background:transparent!important;
+  color:#6E1025!important;
+  border:1px solid #6E1025!important;
+  border-radius:10px!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.04em!important;
+  transition:background .2s ease,color .2s ease,transform .2s ease!important;
+}
+
+.filtros button:hover,
+.filtro-area button:hover,
+.filters button:hover,
+#filtros button:hover,
+.filter-bar button:hover{
+  background:#6E1025!important;
+  color:#fff!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Se houver texto acima dos filtros, reduz o espaço */
+.filtros-container,
+.catalogo-header,
+.produtos-header{
+  margin-bottom:0!important;
+  padding-bottom:12px!important;
+}
+
+/* Layout responsivo */
+@media(max-width:760px){
+  .filtros,
+  .filtro-area,
+  .filters,
+  #filtros,
+  .filter-bar{
+    margin-top:0!important;
+    padding:14px!important;
+  }
+
+  .filtros select,
+  .filtro-area select,
+  .filters select,
+  #filtros select,
+  .filter-bar select{
+    min-width:0!important;
+    width:100%!important;
+  }
+
+  .filtros button,
+  .filtro-area button,
+  .filters button,
+  #filtros button,
+  .filter-bar button{
+    width:100%!important;
+  }
 }
 
 </style>
