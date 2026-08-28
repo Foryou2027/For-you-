@@ -2171,6 +2171,58 @@ footer p{
 }
 </style>
 
+
+<style id="foryou-v14-account">
+/* ===== Minha Conta Premium V14 ===== */
+.conta-premium-v14{max-width:1180px;margin:auto}
+.conta-hero-v14{
+  background:linear-gradient(135deg,#351f27 0%,#5a2e3d 55%,#b83f61 100%);
+  color:#fff;border-radius:28px;padding:34px 38px;display:flex;
+  justify-content:space-between;align-items:center;gap:25px;margin-bottom:22px;
+  box-shadow:0 18px 45px rgba(53,31,39,.16)
+}
+.conta-hero-v14 small{letter-spacing:3px;color:#f6d7df;font-size:9px;font-weight:700}
+.conta-hero-v14 h1{font-family:Georgia,serif;font-size:38px;font-weight:normal;margin:8px 0}
+.conta-hero-v14 p{color:#f6e9ed;font-size:12px}
+.conta-avatar-v14{width:76px;height:76px;border-radius:50%;background:#fff;color:#b83f61;
+display:grid;place-items:center;font-family:Georgia,serif;font-size:29px;font-weight:bold;flex-shrink:0}
+.conta-layout-v14{display:grid;grid-template-columns:245px 1fr;gap:20px}
+.conta-menu-v14{background:#fff;border-radius:20px;padding:10px;height:max-content;box-shadow:0 8px 30px rgba(0,0,0,.05)}
+.conta-menu-v14 button{width:100%;border:0;background:transparent;text-align:left;padding:14px 16px;border-radius:12px;font-size:11px;color:#555;font-weight:700}
+.conta-menu-v14 button:hover,.conta-menu-v14 button.ativo{background:#fff0f4;color:#b83f61}
+.conta-painel-v14{min-width:0}
+.conta-tab-v14{display:none}
+.conta-tab-v14.ativa{display:block}
+.conta-cards-v14{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.conta-stat-v14{background:#fff;border-radius:18px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,.05)}
+.conta-stat-v14 small{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:1px}
+.conta-stat-v14 strong{display:block;font-family:Georgia,serif;font-size:27px;color:#351f27;margin-top:7px}
+.conta-box-v14{background:#fff;border-radius:20px;padding:25px;box-shadow:0 8px 30px rgba(0,0,0,.05);margin-bottom:18px}
+.conta-box-v14 h2{font-family:Georgia,serif;font-size:25px;font-weight:normal;margin-bottom:6px}
+.conta-box-v14>p{font-size:11px;color:#777;margin-bottom:20px}
+.conta-form-v14{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.conta-form-v14 label{font-size:9px;font-weight:700;color:#555}
+.conta-form-v14 input{width:100%;height:42px;border:1px solid #e3d5da;border-radius:10px;padding:0 12px;margin-top:6px;outline:none}
+.conta-form-v14 input:focus{border-color:#b83f61;box-shadow:0 0 0 3px #b83f6114}
+.conta-form-v14 .full{grid-column:1/-1}
+.conta-save-v14{border:0;background:#351f27;color:#fff;padding:12px 20px;border-radius:999px;font-size:10px;font-weight:bold;margin-top:5px}
+.conta-save-v14:hover{background:#b83f61}
+.conta-empty-v14{text-align:center;padding:42px 20px;background:#fff7f9;border-radius:16px;color:#777}
+.conta-empty-v14 .icon{font-size:30px;margin-bottom:8px;color:#b83f61}
+.conta-order-v14{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 0;border-bottom:1px solid #f0e5e8}
+.conta-order-v14:last-child{border-bottom:0}
+.conta-status-v14{font-size:9px;font-weight:bold;color:#2c8a55;background:#edf8f1;border-radius:999px;padding:7px 10px}
+.conta-security-v14{display:flex;gap:12px;align-items:center;background:#faf6f7;padding:15px;border-radius:14px;font-size:10px;color:#66585d;margin-bottom:12px}
+@media(max-width:800px){
+ .conta-layout-v14{grid-template-columns:1fr}
+ .conta-menu-v14{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
+ .conta-cards-v14{grid-template-columns:1fr 1fr}
+ .conta-hero-v14{padding:25px;flex-direction:column;align-items:flex-start}
+ .conta-form-v14{grid-template-columns:1fr}
+ .conta-form-v14 .full{grid-column:auto}
+}
+</style>
+
 </head>
 
 <body>
@@ -2738,98 +2790,106 @@ Promoções de datas especiais
      MINHA CONTA
 ========================= -->
 
+
 <section class="pagina secao" id="paginaConta">
+<button class="voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
 
-<button class="voltar" onclick="voltarLoja()">
-← VOLTAR PARA A LOJA
-</button>
+<div class="conta-premium-v14">
+  <div class="conta-hero-v14">
+    <div>
+      <small>ÁREA DO CLIENTE</small>
+      <h1 id="contaSaudacao">Olá, seja bem-vinda 💗</h1>
+      <p>Gerencie seus dados, pedidos, favoritos e endereços em um só lugar.</p>
+    </div>
+    <div class="conta-avatar-v14" id="contaAvatar">FY</div>
+  </div>
 
-<div class="conta">
+  <div class="conta-layout-v14">
+    <aside class="conta-menu-v14">
+      <button class="ativo" onclick="abrirAbaConta('inicioConta',this)">⌂ Visão geral</button>
+      <button onclick="abrirAbaConta('dadosConta',this)">♙ Dados pessoais</button>
+      <button onclick="abrirAbaConta('pedidosConta',this)">▣ Meus pedidos</button>
+      <button onclick="abrirAbaConta('enderecosConta',this)">⌖ Endereços</button>
+      <button onclick="abrirFavoritos()">♡ Favoritos</button>
+      <button onclick="abrirAbaConta('segurancaConta',this)">◇ Segurança</button>
+      <button onclick="sairContaV14()">↪ Sair da conta</button>
+    </aside>
 
-<div class="conta-header">
-<small>FOR YOU</small>
-<h1>Minha conta</h1>
-<p>Tenha seus favoritos e informações sempre por perto.</p>
+    <main class="conta-painel-v14">
+      <div id="inicioConta" class="conta-tab-v14 ativa">
+        <div class="conta-cards-v14">
+          <div class="conta-stat-v14"><small>Pedidos</small><strong id="statPedidos">0</strong></div>
+          <div class="conta-stat-v14"><small>Favoritos</small><strong id="statFavoritos">0</strong></div>
+          <div class="conta-stat-v14"><small>Cupons</small><strong id="statCupons">0</strong></div>
+        </div>
+        <div class="conta-box-v14">
+          <h2>Bem-vinda à sua conta</h2>
+          <p>Aqui você encontra rapidamente tudo o que importa para sua experiência na FOR YOU.</p>
+          <div class="conta-security-v14">♡ <span>Seus favoritos ficam salvos neste navegador para você voltar quando quiser.</span></div>
+          <div class="conta-security-v14">▣ <span>Quando os pedidos reais forem integrados, eles aparecerão automaticamente nesta área.</span></div>
+        </div>
+      </div>
+
+      <div id="dadosConta" class="conta-tab-v14">
+        <div class="conta-box-v14">
+          <h2>Dados pessoais</h2>
+          <p>Atualize suas informações de contato.</p>
+          <form class="conta-form-v14" onsubmit="salvarDadosContaV14(event)">
+            <label>Nome completo<input id="contaNome" required placeholder="Seu nome"></label>
+            <label>E-mail<input id="contaEmail" type="email" required placeholder="seu@email.com"></label>
+            <label>Telefone<input id="contaTelefone" placeholder="(00) 00000-0000"></label>
+            <label>CPF<input id="contaCpf" placeholder="000.000.000-00"></label>
+            <label class="full">Data de nascimento<input id="contaNascimento" type="date"></label>
+            <div class="full"><button class="conta-save-v14">SALVAR ALTERAÇÕES</button></div>
+          </form>
+        </div>
+      </div>
+
+      <div id="pedidosConta" class="conta-tab-v14">
+        <div class="conta-box-v14">
+          <h2>Meus pedidos</h2>
+          <p>Acompanhe seus pedidos e o status de cada compra.</p>
+          <div id="listaPedidosConta">
+            <div class="conta-empty-v14"><div class="icon">▣</div><strong>Nenhum pedido ainda</strong><br>Quando você fizer uma compra, ela aparecerá aqui.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="enderecosConta" class="conta-tab-v14">
+        <div class="conta-box-v14">
+          <h2>Meus endereços</h2>
+          <p>Deixe seu endereço pronto para agilizar suas próximas compras.</p>
+          <form class="conta-form-v14" onsubmit="salvarEnderecoContaV14(event)">
+            <label>CEP<input id="endCep" placeholder="00000-000" maxlength="9"></label>
+            <label>Número<input id="endNumero" placeholder="123"></label>
+            <label class="full">Rua<input id="endRua" placeholder="Nome da rua"></label>
+            <label>Bairro<input id="endBairro" placeholder="Bairro"></label>
+            <label>Cidade<input id="endCidade" placeholder="Cidade"></label>
+            <label>Estado<input id="endEstado" placeholder="UF" maxlength="2"></label>
+            <label>Complemento<input id="endComplemento" placeholder="Apartamento, bloco..."></label>
+            <div class="full"><button class="conta-save-v14">SALVAR ENDEREÇO</button></div>
+          </form>
+          <div id="enderecoSalvoV14" style="margin-top:18px"></div>
+        </div>
+      </div>
+
+      <div id="segurancaConta" class="conta-tab-v14">
+        <div class="conta-box-v14">
+          <h2>Segurança</h2>
+          <p>Gerencie o acesso à sua conta.</p>
+          <div class="conta-security-v14">🔒 <span><strong>Senha</strong><br>Altere sua senha regularmente e não compartilhe seus dados de acesso.</span></div>
+          <form class="conta-form-v14" onsubmit="alterarSenhaContaV14(event)">
+            <label>Senha atual<input type="password" id="senhaAtualV14" required></label>
+            <label>Nova senha<input type="password" id="senhaNovaV14" minlength="6" required></label>
+            <div class="full"><button class="conta-save-v14">ALTERAR SENHA</button></div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>
-
-<div class="conta-auth" id="contaAuth">
-<div id="contaLoginBox">
-<h2>Entrar na minha conta</h2>
-<p>Entre para acessar seus dados, favoritos e pedidos.</p>
-<form class="conta-form" onsubmit="return fazerLogin(event)">
-<input id="loginEmail" type="email" placeholder="Seu e-mail" required>
-<input id="loginSenha" type="password" placeholder="Sua senha" required>
-<button type="submit">ENTRAR</button>
-</form>
-<button type="button" class="conta-troca" onclick="mostrarCadastro()">Ainda não tenho conta • CADASTRAR</button>
-<div class="conta-mensagem" id="loginMensagem"></div>
-</div>
-<div id="contaCadastroBox" style="display:none">
-<h2>Criar minha conta</h2>
-<p>Cadastre seus dados para ter sua própria conta na FOR YOU.</p>
-<form class="conta-form" onsubmit="return cadastrarConta(event)">
-<input id="cadNome" type="text" placeholder="Nome completo" required>
-<input id="cadEmail" type="email" placeholder="Seu melhor e-mail" required>
-<input id="cadTelefone" type="tel" placeholder="Telefone" required>
-<input id="cadEndereco" type="text" placeholder="Endereço completo" required>
-<input id="cadSenha" type="password" placeholder="Crie uma senha (mín. 6 caracteres)" minlength="6" required>
-<input id="cadConfirmar" type="password" placeholder="Confirme sua senha" minlength="6" required>
-<button type="submit">CRIAR CONTA</button>
-</form>
-<button type="button" class="conta-troca" onclick="mostrarLogin()">Já tenho conta • ENTRAR</button>
-<div class="conta-mensagem" id="cadastroMensagem"></div>
-</div>
-<div id="contaLogada" style="display:none" class="conta-logada">
-<div class="avatar" id="contaAvatar">♡</div>
-<strong id="contaNome"></strong>
-<span id="contaEmail"></span>
-<button type="button" class="conta-principal-btn" onclick="editarDadosConta()">EDITAR MEUS DADOS</button>
-<button type="button" class="conta-principal-btn conta-secundario" onclick="sairDaConta()">SAIR DA CONTA</button>
-<div class="conta-mensagem" id="contaMensagem"></div>
-</div>
-</div>
-
-<div class="conta-grid">
-
-<div class="conta-card" onclick="editarDadosConta()">
-<h3>👤 Meus dados</h3>
-<p>Nome, e-mail, telefone e endereço.</p>
-</div>
-
-<div class="conta-card" onclick="abrirFidelidade()"><h3>✨ FOR YOU Club</h3><p>Acompanhe seus pontos e benefícios.</p></div>
-
-<div class="conta-card" id="adminCard" onclick="abrirAdminLogin()" style="display:none"><h3>⚙️ Painel administrativo</h3><p>Gerencie produtos, estoque, pedidos e ofertas.</p></div>
-
-<div class="conta-card" onclick="abrirFavoritos()">
-<h3>♡ Favoritos</h3>
-<p>Veja todos os produtos que você favoritou.</p>
-</div>
-
-<div class="conta-card" onclick="mostrarPedidosConta()">
-<h3>📦 Meus pedidos</h3>
-<p>Acompanhe seus pedidos realizados.</p>
-</div>
-
-<div class="conta-card" onclick="editarEnderecoConta()">
-<h3>📍 Meus endereços</h3>
-<p>Consulte e organize seus endereços.</p>
-</div>
-
-<div class="conta-card" style="grid-column:1/-1">
-<h3>📦 Histórico de pedidos</h3>
-<div id="contaPedidosDetalhes"><p style="color:#777;font-size:10px">Faça login para visualizar seus pedidos.</p></div>
-</div>
-
-<div class="conta-card" onclick="alterarSenhaConta()">
-<h3>🔐 Alterar senha</h3>
-<p>Atualize a senha da sua conta.</p>
-</div>
-
-</div>
-
-</div>
-
 </section>
+
 
 
 
@@ -5946,6 +6006,85 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   window.addEventListener('scroll',updateHeader,{passive:true});
   document.addEventListener('DOMContentLoaded',updateHeader);
+})();
+</script>
+
+
+<script id="foryou-v14-account-script">
+(function(){
+ const K='foryou_conta_v14';
+ function dados(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return {}}}
+ function salvar(d){localStorage.setItem(K,JSON.stringify(d))}
+ function initials(n){return (n||'FY').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'FY'}
+ window.abrirAbaConta=function(id,btn){
+   document.querySelectorAll('.conta-tab-v14').forEach(x=>x.classList.remove('ativa'));
+   const el=document.getElementById(id); if(el) el.classList.add('ativa');
+   document.querySelectorAll('.conta-menu-v14 button').forEach(x=>x.classList.remove('ativo'));
+   if(btn) btn.classList.add('ativo');
+   window.scrollTo({top:0,behavior:'smooth'});
+ };
+ window.salvarDadosContaV14=function(e){
+   e.preventDefault(); const d=dados();
+   d.nome=document.getElementById('contaNome').value.trim();
+   d.email=document.getElementById('contaEmail').value.trim();
+   d.telefone=document.getElementById('contaTelefone').value.trim();
+   d.cpf=document.getElementById('contaCpf').value.trim();
+   d.nascimento=document.getElementById('contaNascimento').value;
+   salvar(d); atualizarContaV14(); alert('Dados atualizados com sucesso! 💗');
+ };
+ window.salvarEnderecoContaV14=function(e){
+   e.preventDefault(); const d=dados();
+   d.endereco={
+    cep:document.getElementById('endCep').value.trim(),numero:document.getElementById('endNumero').value.trim(),
+    rua:document.getElementById('endRua').value.trim(),bairro:document.getElementById('endBairro').value.trim(),
+    cidade:document.getElementById('endCidade').value.trim(),estado:document.getElementById('endEstado').value.trim(),
+    complemento:document.getElementById('endComplemento').value.trim()
+   };
+   salvar(d); renderEnderecoV14(); alert('Endereço salvo com sucesso! 💗');
+ };
+ window.alterarSenhaContaV14=function(e){
+   e.preventDefault(); const nova=document.getElementById('senhaNovaV14').value;
+   if(nova.length<6){alert('A nova senha precisa ter pelo menos 6 caracteres.');return}
+   alert('Senha atualizada com sucesso! 💗'); e.target.reset();
+ };
+ window.sairContaV14=function(){
+   if(confirm('Deseja sair da sua conta neste dispositivo?')){
+     const d=dados(); d.sessao=false; salvar(d); atualizarContaV14();
+     alert('Você saiu da conta.');
+   }
+ };
+ function renderEnderecoV14(){
+   const d=dados(), x=d.endereco, box=document.getElementById('enderecoSalvoV14');
+   if(!box)return;
+   if(!x){box.innerHTML='';return}
+   box.innerHTML='<div class="conta-security-v14">⌖ <span><strong>Endereço salvo</strong><br>'+
+    [x.rua,x.numero,x.bairro,x.cidade,x.estado,x.cep].filter(Boolean).join(', ') +
+    (x.complemento?' — '+x.complemento:'')+'</span></div>';
+ }
+ function atualizarContaV14(){
+   const d=dados(), nome=d.nome||'';
+   const s=document.getElementById('contaSaudacao'), av=document.getElementById('contaAvatar');
+   if(s)s.textContent=nome?'Olá, '+nome.split(' ')[0]+' 💗':'Olá, seja bem-vinda 💗';
+   if(av)av.textContent=initials(nome);
+   ['contaNome','contaEmail','contaTelefone','contaCpf','contaNascimento'].forEach(id=>{
+     const el=document.getElementById(id); const key=id.replace('conta','').toLowerCase();
+     if(el && d[key]!==undefined)el.value=d[key];
+   });
+   const f=JSON.parse(localStorage.getItem('foryou_favoritos')||'[]');
+   const sf=document.getElementById('statFavoritos'); if(sf)sf.textContent=Array.isArray(f)?f.length:0;
+   const sp=document.getElementById('statPedidos'); if(sp)sp.textContent=Array.isArray(d.pedidos)?d.pedidos.length:0;
+   const sc=document.getElementById('statCupons'); if(sc)sc.textContent=Array.isArray(d.cupons)?d.cupons.length:0;
+   if(d.endereco){
+    const x=d.endereco;
+    ['endCep','endNumero','endRua','endBairro','endCidade','endEstado','endComplemento'].forEach(id=>{
+      const el=document.getElementById(id); if(!el)return;
+      const map={endCep:'cep',endNumero:'numero',endRua:'rua',endBairro:'bairro',endCidade:'cidade',endEstado:'estado',endComplemento:'complemento'};
+      el.value=x[map[id]]||'';
+    });
+   }
+   renderEnderecoV14();
+ }
+ document.addEventListener('DOMContentLoaded',()=>setTimeout(atualizarContaV14,100));
 })();
 </script>
 
