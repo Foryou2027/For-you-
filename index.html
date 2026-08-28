@@ -2509,6 +2509,138 @@ footer small,.footer small{color:#bcaeb3}
 }
 </style>
 
+
+<style id="foryou-v18-entry">
+/* ===== FOR YOU V18 — Primeira impressão ===== */
+:root{
+  --fy18-pink:#e91e63;
+  --fy18-ink:#241a1e;
+  --fy18-muted:#75696e;
+  --fy18-line:#eee5e8;
+}
+
+/* Header more airy and premium */
+header, .header, .topo, .navbar{
+  box-shadow:0 1px 0 rgba(36,26,30,.05)!important;
+}
+.logo, .brand-logo, .site-logo{
+  letter-spacing:.08em!important;
+}
+
+/* Entry / hero: make the first viewport calm */
+.hero, .hero-banner, .banner-principal, .banner-hero{
+  min-height:clamp(430px,68vh,650px)!important;
+  border-radius:0!important;
+  overflow:hidden;
+}
+.hero::before,.hero-banner::before,.banner-principal::before,.banner-hero::before{
+  opacity:.08!important;
+}
+.hero-content,.banner-content,.hero-text{
+  max-width:560px!important;
+}
+.hero-content h1,.banner-content h1,.hero-text h1{
+  font-family:Georgia,serif!important;
+  font-weight:400!important;
+  font-size:clamp(42px,6vw,72px)!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+  margin-bottom:16px!important;
+}
+.hero-content p,.banner-content p,.hero-text p{
+  font-size:14px!important;
+  line-height:1.7!important;
+  max-width:410px!important;
+  color:var(--fy18-muted)!important;
+}
+.hero-actions,.banner-actions{
+  display:flex!important;
+  gap:10px!important;
+  margin-top:24px!important;
+}
+.hero-actions a,.hero-actions button,.banner-actions a,.banner-actions button{
+  min-height:46px!important;
+  padding:0 23px!important;
+  border-radius:999px!important;
+}
+
+/* Indicators become tiny, elegant and unobtrusive */
+.hero .dots,.hero .indicators,.banner .dots,.banner .indicators{
+  transform:scale(.78);
+  opacity:.78;
+}
+
+/* Category navigation: clean chips rather than heavy boxes */
+.categorias,.categories,.category-list{
+  gap:9px!important;
+  padding:18px 0!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+.categorias a,.categories a,.category-list a,
+.categoria,.category{
+  border:1px solid var(--fy18-line)!important;
+  background:#fff!important;
+  border-radius:999px!important;
+  padding:9px 15px!important;
+  font-size:10px!important;
+  box-shadow:none!important;
+}
+.categorias a:hover,.categories a:hover,.category-list a:hover,
+.categoria:hover,.category:hover{
+  border-color:#f2a7bd!important;
+  color:var(--fy18-pink)!important;
+  transform:translateY(-1px);
+}
+
+/* Benefits should feel like one quiet line under the hero */
+.beneficios,.benefits,.barra-beneficios{
+  border-top:1px solid var(--fy18-line)!important;
+  border-bottom:1px solid var(--fy18-line)!important;
+  padding:17px 10px!important;
+}
+
+/* First content section starts with more breathing room */
+#inicio > section:first-of-type,
+#home > section:first-of-type,
+.home > section:first-of-type{
+  margin-top:12px!important;
+}
+
+/* Prevent the home page from feeling like a long wall of cards */
+#inicio .secao,
+#home .secao,
+.home .secao{
+  padding-left:clamp(16px,3vw,40px);
+  padding-right:clamp(16px,3vw,40px);
+}
+
+/* On entry, product images should dominate text */
+.product-card img,.produto-card img,.product img,.card img{
+  aspect-ratio:1/1.08;
+  object-fit:cover;
+}
+
+/* Mobile first impression */
+@media(max-width:700px){
+  .hero,.hero-banner,.banner-principal,.banner-hero{
+    min-height:500px!important;
+  }
+  .hero-content h1,.banner-content h1,.hero-text h1{
+    font-size:43px!important;
+  }
+  .hero-content p,.banner-content p,.hero-text p{
+    font-size:13px!important;
+  }
+  .hero-actions,.banner-actions{
+    flex-direction:column;
+    align-items:stretch;
+    max-width:260px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -6607,6 +6739,27 @@ document.addEventListener("DOMContentLoaded",()=>{
     // Make common cart buttons open the new premium cart.
     document.querySelectorAll('[href="#carrinho"],[data-cart-link],.abrir-carrinho').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();abrirCarrinhoV17()}));
   });
+})();
+</script>
+
+
+<script id="foryou-v18-entry-script">
+(function(){
+  function polishEntry(){
+    document.body.classList.add('foryou-v18');
+    const candidates=[
+      ...document.querySelectorAll('.hero h1,.hero-banner h1,.banner-principal h1,.banner-hero h1')
+    ];
+    candidates.forEach(h=>{
+      if(h.dataset.fy18) return;
+      h.dataset.fy18='1';
+      const text=(h.textContent||'').trim();
+      if(!text) return;
+      /* Keep existing campaign copy; only normalize accidental all-caps. */
+      if(text.length<80) h.textContent=text.replace(/\s+/g,' ');
+    });
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(polishEntry,120));
 })();
 </script>
 
