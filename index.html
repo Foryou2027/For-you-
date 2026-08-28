@@ -1760,6 +1760,22 @@ footer p{
   .seguranca-cards{grid-template-columns:1fr}
 }
 
+
+/* =========================
+   NOVOS RECURSOS PROFISSIONAIS
+========================= */
+.admin-btn,.fidelidade-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #351f27;background:#351f27;color:#fff;padding:12px 16px;border-radius:8px;font-weight:bold;letter-spacing:.5px;cursor:pointer}
+.admin-btn:hover,.fidelidade-btn:hover{opacity:.9}
+.painel-admin,.fidelidade-pagina{max-width:1250px;margin:auto}
+.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+.admin-stat{background:#fff;border:1px solid #ead9de;border-radius:12px;padding:18px;box-shadow:0 5px 18px rgba(53,31,39,.06)}
+.admin-stat small{display:block;color:#777;font-size:10px;letter-spacing:1px;margin-bottom:8px}.admin-stat strong{font-size:25px}
+.admin-card{background:#fff;border:1px solid #ead9de;border-radius:12px;padding:20px;margin-top:18px}.admin-card h3{margin-bottom:14px}.admin-table{width:100%;border-collapse:collapse;font-size:12px}.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #eee;text-align:left}.admin-table th{font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.admin-actions button{border:1px solid #351f27;background:#fff;color:#351f27;padding:8px 11px;border-radius:6px;cursor:pointer}.admin-actions button.principal{background:#351f27;color:#fff}
+.pontos-box{background:linear-gradient(135deg,#351f27,#6c3b4a);color:#fff;border-radius:16px;padding:28px;margin:20px 0;display:flex;justify-content:space-between;align-items:center;gap:20px}.pontos-numero{font-size:42px;font-weight:bold}.nivel{font-size:12px;letter-spacing:1px}.beneficio-pontos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.beneficio-pontos>div{background:#fff;border:1px solid #ead9de;border-radius:12px;padding:18px}.progresso-pontos{height:9px;background:#eee;border-radius:20px;overflow:hidden;margin-top:10px}.progresso-pontos span{display:block;height:100%;background:#a88955;border-radius:20px;width:50%}
+@media(max-width:800px){.admin-grid{grid-template-columns:repeat(2,1fr)}.beneficio-pontos{grid-template-columns:1fr}.pontos-box{flex-direction:column;align-items:flex-start}}
+@media(max-width:500px){.admin-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -2353,6 +2369,10 @@ Promoções de datas especiais
 <p>Nome, e-mail, telefone e endereço.</p>
 </div>
 
+<div class="conta-card" onclick="abrirFidelidade()"><h3>✨ FOR YOU Club</h3><p>Acompanhe seus pontos e benefícios.</p></div>
+
+<div class="conta-card" onclick="abrirAdmin()"><h3>⚙️ Painel administrativo</h3><p>Gerencie produtos, estoque, pedidos e ofertas.</p></div>
+
 <div class="conta-card" onclick="abrirFavoritos()">
 <h3>♡ Favoritos</h3>
 <p>Veja todos os produtos que você favoritou.</p>
@@ -2486,6 +2506,56 @@ Promoções de datas especiais
 
 </div>
 
+</section>
+
+
+
+<!-- =========================
+     FOR YOU CLUB
+========================= -->
+<section class="pagina secao" id="paginaFidelidade">
+  <div class="fidelidade-pagina">
+    <button class="voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
+    <div class="titulo"><small>FOR YOU CLUB</small><h2>Programa de fidelidade</h2><p>Acumule pontos nas suas compras e acompanhe seus benefícios.</p></div>
+    <div class="pontos-box">
+      <div><div class="nivel">SEUS PONTOS</div><div class="pontos-numero" id="pontosCliente">0</div><div>pontos acumulados</div></div>
+      <div style="min-width:240px"><strong id="nivelCliente">Nível FOR YOU</strong><div class="progresso-pontos"><span id="barraPontos"></span></div><small id="textoProgresso">Faltam 100 pontos para o próximo nível.</small></div>
+    </div>
+    <div class="beneficio-pontos">
+      <div><strong>💗 Ganhe pontos</strong><p>A cada R$ 1 em compras, você acumula 1 ponto.</p></div>
+      <div><strong>🎁 Benefícios</strong><p>Use seus pontos em futuras campanhas e vantagens.</p></div>
+      <div><strong>✨ Novidades</strong><p>Ofertas especiais podem ser liberadas para clientes do clube.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     PAINEL ADMINISTRATIVO
+========================= -->
+<section class="pagina secao" id="paginaAdmin">
+  <div class="painel-admin">
+    <button class="voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
+    <div class="titulo"><small>FOR YOU ADMIN</small><h2>Painel Administrativo</h2><p>Controle produtos, estoque, pedidos, clientes, ofertas e desempenho da loja.</p></div>
+    <div class="admin-grid">
+      <div class="admin-stat"><small>PRODUTOS</small><strong id="adminProdutos">0</strong></div>
+      <div class="admin-stat"><small>ESTOQUE BAIXO</small><strong id="adminEstoqueBaixo">0</strong></div>
+      <div class="admin-stat"><small>PEDIDOS</small><strong id="adminPedidos">0</strong></div>
+      <div class="admin-stat"><small>CLIENTES</small><strong id="adminClientes">0</strong></div>
+    </div>
+    <div class="admin-card">
+      <h3>Gestão de produtos</h3>
+      <div class="admin-actions"><button class="principal" onclick="adminAdicionarProduto()">+ ADICIONAR PRODUTO</button><button onclick="adminAlterarEstoque()">ALTERAR ESTOQUE</button><button onclick="adminPromocao()">CRIAR PROMOÇÃO</button></div>
+      <div style="overflow:auto;margin-top:15px"><table class="admin-table"><thead><tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Status</th></tr></thead><tbody id="adminTabelaProdutos"></tbody></table></div>
+    </div>
+    <div class="admin-card">
+      <h3>Pedidos recentes</h3>
+      <div id="adminTabelaPedidos"></div>
+    </div>
+    <div class="admin-card">
+      <h3>Relatórios rápidos</h3>
+      <div id="adminRelatorios"></div>
+    </div>
+  </div>
 </section>
 
 
@@ -5064,6 +5134,18 @@ function fecharPolitica(event){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharPolitica();});
+
+
+/* =========================
+   FOR YOU CLUB / ADMIN
+========================= */
+function abrirFidelidade(){fecharTodasPaginas();document.getElementById('paginaFidelidade').classList.add('ativa');renderFidelidade();window.scrollTo({top:0,behavior:'smooth'});}
+function renderFidelidade(){const conta=contaSalva();const pontos=conta&&Number(conta.pontos||0)||0;const el=document.getElementById('pontosCliente');if(el)el.textContent=pontos.toLocaleString('pt-BR');const nivel=pontos>=1000?'FOR YOU DIAMOND':pontos>=500?'FOR YOU GOLD':'FOR YOU';const prox=pontos>=1000?0:pontos>=500?1000-pontos:500-pontos;const pct=pontos>=1000?100:Math.min(100,(pontos%500)/5);const n=document.getElementById('nivelCliente');const b=document.getElementById('barraPontos');const t=document.getElementById('textoProgresso');if(n)n.textContent='Nível '+nivel;if(b)b.style.width=pct+'%';if(t)t.textContent=prox?`Faltam ${prox} pontos para o próximo nível.`:'Você alcançou o nível máximo atual.';}
+function abrirAdmin(){fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
+function renderAdmin(){const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;const pedidos=Object.values(localStorage).filter(k=>k).reduce((n,v)=>{try{const x=JSON.parse(v);return n+(Array.isArray(x)?x.filter(i=>i&&i.numero).length:0)}catch(e){return n}},0);document.getElementById('adminProdutos').textContent=produtos.length;document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;document.getElementById('adminPedidos').textContent=pedidos;document.getElementById('adminClientes').textContent=localStorage.getItem('forYouConta')?1:0;const tb=document.getElementById('adminTabelaProdutos');tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');const pedidosEl=document.getElementById('adminTabelaPedidos');const conta=contaSalva();const lista=(conta&&conta.pedidos)||[];pedidosEl.innerHTML=lista.length?lista.slice(-8).reverse().map(p=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))} • <span>${p.status||'Confirmado'}</span></div>`).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';const total=lista.reduce((s,p)=>s+Number(p.total||0),0);document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(total)}</p><p><strong>Ticket médio:</strong> ${lista.length?moeda(total/lista.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;}
+function adminAdicionarProduto(){const nome=prompt('Nome do produto:');if(!nome)return;const preco=Number((prompt('Preço:')||'0').replace(',','.'));if(!preco)return;const estoque=Math.max(0,Number(prompt('Estoque inicial:')||0));produtos.push({id:'admin-'+Date.now(),nome:nome.trim(),preco,estoque,categoria:'Novidades',marca:'FOR YOU'});renderAdmin();renderProdutos();renderMaisVendidos();renderUltimasUnidades();alert('Produto adicionado ao catálogo desta sessão.');}
+function adminAlterarEstoque(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const n=Number(prompt('Novo estoque:',p.estoque||0));if(Number.isNaN(n)||n<0)return;p.estoque=n;renderAdmin();renderProdutos();renderUltimasUnidades();alert('Estoque atualizado.');}
+function adminPromocao(){const nome=prompt('Digite o nome do produto:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novo=Number((prompt('Novo preço promocional:',p.preco)||'0').replace(',','.'));if(!novo||novo>=p.preco){alert('O preço promocional deve ser menor que o atual.');return;}p.precoAntigo=p.preco;p.preco=novo;renderAdmin();renderProdutos();renderOfertas();alert('Promoção criada.');}
 
 /* =========================
    INICIALIZAR
