@@ -3208,6 +3208,234 @@ h1,h2,h3,.logo h1,.nome,.detalhe-info h1,.titulo h2{color:var(--vinho)}
   color:#351F27!important;
 }
 
+
+
+/* =========================================================
+   ATUALIZAÇÃO — HOME MAIS LIMPA E PREMIUM
+   Simplifica a primeira impressão sem remover funcionalidades
+========================================================= */
+
+/* Mais respiro geral */
+main, .home, .pagina-inicial, #home{
+  background:var(--bege,#f8f4ef);
+}
+
+/* HERO: menos alto e com foco em uma única mensagem */
+.hero,
+.banner-principal,
+.home-hero{
+  min-height:480px!important;
+  padding:70px 8%!important;
+}
+
+.hero-content,
+.banner-content,
+.hero-text{
+  max-width:560px!important;
+}
+
+.hero h1,
+.banner-principal h1,
+.home-hero h1{
+  font-size:clamp(38px,5vw,62px)!important;
+  line-height:1.05!important;
+  margin-bottom:18px!important;
+}
+
+.hero p,
+.banner-principal p,
+.home-hero p{
+  max-width:440px!important;
+  line-height:1.7!important;
+  margin-bottom:26px!important;
+}
+
+/* Seções com mais espaço e leitura mais tranquila */
+section{
+  scroll-margin-top:90px;
+}
+
+section:not(.newsletter){
+  margin-top:0;
+  margin-bottom:0;
+}
+
+/* Títulos de seção mais minimalistas */
+.titulo,
+.section-title,
+.secao-titulo{
+  margin-bottom:28px!important;
+}
+
+.titulo h2,
+.section-title h2,
+.secao-titulo h2{
+  color:var(--vinho,#351f27)!important;
+  font-size:clamp(26px,3vw,36px)!important;
+  font-weight:500!important;
+}
+
+/* Categorias: menos sensação de excesso visual */
+.categorias,
+.categories{
+  gap:14px!important;
+  padding-top:8px!important;
+  padding-bottom:28px!important;
+}
+
+.categoria,
+.category-card{
+  background:var(--off-white,#fffdfb)!important;
+  border:1px solid rgba(53,31,39,.08)!important;
+  box-shadow:none!important;
+  border-radius:14px!important;
+}
+
+.categoria:hover,
+.category-card:hover{
+  transform:translateY(-3px)!important;
+  box-shadow:0 10px 24px rgba(53,31,39,.07)!important;
+}
+
+/* Produtos: reduzir o impacto visual das imagens no início */
+.grid-produtos,
+.produtos-grid,
+.products-grid{
+  row-gap:24px!important;
+  column-gap:18px!important;
+}
+
+.produto{
+  box-shadow:none!important;
+}
+
+.produto-img{
+  overflow:hidden!important;
+}
+
+.produto-img img{
+  transition:transform .35s ease!important;
+}
+
+.produto:hover .produto-img img{
+  transform:scale(1.03)!important;
+}
+
+/* Evita que banners/promos secundárias dominem a primeira dobra */
+.banner-secundario,
+.promo-banner,
+.banner-oferta{
+  margin-top:34px!important;
+  margin-bottom:34px!important;
+  border-radius:18px!important;
+}
+
+/* Esconder elementos decorativos redundantes quando houver muitos banners */
+@media(min-width:761px){
+  .hero + .beneficios,
+  .banner-principal + .beneficios{
+    padding-top:18px!important;
+    padding-bottom:18px!important;
+  }
+}
+
+/* Benefícios mais discretos */
+.beneficios,
+.benefits{
+  background:transparent!important;
+  border-top:1px solid rgba(53,31,39,.08);
+  border-bottom:1px solid rgba(53,31,39,.08);
+  padding:18px 5%!important;
+}
+
+.beneficio,
+.benefit{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Ofertas e kits ganham separação visual, não excesso */
+.ofertas,
+.kits,
+.produtos-section,
+.secao-produtos{
+  padding-top:55px!important;
+  padding-bottom:55px!important;
+}
+
+/* No celular, entrada ainda mais limpa */
+@media(max-width:600px){
+
+  .hero,
+  .banner-principal,
+  .home-hero{
+    min-height:390px!important;
+    padding:55px 22px!important;
+  }
+
+  .hero h1,
+  .banner-principal h1,
+  .home-hero h1{
+    font-size:38px!important;
+  }
+
+  .categorias,
+  .categories{
+    gap:10px!important;
+  }
+
+  .ofertas,
+  .kits,
+  .produtos-section,
+  .secao-produtos{
+    padding-top:40px!important;
+    padding-bottom:40px!important;
+  }
+}
+
+
+
+/* =========================================================
+   CORREÇÃO FINAL — LOGO "FOR YOU" NO CANTO EM VINHO
+========================================================= */
+
+header .logo,
+header .logo *,
+.header .logo,
+.header .logo *,
+.logo,
+.logo *,
+#logo,
+#logo *,
+.brand,
+.brand *,
+.site-logo,
+.site-logo *,
+.logo-text,
+.logo-text *{
+  color:#351F27 !important;
+}
+
+/* Impede gradientes ou transparência de alterarem a cor do texto */
+header .logo,
+header .logo *,
+.header .logo,
+.header .logo *,
+.logo,
+.logo *,
+#logo,
+#logo *,
+.brand,
+.brand *,
+.site-logo,
+.site-logo *,
+.logo-text,
+.logo-text *{
+  background-image:none !important;
+  -webkit-text-fill-color:#351F27 !important;
+  text-shadow:none !important;
+}
+
 </style>
 
 </head>
