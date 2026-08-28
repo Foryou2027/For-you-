@@ -1603,6 +1603,135 @@ footer p{
 .positivas{font-size:9px;color:#777;margin-top:-10px;margin-bottom:18px;}
 .recente-card{position:relative;}
 @media(max-width:800px){.banner-box{padding:20px;min-height:110px}.banner-box h3{font-size:23px}.avaliacao-form-grid{grid-template-columns:1fr}.avaliacao-form textarea{grid-column:auto}}
+
+/* =========================
+   SEGURANÇA E CONFIANÇA
+========================= */
+.seguranca{
+  background:#fff;
+  border-top:1px solid #ead9de;
+  padding:45px 5% 35px;
+}
+.seguranca-inner{
+  max-width:1200px;
+  margin:auto;
+}
+.seguranca-topo{
+  text-align:center;
+  margin-bottom:28px;
+}
+.seguranca-topo small{
+  color:#a88955;
+  letter-spacing:3px;
+  font-size:9px;
+  font-weight:bold;
+}
+.seguranca-topo h2{
+  font-family:Georgia,serif;
+  font-size:34px;
+  font-weight:normal;
+  margin:8px 0;
+}
+.seguranca-topo p{
+  color:#777;
+  font-size:11px;
+}
+.seguranca-cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+.seguranca-card{
+  border:1px solid #ead9de;
+  padding:22px 14px;
+  text-align:center;
+  background:#fff;
+  transition:.2s;
+}
+.seguranca-card:hover{
+  transform:translateY(-2px);
+  border-color:#b83f61;
+  box-shadow:0 8px 20px rgba(53,31,39,.06);
+}
+.seguranca-icone{
+  font-size:24px;
+  margin-bottom:9px;
+}
+.seguranca-card strong{
+  display:block;
+  font-size:11px;
+  margin-bottom:6px;
+}
+.seguranca-card span{
+  display:block;
+  color:#777;
+  font-size:9px;
+  line-height:1.5;
+}
+.seguranca-links{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid #ead9de;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px 24px;
+}
+.seguranca-links button{
+  border:0;
+  background:none;
+  color:#66585d;
+  font-size:9px;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.seguranca-links button:hover{color:#b83f61}
+
+/* MODAIS DE POLÍTICAS */
+.politica-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:700;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.politica-modal.aberto{display:flex}
+.politica-caixa{
+  width:min(720px,100%);
+  max-height:85vh;
+  overflow:auto;
+  background:white;
+  border-radius:14px;
+  box-shadow:0 25px 70px #0005;
+}
+.politica-cabecalho{
+  position:sticky;
+  top:0;
+  background:white;
+  padding:22px 25px;
+  border-bottom:1px solid #ead9de;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.politica-cabecalho h2{font-family:Georgia,serif;font-size:27px;font-weight:normal}
+.politica-fechar{border:0;background:none;font-size:25px}
+.politica-conteudo{padding:25px}
+.politica-conteudo h3{font-size:13px;margin:18px 0 7px;color:#351f27}
+.politica-conteudo h3:first-child{margin-top:0}
+.politica-conteudo p,.politica-conteudo li{font-size:11px;color:#6d6165;line-height:1.8}
+.politica-conteudo ul{padding-left:18px}
+
+@media(max-width:900px){
+  .seguranca-cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .seguranca-cards{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 
@@ -2261,6 +2390,55 @@ required
 </section>
 
 
+<!-- =========================
+     SEGURANÇA E CONFIANÇA
+========================= -->
+<section class="seguranca">
+  <div class="seguranca-inner">
+    <div class="seguranca-topo">
+      <small>COMPRE COM TRANQUILIDADE</small>
+      <h2>Segurança e confiança</h2>
+      <p>Transparência em cada etapa da sua compra na FOR YOU.</p>
+    </div>
+
+    <div class="seguranca-cards">
+      <div class="seguranca-card">
+        <div class="seguranca-icone">🔒</div>
+        <strong>Compra segura</strong>
+        <span>Seus dados são tratados com cuidado durante a navegação e a compra.</span>
+      </div>
+      <div class="seguranca-card">
+        <div class="seguranca-icone">🛡️</div>
+        <strong>Privacidade</strong>
+        <span>Informações sobre como seus dados são utilizados e protegidos.</span>
+      </div>
+      <div class="seguranca-card">
+        <div class="seguranca-icone">↩️</div>
+        <strong>Trocas e devoluções</strong>
+        <span>Consulte as condições e prazos para solicitar uma troca ou devolução.</span>
+      </div>
+      <div class="seguranca-card">
+        <div class="seguranca-icone">💳</div>
+        <strong>Pagamento</strong>
+        <span>Veja as formas de pagamento aceitas e informações importantes.</span>
+      </div>
+      <div class="seguranca-card">
+        <div class="seguranca-icone">📄</div>
+        <strong>Termos de uso</strong>
+        <span>Conheça as regras para utilização da loja e dos nossos serviços.</span>
+      </div>
+    </div>
+
+    <div class="seguranca-links">
+      <button onclick="abrirPolitica('privacidade')">Política de privacidade</button>
+      <button onclick="abrirPolitica('termos')">Termos de uso</button>
+      <button onclick="abrirPolitica('trocas')">Política de troca/devolução</button>
+      <button onclick="abrirPolitica('pagamento')">Informações de pagamento</button>
+      <button onclick="abrirPolitica('seguranca')">Compra segura</button>
+    </div>
+  </div>
+</section>
+
 <footer>
 
 <div class="footer-grid">
@@ -2303,8 +2481,8 @@ com carinho.
 <h3>ATENDIMENTO</h3>
 
 <a href="#" onclick="abrirWhatsApp();return false;">WhatsApp</a>
-<a href="#">Trocas</a>
-<a href="#">Dúvidas</a>
+<a href="#" onclick="abrirPolitica('trocas');return false;">Trocas e devoluções</a>
+<a href="#" onclick="abrirPolitica('privacidade');return false;">Privacidade</a>
 
 </div>
 
@@ -2330,6 +2508,19 @@ title="Fale conosco"
 💬
 </a>
 
+
+<!-- =========================
+     MODAIS DE SEGURANÇA / POLÍTICAS
+========================= -->
+<div class="politica-modal" id="politicaModal" onclick="fecharPolitica(event)">
+  <div class="politica-caixa" onclick="event.stopPropagation()">
+    <div class="politica-cabecalho">
+      <h2 id="politicaTitulo">Segurança</h2>
+      <button class="politica-fechar" onclick="fecharPolitica()">×</button>
+    </div>
+    <div class="politica-conteudo" id="politicaConteudo"></div>
+  </div>
+</div>
 
 <!-- =========================
      OVERLAY
@@ -4633,6 +4824,48 @@ return false;
 
 }
 
+
+
+
+/* =========================
+   SEGURANÇA / POLÍTICAS
+========================= */
+const politicas={
+  seguranca:{
+    titulo:'Compra segura',
+    html:`<h3>Uma compra mais tranquila</h3><p>A FOR YOU busca oferecer uma experiência clara e segura. Antes de finalizar, confira os produtos, quantidades, valores, frete e condições do pedido.</p><h3>Proteção dos dados</h3><p>Informações fornecidas nos formulários devem ser utilizadas somente para as finalidades informadas ao cliente. Evite compartilhar senhas e dados pessoais com terceiros.</p><h3>Pagamento</h3><p>As formas de pagamento e eventuais condições devem ser apresentadas no momento da finalização do pedido.</p>`
+  },
+  privacidade:{
+    titulo:'Política de privacidade',
+    html:`<h3>Quais informações podem ser coletadas</h3><p>Dados fornecidos pelo cliente, como nome, e-mail, endereço e informações necessárias para atendimento e processamento do pedido.</p><h3>Uso das informações</h3><p>As informações devem ser utilizadas para atendimento, cadastro, comunicação relacionada ao pedido e melhoria da experiência na loja.</p><h3>Proteção</h3><p>A FOR YOU deve adotar medidas razoáveis para proteger os dados contra acesso, alteração ou divulgação indevida.</p>`
+  },
+  termos:{
+    titulo:'Termos de uso',
+    html:`<h3>Uso da loja</h3><p>Ao utilizar a loja, o cliente concorda em fornecer informações verdadeiras e utilizar os recursos de forma adequada.</p><h3>Produtos e preços</h3><p>Produtos, preços, disponibilidade e condições promocionais podem ser atualizados pela loja. O valor exibido no fechamento do pedido é o que deve ser considerado para a compra.</p><h3>Atendimento</h3><p>Em caso de dúvidas sobre pedidos, produtos ou condições, entre em contato pelos canais disponibilizados pela FOR YOU.</p>`
+  },
+  trocas:{
+    titulo:'Política de troca e devolução',
+    html:`<h3>Solicitação</h3><p>Para solicitar uma troca ou devolução, entre em contato com a FOR YOU pelos canais de atendimento informados na loja.</p><h3>Condições</h3><p>O produto deve ser apresentado nas condições exigidas pela política vigente, observando prazos e eventuais regras aplicáveis ao pedido.</p><h3>Atendimento</h3><p>Antes de enviar qualquer produto, aguarde as orientações da loja sobre o procedimento adequado.</p>`
+  },
+  pagamento:{
+    titulo:'Informações de pagamento',
+    html:`<h3>Formas de pagamento</h3><p>As opções disponíveis devem ser exibidas no momento da finalização da compra, de acordo com os meios habilitados pela loja.</p><h3>Conferência</h3><p>Antes de concluir, confira o subtotal, descontos, frete e total do pedido.</p><h3>Segurança</h3><p>Nunca informe sua senha a terceiros. Utilize somente os campos oficiais disponibilizados pela loja para inserir dados de pagamento.</p>`
+  }
+};
+
+function abrirPolitica(tipo){
+  const p=politicas[tipo]||politicas.seguranca;
+  document.getElementById('politicaTitulo').textContent=p.titulo;
+  document.getElementById('politicaConteudo').innerHTML=p.html;
+  document.getElementById('politicaModal').classList.add('aberto');
+  document.body.style.overflow='hidden';
+}
+function fecharPolitica(event){
+  if(event && event.target!==document.getElementById('politicaModal')) return;
+  document.getElementById('politicaModal').classList.remove('aberto');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharPolitica();});
 
 /* =========================
    INICIALIZAR
