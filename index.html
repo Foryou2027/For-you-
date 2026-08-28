@@ -138,30 +138,46 @@ function atualizarMinhaConta(){
 }
 function mostrarCadastro(){ document.getElementById("contaLoginBox").style.display="none"; document.getElementById("contaCadastroBox").style.display="block"; document.getElementById("loginMensagem").textContent=""; }
 function mostrarLogin(){ document.getElementById("contaCadastroBox").style.display="none"; document.getElementById("contaLoginBox").style.display="block"; document.getElementById("cadastroMensagem").textContent=""; }
+function contaSalva(){ return JSON.parse(localStorage.getItem("forYouConta")) || null; }
+function salvarConta(conta){ localStorage.setItem("forYouConta",JSON.stringify(conta)); }
+function salvarContaAtual(){ localStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual)); }
+function atualizarMinhaConta(){
+  const loginBox=document.getElementById("contaLoginBox"), cadastroBox=document.getElementById("contaCadastroBox"), logada=document.getElementById("contaLogada");
+  if(!loginBox||!cadastroBox||!logada)return;
+  if(contaAtual){
+    loginBox.style.display="none"; cadastroBox.style.display="none"; logada.style.display="block";
+    document.getElementById("contaNome").textContent=contaAtual.nome;
+    document.getElementById("contaEmail").textContent=contaAtual.email;
+    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase();
+  } else { loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none"; }
+}
+function mostrarCadastro(){document.getElementById("contaLoginBox").style.display="none";document.getElementById("contaCadastroBox").style.display="block";document.getElementById("loginMensagem").textContent="";}
+function mostrarLogin(){document.getElementById("contaCadastroBox").style.display="none";document.getElementById("contaLoginBox").style.display="block";document.getElementById("cadastroMensagem").textContent="";}
 function cadastrarConta(event){
   event.preventDefault();
-  const nome=document.getElementById("cadNome").value.trim(), email=document.getElementById("cadEmail").value.trim().toLowerCase(), senha=document.getElementById("cadSenha").value, confirmar=document.getElementById("cadConfirmar").value, msg=document.getElementById("cadastroMensagem");
+  const nome=document.getElementById("cadNome").value.trim(), email=document.getElementById("cadEmail").value.trim().toLowerCase(), telefone=document.getElementById("cadTelefone").value.trim(), endereco=document.getElementById("cadEndereco").value.trim(), senha=document.getElementById("cadSenha").value, confirmar=document.getElementById("cadConfirmar").value, msg=document.getElementById("cadastroMensagem");
   if(senha.length<6){msg.textContent="A senha precisa ter pelo menos 6 caracteres.";return false;}
   if(senha!==confirmar){msg.textContent="As senhas não são iguais.";return false;}
-  const existente=contaSalva();
-  if(existente && existente.email===email){msg.textContent="Já existe uma conta com este e-mail.";return false;}
-  salvarConta({nome,email,senha}); contaAtual={nome,email}; salvarContaAtual(); atualizarMinhaConta();
-  document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
+  const existente=contaSalva(); if(existente && existente.email===email){msg.textContent="Já existe uma conta com este e-mail.";return false;}
+  salvarConta({nome,email,telefone,endereco,senha,pedidos:[]}); contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); atualizarMinhaConta(); document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
 }
 function fazerLogin(event){
   event.preventDefault();
   const email=document.getElementById("loginEmail").value.trim().toLowerCase(), senha=document.getElementById("loginSenha").value, msg=document.getElementById("loginMensagem"), conta=contaSalva();
-  if(!conta){ mostrarCadastro(); document.getElementById("cadastroMensagem").textContent="Você ainda não possui uma conta. Faça seu cadastro."; return false; }
-  if(conta.email!==email || conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
-  contaAtual={nome:conta.nome,email:conta.email}; salvarContaAtual(); atualizarMinhaConta(); document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕"; return false;
+  if(!conta){mostrarCadastro();document.getElementById("cadastroMensagem").textContent="Você ainda não possui uma conta. Faça seu cadastro.";return false;}
+  if(conta.email!==email||conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
+  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};salvarContaAtual();atualizarMinhaConta();document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕";return false;
 }
-function sairDaConta(){ contaAtual=null; salvarContaAtual(); atualizarMinhaConta(); mostrarLogin(); }
+function sairDaConta(){contaAtual=null;salvarContaAtual();atualizarMinhaConta();mostrarLogin();}
 function editarDadosConta(){
-  const conta=contaSalva(); if(!conta) return;
-  const nome=prompt("Nome completo:",conta.nome), email=prompt("E-mail:",conta.email); if(nome===null||email===null)return;
+  const conta=contaSalva();if(!conta)return;
+  const nome=prompt("Nome completo:",conta.nome);if(nome===null)return; const email=prompt("E-mail:",conta.email);if(email===null)return; const telefone=prompt("Telefone:",conta.telefone||"");if(telefone===null)return;
   if(!nome.trim()||!email.trim()){alert("Preencha nome e e-mail corretamente.");return;}
-  conta.nome=nome.trim(); conta.email=email.trim().toLowerCase(); salvarConta(conta); contaAtual={nome:conta.nome,email:conta.email}; salvarContaAtual(); atualizarMinhaConta(); document.getElementById("contaMensagem").textContent="Dados atualizados com sucesso!";
+  conta.nome=nome.trim();conta.email=email.trim().toLowerCase();conta.telefone=telefone.trim();salvarConta(conta);contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone,endereco:conta.endereco||""};salvarContaAtual();atualizarMinhaConta();document.getElementById("contaMensagem").textContent="Dados atualizados com sucesso!";
 }
+function editarEnderecoConta(){const conta=contaSalva();if(!conta)return;const endereco=prompt("Endereço completo:",conta.endereco||"");if(endereco===null||!endereco.trim())return;conta.endereco=endereco.trim();salvarConta(conta);contaAtual.endereco=conta.endereco;salvarContaAtual();alert("Endereço atualizado com sucesso!");}
+function alterarSenhaConta(){const conta=contaSalva();if(!conta)return;const atual=prompt("Digite sua senha atual:");if(atual!==conta.senha){alert("Senha atual incorreta.");return;}const nova=prompt("Digite a nova senha (mín. 6 caracteres):");if(!nova||nova.length<6){alert("A nova senha precisa ter pelo menos 6 caracteres.");return;}const confirmar=prompt("Confirme a nova senha:");if(nova!==confirmar){alert("As senhas não são iguais.");return;}conta.senha=nova;salvarConta(conta);alert("Senha alterada com sucesso!");}
+function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];alert(pedidos.length?"Você possui "+pedidos.length+" pedido(s).":"Ainda não há pedidos registrados nesta conta.");}
 
 /* =========================
    MENU
@@ -1602,6 +1618,7 @@ footer p{
 .avaliacao-form .btn-enviar-avaliacao{background:#351f27;color:white;border:0;padding:11px 18px;font-size:8px;font-weight:bold;letter-spacing:1px;}
 .positivas{font-size:9px;color:#777;margin-top:-10px;margin-bottom:18px;}
 .recente-card{position:relative;}
+.banner-conteudo{flex:1;text-align:center;z-index:2}.banner-conteudo small{font-size:8px;letter-spacing:3px;color:#e9c9d2}.banner-cta{margin-top:12px;background:#fff;color:#351f27;border:0;padding:10px 16px;font-size:8px;font-weight:bold;letter-spacing:1px}.banner-arrow{border:0;background:#ffffff18;color:#fff;width:38px;height:38px;border-radius:50%;font-size:28px;line-height:1;z-index:3}.banner-arrow:hover{background:#ffffff30}.destaque-beneficios{max-width:1200px;margin:18px auto 8px!important;padding:0 5%;display:grid!important;grid-template-columns:repeat(5,1fr);gap:8px}.destaque-beneficios .beneficio{background:#fff;border:1px solid #ead9de;padding:16px 10px;text-align:center}.destaque-beneficios .beneficio div{font-size:18px;margin-bottom:7px}.destaque-beneficios .beneficio strong{display:block;font-size:9px}.destaque-beneficios .beneficio span{font-size:7px}.conta-card{cursor:pointer}.conta-card:hover{transform:translateY(-2px)}
 @media(max-width:800px){.banner-box{padding:20px;min-height:110px}.banner-box h3{font-size:23px}.avaliacao-form-grid{grid-template-columns:1fr}.avaliacao-form textarea{grid-column:auto}}
 
 /* =========================
@@ -1975,9 +1992,24 @@ VER NOVIDADES
 
 <section class="banner-rotativo">
   <div class="banner-box" id="bannerBox">
-    <div><h3 id="bannerTitulo">Frete grátis acima de R$ 199</h3><p id="bannerTexto">Aproveite e compre seus favoritos.</p></div>
+    <button class="banner-arrow banner-prev" onclick="mudarBanner(-1)" aria-label="Banner anterior">‹</button>
+    <div class="banner-conteudo">
+      <small id="bannerEtiqueta">FOR YOU</small>
+      <h3 id="bannerTitulo">Frete grátis acima de R$ 199</h3>
+      <p id="bannerTexto">Aproveite e compre seus favoritos.</p>
+      <button class="banner-cta" id="bannerCta" onclick="document.getElementById('ofertas').scrollIntoView({behavior:'smooth'})">APROVEITAR AGORA</button>
+    </div>
+    <button class="banner-arrow banner-next" onclick="mudarBanner(1)" aria-label="Próximo banner">›</button>
   </div>
   <div class="banner-dots" id="bannerDots"></div>
+</section>
+
+<section class="beneficios destaque-beneficios">
+  <div class="beneficio"><div>🚚</div><strong>Frete grátis</strong><span>Acima de R$ 199</span></div>
+  <div class="beneficio"><div>🔒</div><strong>Compra segura</strong><span>Seus dados protegidos</span></div>
+  <div class="beneficio"><div>💳</div><strong>Pagamento facilitado</strong><span>Escolha sua forma de pagar</span></div>
+  <div class="beneficio"><div>↩️</div><strong>Troca fácil</strong><span>Consulte as condições</span></div>
+  <div class="beneficio"><div>💗</div><strong>Atendimento FOR YOU</strong><span>Estamos aqui para ajudar</span></div>
 </section>
 
 
@@ -1990,6 +2022,17 @@ VER NOVIDADES
 </div>
 
 <div class="filtros">
+
+<select id="filtroMarca" onchange="aplicarFiltros()">
+<option value="">Todas as marcas/categorias</option>
+<option value="Lábios">Lábios</option>
+<option value="Pele">Pele</option>
+<option value="Skincare">Skincare</option>
+<option value="Olhos">Olhos</option>
+<option value="Face">Face</option>
+<option value="Acessórios">Acessórios</option>
+<option value="Corpo">Corpo</option>
+</select>
 
 <select id="filtroCategoria" onchange="aplicarFiltros()">
 <option value="">Todas as categorias</option>
@@ -2273,6 +2316,8 @@ Promoções de datas especiais
 <form class="conta-form" onsubmit="return cadastrarConta(event)">
 <input id="cadNome" type="text" placeholder="Nome completo" required>
 <input id="cadEmail" type="email" placeholder="Seu melhor e-mail" required>
+<input id="cadTelefone" type="tel" placeholder="Telefone" required>
+<input id="cadEndereco" type="text" placeholder="Endereço completo" required>
 <input id="cadSenha" type="password" placeholder="Crie uma senha (mín. 6 caracteres)" minlength="6" required>
 <input id="cadConfirmar" type="password" placeholder="Confirme sua senha" minlength="6" required>
 <button type="submit">CRIAR CONTA</button>
@@ -2292,9 +2337,9 @@ Promoções de datas especiais
 
 <div class="conta-grid">
 
-<div class="conta-card">
+<div class="conta-card" onclick="editarDadosConta()">
 <h3>👤 Meus dados</h3>
-<p>Nome, e-mail e informações da sua conta.</p>
+<p>Nome, e-mail, telefone e endereço.</p>
 </div>
 
 <div class="conta-card" onclick="abrirFavoritos()">
@@ -2302,14 +2347,19 @@ Promoções de datas especiais
 <p>Veja todos os produtos que você favoritou.</p>
 </div>
 
-<div class="conta-card">
+<div class="conta-card" onclick="mostrarPedidosConta()">
 <h3>📦 Meus pedidos</h3>
 <p>Acompanhe seus pedidos realizados.</p>
 </div>
 
-<div class="conta-card">
+<div class="conta-card" onclick="editarEnderecoConta()">
 <h3>📍 Meus endereços</h3>
 <p>Consulte e organize seus endereços.</p>
+</div>
+
+<div class="conta-card" onclick="alterarSenhaConta()">
+<h3>🔐 Alterar senha</h3>
+<p>Atualize a senha da sua conta.</p>
 </div>
 
 </div>
@@ -3007,9 +3057,9 @@ let contaAtual = JSON.parse(localStorage.getItem("forYouContaAtual")) || null;
 let recentes = JSON.parse(localStorage.getItem("forYouRecentes")) || [];
 let estrelaSelecionada = 5;
 const banners = [
-  {titulo:"Frete grátis acima de R$ 199",texto:"Aproveite e compre seus favoritos."},
-  {titulo:"Novidades toda semana",texto:"Sempre tem um novo achadinho esperando por você."},
-  {titulo:"Cuide de você",texto:"Beleza, cuidados e produtos escolhidos com carinho."}
+  {etiqueta:"FRETE ESPECIAL",titulo:"Frete grátis acima de R$ 199",texto:"Aproveite e compre seus favoritos.",cta:"APROVEITAR OFERTAS",acao:"ofertas"},
+  {etiqueta:"NOVIDADES",titulo:"Novidades toda semana",texto:"Sempre tem um novo achadinho esperando por você.",cta:"VER NOVIDADES",acao:"novidades"},
+  {etiqueta:"KITS ESPECIAIS",titulo:"Combinações que valem a pena",texto:"Kits promocionais pensados para você.",cta:"VER KITS",acao:"kits"}
 ];
 let bannerAtual=0;
 
@@ -3059,12 +3109,12 @@ JSON.stringify(favoritos)
 ========================= */
 function atualizarBanner(){
   const b=banners[bannerAtual];
-  const t=document.getElementById("bannerTitulo"), p=document.getElementById("bannerTexto"), dots=document.getElementById("bannerDots");
-  if(t)t.textContent=b.titulo;
-  if(p)p.textContent=b.texto;
-  if(dots){dots.innerHTML="";banners.forEach((_,i)=>{const d=document.createElement("button");d.className="banner-dot "+(i===bannerAtual?"ativo":"");d.onclick=()=>{bannerAtual=i;atualizarBanner()};dots.appendChild(d);});}
+  const t=document.getElementById("bannerTitulo"), p=document.getElementById("bannerTexto"), dots=document.getElementById("bannerDots"), e=document.getElementById("bannerEtiqueta"), c=document.getElementById("bannerCta");
+  if(t)t.textContent=b.titulo; if(p)p.textContent=b.texto; if(e)e.textContent=b.etiqueta; if(c){c.textContent=b.cta;c.onclick=()=>{const alvo=document.getElementById(b.acao); if(alvo) alvo.scrollIntoView({behavior:"smooth"});}}
+  if(dots){dots.innerHTML="";banners.forEach((_,i)=>{const d=document.createElement("button");d.className="banner-dot "+(i===bannerAtual?"ativo":"");d.setAttribute("aria-label","Ir para banner "+(i+1));d.onclick=()=>{bannerAtual=i;atualizarBanner()};dots.appendChild(d);});}
 }
-setInterval(()=>{bannerAtual=(bannerAtual+1)%banners.length;atualizarBanner()},4500);
+function mudarBanner(direcao){bannerAtual=(bannerAtual+direcao+banners.length)%banners.length;atualizarBanner();}
+setInterval(()=>mudarBanner(1),5000);
 
 function salvarRecentes(){localStorage.setItem("forYouRecentes",JSON.stringify(recentes));}
 function adicionarRecente(id){
@@ -3139,9 +3189,10 @@ div.innerHTML=`
 onclick="abrirProduto(${produto.id})">
 
 <span class="etiqueta">
-${produto.precoAntigo ? "OFERTA" : (produto.nota>=4.9 ? "NOVO" : "DESTAQUE")}
+${produto.precoAntigo ? "OFERTA" : (produto.nota>=4.9 ? "NOVIDADE" : "DESTAQUE")}
 </span>
 ${produto.nota>=4.9 ? '<span class="selo-vendido">MAIS VENDIDO</span>' : ''}
+${produto.estoque<=5 ? '<span class="selo-ultimas">ÚLTIMAS UNIDADES</span>' : ''}
 
 <button
 class="favoritar ${favorito ? "favoritado":""}"
@@ -4116,6 +4167,8 @@ produto.preco
 
 function aplicarFiltros(){
 
+const marca = document.getElementById("filtroMarca")?.value || "";
+
 const categoria =
 document.getElementById(
 "filtroCategoria"
@@ -4137,6 +4190,8 @@ document.getElementById(
 ).value;
 
 let lista=[...produtos];
+
+if(marca){ lista=lista.filter(p=>p.marca===marca); }
 
 if(categoria){
 
@@ -4208,6 +4263,8 @@ renderProdutos(lista);
 
 
 function limparFiltros(){
+
+if(document.getElementById("filtroMarca")) document.getElementById("filtroMarca").value="";
 
 document.getElementById(
 "filtroCategoria"
