@@ -3619,6 +3619,154 @@ textarea:focus{
   color:var(--rosa)!important;
 }
 
+
+
+/* =========================================================
+   ATUALIZAÇÃO — MENU PRINCIPAL CLEAN EM TONS DE VERMELHO
+========================================================= */
+
+header,
+.header,
+.top-header{
+  background:#fffdfc!important;
+  border-bottom:1px solid #ecdde0!important;
+  box-shadow:0 4px 18px rgba(110,16,37,.035)!important;
+}
+
+/* Área central do menu */
+nav,
+.menu,
+.menu-principal,
+.main-menu,
+.nav-menu{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:clamp(14px,2vw,32px)!important;
+}
+
+/* Links do menu */
+nav a,
+.menu a,
+.menu-principal a,
+.main-menu a,
+.nav-menu a{
+  position:relative!important;
+  color:#4A101D!important;
+  background:transparent!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.08em!important;
+  text-decoration:none!important;
+  padding:18px 0!important;
+  transition:color .22s ease!important;
+}
+
+/* Linha elegante no hover */
+nav a::after,
+.menu a::after,
+.menu-principal a::after,
+.main-menu a::after,
+.nav-menu a::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  bottom:11px!important;
+  width:100%!important;
+  height:2px!important;
+  background:#B71C3A!important;
+  transform:scaleX(0)!important;
+  transform-origin:center!important;
+  transition:transform .22s ease!important;
+}
+
+nav a:hover,
+.menu a:hover,
+.menu-principal a:hover,
+.main-menu a:hover,
+.nav-menu a:hover{
+  color:#B71C3A!important;
+}
+
+nav a:hover::after,
+.menu a:hover::after,
+.menu-principal a:hover::after,
+.main-menu a:hover::after,
+.nav-menu a:hover::after{
+  transform:scaleX(1)!important;
+}
+
+/* Página/item ativo */
+nav a.active,
+.menu a.active,
+.menu-principal a.active,
+.main-menu a.active,
+.nav-menu a.active{
+  color:#6E1025!important;
+}
+
+nav a.active::after,
+.menu a.active::after,
+.menu-principal a.active::after,
+.main-menu a.active::after,
+.nav-menu a.active::after{
+  transform:scaleX(1)!important;
+  background:#6E1025!important;
+}
+
+/* OFERTAS ganha destaque discreto */
+nav a:last-child,
+.menu a:last-child,
+.menu-principal a:last-child,
+.main-menu a:last-child,
+.nav-menu a:last-child{
+  color:#B71C3A!important;
+  font-weight:800!important;
+}
+
+/* Logo separado visualmente do menu */
+.logo,
+#logo,
+.brand,
+.site-logo,
+.logo-text{
+  color:#6E1025!important;
+  -webkit-text-fill-color:#6E1025!important;
+}
+
+/* Ícones do topo mais discretos */
+header button,
+.header button,
+.top-header button{
+  transition:color .2s ease,background .2s ease!important;
+}
+
+header button:hover,
+.header button:hover,
+.top-header button:hover{
+  color:#B71C3A!important;
+}
+
+/* Menu mobile */
+@media(max-width:760px){
+  nav,
+  .menu,
+  .menu-principal,
+  .main-menu,
+  .nav-menu{
+    gap:0!important;
+  }
+
+  nav a,
+  .menu a,
+  .menu-principal a,
+  .main-menu a,
+  .nav-menu a{
+    padding:14px 0!important;
+    font-size:10px!important;
+  }
+}
+
 </style>
 
 </head>
@@ -3710,7 +3858,7 @@ Skincare ▾
 </button>
 
 <div class="dropdown" id="dropdown-skincare">
-<h3>Skincare</h3>
+<h3>SKINCARE</h3>
 <a href="#skincare">Sabonete Facial</a>
 <a href="#skincare">Hidratante</a>
 <a href="#skincare">Sérum</a>
@@ -3782,7 +3930,7 @@ Corpo ▾
 </button>
 
 <div class="dropdown" id="dropdown-corpo">
-<h3>Corpo</h3>
+<h3>CORPO</h3>
 <a href="#corpo">Body Splash</a>
 <a href="#corpo">Hidratante Corporal</a>
 <a href="#corpo">Esfoliante Corporal</a>
@@ -3860,7 +4008,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   </div>
   <div class="hero-side-card" aria-hidden="true">
     <small>FOR YOU</small>
-    <strong>Ofertas<br>especiais</strong>
+    <strong>OFERTAS<br>especiais</strong>
     <span>Seleções pensadas para você</span>
     <i></i>
   </div>
@@ -3928,22 +4076,22 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <option value="">Todas as marcas/categorias</option>
 <option value="Lábios">Lábios</option>
 <option value="Pele">Pele</option>
-<option value="Skincare">Skincare</option>
+<option value="Skincare">SKINCARE</option>
 <option value="Olhos">Olhos</option>
 <option value="Face">Face</option>
 <option value="Acessórios">Acessórios</option>
-<option value="Corpo">Corpo</option>
+<option value="Corpo">CORPO</option>
 </select>
 
 <select id="filtroCategoria" onchange="aplicarFiltros()">
 <option value="">Todas as categorias</option>
 <option value="Lábios">Lábios</option>
 <option value="Pele">Pele</option>
-<option value="Skincare">Skincare</option>
+<option value="Skincare">SKINCARE</option>
 <option value="Olhos">Olhos</option>
 <option value="Face">Face</option>
 <option value="Acessórios">Acessórios</option>
-<option value="Corpo">Corpo</option>
+<option value="Corpo">CORPO</option>
 </select>
 
 <select id="filtroPreco" onchange="aplicarFiltros()">
@@ -3964,7 +4112,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <option value="menor">Menor preço</option>
 <option value="maior">Maior preço</option>
 <option value="nota">Melhor avaliação</option>
-<option value="novidades">Novidades</option>
+<option value="novidades">NOVIDADES</option>
 <option value="vendidos">Mais vendidos</option>
 </select>
 
@@ -3983,7 +4131,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <div class="titulo">
 <small>PREÇOS ESPECIAIS</small>
-<h2>Ofertas</h2>
+<h2>OFERTAS</h2>
 <p>Aproveite enquanto durar o estoque.</p>
 </div>
 
@@ -4113,7 +4261,7 @@ Kits presenteáveis
 
 <div class="titulo">
 <small>FOR YOU</small>
-<h2>Ofertas</h2>
+<h2>OFERTAS</h2>
 <p>Escolha uma categoria de oferta.</p>
 </div>
 
@@ -4610,8 +4758,8 @@ com carinho.
 
 <h3>LOJA</h3>
 
-<a href="#novidades" onclick="voltarLoja()">Novidades</a>
-<a href="#ofertas" onclick="voltarLoja()">Ofertas</a>
+<a href="#novidades" onclick="voltarLoja()">NOVIDADES</a>
+<a href="#ofertas" onclick="voltarLoja()">OFERTAS</a>
 <a href="#kits" onclick="voltarLoja()">Kits Promocionais</a>
 
 </div>
@@ -4622,7 +4770,7 @@ com carinho.
 
 <a href="#labios">Lábios</a>
 <a href="#pele">Pele</a>
-<a href="#skincare">Skincare</a>
+<a href="#skincare">SKINCARE</a>
 <a href="#olhos">Olhos</a>
 
 </div>
