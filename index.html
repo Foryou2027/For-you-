@@ -1648,6 +1648,66 @@ footer p{
 @media(max-width:800px){.checkout-layout{grid-template-columns:1fr}.checkout-etapas{grid-template-columns:1fr 1fr}.checkout-form{grid-template-columns:1fr}.checkout-form .completo{grid-column:auto}.pagamento-opcoes{grid-template-columns:1fr}.combo-box{grid-template-columns:1fr}}
 
 /* =========================
+   MELHORIAS PROFISSIONAIS — HOME / BUSCA / ADMIN
+========================= */
+.hero{min-height:500px;}
+.hero-content{padding:25px 0;}
+.secao{padding:58px 5%;}
+.titulo{margin-bottom:28px;}
+.titulo h2{margin:8px 0;}
+.ver-todos-wrap{text-align:center;margin-top:24px;}
+.ver-todos-btn{border:1px solid #351f27;background:white;color:#351f27;padding:11px 22px;font-size:9px;font-weight:bold;letter-spacing:1px;border-radius:22px;}
+.ver-todos-btn:hover{background:#351f27;color:white;}
+.busca-sugestoes{display:none;position:absolute;left:0;right:0;top:52px;background:white;border:1px solid #ead9de;border-radius:14px;box-shadow:0 15px 35px #0002;z-index:450;overflow:hidden;text-align:left;}
+.busca-sugestoes.aberta{display:block;}
+.busca-sugestao{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;border-bottom:1px solid #f4e8eb;font-size:10px;cursor:pointer;}
+.busca-sugestao:hover{background:#fff8fa;}
+.busca-sugestao small{color:#a88955;font-size:8px;}
+.busca-historico{padding:12px 15px;border-bottom:1px solid #ead9de;background:#faf5f6;}
+.busca-historico-top{display:flex;justify-content:space-between;align-items:center;font-size:8px;font-weight:bold;letter-spacing:1px;color:#777;margin-bottom:7px;}
+.busca-historico button{border:0;background:none;color:#b83f61;font-size:8px;}
+.busca-historico-item{display:inline-block;border:1px solid #ead9de;background:white;border-radius:15px;padding:6px 9px;margin:2px;font-size:8px;cursor:pointer;}
+.resultado-busca{min-height:16px;}
+.admin-dashboard-sub{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
+.admin-mini{background:#fff;border:1px solid #ead9de;border-radius:10px;padding:15px;}
+.admin-mini small{display:block;color:#777;font-size:8px;letter-spacing:1px;margin-bottom:6px;}
+.admin-mini strong{font-size:17px;}
+.admin-lista{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.admin-ranking-item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee;font-size:10px;}
+.admin-alerta{color:#a36d00;font-weight:bold;}
+@media(max-width:800px){.admin-dashboard-sub{grid-template-columns:1fr 1fr}.admin-lista{grid-template-columns:1fr}}
+@media(max-width:500px){.admin-dashboard-sub{grid-template-columns:1fr}.secao{padding:45px 5%}}
+
+/* =========================
+   REFINAMENTO V6
+========================= */
+.hero{min-height:390px;padding:70px 7%;display:flex;align-items:center;}
+.hero-content{max-width:680px;}
+.hero-content h2{line-height:1.05;margin:12px 0 16px;}
+.secao{padding-top:58px;padding-bottom:58px;}
+.titulo{margin-bottom:26px;}
+.titulo h2{letter-spacing:.2px;}
+.banner-rotativo{margin-top:30px;margin-bottom:8px;}
+.banner-box{min-height:155px;border-radius:18px;padding:28px 42px;box-shadow:0 16px 40px rgba(53,31,39,.12);}
+.banner-conteudo{max-width:720px;}
+.banner-conteudo h3{margin-top:5px;}
+.banner-arrow{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:white;font-size:22px;flex:none;}
+.banner-arrow:hover{background:rgba(255,255,255,.18);}
+.banner-dots{gap:5px;margin-top:12px;}
+.banner-dot{width:6px;height:6px;opacity:.65;}
+.banner-dot.ativo{opacity:1;transform:scale(1.15);}
+.filtros{margin-bottom:24px;}
+.ver-todos-wrap{margin-top:28px;}
+.busca input{font-size:12px;}
+.busca-linha:focus-within{border-color:#351f27;box-shadow:0 0 0 4px rgba(53,31,39,.05);}
+.admin-stat,.admin-mini{transition:transform .2s,box-shadow .2s;border-radius:14px;}
+.admin-stat:hover,.admin-mini:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(53,31,39,.08);}
+.admin-stat strong,.admin-mini strong{display:block;}
+.admin-dashboard-sub{margin-bottom:18px;}
+.admin-card{border-radius:14px;}
+@media(max-width:700px){.hero{min-height:330px;padding:55px 7%;}.banner-box{padding:24px 22px;min-height:145px;border-radius:14px;}.banner-box h3{font-size:24px}.banner-arrow{width:32px;height:32px;}}
+
+/* =========================
    NOVOS RECURSOS
 ========================= */
 .banner-rotativo{max-width:1200px;margin:25px auto 0;padding:0 5%;}
@@ -2026,7 +2086,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 >
 <button onclick="buscarProdutos()">⌕</button>
 </div>
-
+<div class="busca-sugestoes" id="buscaSugestoes"></div>
 </div>
 
 </div>
@@ -2060,9 +2120,9 @@ e aqueles achadinhos que você vai amar.
 
 <button
 class="btn"
-onclick="document.getElementById('novidades').scrollIntoView()"
+onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})"
 >
-VER NOVIDADES
+VER PRODUTOS
 </button>
 
 </div>
@@ -2142,6 +2202,8 @@ VER NOVIDADES
 <option value="menor">Menor preço</option>
 <option value="maior">Maior preço</option>
 <option value="nota">Melhor avaliação</option>
+<option value="novidades">Novidades</option>
+<option value="vendidos">Mais vendidos</option>
 </select>
 
 <button onclick="limparFiltros()">LIMPAR FILTROS</button>
@@ -2150,6 +2212,7 @@ VER NOVIDADES
 
 <div class="resultado-busca" id="resultadoBusca"></div>
 <div class="produtos" id="listaProdutos"></div>
+<div class="ver-todos-wrap"><button class="ver-todos-btn" onclick="mostrarTodosProdutos()">VER TODOS OS PRODUTOS</button></div>
 
 </section>
 
@@ -2605,6 +2668,21 @@ Promoções de datas especiais
       <div class="admin-stat"><small>ESTOQUE BAIXO</small><strong id="adminEstoqueBaixo">0</strong></div>
       <div class="admin-stat"><small>PEDIDOS</small><strong id="adminPedidos">0</strong></div>
       <div class="admin-stat"><small>CLIENTES</small><strong id="adminClientes">0</strong></div>
+    </div>
+    <div class="admin-dashboard-sub">
+      <div class="admin-mini"><small>VENDAS HOJE</small><strong id="adminVendasHoje">R$ 0,00</strong></div>
+      <div class="admin-mini"><small>FATURAMENTO</small><strong id="adminFaturamento">R$ 0,00</strong></div>
+      <div class="admin-mini"><small>PEDIDOS PENDENTES</small><strong id="adminPendentes">0</strong></div>
+      <div class="admin-mini"><small>CLIENTES NOVOS</small><strong id="adminClientesNovos">0</strong></div>
+    </div>
+    <div class="admin-card">
+      <h3>Visão geral da loja</h3>
+      <div class="admin-lista">
+        <div><strong>🏆 Mais vendidos</strong><div id="adminMaisVendidos"></div></div>
+        <div><strong>⚠️ Estoque baixo</strong><div id="adminEstoqueLista"></div></div>
+        <div><strong>⭐ Avaliações aguardando aprovação</strong><div id="adminAvaliacoesPendentes" style="margin-top:10px;font-size:10px;color:#777"></div></div>
+        <div><strong>🎟️ Cupons ativos</strong><div id="adminCuponsAtivos" style="margin-top:10px;font-size:10px;color:#777"></div></div>
+      </div>
     </div>
     <div class="admin-card">
       <h3>Gestão de produtos</h3>
@@ -3467,20 +3545,69 @@ return div;
 
 
 /* =========================
+   BUSCA / HOME PROFISSIONAL
+========================= */
+function produtosOrdenadosMaisVendidos(){
+  return [...produtos].sort((a,b)=>Number(b.vendas||b.nota||0)-Number(a.vendas||a.nota||0));
+}
+function mostrarTodosProdutos(){
+  const container=document.getElementById("listaProdutos");
+  if(!container)return;
+  renderProdutos(produtos);
+  const btn=document.querySelector(".ver-todos-btn");
+  if(btn)btn.textContent="MOSTRANDO TODOS OS PRODUTOS";
+  document.getElementById("novidades")?.scrollIntoView({behavior:"smooth"});
+}
+function historicoBuscas(){try{return JSON.parse(localStorage.getItem("forYouHistoricoBuscas")||"[]")}catch(e){return []}}
+function salvarHistoricoBusca(termo){
+  if(!termo)return;
+  let h=historicoBuscas().filter(x=>x!==termo); h.unshift(termo); h=h.slice(0,6);
+  localStorage.setItem("forYouHistoricoBuscas",JSON.stringify(h));
+}
+function renderSugestoesBusca(){
+  const input=document.getElementById("busca"), box=document.getElementById("buscaSugestoes"); if(!input||!box)return;
+  const termo=input.value.trim().toLowerCase(); let lista=[];
+  if(termo){
+    lista=[...produtos,...kits].filter(p=>`${p.nome} ${p.marca} ${p.categoria||""} ${p.descricao||""}`.toLowerCase().includes(termo)).slice(0,6);
+  }
+  const h=historicoBuscas();
+  let html="";
+  if(!termo&&h.length){html+=`<div class="busca-historico"><div class="busca-historico-top"><span>BUSCAS RECENTES</span><button onclick="event.stopPropagation();limparHistoricoBusca()">LIMPAR</button></div>${h.map(x=>`<span class="busca-historico-item" onclick="usarBuscaHistorico('${String(x).replace(/'/g,"\'")}')">${x}</span>`).join("")}</div>`;}
+  if(lista.length){html+=lista.map(p=>`<div class="busca-sugestao" onclick="selecionarSugestaoBusca(${p.id})"><span>${p.nome}</span><small>${p.marca||p.categoria||"Produto"}</small></div>`).join("");}
+  if(termo&&!lista.length)html+='<div class="busca-sugestao"><span>Nenhum produto encontrado</span><small>Tente outro termo</small></div>';
+  box.innerHTML=html; box.classList.toggle("aberta",!!html);
+}
+let buscaTimer=null;
+function inicializarBuscaProfissional(){
+  const input=document.getElementById("busca");
+  if(!input||input.dataset.v6Inicializada)return;
+  input.dataset.v6Inicializada="1";
+  input.addEventListener("input",()=>{
+    clearTimeout(buscaTimer);
+    buscaTimer=setTimeout(renderSugestoesBusca,120);
+  });
+  input.addEventListener("focus",renderSugestoesBusca);
+  input.addEventListener("keydown",e=>{if(e.key==="Escape")fecharSugestoesBusca();});
+}
+
+function selecionarSugestaoBusca(id){const p=[...produtos,...kits].find(x=>String(x.id)===String(id));if(!p)return;document.getElementById("busca").value=p.nome;salvarHistoricoBusca(p.nome.toLowerCase());fecharSugestoesBusca();buscarProdutos();}
+function usarBuscaHistorico(t){document.getElementById("busca").value=t;fecharSugestoesBusca();buscarProdutos();}
+function limparHistoricoBusca(){localStorage.removeItem("forYouHistoricoBuscas");renderSugestoesBusca();}
+function fecharSugestoesBusca(){document.getElementById("buscaSugestoes")?.classList.remove("aberta");}
+function inicializarBuscaProfissional(){const input=document.getElementById("busca");if(!input)return;input.addEventListener("input",renderSugestoesBusca);input.addEventListener("focus",renderSugestoesBusca);document.addEventListener("click",e=>{if(!e.target.closest(".busca"))fecharSugestoesBusca();});}
+
+/* =========================
    RENDER PRODUTOS
 ========================= */
 
 function renderProdutos(lista=produtos){
-
-const container =
-document.getElementById("listaProdutos");
-
-container.innerHTML="";
-
-lista.forEach(produto=>{
-container.appendChild(criarCard(produto));
-});
-
+  const container=document.getElementById("listaProdutos");
+  if(!container)return;
+  container.innerHTML="";
+  const mostrar=lista===produtos ? produtosOrdenadosMaisVendidos().slice(0,4) : lista;
+  mostrar.forEach(produto=>container.appendChild(criarCard(produto)));
+  const btn=document.querySelector(".ver-todos-btn");
+  if(btn && lista===produtos)btn.textContent=produtos.length>4?"VER TODOS OS PRODUTOS":"TODOS OS PRODUTOS";
 }
 
 
@@ -3516,7 +3643,7 @@ function renderMaisVendidos(){
 
 const lista =
 [...produtos]
-.sort((a,b)=>b.nota-a.nota)
+.sort((a,b)=>Number(b.vendas||0)-Number(a.vendas||0) || b.nota-a.nota)
 .slice(0,4);
 
 const container =
@@ -4544,7 +4671,7 @@ if(marca){ lista=lista.filter(p=>p.marca===marca); }
 if(categoria){
 
 lista=lista.filter(
-p=>p.marca===categoria
+p=>p.categoria===categoria
 );
 
 }
@@ -4598,11 +4725,13 @@ lista.sort(
 }
 
 if(ordenacao==="nota"){
-
-lista.sort(
-(a,b)=>b.nota-a.nota
-);
-
+lista.sort((a,b)=>b.nota-a.nota);
+}
+if(ordenacao==="novidades"){
+lista.sort((a,b)=>Number(b.id)-Number(a.id));
+}
+if(ordenacao==="vendidos"){
+lista.sort((a,b)=>Number(b.vendas||b.nota||0)-Number(a.vendas||a.nota||0));
 }
 
 renderProdutos(lista);
@@ -4647,6 +4776,8 @@ document
 .value
 .trim()
 .toLowerCase();
+fecharSugestoesBusca();
+if(termo)salvarHistoricoBusca(termo);
 
 if(!termo){
 
@@ -4673,6 +4804,8 @@ const texto=
 produto.nome+
 " "+
 produto.marca+
+" "+
+(produto.categoria||"")+
 " "+
 produto.descricao
 ).toLowerCase();
@@ -5284,7 +5417,41 @@ function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');
 function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito à administração\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
 function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
 function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
-function renderAdmin(){const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;let pedidos=[];try{pedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]');}catch(e){pedidos=[];}const quantidadePedidos=pedidos.length;document.getElementById('adminProdutos').textContent=produtos.length;document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;document.getElementById('adminPedidos').textContent=quantidadePedidos;document.getElementById('adminClientes').textContent=contasSalvas().length;const tb=document.getElementById('adminTabelaProdutos');tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');const pedidosEl=document.getElementById('adminTabelaPedidos');const lista=pedidos;pedidosEl.innerHTML=lista.length?lista.slice(0,12).map(p=>{const e=Math.max(1,Math.min(4,Number(p.etapa||1)));const status=p.statusTexto||['Pedido confirmado','Preparando','Enviado','Entregue'][e-1];return `<div style="padding:12px 0;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))}<br><span style="font-size:10px;color:#777">${p.cliente?.nome||p.clienteEmail||''} • ${status}</span></div><select onchange="atualizarStatusPedido('${p.id}',this.value)" style="padding:7px;border:1px solid #ddd;border-radius:8px"><option value="1" ${e===1?'selected':''}>Confirmado</option><option value="2" ${e===2?'selected':''}>Preparando</option><option value="3" ${e===3?'selected':''}>Enviado</option><option value="4" ${e===4?'selected':''}>Entregue</option></select></div></div>`}).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';const total=lista.reduce((s,p)=>s+Number(p.total||0),0);document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(total)}</p><p><strong>Ticket médio:</strong> ${lista.length?moeda(total/lista.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;}
+function renderAdmin(){
+  if(!adminAutenticado())return;
+  const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;
+  let pedidos=[];try{pedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]')}catch(e){pedidos=[]}
+  const contas=contasSalvas();
+  const hoje=new Date().toLocaleDateString('pt-BR');
+  const pedidosHoje=pedidos.filter(p=>String(p.data||'').startsWith(hoje));
+  const faturamento=pedidos.reduce((s,p)=>s+Number(p.total||0),0);
+  const vendasHoje=pedidosHoje.reduce((s,p)=>s+Number(p.total||0),0);
+  const pendentes=pedidos.filter(p=>Number(p.etapa||1)<4).length;
+  const clientesNovos=contas.filter(c=>{const d=c.criadoEm||c.dataCadastro;return d&&String(d).startsWith(hoje)}).length;
+  document.getElementById('adminProdutos').textContent=produtos.length;
+  document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;
+  document.getElementById('adminPedidos').textContent=pedidos.length;
+  document.getElementById('adminClientes').textContent=contas.length;
+  document.getElementById('adminVendasHoje').textContent=moeda(vendasHoje);
+  document.getElementById('adminFaturamento').textContent=moeda(faturamento);
+  document.getElementById('adminPendentes').textContent=pendentes;
+  document.getElementById('adminClientesNovos').textContent=clientesNovos;
+  const tb=document.getElementById('adminTabelaProdutos');
+  tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');
+  const ranking=[...produtos].sort((a,b)=>Number(b.vendas||b.nota||0)-Number(a.vendas||a.nota||0)).slice(0,5);
+  document.getElementById('adminMaisVendidos').innerHTML=ranking.length?ranking.map((p,i)=>`<div class="admin-ranking-item"><span>${i+1}. ${p.nome}</span><strong>${Number(p.vendas||0)?p.vendas+' vendas':'⭐ '+p.nota}</strong></div>`).join(''):'<p style="font-size:10px;color:#777;margin-top:10px">Ainda sem dados de vendas.</p>';
+  const baixos=produtos.filter(p=>Number(p.estoque||0)<=5).slice(0,6);
+  document.getElementById('adminEstoqueLista').innerHTML=baixos.length?baixos.map(p=>`<div class="admin-ranking-item"><span>${p.nome}</span><strong class="admin-alerta">${Number(p.estoque||0)} un.</strong></div>`).join(''):'<p style="font-size:10px;color:#777;margin-top:10px">Estoque saudável.</p>';
+  const avaliacoesPendentes=produtos.reduce((s,p)=>s+(Array.isArray(p.avaliacoesPendentes)?p.avaliacoesPendentes.length:0),0);
+  document.getElementById('adminAvaliacoesPendentes').textContent=avaliacoesPendentes+' avaliação(ões) aguardando aprovação.';
+  let cupons=[];try{cupons=JSON.parse(localStorage.getItem('forYouCupons')||'[]')}catch(e){cupons=[]}
+  const cuponsAtivos=cupons.filter(c=>c&&c.ativo!==false);
+  document.getElementById('adminCuponsAtivos').textContent=cuponsAtivos.length+' cupom(ns) ativo(s).';
+  const pedidosEl=document.getElementById('adminTabelaPedidos');
+  pedidosEl.innerHTML=pedidos.length?pedidos.slice(0,12).map(p=>{const e=Math.max(1,Math.min(4,Number(p.etapa||1)));const status=p.statusTexto||['Pedido confirmado','Preparando','Enviado','Entregue'][e-1];return `<div style="padding:12px 0;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))}<br><span style="font-size:10px;color:#777">${p.cliente?.nome||p.clienteEmail||''} • ${status}</span></div><select onchange="atualizarStatusPedido('${p.id}',this.value)" style="padding:7px;border:1px solid #ddd;border-radius:8px"><option value="1" ${e===1?'selected':''}>Confirmado</option><option value="2" ${e===2?'selected':''}>Preparando</option><option value="3" ${e===3?'selected':''}>Enviado</option><option value="4" ${e===4?'selected':''}>Entregue</option></select></div></div>`}).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';
+  document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(faturamento)}</p><p><strong>Ticket médio:</strong> ${pedidos.length?moeda(faturamento/pedidos.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;
+}
+
 function salvarCatalogoAdmin(){localStorage.setItem('forYouCatalogo',JSON.stringify(produtos));}
 function adminAdicionarProduto(){const nome=prompt('Nome do produto:');if(!nome)return;const preco=Number((prompt('Preço:')||'0').replace(',','.'));if(Number.isNaN(preco)||preco<0)return;const estoque=Math.max(0,Number(prompt('Estoque inicial:')||0));const categoria=prompt('Categoria:','Novidades')||'Novidades';const marca=prompt('Marca:','FOR YOU')||'FOR YOU';produtos.push({id:'admin-'+Date.now(),nome:nome.trim(),preco,estoque,categoria:categoria.trim(),marca:marca.trim()});salvarCatalogoAdmin();renderAdmin();renderProdutos();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto adicionado e salvo neste navegador.');}
 function adminEditarProduto(){const nome=prompt('Digite o nome exato do produto que deseja editar:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novoNome=prompt('Nome:',p.nome);if(novoNome===null)return;const novoPreco=Number((prompt('Preço:',p.preco)||p.preco).replace(',','.'));if(Number.isNaN(novoPreco)||novoPreco<0)return;const categoria=prompt('Categoria:',p.categoria||'Novidades');if(categoria===null)return;const marca=prompt('Marca:',p.marca||'FOR YOU');if(marca===null)return;p.nome=novoNome.trim()||p.nome;p.preco=novoPreco;p.categoria=categoria.trim()||p.categoria;p.marca=marca.trim()||p.marca;salvarCatalogoAdmin();renderAdmin();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto atualizado.');}
@@ -5307,11 +5474,28 @@ renderMaisVendidos();
 renderUltimasUnidades();
 renderRecentes();
 renderRecomendados();
+inicializarBuscaProfissional();
 atualizarBanner();
 atualizarMinhaConta();
 renderPedidosConta();
 atualizar();
 
+
+setInterval(()=>{if(typeof atualizarDashboardAdminV6==="function") atualizarDashboardAdminV6();},1500);
+
+function atualizarDashboardAdminV6(){
+  if(!adminAutenticado()) return;
+  const cards=[
+    ["adminVendasHoje","💰"],["adminFaturamento","📈"],["adminPendentes","📦"],["adminClientesNovos","👥"]
+  ];
+  cards.forEach(([id,icone])=>{const el=document.getElementById(id); if(el){const box=el.closest(".admin-mini"); if(box && !box.dataset.v6){const small=box.querySelector("small"); if(small){small.innerHTML=icone+" "+small.textContent;} box.dataset.v6="1";}}});
+}
+
+// Inicialização refinada da busca V6.
+document.addEventListener("DOMContentLoaded",()=>{
+  inicializarBuscaProfissional();
+  if(typeof renderAdmin==='function' && adminAutenticado()){ renderAdmin(); atualizarDashboardAdminV6(); }
+});
 </script>
 
 </body>
