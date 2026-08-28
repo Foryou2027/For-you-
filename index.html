@@ -3436,6 +3436,189 @@ header .logo *,
   text-shadow:none !important;
 }
 
+
+
+/* =========================================================
+   ATUALIZAÇÃO — NOVA IDENTIDADE EM TONS DE VERMELHO
+========================================================= */
+
+:root{
+  --vinho:#6E1025;
+  --vinho-claro:#86162F;
+
+  --rosa:#B71C3A;
+  --rosa-hover:#8F122C;
+  --rosa-suave:#F4DCE1;
+
+  --bege:#FFF8F7;
+  --bege-claro:#FFFDFC;
+  --off-white:#FFFFFF;
+
+  --dourado:#A88955;
+  --dourado-claro:#D8C28E;
+
+  --texto:#4A101D;
+  --texto-suave:#80656B;
+  --borda:#EBD7DB;
+}
+
+/* Fundo geral */
+body,
+#paginaCarrinhoV17{
+  background:var(--bege)!important;
+  color:var(--texto)!important;
+}
+
+/* Logo FOR YOU inteiro */
+.logo,
+.logo *,
+#logo,
+#logo *,
+.brand,
+.brand *,
+.site-logo,
+.site-logo *,
+.logo-text,
+.logo-text *{
+  color:var(--vinho)!important;
+  -webkit-text-fill-color:var(--vinho)!important;
+}
+
+/* Títulos */
+h1,h2,h3,
+.titulo h2,
+.section-title h2,
+.secao-titulo h2,
+.fy17-cart-head h1,
+.fy17-cart-summary h2{
+  color:var(--vinho)!important;
+}
+
+/* Preços, descontos e destaques */
+.preco,
+.detalhe-preco,
+.desconto,
+.estoque,
+.fy17-price,
+.fy17-line.discount{
+  color:var(--rosa)!important;
+}
+
+/* Botões principais */
+.btn,
+.btn-detalhe,
+.checkout-btn,
+.conta-principal-btn,
+.adicionar,
+#paginaCarrinhoV17 .fy17-cart-summary button,
+#paginaCarrinhoV17 .fy17-checkout{
+  background:var(--vinho)!important;
+  color:#fff!important;
+}
+
+.btn:hover,
+.btn-detalhe:hover,
+.checkout-btn:hover,
+.conta-principal-btn:hover,
+.adicionar:hover,
+#paginaCarrinhoV17 .fy17-cart-summary button:hover,
+#paginaCarrinhoV17 .fy17-checkout:hover{
+  background:var(--rosa)!important;
+}
+
+/* Produtos */
+.produto{
+  background:var(--off-white)!important;
+  border-color:rgba(110,16,37,.10)!important;
+}
+
+.produto-img{
+  background:var(--rosa-suave)!important;
+}
+
+/* Carrinho */
+#paginaCarrinhoV17 .fy17-progress{
+  background:linear-gradient(135deg,#FFF5F6,#FFFFFF)!important;
+  border-color:#EBD7DB!important;
+}
+
+#paginaCarrinhoV17 .fy17-progress-fill{
+  background:linear-gradient(
+    90deg,
+    var(--vinho),
+    var(--rosa),
+    #D6284A
+  )!important;
+}
+
+#paginaCarrinhoV17 .fy17-cart-list,
+#paginaCarrinhoV17 .fy17-cart-summary,
+#paginaCarrinhoV17 .fy17-cart-box{
+  background:#fff!important;
+  border-color:rgba(110,16,37,.10)!important;
+}
+
+#paginaCarrinhoV17 .fy17-cart-item h3,
+#paginaCarrinhoV17 .fy17-item-total,
+#paginaCarrinhoV17 .fy17-total{
+  color:var(--vinho)!important;
+}
+
+#paginaCarrinhoV17 .fy17-cart-item .brand{
+  color:var(--dourado)!important;
+}
+
+#paginaCarrinhoV17 .fy17-qty button:hover{
+  background:var(--rosa-suave)!important;
+  color:var(--rosa)!important;
+}
+
+/* Newsletter */
+.newsletter{
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(214,40,74,.25),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(168,137,85,.13),
+      transparent 30%
+    ),
+    var(--vinho)!important;
+}
+
+.newsletter h2{
+  color:#fff!important;
+}
+
+.newsletter h2 span{
+  color:#F3A6B5!important;
+}
+
+.newsletter button{
+  background:var(--rosa)!important;
+}
+
+.newsletter button:hover{
+  background:#D6284A!important;
+}
+
+/* Campos em foco */
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--rosa)!important;
+  box-shadow:0 0 0 3px rgba(183,28,58,.10)!important;
+}
+
+/* Elementos de destaque */
+.favoritar.favoritado,
+#paginaCarrinhoV17 .voltar:hover{
+  color:var(--rosa)!important;
+}
+
 </style>
 
 </head>
