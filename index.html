@@ -1954,6 +1954,82 @@ footer p{
 
 .pagamento-detalhes{margin-top:15px}.pagamento-extra{padding:16px;border:1px solid #eee;border-radius:14px;background:#fff;margin-bottom:15px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.checkout-grid input{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px}.pix-placeholder{width:150px;height:150px;margin:12px auto;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed #d9a441;border-radius:12px;font-weight:700;color:#9b721b}.checkout-revisao{margin-top:15px;padding:16px;border-radius:14px;background:#fafafa;border:1px solid #eee}.checkout-revisao h3{margin-top:0}.checkout-revisao div{margin:5px 0}
 @media(max-width:700px){.checkout-grid{grid-template-columns:1fr}}
+
+/* =========================
+   REFINAMENTO PREMIUM DA HOME
+========================= */
+.hero-premium{
+  min-height:600px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,248,250,.98) 0%,rgba(255,248,250,.92) 31%,rgba(255,248,250,.48) 58%,rgba(255,248,250,.08) 100%),
+    url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=85");
+  background-size:cover;
+  background-position:center;
+}
+.hero-premium::after{
+  content:"";
+  position:absolute;
+  inset:auto -5% -45% 45%;
+  height:420px;
+  border-radius:50%;
+  background:rgba(184,63,97,.10);
+  filter:blur(2px);
+}
+.hero-content-premium{position:relative;z-index:3;padding:58px 0 48px;}
+.hero-kicker{display:flex;align-items:center;gap:9px;color:#b83f61;font-size:9px;font-weight:bold;letter-spacing:3px;}
+.hero-kicker span{width:24px;height:1px;background:#a88955;display:inline-block;}
+.hero-promo-tag{display:inline-flex;margin-top:20px;padding:7px 11px;border:1px solid rgba(168,137,85,.55);background:rgba(255,255,255,.72);color:#8c7042;font-size:8px;font-weight:bold;letter-spacing:2px;}
+.hero-content-premium h2{font-size:68px;line-height:1.02;margin:18px 0 20px;letter-spacing:-1px;}
+.hero-content-premium p{max-width:520px;font-size:13px;line-height:1.9;color:#62565b;}
+.hero-actions{display:flex;gap:10px;align-items:center;margin-top:28px;flex-wrap:wrap;}
+.hero-actions .btn{margin-top:0;min-width:150px;padding:14px 22px;transition:.2s;}
+.btn-hero-primary{background:#351f27;border:1px solid #351f27;color:#fff;}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(53,31,39,.18);}
+.btn-hero-secondary{background:rgba(255,255,255,.72);border:1px solid #351f27;color:#351f27;}
+.btn-hero-secondary:hover{background:#351f27;color:#fff;transform:translateY(-2px);}
+.hero-note{display:flex;align-items:center;gap:9px;margin-top:22px;color:#776a6f;font-size:9px;letter-spacing:.5px;}
+.hero-note-line{width:28px;height:1px;background:#d4b5be;}
+.hero-side-card{position:absolute;right:7%;bottom:48px;z-index:4;width:190px;padding:22px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 45px rgba(53,31,39,.12);backdrop-filter:blur(8px);}
+.hero-side-card small{display:block;color:#a88955;letter-spacing:3px;font-size:7px;margin-bottom:11px;}
+.hero-side-card strong{display:block;font-family:Georgia,serif;font-weight:normal;font-size:27px;line-height:1.02;color:#351f27;}
+.hero-side-card span{display:block;margin-top:12px;color:#776a6f;font-size:8px;line-height:1.6;}
+.hero-side-card i{display:block;width:28px;height:1px;background:#b83f61;margin-top:17px;}
+.banner-rotativo{margin-top:34px;}
+.banner-box{min-height:170px;border-radius:20px;padding:30px 44px;box-shadow:0 18px 42px rgba(53,31,39,.12);}
+.banner-dots{gap:7px;margin-top:13px;}
+.banner-dot{width:7px;height:7px;border:1px solid #b83f61;background:#ead9de;transition:.2s;}
+.banner-dot.ativo{background:#b83f61;transform:scale(1.2);}
+.secao{padding-top:64px;padding-bottom:64px;}
+.titulo{margin-bottom:30px;}
+.titulo h2{font-size:44px;}
+.ver-todos-wrap{text-align:center;margin-top:26px;}
+.ver-todos-btn{min-width:190px;padding:12px 20px;}
+@media(max-width:900px){
+  .hero-premium{min-height:540px;background-position:62% center;}
+  .hero-content-premium h2{font-size:56px;}
+  .hero-side-card{right:5%;bottom:28px;width:165px;}
+}
+@media(max-width:700px){
+  .hero-premium{min-height:570px;background-position:64% center;background:linear-gradient(90deg,rgba(255,248,250,.98) 0%,rgba(255,248,250,.91) 60%,rgba(255,248,250,.45) 100%),url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1200&q=85");background-size:cover;}
+  .hero-content-premium{padding:48px 0 135px;}
+  .hero-content-premium h2{font-size:45px;letter-spacing:-.5px;}
+  .hero-content-premium p{font-size:12px;max-width:390px;}
+  .hero-side-card{right:7%;bottom:22px;width:180px;padding:16px;}
+  .hero-side-card strong{font-size:22px;}
+  .hero-actions .btn{min-width:142px;padding:13px 17px;}
+  .banner-box{min-height:155px;padding:25px 20px;border-radius:16px;}
+  .banner-box h3{font-size:24px;}
+}
+@media(max-width:430px){
+  .hero-premium{min-height:600px;}
+  .hero-content-premium h2{font-size:39px;}
+  .hero-actions{gap:8px;}
+  .hero-actions .btn{min-width:135px;font-size:9px;}
+  .hero-side-card{right:5%;width:170px;}
+}
+
 </style>
 </head>
 
@@ -2166,33 +2242,38 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <main id="loja">
 
-<section class="hero">
-
-<div class="hero-content">
-
-<small>BEM-VINDA À FOR YOU</small>
-
-<h2>
-Beleza do seu jeito,
-<br>
-<span>escolhida por nós.</span>
-</h2>
-
-<p>
-Testamos, gostamos e colocamos na loja.
-Maquiagem, skincare, corpo, acessórios
-e aqueles achadinhos que você vai amar.
-</p>
-
-<button
-class="btn"
-onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})"
->
-VER PRODUTOS
-</button>
-
-</div>
-
+<section class="hero hero-premium">
+  <div class="hero-overlay-decor" aria-hidden="true"></div>
+  <div class="hero-content hero-content-premium">
+    <div class="hero-kicker"><span></span> BEM-VINDA À FOR YOU</div>
+    <div class="hero-promo-tag">SELEÇÃO ESPECIAL</div>
+    <h2>
+      Beleza do seu jeito,
+      <br>
+      <span>escolhida por nós.</span>
+    </h2>
+    <p>
+      Achadinhos selecionados para transformar sua rotina.
+      Maquiagem, skincare, corpo, acessórios e muito mais.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-hero-primary" onclick="document.getElementById('ofertas').scrollIntoView({behavior:'smooth'})">
+        COMPRAR AGORA
+      </button>
+      <button class="btn btn-hero-secondary" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})">
+        VER PRODUTOS
+      </button>
+    </div>
+    <div class="hero-note">
+      <span class="hero-note-line"></span> Descubra seus próximos favoritos
+    </div>
+  </div>
+  <div class="hero-side-card" aria-hidden="true">
+    <small>FOR YOU</small>
+    <strong>Ofertas<br>especiais</strong>
+    <span>Seleções pensadas para você</span>
+    <i></i>
+  </div>
 </section>
 
 <section class="banner-rotativo">
