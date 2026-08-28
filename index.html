@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -100,6 +101,32 @@ header{
   font-size:25px;
 }
 
+.favoritos-icon{
+  position:relative;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.favoritos-icon:hover{
+  color:#b83f61;
+  transform:scale(1.08);
+}
+
+.contador-favoritos{
+  position:absolute;
+  top:-9px;
+  right:-11px;
+  background:#b83f61;
+  color:white;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
 .carrinho-icon{
   position:relative;
   cursor:pointer;
@@ -147,7 +174,6 @@ header{
 
 /* =========================
    CATEGORIAS
-   COR DO MENU PRINCIPAL
 ========================= */
 
 .menu-item{
@@ -155,16 +181,16 @@ header{
 }
 
 .menu-btn{
-  border:1.5px solid #351f27;
-  background:#351f27;
-  color:white;
+  border:1.5px solid #e39aae;
+  background:#fff;
+  color:#b83f61;
   padding:11px 17px;
   font-size:11px;
   font-weight:bold;
   letter-spacing:.5px;
   border-radius:22px;
   transition:.25s ease;
-  box-shadow:0 3px 10px rgba(53,31,39,.12);
+  box-shadow:0 3px 10px rgba(184,63,97,.08);
 }
 
 .menu-btn:hover,
@@ -234,9 +260,9 @@ header{
 }
 
 .destaque-btn{
-  border:1px solid #b83f61;
-  background:#fff5f7;
-  color:#b83f61;
+  border:1px solid #a88955;
+  background:#fffaf0;
+  color:#a88955;
   padding:11px 24px;
   font-size:9px;
   font-weight:bold;
@@ -246,19 +272,50 @@ header{
 }
 
 .destaque-btn:hover{
-  background:#b83f61;
+  background:#a88955;
   color:white;
 }
 
-.destaque-btn.kit{
-  background:#351f27;
-  border-color:#351f27;
+.destaque-btn.oferta{
+  background:#a88955;
+  border-color:#a88955;
   color:white;
 }
 
-.destaque-btn.kit:hover{
-  background:#b83f61;
-  border-color:#b83f61;
+.destaque-btn.oferta:hover{
+  background:#8f733f;
+  border-color:#8f733f;
+}
+
+/* =========================
+   SUBCATEGORIAS DE OFERTAS
+========================= */
+
+.subcategorias-ofertas{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.suboferta-btn{
+  border:1px solid #c9ad70;
+  background:#fffaf0;
+  color:#9b7b3d;
+  padding:8px 14px;
+  font-size:8px;
+  font-weight:bold;
+  letter-spacing:.6px;
+  border-radius:18px;
+  transition:.2s;
+}
+
+.suboferta-btn:hover,
+.suboferta-btn.ativo{
+  background:#a88955;
+  color:white;
+  border-color:#a88955;
 }
 
 /* =========================
@@ -268,14 +325,15 @@ header{
 .busca{
   max-width:620px;
   margin:17px auto 0;
-  position:relative;
+  display:flex;
+  gap:7px;
 }
 
 .busca input{
-  width:100%;
+  flex:1;
   border:1px solid #dfc8cf;
   border-radius:30px;
-  padding:14px 50px 14px 20px;
+  padding:14px 20px;
   outline:none;
   background:#fff;
   font-size:12px;
@@ -285,56 +343,28 @@ header{
   border-color:#b83f61;
 }
 
+.btn-buscar{
+  border:0;
+  border-radius:30px;
+  background:#351f27;
+  color:white;
+  padding:0 20px;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1px;
+  transition:.2s;
+}
+
+.btn-buscar:hover{
+  background:#b83f61;
+}
+
 .resultado-busca{
   display:none;
-  position:absolute;
-  top:52px;
-  left:0;
-  right:0;
-  background:white;
-  border:1px solid #ead9de;
-  border-radius:12px;
-  box-shadow:0 10px 25px #0002;
-  z-index:400;
-  overflow:hidden;
-  text-align:left;
-}
-
-.resultado-busca.ativo{
-  display:block;
-}
-
-.resultado-item{
-  padding:12px 16px;
-  border-bottom:1px solid #f3e6e9;
-  cursor:pointer;
-}
-
-.resultado-item:last-child{
-  border-bottom:0;
-}
-
-.resultado-item:hover{
-  background:#fff0f4;
-}
-
-.resultado-item strong{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:15px;
-  color:#351f27;
-}
-
-.resultado-item span{
-  font-size:9px;
-  color:#a88955;
-}
-
-.sem-resultado{
-  padding:16px;
   text-align:center;
-  color:#888;
+  margin-top:10px;
   font-size:10px;
+  color:#777;
 }
 
 /* =========================
@@ -448,6 +478,11 @@ header{
 .produto{
   background:white;
   border:1px solid #ead9de;
+  position:relative;
+}
+
+.produto.oculto-busca{
+  display:none !important;
 }
 
 .produto-img{
@@ -472,6 +507,39 @@ header{
   padding:7px 10px;
   font-size:8px;
   z-index:2;
+}
+
+/* =========================
+   FAVORITAR PRODUTO
+========================= */
+
+.favoritar{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid #ead9de;
+  background:white;
+  color:#b83f61;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  transition:.2s;
+}
+
+.favoritar:hover{
+  transform:scale(1.08);
+  border-color:#b83f61;
+}
+
+.favoritar.favoritado{
+  background:#b83f61;
+  color:white;
+  border-color:#b83f61;
 }
 
 .produto-info{
@@ -517,7 +585,15 @@ header{
 ========================= */
 
 .ofertas{
-  background:#fff8fa;
+  background:white;
+}
+
+.ofertas .titulo small{
+  color:#a88955;
+}
+
+.ofertas .etiqueta{
+  background:#a88955;
 }
 
 /* =========================
@@ -533,7 +609,7 @@ header{
 }
 
 .kit-card .etiqueta{
-  background:#351f27;
+  background:#a88955;
 }
 
 /* =========================
@@ -664,7 +740,7 @@ footer p{
 }
 
 /* =========================
-   CARRINHO
+   OVERLAY
 ========================= */
 
 .overlay{
@@ -678,6 +754,10 @@ footer p{
 .overlay.ativo{
   display:block;
 }
+
+/* =========================
+   CARRINHO
+========================= */
 
 .carrinho{
   position:fixed;
@@ -933,6 +1013,107 @@ footer p{
 }
 
 /* =========================
+   PAINEL FAVORITOS
+========================= */
+
+.favoritos-painel{
+  position:fixed;
+  right:0;
+  top:0;
+  height:100vh;
+  width:min(430px,100%);
+  background:white;
+  z-index:502;
+  transform:translateX(100%);
+  transition:.3s;
+  display:flex;
+  flex-direction:column;
+}
+
+.favoritos-painel.aberto{
+  transform:translateX(0);
+}
+
+.favoritos-header{
+  padding:20px;
+  border-bottom:1px solid #ead9de;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.favoritos-header h2{
+  font-family:Georgia,serif;
+  font-size:28px;
+  font-weight:normal;
+}
+
+.favoritos-conteudo{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+}
+
+.favorito-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid #ead9de;
+}
+
+.favorito-card-img{
+  width:70px;
+  height:75px;
+  background:#f6e5e9;
+  flex-shrink:0;
+  overflow:hidden;
+}
+
+.favorito-card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.favorito-card-info{
+  flex:1;
+}
+
+.favorito-card-info strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+.favorito-card-info span{
+  color:#b83f61;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.remover-favorito{
+  border:0;
+  background:none;
+  color:#999;
+  font-size:20px;
+}
+
+.vazio-favoritos{
+  text-align:center;
+  padding:70px 20px;
+  color:#888;
+  font-size:12px;
+}
+
+.vazio-favoritos div{
+  font-size:45px;
+  color:#e39aae;
+  margin-bottom:15px;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
@@ -992,6 +1173,17 @@ footer p{
     white-space:nowrap;
   }
 
+  .subcategorias-ofertas{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:5px;
+  }
+
+  .suboferta-btn{
+    white-space:nowrap;
+  }
+
   .produtos{
     grid-template-columns:repeat(2,1fr);
   }
@@ -1023,6 +1215,7 @@ footer p{
 
   .acoes{
     font-size:21px;
+    gap:14px;
   }
 
   .menu-lista{
@@ -1032,6 +1225,18 @@ footer p{
   .menu-btn{
     padding:9px 13px;
     font-size:10px;
+  }
+
+  .busca{
+    gap:5px;
+  }
+
+  .busca input{
+    padding:12px 14px;
+  }
+
+  .btn-buscar{
+    padding:0 13px;
   }
 
   .produtos{
@@ -1070,7 +1275,6 @@ footer p{
 ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 </div>
 
-
 <!-- =========================
      HEADER
 ========================= -->
@@ -1093,7 +1297,19 @@ BELEZA • CUIDADOS • ACHADINHOS
 
 <div class="acoes">
 
-<span>♡</span>
+<div
+class="favoritos-icon"
+onclick="abrirFavoritos()"
+title="Meus favoritos"
+>
+♡
+<span
+class="contador-favoritos"
+id="contadorFavoritos"
+>
+0
+</span>
+</div>
 
 <div
 class="carrinho-icon"
@@ -1114,7 +1330,6 @@ id="contador"
 </div>
 
 </div>
-
 
 <!-- =========================
      MENU PRINCIPAL
@@ -1159,7 +1374,6 @@ id="dropdown-labios"
 
 </div>
 
-
 <!-- PELE -->
 
 <div class="menu-item">
@@ -1193,7 +1407,6 @@ id="dropdown-pele"
 
 </div>
 
-
 <!-- SKINCARE -->
 
 <div class="menu-item">
@@ -1226,7 +1439,6 @@ id="dropdown-skincare"
 
 </div>
 
-
 <!-- OLHOS -->
 
 <div class="menu-item">
@@ -1257,7 +1469,6 @@ id="dropdown-olhos"
 </div>
 
 </div>
-
 
 <!-- FACE -->
 
@@ -1290,7 +1501,6 @@ id="dropdown-face"
 
 </div>
 
-
 <!-- ACESSÓRIOS -->
 
 <div class="menu-item">
@@ -1320,7 +1530,6 @@ id="dropdown-acessorios"
 </div>
 
 </div>
-
 
 <!-- CORPO -->
 
@@ -1354,31 +1563,67 @@ id="dropdown-corpo"
 
 </div>
 
-
 <!-- =========================
-     DESTAQUES
+     DESTAQUE OFERTAS
 ========================= -->
 
 <div class="destaques-menu">
 
 <button
-class="destaque-btn"
-onclick="document.getElementById('ofertas').scrollIntoView()"
+class="destaque-btn oferta"
+onclick="document.getElementById('ofertas').scrollIntoView({behavior:'smooth'})"
 >
 ✨ OFERTAS
 </button>
 
+</div>
+
+<!-- =========================
+     SUBCATEGORIAS OFERTAS
+========================= -->
+
+<div class="subcategorias-ofertas">
+
 <button
-class="destaque-btn kit"
-onclick="document.getElementById('kits').scrollIntoView()"
+class="suboferta-btn"
+onclick="filtrarOferta('proximo')"
 >
-🎁 KITS PROMOCIONAIS
+PRÓXIMO VENCIMENTO
+</button>
+
+<button
+class="suboferta-btn"
+onclick="filtrarOferta('preco')"
+>
+ABAIXO DO PREÇO
+</button>
+
+<button
+class="suboferta-btn"
+onclick="filtrarOferta('ultimas')"
+>
+ÚLTIMAS UNIDADES
+</button>
+
+<button
+class="suboferta-btn"
+onclick="filtrarOferta('datas')"
+>
+PROMOÇÕES DE DATAS ESPECIAIS
+</button>
+
+<button
+class="suboferta-btn ativo"
+onclick="filtrarOferta('todas')"
+>
+TODAS
 </button>
 
 </div>
 
-
-<!-- BUSCA -->
+<!-- =========================
+     BUSCA
+========================= -->
 
 <div class="busca">
 
@@ -1386,9 +1631,17 @@ onclick="document.getElementById('kits').scrollIntoView()"
 id="busca"
 type="text"
 placeholder="Buscar produto..."
-oninput="buscarProdutos()"
-autocomplete="off"
+onkeyup="buscarProdutos(event)"
 >
+
+<button
+class="btn-buscar"
+onclick="executarBusca()"
+>
+BUSCAR
+</button>
+
+</div>
 
 <div
 class="resultado-busca"
@@ -1400,10 +1653,7 @@ id="resultadoBusca"
 
 </div>
 
-</div>
-
 </header>
-
 
 <!-- =========================
      HERO
@@ -1440,7 +1690,7 @@ e aqueles achadinhos que você vai amar.
 
 <button
 class="btn"
-onclick="document.getElementById('novidades').scrollIntoView()"
+onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})"
 >
 VER NOVIDADES
 </button>
@@ -1448,7 +1698,6 @@ VER NOVIDADES
 </div>
 
 </section>
-
 
 <!-- =========================
      NOVIDADES
@@ -1477,13 +1726,28 @@ Conheça os novos produtos da FOR YOU.
 
 <div class="produtos">
 
-<div class="produto">
+<div
+class="produto"
+data-nome="Base Glow"
+data-categoria="Pele"
+data-tipo="novidade"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 NOVO
 </span>
+
+<button
+class="favoritar"
+data-produto="Base Glow"
+data-preco="39.90"
+data-imagem="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
@@ -1516,14 +1780,28 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto">
+<div
+class="produto"
+data-nome="Gloss Rosé"
+data-categoria="Lábios"
+data-tipo="novidade"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 NOVO
 </span>
+
+<button
+class="favoritar"
+data-produto="Gloss Rosé"
+data-preco="24.90"
+data-imagem="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
@@ -1556,14 +1834,28 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto">
+<div
+class="produto"
+data-nome="Hidratante Facial"
+data-categoria="Skincare"
+data-tipo="novidade"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 NOVO
 </span>
+
+<button
+class="favoritar"
+data-produto="Hidratante Facial"
+data-preco="29.90"
+data-imagem="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
@@ -1596,14 +1888,28 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto">
+<div
+class="produto"
+data-nome="Paleta Glow"
+data-categoria="Olhos"
+data-tipo="novidade"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 NOVO
 </span>
+
+<button
+class="favoritar"
+data-produto="Paleta Glow"
+data-preco="34.90"
+data-imagem="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
@@ -1640,7 +1946,6 @@ ADICIONAR AO CARRINHO
 
 </section>
 
-
 <!-- =========================
      OFERTAS
 ========================= -->
@@ -1668,13 +1973,30 @@ Aproveite enquanto durar o estoque.
 
 <div class="produtos">
 
-<div class="produto">
+<!-- OFERTA 1 -->
+
+<div
+class="produto"
+data-nome="Batom Especial"
+data-categoria="Lábios"
+data-oferta="preco"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 OFERTA
 </span>
+
+<button
+class="favoritar"
+data-produto="Batom Especial"
+data-preco="14.90"
+data-imagem="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
@@ -1707,14 +2029,30 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+<!-- OFERTA 2 -->
 
-<div class="produto">
+<div
+class="produto"
+data-nome="Hidratante Glow"
+data-categoria="Skincare"
+data-oferta="ultimas"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 OFERTA
 </span>
+
+<button
+class="favoritar"
+data-produto="Hidratante Glow"
+data-preco="18.90"
+data-imagem="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
@@ -1747,14 +2085,30 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+<!-- OFERTA 3 -->
 
-<div class="produto">
+<div
+class="produto"
+data-nome="Body Splash"
+data-categoria="Corpo"
+data-oferta="datas"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 OFERTA
 </span>
+
+<button
+class="favoritar"
+data-produto="Body Splash"
+data-preco="24.90"
+data-imagem="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
@@ -1787,14 +2141,30 @@ ADICIONAR AO CARRINHO
 
 </div>
 
+<!-- OFERTA 4 -->
 
-<div class="produto">
+<div
+class="produto"
+data-nome="Blush Rosé"
+data-categoria="Face"
+data-oferta="proximo"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 OFERTA
 </span>
+
+<button
+class="favoritar"
+data-produto="Blush Rosé"
+data-preco="16.90"
+data-imagem="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
@@ -1831,7 +2201,6 @@ ADICIONAR AO CARRINHO
 
 </section>
 
-
 <!-- =========================
      KITS
 ========================= -->
@@ -1859,13 +2228,27 @@ Produtos escolhidos juntos por um preço especial.
 
 <div class="produtos">
 
-<div class="produto kit-card">
+<div
+class="produto kit-card"
+data-nome="Kit Glow"
+data-categoria="Kit Beleza"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 KIT
 </span>
+
+<button
+class="favoritar"
+data-produto="Kit Glow"
+data-preco="49.90"
+data-imagem="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
@@ -1898,14 +2281,27 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto kit-card">
+<div
+class="produto kit-card"
+data-nome="Kit Skincare"
+data-categoria="Skincare"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 KIT
 </span>
+
+<button
+class="favoritar"
+data-produto="Kit Skincare"
+data-preco="59.90"
+data-imagem="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
@@ -1938,14 +2334,27 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto kit-card">
+<div
+class="produto kit-card"
+data-nome="Kit Lábios"
+data-categoria="Lábios"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 KIT
 </span>
+
+<button
+class="favoritar"
+data-produto="Kit Lábios"
+data-preco="39.90"
+data-imagem="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
@@ -1978,14 +2387,27 @@ ADICIONAR AO CARRINHO
 
 </div>
 
-
-<div class="produto kit-card">
+<div
+class="produto kit-card"
+data-nome="Kit Olhar"
+data-categoria="Olhos"
+>
 
 <div class="produto-img">
 
 <span class="etiqueta">
 KIT
 </span>
+
+<button
+class="favoritar"
+data-produto="Kit Olhar"
+data-preco="54.90"
+data-imagem="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
@@ -2022,7 +2444,6 @@ ADICIONAR AO CARRINHO
 
 </section>
 
-
 <!-- =========================
      CATEGORIAS
 ========================= -->
@@ -2047,9 +2468,22 @@ Encontre seus favoritos por categoria.
 
 <div class="produtos">
 
-<div class="produto" id="labios">
+<div class="produto" id="labios"
+data-nome="Batom Rosé"
+data-categoria="Lábios"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Batom Rosé"
+data-preco="15.00"
+data-imagem="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
@@ -2082,10 +2516,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="pele">
+<div class="produto" id="pele"
+data-nome="Base Glow"
+data-categoria="Pele"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Base Glow"
+data-preco="39.90"
+data-imagem="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
@@ -2118,10 +2564,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="skincare">
+<div class="produto" id="skincare"
+data-nome="Hidratante Facial"
+data-categoria="Skincare"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Hidratante Facial"
+data-preco="29.90"
+data-imagem="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
@@ -2154,10 +2612,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="olhos">
+<div class="produto" id="olhos"
+data-nome="Paleta Glow"
+data-categoria="Olhos"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Paleta Glow"
+data-preco="34.90"
+data-imagem="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85"
@@ -2190,10 +2660,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="face">
+<div class="produto" id="face"
+data-nome="Blush Rosé"
+data-categoria="Face"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Blush Rosé"
+data-preco="20.00"
+data-imagem="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
@@ -2226,10 +2708,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="acessorios">
+<div class="produto" id="acessorios"
+data-nome="Kit de Pincéis"
+data-categoria="Acessórios"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Kit de Pincéis"
+data-preco="29.90"
+data-imagem="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
@@ -2262,10 +2756,22 @@ ADICIONAR
 
 </div>
 
-
-<div class="produto" id="corpo">
+<div class="produto" id="corpo"
+data-nome="Body Splash"
+data-categoria="Corpo"
+>
 
 <div class="produto-img">
+
+<button
+class="favoritar"
+data-produto="Body Splash"
+data-preco="34.90"
+data-imagem="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
+onclick="favoritarProduto(this,event)"
+>
+♡
+</button>
 
 <img
 src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
@@ -2302,7 +2808,6 @@ ADICIONAR
 
 </section>
 
-
 <!-- =========================
      BENEFÍCIOS
 ========================= -->
@@ -2325,7 +2830,6 @@ Achadinhos selecionados para você.
 
 </div>
 
-
 <div class="beneficio">
 
 <div>✦</div>
@@ -2339,7 +2843,6 @@ Sempre tem novidade na FOR YOU.
 </span>
 
 </div>
-
 
 <div class="beneficio">
 
@@ -2358,7 +2861,6 @@ Escolha a melhor forma de entrega.
 </div>
 
 </section>
-
 
 <!-- =========================
      NEWSLETTER
@@ -2390,7 +2892,6 @@ CADASTRAR
 
 </section>
 
-
 <!-- =========================
      FOOTER
 ========================= -->
@@ -2413,7 +2914,6 @@ com carinho.
 
 </div>
 
-
 <div>
 
 <h3>
@@ -2433,7 +2933,6 @@ Kits Promocionais
 </a>
 
 </div>
-
 
 <div>
 
@@ -2459,7 +2958,6 @@ Olhos
 
 </div>
 
-
 <div>
 
 <h3>
@@ -2482,7 +2980,6 @@ Dúvidas
 
 </div>
 
-
 <div class="copyright">
 
 © 2026 FOR YOU • Todos os direitos reservados.
@@ -2491,7 +2988,6 @@ Dúvidas
 
 </footer>
 
-
 <!-- =========================
      OVERLAY
 ========================= -->
@@ -2499,10 +2995,9 @@ Dúvidas
 <div
 class="overlay"
 id="overlay"
-onclick="fecharCarrinho()"
+onclick="fecharTudo()"
 >
 </div>
-
 
 <!-- =========================
      CARRINHO
@@ -2528,13 +3023,11 @@ onclick="fecharCarrinho()"
 
 </div>
 
-
 <div
 class="itens"
 id="itens"
 >
 </div>
-
 
 <div class="frete">
 
@@ -2557,7 +3050,6 @@ CALCULAR
 
 </div>
 
-
 <a
 class="cep-link"
 href="https://buscacepinter.correios.com.br/app/endereco/index.php"
@@ -2565,7 +3057,6 @@ target="_blank"
 >
 Não sei meu CEP
 </a>
-
 
 <div
 class="endereco"
@@ -2577,7 +3068,6 @@ class="endereco-box"
 id="enderecoBox"
 >
 </div>
-
 
 <div class="campos">
 
@@ -2599,13 +3089,11 @@ placeholder="Ponto de referência (opcional)"
 
 </div>
 
-
 <div class="entregas">
 
 <h4>
 FORMA DE ENTREGA
 </h4>
-
 
 <label class="entrega">
 
@@ -2641,7 +3129,6 @@ R$ 0,00
 
 </label>
 
-
 <label class="entrega">
 
 <div class="entrega-esq">
@@ -2675,7 +3162,6 @@ R$ 0,00
 </div>
 
 </label>
-
 
 <label class="entrega">
 
@@ -2714,7 +3200,6 @@ GRÁTIS
 
 </div>
 
-
 <div class="resumo">
 
 <div class="linha">
@@ -2729,7 +3214,6 @@ R$ 0,00
 
 </div>
 
-
 <div class="linha">
 
 <span>
@@ -2741,7 +3225,6 @@ R$ 0,00
 </strong>
 
 </div>
-
 
 <div class="linha total">
 
@@ -2755,7 +3238,6 @@ R$ 0,00
 
 </div>
 
-
 <button
 class="whatsapp"
 onclick="finalizarWhatsApp()"
@@ -2767,6 +3249,37 @@ FINALIZAR PEDIDO PELO WHATSAPP
 
 </aside>
 
+<!-- =========================
+     FAVORITOS
+========================= -->
+
+<aside
+class="favoritos-painel"
+id="favoritosPainel"
+>
+
+<div class="favoritos-header">
+
+<h2>
+Meus favoritos ♡
+</h2>
+
+<button
+class="fechar"
+onclick="fecharFavoritos()"
+>
+×
+</button>
+
+</div>
+
+<div
+class="favoritos-conteudo"
+id="favoritosConteudo"
+>
+</div>
+
+</aside>
 
 <script>
 
@@ -2775,7 +3288,6 @@ FINALIZAR PEDIDO PELO WHATSAPP
 ========================= */
 
 const WHATSAPP = "5511999999999";
-
 
 /* =========================
    CARRINHO
@@ -2797,6 +3309,14 @@ let valoresFrete = {
   expressa:0
 };
 
+/* =========================
+   FAVORITOS
+========================= */
+
+let favoritos =
+JSON.parse(
+localStorage.getItem("forYouFavoritos")
+) || [];
 
 /* =========================
    MOEDA
@@ -2814,9 +3334,8 @@ function moeda(valor){
 
 }
 
-
 /* =========================
-   SALVAR
+   SALVAR CARRINHO
 ========================= */
 
 function salvar(){
@@ -2828,6 +3347,18 @@ function salvar(){
 
 }
 
+/* =========================
+   SALVAR FAVORITOS
+========================= */
+
+function salvarFavoritos(){
+
+  localStorage.setItem(
+    "forYouFavoritos",
+    JSON.stringify(favoritos)
+  );
+
+}
 
 /* =========================
    ADICIONAR
@@ -2862,7 +3393,6 @@ function adicionar(nome,preco){
 
 }
 
-
 /* =========================
    ATUALIZAR
 ========================= */
@@ -2875,7 +3405,6 @@ function atualizar(){
   let quantidade = 0;
 
   let subtotal = 0;
-
 
   if(carrinho.length === 0){
 
@@ -2904,12 +3433,10 @@ function atualizar(){
         produto.preco *
         produto.quantidade;
 
-
         const item =
         document.createElement("div");
 
         item.className = "item";
-
 
         item.innerHTML = `
 
@@ -2963,23 +3490,19 @@ function atualizar(){
 
   }
 
-
   document.getElementById(
     "contador"
   ).textContent = quantidade;
-
 
   document.getElementById(
     "subtotal"
   ).textContent =
   moeda(subtotal);
 
-
   document.getElementById(
     "frete"
   ).textContent =
   moeda(freteAtual);
-
 
   document.getElementById(
     "total"
@@ -2989,7 +3512,6 @@ function atualizar(){
   );
 
 }
-
 
 /* =========================
    QUANTIDADE
@@ -3013,7 +3535,6 @@ function alterar(index,valor){
 
 }
 
-
 /* =========================
    REMOVER
 ========================= */
@@ -3028,12 +3549,13 @@ function remover(index){
 
 }
 
-
 /* =========================
    CARRINHO
 ========================= */
 
 function abrirCarrinho(){
+
+  fecharFavoritos();
 
   document
   .getElementById("carrinho")
@@ -3045,19 +3567,262 @@ function abrirCarrinho(){
 
 }
 
-
 function fecharCarrinho(){
 
   document
   .getElementById("carrinho")
   .classList.remove("aberto");
 
-  document
-  .getElementById("overlay")
-  .classList.remove("ativo");
+  if(
+    !document
+    .getElementById("favoritosPainel")
+    .classList.contains("aberto")
+  ){
+
+    document
+    .getElementById("overlay")
+    .classList.remove("ativo");
+
+  }
 
 }
 
+/* =========================
+   FAVORITOS
+========================= */
+
+function favoritarProduto(botao,event){
+
+  event.stopPropagation();
+
+  const nome =
+  botao.dataset.produto;
+
+  const preco =
+  parseFloat(botao.dataset.preco);
+
+  const imagem =
+  botao.dataset.imagem;
+
+  const existe =
+  favoritos.find(
+    item => item.nome === nome
+  );
+
+  if(existe){
+
+    favoritos =
+    favoritos.filter(
+      item => item.nome !== nome
+    );
+
+    botao.classList.remove("favoritado");
+    botao.textContent = "♡";
+
+  }else{
+
+    favoritos.push({
+      nome:nome,
+      preco:preco,
+      imagem:imagem
+    });
+
+    botao.classList.add("favoritado");
+    botao.textContent = "♥";
+
+  }
+
+  salvarFavoritos();
+
+  atualizarFavoritos();
+
+}
+
+/* =========================
+   ATUALIZAR FAVORITOS
+========================= */
+
+function atualizarFavoritos(){
+
+  const container =
+  document.getElementById(
+    "favoritosConteudo"
+  );
+
+  document.getElementById(
+    "contadorFavoritos"
+  ).textContent =
+  favoritos.length;
+
+  document
+  .querySelectorAll(".favoritar")
+  .forEach(botao => {
+
+    const nome =
+    botao.dataset.produto;
+
+    const existe =
+    favoritos.some(
+      item => item.nome === nome
+    );
+
+    if(existe){
+
+      botao.classList.add("favoritado");
+      botao.textContent = "♥";
+
+    }else{
+
+      botao.classList.remove("favoritado");
+      botao.textContent = "♡";
+
+    }
+
+  });
+
+  if(favoritos.length === 0){
+
+    container.innerHTML = `
+
+      <div class="vazio-favoritos">
+
+        <div>♡</div>
+
+        Você ainda não adicionou
+        nenhum produto aos favoritos.
+
+        <br><br>
+
+        Clique no coração dos produtos
+        que você mais gostar.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  container.innerHTML = "";
+
+  favoritos.forEach(
+    (produto,index) => {
+
+      const card =
+      document.createElement("div");
+
+      card.className =
+      "favorito-card";
+
+      card.innerHTML = `
+
+        <div class="favorito-card-img">
+
+          <img
+            src="${produto.imagem}"
+            alt="${produto.nome}"
+          >
+
+        </div>
+
+        <div class="favorito-card-info">
+
+          <strong>
+            ${produto.nome}
+          </strong>
+
+          <span>
+            ${moeda(produto.preco)}
+          </span>
+
+          <button
+            class="adicionar"
+            style="margin-top:7px;padding:8px;"
+            onclick="adicionar('${produto.nome.replace(/'/g,"\\'")}',${produto.preco})"
+          >
+            ADICIONAR
+          </button>
+
+        </div>
+
+        <button
+          class="remover-favorito"
+          onclick="removerFavorito(${index})"
+          title="Remover dos favoritos"
+        >
+          ×
+        </button>
+
+      `;
+
+      container.appendChild(card);
+
+    }
+  );
+
+}
+
+/* =========================
+   REMOVER FAVORITO
+========================= */
+
+function removerFavorito(index){
+
+  favoritos.splice(index,1);
+
+  salvarFavoritos();
+
+  atualizarFavoritos();
+
+}
+
+/* =========================
+   ABRIR FAVORITOS
+========================= */
+
+function abrirFavoritos(){
+
+  fecharCarrinho();
+
+  atualizarFavoritos();
+
+  document
+  .getElementById("favoritosPainel")
+  .classList.add("aberto");
+
+  document
+  .getElementById("overlay")
+  .classList.add("ativo");
+
+}
+
+function fecharFavoritos(){
+
+  document
+  .getElementById("favoritosPainel")
+  .classList.remove("aberto");
+
+  if(
+    !document
+    .getElementById("carrinho")
+    .classList.contains("aberto")
+  ){
+
+    document
+    .getElementById("overlay")
+    .classList.remove("ativo");
+
+  }
+
+}
+
+function fecharTudo(){
+
+  fecharCarrinho();
+  fecharFavoritos();
+
+}
 
 /* =========================
    MENU CATEGORIAS
@@ -3075,7 +3840,6 @@ function abrirMenu(nome,event){
 
   });
 
-
   document
   .querySelectorAll(".menu-btn")
   .forEach(botao => {
@@ -3084,23 +3848,19 @@ function abrirMenu(nome,event){
 
   });
 
-
   const menu =
   document.getElementById(
     "dropdown-" + nome
   );
 
-
   const botao =
   event.currentTarget;
-
 
   menu.classList.add("aberto");
 
   botao.classList.add("ativo");
 
 }
-
 
 /* =========================
    CLICAR FORA
@@ -3122,7 +3882,6 @@ document.addEventListener(
 
       });
 
-
       document
       .querySelectorAll(".menu-btn")
       .forEach(botao => {
@@ -3136,7 +3895,6 @@ document.addEventListener(
   }
 );
 
-
 /* =========================
    CEP
 ========================= */
@@ -3147,7 +3905,6 @@ function mascaraCEP(input){
   input.value
   .replace(/\D/g,"")
   .substring(0,8);
-
 
   if(valor.length > 5){
 
@@ -3160,11 +3917,9 @@ function mascaraCEP(input){
 
   }
 
-
   input.value = valor;
 
 }
-
 
 /* =========================
    BUSCAR CEP
@@ -3178,7 +3933,6 @@ async function buscarCEP(){
   .value
   .replace(/\D/g,"");
 
-
   if(cep.length !== 8){
 
     alert(
@@ -3189,24 +3943,20 @@ async function buscarCEP(){
 
   }
 
-
   const endereco =
   document.getElementById(
     "endereco"
   );
-
 
   const box =
   document.getElementById(
     "enderecoBox"
   );
 
-
   endereco.classList.add("ativo");
 
   box.innerHTML =
   "Consultando endereço...";
-
 
   try{
 
@@ -3215,10 +3965,8 @@ async function buscarCEP(){
       `https://viacep.com.br/ws/${cep}/json/`
     );
 
-
     const dados =
     await resposta.json();
-
 
     if(dados.erro){
 
@@ -3229,9 +3977,7 @@ async function buscarCEP(){
 
     }
 
-
     enderecoDados = dados;
-
 
     box.innerHTML = `
 
@@ -3256,11 +4002,9 @@ async function buscarCEP(){
 
     `;
 
-
     calcularFrete(
       dados.uf
     );
-
 
   }catch(error){
 
@@ -3270,7 +4014,6 @@ async function buscarCEP(){
   }
 
 }
-
 
 /* =========================
    FRETE
@@ -3314,7 +4057,6 @@ function calcularFrete(uf){
 
   };
 
-
   const valores =
   tabela[uf] ||
   {
@@ -3322,21 +4064,17 @@ function calcularFrete(uf){
     expressa:32
   };
 
-
   valoresFrete = valores;
-
 
   document.getElementById(
     "valorPadrao"
   ).textContent =
   moeda(valores.padrao);
 
-
   document.getElementById(
     "valorExpressa"
   ).textContent =
   moeda(valores.expressa);
-
 
   if(entregaSelecionada){
 
@@ -3348,7 +4086,6 @@ function calcularFrete(uf){
 
 }
 
-
 /* =========================
    ENTREGA
 ========================= */
@@ -3356,7 +4093,6 @@ function calcularFrete(uf){
 function selecionarEntrega(tipo){
 
   entregaSelecionada = tipo;
-
 
   if(tipo === "retirada"){
 
@@ -3377,14 +4113,12 @@ function selecionarEntrega(tipo){
 
     }
 
-
     if(tipo === "padrao"){
 
       freteAtual =
       valoresFrete.padrao;
 
     }
-
 
     if(tipo === "expressa"){
 
@@ -3395,206 +4129,191 @@ function selecionarEntrega(tipo){
 
   }
 
-
   atualizar();
 
 }
-
 
 /* =========================
    BUSCA DE PRODUTOS
 ========================= */
 
-function buscarProdutos(){
+function executarBusca(){
 
   const campo =
   document.getElementById("busca");
 
-  const resultado =
-  document.getElementById("resultadoBusca");
-
   const termo =
   campo.value
-  .toLowerCase()
-  .trim();
+  .trim()
+  .toLowerCase();
 
+  const resultado =
+  document.getElementById(
+    "resultadoBusca"
+  );
+
+  const produtos =
+  document.querySelectorAll(
+    ".produto"
+  );
 
   if(!termo){
 
-    resultado.innerHTML = "";
+    produtos.forEach(produto => {
 
-    resultado.classList.remove("ativo");
+      produto.classList.remove(
+        "oculto-busca"
+      );
+
+    });
+
+    resultado.style.display =
+    "none";
 
     return;
 
   }
 
-
-  const produtos =
-  document.querySelectorAll(".produto");
-
-  const encontrados = [];
-
+  let encontrados = 0;
 
   produtos.forEach(produto => {
 
     const nome =
-    produto.querySelector(".nome");
+    (produto.dataset.nome || "")
+    .toLowerCase();
 
-    const marca =
-    produto.querySelector(".marca");
+    const categoria =
+    (produto.dataset.categoria || "")
+    .toLowerCase();
 
-    if(!nome) return;
+    const texto =
+    produto.innerText.toLowerCase();
 
-    const nomeTexto =
-    nome.innerText.toLowerCase();
+    const encontrou =
+    nome.includes(termo) ||
+    categoria.includes(termo) ||
+    texto.includes(termo);
 
-    const marcaTexto =
-    marca
-    ? marca.innerText.toLowerCase()
-    : "";
+    if(encontrou){
 
+      produto.classList.remove(
+        "oculto-busca"
+      );
 
-    if(
-      nomeTexto.includes(termo) ||
-      marcaTexto.includes(termo)
-    ){
+      encontrados++;
 
-      if(
-        !encontrados.some(
-          item =>
-          item.nome === nome.innerText
-        )
-      ){
+    }else{
 
-        encontrados.push({
-          nome:nome.innerText,
-          marca:marca
-            ? marca.innerText
-            : "",
-          elemento:produto
-        });
-
-      }
+      produto.classList.add(
+        "oculto-busca"
+      );
 
     }
 
   });
 
+  resultado.style.display =
+  "block";
 
-  if(encontrados.length === 0){
+  if(encontrados === 0){
 
-    resultado.innerHTML = `
-      <div class="sem-resultado">
-        Nenhum produto encontrado.
-      </div>
-    `;
+    resultado.textContent =
+    "Nenhum produto encontrado para: " +
+    campo.value;
 
-    resultado.classList.add("ativo");
+  }else{
 
-    return;
+    resultado.textContent =
+    encontrados +
+    (
+      encontrados === 1
+      ? " produto encontrado."
+      : " produtos encontrados."
+    );
+
+    document
+    .getElementById("novidades")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 
   }
 
-
-  resultado.innerHTML = encontrados
-  .map((item,index) => `
-
-    <div
-      class="resultado-item"
-      onclick="abrirResultadoBusca(${index})"
-    >
-
-      <strong>
-        ${item.nome}
-      </strong>
-
-      <span>
-        ${item.marca}
-      </span>
-
-    </div>
-
-  `)
-  .join("");
-
-
-  window.resultadosBusca =
-  encontrados;
-
-  resultado.classList.add("ativo");
-
 }
 
+function buscarProdutos(event){
 
-function abrirResultadoBusca(index){
+  if(event.key === "Enter"){
 
-  const resultado =
-  window.resultadosBusca[index];
+    executarBusca();
 
-  if(!resultado) return;
-
-
-  document
-  .getElementById("resultadoBusca")
-  .classList.remove("ativo");
-
-
-  document
-  .getElementById("busca")
-  .value =
-  resultado.nome;
-
-
-  resultado.elemento.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-
-  resultado.elemento.style.transition =
-  "box-shadow .3s";
-
-
-  resultado.elemento.style.boxShadow =
-  "0 0 0 3px #b83f61";
-
-
-  setTimeout(() => {
-
-    resultado.elemento.style.boxShadow =
-    "";
-
-  },2000);
+  }
 
 }
-
 
 /* =========================
-   CLICAR FORA DA BUSCA
+   FILTRO DE OFERTAS
 ========================= */
 
-document.addEventListener(
-  "click",
-  function(event){
+function filtrarOferta(tipo){
 
-    const busca =
-    document.querySelector(".busca");
+  const produtos =
+  document.querySelectorAll(
+    "#ofertas .produto"
+  );
+
+  const botoes =
+  document.querySelectorAll(
+    ".suboferta-btn"
+  );
+
+  botoes.forEach(botao => {
+
+    botao.classList.remove("ativo");
+
+  });
+
+  const botaoClicado =
+  [...botoes].find(
+    botao =>
+    botao.getAttribute("onclick") ===
+    `filtrarOferta('${tipo}')`
+  );
+
+  if(botaoClicado){
+
+    botaoClicado.classList.add("ativo");
+
+  }
+
+  produtos.forEach(produto => {
 
     if(
-      busca &&
-      !busca.contains(event.target)
+      tipo === "todas" ||
+      produto.dataset.oferta === tipo
     ){
 
-      document
-      .getElementById("resultadoBusca")
-      .classList.remove("ativo");
+      produto.classList.remove(
+        "oculto-busca"
+      );
+
+    }else{
+
+      produto.classList.add(
+        "oculto-busca"
+      );
 
     }
 
-  }
-);
+  });
 
+  document
+  .getElementById("ofertas")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
 
 /* =========================
    WHATSAPP
@@ -3612,13 +4331,11 @@ function finalizarWhatsApp(){
 
   }
 
-
   const cep =
   document
   .getElementById("cep")
   .value
   .trim();
-
 
   if(
     cep.replace(/\D/g,"").length !== 8
@@ -3632,13 +4349,11 @@ function finalizarWhatsApp(){
 
   }
 
-
   const numero =
   document
   .getElementById("numero")
   .value
   .trim();
-
 
   if(!numero){
 
@@ -3650,7 +4365,6 @@ function finalizarWhatsApp(){
 
   }
 
-
   if(!entregaSelecionada){
 
     alert(
@@ -3661,17 +4375,13 @@ function finalizarWhatsApp(){
 
   }
 
-
   let subtotal = 0;
-
 
   let mensagem =
   "Olá! Quero fazer um pedido na FOR YOU.\n\n";
 
-
   mensagem +=
   "*MEU PEDIDO*\n";
-
 
   carrinho.forEach(
     produto => {
@@ -3680,9 +4390,7 @@ function finalizarWhatsApp(){
       produto.preco *
       produto.quantidade;
 
-
       subtotal += valor;
-
 
       mensagem +=
       "• " +
@@ -3696,31 +4404,25 @@ function finalizarWhatsApp(){
     }
   );
 
-
   mensagem +=
   "\n*RESUMO*\n";
-
 
   mensagem +=
   "Subtotal: " +
   moeda(subtotal) +
   "\n";
 
-
   mensagem +=
   "Frete: " +
   moeda(freteAtual) +
   "\n";
-
 
   mensagem +=
   "Total: " +
   moeda(subtotal + freteAtual) +
   "\n\n";
 
-
   let nomeEntrega = "";
-
 
   if(
     entregaSelecionada === "padrao"
@@ -3731,7 +4433,6 @@ function finalizarWhatsApp(){
 
   }
 
-
   if(
     entregaSelecionada === "expressa"
   ){
@@ -3740,7 +4441,6 @@ function finalizarWhatsApp(){
     "Entrega expressa";
 
   }
-
 
   if(
     entregaSelecionada === "retirada"
@@ -3751,16 +4451,13 @@ function finalizarWhatsApp(){
 
   }
 
-
   mensagem +=
   "*FORMA DE ENTREGA*\n" +
   nomeEntrega +
   "\n\n";
 
-
   mensagem +=
   "*ENDEREÇO*\n";
-
 
   if(enderecoDados){
 
@@ -3770,13 +4467,11 @@ function finalizarWhatsApp(){
     numero +
     "\n";
 
-
     const complemento =
     document
     .getElementById("complemento")
     .value
     .trim();
-
 
     if(complemento){
 
@@ -3787,11 +4482,9 @@ function finalizarWhatsApp(){
 
     }
 
-
     mensagem +=
     enderecoDados.bairro +
     "\n";
-
 
     mensagem +=
     enderecoDados.localidade +
@@ -3801,19 +4494,16 @@ function finalizarWhatsApp(){
 
   }
 
-
   const referencia =
   document
   .getElementById("referencia")
   .value
   .trim();
 
-
   mensagem +=
   "CEP: " +
   cep +
   "\n";
-
 
   if(referencia){
 
@@ -3824,7 +4514,6 @@ function finalizarWhatsApp(){
 
   }
 
-
   const url =
   "https://wa.me/" +
   WHATSAPP +
@@ -3833,14 +4522,12 @@ function finalizarWhatsApp(){
     mensagem
   );
 
-
   window.open(
     url,
     "_blank"
   );
 
 }
-
 
 /* =========================
    NEWSLETTER
@@ -3856,14 +4543,16 @@ function newsletter(){
 
 }
 
-
 /* =========================
    INICIAR
 ========================= */
 
 atualizar();
 
+atualizarFavoritos();
+
 </script>
 
 </body>
 </html>
+```
