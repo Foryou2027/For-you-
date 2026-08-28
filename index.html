@@ -123,9 +123,35 @@ header{
 /* =========================
    MINHA CONTA / CADASTRO
 ========================= */
-function contaSalva(){ return JSON.parse(localStorage.getItem("forYouConta")) || null; }
-function salvarConta(conta){ localStorage.setItem("forYouConta",JSON.stringify(conta)); }
-function salvarContaAtual(){ if(contaAtual) localStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual)); else localStorage.removeItem("forYouContaAtual"); }
+function contasSalvas(){
+  try{
+    const lista=JSON.parse(localStorage.getItem("forYouContas")||"null");
+    if(Array.isArray(lista)) return lista;
+    const antiga=JSON.parse(localStorage.getItem("forYouConta")||"null");
+    if(antiga && antiga.email){
+      localStorage.setItem("forYouContas",JSON.stringify([antiga]));
+      return [antiga];
+    }
+  }catch(e){}
+  return [];
+}
+function salvarContas(lista){ localStorage.setItem("forYouContas",JSON.stringify(lista)); }
+function contaSalva(){
+  const lista=contasSalvas();
+  if(!contaAtual) return null;
+  return lista.find(c=>String(c.email||"").toLowerCase()===String(contaAtual.email||"").toLowerCase())||null;
+}
+function salvarConta(conta){
+  const lista=contasSalvas();
+  const i=lista.findIndex(c=>String(c.email||"").toLowerCase()===String(conta.email||"").toLowerCase());
+  if(i>=0) lista[i]=conta; else lista.push(conta);
+  salvarContas(lista);
+  localStorage.setItem("forYouConta",JSON.stringify(conta));
+}
+function salvarContaAtual(){
+  if(contaAtual) localStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual));
+  else localStorage.removeItem("forYouContaAtual");
+}
 function atualizarMinhaConta(){
   const loginBox=document.getElementById("contaLoginBox"), cadastroBox=document.getElementById("contaCadastroBox"), logada=document.getElementById("contaLogada");
   if(!loginBox||!cadastroBox||!logada) return;
@@ -133,51 +159,59 @@ function atualizarMinhaConta(){
     loginBox.style.display="none"; cadastroBox.style.display="none"; logada.style.display="block";
     document.getElementById("contaNome").textContent=contaAtual.nome;
     document.getElementById("contaEmail").textContent=contaAtual.email;
-    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase(); renderPedidosConta();
-  } else { loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none"; }
-}
-function mostrarCadastro(){ document.getElementById("contaLoginBox").style.display="none"; document.getElementById("contaCadastroBox").style.display="block"; document.getElementById("loginMensagem").textContent=""; }
-function mostrarLogin(){ document.getElementById("contaCadastroBox").style.display="none"; document.getElementById("contaLoginBox").style.display="block"; document.getElementById("cadastroMensagem").textContent=""; }
-function contaSalva(){ return JSON.parse(localStorage.getItem("forYouConta")) || null; }
-function salvarConta(conta){ localStorage.setItem("forYouConta",JSON.stringify(conta)); }
-function salvarContaAtual(){ localStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual)); }
-function atualizarMinhaConta(){
-  const loginBox=document.getElementById("contaLoginBox"), cadastroBox=document.getElementById("contaCadastroBox"), logada=document.getElementById("contaLogada");
-  if(!loginBox||!cadastroBox||!logada)return;
-  if(contaAtual){
-    loginBox.style.display="none"; cadastroBox.style.display="none"; logada.style.display="block";
-    document.getElementById("contaNome").textContent=contaAtual.nome;
-    document.getElementById("contaEmail").textContent=contaAtual.email;
-    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase(); renderPedidosConta();
-  } else { loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none"; }
+    document.getElementById("contaAvatar").textContent=(contaAtual.nome||"F").trim().charAt(0).toUpperCase();
+    renderPedidosConta();
+  }else{
+    loginBox.style.display="block"; cadastroBox.style.display="none"; logada.style.display="none";
+  }
+  const adminCard=document.getElementById("adminCard");
+  if(adminCard) adminCard.style.display=adminAutenticado()?"block":"none";
 }
 function mostrarCadastro(){document.getElementById("contaLoginBox").style.display="none";document.getElementById("contaCadastroBox").style.display="block";document.getElementById("loginMensagem").textContent="";}
 function mostrarLogin(){document.getElementById("contaCadastroBox").style.display="none";document.getElementById("contaLoginBox").style.display="block";document.getElementById("cadastroMensagem").textContent="";}
 function cadastrarConta(event){
   event.preventDefault();
   const nome=document.getElementById("cadNome").value.trim(), email=document.getElementById("cadEmail").value.trim().toLowerCase(), telefone=document.getElementById("cadTelefone").value.trim(), endereco=document.getElementById("cadEndereco").value.trim(), senha=document.getElementById("cadSenha").value, confirmar=document.getElementById("cadConfirmar").value, msg=document.getElementById("cadastroMensagem");
+  if(nome.length<2){msg.textContent="Digite seu nome completo.";return false;}
+  if(!/^\S+@\S+\.\S+$/.test(email)){msg.textContent="Digite um e-mail válido.";return false;}
   if(senha.length<6){msg.textContent="A senha precisa ter pelo menos 6 caracteres.";return false;}
   if(senha!==confirmar){msg.textContent="As senhas não são iguais.";return false;}
-  const existente=contaSalva(); if(existente && existente.email===email){msg.textContent="Já existe uma conta com este e-mail.";return false;}
-  salvarConta({nome,email,telefone,endereco,senha,pedidos:[]}); contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados(); document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
+  const lista=contasSalvas();
+  if(lista.some(c=>String(c.email||"").toLowerCase()===email)){msg.textContent="Já existe uma conta com este e-mail.";return false;}
+  const conta={nome,email,telefone,endereco,senha,pedidos:[]};
+  lista.push(conta); salvarContas(lista); localStorage.setItem("forYouConta",JSON.stringify(conta));
+  contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
+  document.getElementById("contaMensagem").textContent="Conta criada com sucesso! 💕"; return false;
 }
 function fazerLogin(event){
   event.preventDefault();
-  const email=document.getElementById("loginEmail").value.trim().toLowerCase(), senha=document.getElementById("loginSenha").value, msg=document.getElementById("loginMensagem"), conta=contaSalva();
-  if(!conta){mostrarCadastro();document.getElementById("cadastroMensagem").textContent="Você ainda não possui uma conta. Faça seu cadastro.";return false;}
-  if(conta.email!==email||conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
-  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};salvarContaAtual();carregarDadosDaConta();atualizarMinhaConta();atualizar();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderRecomendados();document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕";return false;
+  const email=document.getElementById("loginEmail").value.trim().toLowerCase(), senha=document.getElementById("loginSenha").value, msg=document.getElementById("loginMensagem"), lista=contasSalvas();
+  const conta=lista.find(c=>String(c.email||"").toLowerCase()===email);
+  if(!conta){msg.textContent="Conta não encontrada. Confira o e-mail ou cadastre-se.";return false;}
+  if(conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
+  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};
+  localStorage.setItem("forYouConta",JSON.stringify(conta)); salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
+  document.getElementById("contaMensagem").textContent="Login realizado com sucesso! 💕"; return false;
 }
-function sairDaConta(){contaAtual=null;salvarContaAtual();atualizarMinhaConta();mostrarLogin();}
+function sairDaConta(){
+  salvar(); salvarFavoritos(); contaAtual=null; salvarContaAtual(); atualizarMinhaConta(); mostrarLogin();
+  document.getElementById("loginEmail").value=""; document.getElementById("loginSenha").value="";
+}
 function editarDadosConta(){
   const conta=contaSalva();if(!conta)return;
   const nome=prompt("Nome completo:",conta.nome);if(nome===null)return; const email=prompt("E-mail:",conta.email);if(email===null)return; const telefone=prompt("Telefone:",conta.telefone||"");if(telefone===null)return;
-  if(!nome.trim()||!email.trim()){alert("Preencha nome e e-mail corretamente.");return;}
-  conta.nome=nome.trim();conta.email=email.trim().toLowerCase();conta.telefone=telefone.trim();salvarConta(conta);contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone,endereco:conta.endereco||""};salvarContaAtual();atualizarMinhaConta();document.getElementById("contaMensagem").textContent="Dados atualizados com sucesso!";
+  const novoEmail=email.trim().toLowerCase();
+  if(!nome.trim()||!/^\S+@\S+\.\S+$/.test(novoEmail)){alert("Preencha nome e e-mail corretamente.");return;}
+  const lista=contasSalvas();
+  if(novoEmail!==String(conta.email).toLowerCase() && lista.some(c=>String(c.email||"").toLowerCase()===novoEmail)){alert("Este e-mail já está sendo usado por outra conta.");return;}
+  const antigoEmail=conta.email;
+  conta.nome=nome.trim();conta.email=novoEmail;conta.telefone=telefone.trim();
+  const i=lista.findIndex(c=>String(c.email||"").toLowerCase()===String(antigoEmail||"").toLowerCase()); if(i>=0) lista[i]=conta; else lista.push(conta); salvarContas(lista); localStorage.setItem("forYouConta",JSON.stringify(conta));
+  contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone,endereco:conta.endereco||""}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); document.getElementById("contaMensagem").textContent="Dados atualizados com sucesso!";
 }
 function editarEnderecoConta(){const conta=contaSalva();if(!conta)return;const endereco=prompt("Endereço completo:",conta.endereco||"");if(endereco===null||!endereco.trim())return;conta.endereco=endereco.trim();salvarConta(conta);contaAtual.endereco=conta.endereco;salvarContaAtual();alert("Endereço atualizado com sucesso!");}
 function alterarSenhaConta(){const conta=contaSalva();if(!conta)return;const atual=prompt("Digite sua senha atual:");if(atual!==conta.senha){alert("Senha atual incorreta.");return;}const nova=prompt("Digite a nova senha (mín. 6 caracteres):");if(!nova||nova.length<6){alert("A nova senha precisa ter pelo menos 6 caracteres.");return;}const confirmar=prompt("Confirme a nova senha:");if(nova!==confirmar){alert("As senhas não são iguais.");return;}conta.senha=nova;salvarConta(conta);alert("Senha alterada com sucesso!");}
-function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];alert(pedidos.length?"Você possui "+pedidos.length+" pedido(s).":"Ainda não há pedidos registrados nesta conta.");}
+function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];abrirConta();setTimeout(()=>{const el=document.getElementById("contaPedidosDetalhes");if(el){el.innerHTML=pedidos.length?pedidos.slice().reverse().map(p=>`<div class="conta-pedido"><div class="conta-pedido-top"><strong>${p.numero||"Pedido"}</strong><span class="pedido-badge">${p.status||"Confirmado"}</span></div><div class="pedido-meta">${moeda(Number(p.total||0))}</div></div>`).join(""):"<p style=\"color:#777;font-size:10px\">Você ainda não possui pedidos.</p>";}},50);}
 
 /* =========================
    MENU
@@ -2386,6 +2420,11 @@ Promoções de datas especiais
 <div class="conta-card" onclick="editarEnderecoConta()">
 <h3>📍 Meus endereços</h3>
 <p>Consulte e organize seus endereços.</p>
+</div>
+
+<div class="conta-card" style="grid-column:1/-1">
+<h3>📦 Histórico de pedidos</h3>
+<div id="contaPedidosDetalhes"><p style="color:#777;font-size:10px">Faça login para visualizar seus pedidos.</p></div>
 </div>
 
 <div class="conta-card" onclick="alterarSenhaConta()">
@@ -5156,7 +5195,7 @@ function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');
 function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito à administração\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
 function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
 function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
-function renderAdmin(){const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;const pedidos=Object.values(localStorage).filter(k=>k).reduce((n,v)=>{try{const x=JSON.parse(v);return n+(Array.isArray(x)?x.filter(i=>i&&i.numero).length:0)}catch(e){return n}},0);document.getElementById('adminProdutos').textContent=produtos.length;document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;document.getElementById('adminPedidos').textContent=pedidos;document.getElementById('adminClientes').textContent=localStorage.getItem('forYouConta')?1:0;const tb=document.getElementById('adminTabelaProdutos');tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');const pedidosEl=document.getElementById('adminTabelaPedidos');const conta=contaSalva();const lista=(conta&&conta.pedidos)||[];pedidosEl.innerHTML=lista.length?lista.slice(-8).reverse().map(p=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))} • <span>${p.status||'Confirmado'}</span></div>`).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';const total=lista.reduce((s,p)=>s+Number(p.total||0),0);document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(total)}</p><p><strong>Ticket médio:</strong> ${lista.length?moeda(total/lista.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;}
+function renderAdmin(){const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;const pedidos=Object.values(localStorage).filter(k=>k).reduce((n,v)=>{try{const x=JSON.parse(v);return n+(Array.isArray(x)?x.filter(i=>i&&i.numero).length:0)}catch(e){return n}},0);document.getElementById('adminProdutos').textContent=produtos.length;document.getElementById('adminEstoqueBaixo').textContent=estoqueBaixo;document.getElementById('adminPedidos').textContent=pedidos;document.getElementById('adminClientes').textContent=contasSalvas().length;const tb=document.getElementById('adminTabelaProdutos');tb.innerHTML=produtos.map(p=>{const e=Number(p.estoque||0);return `<tr><td>${p.nome}</td><td>${moeda(p.preco)}</td><td>${e}</td><td>${e===0?'🔴 Sem estoque':e<=5?'⚠️ Estoque baixo':'🟢 Disponível'}</td></tr>`}).join('');const pedidosEl=document.getElementById('adminTabelaPedidos');const conta=contaSalva();const lista=(conta&&conta.pedidos)||[];pedidosEl.innerHTML=lista.length?lista.slice(-8).reverse().map(p=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))} • <span>${p.status||'Confirmado'}</span></div>`).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';const total=lista.reduce((s,p)=>s+Number(p.total||0),0);document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(total)}</p><p><strong>Ticket médio:</strong> ${lista.length?moeda(total/lista.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;}
 function salvarCatalogoAdmin(){localStorage.setItem('forYouCatalogo',JSON.stringify(produtos));}
 function adminAdicionarProduto(){const nome=prompt('Nome do produto:');if(!nome)return;const preco=Number((prompt('Preço:')||'0').replace(',','.'));if(Number.isNaN(preco)||preco<0)return;const estoque=Math.max(0,Number(prompt('Estoque inicial:')||0));const categoria=prompt('Categoria:','Novidades')||'Novidades';const marca=prompt('Marca:','FOR YOU')||'FOR YOU';produtos.push({id:'admin-'+Date.now(),nome:nome.trim(),preco,estoque,categoria:categoria.trim(),marca:marca.trim()});salvarCatalogoAdmin();renderAdmin();renderProdutos();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto adicionado e salvo neste navegador.');}
 function adminEditarProduto(){const nome=prompt('Digite o nome exato do produto que deseja editar:');if(!nome)return;const p=produtos.find(x=>x.nome.toLowerCase()===nome.toLowerCase());if(!p){alert('Produto não encontrado.');return;}const novoNome=prompt('Nome:',p.nome);if(novoNome===null)return;const novoPreco=Number((prompt('Preço:',p.preco)||p.preco).replace(',','.'));if(Number.isNaN(novoPreco)||novoPreco<0)return;const categoria=prompt('Categoria:',p.categoria||'Novidades');if(categoria===null)return;const marca=prompt('Marca:',p.marca||'FOR YOU');if(marca===null)return;p.nome=novoNome.trim()||p.nome;p.preco=novoPreco;p.categoria=categoria.trim()||p.categoria;p.marca=marca.trim()||p.marca;salvarCatalogoAdmin();renderAdmin();renderProdutos();renderOfertas();renderKits();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();alert('Produto atualizado.');}
