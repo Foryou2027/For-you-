@@ -3767,6 +3767,344 @@ header button:hover,
   }
 }
 
+
+
+/* =========================================================
+   ATUALIZAÇÃO — ÁREA DO CLIENTE EM TONS DE VERMELHO
+   Mantém toda a lógica existente
+========================================================= */
+
+/* Fundo geral da área do cliente */
+#paginaConta,
+#paginaCliente,
+.conta-page,
+.area-cliente,
+.cliente-area,
+.account-page,
+.profile-page{
+  background:var(--bege,#FFF8F7)!important;
+  color:var(--texto,#4A101D)!important;
+}
+
+/* Títulos e textos principais */
+#paginaConta h1,
+#paginaConta h2,
+#paginaConta h3,
+#paginaCliente h1,
+#paginaCliente h2,
+#paginaCliente h3,
+.conta-page h1,
+.conta-page h2,
+.area-cliente h1,
+.area-cliente h2,
+.account-page h1,
+.account-page h2{
+  color:var(--vinho,#6E1025)!important;
+}
+
+/* Cards e blocos */
+.conta-card,
+.conta-box,
+.conta-principal,
+.area-cliente .card,
+.cliente-card,
+.account-card,
+.profile-card,
+.pedidos-card,
+.endereco-card{
+  background:#FFFFFF!important;
+  border:1px solid #EBD7DB!important;
+  border-radius:16px!important;
+  box-shadow:0 10px 28px rgba(110,16,37,.06)!important;
+}
+
+/* Menu lateral / navegação da conta */
+.conta-menu,
+.conta-sidebar,
+.cliente-menu,
+.account-menu,
+.profile-menu{
+  background:#FFFFFF!important;
+  border:1px solid #EBD7DB!important;
+  border-radius:16px!important;
+  box-shadow:0 8px 24px rgba(110,16,37,.05)!important;
+}
+
+.conta-menu a,
+.conta-menu button,
+.conta-sidebar a,
+.conta-sidebar button,
+.cliente-menu a,
+.cliente-menu button,
+.account-menu a,
+.account-menu button,
+.profile-menu a,
+.profile-menu button{
+  color:var(--texto,#4A101D)!important;
+  background:transparent!important;
+  border-radius:10px!important;
+  transition:background .2s ease,color .2s ease,transform .2s ease!important;
+}
+
+/* Hover */
+.conta-menu a:hover,
+.conta-menu button:hover,
+.conta-sidebar a:hover,
+.conta-sidebar button:hover,
+.cliente-menu a:hover,
+.cliente-menu button:hover,
+.account-menu a:hover,
+.account-menu button:hover,
+.profile-menu a:hover,
+.profile-menu button:hover{
+  background:var(--rosa-suave,#F4DCE1)!important;
+  color:var(--rosa,#B71C3A)!important;
+  transform:translateX(2px);
+}
+
+/* Item ativo */
+.conta-menu .ativo,
+.conta-menu .active,
+.conta-sidebar .ativo,
+.conta-sidebar .active,
+.cliente-menu .ativo,
+.cliente-menu .active,
+.account-menu .ativo,
+.account-menu .active,
+.profile-menu .ativo,
+.profile-menu .active{
+  background:var(--vinho,#6E1025)!important;
+  color:#FFFFFF!important;
+}
+
+/* Ícones ativos */
+.conta-menu .ativo i,
+.conta-menu .active i,
+.conta-sidebar .ativo i,
+.conta-sidebar .active i,
+.cliente-menu .ativo i,
+.cliente-menu .active i{
+  color:#FFFFFF!important;
+}
+
+/* Campos */
+#paginaConta input,
+#paginaConta select,
+#paginaConta textarea,
+#paginaCliente input,
+#paginaCliente select,
+#paginaCliente textarea,
+.conta-page input,
+.conta-page select,
+.conta-page textarea,
+.area-cliente input,
+.area-cliente select,
+.area-cliente textarea,
+.account-page input,
+.account-page select,
+.account-page textarea{
+  background:#FFFFFF!important;
+  color:var(--texto,#4A101D)!important;
+  border:1px solid #E4CDD3!important;
+  border-radius:10px!important;
+}
+
+/* Placeholder */
+#paginaConta input::placeholder,
+#paginaCliente input::placeholder,
+.conta-page input::placeholder,
+.area-cliente input::placeholder,
+.account-page input::placeholder{
+  color:#A4878E!important;
+}
+
+/* Focus */
+#paginaConta input:focus,
+#paginaConta select:focus,
+#paginaConta textarea:focus,
+#paginaCliente input:focus,
+#paginaCliente select:focus,
+#paginaCliente textarea:focus,
+.conta-page input:focus,
+.conta-page select:focus,
+.conta-page textarea:focus,
+.area-cliente input:focus,
+.area-cliente select:focus,
+.area-cliente textarea:focus,
+.account-page input:focus,
+.account-page select:focus,
+.account-page textarea:focus{
+  outline:none!important;
+  border-color:var(--rosa,#B71C3A)!important;
+  box-shadow:0 0 0 3px rgba(183,28,58,.10)!important;
+}
+
+/* Botões principais da conta */
+.conta-principal-btn,
+.conta-btn,
+.salvar-conta,
+.btn-salvar,
+.area-cliente .btn-principal,
+.account-page .btn-primary,
+.profile-card button[type="submit"]{
+  background:var(--vinho,#6E1025)!important;
+  color:#FFFFFF!important;
+  border:0!important;
+  border-radius:11px!important;
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease!important;
+}
+
+.conta-principal-btn:hover,
+.conta-btn:hover,
+.salvar-conta:hover,
+.btn-salvar:hover,
+.area-cliente .btn-principal:hover,
+.account-page .btn-primary:hover,
+.profile-card button[type="submit"]:hover{
+  background:var(--rosa,#B71C3A)!important;
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(183,28,58,.18)!important;
+}
+
+/* Botões secundários */
+.conta-secundario-btn,
+.btn-secundario,
+.area-cliente .btn-outline,
+.account-page .btn-outline{
+  background:#FFFFFF!important;
+  color:var(--vinho,#6E1025)!important;
+  border:1px solid var(--vinho,#6E1025)!important;
+  border-radius:11px!important;
+}
+
+.conta-secundario-btn:hover,
+.btn-secundario:hover,
+.area-cliente .btn-outline:hover,
+.account-page .btn-outline:hover{
+  background:var(--rosa-suave,#F4DCE1)!important;
+  color:var(--rosa,#B71C3A)!important;
+  border-color:var(--rosa,#B71C3A)!important;
+}
+
+/* Área de boas-vindas */
+.conta-welcome,
+.cliente-welcome,
+.account-welcome,
+.profile-header{
+  background:linear-gradient(135deg,#FFF4F6,#FFFFFF)!important;
+  border:1px solid #EBD7DB!important;
+  border-radius:18px!important;
+}
+
+.conta-welcome strong,
+.cliente-welcome strong,
+.account-welcome strong,
+.profile-header strong{
+  color:var(--vinho,#6E1025)!important;
+}
+
+/* Avatar */
+.conta-avatar,
+.cliente-avatar,
+.profile-avatar,
+.account-avatar{
+  background:var(--vinho,#6E1025)!important;
+  color:#FFFFFF!important;
+  border:4px solid #F4DCE1!important;
+}
+
+/* Pedidos */
+.pedido,
+.pedido-item,
+.order-card,
+.order-item{
+  background:#FFFFFF!important;
+  border-color:#EBD7DB!important;
+}
+
+.pedido strong,
+.pedido-item strong,
+.order-card strong,
+.order-item strong{
+  color:var(--vinho,#6E1025)!important;
+}
+
+/* Status */
+.status,
+.status-pedido,
+.order-status{
+  border-radius:20px!important;
+}
+
+.status-pendente,
+.pendente{
+  background:#FCEDEF!important;
+  color:#B71C3A!important;
+}
+
+.status-entregue,
+.entregue,
+.status-concluido,
+.concluido{
+  background:#F4DCE1!important;
+  color:#6E1025!important;
+}
+
+/* Links */
+#paginaConta a,
+#paginaCliente a,
+.conta-page a,
+.area-cliente a,
+.account-page a{
+  transition:color .2s ease!important;
+}
+
+#paginaConta a:hover,
+#paginaCliente a:hover,
+.conta-page a:hover,
+.area-cliente a:hover,
+.account-page a:hover{
+  color:var(--rosa,#B71C3A)!important;
+}
+
+/* Separadores */
+.conta-card hr,
+.conta-box hr,
+.area-cliente hr,
+.account-card hr,
+.profile-card hr{
+  border-color:#EBD7DB!important;
+}
+
+/* Mensagens e alertas */
+.conta-alert,
+.cliente-alert,
+.account-alert,
+.sucesso,
+.mensagem-sucesso{
+  border-radius:12px!important;
+}
+
+@media(max-width:760px){
+  .conta-card,
+  .conta-box,
+  .conta-principal,
+  .area-cliente .card,
+  .cliente-card,
+  .account-card,
+  .profile-card{
+    border-radius:13px!important;
+  }
+
+  .conta-menu,
+  .conta-sidebar,
+  .cliente-menu,
+  .account-menu,
+  .profile-menu{
+    border-radius:13px!important;
+  }
+}
+
 </style>
 
 </head>
