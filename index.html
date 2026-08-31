@@ -5049,9 +5049,7 @@ MENU PRINCIPAL
 <div class="menu-lista">
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('labios',event)">
-Lábios ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('labios',event)"><span class="fy-category-icon" aria-hidden="true">♡</span><span class="fy-category-label">Lábios</span></button>
 
 <div class="dropdown" id="dropdown-labios">
 <h3>Lábios</h3>
@@ -5068,9 +5066,7 @@ Lábios ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('pele',event)">
-Pele ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('pele',event)"><span class="fy-category-icon" aria-hidden="true">✦</span><span class="fy-category-label">Pele</span></button>
 
 <div class="dropdown" id="dropdown-pele">
 <h3>Pele</h3>
@@ -5089,9 +5085,7 @@ Pele ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('skincare',event)">
-Skincare ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('skincare',event)"><span class="fy-category-icon" aria-hidden="true">✧</span><span class="fy-category-label">Skincare</span></button>
 
 <div class="dropdown" id="dropdown-skincare">
 <h3>Skincare</h3>
@@ -5109,9 +5103,7 @@ Skincare ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('olhos',event)">
-Olhos ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('olhos',event)"><span class="fy-category-icon" aria-hidden="true">◌</span><span class="fy-category-label">Olhos</span></button>
 
 <div class="dropdown" id="dropdown-olhos">
 <h3>Olhos</h3>
@@ -5128,9 +5120,7 @@ Olhos ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('face',event)">
-Face ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('face',event)"><span class="fy-category-icon" aria-hidden="true">◇</span><span class="fy-category-label">Face</span></button>
 
 <div class="dropdown" id="dropdown-face">
 <h3>Face</h3>
@@ -5147,9 +5137,7 @@ Face ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('acessorios',event)">
-Acessórios ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('acessorios',event)"><span class="fy-category-icon" aria-hidden="true">♢</span><span class="fy-category-label">Acessórios</span></button>
 
 <div class="dropdown" id="dropdown-acessorios">
 <h3>Acessórios</h3>
@@ -5165,9 +5153,7 @@ Acessórios ▾
 </div>
 
 <div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('corpo',event)">
-Corpo ▾
-</button>
+<button class="menu-btn" onclick="abrirMenu('corpo',event)"><span class="fy-category-icon" aria-hidden="true">♡</span><span class="fy-category-label">Corpo</span></button>
 
 <div class="dropdown" id="dropdown-corpo">
 <h3>Corpo</h3>
@@ -11442,6 +11428,149 @@ document.addEventListener("DOMContentLoaded",()=>{
   .menu-categorias .menu-btn::before,
   .categorias-menu .menu-btn::before{
     font-size:17px !important;
+  }
+}
+</style>
+
+
+<style id="fy-menu-horizontal-final">
+/* =========================================================
+   MENU PRINCIPAL — FORMATO DA REFERÊNCIA
+   Barra única / desenho + nome / divisórias
+========================================================= */
+
+.menu-principal{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.menu-principal .menu-titulo{
+  margin-bottom:10px !important;
+}
+
+.menu-principal .menu-lista{
+  display:flex !important;
+  width:min(1040px,calc(100% - 30px)) !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  background:#fff !important;
+  border:1px solid #eee3e5 !important;
+  border-radius:20px !important;
+  box-shadow:0 12px 30px rgba(102,65,76,.07) !important;
+}
+
+.menu-principal .menu-item{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  margin:0 !important;
+  position:relative !important;
+}
+
+.menu-principal .menu-item + .menu-item{
+  border-left:1px solid #eee3e5 !important;
+}
+
+.menu-principal .menu-btn{
+  width:100% !important;
+  height:72px !important;
+  min-width:0 !important;
+  padding:10px 8px 9px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:#fff !important;
+  color:#4b4144 !important;
+  box-shadow:none !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  font-size:0 !important;
+  cursor:pointer !important;
+  transform:none !important;
+}
+
+.menu-principal .menu-btn:hover{
+  background:#fff8fa !important;
+  color:#a9576e !important;
+  border:0 !important;
+  transform:none !important;
+}
+
+.menu-principal .menu-btn.ativo{
+  background:#fff8fa !important;
+  color:#a9576e !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.menu-principal .fy-category-icon{
+  display:block !important;
+  font-family:Georgia,serif !important;
+  font-size:20px !important;
+  line-height:18px !important;
+  height:20px !important;
+  color:#c9788e !important;
+  font-weight:400 !important;
+}
+
+.menu-principal .fy-category-label{
+  display:block !important;
+  color:#43393c !important;
+  font-family:inherit !important;
+  font-size:9px !important;
+  line-height:12px !important;
+  font-weight:700 !important;
+  white-space:nowrap !important;
+}
+
+.menu-principal .menu-btn:hover .fy-category-label,
+.menu-principal .menu-btn.ativo .fy-category-label{
+  color:#a9576e !important;
+}
+
+.menu-principal .menu-btn:hover .fy-category-icon,
+.menu-principal .menu-btn.ativo .fy-category-icon{
+  color:#b85f78 !important;
+}
+
+/* Remove a aparência de setinha apenas do botão; o dropdown continua intacto. */
+.menu-principal .menu-btn::after,
+.menu-principal .menu-btn::before{
+  content:none !important;
+}
+
+/* O dropdown permanece funcional e abre pelo mesmo abrirMenu(). */
+.menu-principal .dropdown{
+  z-index:1000 !important;
+}
+
+/* Destaques continuam separados, como já estavam. */
+.menu-principal .destaques-menu{
+  margin-top:12px !important;
+}
+
+/* Mobile: continua sendo uma barra horizontal, com rolagem suave se necessário. */
+@media(max-width:700px){
+  .menu-principal .menu-lista{
+    width:calc(100% - 20px) !important;
+    overflow-x:auto !important;
+    scrollbar-width:none !important;
+    border-radius:15px !important;
+  }
+
+  .menu-principal .menu-lista::-webkit-scrollbar{
+    display:none !important;
+  }
+
+  .menu-principal .menu-item{
+    flex:0 0 100px !important;
+  }
+
+  .menu-principal .menu-btn{
+    height:68px !important;
   }
 }
 </style>
