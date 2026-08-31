@@ -2365,6 +2365,17 @@ footer p{
 .checkout-btn{border-radius:9px;transition:.2s}.checkout-btn:hover{transform:translateY(-1px)}
 @media(max-width:800px){.checkout-resumo{position:static}}
 
+
+/* =========================
+   HOME — REFINAMENTO PREMIUM
+========================= */
+.home-quick{max-width:1200px;margin:-34px auto 0;padding:0 5%;position:relative;z-index:8}.home-quick-inner{background:rgba(255,255,255,.96);border:1px solid #ead9de;border-radius:20px;box-shadow:0 18px 45px rgba(53,31,39,.10);display:grid;grid-template-columns:repeat(7,1fr);overflow:hidden}.home-quick button{border:0;border-right:1px solid #eee2e6;background:#fff;padding:18px 10px;color:#351f27;font-size:10px;font-weight:700;letter-spacing:.3px;transition:.22s}.home-quick button:last-child{border-right:0}.home-quick button span{display:block;font-family:Georgia,serif;font-size:17px;color:#b83f61;margin-bottom:5px}.home-quick button:hover{background:#fff7f9;color:#b83f61;transform:translateY(-2px)}
+.home-story{max-width:1200px;margin:0 auto;padding:64px 5% 18px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}.home-story-copy,.home-story-panel{border:1px solid #ead9de;border-radius:22px;background:#fff}.home-story-copy{padding:42px}.home-story-copy small{color:#a88955;letter-spacing:3px;font-size:9px;font-weight:700}.home-story-copy h2{font-family:Georgia,serif;font-weight:normal;font-size:38px;line-height:1.12;margin:10px 0 15px}.home-story-copy h2 span{color:#b83f61;font-style:italic}.home-story-copy p{font-size:12px;line-height:1.8;color:#75686d;max-width:580px}.home-story-link{margin-top:22px;border:0;background:transparent;color:#b83f61;font-size:10px;font-weight:700;letter-spacing:1px;padding:0}.home-story-panel{padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:linear-gradient(135deg,#fff,#fff5f8)}.home-story-stat{border:1px solid #eddde2;border-radius:16px;padding:22px 15px;background:rgba(255,255,255,.78);display:flex;flex-direction:column;justify-content:center}.home-story-stat strong{font-family:Georgia,serif;font-size:27px;font-weight:normal;color:#351f27}.home-story-stat span{font-size:9px;color:#777;margin-top:5px;line-height:1.5}.home-story-stat.highlight{background:#351f27;color:#fff;border-color:#351f27}.home-story-stat.highlight strong,.home-story-stat.highlight span{color:#fff}
+.home-section-divider{max-width:1200px;margin:20px auto 0;padding:0 5%;display:flex;align-items:center;gap:14px;color:#a88955;font-size:8px;letter-spacing:3px;font-weight:700}.home-section-divider:before,.home-section-divider:after{content:"";height:1px;background:#ead9de;flex:1}
+.hero-premium{min-height:610px}.hero-content-premium h2{max-width:720px}.hero-side-card{box-shadow:0 20px 45px rgba(53,31,39,.13)!important;border:1px solid rgba(255,255,255,.65)}
+@media(max-width:900px){.home-quick{margin:-20px auto 0}.home-quick-inner{grid-template-columns:repeat(4,1fr)}.home-quick button:nth-child(4){border-right:0}.home-story{grid-template-columns:1fr;padding-top:45px}.home-story-copy{padding:30px}.home-story-copy h2{font-size:32px}}
+@media(max-width:600px){.home-quick{padding:0 4%;margin:-15px auto 0}.home-quick-inner{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:16px}.home-quick button{min-width:112px;scroll-snap-align:start;padding:15px 9px}.home-quick button span{font-size:15px}.home-story{padding:36px 4% 8px}.home-story-copy{padding:25px;border-radius:18px}.home-story-copy h2{font-size:28px}.home-story-panel{padding:18px;border-radius:18px}.home-story-stat{padding:17px 12px}.hero-premium{min-height:520px}.hero-content-premium{padding:42px 0 35px}.hero-content-premium h2{font-size:43px;line-height:1.03}.hero-content-premium p{font-size:11px;line-height:1.7}.hero-side-card{display:none}.home-section-divider{padding:0 4%;margin-top:14px}}
+
 </style>
 
 <style id="cards-premium-v11">
@@ -3874,6 +3885,36 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
     <i></i>
   </div>
 </section>
+
+
+<section class="home-quick" aria-label="Acesso rápido às categorias">
+  <div class="home-quick-inner">
+    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
+    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
+    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
+    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
+    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
+    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
+    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
+  </div>
+</section>
+
+<section class="home-story" aria-label="Sobre a experiência FOR YOU">
+  <div class="home-story-copy">
+    <small>A EXPERIÊNCIA FOR YOU</small>
+    <h2>Escolhas bonitas, <span>feitas para você.</span></h2>
+    <p>Descubra uma seleção de maquiagem, skincare, corpo e acessórios pensada para deixar sua rotina mais especial. Encontre novidades, ofertas e os produtos que podem virar seus próximos favoritos.</p>
+    <button class="home-story-link" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})">EXPLORAR A SELEÇÃO →</button>
+  </div>
+  <div class="home-story-panel">
+    <div class="home-story-stat highlight"><strong>FOR YOU</strong><span>Seu espaço de beleza e autocuidado.</span></div>
+    <div class="home-story-stat"><strong>Novidades</strong><span>Descubra produtos que acabaram de chegar.</span></div>
+    <div class="home-story-stat"><strong>Ofertas</strong><span>Condições especiais enquanto durar o estoque.</span></div>
+    <div class="home-story-stat"><strong>Favoritos</strong><span>Guarde seus achadinhos para voltar depois.</span></div>
+  </div>
+</section>
+
+<div class="home-section-divider"><span>SELEÇÃO FOR YOU</span></div>
 
 <section class="banner-rotativo">
   <div class="banner-box" id="bannerBox">
