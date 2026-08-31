@@ -2376,6 +2376,386 @@ footer p{
 @media(max-width:900px){.home-quick{margin:-20px auto 0}.home-quick-inner{grid-template-columns:repeat(4,1fr)}.home-quick button:nth-child(4){border-right:0}.home-story{grid-template-columns:1fr;padding-top:45px}.home-story-copy{padding:30px}.home-story-copy h2{font-size:32px}}
 @media(max-width:600px){.home-quick{padding:0 4%;margin:-15px auto 0}.home-quick-inner{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:16px}.home-quick button{min-width:112px;scroll-snap-align:start;padding:15px 9px}.home-quick button span{font-size:15px}.home-story{padding:36px 4% 8px}.home-story-copy{padding:25px;border-radius:18px}.home-story-copy h2{font-size:28px}.home-story-panel{padding:18px;border-radius:18px}.home-story-stat{padding:17px 12px}.hero-premium{min-height:520px}.hero-content-premium{padding:42px 0 35px}.hero-content-premium h2{font-size:43px;line-height:1.03}.hero-content-premium p{font-size:11px;line-height:1.7}.hero-side-card{display:none}.home-section-divider{padding:0 4%;margin-top:14px}}
 
+
+/* =========================================================
+   FOR YOU — IDENTIDADE VISUAL PREMIUM
+   Paleta: Ivory + Rosewood + Champagne
+========================================================= */
+
+:root{
+  --fy-ivory:#fbf8f5;
+  --fy-white:#ffffff;
+  --fy-rose:#b76e79;
+  --fy-rose-dark:#8f4f5b;
+  --fy-rose-soft:#f4e4e6;
+  --fy-champagne:#c9a46a;
+  --fy-champagne-soft:#f5ead7;
+  --fy-ink:#2d2426;
+  --fy-muted:#74686b;
+  --fy-line:#e9dfe0;
+  --fy-shadow:0 14px 40px rgba(45,36,38,.08);
+}
+
+/* Base */
+html{scroll-behavior:smooth}
+
+body{
+  font-family:"Helvetica Neue",Arial,sans-serif !important;
+  background:var(--fy-ivory) !important;
+  color:var(--fy-ink) !important;
+  line-height:1.5;
+}
+
+button,input,select,textarea{
+  font-family:"Helvetica Neue",Arial,sans-serif !important;
+}
+
+h1,h2,h3,h4,.logo h1,.titulo h2,.conta-hero-v14 h1{
+  font-family:Georgia,"Times New Roman",serif !important;
+  color:var(--fy-ink);
+}
+
+a{color:inherit}
+
+/* Barra superior */
+.topo{
+  background:var(--fy-ink) !important;
+  color:#fff !important;
+  letter-spacing:2px !important;
+  font-size:10px !important;
+  padding:10px !important;
+}
+
+/* Header / logo */
+header{
+  background:rgba(255,255,255,.97) !important;
+  border-bottom:1px solid var(--fy-line) !important;
+  box-shadow:0 4px 20px rgba(45,36,38,.04);
+}
+
+.logo h1{
+  color:var(--fy-rose) !important;
+  font-size:44px !important;
+  letter-spacing:6px !important;
+  font-weight:500;
+}
+
+.logo span{
+  color:var(--fy-champagne) !important;
+  letter-spacing:3px !important;
+  font-weight:700;
+}
+
+/* Busca */
+.busca input,
+.search input,
+input[type="search"]{
+  border:1px solid var(--fy-line) !important;
+  background:var(--fy-ivory) !important;
+  color:var(--fy-ink) !important;
+  border-radius:999px !important;
+}
+
+.busca input:focus,
+.search input:focus,
+input[type="search"]:focus{
+  outline:none;
+  border-color:var(--fy-rose) !important;
+  box-shadow:0 0 0 4px rgba(183,110,121,.10);
+}
+
+/* Menu principal */
+.menu-principal,
+nav{
+  background:var(--fy-white) !important;
+}
+
+.menu-principal button,
+.menu button{
+  color:var(--fy-ink) !important;
+  border-color:var(--fy-line) !important;
+  transition:.25s ease;
+}
+
+.menu-principal button:hover,
+.menu-principal button.ativo,
+.menu button:hover{
+  color:var(--fy-rose) !important;
+  border-color:var(--fy-rose) !important;
+  background:var(--fy-rose-soft) !important;
+}
+
+/* Títulos de seção */
+.titulo small{
+  color:var(--fy-champagne) !important;
+  font-weight:800 !important;
+  letter-spacing:3px !important;
+}
+
+.titulo h2{
+  color:var(--fy-ink) !important;
+  font-size:34px !important;
+  font-weight:500 !important;
+  letter-spacing:.2px;
+}
+
+.titulo p{
+  color:var(--fy-muted) !important;
+}
+
+/* Hero / banners */
+.banner-box,
+.hero,
+.hero-banner{
+  border-color:var(--fy-line) !important;
+  box-shadow:var(--fy-shadow);
+}
+
+.banner-conteudo small{
+  color:var(--fy-champagne) !important;
+  letter-spacing:3px !important;
+}
+
+.banner-cta,
+.btn-primary,
+.btn-comprar,
+.ver-todos-btn{
+  background:var(--fy-rose) !important;
+  color:#fff !important;
+  border:1px solid var(--fy-rose) !important;
+  border-radius:999px !important;
+  letter-spacing:1.2px;
+  transition:.25s ease;
+}
+
+.banner-cta:hover,
+.btn-primary:hover,
+.btn-comprar:hover,
+.ver-todos-btn:hover{
+  background:var(--fy-rose-dark) !important;
+  border-color:var(--fy-rose-dark) !important;
+  transform:translateY(-1px);
+}
+
+/* Categorias e subcategorias */
+.subcategoria{
+  background:var(--fy-white) !important;
+  color:var(--fy-rose-dark) !important;
+  border:1px solid #dcb6bd !important;
+  border-radius:12px !important;
+}
+
+.subcategoria:hover,
+.subcategoria.ativa{
+  background:var(--fy-rose) !important;
+  color:#fff !important;
+  border-color:var(--fy-rose) !important;
+}
+
+/* Cards de produto */
+.produto-card,
+.product-card,
+.card-produto{
+  background:var(--fy-white) !important;
+  border:1px solid var(--fy-line) !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 28px rgba(45,36,38,.05);
+  overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+
+.produto-card:hover,
+.product-card:hover,
+.card-produto:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 42px rgba(45,36,38,.10);
+  border-color:#dfc4c8 !important;
+}
+
+.produto-card h3,
+.product-card h3,
+.card-produto h3{
+  font-family:Georgia,"Times New Roman",serif !important;
+  color:var(--fy-ink) !important;
+  font-weight:500 !important;
+}
+
+.preco,
+.preco-atual,
+.product-price{
+  color:var(--fy-rose-dark) !important;
+  font-weight:800 !important;
+}
+
+/* Favoritos */
+.favorito,
+.btn-favorito,
+.heart{
+  color:var(--fy-rose) !important;
+}
+
+.favorito.ativo,
+.btn-favorito.ativo,
+.heart.ativo{
+  background:var(--fy-rose-soft) !important;
+  color:var(--fy-rose-dark) !important;
+}
+
+/* Benefícios */
+.beneficio{
+  background:var(--fy-white) !important;
+  border:1px solid var(--fy-line) !important;
+  box-shadow:0 6px 22px rgba(45,36,38,.04);
+}
+
+.beneficio .beneficio-icone{
+  color:var(--fy-rose) !important;
+  background:#fff9fa !important;
+  border-color:#e8c9ce !important;
+}
+
+/* Filtros */
+.filtros{
+  background:var(--fy-white) !important;
+  border:1px solid var(--fy-line) !important;
+  border-radius:16px !important;
+  box-shadow:0 8px 25px rgba(45,36,38,.04);
+}
+
+.filtros select{
+  background:var(--fy-ivory) !important;
+  border:1px solid var(--fy-line) !important;
+  color:var(--fy-ink) !important;
+  border-radius:10px !important;
+}
+
+.filtros button{
+  border-color:var(--fy-rose) !important;
+  color:var(--fy-rose-dark) !important;
+  border-radius:999px !important;
+}
+
+.filtros button:hover{
+  background:var(--fy-rose) !important;
+  color:#fff !important;
+}
+
+/* Conta / FOR YOU Club */
+.conta-premium-v14,
+.conta-hero-v14,
+.conta-box-v14,
+.conta-stat-v14{
+  border-color:var(--fy-line) !important;
+}
+
+.conta-hero-v14{
+  background:linear-gradient(135deg,#fff 0%,#fbf0f1 60%,#f7eee2 100%) !important;
+  box-shadow:var(--fy-shadow);
+}
+
+.conta-avatar-v14{
+  background:var(--fy-rose) !important;
+  color:#fff !important;
+}
+
+.conta-menu-v14 button.ativo,
+.conta-menu-v14 button:hover{
+  background:var(--fy-rose-soft) !important;
+  color:var(--fy-rose-dark) !important;
+}
+
+.club,
+.club-card,
+.for-you-club{
+  background:linear-gradient(135deg,#fff 0%,#fbf1f2 58%,#f7eddf 100%) !important;
+  border:1px solid #e5d2c2 !important;
+  box-shadow:var(--fy-shadow);
+}
+
+.club strong,
+.club h2,
+.club h3,
+.for-you-club h2,
+.for-you-club h3{
+  font-family:Georgia,"Times New Roman",serif !important;
+  color:var(--fy-ink) !important;
+}
+
+.club .progresso,
+.club-progress{
+  background:#eadfe0 !important;
+}
+
+.club .progresso > div,
+.club-progress > div{
+  background:linear-gradient(90deg,var(--fy-rose),var(--fy-champagne)) !important;
+}
+
+/* Carrinho / checkout */
+.carrinho,
+.carrinho-box,
+.checkout-box,
+.resumo-pedido{
+  background:var(--fy-white) !important;
+  border-color:var(--fy-line) !important;
+  box-shadow:var(--fy-shadow);
+}
+
+.carrinho button,
+.checkout button{
+  border-radius:12px;
+}
+
+.total,
+.total-final{
+  color:var(--fy-rose-dark) !important;
+  font-weight:800;
+}
+
+/* Rodapé */
+footer{
+  background:var(--fy-ink) !important;
+  color:#f8eeee !important;
+}
+
+footer h3,
+footer h4{
+  font-family:Georgia,"Times New Roman",serif !important;
+  color:#fff !important;
+}
+
+footer a:hover{
+  color:#e8c99c !important;
+}
+
+/* Seleção de texto */
+::selection{
+  background:var(--fy-rose) !important;
+  color:#fff !important;
+}
+
+/* Mobile */
+@media(max-width:700px){
+  .logo h1{
+    font-size:32px !important;
+    letter-spacing:4px !important;
+  }
+
+  .titulo h2{
+    font-size:28px !important;
+  }
+
+  .produto-card,
+  .product-card,
+  .card-produto{
+    border-radius:14px !important;
+  }
+
+  .beneficio{
+    border-radius:12px !important;
+  }
+}
+
 </style>
 
 <style id="cards-premium-v11">
