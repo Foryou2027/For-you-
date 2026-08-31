@@ -5685,7 +5685,10 @@ onclick="fecharCarrinho()"
 
 <h2>Seu carrinho</h2>
 
-<button class="fechar" onclick="fecharCarrinho()">
+<button type="button" class="fechar" id="btnFecharCarrinho"
+onclick="(function(){var c=document.getElementById('carrinho');var o=document.getElementById('overlay');if(c){c.classList.remove('aberto');c.style.transform='translateX(100%)';c.style.pointerEvents='none';c.setAttribute('aria-hidden','true');}if(o){o.classList.remove('ativo');o.style.display='none';o.style.pointerEvents='none';}document.body.classList.remove('carrinho-aberto');document.body.style.overflow='';})()"
+aria-label="Fechar carrinho"
+title="Fechar carrinho">
 ×
 </button>
 
@@ -9018,6 +9021,37 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   });
 })();
+</script>
+
+
+<script id="foryou-x-close-final">
+document.addEventListener('DOMContentLoaded', function(){
+  var x = document.getElementById('btnFecharCarrinho');
+  if(!x) return;
+  x.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    var cart = document.getElementById('carrinho');
+    var overlay = document.getElementById('overlay');
+
+    if(cart){
+      cart.classList.remove('aberto');
+      cart.style.transform = 'translateX(100%)';
+      cart.style.pointerEvents = 'none';
+      cart.setAttribute('aria-hidden','true');
+    }
+
+    if(overlay){
+      overlay.classList.remove('ativo');
+      overlay.style.display = 'none';
+      overlay.style.pointerEvents = 'none';
+    }
+
+    document.body.classList.remove('carrinho-aberto');
+    document.body.style.overflow = '';
+  }, true);
+});
 </script>
 
 </body>
