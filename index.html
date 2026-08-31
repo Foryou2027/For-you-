@@ -11118,5 +11118,194 @@ document.addEventListener("DOMContentLoaded",()=>{
 }
 </style>
 
+
+<style id="fy-clean-fav-cart-final">
+/* =========================================================
+   FAVORITOS + CARRINHO
+   MESMA IDENTIDADE DA ÁREA DO CLIENTE
+========================================================= */
+
+:root{
+  --fy-clean-rose:#c9788e;
+  --fy-clean-rose-dark:#a9576e;
+  --fy-clean-rose-light:#faedf1;
+  --fy-clean-champagne:#d9c28f;
+  --fy-clean-champagne-light:#f4ecd9;
+  --fy-clean-bg:#fcfaf8;
+  --fy-clean-line:#eee3e5;
+  --fy-clean-text:#40373a;
+  --fy-clean-muted:#817579;
+}
+
+/* FAVORITOS */
+#paginaFavoritos{
+  background:var(--fy-clean-bg) !important;
+}
+
+#paginaFavoritos h1,
+#paginaFavoritos h2,
+#paginaFavoritos h3{
+  color:var(--fy-clean-text) !important;
+}
+
+#paginaFavoritos p{
+  color:var(--fy-clean-muted) !important;
+}
+
+#paginaFavoritos .favoritos-vazio{
+  background:#fff !important;
+  border:1px solid var(--fy-clean-line) !important;
+  border-radius:14px !important;
+  box-shadow:0 6px 20px rgba(102,65,76,.035) !important;
+}
+
+#paginaFavoritos .favoritos-vazio h3:first-child{
+  color:var(--fy-clean-rose) !important;
+}
+
+#paginaFavoritos .favoritos-vazio button,
+#paginaFavoritos .btn-primary,
+#paginaFavoritos .btn-fy{
+  background:var(--fy-clean-rose) !important;
+  border-color:var(--fy-clean-rose) !important;
+  color:#fff !important;
+}
+
+#paginaFavoritos .produto-card,
+#paginaFavoritos .card-produto,
+#paginaFavoritos .produto{
+  border-color:var(--fy-clean-line) !important;
+  box-shadow:0 5px 18px rgba(102,65,76,.035) !important;
+}
+
+#paginaFavoritos .favorito,
+#paginaFavoritos .coracao,
+#paginaFavoritos .heart,
+#paginaFavoritos [aria-label*="favorit" i]{
+  color:var(--fy-clean-rose) !important;
+}
+
+/* CARRINHO */
+#carrinho{
+  background:#fff !important;
+  color:var(--fy-clean-text) !important;
+  border-left:1px solid var(--fy-clean-line) !important;
+  box-shadow:-12px 0 35px rgba(90,55,66,.08) !important;
+}
+
+#carrinho .carrinho-header,
+#carrinho .cart-header{
+  background:#fff !important;
+  border-bottom:1px solid #f0e5df !important;
+}
+
+#carrinho h2,
+#carrinho h3{
+  color:#463b3e !important;
+}
+
+#carrinho .fechar,
+#carrinho #btnFecharCarrinho,
+#btnFecharCarrinho{
+  width:34px !important;
+  height:34px !important;
+  border:1px solid #eadde0 !important;
+  border-radius:8px !important;
+  background:#fff !important;
+  color:var(--fy-clean-rose-dark) !important;
+  font-size:19px !important;
+  cursor:pointer !important;
+  transition:.2s ease;
+}
+
+#carrinho .fechar:hover,
+#carrinho #btnFecharCarrinho:hover,
+#btnFecharCarrinho:hover{
+  background:var(--fy-clean-rose-light) !important;
+  border-color:#e6cbd3 !important;
+}
+
+#carrinho .item-carrinho,
+#carrinho .cart-item{
+  border-bottom:1px solid #f0e8e9 !important;
+}
+
+#carrinho .item-preco,
+#carrinho .subtotal,
+#carrinho .total{
+  color:#493c40 !important;
+}
+
+#carrinho .quantidade button{
+  background:#fff !important;
+  border:1px solid #e4dadd !important;
+  color:var(--fy-clean-rose-dark) !important;
+  border-radius:7px !important;
+}
+
+#carrinho .quantidade span{
+  color:#4e4447 !important;
+}
+
+#carrinho .remover{
+  color:#ad7f88 !important;
+  background:none !important;
+}
+
+#carrinho .carrinho-footer,
+#carrinho .cart-footer{
+  background:#fff !important;
+  border-top:1px solid #eee3e5 !important;
+}
+
+#carrinho #subtotal,
+#carrinho #desconto,
+#carrinho #frete{
+  color:#6f6367 !important;
+}
+
+#carrinho #total{
+  color:var(--fy-clean-rose-dark) !important;
+  font-family:Georgia,serif !important;
+  font-size:22px !important;
+}
+
+#carrinho .btn-finalizar,
+#carrinho .checkout-btn,
+#carrinho button[onclick*="checkout" i],
+#carrinho button[onclick*="final" i]{
+  background:var(--fy-clean-rose) !important;
+  color:#fff !important;
+  border:1px solid var(--fy-clean-rose) !important;
+  border-radius:9px !important;
+}
+
+#carrinho .btn-finalizar:hover,
+#carrinho .checkout-btn:hover{
+  background:var(--fy-clean-rose-dark) !important;
+}
+
+#carrinho #barraProgresso{
+  background:var(--fy-clean-champagne) !important;
+}
+
+#carrinho #mensagemFreteGratis{
+  color:#8d7950 !important;
+}
+
+/* Overlay clean */
+#overlay{
+  background:rgba(77,54,60,.18) !important;
+  backdrop-filter:blur(2px);
+}
+
+/* Mobile */
+@media(max-width:600px){
+  #carrinho{
+    width:min(94vw,410px) !important;
+  }
+}
+</style>
+
 </body>
 </html>
