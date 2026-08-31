@@ -3287,6 +3287,221 @@ body.foryou-v19 .category-list:not(.fy19-original-hidden){
 }
 </style>
 
+
+<style id="foryou-mobile-final">
+/* =========================================================
+   FOR YOU — EXPERIÊNCIA MOBILE FINAL
+   Ajustes focados em toque, leitura, espaço e navegação.
+========================================================= */
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{overflow-x:hidden;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto}
+button,a,input,select,textarea{touch-action:manipulation}
+
+@media (max-width:800px){
+  /* TOPO / HEADER */
+  .topo{font-size:9px;line-height:1.35;padding:8px 12px;letter-spacing:1px}
+  header{z-index:1200}
+  .header{padding:10px 12px 9px}
+  .header-top{gap:10px;align-items:center}
+  .logo{min-width:0;flex:1}
+  .logo h1{font-size:28px;letter-spacing:3px;line-height:1}
+  .logo span{font-size:6.5px;letter-spacing:1.5px}
+  .acoes{gap:4px;font-size:20px}
+  .acao-btn{width:40px;height:40px;font-size:20px;display:grid;place-items:center;border-radius:50%}
+  .contador{top:1px;right:0;width:17px;height:17px;font-size:9px}
+
+  /* HEADER V13 */
+  .fy-header-v13 .fy-top{min-height:0;padding:9px 12px 10px;grid-template-columns:auto 1fr auto;gap:7px}
+  .fy-logo-v13{font-size:20px;letter-spacing:1.5px;white-space:nowrap}
+  .fy-icon-btn-v13{width:40px;height:40px;font-size:19px}
+  .fy-search-v13{grid-column:1/-1;grid-row:2;margin-top:2px}
+  .fy-search-v13 input{height:44px;font-size:14px;padding-left:15px;padding-right:46px}
+  .fy-search-v13 button{width:34px;height:34px;right:5px;top:5px}
+  .fy-nav-v13{padding:7px 12px 10px;gap:22px;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fy-nav-v13 a{font-size:12px;white-space:nowrap;padding:7px 0}
+  .fy-category-strip-v13{padding:10px 12px 13px;gap:8px;overflow-x:auto}
+  .fy-cat-v13{font-size:11px;padding:9px 13px;white-space:nowrap}
+
+  /* CATEGORIAS */
+  .menu-principal{margin-top:10px;text-align:left;padding:0 12px}
+  .menu-titulo{text-align:center;font-size:8px;margin-bottom:9px;letter-spacing:2px}
+  .menu-lista{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:2px 1px 7px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .menu-lista::-webkit-scrollbar{display:none}
+  .menu-item{flex:0 0 auto}
+  .menu-btn{padding:10px 13px;font-size:10px;white-space:nowrap;min-height:40px}
+  .dropdown{position:fixed;left:10px;right:10px;top:auto;bottom:10px;transform:none;width:auto;max-height:72vh;overflow:auto;border-radius:18px;box-shadow:0 18px 55px rgba(53,31,39,.22);z-index:1500}
+  .dropdown h3{padding:15px 16px;font-size:20px;position:sticky;top:0;z-index:2}
+  .dropdown a{padding:13px 16px;font-size:11px;min-height:44px;display:flex;align-items:center}
+  .destaques-menu{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;gap:8px;padding:0 12px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .destaques-menu::-webkit-scrollbar{display:none}
+  .destaque-btn{flex:0 0 auto;padding:10px 15px;font-size:8px;min-height:38px}
+
+  /* BUSCA */
+  .busca{width:auto;margin:10px 12px 0}
+  .busca-linha input{height:44px;font-size:14px}
+  .busca-linha button{min-width:44px}
+
+  /* HERO */
+  .hero-premium{min-height:570px;border-radius:0;background-position:65% center}
+  .hero-content-premium{padding:40px 20px 145px}
+  .hero-content-premium h2{font-size:clamp(36px,10vw,46px);line-height:.98;max-width:330px}
+  .hero-content-premium p{font-size:12px;line-height:1.6;max-width:300px}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:360px}
+  .hero-actions .btn{width:100%;min-width:0;min-height:46px;padding:12px 10px;font-size:9px}
+  .hero-side-card{right:5%;bottom:18px;width:175px;padding:14px}
+  .hero-side-card strong{font-size:20px}
+  .banner-box{min-height:145px;padding:22px 18px;border-radius:15px}
+  .banner-box h3{font-size:22px;line-height:1.05}
+
+  /* SEÇÕES */
+  .secao{padding:42px 12px}
+  .titulo{margin-bottom:20px}
+  .titulo h2{font-size:32px;line-height:1.05}
+  .titulo p{font-size:11px;line-height:1.55}
+  .fy16-section-head{gap:8px;flex-wrap:wrap}
+  .fy16-title{font-size:29px!important}
+  .fy16-see-all{font-size:9px}
+
+  /* PRODUTOS — 2 COLUNAS CONFORTÁVEIS */
+  .produtos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .produto-card,.product-card{min-width:0;border-radius:14px;overflow:hidden}
+  .produto-img{height:auto;aspect-ratio:1/1.08;object-fit:cover}
+  .produto-info{padding:10px}
+  .nome{font-size:13px;line-height:1.25;min-height:33px}
+  .marca{font-size:8px;letter-spacing:.7px}
+  .preco{font-size:16px;line-height:1.1}
+  .preco-antigo{font-size:9px}
+  .desconto{font-size:7px;padding:4px 6px}
+  .avaliacao{font-size:8px}
+  .adicionar{width:100%;min-height:42px;padding:10px 7px;font-size:8px;border-radius:9px}
+  .favorito{width:38px;height:38px}
+  .selo{font-size:7px;padding:5px 7px}
+
+  /* LISTAS / KITS / OFERTAS */
+  .cart-recommendations .mini-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .cart-recommendations .mini-product{padding:9px;border-radius:13px}
+  .cart-recommendations .mini-product button{min-height:40px}
+
+  /* CARRINHO V17 */
+  #paginaCarrinhoV17{padding-left:0!important;padding-right:0!important}
+  #paginaCarrinhoV17 .fy17-cart{padding:18px 12px 45px!important}
+  #paginaCarrinhoV17 .fy17-cart-head{margin-top:12px;margin-bottom:16px}
+  #paginaCarrinhoV17 .fy17-cart-head h1{font-size:32px!important;line-height:1.02!important}
+  #paginaCarrinhoV17 .fy17-cart-head p{font-size:11px;line-height:1.5}
+  #paginaCarrinhoV17 .fy17-progress{padding:14px 15px!important;border-radius:14px;margin-bottom:12px!important}
+  #paginaCarrinhoV17 .fy17-cart-layout{grid-template-columns:1fr!important;gap:12px!important}
+  #paginaCarrinhoV17 .fy17-cart-list{padding:0 12px!important;border-radius:15px}
+  #paginaCarrinhoV17 .fy17-cart-item{display:grid!important;grid-template-columns:72px minmax(0,1fr);gap:11px;padding:15px 0!important;position:relative}
+  #paginaCarrinhoV17 .fy17-cart-item img{width:72px!important;height:84px!important;border-radius:12px!important}
+  #paginaCarrinhoV17 .fy17-cart-item h3{font-size:12px!important;line-height:1.3;margin-right:38px}
+  #paginaCarrinhoV17 .fy17-cart-item .brand{font-size:8px!important;margin-top:3px}
+  #paginaCarrinhoV17 .fy17-price{font-size:13px!important}
+  #paginaCarrinhoV17 .fy17-old{font-size:9px!important}
+  #paginaCarrinhoV17 .fy17-qty{height:38px!important;margin-top:8px;width:max-content}
+  #paginaCarrinhoV17 .fy17-qty button{width:38px!important;height:38px!important;font-size:18px}
+  #paginaCarrinhoV17 .fy17-qty span{min-width:30px;text-align:center}
+  #paginaCarrinhoV17 .fy17-item-total{position:absolute;right:0;top:18px;font-size:12px!important}
+  #paginaCarrinhoV17 .fy17-save,#paginaCarrinhoV17 .fy17-remove{font-size:8px!important;min-height:30px;padding:4px 0}
+  #paginaCarrinhoV17 .fy17-cart-summary{position:static!important;padding:17px!important;border-radius:15px}
+  #paginaCarrinhoV17 .fy17-cart-summary h2{font-size:22px!important}
+  #paginaCarrinhoV17 .fy17-line{font-size:10px!important;padding:8px 0}
+  #paginaCarrinhoV17 .fy17-total{font-size:16px!important}
+  #paginaCarrinhoV17 .fy17-coupon{display:flex;gap:7px}
+  #paginaCarrinhoV17 .fy17-coupon input{height:44px!important;min-width:0;font-size:11px!important}
+  #paginaCarrinhoV17 .fy17-coupon button{height:44px!important;padding:0 13px}
+  #paginaCarrinhoV17 .fy17-checkout{width:100%;height:52px!important;border-radius:11px}
+  #paginaCarrinhoV17 .fy17-trust{line-height:1.5}
+  #paginaCarrinhoV17 .fy17-recommend{margin-top:24px!important}
+  #paginaCarrinhoV17 .fy17-recommend h2{font-size:23px!important}
+  #paginaCarrinhoV17 .fy17-mini{min-width:0;border-radius:13px}
+
+  /* CARRINHO LATERAL ANTIGO */
+  .carrinho{width:100%!important;max-width:none!important}
+  .carrinho-header{padding:16px 17px!important}
+  .carrinho-header h2{font-size:25px!important}
+  .carrinho-header h2::after{display:none!important}
+  .itens,.frete-gratis,.frete,.cupom,.resumo{padding-left:15px!important;padding-right:15px!important}
+  .item{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;padding:14px 0}
+  .item-img{width:62px;height:72px}
+  .item-dados strong{font-size:14px;line-height:1.3}
+  .item-preco{font-size:12px}
+  .quantidade button{width:34px;height:34px}
+  .quantidade{gap:6px}
+  .remover{min-height:30px}
+  .frete{max-height:30vh}
+  .cep-linha input{min-width:0;font-size:13px}
+  .cep-linha button{min-width:92px}
+  .campos{grid-template-columns:1fr}
+  .completo{grid-column:auto}
+  .entrega{min-height:62px;padding:11px 10px}
+  .cupom-linha input{min-width:0;font-size:12px}
+
+  /* CHECKOUT */
+  .checkout-layout{grid-template-columns:1fr!important;gap:12px!important;padding:0 12px}
+  .checkout-card,.checkout-resumo{padding:17px!important;border-radius:15px}
+  .checkout-etapas{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;overflow:hidden}
+  .checkout-etapa{padding:8px 3px;font-size:7px;line-height:1.25;min-height:50px}
+  .checkout-card h2{font-size:22px}
+  .checkout-form{grid-template-columns:1fr!important;gap:8px}
+  .checkout-form .completo{grid-column:auto}
+  .checkout-form input,.checkout-form select{height:45px;font-size:13px;padding:11px}
+  .pagamento-opcoes{grid-template-columns:1fr!important;gap:7px}
+  .pagamento-opcao{min-height:55px;font-size:10px}
+  .checkout-acoes{display:grid;grid-template-columns:1fr;gap:8px}
+  .checkout-btn{min-height:48px;font-size:9px;border-radius:9px}
+  .checkout-resumo h3{font-size:20px}
+
+  /* CONTA / ADMIN / MODAIS */
+  .conta-layout,.admin-grid,.admin-dashboard-sub{grid-template-columns:1fr!important}
+  .conta-menu-v14{display:flex;overflow-x:auto;gap:7px;padding-bottom:5px;scrollbar-width:none}
+  .conta-menu-v14::-webkit-scrollbar{display:none}
+  .conta-menu-v14 button{flex:0 0 auto;min-height:42px}
+  .admin-card,.conta-box-v14{padding:16px!important;border-radius:14px}
+  .modal,.politica-modal{padding:10px!important}
+  .modal-content,.politica-box{width:100%!important;max-height:90vh;overflow:auto;border-radius:16px}
+
+  /* NEWSLETTER / RODAPÉ */
+  .newsletter{padding:42px 16px!important}
+  .newsletter h2{font-size:28px!important;line-height:1.05}
+  .newsletter form{display:grid!important;grid-template-columns:1fr!important;gap:8px}
+  .newsletter input,.newsletter button{width:100%!important;min-height:46px}
+  footer{padding-left:16px!important;padding-right:16px!important}
+  footer .footer-grid{grid-template-columns:1fr 1fr!important;gap:22px!important}
+}
+
+@media (max-width:430px){
+  .logo h1{font-size:25px}
+  .fy-logo-v13{font-size:18px}
+  .hero-premium{min-height:590px}
+  .hero-content-premium{padding-left:16px;padding-right:16px}
+  .hero-content-premium h2{font-size:37px}
+  .hero-side-card{width:160px;right:4%;bottom:15px}
+  .produtos{gap:8px}
+  .produto-info{padding:9px}
+  .nome{font-size:12px}
+  .preco{font-size:15px}
+  .adicionar{font-size:7.5px;padding-left:4px;padding-right:4px}
+  #paginaCarrinhoV17 .fy17-cart-item{grid-template-columns:64px minmax(0,1fr);gap:9px}
+  #paginaCarrinhoV17 .fy17-cart-item img{width:64px!important;height:76px!important}
+  #paginaCarrinhoV17 .fy17-item-total{font-size:11px!important}
+  .checkout-etapa{font-size:6px}
+}
+
+@media (max-width:360px){
+  .fy-actions-v13 .fy-icon-btn-v13{width:36px;height:36px}
+  .hero-actions{grid-template-columns:1fr}
+  .hero-actions .btn{min-height:44px}
+  .produtos{grid-template-columns:1fr}
+  .produto-img{aspect-ratio:1/1.05}
+}
+
+/* Respeita usuários que preferem menos animação */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+
 </head>
 
 <body>
@@ -7527,3 +7742,4 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+  
