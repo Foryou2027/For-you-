@@ -5608,106 +5608,253 @@ Promoções de datas especiais
 ========================= -->
 
 
+
 <section class="pagina secao" id="paginaConta">
-<button class="voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
+  <button class="voltar fy2-voltar" onclick="voltarLoja()">← VOLTAR PARA A LOJA</button>
 
-<div class="conta-premium-v14">
-  <div class="conta-hero-v14">
-    <div>
-      <small>ÁREA DO CLIENTE</small>
-      <h1 id="contaSaudacao">Olá, seja bem-vinda 💗</h1>
-      <p>Gerencie seus dados, pedidos, favoritos e endereços em um só lugar.</p>
+  <div class="fy2-account">
+
+    <!-- Cabeçalho -->
+    <div class="fy2-header">
+      <div class="fy2-header-main">
+        <div class="fy2-eyebrow">ÁREA DO CLIENTE</div>
+        <h1 id="contaSaudacao">Olá, seja bem-vinda</h1>
+        <p>Gerencie seus pedidos, dados, favoritos e benefícios em um só lugar.</p>
+      </div>
+
+      <div class="fy2-profile">
+        <div class="fy2-profile-icon" id="contaAvatar" aria-label="Perfil do cliente">
+          <span class="fy2-person-head"></span>
+          <span class="fy2-person-body"></span>
+        </div>
+        <div class="fy2-profile-text">
+          <strong>Minha conta</strong>
+          <span>Área pessoal</span>
+        </div>
+      </div>
     </div>
-    <div class="conta-avatar-v14" id="contaAvatar">FY</div>
-  </div>
 
-  <div class="cadastro-box-fy"><h3>Seu cadastro</h3><p style="color:#777">Mantenha seus dados salvos neste navegador para agilizar suas próximas compras.</p><div class="cadastro-grid-fy"><input id="fyNome" type="text" placeholder="Nome completo"><input id="fyEmail" type="email" placeholder="Seu melhor e-mail"></div><button class="btn-fy" onclick="salvarCadastroFY()">SALVAR MEUS DADOS</button></div><div id="clubConteudoFY"></div>
+    <div class="fy2-layout">
 
-<div class="conta-layout-v14">
-    <aside class="conta-menu-v14">
-      <button class="ativo" onclick="abrirAbaConta('inicioConta',this)">⌂ Visão geral</button>
-      <button onclick="abrirAbaConta('dadosConta',this)">♙ Dados pessoais</button>
-      <button onclick="abrirAbaConta('pedidosConta',this)">▣ Meus pedidos</button>
-      <button onclick="abrirAbaConta('enderecosConta',this)">⌖ Endereços</button>
-      <button onclick="abrirFavoritos()">♡ Favoritos</button>
-      <button onclick="abrirAbaConta('segurancaConta',this)">◇ Segurança</button>
-      <button onclick="sairContaV14()">↪ Sair da conta</button>
-    </aside>
+      <!-- Menu -->
+      <aside class="fy2-sidebar">
+        <div class="fy2-sidebar-title">MINHA ÁREA</div>
 
-    <main class="conta-painel-v14">
-      <div id="inicioConta" class="conta-tab-v14 ativa">
-        <div class="conta-cards-v14">
-          <div class="conta-stat-v14"><small>Pedidos</small><strong id="statPedidos">0</strong></div>
-          <div class="conta-stat-v14"><small>Favoritos</small><strong id="statFavoritos">0</strong></div>
-          <div class="conta-stat-v14"><small>Cupons</small><strong id="statCupons">0</strong></div>
+        <button class="ativo fy2-nav-item" onclick="abrirAbaConta('inicioConta',this)">
+          <span class="fy2-nav-icon">⌂</span>
+          <span>Visão geral</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirAbaConta('dadosConta',this)">
+          <span class="fy2-nav-icon">♙</span>
+          <span>Dados pessoais</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirAbaConta('pedidosConta',this)">
+          <span class="fy2-nav-icon">▣</span>
+          <span>Meus pedidos</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirAbaConta('enderecosConta',this)">
+          <span class="fy2-nav-icon">⌖</span>
+          <span>Endereços</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirFavoritos()">
+          <span class="fy2-nav-icon">♡</span>
+          <span>Favoritos</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirAbaConta('segurancaConta',this)">
+          <span class="fy2-nav-icon">◇</span>
+          <span>Segurança</span>
+        </button>
+
+        <div class="fy2-sidebar-separator"></div>
+
+        <button class="fy2-nav-item fy2-logout" onclick="sairContaV14()">
+          <span class="fy2-nav-icon">↪</span>
+          <span>Sair da conta</span>
+        </button>
+      </aside>
+
+      <!-- Conteúdo -->
+      <main class="fy2-content">
+
+        <!-- VISÃO GERAL -->
+        <div id="inicioConta" class="conta-tab-v14 ativa">
+
+          <div class="fy2-welcome-row">
+            <div>
+              <div class="fy2-section-kicker">RESUMO DA CONTA</div>
+              <h2>Olá, seja bem-vinda à FOR YOU</h2>
+              <p>Veja rapidamente as principais informações da sua conta.</p>
+            </div>
+          </div>
+
+          <div class="fy2-stats">
+            <div class="fy2-stat">
+              <div class="fy2-stat-icon">▣</div>
+              <div>
+                <small>PEDIDOS</small>
+                <strong id="statPedidos">0</strong>
+              </div>
+              <span class="fy2-stat-arrow">›</span>
+            </div>
+
+            <div class="fy2-stat">
+              <div class="fy2-stat-icon">♡</div>
+              <div>
+                <small>FAVORITOS</small>
+                <strong id="statFavoritos">0</strong>
+              </div>
+              <span class="fy2-stat-arrow">›</span>
+            </div>
+
+            <div class="fy2-stat">
+              <div class="fy2-stat-icon">◇</div>
+              <div>
+                <small>CUPONS</small>
+                <strong id="statCupons">0</strong>
+              </div>
+              <span class="fy2-stat-arrow">›</span>
+            </div>
+          </div>
+
+          <div class="fy2-main-grid">
+            <div class="fy2-panel">
+              <div class="fy2-panel-heading">
+                <div>
+                  <div class="fy2-section-kicker">ACOMPANHAMENTO</div>
+                  <h3>Meus pedidos</h3>
+                </div>
+                <button type="button" class="fy2-link-btn" onclick="abrirAbaConta('pedidosConta',document.querySelector('.fy2-nav-item:nth-of-type(4)'))">
+                  Ver pedidos <span>›</span>
+                </button>
+              </div>
+
+              <div id="fy2-order-preview" class="fy2-order-preview">
+                <div class="fy2-empty-icon">▣</div>
+                <div>
+                  <strong>Nenhum pedido ainda</strong>
+                  <p>Quando você fizer uma compra, ela aparecerá aqui.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="fy2-panel fy2-club">
+              <div class="fy2-section-kicker">BENEFÍCIOS</div>
+              <h3>FOR YOU Club</h3>
+
+              <div class="fy2-club-card">
+                <div class="fy2-club-brand">FOR YOU</div>
+                <div class="fy2-club-word">CLUB</div>
+                <div class="fy2-club-line"></div>
+                <span>SEU CLUBE DE BENEFÍCIOS</span>
+              </div>
+
+              <p class="fy2-club-copy">Acompanhe seus benefícios e aproveite uma experiência cada vez mais exclusiva.</p>
+            </div>
+          </div>
+
+          <div class="fy2-panel fy2-quick">
+            <div class="fy2-section-kicker">ACESSO RÁPIDO</div>
+
+            <div class="fy2-quick-grid">
+              <button onclick="abrirAbaConta('enderecosConta',document.querySelector('.fy2-nav-item:nth-of-type(5)'))">
+                <span>⌖</span><strong>Endereços</strong><small>Gerenciar</small>
+              </button>
+              <button onclick="abrirAbaConta('dadosConta',document.querySelector('.fy2-nav-item:nth-of-type(3)'))">
+                <span>♙</span><strong>Dados pessoais</strong><small>Atualizar</small>
+              </button>
+              <button onclick="abrirFavoritos()">
+                <span>♡</span><strong>Favoritos</strong><small>Ver itens</small>
+              </button>
+              <button onclick="abrirAbaConta('segurancaConta',document.querySelector('.fy2-nav-item:nth-of-type(8)'))">
+                <span>◇</span><strong>Segurança</strong><small>Gerenciar</small>
+              </button>
+            </div>
+          </div>
+
         </div>
-        <div class="conta-box-v14">
-          <h2>Bem-vinda à sua conta</h2>
-          <p>Aqui você encontra rapidamente tudo o que importa para sua experiência na FOR YOU.</p>
-          <div class="conta-security-v14">♡ <span>Seus favoritos ficam salvos neste navegador para você voltar quando quiser.</span></div>
-          <div class="conta-security-v14">▣ <span>Quando os pedidos reais forem integrados, eles aparecerão automaticamente nesta área.</span></div>
-        </div>
-      </div>
 
-      <div id="dadosConta" class="conta-tab-v14">
-        <div class="conta-box-v14">
-          <h2>Dados pessoais</h2>
-          <p>Atualize suas informações de contato.</p>
-          <form class="conta-form-v14" onsubmit="salvarDadosContaV14(event)">
-            <label>Nome completo<input id="contaNome" required placeholder="Seu nome"></label>
-            <label>E-mail<input id="contaEmail" type="email" required placeholder="seu@email.com"></label>
-            <label>Telefone<input id="contaTelefone" placeholder="(00) 00000-0000"></label>
-            <label>CPF<input id="contaCpf" placeholder="000.000.000-00"></label>
-            <label class="full">Data de nascimento<input id="contaNascimento" type="date"></label>
-            <div class="full"><button class="conta-save-v14">SALVAR ALTERAÇÕES</button></div>
-          </form>
-        </div>
-      </div>
+        <!-- DADOS -->
+        <div id="dadosConta" class="conta-tab-v14">
+          <div class="fy2-panel fy2-form-panel">
+            <div class="fy2-section-kicker">MINHA CONTA</div>
+            <h2>Dados pessoais</h2>
+            <p>Atualize suas informações de contato.</p>
 
-      <div id="pedidosConta" class="conta-tab-v14">
-        <div class="conta-box-v14">
-          <h2>Meus pedidos</h2>
-          <p>Acompanhe seus pedidos e o status de cada compra.</p>
-          <div id="listaPedidosConta">
-            <div class="conta-empty-v14"><div class="icon">▣</div><strong>Nenhum pedido ainda</strong><br>Quando você fizer uma compra, ela aparecerá aqui.</div>
+            <form class="conta-form-v14 fy2-form" onsubmit="salvarDadosContaV14(event)">
+              <label>Nome completo<input id="contaNome" required placeholder="Seu nome"></label>
+              <label>E-mail<input id="contaEmail" type="email" required placeholder="seu@email.com"></label>
+              <label>Telefone<input id="contaTelefone" placeholder="(00) 00000-0000"></label>
+              <label>CPF<input id="contaCpf" placeholder="000.000.000-00"></label>
+              <label class="full">Data de nascimento<input id="contaNascimento" type="date"></label>
+              <div class="full"><button class="conta-save-v14 fy2-save">SALVAR ALTERAÇÕES</button></div>
+            </form>
           </div>
         </div>
-      </div>
 
-      <div id="enderecosConta" class="conta-tab-v14">
-        <div class="conta-box-v14">
-          <h2>Meus endereços</h2>
-          <p>Deixe seu endereço pronto para agilizar suas próximas compras.</p>
-          <form class="conta-form-v14" onsubmit="salvarEnderecoContaV14(event)">
-            <label>CEP<input id="endCep" placeholder="00000-000" maxlength="9"></label>
-            <label>Número<input id="endNumero" placeholder="123"></label>
-            <label class="full">Rua<input id="endRua" placeholder="Nome da rua"></label>
-            <label>Bairro<input id="endBairro" placeholder="Bairro"></label>
-            <label>Cidade<input id="endCidade" placeholder="Cidade"></label>
-            <label>Estado<input id="endEstado" placeholder="UF" maxlength="2"></label>
-            <label>Complemento<input id="endComplemento" placeholder="Apartamento, bloco..."></label>
-            <div class="full"><button class="conta-save-v14">SALVAR ENDEREÇO</button></div>
-          </form>
-          <div id="enderecoSalvoV14" style="margin-top:18px"></div>
+        <!-- PEDIDOS -->
+        <div id="pedidosConta" class="conta-tab-v14">
+          <div class="fy2-panel">
+            <div class="fy2-section-kicker">HISTÓRICO</div>
+            <h2>Meus pedidos</h2>
+            <p>Acompanhe seus pedidos e o status de cada compra.</p>
+            <div id="listaPedidosConta">
+              <div class="conta-empty-v14 fy2-empty">
+                <div class="icon">▣</div>
+                <strong>Nenhum pedido ainda</strong>
+                <br>Quando você fizer uma compra, ela aparecerá aqui.
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div id="segurancaConta" class="conta-tab-v14">
-        <div class="conta-box-v14">
-          <h2>Segurança</h2>
-          <p>Gerencie o acesso à sua conta.</p>
-          <div class="conta-security-v14">🔒 <span><strong>Senha</strong><br>Altere sua senha regularmente e não compartilhe seus dados de acesso.</span></div>
-          <form class="conta-form-v14" onsubmit="alterarSenhaContaV14(event)">
-            <label>Senha atual<input type="password" id="senhaAtualV14" required></label>
-            <label>Nova senha<input type="password" id="senhaNovaV14" minlength="6" required></label>
-            <div class="full"><button class="conta-save-v14">ALTERAR SENHA</button></div>
-          </form>
+        <!-- ENDEREÇOS -->
+        <div id="enderecosConta" class="conta-tab-v14">
+          <div class="fy2-panel fy2-form-panel">
+            <div class="fy2-section-kicker">ENTREGA</div>
+            <h2>Meus endereços</h2>
+            <p>Deixe seu endereço pronto para agilizar suas próximas compras.</p>
+
+            <form class="conta-form-v14 fy2-form" onsubmit="salvarEnderecoContaV14(event)">
+              <label>CEP<input id="endCep" placeholder="00000-000" maxlength="9"></label>
+              <label>Número<input id="endNumero" placeholder="123"></label>
+              <label class="full">Rua<input id="endRua" placeholder="Nome da rua"></label>
+              <label>Bairro<input id="endBairro" placeholder="Bairro"></label>
+              <label>Cidade<input id="endCidade" placeholder="Cidade"></label>
+              <label>Estado<input id="endEstado" placeholder="UF" maxlength="2"></label>
+              <label>Complemento<input id="endComplemento" placeholder="Apartamento, bloco..."></label>
+              <div class="full"><button class="conta-save-v14 fy2-save">SALVAR ENDEREÇO</button></div>
+            </form>
+            <div id="enderecoSalvoV14" style="margin-top:18px"></div>
+          </div>
         </div>
-      </div>
-    </main>
+
+        <!-- SEGURANÇA -->
+        <div id="segurancaConta" class="conta-tab-v14">
+          <div class="fy2-panel fy2-form-panel">
+            <div class="fy2-section-kicker">PROTEÇÃO</div>
+            <h2>Segurança</h2>
+            <p>Gerencie o acesso à sua conta.</p>
+
+            <div class="fy2-security-box">🔒 <span><strong>Senha</strong><br>Altere sua senha regularmente e não compartilhe seus dados de acesso.</span></div>
+
+            <form class="conta-form-v14 fy2-form" onsubmit="alterarSenhaContaV14(event)">
+              <label>Senha atual<input type="password" id="senhaAtualV14" required></label>
+              <label>Nova senha<input type="password" id="senhaNovaV14" minlength="6" required></label>
+              <div class="full"><button class="conta-save-v14 fy2-save">ALTERAR SENHA</button></div>
+            </form>
+          </div>
+        </div>
+
+      </main>
+    </div>
   </div>
-</div>
 </section>
+
 
 
 
@@ -9961,6 +10108,683 @@ document.addEventListener("DOMContentLoaded",()=>{
 @media(max-width:600px){
   #paginaConta .conta-hero-v14{
     border-radius:20px !important;
+  }
+}
+</style>
+
+
+<style id="fy2-dashboard-account">
+/* =========================================================
+   FOR YOU — DASHBOARD DA ÁREA DO CLIENTE
+   Preto + dourado champagne claro
+========================================================= */
+
+#paginaConta{
+  --fy2-black:#151414;
+  --fy2-black2:#242021;
+  --fy2-gold:#d8c99f;
+  --fy2-gold2:#eee4c8;
+  --fy2-bg:#faf8f3;
+  --fy2-line:#e6e0d5;
+  --fy2-text:#242021;
+  --fy2-muted:#746d6e;
+  background:var(--fy2-bg) !important;
+  color:var(--fy2-text) !important;
+  padding-bottom:65px !important;
+}
+
+#paginaConta .fy2-voltar{
+  max-width:1200px;
+  margin:0 auto 15px;
+  color:#5a5254 !important;
+  font-size:10px;
+  font-weight:800;
+}
+
+#paginaConta .fy2-account{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* HEADER */
+#paginaConta .fy2-header{
+  min-height:185px;
+  padding:35px 40px;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 20%,rgba(216,201,159,.12),transparent 23%),
+    linear-gradient(125deg,#111010,#201d1e 65%,#292527);
+  border:1px solid rgba(216,201,159,.48);
+  box-shadow:0 18px 45px rgba(21,20,20,.16);
+}
+
+#paginaConta .fy2-header::after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border:1px solid rgba(216,201,159,.16);
+  border-radius:50%;
+  right:-85px;
+  bottom:-150px;
+}
+
+#paginaConta .fy2-eyebrow,
+#paginaConta .fy2-section-kicker{
+  color:#bca873;
+  font-size:8px;
+  letter-spacing:2.4px;
+  font-weight:900;
+}
+
+#paginaConta .fy2-header .fy2-eyebrow{
+  color:var(--fy2-gold);
+}
+
+#paginaConta .fy2-header h1{
+  margin:8px 0 7px;
+  color:#fff !important;
+  font-family:Georgia,serif !important;
+  font-size:34px !important;
+  font-weight:normal !important;
+}
+
+#paginaConta .fy2-header p{
+  margin:0;
+  color:#d9d5d1 !important;
+  font-size:11px;
+}
+
+#paginaConta .fy2-profile{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+#paginaConta .fy2-profile-icon{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:transparent !important;
+  border:1px solid var(--fy2-gold) !important;
+  position:relative;
+  flex:none;
+  box-shadow:0 0 0 7px rgba(216,201,159,.06);
+  font-size:0 !important;
+}
+
+#paginaConta .fy2-person-head{
+  position:absolute;
+  width:19px;
+  height:19px;
+  border:2px solid var(--fy2-gold);
+  border-radius:50%;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+#paginaConta .fy2-person-body{
+  position:absolute;
+  width:34px;
+  height:18px;
+  border:2px solid var(--fy2-gold);
+  border-bottom:0;
+  border-radius:20px 20px 0 0;
+  bottom:13px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+#paginaConta .fy2-profile-text{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+#paginaConta .fy2-profile-text strong{
+  color:#fff !important;
+  font-size:11px;
+}
+
+#paginaConta .fy2-profile-text span{
+  color:#bdb6b5 !important;
+  font-size:9px;
+}
+
+/* LAYOUT */
+#paginaConta .fy2-layout{
+  display:grid;
+  grid-template-columns:220px minmax(0,1fr);
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+
+/* SIDEBAR */
+#paginaConta .fy2-sidebar{
+  background:#fff;
+  border:1px solid var(--fy2-line);
+  border-radius:19px;
+  padding:9px;
+  box-shadow:0 8px 25px rgba(21,20,20,.045);
+  position:sticky;
+  top:15px;
+}
+
+#paginaConta .fy2-sidebar-title{
+  padding:10px 12px 8px;
+  color:#9a8c70;
+  font-size:8px;
+  letter-spacing:2px;
+  font-weight:900;
+}
+
+#paginaConta .fy2-nav-item{
+  width:100%;
+  min-height:44px;
+  padding:10px 12px !important;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  border:1px solid transparent !important;
+  border-radius:10px !important;
+  background:transparent !important;
+  color:#4e484a !important;
+  font-size:10px !important;
+  font-weight:700;
+  text-align:left;
+  transition:.2s ease;
+}
+
+#paginaConta .fy2-nav-item:hover{
+  color:#1e1b1c !important;
+  background:#faf8f3 !important;
+  transform:none !important;
+}
+
+#paginaConta .fy2-nav-item.ativo{
+  background:#171516 !important;
+  color:#fff !important;
+  border-color:#171516 !important;
+  box-shadow:0 5px 14px rgba(21,20,20,.11);
+}
+
+#paginaConta .fy2-nav-icon{
+  width:20px;
+  text-align:center;
+  color:#9d8a5d;
+  font-size:16px;
+  line-height:1;
+}
+
+#paginaConta .fy2-nav-item.ativo .fy2-nav-icon{
+  color:var(--fy2-gold);
+}
+
+#paginaConta .fy2-sidebar-separator{
+  height:1px;
+  background:#eee9df;
+  margin:8px 6px;
+}
+
+#paginaConta .fy2-logout{
+  color:#766d6f !important;
+}
+
+/* CONTENT */
+#paginaConta .fy2-content{
+  min-width:0;
+}
+
+#paginaConta .fy2-welcome-row{
+  margin:2px 0 14px;
+}
+
+#paginaConta .fy2-welcome-row h2{
+  margin:6px 0 4px;
+  color:var(--fy2-text) !important;
+  font-family:Georgia,serif !important;
+  font-size:23px !important;
+  font-weight:normal !important;
+}
+
+#paginaConta .fy2-welcome-row p{
+  margin:0;
+  color:var(--fy2-muted) !important;
+  font-size:10px;
+}
+
+/* STATS */
+#paginaConta .fy2-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+  margin-bottom:14px;
+}
+
+#paginaConta .fy2-stat{
+  min-height:92px;
+  padding:17px;
+  background:#fff;
+  border:1px solid var(--fy2-line);
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 7px 22px rgba(21,20,20,.04);
+}
+
+#paginaConta .fy2-stat::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#f7f1e2;
+  right:-32px;
+  bottom:-35px;
+}
+
+#paginaConta .fy2-stat-icon{
+  width:40px;
+  height:40px;
+  border:1px solid #ded1ad;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:#a08750;
+  font-size:20px;
+  background:#fcfaf5;
+}
+
+#paginaConta .fy2-stat small{
+  display:block;
+  color:#8b8284 !important;
+  font-size:7px !important;
+  letter-spacing:1.3px;
+  font-weight:900;
+}
+
+#paginaConta .fy2-stat strong{
+  display:block;
+  margin-top:4px;
+  color:#1e1b1c !important;
+  font-size:25px !important;
+  font-family:Georgia,serif !important;
+}
+
+#paginaConta .fy2-stat-arrow{
+  margin-left:auto;
+  color:#b29b67;
+  font-size:20px;
+  position:relative;
+  z-index:2;
+}
+
+/* PANELS */
+#paginaConta .fy2-main-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(250px,.9fr);
+  gap:14px;
+  margin-bottom:14px;
+}
+
+#paginaConta .fy2-panel{
+  background:#fff;
+  border:1px solid var(--fy2-line);
+  border-radius:17px;
+  padding:21px;
+  box-shadow:0 7px 23px rgba(21,20,20,.04);
+}
+
+#paginaConta .fy2-panel-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  padding-bottom:13px;
+  border-bottom:1px solid #eeeae3;
+}
+
+#paginaConta .fy2-panel h3{
+  margin:6px 0 0;
+  color:#242021 !important;
+  font-size:19px !important;
+  font-family:Georgia,serif !important;
+  font-weight:normal !important;
+}
+
+#paginaConta .fy2-link-btn{
+  border:0;
+  background:none;
+  color:#a08750;
+  font-size:9px;
+  font-weight:800;
+  cursor:pointer;
+  padding:4px;
+}
+
+#paginaConta .fy2-order-preview{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:22px 3px 3px;
+}
+
+#paginaConta .fy2-empty-icon{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:#faf8f3;
+  border:1px solid #e7deca;
+  color:#ad945b;
+  font-size:22px;
+}
+
+#paginaConta .fy2-order-preview strong{
+  color:#383133 !important;
+  font-size:11px;
+}
+
+#paginaConta .fy2-order-preview p{
+  margin:4px 0 0;
+  color:#817879 !important;
+  font-size:9px;
+  line-height:1.5;
+}
+
+/* CLUB */
+#paginaConta .fy2-club{
+  overflow:hidden;
+}
+
+#paginaConta .fy2-club-card{
+  margin-top:13px;
+  min-height:125px;
+  border-radius:13px;
+  padding:20px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(238,228,200,.13),transparent 25%),
+    linear-gradient(135deg,#111010,#292527);
+  border:1px solid rgba(216,201,159,.55);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-shadow:0 10px 24px rgba(21,20,20,.12);
+}
+
+#paginaConta .fy2-club-brand{
+  color:#eee4c8;
+  font-family:Georgia,serif;
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+#paginaConta .fy2-club-word{
+  color:#fff;
+  font-size:7px;
+  letter-spacing:4px;
+  margin-top:3px;
+}
+
+#paginaConta .fy2-club-line{
+  width:35px;
+  height:1px;
+  background:#d8c99f;
+  margin:12px 0 7px;
+}
+
+#paginaConta .fy2-club-card span{
+  color:#a99d9d;
+  font-size:6px;
+  letter-spacing:1.5px;
+}
+
+#paginaConta .fy2-club-copy{
+  color:#756e70 !important;
+  font-size:9px !important;
+  line-height:1.55;
+  margin:13px 0 0;
+}
+
+/* QUICK */
+#paginaConta .fy2-quick{
+  padding-bottom:12px;
+}
+
+#paginaConta .fy2-quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:14px;
+}
+
+#paginaConta .fy2-quick-grid button{
+  min-height:75px;
+  padding:10px 8px;
+  background:#fff;
+  border:0;
+  border-right:1px solid #eeeae3;
+  color:#3d3739;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  cursor:pointer;
+}
+
+#paginaConta .fy2-quick-grid button:last-child{
+  border-right:0;
+}
+
+#paginaConta .fy2-quick-grid button > span{
+  color:#a08750;
+  font-size:20px;
+}
+
+#paginaConta .fy2-quick-grid strong{
+  color:#373032 !important;
+  font-size:8px;
+}
+
+#paginaConta .fy2-quick-grid small{
+  color:#938a8b !important;
+  font-size:7px;
+}
+
+/* FORMS */
+#paginaConta .fy2-form-panel{
+  padding:27px;
+}
+
+#paginaConta .fy2-form-panel h2{
+  color:#242021 !important;
+  font-family:Georgia,serif !important;
+  font-size:26px !important;
+  font-weight:normal !important;
+  margin:6px 0;
+}
+
+#paginaConta .fy2-form-panel > p{
+  color:#746d6e !important;
+  font-size:10px;
+  margin-bottom:22px;
+}
+
+#paginaConta .fy2-form{
+  gap:14px !important;
+}
+
+#paginaConta .fy2-form label{
+  color:#4c4547 !important;
+  font-size:9px !important;
+  font-weight:800;
+}
+
+#paginaConta .fy2-form input{
+  width:100%;
+  margin-top:6px;
+  min-height:43px;
+  padding:11px 12px;
+  border:1px solid #ddd7cc !important;
+  border-radius:9px !important;
+  color:#272325 !important;
+  background:#fff !important;
+  font-size:11px;
+  box-sizing:border-box;
+}
+
+#paginaConta .fy2-form input:focus{
+  outline:none;
+  border-color:#c9b778 !important;
+  box-shadow:0 0 0 3px rgba(216,201,159,.20) !important;
+}
+
+#paginaConta .fy2-save{
+  min-height:43px;
+  padding:11px 18px !important;
+  border-radius:9px !important;
+  background:#171516 !important;
+  border:1px solid #d8c99f !important;
+  color:#fff !important;
+  font-size:9px !important;
+  font-weight:800;
+}
+
+/* EMPTY + SECURITY */
+#paginaConta .fy2-empty{
+  margin-top:20px;
+  background:#faf8f3 !important;
+  border:1px dashed #ddd2b8 !important;
+  border-radius:13px !important;
+  color:#777071 !important;
+  padding:30px !important;
+  text-align:center;
+}
+
+#paginaConta .fy2-empty strong{
+  color:#383133 !important;
+}
+
+#paginaConta .fy2-security-box{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:18px 0;
+  padding:15px;
+  background:#faf8f3;
+  border:1px solid #e8e0d1;
+  border-radius:11px;
+  color:#645b5d !important;
+  font-size:10px;
+  line-height:1.5;
+}
+
+#paginaConta .fy2-security-box strong{
+  color:#302a2c !important;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  #paginaConta .fy2-account{
+    margin:0 15px;
+  }
+
+  #paginaConta .fy2-layout{
+    grid-template-columns:1fr;
+  }
+
+  #paginaConta .fy2-sidebar{
+    position:static;
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    padding:7px;
+  }
+
+  #paginaConta .fy2-sidebar-title,
+  #paginaConta .fy2-sidebar-separator{
+    display:none;
+  }
+
+  #paginaConta .fy2-nav-item{
+    width:auto;
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+
+  #paginaConta .fy2-nav-item.ativo{
+    box-shadow:none;
+  }
+}
+
+@media(max-width:650px){
+  #paginaConta .fy2-header{
+    padding:25px 21px;
+    min-height:155px;
+  }
+
+  #paginaConta .fy2-header h1{
+    font-size:27px !important;
+  }
+
+  #paginaConta .fy2-header p{
+    max-width:260px;
+    line-height:1.5;
+  }
+
+  #paginaConta .fy2-profile-text{
+    display:none;
+  }
+
+  #paginaConta .fy2-profile-icon{
+    width:60px;
+    height:60px;
+  }
+
+  #paginaConta .fy2-person-head{
+    width:15px;
+    height:15px;
+    top:11px;
+  }
+
+  #paginaConta .fy2-person-body{
+    width:27px;
+    height:13px;
+    bottom:10px;
+  }
+
+  #paginaConta .fy2-stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  #paginaConta .fy2-main-grid{
+    grid-template-columns:1fr;
+  }
+
+  #paginaConta .fy2-quick-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  #paginaConta .fy2-quick-grid button:nth-child(2){
+    border-right:0;
+  }
+
+  #paginaConta .fy2-quick-grid button{
+    border-bottom:1px solid #eeeae3;
   }
 }
 </style>
