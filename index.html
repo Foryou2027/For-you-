@@ -2756,6 +2756,296 @@ footer a:hover{
   }
 }
 
+
+/* =========================================================
+   FOR YOU — MICROINTERAÇÕES & ANIMAÇÕES PREMIUM
+========================================================= */
+
+/* Entrada suave da página */
+@keyframes fyFadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fyFadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes fyPop{
+  0%{transform:scale(.88);opacity:0}
+  70%{transform:scale(1.05)}
+  100%{transform:scale(1);opacity:1}
+}
+
+@keyframes fyShine{
+  0%{transform:translateX(-130%)}
+  100%{transform:translateX(130%)}
+}
+
+@keyframes fyHeart{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.25)}
+  70%{transform:scale(.92)}
+  100%{transform:scale(1)}
+}
+
+@keyframes fyCart{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
+
+/* Logo */
+.logo{
+  transition:transform .3s ease;
+}
+.logo:hover{
+  transform:translateY(-1px);
+}
+
+/* Links e botões */
+button,
+a,
+.menu-principal button,
+.menu button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:not(:disabled),
+a{
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease;
+}
+
+button:not(:disabled):active{
+  transform:scale(.97);
+}
+
+/* Botões principais com brilho muito discreto */
+.banner-cta,
+.btn-primary,
+.btn-comprar,
+.ver-todos-btn{
+  position:relative;
+  overflow:hidden;
+}
+
+.banner-cta::after,
+.btn-primary::after,
+.btn-comprar::after,
+.ver-todos-btn::after{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 -55%;
+  width:35%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.24),
+    transparent
+  );
+  transform:skewX(-18deg);
+  pointer-events:none;
+}
+
+.banner-cta:hover::after,
+.btn-primary:hover::after,
+.btn-comprar:hover::after,
+.ver-todos-btn:hover::after{
+  animation:fyShine .75s ease;
+}
+
+/* Cards */
+.produto-card,
+.product-card,
+.card-produto,
+.beneficio{
+  will-change:transform;
+}
+
+/* Imagens de produto: zoom delicado */
+.produto-card img,
+.product-card img,
+.card-produto img{
+  transition:transform .45s cubic-bezier(.2,.7,.2,1);
+}
+
+.produto-card:hover img,
+.product-card:hover img,
+.card-produto:hover img{
+  transform:scale(1.035);
+}
+
+/* Coração */
+.favorito,
+.btn-favorito,
+.heart{
+  transition:transform .2s ease,background-color .2s ease,color .2s ease;
+}
+
+.favorito:hover,
+.btn-favorito:hover,
+.heart:hover{
+  transform:scale(1.08);
+}
+
+.favorito.ativo,
+.btn-favorito.ativo,
+.heart.ativo{
+  animation:fyHeart .38s ease;
+}
+
+/* Ícones do cabeçalho */
+header svg{
+  transition:transform .22s ease;
+}
+
+header button:hover svg,
+header a:hover svg{
+  transform:translateY(-1px) scale(1.05);
+}
+
+/* Contadores */
+.cart-count,
+.contador-carrinho,
+.favoritos-count,
+.badge-count{
+  animation:fyPop .3s ease;
+}
+
+/* Menu dropdown */
+.dropdown,
+.submenu,
+.menu-dropdown{
+  transform-origin:top center;
+  animation:fyFadeUp .22s ease both;
+}
+
+/* Categorias */
+.subcategoria{
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background-color .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+}
+
+.subcategoria:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(45,36,38,.08);
+}
+
+/* Filtros */
+.filtros select,
+.filtros button{
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background-color .2s ease;
+}
+
+.filtros select:focus{
+  outline:none;
+  border-color:var(--fy-rose) !important;
+  box-shadow:0 0 0 4px rgba(183,110,121,.10);
+}
+
+/* Benefícios */
+.beneficio .beneficio-icone{
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.beneficio:hover .beneficio-icone{
+  transform:scale(1.06);
+  box-shadow:0 6px 16px rgba(183,110,121,.12);
+}
+
+/* Modal / overlays */
+.modal,
+.overlay,
+.popup,
+.carrinho-overlay{
+  animation:fyFadeIn .2s ease both;
+}
+
+/* Carrinho e painéis */
+.carrinho,
+.carrinho-box,
+.checkout-box,
+.resumo-pedido{
+  animation:fyFadeUp .25s ease both;
+}
+
+/* Toasts / mensagens */
+.toast,
+.notificacao,
+.alerta,
+.mensagem{
+  animation:fyPop .3s ease both;
+}
+
+/* Barra de progresso do Club */
+.club .progresso > div,
+.club-progress > div{
+  transition:width .8s cubic-bezier(.2,.7,.2,1);
+}
+
+/* Foco acessível */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:2px solid var(--fy-rose) !important;
+  outline-offset:3px;
+}
+
+/* Rolagem mais agradável */
+*{
+  scrollbar-width:thin;
+  scrollbar-color:#d7b1b7 transparent;
+}
+
+/* Evita animações para usuários que pedem menos movimento */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto !important}
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* Celular: efeitos mais leves */
+@media(max-width:700px){
+  .produto-card:hover,
+  .product-card:hover,
+  .card-produto:hover{
+    transform:none;
+  }
+
+  .produto-card:hover img,
+  .product-card:hover img,
+  .card-produto:hover img{
+    transform:none;
+  }
+
+  .subcategoria:hover{
+    transform:none;
+  }
+}
+
 </style>
 
 <style id="cards-premium-v11">
