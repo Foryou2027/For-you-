@@ -5033,10 +5033,9 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <button class="acao-btn" onclick="abrirConta()" title="Área do cliente" aria-label="Área do cliente" data-tooltip="Área do cliente"></button>
 
-<div class="carrinho-icon" onclick="abrirCarrinho()">
-🛍️
-<span class="contador" id="contador">0</span>
-</div>
+<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" aria-label="Abrir carrinho" title="Carrinho">
+  🛒<span class="contador" id="contadorCarrinho">0</span>
+</button>
 
 </div>
 </div>
@@ -9413,6 +9412,114 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     }
   }, true);
+})();
+</script>
+
+
+<style id="fy-cart-final-fix">
+#btnAbrirCarrinho{
+  position:relative;
+  border:0;
+  background:none;
+  cursor:pointer;
+  color:#351f27;
+  font-size:24px;
+  padding:5px;
+  touch-action:manipulation;
+  z-index:10001;
+}
+#btnAbrirCarrinho:hover{transform:scale(1.06)}
+#carrinho{
+  transform:translateX(100%) !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+#carrinho.aberto{
+  transform:translateX(0) !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+#btnFecharCarrinho{
+  z-index:100000 !important;
+  pointer-events:auto !important;
+  cursor:pointer !important;
+  touch-action:manipulation !important;
+}
+#overlay{pointer-events:none !important}
+#overlay.ativo{pointer-events:auto !important}
+</style>
+
+<script id="fy-cart-final-fix-script">
+(function(){
+  function openCart(){
+    var c=document.getElementById('carrinho');
+    var o=document.getElementById('overlay');
+    if(c){
+      c.classList.add('aberto');
+      c.style.setProperty('transform','translateX(0)','important');
+      c.style.setProperty('visibility','visible','important');
+      c.style.setProperty('pointer-events','auto','important');
+      c.setAttribute('aria-hidden','false');
+    }
+    if(o){
+      o.classList.add('ativo');
+      o.style.setProperty('display','block','important');
+      o.style.setProperty('pointer-events','auto','important');
+    }
+    document.body.style.overflow='hidden';
+  }
+
+  function closeCart(){
+    var c=document.getElementById('carrinho');
+    var o=document.getElementById('overlay');
+    if(c){
+      c.classList.remove('aberto');
+      c.style.setProperty('transform','translateX(100%)','important');
+      c.style.setProperty('visibility','hidden','important');
+      c.style.setProperty('pointer-events','none','important');
+      c.setAttribute('aria-hidden','true');
+    }
+    if(o){
+      o.classList.remove('ativo');
+      o.style.setProperty('display','none','important');
+      o.style.setProperty('pointer-events','none','important');
+    }
+    document.body.style.overflow='';
+  }
+
+  window.abrirCarrinho=openCart;
+  window.fecharCarrinho=closeCart;
+
+  document.addEventListener('click',function(e){
+    var open=e.target.closest && e.target.closest('#btnAbrirCarrinho');
+    var close=e.target.closest && e.target.closest('#btnFecharCarrinho');
+
+    if(open){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openCart();
+      return;
+    }
+
+    if(close){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      closeCart();
+      return;
+    }
+
+    var overlay=document.getElementById('overlay');
+    if(overlay && e.target===overlay && overlay.classList.contains('ativo')){
+      closeCart();
+    }
+  },true);
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var c=document.getElementById('carrinho');
+      if(c && c.classList.contains('aberto')) closeCart();
+    }
+  },true);
 })();
 </script>
 
