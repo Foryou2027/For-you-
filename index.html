@@ -3634,6 +3634,32 @@ button,a,input,select,textarea{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){.menu-btn,.dropdown,.dropdown a{transition:none!important;animation:none!important}}
 </style>
 
+
+<style>
+/* ===== MINHA CONTA / FOR YOU CLUB ===== */
+.conta-premium-v15{max-width:1200px;margin:20px auto 60px}.conta-hero-v14{border-radius:24px;padding:32px;background:linear-gradient(135deg,#fff5f8,#fff);border:1px solid #f0d7df;box-shadow:0 12px 35px #351f2710}.conta-layout-v14{margin-top:18px}.conta-menu-v14{border-radius:18px;border:1px solid #ead9de;background:#fff;padding:10px}.conta-menu-v14 button{border-radius:12px!important;padding:13px 14px!important;transition:.2s}.conta-menu-v14 button.ativo,.conta-menu-v14 button:hover{background:#fff0f4!important;color:#c2185b!important}.conta-painel-v14{border:1px solid #ead9de!important;border-radius:20px!important;background:#fff!important;box-shadow:0 10px 30px #351f2708}.conta-cards-v14{gap:14px}.conta-stat-v14{border-radius:16px!important;background:linear-gradient(180deg,#fff,#fff8fa)!important;border:1px solid #f0d7df!important}.conta-box-v14{border-radius:16px!important;border:1px solid #f0d7df!important}.club-card-fy{margin-top:18px;border-radius:20px;padding:24px;background:linear-gradient(135deg,#d81b60,#ad1457);color:#fff;box-shadow:0 15px 35px #d81b6030}.club-card-fy h2{margin:0 0 6px;font-family:Georgia,serif}.club-card-fy p{margin:0 0 18px;opacity:.9}.club-progress-fy{height:8px;background:#ffffff40;border-radius:20px;overflow:hidden}.club-progress-fy span{display:block;height:100%;width:65%;background:#fff;border-radius:20px}.club-benefits-fy{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.club-benefit-fy{background:#ffffff18;border:1px solid #ffffff30;border-radius:14px;padding:12px}.cadastro-box-fy{margin-top:18px;padding:22px;border:1px solid #ead9de;border-radius:18px;background:#fff}.cadastro-box-fy h3{margin-top:0}.cadastro-grid-fy{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cadastro-grid-fy input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #dccbd1;border-radius:10px}.btn-fy{border:0;border-radius:12px;padding:13px 18px;background:#d81b60;color:#fff;font-weight:700;cursor:pointer;margin-top:12px}.pedido-vazio-fy{text-align:center;padding:30px;border:1px dashed #e3cbd2;border-radius:16px;color:#777}.pedido-card-fy{padding:16px;border:1px solid #ead9de;border-radius:14px;margin-top:10px;display:flex;justify-content:space-between;gap:12px}.pedido-status-fy{color:#d81b60;font-weight:700}@media(max-width:700px){.club-benefits-fy,.cadastro-grid-fy{grid-template-columns:1fr}.conta-hero-v14{padding:22px}.pedido-card-fy{flex-direction:column}.conta-layout-v14{display:block}}
+</style>
+<script>
+function atualizarClubFY(){
+ const el=document.getElementById('clubConteudoFY'); if(!el)return;
+ let fav=0; try{fav=JSON.parse(localStorage.getItem('forYouFavoritos')||'[]').length}catch(e){}
+ const nome=localStorage.getItem('forYouNome')||'cliente';
+ el.innerHTML=`<div class="club-card-fy"><h2>FOR YOU Club ✦</h2><p>Olá, ${nome}! Quanto mais você compra, mais benefícios desbloqueia.</p><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>Próximo nível</span><strong>650 / 1.000 pontos</strong></div><div class="club-progress-fy"><span></span></div><div class="club-benefits-fy"><div class="club-benefit-fy"><b>♡ ${fav}</b><br><small>Favoritos salvos</small></div><div class="club-benefit-fy"><b>+10%</b><br><small>Cupons exclusivos</small></div><div class="club-benefit-fy"><b>Frete</b><br><small>Benefícios especiais</small></div></div></div>`;
+}
+function salvarCadastroFY(){
+ const n=document.getElementById('fyNome'); const e=document.getElementById('fyEmail'); if(!n||!e)return;
+ if(!n.value.trim()||!e.value.trim()){alert('Preencha nome e e-mail.');return;}
+ localStorage.setItem('forYouNome',n.value.trim()); localStorage.setItem('forYouEmail',e.value.trim());
+ const s=document.getElementById('contaSaudacao'); if(s)s.textContent='Olá, '+n.value.trim()+' 💗';
+ atualizarClubFY(); alert('Cadastro salvo com sucesso!');
+}
+function prepararContaFY(){
+ const n=localStorage.getItem('forYouNome')||''; const e=localStorage.getItem('forYouEmail')||'';
+ const a=document.getElementById('fyNome'),b=document.getElementById('fyEmail'); if(a)a.value=n;if(b)b.value=e;
+ atualizarClubFY();
+}
+document.addEventListener('DOMContentLoaded',prepararContaFY);
+</script>
 </head>
 
 <body>
@@ -4252,7 +4278,9 @@ Promoções de datas especiais
     <div class="conta-avatar-v14" id="contaAvatar">FY</div>
   </div>
 
-  <div class="conta-layout-v14">
+  <div class="cadastro-box-fy"><h3>Seu cadastro</h3><p style="color:#777">Mantenha seus dados salvos neste navegador para agilizar suas próximas compras.</p><div class="cadastro-grid-fy"><input id="fyNome" type="text" placeholder="Nome completo"><input id="fyEmail" type="email" placeholder="Seu melhor e-mail"></div><button class="btn-fy" onclick="salvarCadastroFY()">SALVAR MEUS DADOS</button></div><div id="clubConteudoFY"></div>
+
+<div class="conta-layout-v14">
     <aside class="conta-menu-v14">
       <button class="ativo" onclick="abrirAbaConta('inicioConta',this)">⌂ Visão geral</button>
       <button onclick="abrirAbaConta('dadosConta',this)">♙ Dados pessoais</button>
