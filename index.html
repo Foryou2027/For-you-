@@ -3283,6 +3283,445 @@ textarea:focus-visible{
   }
 }
 
+
+<style id="fy-account-premium-v2">
+/* =========================================================
+   FOR YOU — ÁREA DO CLIENTE V2
+   Mais limpa, clara e profissional
+========================================================= */
+
+#paginaConta{
+  background:#faf7f5 !important;
+  padding-bottom:60px !important;
+}
+
+#paginaConta > .voltar{
+  max-width:1200px;
+  margin:0 auto 14px;
+  display:block;
+  color:#79515a !important;
+  font-weight:700;
+}
+
+/* Hero */
+#paginaConta .conta-premium-v14{
+  max-width:1200px !important;
+}
+
+#paginaConta .conta-hero-v14{
+  position:relative;
+  min-height:175px;
+  padding:34px 38px !important;
+  border-radius:26px !important;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(255,255,255,.18),transparent 28%),
+    linear-gradient(120deg,#3b252c 0%,#6d3b49 55%,#9b626d 100%) !important;
+  border:0 !important;
+  box-shadow:0 18px 45px rgba(59,37,44,.16) !important;
+}
+
+#paginaConta .conta-hero-v14::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+  right:-80px;
+  top:-90px;
+}
+
+#paginaConta .conta-hero-v14 small{
+  color:#f0d8dd !important;
+  font-size:10px !important;
+  letter-spacing:3px !important;
+}
+
+#paginaConta .conta-hero-v14 h1{
+  color:#fff !important;
+  font-size:34px !important;
+  margin:8px 0 !important;
+}
+
+#paginaConta .conta-hero-v14 p{
+  color:#f7e9ec !important;
+  font-size:12px !important;
+  max-width:590px;
+}
+
+#paginaConta .conta-avatar-v14{
+  position:relative;
+  z-index:2;
+  width:82px !important;
+  height:82px !important;
+  flex:0 0 82px;
+  border:4px solid rgba(255,255,255,.25) !important;
+  background:#fff !important;
+  color:#7d4653 !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+  font-family:Georgia,serif !important;
+  font-size:25px !important;
+}
+
+/* Cadastro compacto */
+#paginaConta .cadastro-box-fy{
+  position:relative;
+  margin:16px 0 !important;
+  padding:22px 24px !important;
+  border:1px solid #eadfe0 !important;
+  border-radius:18px !important;
+  background:#fff !important;
+  box-shadow:0 7px 24px rgba(45,36,38,.045);
+}
+
+#paginaConta .cadastro-box-fy h3{
+  font-family:Georgia,serif !important;
+  font-size:20px !important;
+  color:#302528 !important;
+  margin-bottom:4px;
+}
+
+#paginaConta .cadastro-box-fy p{
+  color:#766b6e !important;
+  font-size:10px !important;
+}
+
+#paginaConta .cadastro-grid-fy input{
+  height:44px !important;
+  background:#fff !important;
+  color:#302528 !important;
+  border:1px solid #ddd0d3 !important;
+}
+
+#paginaConta .cadastro-grid-fy input::placeholder{
+  color:#9a8e91 !important;
+}
+
+#paginaConta .btn-fy{
+  background:#7f4653 !important;
+  border:0 !important;
+  border-radius:10px !important;
+  min-height:42px;
+  padding:11px 18px !important;
+  transition:.2s;
+}
+
+#paginaConta .btn-fy:hover{
+  background:#62333f !important;
+  transform:translateY(-1px);
+}
+
+/* Navegação */
+#paginaConta .conta-layout-v14{
+  align-items:start;
+  gap:18px !important;
+}
+
+#paginaConta .conta-menu-v14{
+  position:sticky;
+  top:18px;
+  border:1px solid #e8dddf !important;
+  border-radius:18px !important;
+  padding:8px !important;
+  background:#fff !important;
+  box-shadow:0 8px 25px rgba(45,36,38,.05) !important;
+}
+
+#paginaConta .conta-menu-v14::before{
+  content:"MINHA ÁREA";
+  display:block;
+  padding:9px 12px 7px;
+  color:#a08f94;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+#paginaConta .conta-menu-v14 button{
+  position:relative;
+  min-height:46px;
+  padding:12px 13px !important;
+  margin-bottom:2px;
+  color:#51474a !important;
+  background:#fff !important;
+  border:1px solid transparent !important;
+  font-size:10px !important;
+  font-weight:700;
+}
+
+#paginaConta .conta-menu-v14 button:hover{
+  color:#7f4653 !important;
+  background:#fcf3f5 !important;
+  border-color:#f0dfe2 !important;
+  transform:none;
+}
+
+#paginaConta .conta-menu-v14 button.ativo{
+  color:#7f4653 !important;
+  background:#f7e9ec !important;
+  border-color:#ead0d5 !important;
+}
+
+#paginaConta .conta-menu-v14 button.ativo::before{
+  content:"";
+  position:absolute;
+  left:-8px;
+  top:10px;
+  bottom:10px;
+  width:3px;
+  border-radius:4px;
+  background:#9b626d;
+}
+
+/* Painel */
+#paginaConta .conta-painel-v14{
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Estatísticas */
+#paginaConta .conta-cards-v14{
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:12px !important;
+  margin-bottom:14px !important;
+}
+
+#paginaConta .conta-stat-v14{
+  position:relative;
+  min-height:95px;
+  padding:18px 20px !important;
+  border:1px solid #e8dddf !important;
+  border-radius:17px !important;
+  background:#fff !important;
+  box-shadow:0 7px 22px rgba(45,36,38,.045) !important;
+  overflow:hidden;
+}
+
+#paginaConta .conta-stat-v14::after{
+  content:"";
+  position:absolute;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#f9ecef;
+  right:-22px;
+  bottom:-22px;
+}
+
+#paginaConta .conta-stat-v14 small{
+  position:relative;
+  z-index:1;
+  color:#827579 !important;
+  font-size:8px !important;
+  letter-spacing:1.4px;
+  font-weight:800;
+}
+
+#paginaConta .conta-stat-v14 strong{
+  position:relative;
+  z-index:1;
+  color:#302528 !important;
+  font-size:28px !important;
+  margin-top:5px !important;
+}
+
+/* Caixas internas */
+#paginaConta .conta-box-v14{
+  padding:24px !important;
+  border:1px solid #e8dddf !important;
+  border-radius:18px !important;
+  background:#fff !important;
+  box-shadow:0 7px 24px rgba(45,36,38,.045) !important;
+}
+
+#paginaConta .conta-box-v14 h2{
+  color:#302528 !important;
+  font-size:23px !important;
+}
+
+#paginaConta .conta-box-v14 > p{
+  color:#766b6e !important;
+  font-size:10px !important;
+}
+
+/* Avisos da visão geral */
+#paginaConta .conta-security-v14{
+  background:#faf6f7 !important;
+  border:1px solid #eee1e4;
+  color:#54494c !important;
+  border-radius:12px !important;
+}
+
+/* Formulários */
+#paginaConta .conta-form-v14 label{
+  color:#504649 !important;
+}
+
+#paginaConta .conta-form-v14 input{
+  color:#302528 !important;
+  background:#fff !important;
+  border:1px solid #ddd0d3 !important;
+  border-radius:10px !important;
+}
+
+#paginaConta .conta-form-v14 input:focus{
+  border-color:#9b626d !important;
+  box-shadow:0 0 0 3px rgba(155,98,109,.11) !important;
+}
+
+#paginaConta .conta-save-v14{
+  background:#3b252c !important;
+  color:#fff !important;
+  border:0 !important;
+  border-radius:10px !important;
+  padding:12px 20px !important;
+}
+
+#paginaConta .conta-save-v14:hover{
+  background:#7f4653 !important;
+}
+
+/* Pedidos */
+#paginaConta .conta-order-v14,
+#paginaConta .conta-pedido{
+  background:#fff !important;
+  border-color:#eadfe0 !important;
+}
+
+#paginaConta .conta-status-v14,
+#paginaConta .pedido-badge{
+  color:#527b62 !important;
+  background:#eef7f1 !important;
+  border:1px solid #d6eadc !important;
+}
+
+/* Vazio */
+#paginaConta .conta-empty-v14,
+#paginaConta .pedido-vazio-fy{
+  background:#fcf7f8 !important;
+  border:1px dashed #dfcbd0 !important;
+  color:#75696d !important;
+  border-radius:15px !important;
+}
+
+#paginaConta .conta-empty-v14 strong{
+  color:#3b3033 !important;
+}
+
+/* Club */
+#paginaConta .club-card-fy{
+  border-radius:20px !important;
+  padding:25px !important;
+  background:
+    radial-gradient(circle at 95% 10%,rgba(255,255,255,.16),transparent 25%),
+    linear-gradient(135deg,#6d3b49,#a26570) !important;
+  box-shadow:0 14px 32px rgba(109,59,73,.17) !important;
+}
+
+#paginaConta .club-card-fy h2{
+  color:#fff !important;
+  font-size:23px !important;
+}
+
+#paginaConta .club-card-fy p,
+#paginaConta .club-card-fy small{
+  color:#f8eaed !important;
+}
+
+#paginaConta .club-progress-fy{
+  background:rgba(255,255,255,.22) !important;
+}
+
+#paginaConta .club-progress-fy span{
+  background:#fff !important;
+}
+
+#paginaConta .club-benefit-fy{
+  background:rgba(255,255,255,.10) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  color:#fff !important;
+}
+
+/* Responsivo */
+@media(max-width:900px){
+  #paginaConta .conta-layout-v14{
+    grid-template-columns:1fr !important;
+  }
+
+  #paginaConta .conta-menu-v14{
+    position:static;
+    display:flex;
+    overflow-x:auto;
+    gap:5px;
+    padding:7px !important;
+  }
+
+  #paginaConta .conta-menu-v14::before{
+    display:none;
+  }
+
+  #paginaConta .conta-menu-v14 button{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+
+  #paginaConta .conta-menu-v14 button.ativo::before{
+    left:10px;
+    right:10px;
+    bottom:-7px;
+    top:auto;
+    width:auto;
+    height:3px;
+  }
+}
+
+@media(max-width:600px){
+  #paginaConta > .voltar{
+    margin-left:16px;
+    margin-right:16px;
+  }
+
+  #paginaConta .conta-hero-v14{
+    min-height:0;
+    padding:25px 21px !important;
+    border-radius:20px !important;
+  }
+
+  #paginaConta .conta-hero-v14 h1{
+    font-size:27px !important;
+  }
+
+  #paginaConta .conta-hero-v14 p{
+    font-size:10px !important;
+  }
+
+  #paginaConta .conta-avatar-v14{
+    width:62px !important;
+    height:62px !important;
+    flex-basis:62px;
+    font-size:20px !important;
+  }
+
+  #paginaConta .cadastro-box-fy,
+  #paginaConta .conta-box-v14{
+    padding:18px !important;
+  }
+
+  #paginaConta .conta-cards-v14{
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  #paginaConta .conta-stat-v14:last-child{
+    grid-column:1/-1;
+  }
+}
+</style>
+
 </style>
 
 <style id="cards-premium-v11">
