@@ -2299,6 +2299,72 @@ footer p{
   .hero-side-card{right:5%;width:170px;}
 }
 
+
+/* =========================
+   CARRINHO PREMIUM — NOVO VISUAL
+========================= */
+.carrinho{width:min(560px,100%);box-shadow:-18px 0 45px rgba(53,31,39,.16)}
+.carrinho-header{padding:22px 24px;background:linear-gradient(180deg,#fff,#fff8fa);position:sticky;top:0;z-index:3}
+.carrinho-header h2{font-size:30px;color:#351f27}
+.carrinho-header h2::after{content:'  •  seus favoritos em um só lugar';font:10px Arial,sans-serif;color:#a88955;letter-spacing:.3px}
+.itens{padding:14px 24px 8px;background:#fff}
+.carrinho-vazio{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:220px;color:#777}
+.carrinho-vazio .icone{font-size:34px;margin-bottom:12px;color:#b83f61}
+.carrinho-vazio strong{font-family:Georgia,serif;font-size:23px;color:#351f27;margin-bottom:5px}
+.carrinho-vazio span{font-size:10px}
+.item{display:grid;grid-template-columns:76px 1fr auto;gap:13px;align-items:center;padding:17px 0;border-bottom:1px solid #f0e3e7}
+.item:last-child{border-bottom:0}
+.item-img{width:76px;height:86px;border-radius:10px;background:#f8e9ed center/cover no-repeat;border:1px solid #f0dce2;overflow:hidden}
+.item-dados{min-width:0}
+.item-dados .item-marca{font-size:8px;text-transform:uppercase;letter-spacing:1.3px;color:#a88955;font-weight:bold;margin-bottom:3px}
+.item-dados strong{display:block;font-family:Georgia,serif;font-size:17px;line-height:1.2;color:#351f27;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-preco{font-size:12px;margin:6px 0 9px;color:#b83f61}
+.item-preco small{font-size:9px;color:#999;margin-left:4px}
+.quantidade{display:inline-flex;align-items:center;gap:0;border:1px solid #dfcbd1;border-radius:20px;overflow:hidden;background:#fff}
+.quantidade button{width:30px;height:30px;border:0;background:#fff;color:#351f27;font-size:17px;line-height:1;transition:.2s}
+.quantidade button:hover{background:#fff0f4;color:#b83f61}
+.quantidade span{min-width:30px;text-align:center;font-size:11px;font-weight:bold;color:#351f27}
+.item-total{font-size:13px;font-weight:bold;color:#351f27;white-space:nowrap;align-self:start;padding-top:3px}
+.remover{display:block;margin-top:7px;padding:0;text-align:right;color:#a08f95;font-size:8px;text-decoration:underline;text-underline-offset:3px}
+.remover:hover{color:#b83f61}
+.frete-gratis{padding:15px 24px;background:#fff8fa;border-top:1px solid #ead9de;border-bottom:1px solid #ead9de}
+.frete-gratis p{font-size:10px;color:#5e4e54;margin-bottom:9px}
+.barra{height:8px;background:#ead9de;border-radius:20px}
+.barra-progresso{background:linear-gradient(90deg,#b83f61,#d97996);border-radius:20px}
+.frete{padding:17px 24px;background:#fff;max-height:31vh;border-bottom:1px solid #ead9de}
+.frete h3,.cupom h3{font-size:10px;letter-spacing:1.2px;color:#351f27;margin-bottom:10px}
+.cep-linha input{border-radius:9px 0 0 9px}
+.cep-linha button{border-radius:0 9px 9px 0}
+.entrega{border-radius:10px;padding:12px;transition:.2s}
+.entrega:hover{border-color:#d88ca1;background:#fff8fa}
+.entrega:has(input:checked){border-color:#b83f61;background:#fff5f7;box-shadow:0 0 0 2px #b83f6112}
+.valor-entrega{font-weight:bold;color:#351f27;font-size:10px}
+.cupom{padding:16px 24px;background:#fff;border-bottom:1px solid #ead9de}
+.cupom-linha{display:flex}
+.cupom-linha input{flex:1;border:1px solid #ddcbd0;border-radius:9px 0 0 9px;padding:11px 12px;font-size:10px;text-transform:uppercase;outline:none}
+.cupom-linha button{border:0;background:#b83f61;color:#fff;border-radius:0 9px 9px 0;padding:0 16px;font-size:9px;font-weight:bold}
+.cupom-msg{font-size:9px;margin-top:7px;color:#b83f61;min-height:12px}
+.cupons-disponiveis{margin-top:12px}.cupons-disponiveis h4{font-size:8px;letter-spacing:1px;color:#8d7b82;margin-bottom:7px}
+.cupom-card{display:flex;justify-content:space-between;align-items:center;border:1px dashed #e3b9c5;border-radius:8px;padding:8px 10px;margin-top:6px;background:#fffafd}
+.cupom-card span{font-size:9px;color:#6b5a60}.cupom-card strong{color:#b83f61;letter-spacing:1px}
+.cupom-card button{border:0;background:none;color:#b83f61;font-size:8px;font-weight:bold}
+.resumo{padding:19px 24px 24px;background:#fff;box-shadow:0 -8px 25px rgba(53,31,39,.05)}
+.linha{display:flex;justify-content:space-between;align-items:center;padding:7px 0;color:#6e6065;font-size:10px}
+.linha strong{color:#351f27}.linha.desconto strong{color:#b83f61}
+.linha.total{margin-top:5px;padding-top:13px;border-top:1px solid #ead9de;color:#351f27;font-size:14px}.linha.total strong{font-size:23px;color:#b83f61;font-family:Georgia,serif}
+.resumo::after{content:'Compra segura • valores atualizados em tempo real';display:block;text-align:center;margin-top:10px;color:#9b8c91;font-size:8px}
+.whatsapp{width:100%;border-radius:8px!important;padding:14px!important;background:#351f27!important;letter-spacing:1.2px!important;transition:.2s!important}
+.whatsapp:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(53,31,39,.16)}
+@media(max-width:600px){.carrinho{width:100%}.carrinho-header{padding:18px}.carrinho-header h2{font-size:26px}.carrinho-header h2::after{display:none}.itens,.frete-gratis,.frete,.cupom,.resumo{padding-left:18px;padding-right:18px}.item{grid-template-columns:64px 1fr auto;gap:10px}.item-img{width:64px;height:74px}.item-dados strong{font-size:15px}.item-total{font-size:12px}.frete{max-height:29vh}}
+/* CHECKOUT PREMIUM */
+.checkout-card,.checkout-resumo{border-radius:16px;box-shadow:0 10px 30px rgba(53,31,39,.05)}
+.checkout-etapa{border-radius:10px;transition:.2s}.checkout-etapa.ativa{box-shadow:0 5px 14px rgba(53,31,39,.12)}
+.checkout-resumo{position:sticky;top:105px;height:max-content;padding:22px;background:linear-gradient(180deg,#fff8fa,#fff)}
+.checkout-resumo h3{font-size:24px}
+.checkout-item-mini{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #ead9de;font-size:9px}.checkout-item-mini strong{font-size:10px}.checkout-item-mini span{color:#777}.checkout-total strong{font-size:19px;color:#b83f61}
+.checkout-btn{border-radius:9px;transition:.2s}.checkout-btn:hover{transform:translateY(-1px)}
+@media(max-width:800px){.checkout-resumo{position:static}}
+
 </style>
 
 <style id="cards-premium-v11">
@@ -5124,112 +5190,44 @@ abrirCarrinho();
 ========================= */
 
 function atualizar(){
-
-const container =
-document.getElementById("itens");
-
-let quantidade=0;
-
-let subtotal=0;
-
-if(carrinho.length===0){
-
-container.innerHTML=`
-<div style="
-text-align:center;
-padding:60px 10px;
-color:#888;
-font-size:12px;
-">
-Seu carrinho está vazio.
-</div>
-`;
-
-}else{
-
-container.innerHTML="";
-
-carrinho.forEach((produto,index)=>{
-
-quantidade += produto.quantidade;
-
-subtotal +=
-produto.preco*produto.quantidade;
-
-const item =
-document.createElement("div");
-
-item.className="item";
-
-item.innerHTML=`
-
-<div class="item-img"></div>
-
-<div class="item-dados">
-
-<strong>
-${produto.nome}
-</strong>
-
-<div class="item-preco">
-${moeda(produto.preco)}
-</div>
-
-<div class="quantidade">
-
-<button onclick="alterar(${index},-1)">
-−
-</button>
-
-<span>
-${produto.quantidade}
-</span>
-
-<button onclick="alterar(${index},1)">
-+
-</button>
-
-</div>
-
-<button
-class="remover"
-onclick="remover(${index})"
->
-REMOVER
-</button>
-
-</div>
-
-`;
-
-container.appendChild(item);
-
-});
-
+  const container=document.getElementById("itens");
+  let quantidade=0, subtotal=0;
+  if(carrinho.length===0){
+    container.innerHTML=`<div class="carrinho-vazio"><div class="icone">♡</div><strong>Seu carrinho está vazio</strong><span>Adicione seus produtos favoritos para continuar.</span></div>`;
+  }else{
+    container.innerHTML="";
+    carrinho.forEach((produto,index)=>{
+      quantidade+=Number(produto.quantidade||0);
+      subtotal+=Number(produto.preco||0)*Number(produto.quantidade||0);
+      const item=document.createElement("div"); item.className="item";
+      const produtoBase=encontrarProduto(produto.id)||produto;
+      const imagem=produto.imagem||produtoBase.imagem||"";
+      item.innerHTML=`
+        <div class="item-img" style="${imagem?`background-image:url('${imagem}')`:''}" aria-label="${produto.nome}"></div>
+        <div class="item-dados">
+          <div class="item-marca">${produto.marca||produtoBase.marca||'FOR YOU'}</div>
+          <strong title="${produto.nome}">${produto.nome}</strong>
+          <div class="item-preco">${moeda(produto.preco)} <small>unidade</small></div>
+          <div class="quantidade" aria-label="Quantidade de ${produto.nome}">
+            <button type="button" onclick="alterar(${index},-1)" aria-label="Diminuir">−</button>
+            <span>${produto.quantidade}</span>
+            <button type="button" onclick="alterar(${index},1)" aria-label="Aumentar">+</button>
+          </div>
+          <button class="remover" type="button" onclick="remover(${index})">REMOVER</button>
+        </div>
+        <div class="item-total">${moeda(Number(produto.preco)*Number(produto.quantidade))}</div>`;
+      container.appendChild(item);
+    });
+  }
+  document.getElementById("contador").textContent=quantidade;
+  const desconto=subtotal*descontoAtual;
+  document.getElementById("subtotal").textContent=moeda(subtotal);
+  document.getElementById("desconto").textContent=desconto>0?"- "+moeda(desconto):moeda(0);
+  document.getElementById("frete").textContent=freteAtual===0?"GRÁTIS":moeda(freteAtual);
+  document.getElementById("total").textContent=moeda(subtotal-desconto+freteAtual);
+  atualizarFreteGratis(subtotal);
+  if(typeof renderCheckout==='function' && document.getElementById('paginaCheckout')?.classList.contains('ativa')) renderCheckout();
 }
-
-document.getElementById("contador").textContent=quantidade;
-
-const desconto =
-subtotal*descontoAtual;
-
-document.getElementById("subtotal").textContent=
-moeda(subtotal);
-
-document.getElementById("desconto").textContent=
-desconto>0 ? "- "+moeda(desconto) : moeda(0);
-
-document.getElementById("frete").textContent=
-freteAtual===0 ? "GRÁTIS" : moeda(freteAtual);
-
-document.getElementById("total").textContent=
-moeda(subtotal-desconto+freteAtual);
-
-atualizarFreteGratis(subtotal);
-
-}
-
-
 /* =========================
    FRETE GRÁTIS
 ========================= */
@@ -6000,9 +5998,16 @@ function atualizarRevisaoCheckout(){
   el.innerHTML=`<div><strong>Cliente:</strong> ${nome}</div><div><strong>Entrega:</strong> ${endereco}, ${numero}</div><div><strong>Pagamento:</strong> ${pagamentoSelecionado}</div><div><strong>Total:</strong> ${moeda(total)}</div>`;
 }
 function renderCheckout(){
-  let subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);const desconto=subtotal*descontoAtual;const total=subtotal-desconto+freteAtual;
-  document.getElementById('checkoutItens').innerHTML=carrinho.map(p=>`<div class="checkout-linha"><span>${p.nome} × ${p.quantidade}</span><strong>${moeda(p.preco*p.quantidade)}</strong></div>`).join('');
-  document.getElementById('checkoutSubtotal').textContent=moeda(subtotal);document.getElementById('checkoutDesconto').textContent='-'+moeda(desconto);document.getElementById('checkoutFrete').textContent=freteAtual?moeda(freteAtual):'GRÁTIS';document.getElementById('checkoutTotal').textContent=moeda(total);atualizarRevisaoCheckout();
+  const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);
+  const desconto=subtotal*descontoAtual;
+  const total=subtotal-desconto+freteAtual;
+  const itens=document.getElementById('checkoutItens');
+  if(itens){itens.innerHTML=carrinho.map(p=>`<div class="checkout-item-mini"><div><strong>${p.nome}</strong><br><span>${p.quantidade} × ${moeda(p.preco)}</span></div><strong>${moeda(p.preco*p.quantidade)}</strong></div>`).join('');}
+  document.getElementById('checkoutSubtotal').textContent=moeda(subtotal);
+  document.getElementById('checkoutDesconto').textContent=desconto>0?'- '+moeda(desconto):moeda(0);
+  document.getElementById('checkoutFrete').textContent=freteAtual?moeda(freteAtual):'GRÁTIS';
+  document.getElementById('checkoutTotal').textContent=moeda(total);
+  atualizarRevisaoCheckout();
 }
 function confirmarPedido(){
   if(!carrinho.length){alert('Seu carrinho está vazio.');return;}
