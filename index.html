@@ -3046,6 +3046,243 @@ textarea:focus-visible{
   }
 }
 
+
+/* =========================================================
+   FOR YOU — ÁREA DO CLIENTE: ÍCONE + LEGIBILIDADE
+========================================================= */
+
+/* Botão da área do cliente no cabeçalho */
+.acao-btn[onclick*="abrirConta"]{
+  position:relative;
+  width:46px !important;
+  height:46px !important;
+  min-width:46px !important;
+  border:1px solid #d9c4c7 !important;
+  border-radius:50% !important;
+  background:#fff !important;
+  color:#8f4f5b !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:0 !important;
+  box-shadow:0 5px 16px rgba(45,36,38,.08);
+  cursor:pointer;
+  overflow:visible !important;
+}
+
+/* Novo desenho: pessoa + pequeno detalhe */
+.acao-btn[onclick*="abrirConta"]::before{
+  content:"";
+  width:19px;
+  height:19px;
+  border:2px solid #8f4f5b;
+  border-radius:50%;
+  position:absolute;
+  top:9px;
+  left:12px;
+  box-sizing:border-box;
+}
+
+.acao-btn[onclick*="abrirConta"]::after{
+  content:"";
+  width:25px;
+  height:12px;
+  border:2px solid #8f4f5b;
+  border-bottom:0;
+  border-radius:15px 15px 0 0;
+  position:absolute;
+  bottom:8px;
+  left:9px;
+  box-sizing:border-box;
+}
+
+/* Texto aparece ao passar o mouse */
+.acao-btn[onclick*="abrirConta"] .fy-account-label{
+  display:none;
+}
+
+.acao-btn[onclick*="abrirConta"]:hover{
+  background:#f7ecee !important;
+  border-color:#b76e79 !important;
+  color:#8f4f5b !important;
+  transform:translateY(-2px);
+  box-shadow:0 9px 22px rgba(143,79,91,.16);
+}
+
+.acao-btn[onclick*="abrirConta"]::marker{display:none}
+
+.acao-btn[onclick*="abrirConta"]{
+  --fy-tip:"Área do cliente";
+}
+
+.acao-btn[onclick*="abrirConta"]:hover::selection{background:transparent}
+
+/* Balão */
+.acao-btn[onclick*="abrirConta"]:hover{
+  isolation:isolate;
+}
+.acao-btn[onclick*="abrirConta"]:hover:before{
+  /* o desenho continua via background abaixo */
+}
+
+/* Usamos um pseudo-elemento extra através do wrapper do botão */
+.acao-btn[onclick*="abrirConta"]{
+  --fy-label:"Área do cliente";
+}
+
+/* Tooltip com data-text injetado no JS */
+.acao-btn[onclick*="abrirConta"][data-tooltip]::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  top:calc(100% + 10px);
+  left:50%;
+  transform:translateX(-50%) translateY(-3px);
+  background:#2d2426;
+  color:#fff;
+  padding:7px 11px;
+  border-radius:8px;
+  white-space:nowrap;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.4px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:.2s ease;
+  z-index:9999;
+  box-shadow:0 7px 18px rgba(45,36,38,.18);
+}
+
+.acao-btn[onclick*="abrirConta"][data-tooltip]:hover::after{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* Contraste da área Minha Conta */
+#paginaConta{
+  color:#2d2426 !important;
+}
+
+#paginaConta p,
+#paginaConta span,
+#paginaConta label{
+  color:#5f5558;
+}
+
+#paginaConta h1,
+#paginaConta h2,
+#paginaConta h3,
+#paginaConta strong{
+  color:#2d2426;
+}
+
+#paginaConta input,
+#paginaConta select,
+#paginaConta textarea{
+  color:#2d2426 !important;
+  background:#fff !important;
+  border-color:#d9c4c7 !important;
+}
+
+#paginaConta input::placeholder,
+#paginaConta textarea::placeholder{
+  color:#8a7d81 !important;
+  opacity:1;
+}
+
+#paginaConta input:focus,
+#paginaConta textarea:focus,
+#paginaConta select:focus{
+  border-color:#b76e79 !important;
+  box-shadow:0 0 0 4px rgba(183,110,121,.10) !important;
+}
+
+/* Hero da conta: contraste forte */
+#paginaConta .conta-hero-v14{
+  background:linear-gradient(135deg,#351f27 0%,#5a2e3d 60%,#8f4f5b 100%) !important;
+  color:#fff !important;
+}
+
+#paginaConta .conta-hero-v14 h1,
+#paginaConta .conta-hero-v14 h2,
+#paginaConta .conta-hero-v14 p,
+#paginaConta .conta-hero-v14 strong,
+#paginaConta .conta-hero-v14 span{
+  color:#fff !important;
+}
+
+/* Avatar mais reconhecível */
+#paginaConta .conta-avatar-v14{
+  background:#fff !important;
+  color:#8f4f5b !important;
+  border:3px solid rgba(255,255,255,.5);
+}
+
+/* Menu lateral da conta */
+#paginaConta .conta-menu-v14 button{
+  color:#40373a !important;
+  background:#fff !important;
+  border:1px solid #eadfe0 !important;
+}
+
+#paginaConta .conta-menu-v14 button:hover,
+#paginaConta .conta-menu-v14 button.ativo{
+  color:#8f4f5b !important;
+  background:#f8edef !important;
+  border-color:#d9b9be !important;
+}
+
+/* Cards da conta */
+#paginaConta .conta-box-v14,
+#paginaConta .conta-stat-v14,
+#paginaConta .conta-pedido{
+  background:#fff !important;
+  color:#2d2426 !important;
+  border-color:#e8dcde !important;
+}
+
+#paginaConta .conta-stat-v14 span,
+#paginaConta .pedido-meta{
+  color:#716568 !important;
+}
+
+/* Botões dentro da conta */
+#paginaConta .btn-primary,
+#paginaConta button.btn-primary{
+  background:#8f4f5b !important;
+  color:#fff !important;
+  border-color:#8f4f5b !important;
+}
+
+#paginaConta .btn-primary:hover,
+#paginaConta button.btn-primary:hover{
+  background:#733d49 !important;
+  border-color:#733d49 !important;
+}
+
+/* Mobile */
+@media(max-width:700px){
+  .acao-btn[onclick*="abrirConta"]{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+  }
+
+  .acao-btn[onclick*="abrirConta"]::before{
+    left:10px;
+  }
+
+  .acao-btn[onclick*="abrirConta"]::after{
+    left:7px;
+  }
+
+  #paginaConta .conta-hero-v14{
+    border-radius:20px !important;
+    padding:24px !important;
+  }
+}
+
 </style>
 
 <style id="cards-premium-v11">
@@ -4355,9 +4592,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 ♡
 </button>
 
-<button class="acao-btn" onclick="abrirConta()" title="Minha conta">
-♙
-</button>
+<button class="acao-btn" onclick="abrirConta()" title="Área do cliente" aria-label="Área do cliente" data-tooltip="Área do cliente"></button>
 
 <div class="carrinho-icon" onclick="abrirCarrinho()">
 🛍️
