@@ -11307,5 +11307,144 @@ document.addEventListener("DOMContentLoaded",()=>{
 }
 </style>
 
+
+<style id="fy-menu-icons-only">
+/* =========================================================
+   MENU PRINCIPAL — SOMENTE ÍCONES
+   Mantém os cliques/subcategorias existentes
+========================================================= */
+
+.menu-principal,
+#menuPrincipal,
+.menu-categorias,
+.categorias-menu{
+  /* neutral: selectors below handle the actual buttons */
+}
+
+.menu-principal .menu-btn,
+#menuPrincipal .menu-btn,
+.menu-categorias .menu-btn,
+.categorias-menu .menu-btn{
+  font-size:0 !important;
+  min-width:54px !important;
+  width:54px !important;
+  height:54px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:50% !important;
+  color:#c9788e !important;
+  background:#fff !important;
+  border:1px solid #eee3e5 !important;
+  box-shadow:0 4px 14px rgba(102,65,76,.045) !important;
+}
+
+.menu-principal .menu-btn::before,
+#menuPrincipal .menu-btn::before,
+.menu-categorias .menu-btn::before,
+.categorias-menu .menu-btn::before{
+  font-size:20px !important;
+  line-height:1;
+}
+
+.menu-principal .menu-btn:nth-child(1)::before,
+#menuPrincipal .menu-btn:nth-child(1)::before,
+.menu-categorias .menu-btn:nth-child(1)::before,
+.categorias-menu .menu-btn:nth-child(1)::before{content:"♡";}
+
+.menu-principal .menu-btn:nth-child(2)::before,
+#menuPrincipal .menu-btn:nth-child(2)::before,
+.menu-categorias .menu-btn:nth-child(2)::before,
+.categorias-menu .menu-btn:nth-child(2)::before{content:"✦";}
+
+.menu-principal .menu-btn:nth-child(3)::before,
+#menuPrincipal .menu-btn:nth-child(3)::before,
+.menu-categorias .menu-btn:nth-child(3)::before,
+.categorias-menu .menu-btn:nth-child(3)::before{content:"✧";}
+
+.menu-principal .menu-btn:nth-child(4)::before,
+#menuPrincipal .menu-btn:nth-child(4)::before,
+.menu-categorias .menu-btn:nth-child(4)::before,
+.categorias-menu .menu-btn:nth-child(4)::before{content:"◌";}
+
+.menu-principal .menu-btn:nth-child(5)::before,
+#menuPrincipal .menu-btn:nth-child(5)::before,
+.menu-categorias .menu-btn:nth-child(5)::before,
+.categorias-menu .menu-btn:nth-child(5)::before{content:"◇";}
+
+.menu-principal .menu-btn:nth-child(6)::before,
+#menuPrincipal .menu-btn:nth-child(6)::before,
+.menu-categorias .menu-btn:nth-child(6)::before,
+.categorias-menu .menu-btn:nth-child(6)::before{content:"♢";}
+
+.menu-principal .menu-btn:nth-child(7)::before,
+#menuPrincipal .menu-btn:nth-child(7)::before,
+.menu-categorias .menu-btn:nth-child(7)::before,
+.categorias-menu .menu-btn:nth-child(7)::before{content:"♡";}
+
+.menu-principal .menu-btn:hover,
+#menuPrincipal .menu-btn:hover,
+.menu-categorias .menu-btn:hover,
+.categorias-menu .menu-btn:hover{
+  color:#a9576e !important;
+  border-color:#e6cbd3 !important;
+  background:#fff8fa !important;
+  transform:translateY(-1px);
+}
+
+.menu-principal .menu-btn.ativo,
+#menuPrincipal .menu-btn.ativo,
+.menu-categorias .menu-btn.ativo,
+.categorias-menu .menu-btn.ativo{
+  color:#a9576e !important;
+  background:#faedf1 !important;
+  border-color:#e6cbd3 !important;
+  box-shadow:none !important;
+}
+
+/* Remove títulos/legendas do menu duplicado quando existirem */
+.menu-principal .menu-btn span,
+#menuPrincipal .menu-btn span,
+.menu-categorias .menu-btn span,
+.categorias-menu .menu-btn span{
+  display:none !important;
+}
+
+/* Mantém os dropdowns/subcategorias funcionando */
+.dropdown{
+  font-size:inherit !important;
+}
+
+/* Espaçamento limpo */
+.menu-principal,
+#menuPrincipal,
+.menu-categorias,
+.categorias-menu{
+  gap:10px !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+/* No celular */
+@media(max-width:600px){
+  .menu-principal .menu-btn,
+  #menuPrincipal .menu-btn,
+  .menu-categorias .menu-btn,
+  .categorias-menu .menu-btn{
+    width:46px !important;
+    min-width:46px !important;
+    height:46px !important;
+  }
+
+  .menu-principal .menu-btn::before,
+  #menuPrincipal .menu-btn::before,
+  .menu-categorias .menu-btn::before,
+  .categorias-menu .menu-btn::before{
+    font-size:17px !important;
+  }
+}
+</style>
+
 </body>
 </html>
