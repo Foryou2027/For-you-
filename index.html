@@ -3502,6 +3502,24 @@ button,a,input,select,textarea{touch-action:manipulation}
 }
 </style>
 
+
+<style id="foryou-favoritos-v2">
+/* ===== FAVORITOS V2 ===== */
+.acao-favoritos{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;transition:.2s ease;}
+.acao-favoritos:hover{background:#fff0f4;color:#b83f61;transform:translateY(-1px)}
+.coracao-topo{font-size:26px;line-height:1;transition:.2s ease}.acao-favoritos:hover .coracao-topo{transform:scale(1.08)}
+.contador-favoritos{position:absolute;top:1px;right:0;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#b83f61;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;opacity:0;transform:scale(.7);transition:.2s ease}
+.contador-favoritos.visivel{opacity:1;transform:scale(1)}
+.favoritos-toolbar{max-width:1200px;margin:0 auto 18px;padding:12px 14px;background:#fff;border:1px solid #ead9de;border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 8px 25px rgba(53,31,39,.05)}
+.favoritos-resumo{display:flex;align-items:baseline;gap:6px;color:#777;font-size:10px}.favoritos-resumo strong{font-family:Georgia,serif;font-size:23px;color:#351f27}.favoritos-controles{display:flex;align-items:center;gap:7px}.fav-filtro,.favoritos-controles select{height:34px;border:1px solid #ead9de;background:#fff;border-radius:18px;padding:0 12px;font-size:9px;color:#66585d;font-weight:700}.fav-filtro.ativo{background:#351f27;color:#fff;border-color:#351f27}.favoritos-controles select{border-radius:8px;font-weight:600;outline:none}.favoritos-controles select:focus,.fav-filtro:focus{outline:2px solid #f3c5d1;outline-offset:1px}
+.favoritos-vazio{border-radius:18px!important;box-shadow:0 10px 35px rgba(53,31,39,.05)}
+.favoritos-vazio .fav-empty-icon{width:70px;height:70px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff0f4;color:#b83f61;font-size:34px}
+.favoritos-vazio .fav-empty-btn{display:inline-flex;margin-top:18px;padding:12px 18px;border-radius:22px;background:#351f27;color:#fff;text-decoration:none;font-size:9px;font-weight:700;letter-spacing:.6px;border:0;cursor:pointer}
+.favoritos-vazio .fav-empty-btn:hover{background:#b83f61}
+.produto.fav-destaque{outline:1px solid #f1c3cf;box-shadow:0 12px 30px rgba(184,63,97,.10)}
+.produto .favoritar{transition:transform .18s ease,background .18s ease,color .18s ease}.produto .favoritar:active{transform:scale(.88)}.produto .favoritar.favoritado{background:#fff0f4;color:#b83f61;box-shadow:0 5px 16px rgba(184,63,97,.16)}
+@media(max-width:650px){.favoritos-toolbar{align-items:stretch;flex-direction:column;padding:12px}.favoritos-controles{width:100%;overflow-x:auto;padding-bottom:2px}.fav-filtro,.favoritos-controles select{flex:0 0 auto}.favoritos-controles select{max-width:155px}.favoritos-resumo{justify-content:center}.favoritos-vazio{padding:50px 18px}.favoritos-vazio h3{font-size:24px}}
+</style>
 </head>
 
 <body>
@@ -3523,8 +3541,9 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="acoes">
 
-<button class="acao-btn" onclick="abrirFavoritos()" title="Favoritos">
-♡
+<button class="acao-btn acao-favoritos" onclick="abrirFavoritos()" title="Favoritos" aria-label="Abrir favoritos">
+<span class="coracao-topo">♡</span>
+<span class="contador-favoritos" id="contadorFavoritos">0</span>
 </button>
 
 <button class="acao-btn" onclick="abrirConta()" title="Minha conta">
@@ -4065,6 +4084,20 @@ Promoções de datas especiais
 <small>FOR YOU</small>
 <h2>Meus favoritos</h2>
 <p>Produtos que você guardou com carinho.</p>
+</div>
+
+<div class="favoritos-toolbar" id="favoritosToolbar">
+  <div class="favoritos-resumo"><strong id="favoritosQtd">0</strong><span>itens salvos</span></div>
+  <div class="favoritos-controles">
+    <button type="button" class="fav-filtro ativo" onclick="filtrarFavoritos('todos',this)">Todos</button>
+    <button type="button" class="fav-filtro" onclick="filtrarFavoritos('ofertas',this)">Ofertas</button>
+    <select id="favoritosOrdenacao" onchange="ordenarFavoritos(this.value)" aria-label="Ordenar favoritos">
+      <option value="recentes">Mais recentes</option>
+      <option value="menor">Menor preço</option>
+      <option value="maior">Maior preço</option>
+      <option value="nome">Nome A–Z</option>
+    </select>
+  </div>
 </div>
 
 <div id="listaFavoritos"></div>
@@ -7740,6 +7773,59 @@ document.addEventListener("DOMContentLoaded",()=>{
 })();
 </script>
 
+
+<script id="foryou-favoritos-v2-js">
+(function(){
+  let filtroAtual='todos';
+  let ordemAtual='recentes';
+  function listaBase(){return [...(window.produtos||[]),...(window.kits||[])].filter(p=>favoritos.includes(p.id));}
+  window.atualizarBadgeFavoritos=function(){
+    const n=(favoritos||[]).length;
+    const b=document.getElementById('contadorFavoritos');
+    const q=document.getElementById('favoritosQtd');
+    if(b){b.textContent=n>99?'99+':n;b.classList.toggle('visivel',n>0);}
+    if(q)q.textContent=n;
+  };
+  window.filtrarFavoritos=function(tipo,btn){
+    filtroAtual=tipo;
+    document.querySelectorAll('.fav-filtro').forEach(x=>x.classList.remove('ativo'));
+    if(btn)btn.classList.add('ativo');
+    window.renderFavoritosV2();
+  };
+  window.ordenarFavoritos=function(tipo){ordemAtual=tipo||'recentes';window.renderFavoritosV2();};
+  window.renderFavoritosV2=function(){
+    const container=document.getElementById('listaFavoritos'); if(!container)return;
+    atualizarBadgeFavoritos();
+    let lista=listaBase();
+    if(filtroAtual==='ofertas') lista=lista.filter(p=>p.precoAntigo||p.oldPrice);
+    if(ordemAtual==='menor') lista.sort((a,b)=>Number(a.preco||a.price||0)-Number(b.preco||b.price||0));
+    if(ordemAtual==='maior') lista.sort((a,b)=>Number(b.preco||b.price||0)-Number(a.preco||a.price||0));
+    if(ordemAtual==='nome') lista.sort((a,b)=>String(a.nome||a.name||'').localeCompare(String(b.nome||b.name||''),'pt-BR'));
+    if(!lista.length){
+      const temFavoritos=(favoritos||[]).length>0;
+      container.innerHTML=`<div class="favoritos-vazio"><div class="fav-empty-icon">♡</div><h3>${temFavoritos?'Nenhuma oferta nos favoritos':'Você ainda não tem favoritos.'}</h3><p>${temFavoritos?'Seus favoritos sem desconto continuam salvos.':'Clique no coração dos produtos que você ama e eles aparecerão aqui.'}</p><button class="fav-empty-btn" onclick="voltarLoja();setTimeout(()=>document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'}),80)">${temFavoritos?'VER TODOS OS FAVORITOS':'EXPLORAR PRODUTOS'}</button></div>`;
+      return;
+    }
+    const grid=document.createElement('div');grid.className='produtos';
+    lista.forEach(p=>{const card=criarCard(p);card.classList.add('fav-destaque');grid.appendChild(card);});
+    container.innerHTML='';container.appendChild(grid);
+  };
+  const originalAbrirFavoritos=window.abrirFavoritos;
+  window.abrirFavoritos=function(){
+    filtroAtual='todos';
+    const select=document.getElementById('favoritosOrdenacao');if(select)select.value='recentes';
+    document.querySelectorAll('.fav-filtro').forEach((x,i)=>x.classList.toggle('ativo',i===0));
+    if(typeof originalAbrirFavoritos==='function') originalAbrirFavoritos(); else {fecharTodasPaginas();document.getElementById('paginaFavoritos')?.classList.add('ativa');}
+    window.renderFavoritosV2();
+  };
+  const originalAlternar=window.alternarFavorito;
+  window.alternarFavorito=function(id){
+    if(typeof originalAlternar==='function') originalAlternar(id);
+    setTimeout(()=>{atualizarBadgeFavoritos();if(document.getElementById('paginaFavoritos')?.classList.contains('ativa'))window.renderFavoritosV2();},0);
+  };
+  document.addEventListener('DOMContentLoaded',()=>{atualizarBadgeFavoritos();});
+  setTimeout(atualizarBadgeFavoritos,300);
+})();
+</script>
 </body>
 </html>
-  
