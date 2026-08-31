@@ -748,15 +748,18 @@ function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&co
 }
 
 .produto{
-  background:white;
+  background:#fff;
   border:1px solid #ead9de;
+  border-radius:18px;
   position:relative;
-  transition:.25s;
+  overflow:hidden;
+  transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
 }
 
 .produto:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(53,31,39,.08);
+  transform:translateY(-6px);
+  border-color:#efc4d0;
+  box-shadow:0 18px 38px rgba(53,31,39,.11);
 }
 
 .produto-img{
@@ -859,6 +862,63 @@ function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&co
   font-size:8px;
   margin-top:7px;
   font-weight:bold;
+}
+
+.produto-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:10px;
+}
+
+.produto-avaliacao{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:10px;
+  color:#8a7078;
+}
+
+.produto-avaliacao strong{color:#c49742;font-size:11px}
+
+.preco-linha{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:4px;
+}
+
+.preco{font-size:19px}
+
+.desconto-percentual{
+  display:inline-flex;
+  padding:4px 7px;
+  border-radius:6px;
+  background:#eaf7ef;
+  color:#2b8758;
+  font-size:8px;
+  font-weight:800;
+}
+
+.selo-vendido,.selo-ultimas,.selo-desconto{
+  position:absolute;
+  z-index:3;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.5px;
+  padding:6px 8px;
+  border-radius:999px;
+}
+
+.selo-vendido{top:50px;left:10px;background:#351f27;color:#fff}
+.selo-ultimas{bottom:10px;left:10px;background:#fff;color:#b83f61;border:1px solid #efc4d0}
+.selo-desconto{top:10px;left:72px;background:#eaf7ef;color:#2b8758}
+
+.estoque{
+  min-height:16px;
+  margin-top:8px;
 }
 
 /* =========================
@@ -1867,7 +1927,7 @@ footer p{
   }
 
   .produto-img{
-    height:190px;
+    height:205px;
   }
 
   .nome{
@@ -4885,16 +4945,15 @@ ${produto.marca}
 ${produto.nome}
 </div>
 
-<div class="estrelas">
-★★★★★ ${produto.nota}
+<div class="produto-meta">
+  <div class="produto-avaliacao"><strong>★★★★★</strong> ${Number(produto.nota||0).toFixed(1).replace(".",",")}</div>
+  ${produto.vendas ? `<span style="font-size:8px;color:#999">${produto.vendas} vendidos</span>` : ""}
 </div>
 
-<div class="preco">
-
-${produto.precoAntigo ? `<span class="preco-antigo">${moeda(produto.precoAntigo)}</span>` : ""}
-${moeda(produto.preco)}
-${produto.precoAntigo ? `<span class="desconto-percentual">-${Math.round((1-(Number(produto.preco)/Number(produto.precoAntigo)))*100)}%</span>` : ""}
-
+<div class="preco-linha">
+  ${produto.precoAntigo ? `<span class="preco-antigo">${moeda(produto.precoAntigo)}</span>` : ""}
+  <span class="preco">${moeda(produto.preco)}</span>
+  ${produto.precoAntigo ? `<span class="desconto-percentual">-${Math.round((1-(Number(produto.preco)/Number(produto.precoAntigo)))*100)}%</span>` : ""}
 </div>
 
 <div class="estoque ${produto.estoque===0?'estoque-alerta':''}">
