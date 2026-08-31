@@ -9733,5 +9733,237 @@ document.addEventListener("DOMContentLoaded",()=>{
 }
 </style>
 
+
+<style id="fy-account-black-champagne-final">
+/* =========================================================
+   FOR YOU — ÁREA DO CLIENTE
+   PRETO + DOURADO CHAMPAGNE CLARO
+========================================================= */
+
+#paginaConta{
+  --fy-black:#171516;
+  --fy-black-2:#292527;
+  --fy-champagne:#d8c99f;
+  --fy-champagne-light:#eee4c8;
+  --fy-cream:#faf8f3;
+  --fy-text:#292527;
+  --fy-muted:#70696b;
+  background:var(--fy-cream) !important;
+  color:var(--fy-text) !important;
+}
+
+/* Hero principal */
+#paginaConta .conta-hero-v14{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(238,228,200,.12),transparent 25%),
+    linear-gradient(125deg,#111010 0%,#201d1e 62%,#292527 100%) !important;
+  border:1px solid rgba(216,201,159,.45) !important;
+  box-shadow:0 18px 45px rgba(23,21,22,.16) !important;
+}
+
+#paginaConta .conta-hero-v14::after{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  right:-75px;
+  bottom:-105px;
+  border:1px solid rgba(216,201,159,.25);
+  border-radius:50%;
+}
+
+#paginaConta .conta-hero-v14 small{
+  color:var(--fy-champagne) !important;
+  letter-spacing:3px !important;
+}
+
+#paginaConta .conta-hero-v14 h1,
+#paginaConta .conta-hero-v14 p{
+  color:#fff !important;
+}
+
+#paginaConta .conta-hero-v14 p{
+  color:#ddd9d5 !important;
+}
+
+/* Ícone/avatar minimalista */
+#paginaConta .conta-avatar-v14{
+  font-size:0 !important;
+  background:#fff !important;
+  color:var(--fy-black) !important;
+  border:2px solid var(--fy-champagne) !important;
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
+}
+
+#paginaConta .conta-avatar-v14::before{
+  border-color:var(--fy-black) !important;
+}
+
+#paginaConta .conta-avatar-v14::after{
+  border-color:var(--fy-black) !important;
+}
+
+/* Menu */
+#paginaConta .conta-menu-v14{
+  background:#fff !important;
+  border:1px solid #e4dfd3 !important;
+  box-shadow:0 8px 24px rgba(23,21,22,.05) !important;
+}
+
+#paginaConta .conta-menu-v14::before{
+  color:#a18f5f !important;
+}
+
+#paginaConta .conta-menu-v14 button{
+  color:#4b4648 !important;
+  background:#fff !important;
+  border-color:transparent !important;
+}
+
+#paginaConta .conta-menu-v14 button:hover{
+  color:var(--fy-black) !important;
+  background:#faf8f3 !important;
+  border-color:#eee4c8 !important;
+}
+
+#paginaConta .conta-menu-v14 button.ativo{
+  color:#fff !important;
+  background:var(--fy-black) !important;
+  border-color:var(--fy-black) !important;
+}
+
+#paginaConta .conta-menu-v14 button.ativo::before{
+  background:var(--fy-champagne) !important;
+}
+
+/* Cards e estatísticas */
+#paginaConta .conta-stat-v14,
+#paginaConta .conta-box-v14,
+#paginaConta .conta-pedido,
+#paginaConta .conta-order-v14{
+  background:#fff !important;
+  border-color:#e5dfd2 !important;
+  color:var(--fy-text) !important;
+  box-shadow:0 7px 23px rgba(23,21,22,.045) !important;
+}
+
+#paginaConta .conta-stat-v14::after{
+  background:#f4edda !important;
+}
+
+#paginaConta .conta-stat-v14 strong{
+  color:var(--fy-black) !important;
+}
+
+#paginaConta .conta-stat-v14 small{
+  color:#81797a !important;
+}
+
+/* Títulos e textos */
+#paginaConta h1,
+#paginaConta h2,
+#paginaConta h3,
+#paginaConta strong{
+  color:var(--fy-text);
+}
+
+#paginaConta p,
+#paginaConta span,
+#paginaConta label{
+  color:var(--fy-muted);
+}
+
+/* Campos */
+#paginaConta input,
+#paginaConta select,
+#paginaConta textarea{
+  background:#fff !important;
+  color:#272325 !important;
+  border:1px solid #dcd6ca !important;
+}
+
+#paginaConta input::placeholder,
+#paginaConta textarea::placeholder{
+  color:#958e8d !important;
+}
+
+#paginaConta input:focus,
+#paginaConta select:focus,
+#paginaConta textarea:focus{
+  border-color:#c7b883 !important;
+  box-shadow:0 0 0 3px rgba(216,201,159,.24) !important;
+}
+
+/* Botões */
+#paginaConta .btn-fy,
+#paginaConta .btn-primary,
+#paginaConta .conta-save-v14{
+  background:var(--fy-black) !important;
+  color:#fff !important;
+  border:1px solid var(--fy-champagne) !important;
+  box-shadow:none !important;
+}
+
+#paginaConta .btn-fy:hover,
+#paginaConta .btn-primary:hover,
+#paginaConta .conta-save-v14:hover{
+  background:#332f30 !important;
+  border-color:#ead9a8 !important;
+}
+
+/* Status */
+#paginaConta .conta-status-v14,
+#paginaConta .pedido-badge{
+  background:#f5efdf !important;
+  color:#6d5b2d !important;
+  border-color:#dfcf9f !important;
+}
+
+/* Club */
+#paginaConta .club-card-fy{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(238,228,200,.13),transparent 25%),
+    linear-gradient(135deg,#151314,#292527) !important;
+  border:1px solid rgba(216,201,159,.55) !important;
+  box-shadow:0 15px 34px rgba(23,21,22,.15) !important;
+}
+
+#paginaConta .club-card-fy h2{
+  color:#fff !important;
+}
+
+#paginaConta .club-card-fy p,
+#paginaConta .club-card-fy small{
+  color:#ddd8cf !important;
+}
+
+#paginaConta .club-progress-fy{
+  background:rgba(255,255,255,.16) !important;
+}
+
+#paginaConta .club-progress-fy span{
+  background:var(--fy-champagne) !important;
+}
+
+#paginaConta .club-benefit-fy{
+  background:rgba(216,201,159,.08) !important;
+  border-color:rgba(216,201,159,.25) !important;
+  color:#fff !important;
+}
+
+/* Voltar */
+#paginaConta > .voltar{
+  color:#4b4143 !important;
+}
+
+@media(max-width:600px){
+  #paginaConta .conta-hero-v14{
+    border-radius:20px !important;
+  }
+}
+</style>
+
 </body>
 </html>
