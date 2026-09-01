@@ -2222,6 +2222,7 @@ footer p{
 
 
 .pagamento-detalhes{margin-top:15px}.pagamento-extra{padding:16px;border:1px solid #eee;border-radius:14px;background:#fff;margin-bottom:15px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.checkout-grid input{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px}.pix-placeholder{width:150px;height:150px;margin:12px auto;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed #d9a441;border-radius:12px;font-weight:700;color:#9b721b}.checkout-revisao{margin-top:15px;padding:16px;border-radius:14px;background:#fafafa;border:1px solid #eee}.checkout-revisao h3{margin-top:0}.checkout-revisao div{margin:5px 0}
+.fy-pagamento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.fy-pagamento-grid .pagamento-opcao{cursor:pointer;transition:.2s}.fy-pagamento-grid .pagamento-opcao:hover{transform:translateY(-1px);border-color:#351f27}.fy-parcelas{margin-top:10px}.fy-parcelas label{display:block;font-size:9px;font-weight:bold;margin-bottom:6px}.fy-parcelas select{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;background:#fff}.fy-pix-box{text-align:center;padding:18px;border:1px solid #ead9de;border-radius:14px;background:#fff}.fy-pix-qr{width:190px;height:190px;margin:14px auto;background:repeating-conic-gradient(#351f27 0 25%,#fff 0 50%) 50%/12px 12px;border:10px solid #fff;box-shadow:0 0 0 1px #ddd;position:relative;overflow:hidden}.fy-pix-qr:before{content:"PIX";position:absolute;inset:50%;transform:translate(-50%,-50%);background:#fff;padding:9px 12px;border-radius:8px;font-weight:800;color:#351f27;font-size:12px}.fy-pix-code{display:flex;gap:7px;margin-top:10px}.fy-pix-code input{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:10px}.fy-copy{border:0;background:#351f27;color:#fff;border-radius:8px;padding:10px 12px;font-weight:bold;cursor:pointer}.fy-sucesso{display:none;max-width:900px;margin:0 auto;padding:35px 20px}.fy-sucesso.ativa{display:block}.fy-sucesso-card{background:#fff;border:1px solid #ead9de;border-radius:20px;padding:35px;text-align:center;box-shadow:0 15px 40px #0000000d}.fy-check{width:70px;height:70px;border-radius:50%;margin:0 auto 15px;background:#351f27;color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px}.fy-numero-pedido{font-size:22px;font-weight:800;margin:10px 0;color:#351f27}.fy-status-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:25px 0;text-align:left}.fy-status-step{padding:14px;border:1px solid #ead9de;border-radius:12px;font-size:9px;color:#999}.fy-status-step.ativo{background:#fff8fa;border-color:#351f27;color:#351f27}.fy-status-dot{font-size:18px;display:block;margin-bottom:7px}.fy-sucesso-acoes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.fy-sucesso-acoes button{border:1px solid #351f27;background:#351f27;color:#fff;padding:12px 18px;border-radius:10px;font-weight:bold;cursor:pointer}.fy-sucesso-acoes button.sec{background:#fff;color:#351f27}@media(max-width:700px){.fy-pagamento-grid{grid-template-columns:1fr}.fy-status-timeline{grid-template-columns:1fr 1fr}.fy-sucesso-card{padding:24px}.fy-pix-qr{width:160px;height:160px}}
 @media(max-width:700px){.checkout-grid{grid-template-columns:1fr}}
 
 /* =========================
@@ -5883,10 +5884,10 @@ Promoções de datas especiais
         <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('retirada',this)">📦 Retirada<br><small>Consulte disponibilidade</small></button>
       </div>
       <h2 style="margin-top:25px">Pagamento</h2>
-      <div class="pagamento-opcoes">
-        <button class="pagamento-opcao ativa" type="button" onclick="selecionarPagamento('PIX',this)">💠 PIX</button>
-        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('Cartão',this)">💳 Cartão</button>
-        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('A combinar',this)">💬 A combinar</button>
+      <div class="pagamento-opcoes fy-pagamento-grid">
+        <button class="pagamento-opcao ativa" type="button" onclick="selecionarPagamento('PIX',this)">💠 PIX<br><small>QR Code</small></button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('Cartão',this)">💳 Crédito<br><small>Parcelamento</small></button>
+        <button class="pagamento-opcao" type="button" onclick="selecionarPagamento('Débito',this)">💳 Débito<br><small>Cartão de débito</small></button>
       </div>
       <div id="pagamentoDetalhes" class="pagamento-detalhes"></div>
 
@@ -5909,6 +5910,27 @@ Promoções de datas especiais
       <div class="checkout-linha"><span>Frete</span><strong id="checkoutFrete">R$ 0,00</strong></div>
       <div class="checkout-linha checkout-total"><span>Total</span><strong id="checkoutTotal">R$ 0,00</strong></div>
       <div class="sincronizado-aviso">🔒 Confira todas as informações antes de confirmar.</div>
+    </div>
+  </div>
+</section>
+
+<section class="fy-sucesso" id="paginaPedidoSucesso">
+  <div class="fy-sucesso-card">
+    <div class="fy-check">✓</div>
+    <small style="letter-spacing:2px;color:#777">FOR YOU</small>
+    <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:30px;margin:10px 0 5px">Pedido realizado com sucesso!</h2>
+    <p style="font-size:11px;color:#777">Obrigada pela sua compra. Seu pedido foi registrado e já está no acompanhamento da sua conta.</p>
+    <div class="fy-numero-pedido" id="sucessoNumeroPedido">Pedido #0000</div>
+    <div style="font-size:11px;margin-bottom:18px">Total: <strong id="sucessoTotal">R$ 0,00</strong> • Pagamento: <strong id="sucessoPagamento">PIX</strong></div>
+    <div class="fy-status-timeline" id="sucessoTimeline">
+      <div class="fy-status-step ativo"><span class="fy-status-dot">✓</span><strong>Pedido recebido</strong><br><small>Seu pedido foi registrado</small></div>
+      <div class="fy-status-step"><span class="fy-status-dot">💳</span><strong>Pagamento aprovado</strong><br><small>Aguardando confirmação</small></div>
+      <div class="fy-status-step"><span class="fy-status-dot">📦</span><strong>Preparando</strong><br><small>Separação dos produtos</small></div>
+      <div class="fy-status-step"><span class="fy-status-dot">🚚</span><strong>Enviado / Entregue</strong><br><small>Acompanhe pela sua conta</small></div>
+    </div>
+    <div class="fy-sucesso-acoes">
+      <button onclick="abrirConta()">VER MEUS PEDIDOS</button>
+      <button class="sec" onclick="voltarLoja()">CONTINUAR COMPRANDO</button>
     </div>
   </div>
 </section>
@@ -7858,14 +7880,22 @@ function selecionarPagamento(tipo,btn){
   const box=document.getElementById('pagamentoDetalhes');
   if(!box)return;
   if(tipo==='PIX'){
-    box.innerHTML=`<div class="pagamento-extra pix-extra"><strong>💠 Pagamento via PIX</strong><p>Após confirmar, seu pedido ficará aguardando pagamento. Em uma integração real, o QR Code será gerado automaticamente.</p><div class="pix-placeholder">QR CODE PIX<br><small>Pagamento seguro</small></div></div>`;
+    const total=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0)-carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0)*descontoAtual+freteAtual;
+    const codigo='PIX-FOR-YOU-'+String(Math.round(total*100)).padStart(6,'0')+'-'+Date.now();
+    box.innerHTML=`<div class="pagamento-extra pix-extra"><strong>💠 Pagamento via PIX</strong><p>Escaneie o QR Code ou copie o código PIX. <strong>O QR Code real deverá ser gerado pelo gateway de pagamento conectado à loja.</strong></p><div class="fy-pix-box"><div class="fy-pix-qr" aria-label="QR Code PIX demonstrativo"></div><strong>${moeda(total)}</strong><div class="fy-pix-code"><input id="pixCodigo" value="${codigo}" readonly><button class="fy-copy" type="button" onclick="copiarPix()">COPIAR</button></div><small style="display:block;margin-top:8px;color:#777">Modo demonstração: este código não movimenta dinheiro até o gateway PIX ser integrado.</small></div></div>`;
   }else if(tipo==='Cartão'){
-    box.innerHTML=`<div class="pagamento-extra"><strong>💳 Dados do cartão</strong><div class="checkout-grid"><input id="cartaoNumero" inputmode="numeric" maxlength="19" placeholder="Número do cartão"><input id="cartaoNome" placeholder="Nome no cartão"><input id="cartaoValidade" maxlength="5" placeholder="Validade MM/AA"><input id="cartaoCVV" inputmode="numeric" maxlength="4" placeholder="CVV"></div><small>Seus dados serão enviados apenas quando o pagamento estiver conectado a um gateway seguro.</small></div>`;
-  }else{
-    box.innerHTML=`<div class="pagamento-extra"><strong>💬 Pagamento a combinar</strong><p>Você poderá combinar a forma de pagamento com a FOR YOU pelo atendimento.</p></div>`;
+    box.innerHTML=`<div class="pagamento-extra"><strong>💳 Cartão de crédito</strong><div class="checkout-grid"><input id="cartaoNumero" inputmode="numeric" maxlength="19" placeholder="Número do cartão"><input id="cartaoNome" placeholder="Nome no cartão"><input id="cartaoValidade" maxlength="5" placeholder="Validade MM/AA"><input id="cartaoCVV" inputmode="numeric" maxlength="4" placeholder="CVV"></div><div class="fy-parcelas"><label for="cartaoParcelas">PARCELAMENTO</label><select id="cartaoParcelas" onchange="atualizarRevisaoCheckout()"><option value="1">1x sem juros</option><option value="2">2x sem juros</option><option value="3">3x sem juros</option><option value="4">4x sem juros</option><option value="5">5x sem juros</option><option value="6">6x sem juros</option><option value="10">10x com juros (gateway)</option><option value="12">12x com juros (gateway)</option></select></div><small>Os dados do cartão devem ser processados por um gateway seguro. Não armazene número ou CVV no site.</small></div>`;
+  }else if(tipo==='Débito'){
+    box.innerHTML=`<div class="pagamento-extra"><strong>💳 Cartão de débito</strong><div class="checkout-grid"><input id="debitoNumero" inputmode="numeric" maxlength="19" placeholder="Número do cartão"><input id="debitoNome" placeholder="Nome no cartão"><input id="debitoValidade" maxlength="5" placeholder="Validade MM/AA"><input id="debitoCVV" inputmode="numeric" maxlength="4" placeholder="CVV"></div><small>O pagamento com débito depende da disponibilidade do gateway e do banco emissor.</small></div>`;
   }
   atualizarRevisaoCheckout();
 }
+function copiarPix(){
+  const input=document.getElementById('pixCodigo');
+  if(!input)return;
+  navigator.clipboard?.writeText(input.value).then(()=>alert('Código PIX copiado!')).catch(()=>{input.select();document.execCommand('copy');alert('Código PIX copiado!');});
+}
+
 function atualizarRevisaoCheckout(){
   const el=document.getElementById('revisaoResumo');
   if(!el)return;
@@ -7895,18 +7925,20 @@ function confirmarPedido(){
   if(!nome||!email||!telefone||!endereco||!numero||cep.replace(/\D/g,'').length!==8){document.getElementById('checkoutMensagem').textContent='Preencha nome, e-mail, telefone, CEP, endereço e número.';return;}
   const indisponivel=carrinho.find(item=>{const p=encontrarProduto(item.id);return !p || Number(p.estoque||0)<Number(item.quantidade||0);});
   if(indisponivel){document.getElementById('checkoutMensagem').textContent='Um dos produtos não possui estoque suficiente. Atualize o carrinho antes de continuar.';return;}
-  if(pagamentoSelecionado==='Cartão'){
-    const numeroCartao=(document.getElementById('cartaoNumero')?.value||'').replace(/\D/g,'');
-    const nomeCartao=(document.getElementById('cartaoNome')?.value||'').trim();
-    const validade=(document.getElementById('cartaoValidade')?.value||'').trim();
-    const cvv=(document.getElementById('cartaoCVV')?.value||'').replace(/\D/g,'');
+  if(pagamentoSelecionado==='Cartão' || pagamentoSelecionado==='Débito'){
+    const prefix=pagamentoSelecionado==='Cartão'?'cartao':'debito';
+    const numeroCartao=(document.getElementById(prefix+'Numero')?.value||'').replace(/\D/g,'');
+    const nomeCartao=(document.getElementById(prefix+'Nome')?.value||'').trim();
+    const validade=(document.getElementById(prefix+'Validade')?.value||'').trim();
+    const cvv=(document.getElementById(prefix+'CVV')?.value||'').replace(/\D/g,'');
     if(numeroCartao.length<13 || !nomeCartao || !/^\d{2}\/\d{2}$/.test(validade) || cvv.length<3){document.getElementById('checkoutMensagem').textContent='Preencha corretamente os dados do cartão.';return;}
   }
   const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0),desconto=subtotal*descontoAtual,total=subtotal-desconto+freteAtual;
   let todosPedidos=[];try{todosPedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]');}catch(e){todosPedidos=[];}
   const sequencia=todosPedidos.reduce((m,p)=>Math.max(m,parseInt(String(p.numero||'').replace(/\D/g,''))||0),0)+1;
   const numeroPedido=String(sequencia).padStart(4,'0');
-  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'confirmado',statusTexto:'Pedido confirmado',etapa:1,total,subtotal,desconto,frete:freteAtual,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
+  const parcelas=pagamentoSelecionado==='Cartão'?Number(document.getElementById('cartaoParcelas')?.value||1):1;
+  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'confirmado',statusTexto:'Pedido recebido',etapa:1,pagamentoStatus:pagamentoSelecionado==='PIX'?'Aguardando pagamento':'Pagamento em processamento',total,subtotal,desconto,frete:freteAtual,parcelas,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
   const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
   if(contaAtual&&conta){conta.pedidos=[pedido,...pedidos];conta.nome=nome;conta.email=email;conta.telefone=telefone;conta.endereco=endereco;salvarConta(conta);contaAtual={nome,email,telefone,endereco};salvarContaAtual();}
   todosPedidos.unshift({...pedido,clienteEmail:email});localStorage.setItem('forYouPedidos',JSON.stringify(todosPedidos));
@@ -7914,9 +7946,20 @@ function confirmarPedido(){
   salvarCatalogoAdmin();
   carrinho=[];salvar();atualizar();renderProdutos();renderOfertas();renderMaisVendidos();renderUltimasUnidades();renderRecomendados();renderPedidosConta();
   localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
-  document.getElementById('checkoutMensagem').innerHTML='<strong>Pedido '+pedido.numero+' registrado com sucesso! 💗</strong><br><span style="font-size:9px">O pedido foi salvo em Minha conta → Meus pedidos.</span>';
+  mostrarPedidoSucesso(pedido);
   abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total);
 }
+function mostrarPedidoSucesso(pedido){
+  document.getElementById('paginaCheckout').classList.remove('ativa');
+  const page=document.getElementById('paginaPedidoSucesso');
+  if(!page)return;
+  document.getElementById('sucessoNumeroPedido').textContent='Pedido '+pedido.numero;
+  document.getElementById('sucessoTotal').textContent=moeda(pedido.total);
+  document.getElementById('sucessoPagamento').textContent=pedido.pagamento+(pedido.parcelas>1?' • '+pedido.parcelas+'x':'');
+  page.classList.add('ativa');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
 function abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total){
   let msg=`Olá! Quero confirmar o pedido ${pedido.numero} na FOR YOU.\n\n*PEDIDO*\n`;pedido.itens.forEach(i=>msg+=`• ${i.nome} — ${i.quantidade}x — ${moeda(i.preco*i.quantidade)}\n`);msg+=`\nTotal: ${moeda(total)}\nEntrega: ${pedido.entrega}\nPagamento: ${pedido.pagamento}\n\nCliente: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEndereço: ${endereco}, ${numero}\nCEP: ${cep}`;window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
 function renderPedidosConta(){
