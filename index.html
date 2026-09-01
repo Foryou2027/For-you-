@@ -226,7 +226,7 @@ function editarDadosConta(){
 }
 function editarEnderecoConta(){const conta=contaSalva();if(!conta)return;const endereco=prompt("Endereço completo:",conta.endereco||"");if(endereco===null||!endereco.trim())return;conta.endereco=endereco.trim();salvarConta(conta);contaAtual.endereco=conta.endereco;salvarContaAtual();alert("Endereço atualizado com sucesso!");}
 function alterarSenhaConta(){const conta=contaSalva();if(!conta)return;const atual=prompt("Digite sua senha atual:");if(atual!==conta.senha){alert("Senha atual incorreta.");return;}const nova=prompt("Digite a nova senha (mín. 6 caracteres):");if(!nova||nova.length<6){alert("A nova senha precisa ter pelo menos 6 caracteres.");return;}const confirmar=prompt("Confirme a nova senha:");if(nova!==confirmar){alert("As senhas não são iguais.");return;}conta.senha=nova;salvarConta(conta);alert("Senha alterada com sucesso!");}
-function mostrarPedidosConta(){const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];abrirConta();setTimeout(()=>{const el=document.getElementById("contaPedidosDetalhes");if(el){el.innerHTML=pedidos.length?pedidos.slice().reverse().map(p=>`<div class="conta-pedido"><div class="conta-pedido-top"><strong>${p.numero||"Pedido"}</strong><span class="pedido-badge">${p.status||"Confirmado"}</span></div><div class="pedido-meta">${moeda(Number(p.total||0))}</div></div>`).join(""):"<p style=\"color:#777;font-size:10px\">Você ainda não possui pedidos.</p>";}},50);}
+function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 
 /* =========================
    MENU
@@ -1810,6 +1810,22 @@ footer p{
 .whatsapp-flutuante:hover{
   transform:scale(1.08);
 }
+
+
+.pedido-rastreamento-card{padding:18px;border-radius:14px;box-shadow:0 8px 25px #0000000a}
+.pedido-status-5{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:#fff8fa;border:0;padding:15px 8px;margin-top:12px}
+.pedido-status-5 .status-linha{position:relative;display:flex;flex-direction:column;justify-content:flex-start;text-align:center;gap:7px;padding:0 4px;font-size:8px;color:#999;min-height:58px}
+.pedido-status-5 .status-linha:not(:last-child)::after{content:'';position:absolute;top:6px;left:58%;width:84%;height:1px;background:#ddd;z-index:0}
+.pedido-status-5 .status-linha.concluido:not(:last-child)::after{background:#b83f61}
+.pedido-status-5 .status-bolinha{position:relative;z-index:1;width:14px;height:14px;border-radius:50%;background:#fff;border:1px solid #cfc4c7;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;margin:auto}
+.pedido-status-5 .status-linha.concluido .status-bolinha{background:#b83f61;border-color:#b83f61}
+.pedido-status-5 .status-linha.atual{color:#351f27;font-weight:bold}
+.pedido-status-atual{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;background:#fffafa;border:1px solid #ead9de;border-radius:10px;font-size:9px}
+.pedido-status-atual span{font-weight:bold;color:#b83f61}.pedido-status-atual small{width:100%;color:#888}
+.pedido-rastreio{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:10px;padding:13px 14px;border:1px solid #ead9de;border-radius:10px;background:#fff}
+.pedido-rastreio>div{display:flex;align-items:center;gap:10px}.pedido-rastreio .rastreio-icon{font-size:18px}.pedido-rastreio div div{display:flex;flex-direction:column;gap:3px}.pedido-rastreio strong{font-size:9px}.pedido-rastreio span:not(.rastreio-icon){font-size:9px;color:#777;word-break:break-all}
+.pedido-rastreio button{border:0;background:#351f27;color:#fff;padding:10px 13px;font-size:7px;font-weight:bold;letter-spacing:.7px;cursor:pointer}.pedido-rastreio.indisponivel{background:#fafafa}
+@media(max-width:800px){.pedido-status-5{grid-template-columns:1fr;gap:0}.pedido-status-5 .status-linha{flex-direction:row;text-align:left;min-height:35px;align-items:center}.pedido-status-5 .status-linha:not(:last-child)::after{top:20px;left:7px;width:1px;height:30px}.pedido-rastreio{align-items:flex-start;flex-direction:column}.pedido-rastreio button{width:100%}}
 
 /* =========================
    MOBILE
@@ -5043,6 +5059,13 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="menu-principal">
 
+<div class="fy-main-nav" aria-label="Navegação principal">
+  <a href="#inicio" onclick="voltarLoja();window.scrollTo({top:0,behavior:'smooth'});return false;">Início</a>
+  <a href="#destaques">Categorias</a>
+  <a href="#ofertas">Ofertas</a>
+  <a href="#achadinhoSemana">Achadinhos</a>
+  <a href="#marcas">Marcas</a>
+</div>
 <div class="menu-titulo">
 MENU PRINCIPAL
 </div>
@@ -5320,6 +5343,42 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 </section>
 
 
+
+<!-- =========================
+     ORGANIZAÇÃO PREMIUM DA HOME
+========================= -->
+<section class="fy-home-highlights" id="destaques" aria-label="Destaques FOR YOU">
+  <div class="fy-home-heading">
+    <small>FOR YOU</small>
+    <h2>✨ Destaques</h2>
+    <p>Os caminhos mais importantes da loja, organizados para você encontrar tudo com facilidade.</p>
+  </div>
+  <div class="fy-highlight-grid">
+    <button class="fy-highlight-card" onclick="document.getElementById('achadinhoSemana')?.scrollIntoView({behavior:'smooth'})"><span>✨</span><strong>Achadinho da Semana</strong><small>Escolha especial da Dé</small></button>
+    <button class="fy-highlight-card" onclick="document.getElementById('maisVendidosHome')?.scrollIntoView({behavior:'smooth'})"><span>🔥</span><strong>Mais Vendidos</strong><small>Os queridinhos da loja</small></button>
+    <button class="fy-highlight-card" onclick="document.getElementById('kits')?.scrollIntoView({behavior:'smooth'})"><span>🎁</span><strong>Kits Promocionais</strong><small>Combinações que valem a pena</small></button>
+    <button class="fy-highlight-card" onclick="document.getElementById('ofertas')?.scrollIntoView({behavior:'smooth'})"><span>⏳</span><strong>Próximos da Validade</strong><small>Oportunidades enquanto durar o estoque</small></button>
+  </div>
+</section>
+
+<section class="secao" id="achadinhoSemana">
+  <div class="titulo"><small>ESCOLHA DA DÉ</small><h2>💕 Achadinhos da Dé</h2><p>Testamos, gostamos e colocamos na loja.</p></div>
+  <div class="fy-de-pick">
+    <div class="fy-de-pick-copy">
+      <span class="fy-de-pill">MEU ACHADINHO</span>
+      <h3>Produtos que eu escolheria para você.</h3>
+      <p>Uma seleção pequena e especial com aqueles produtos que merecem um lugar no nécessaire.</p>
+      <button onclick="document.getElementById('listaAchadinhosDe')?.scrollIntoView({behavior:'smooth'})">VER SELEÇÃO →</button>
+    </div>
+    <div class="produtos" id="listaAchadinhosDe"></div>
+  </div>
+</section>
+
+<section class="secao" id="marcas">
+  <div class="titulo"><small>ENCONTRE SEU FAVORITO</small><h2>Marcas</h2><p>Explore a loja pela marca que você procura.</p></div>
+  <div class="fy-brands-grid" id="listaMarcasHome"></div>
+</section>
+
 <section class="secao" id="novidades">
 
 <div class="titulo">
@@ -5451,7 +5510,7 @@ Kits presenteáveis
 </section>
 
 
-<section class="secao">
+<section class="secao" id="maisVendidosHome">
 
 <div class="titulo">
 <small>FOR YOU</small>
@@ -5983,6 +6042,20 @@ Promoções de datas especiais
 
 
 
+
+<!-- =========================
+     AVALIAÇÕES NA HOME
+========================= -->
+<section class="secao fy-home-reviews" id="avaliacoesClientes">
+  <div class="titulo"><small>QUEM JÁ COMPROU</small><h2>⭐ Avaliações das clientes</h2><p>Experiências de quem já encontrou seu achadinho na FOR YOU.</p></div>
+  <div class="fy-review-grid">
+    <article><div class="fy-review-stars">★★★★★</div><p>“A loja é linda e os produtos chegaram super bem embalados. Amei!”</p><strong>Mariana</strong><small>Cliente FOR YOU</small></article>
+    <article><div class="fy-review-stars">★★★★★</div><p>“Os kits são ótimos para montar uma rotina completa sem gastar muito.”</p><strong>Camila</strong><small>Cliente FOR YOU</small></article>
+    <article><div class="fy-review-stars">★★★★★</div><p>“Gostei muito da seleção. Dá vontade de colocar tudo no carrinho.”</p><strong>Juliana</strong><small>Cliente FOR YOU</small></article>
+  </div>
+  <button class="fy-see-reviews" onclick="document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'})">VER PRODUTOS E AVALIAÇÕES →</button>
+</section>
+
 <!-- =========================
      FOR YOU CLUB
 ========================= -->
@@ -6048,6 +6121,17 @@ Promoções de datas especiais
   </div>
 </section>
 
+
+
+<section class="fy-club-home" id="clubHome">
+  <div class="fy-club-home-copy">
+    <small>FOR YOU CLUB</small>
+    <h2>💗 Comprar, acumular e ganhar benefícios.</h2>
+    <p>Entre para o clube e acompanhe seus pontos, vantagens e ofertas especiais.</p>
+    <button onclick="document.getElementById('paginaFidelidade')?.classList.add('ativa');window.scrollTo({top:0,behavior:'smooth'});">CONHECER O CLUB →</button>
+  </div>
+  <div class="fy-club-home-points"><span>✦</span><strong>1 ponto</strong><small>a cada R$ 1 em compras</small></div>
+</section>
 
 <!-- =========================
      NEWSLETTER
@@ -7938,7 +8022,7 @@ function confirmarPedido(){
   const sequencia=todosPedidos.reduce((m,p)=>Math.max(m,parseInt(String(p.numero||'').replace(/\D/g,''))||0),0)+1;
   const numeroPedido=String(sequencia).padStart(4,'0');
   const parcelas=pagamentoSelecionado==='Cartão'?Number(document.getElementById('cartaoParcelas')?.value||1):1;
-  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'confirmado',statusTexto:'Pedido recebido',etapa:1,pagamentoStatus:pagamentoSelecionado==='PIX'?'Aguardando pagamento':'Pagamento em processamento',total,subtotal,desconto,frete:freteAtual,parcelas,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
+  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'recebido',statusTexto:'Pedido recebido',etapa:1,pagamentoStatus:pagamentoSelecionado==='PIX'?'Aguardando pagamento':'Pagamento em processamento',codigoRastreio:'',total,subtotal,desconto,frete:freteAtual,parcelas,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
   const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
   if(contaAtual&&conta){conta.pedidos=[pedido,...pedidos];conta.nome=nome;conta.email=email;conta.telefone=telefone;conta.endereco=endereco;salvarConta(conta);contaAtual={nome,email,telefone,endereco};salvarContaAtual();}
   todosPedidos.unshift({...pedido,clienteEmail:email});localStorage.setItem('forYouPedidos',JSON.stringify(todosPedidos));
@@ -7963,18 +8047,52 @@ function mostrarPedidoSucesso(pedido){
 function abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total){
   let msg=`Olá! Quero confirmar o pedido ${pedido.numero} na FOR YOU.\n\n*PEDIDO*\n`;pedido.itens.forEach(i=>msg+=`• ${i.nome} — ${i.quantidade}x — ${moeda(i.preco*i.quantidade)}\n`);msg+=`\nTotal: ${moeda(total)}\nEntrega: ${pedido.entrega}\nPagamento: ${pedido.pagamento}\n\nCliente: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEndereço: ${endereco}, ${numero}\nCEP: ${cep}`;window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
 function renderPedidosConta(){
-  const c=document.getElementById('listaPedidosConta');if(!c)return;const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
-  if(!pedidos.length){c.innerHTML='<div class="pedido-status"><strong>Nenhum pedido ainda.</strong><p style="font-size:9px;color:#777;margin-top:6px">Quando você finalizar uma compra, ela aparecerá aqui.</p></div>';return;}
-  const nomes=['Pedido confirmado','Preparando','Enviado','Entregue'];
-  c.innerHTML=pedidos.map(p=>{const e=Math.max(1,Math.min(4,Number(p.etapa||1)));return `<div class="conta-pedido"><div class="conta-pedido-top"><strong>Pedido ${p.numero}</strong><span class="pedido-badge">${moeda(p.total)}</span></div><div class="pedido-meta">Realizado em ${p.data} • ${p.pagamento||'Pagamento a combinar'} • ${p.statusTexto||nomes[e-1]}</div><div class="pedido-status"><div class="status-linha concluido"><span class="status-bolinha"></span> Pedido confirmado</div><div class="status-linha ${e>=2?'concluido':''}"><span class="status-bolinha"></span> Preparando</div><div class="status-linha ${e>=3?'concluido':''}"><span class="status-bolinha"></span> Enviado</div><div class="status-linha ${e>=4?'concluido':''}"><span class="status-bolinha"></span> Entregue</div></div><div style="margin-top:12px;padding:10px;border-radius:10px;background:#fafafa;font-size:10px"><strong>📦 Status atual:</strong> ${p.statusTexto||nomes[e-1]}<br><span style="color:#777">${p.atualizadoEm?'Atualizado em '+p.atualizadoEm:'Aguardando atualização da loja.'}</span></div></div>`}).join('');
+  const c=document.getElementById('listaPedidosConta');if(!c)return;
+  const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
+  if(!pedidos.length){c.innerHTML='<div class="conta-empty-v14 fy2-empty"><div class="icon">▣</div><strong>Nenhum pedido ainda</strong><br>Quando você fizer uma compra, ela aparecerá aqui.</div>';return;}
+  const nomes=['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'];
+  c.innerHTML=pedidos.map(p=>{
+    const e=Math.max(1,Math.min(5,Number(p.etapa||1)));
+    const rastreio=String(p.codigoRastreio||'').trim();
+    const botaoRastreio=rastreio
+      ? `<div class="pedido-rastreio"><div><span class="rastreio-icon">🚚</span><div><strong>Código de rastreio</strong><span>${rastreio}</span></div></div><button type="button" onclick="acompanharPedido('${rastreio}')">ACOMPANHAR PEDIDO</button></div>`
+      : `<div class="pedido-rastreio indisponivel"><div><span class="rastreio-icon">🚚</span><div><strong>Código de rastreio</strong><span>Disponível após o envio do pedido.</span></div></div></div>`;
+    return `<div class="conta-pedido pedido-rastreamento-card">
+      <div class="conta-pedido-top"><strong>${p.numero||'Pedido'}</strong><span class="pedido-badge">${moeda(Number(p.total||0))}</span></div>
+      <div class="pedido-meta">Realizado em ${p.data||'—'} • ${p.pagamento||'Pagamento a combinar'}</div>
+      <div class="pedido-status pedido-status-5">
+        ${nomes.map((nome,i)=>`<div class="status-linha ${e>=i+1?'concluido':''} ${e===i+1?'atual':''}"><span class="status-bolinha">${e>=i+1?'✓':''}</span><span>${nome}</span></div>`).join('')}
+      </div>
+      <div class="pedido-status-atual"><strong>🟢 Status atual</strong><span>${p.statusTexto||nomes[e-1]}</span>${p.atualizadoEm?`<small>Atualizado em ${p.atualizadoEm}</small>`:''}</div>
+      ${botaoRastreio}
+    </div>`;
+  }).join('');
+}
+
+function acompanharPedido(codigo){
+  const rastreio=String(codigo||'').replace(/[^A-Za-z0-9]/g,'');
+  if(!rastreio){alert('O código de rastreio ainda não está disponível.');return;}
+  window.open('https://rastreamento.correios.com.br/app/index.php', '_blank');
+}
+
+function adicionarRastreioPedido(id){
+  if(!adminAutenticado()) return abrirAdminLogin();
+  let pedidos=[];try{pedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]')}catch(e){pedidos=[]}
+  const p=pedidos.find(x=>x.id===id);if(!p){alert('Pedido não encontrado.');return;}
+  const codigo=prompt('Digite o código de rastreio:',p.codigoRastreio||'');if(codigo===null)return;
+  p.codigoRastreio=codigo.trim();
+  localStorage.setItem('forYouPedidos',JSON.stringify(pedidos));
+  const email=String(p.clienteEmail||p.cliente?.email||'').toLowerCase();
+  if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,codigoRastreio:p.codigoRastreio}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){localStorage.setItem('forYouConta',JSON.stringify(conta));}}}
+  renderAdmin();renderPedidosConta();alert(p.codigoRastreio?'Código de rastreio salvo!':'Código de rastreio removido.');
 }
 
 function atualizarStatusPedido(id, etapa){
   if(!adminAutenticado()) return abrirAdminLogin();
-  const mapa={1:'Pedido confirmado',2:'Preparando',3:'Enviado',4:'Entregue'};
+  const mapa={1:'Pedido recebido',2:'Pagamento aprovado',3:'Preparando',4:'Enviado',5:'Entregue'};
   let pedidos=[];try{pedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]')}catch(e){pedidos=[]}
   const p=pedidos.find(x=>x.id===id); if(!p){alert('Pedido não encontrado.');return;}
-  p.etapa=Number(etapa);p.status=['confirmado','preparando','enviado','entregue'][p.etapa-1];p.statusTexto=mapa[p.etapa];p.atualizadoEm=new Date().toLocaleString('pt-BR');
+  p.etapa=Number(etapa);p.status=['recebido','pagamento_aprovado','preparando','enviado','entregue'][p.etapa-1];p.statusTexto=mapa[p.etapa];p.atualizadoEm=new Date().toLocaleString('pt-BR');
   localStorage.setItem('forYouPedidos',JSON.stringify(pedidos));
   const email=String(p.clienteEmail||p.cliente?.email||'').toLowerCase();
   if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,etapa:p.etapa,status:p.status,statusTexto:p.statusTexto,atualizadoEm:p.atualizadoEm}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){localStorage.setItem('forYouConta',JSON.stringify(conta));}}}
@@ -8798,7 +8916,7 @@ function renderAdmin(){
   const cuponsAtivos=cupons.filter(c=>c&&c.ativo!==false);
   document.getElementById('adminCuponsAtivos').textContent=cuponsAtivos.length+' cupom(ns) ativo(s).';
   const pedidosEl=document.getElementById('adminTabelaPedidos');
-  pedidosEl.innerHTML=pedidos.length?pedidos.slice(0,12).map(p=>{const e=Math.max(1,Math.min(4,Number(p.etapa||1)));const status=p.statusTexto||['Pedido confirmado','Preparando','Enviado','Entregue'][e-1];return `<div style="padding:12px 0;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))}<br><span style="font-size:10px;color:#777">${p.cliente?.nome||p.clienteEmail||''} • ${status}</span></div><select onchange="atualizarStatusPedido('${p.id}',this.value)" style="padding:7px;border:1px solid #ddd;border-radius:8px"><option value="1" ${e===1?'selected':''}>Confirmado</option><option value="2" ${e===2?'selected':''}>Preparando</option><option value="3" ${e===3?'selected':''}>Enviado</option><option value="4" ${e===4?'selected':''}>Entregue</option></select></div></div>`}).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';
+  pedidosEl.innerHTML=pedidos.length?pedidos.slice(0,12).map(p=>{const e=Math.max(1,Math.min(5,Number(p.etapa||1)));const status=p.statusTexto||['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'][e-1];const rastreio=String(p.codigoRastreio||'');return `<div style="padding:12px 0;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><strong>${p.numero||'Pedido'}</strong> • ${moeda(Number(p.total||0))}<br><span style="font-size:10px;color:#777">${p.cliente?.nome||p.clienteEmail||''} • ${status}</span><br><span style="font-size:9px;color:#999">Rastreio: ${rastreio||'não informado'}</span></div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><select onchange="atualizarStatusPedido('${p.id}',this.value)" style="padding:7px;border:1px solid #ddd;border-radius:8px"><option value="1" ${e===1?'selected':''}>Pedido recebido</option><option value="2" ${e===2?'selected':''}>Pagamento aprovado</option><option value="3" ${e===3?'selected':''}>Preparando</option><option value="4" ${e===4?'selected':''}>Enviado</option><option value="5" ${e===5?'selected':''}>Entregue</option></select><button type="button" onclick="adicionarRastreioPedido('${p.id}')" style="padding:7px;border:1px solid #351f27;background:#fff;border-radius:8px;font-size:8px">${rastreio?'EDITAR RASTREIO':'+ RASTREIO'}</button></div></div></div>`}).join(''):'<p style="color:#777">Ainda não existem pedidos registrados.</p>';
   document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(faturamento)}</p><p><strong>Ticket médio:</strong> ${pedidos.length?moeda(faturamento/pedidos.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;
 }
 
@@ -11617,6 +11735,133 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 }
 </style>
+
+
+<style id="foryou-v23-organization">
+.fy-main-nav{display:flex;justify-content:center;gap:28px;align-items:center;padding:13px 18px;border-bottom:1px solid #eee3e6;background:#fff;font-size:10px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;position:relative;z-index:20}
+.fy-main-nav a{color:#4c4044;text-decoration:none;transition:.2s}.fy-main-nav a:hover{color:#b85f78}
+.fy-home-highlights{padding:46px 5% 20px;background:linear-gradient(180deg,#fffafa 0,#fff 100%)}
+.fy-home-heading{text-align:center;max-width:680px;margin:0 auto 24px}.fy-home-heading small,.fy-de-pick-copy small{letter-spacing:2px;color:#b85f78;font-size:9px}.fy-home-heading h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:8px 0}.fy-home-heading p{font-size:11px;color:#817378;line-height:1.7}
+.fy-highlight-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.fy-highlight-card{border:1px solid #eee0e4;background:#fff;border-radius:18px;padding:20px 14px;text-align:left;cursor:pointer;box-shadow:0 8px 25px rgba(91,56,67,.05);transition:.2s}.fy-highlight-card:hover{transform:translateY(-3px);border-color:#e1b8c4}.fy-highlight-card span{font-size:22px;display:block;margin-bottom:12px}.fy-highlight-card strong{display:block;font-size:11px;color:#453b3e}.fy-highlight-card small{display:block;color:#96868b;font-size:9px;margin-top:6px}
+.fy-de-pick{max-width:1100px;margin:auto;display:grid;grid-template-columns:260px 1fr;gap:25px;align-items:center}.fy-de-pick-copy{padding:25px;border-radius:20px;background:#fff8fa;border:1px solid #f1dfe4}.fy-de-pill{display:inline-block;padding:7px 10px;border-radius:99px;background:#f8e4ea;color:#a9576e;font-size:8px;letter-spacing:1.3px;font-weight:700}.fy-de-pick-copy h3{font-family:Georgia,serif;font-size:23px;font-weight:400;margin:16px 0 8px}.fy-de-pick-copy p{font-size:10px;color:#817378;line-height:1.7}.fy-de-pick-copy button,.fy-see-reviews,.fy-club-home-copy button{border:0;background:#b85f78;color:#fff;border-radius:999px;padding:11px 15px;font-size:9px;font-weight:700;letter-spacing:.7px;cursor:pointer;margin-top:8px}
+.fy-brands-grid{max-width:1000px;margin:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.fy-brand-chip{border:1px solid #eadde1;background:#fff;border-radius:999px;padding:13px 20px;font-size:10px;font-weight:700;color:#56484d;cursor:pointer}.fy-brand-chip:hover{background:#fff5f7;color:#a9576e;border-color:#dfb5c1}
+.fy-home-reviews{text-align:center;background:#fffafa}.fy-review-grid{max-width:1050px;margin:0 auto 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.fy-review-grid article{background:#fff;border:1px solid #eee0e4;border-radius:18px;padding:22px;text-align:left}.fy-review-stars{letter-spacing:2px;color:#c9788e;font-size:13px}.fy-review-grid p{font-size:11px;line-height:1.7;color:#66585d;min-height:55px}.fy-review-grid strong,.fy-review-grid small{display:block}.fy-review-grid strong{font-size:10px}.fy-review-grid small{font-size:8px;color:#999;margin-top:3px}.fy-club-home{max-width:1100px;margin:40px auto;padding:30px 34px;border-radius:24px;background:linear-gradient(135deg,#fff3f6,#fff);border:1px solid #efdce2;display:flex;justify-content:space-between;align-items:center;gap:25px}.fy-club-home-copy small{letter-spacing:2px;font-size:9px;color:#b85f78}.fy-club-home-copy h2{font-family:Georgia,serif;font-size:27px;font-weight:400;margin:8px 0}.fy-club-home-copy p{font-size:10px;color:#817378}.fy-club-home-points{min-width:190px;text-align:center;padding:22px;border-radius:18px;background:#fff;border:1px solid #eee0e4}.fy-club-home-points span{display:block;font-size:22px;color:#c9788e}.fy-club-home-points strong,.fy-club-home-points small{display:block}.fy-club-home-points strong{font-size:20px}.fy-club-home-points small{font-size:9px;color:#8b7d81;margin-top:4px}
+@media(max-width:800px){.fy-main-nav{gap:18px;overflow-x:auto;justify-content:flex-start;white-space:nowrap}.fy-highlight-grid{grid-template-columns:repeat(2,1fr)}.fy-de-pick{grid-template-columns:1fr}.fy-review-grid{grid-template-columns:1fr}.fy-club-home{margin:30px 14px;padding:24px;flex-direction:column;align-items:stretch}.fy-club-home-points{min-width:0}}
+@media(max-width:500px){.fy-home-highlights{padding:32px 14px 10px}.fy-highlight-card{padding:15px 12px}.fy-home-heading h2{font-size:26px}.fy-highlight-card strong{font-size:10px}.fy-highlight-card small{font-size:8px}.fy-de-pick .produtos{grid-template-columns:repeat(2,minmax(0,1fr))}.fy-club-home-copy h2{font-size:23px}}
+</style>
+
+<!-- FOR YOU V23: camada de dados preparada para Supabase.
+     Preencha URL e chave pública (anon/publishable) do seu projeto para ativar
+     autenticação e dados persistentes. Nunca coloque service_role no navegador. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script id="foryou-v23-data-layer">
+(function(){
+  const CFG=window.FOR_YOU_SUPABASE||{url:'',anonKey:''};
+  let sb=null;
+  if(window.supabase && CFG.url && CFG.anonKey){try{sb=window.supabase.createClient(CFG.url,CFG.anonKey);window.FOR_YOU_SUPABASE_CLIENT=sb;}catch(e){console.warn('Supabase não inicializado',e)}}
+  window.FOR_YOU_DATA={enabled:!!sb,client:sb};
+
+  // Seleção da Dé: usa produtos marcados como destaque; se ainda não houver,
+  // escolhe os mais bem avaliados para que a seção nunca fique vazia.
+  window.renderAchadinhosDe=function(){
+    const el=document.getElementById('listaAchadinhosDe');if(!el)return;
+    const lista=produtos.filter(p=>p.achadinhoDe||p.escolhaDe||p.destaqueDe).slice(0,4);
+    const final=lista.length?lista:[...produtos].sort((a,b)=>(Number(b.nota)||0)-(Number(a.nota)||0)).slice(0,4);
+    el.innerHTML='';final.forEach(p=>el.appendChild(criarCard(p)));
+  };
+  window.renderMarcasHome=function(){
+    const el=document.getElementById('listaMarcasHome');if(!el)return;
+    const marcas=[...new Set(produtos.map(p=>p.marca).filter(Boolean))].slice(0,12);
+    el.innerHTML=marcas.map(m=>`<button class="fy-brand-chip" onclick="filtrarPorMarcaHome(${JSON.stringify(m)})">${m}</button>`).join('');
+  };
+  window.filtrarPorMarcaHome=function(marca){
+    const f=document.getElementById('filtroMarca');if(f){f.value=marca;aplicarFiltros();document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});}else{window.location.hash='novidades';}
+  };
+
+  // Supabase Auth: quando configurado, a senha deixa de ser armazenada no localStorage.
+  async function syncSupabaseProfile(uid,meta){
+    if(!sb||!uid)return;
+    await sb.from('profiles').upsert({id:uid,nome:meta.nome||meta.full_name||'',telefone:meta.telefone||'',endereco:meta.endereco||'',updated_at:new Date().toISOString()});
+  }
+  async function loadSupabaseFavorites(uid){
+    if(!sb||!uid)return;
+    const r=await sb.from('favorites').select('product_id').eq('user_id',uid);
+    if(!r.error&&Array.isArray(r.data)){favoritos=r.data.map(x=>Number(x.product_id));salvarFavoritosLocalSeguro();renderFavoritos();atualizar();renderProdutos();renderRecomendados();}
+  }
+  async function syncSupabaseFavorites(uid){
+    if(!sb||!uid)return;
+    await sb.from('favorites').delete().eq('user_id',uid);
+    if(favoritos.length) await sb.from('favorites').insert(favoritos.map(id=>({user_id:uid,product_id:Number(id)})));
+  }
+  async function loadSupabaseOrders(uid){
+    if(!sb||!uid)return;
+    const r=await sb.from('orders').select('*').eq('user_id',uid).order('data_pedido',{ascending:false});
+    if(r.error||!Array.isArray(r.data))return;
+    const conta=contaSalva();
+    if(conta){conta.pedidos=r.data.map(o=>({id:o.id,numero:o.numero,data:new Date(o.data_pedido).toLocaleDateString('pt-BR'),status:o.status,etapa:o.etapa,statusTexto:o.status==='confirmado'?'Pedido recebido':o.status,pagamentoStatus:o.pagamento_status,total:Number(o.total),subtotal:Number(o.subtotal),desconto:Number(o.desconto),frete:Number(o.frete),parcelas:o.parcelas,itens:o.itens,entrega:o.entrega,pagamento:o.pagamento,cliente:o.cliente,endereco:o.endereco,codigoRastreio:o.codigo_rastreio||'',atualizadoEm:o.atualizado_em&&new Date(o.atualizado_em).toLocaleString('pt-BR')}));salvarConta(conta);renderPedidosConta();}
+  }
+  async function syncSupabaseOrder(pedido){
+    if(!sb||!pedido||!contaAtual)return;
+    const u=await window.FOR_YOU_AUTH.user();if(!u)return;
+    await sb.from('orders').upsert({id:pedido.id.startsWith('pedido_')?undefined:pedido.id,user_id:u.id,numero:pedido.numero,status:pedido.status,etapa:pedido.etapa,pagamento:pedido.pagamento,pagamento_status:pedido.pagamentoStatus,parcelas:pedido.parcelas,subtotal:pedido.subtotal,desconto:pedido.desconto,frete:pedido.frete,total:pedido.total,entrega:pedido.entrega,itens:pedido.itens,endereco:pedido.endereco,cliente:pedido.cliente,data_pedido:pedido.dataISO,atualizado_em:new Date().toISOString()},{onConflict:'id'});
+  }
+  function salvarFavoritosLocalSeguro(){
+    localStorage.setItem(chaveContaDados('Favoritos'),JSON.stringify(favoritos));
+    if(!contaAtual) localStorage.setItem('forYouFavoritos',JSON.stringify(favoritos));
+  }
+
+  window.FOR_YOU_AUTH={
+    async signUp({email,password,metadata}){if(!sb)return null;return await sb.auth.signUp({email,password,options:{data:metadata||{}}});},
+    async signIn({email,password}){if(!sb)return null;return await sb.auth.signInWithPassword({email,password});},
+    async signOut(){if(!sb)return null;return await sb.auth.signOut();},
+    async user(){if(!sb)return null;const r=await sb.auth.getUser();return r.data?.user||null;}
+  };
+
+  async function sincronizarSessao(){
+    if(!sb)return;
+    const u=await window.FOR_YOU_AUTH.user();
+    if(!u)return;
+    const meta=u.user_metadata||{};
+    contaAtual={nome:meta.nome||meta.full_name||u.email?.split('@')[0]||'Cliente',email:u.email||'',telefone:meta.telefone||'',endereco:meta.endereco||''};
+    salvarContaAtual();
+    try{carregarDadosDaConta();}catch(e){}
+    try{await syncSupabaseProfile(u.id,meta);}catch(e){}
+    try{await loadSupabaseFavorites(u.id);}catch(e){}
+    try{await loadSupabaseOrders(u.id);}catch(e){}
+    try{atualizarMinhaConta();}catch(e){}
+  }
+  window.addEventListener('load',()=>{renderAchadinhosDe();renderMarcasHome();sincronizarSessao();});
+
+  // Não substitui o fluxo local automaticamente: se Supabase estiver configurado,
+  // intercepta cadastro/login e usa Auth. Os dados de conta não são gravados com senha.
+  const salvarFavoritosOriginal=window.salvarFavoritos;
+  window.salvarFavoritos=function(){salvarFavoritosOriginal();if(sb&&contaAtual)window.FOR_YOU_AUTH.user().then(u=>u&&syncSupabaseFavorites(u.id)).catch(()=>{});};
+  const mostrarPedidoSucessoOriginal=window.mostrarPedidoSucesso;
+  window.mostrarPedidoSucesso=function(pedido){mostrarPedidoSucessoOriginal(pedido);if(sb)syncSupabaseOrder(pedido).catch(e=>console.warn('Pedido não sincronizado no Supabase',e));};
+
+  const cadastroOriginal=window.cadastrarConta;
+  window.cadastrarConta=async function(event){
+    if(!sb)return cadastroOriginal(event);
+    event.preventDefault();
+    const nome=document.getElementById('cadNome').value.trim(),email=document.getElementById('cadEmail').value.trim().toLowerCase(),telefone=document.getElementById('cadTelefone').value.trim(),endereco=document.getElementById('cadEndereco').value.trim(),senha=document.getElementById('cadSenha').value,confirmar=document.getElementById('cadConfirmar').value,msg=document.getElementById('cadastroMensagem');
+    if(nome.length<2){msg.textContent='Digite seu nome completo.';return false;} if(!/^\S+@\S+\.\S+$/.test(email)){msg.textContent='Digite um e-mail válido.';return false;} if(senha.length<6){msg.textContent='A senha precisa ter pelo menos 6 caracteres.';return false;} if(senha!==confirmar){msg.textContent='As senhas não são iguais.';return false;}
+    const r=await window.FOR_YOU_AUTH.signUp({email,password:senha,metadata:{nome,telefone,endereco}});
+    if(r.error){msg.textContent=r.error.message||'Não foi possível criar a conta.';return false;}
+    msg.textContent=r.data?.session?'Conta criada com sucesso! 💕':'Conta criada! Confira seu e-mail para confirmar o cadastro.';
+    if(r.data?.session){contaAtual={nome,email,telefone,endereco};salvarContaAtual();atualizarMinhaConta();}
+    return false;
+  };
+  const loginOriginal=window.fazerLogin;
+  window.fazerLogin=async function(event){
+    if(!sb)return loginOriginal(event);
+    event.preventDefault();const email=document.getElementById('loginEmail').value.trim().toLowerCase(),senha=document.getElementById('loginSenha').value,msg=document.getElementById('loginMensagem');
+    const r=await window.FOR_YOU_AUTH.signIn({email,password:senha});if(r.error){msg.textContent='E-mail ou senha incorretos.';return false;}
+    const u=r.data?.user;const meta=u?.user_metadata||{};contaAtual={nome:meta.nome||u?.email?.split('@')[0]||'Cliente',email:u?.email||email,telefone:meta.telefone||'',endereco:meta.endereco||''};salvarContaAtual();carregarDadosDaConta();atualizarMinhaConta();msg.textContent='Login realizado com sucesso! 💕';return false;
+  };
+  const sairOriginal=window.sairDaConta;
+  window.sairDaConta=async function(){if(!sb)return sairOriginal();await window.FOR_YOU_AUTH.signOut();contaAtual=null;salvarContaAtual();location.reload();};
+})();
+</script>
 
 </body>
 </html>
