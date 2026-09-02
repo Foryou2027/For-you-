@@ -5290,89 +5290,6 @@ body{background:#fff!important;color:#3f2028!important}
 .menu-principal > .busca .busca-linha:focus-within{border-color:#e9a9ba!important;box-shadow:0 0 0 4px rgba(255,95,134,.07)!important;}
 
 </style>
-
-<style id="fy-home-categories-hard-fix-v2">
-/* Correção definitiva da faixa de categorias da HOME */
-.home-quick{
-  display:block !important;
-  width:100% !important;
-  max-width:1280px !important;
-  margin:16px auto 22px !important;
-  padding:0 24px !important;
-  position:relative !important;
-  z-index:20 !important;
-  overflow:visible !important;
-}
-.home-quick .home-quick-inner{
-  width:100% !important;
-  min-height:78px !important;
-  height:78px !important;
-  display:grid !important;
-  grid-template-columns:repeat(7,minmax(0,1fr)) !important;
-  align-items:stretch !important;
-  background:#fff !important;
-  border:1px solid #f0d9e0 !important;
-  border-radius:20px !important;
-  overflow:hidden !important;
-  box-shadow:0 10px 30px rgba(111,48,68,.06) !important;
-}
-.home-quick .home-quick-inner > button{
-  position:relative !important;
-  inset:auto !important;
-  transform:none !important;
-  float:none !important;
-  width:100% !important;
-  min-width:0 !important;
-  height:76px !important;
-  min-height:76px !important;
-  margin:0 !important;
-  padding:10px 6px !important;
-  border:0 !important;
-  border-right:1px solid #f0d9e0 !important;
-  border-radius:0 !important;
-  background:#fff !important;
-  color:#4b3039 !important;
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:6px !important;
-  line-height:1.15 !important;
-  font-size:10px !important;
-  font-weight:700 !important;
-  overflow:visible !important;
-}
-.home-quick .home-quick-inner > button:last-child{border-right:0 !important}
-.home-quick .home-quick-inner > button > span{
-  position:static !important;
-  display:block !important;
-  width:auto !important;
-  height:auto !important;
-  margin:0 !important;
-  padding:0 !important;
-  transform:none !important;
-  font-family:Georgia,serif !important;
-  font-size:18px !important;
-  line-height:20px !important;
-  color:#d96f8d !important;
-}
-.home-quick .home-quick-inner > button:hover{background:#fff8fa !important;color:#6f3044 !important;transform:none !important}
-.hero-image-final{margin-top:0 !important}
-@media(max-width:700px){
-  .home-quick{padding:0 12px !important;margin:12px auto 18px !important;overflow:hidden !important}
-  .home-quick .home-quick-inner{
-    display:flex !important;
-    height:72px !important;
-    min-height:72px !important;
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-    -webkit-overflow-scrolling:touch !important;
-    scrollbar-width:none !important;
-  }
-  .home-quick .home-quick-inner::-webkit-scrollbar{display:none !important}
-  .home-quick .home-quick-inner > button{flex:0 0 104px !important;width:104px !important;height:70px !important;min-height:70px !important}
-}
-</style>
 </head>
 
 <body>
@@ -12071,5 +11988,37 @@ footer h3,.footer-logo{color:var(--fy-wine)!important}
   setTimeout(atualizarNomeBoasVindas,300);
 })();
 </script>
+
+<style id="fy-fix-faixa-duplicada-final">
+/* Correção final: mantém os dropdowns no DOM, mas remove visualmente a faixa antiga do header. */
+header .menu-principal,
+header #menuPrincipal,
+header .menu-categorias,
+header .categorias-menu {
+  display:none !important;
+  height:0 !important;
+  min-height:0 !important;
+  max-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  overflow:visible !important;
+}
+
+/* A faixa correta da home fica no fluxo normal, sem sobreposição. */
+#loja > .home-quick {
+  display:block !important;
+  position:relative !important;
+  z-index:20 !important;
+  margin:18px auto 24px !important;
+  transform:none !important;
+}
+#loja > .home-quick + .hero-image-final {
+  margin-top:0 !important;
+}
+
+/* Evita qualquer navegação antiga criada por scripts. */
+.fy19-category-nav { display:none !important; }
+</style>
 </body>
 </html>
