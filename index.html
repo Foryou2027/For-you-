@@ -5290,6 +5290,28 @@ body{background:#fff!important;color:#3f2028!important}
 .menu-principal > .busca .busca-linha:focus-within{border-color:#e9a9ba!important;box-shadow:0 0 0 4px rgba(255,95,134,.07)!important;}
 
 </style>
+
+<style id="fy-fix-legacy-category-duplicate-final">
+/* Oculta somente a faixa antiga de categorias do cabeçalho.
+   Mantém navegação principal, busca, dropdowns e a faixa nova .home-quick. */
+header .menu-principal > .menu-lista{
+  display:none !important;
+  height:0 !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  overflow:hidden !important;
+}
+/* Reativa o contêiner do menu porque versões anteriores o esconderam por inteiro. */
+header .menu-principal{display:block !important;}
+/* A faixa nova fica no fluxo normal, sem sobreposição. */
+main#loja > .home-quick{
+  margin:18px auto 24px !important;
+  transform:none !important;
+  position:relative !important;
+}
+</style>
 </head>
 
 <body>
@@ -11988,37 +12010,5 @@ footer h3,.footer-logo{color:var(--fy-wine)!important}
   setTimeout(atualizarNomeBoasVindas,300);
 })();
 </script>
-
-<style id="fy-fix-faixa-duplicada-final">
-/* Correção final: mantém os dropdowns no DOM, mas remove visualmente a faixa antiga do header. */
-header .menu-principal,
-header #menuPrincipal,
-header .menu-categorias,
-header .categorias-menu {
-  display:none !important;
-  height:0 !important;
-  min-height:0 !important;
-  max-height:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  overflow:visible !important;
-}
-
-/* A faixa correta da home fica no fluxo normal, sem sobreposição. */
-#loja > .home-quick {
-  display:block !important;
-  position:relative !important;
-  z-index:20 !important;
-  margin:18px auto 24px !important;
-  transform:none !important;
-}
-#loja > .home-quick + .hero-image-final {
-  margin-top:0 !important;
-}
-
-/* Evita qualquer navegação antiga criada por scripts. */
-.fy19-category-nav { display:none !important; }
-</style>
 </body>
 </html>
