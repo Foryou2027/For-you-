@@ -3737,6 +3737,15 @@ textarea:focus-visible{
     grid-column:1/-1;
   }
 }
+
+
+/* =========================
+   FAVORITOS — FOR YOU CLEAN
+========================= */
+.favoritos-hero{max-width:1200px;margin:0 auto 30px;padding:34px 38px;border-radius:28px;background:linear-gradient(135deg,#fff4f7,#fff 68%);border:1px solid #f3e1e7;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.favoritos-hero small{display:block;color:#b89a62;font-size:9px;font-weight:800;letter-spacing:2.5px;margin-bottom:8px}.favoritos-hero h2{font-family:Georgia,serif;font-size:38px;font-weight:400;color:#351f27;margin:0 0 8px}.favoritos-hero p{color:#806e74;font-size:11px;line-height:1.7}.favoritos-resumo{min-width:120px;text-align:center;background:#fff;border:1px solid #f0dfe4;border-radius:20px;padding:18px;box-shadow:0 10px 30px rgba(53,31,39,.06)}.favoritos-resumo strong{display:block;font-family:Georgia,serif;font-size:30px;color:#b83f61}.favoritos-resumo span{font-size:8px;color:#8c777e;letter-spacing:1px;text-transform:uppercase}.favoritos-vazio{border:0!important;border-radius:28px!important;box-shadow:0 12px 40px rgba(53,31,39,.06);padding:70px 24px!important}.favoritos-vazio .fav-empty-icon{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:#fff0f4;color:#b83f61;font-size:34px}.favoritos-vazio h3{font-size:28px!important;font-weight:400}.favoritos-vazio p{margin:10px auto 22px;color:#88767c;font-size:11px;line-height:1.7}.favoritos-vazio button{border:0;border-radius:999px;background:#351f27;color:#fff;padding:13px 24px;font-size:9px;font-weight:800;letter-spacing:1px}.acao-favoritos{position:relative}.contador-favoritos{position:absolute;top:-8px;right:-10px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#b83f61;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;border:2px solid #fff}.contador-favoritos.vazio{display:none}#paginaFavoritos .produtos{gap:24px}#paginaFavoritos .produto{border-color:#f1e4e8;box-shadow:0 8px 26px rgba(53,31,39,.045)}#paginaFavoritos .produto:hover{box-shadow:0 16px 38px rgba(53,31,39,.09)}
+@media(max-width:700px){.favoritos-hero{padding:26px 22px;border-radius:22px;align-items:flex-start}.favoritos-hero h2{font-size:30px}.favoritos-resumo{min-width:92px;padding:14px 10px}.favoritos-resumo strong{font-size:25px}}
+
 </style>
 
 </style>
@@ -5191,8 +5200,8 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="acoes">
 
-<button class="acao-btn" onclick="abrirFavoritos()" title="Favoritos">
-♡
+<button class="acao-btn acao-favoritos" onclick="abrirFavoritos()" title="Favoritos" aria-label="Abrir favoritos">
+♡<span class="contador-favoritos vazio" id="contadorFavoritos">0</span>
 </button>
 
 <button class="acao-btn" onclick="abrirConta()" title="Área do cliente" aria-label="Área do cliente" data-tooltip="Área do cliente"></button>
@@ -5768,10 +5777,16 @@ Promoções de datas especiais
 ← VOLTAR PARA A LOJA
 </button>
 
-<div class="titulo">
-<small>FOR YOU</small>
-<h2>Meus favoritos</h2>
-<p>Produtos que você guardou com carinho.</p>
+<div class="favoritos-hero">
+  <div>
+    <small>SEUS QUERIDINHOS</small>
+    <h2>Meus favoritos ♡</h2>
+    <p>Guarde aqui os produtos que você amou e encontre tudo rapidinho quando quiser comprar.</p>
+  </div>
+  <div class="favoritos-resumo">
+    <strong id="favoritosTotalPagina">0</strong>
+    <span>salvos</span>
+  </div>
 </div>
 
 <div id="listaFavoritos"></div>
@@ -6960,6 +6975,7 @@ const banners = [
   {etiqueta:"KITS ESPECIAIS",titulo:"Combinações que valem a pena",texto:"Kits promocionais pensados para você.",cta:"VER KITS",acao:"kits"}
 ];
 let bannerAtual=0;
+setTimeout(atualizarContadorFavoritos,0);
 
 
 /* =========================
@@ -7471,6 +7487,7 @@ favoritos.push(id);
 }
 
 salvarFavoritos();
+atualizarContadorFavoritos();
 
 atualizarAcessoAdmin();
 
@@ -7492,7 +7509,17 @@ renderFavoritos();
 }
 
 
+function atualizarContadorFavoritos(){
+  const el=document.getElementById("contadorFavoritos");
+  const total=document.getElementById("favoritosTotalPagina");
+  const qtd=favoritos.length;
+  if(el){el.textContent=qtd;el.classList.toggle("vazio",qtd===0);}
+  if(total) total.textContent=qtd;
+}
+
 function renderFavoritos(){
+
+atualizarContadorFavoritos();
 
 const container =
 document.getElementById("listaFavoritos");
@@ -7509,17 +7536,10 @@ if(lista.length===0){
 container.innerHTML=`
 
 <div class="favoritos-vazio">
-
-<h3>♡</h3>
-
-<h3>
-Você ainda não tem favoritos.
-</h3>
-
-<p>
-Clique no coração dos produtos que você ama.
-</p>
-
+  <div class="fav-empty-icon">♡</div>
+  <h3>Sua lista de favoritos está esperando por você</h3>
+  <p>Clique no coração dos produtos que você amar. Eles ficam guardados aqui para você encontrar depois.</p>
+  <button type="button" onclick="voltarLoja()">EXPLORAR PRODUTOS</button>
 </div>
 `;
 
