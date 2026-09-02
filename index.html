@@ -5204,6 +5204,51 @@ footer{background:var(--fy-wine);padding:65px 5% 22px}.footer-logo{color:#f3c8d3
 .contador-favoritos.vazio{display:none!important}
 @media(max-width:600px){.acoes .acao-favoritos,.acoes .acao-conta{width:38px!important;height:38px!important;min-width:38px!important}.fy-heart-icon,.fy-user-icon{width:23px;height:23px}}
 </style>
+
+<style id="fy-final-clean-top-v25">
+/* FOR YOU — topo final clean */
+.logo span{display:none!important}
+.menu-principal{margin-top:10px!important;padding-bottom:14px!important}
+.fy-main-nav{margin:0 auto 12px!important}
+.busca{max-width:650px!important;margin:0 auto 14px!important;padding:0 12px!important}
+.menu-lista{
+  max-width:980px!important;
+  margin:0 auto!important;
+  min-height:auto!important;
+  padding:2px 12px!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:8px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.menu-item{flex:0 1 125px!important;min-width:90px!important}
+.menu-item:not(:last-child)::after{display:none!important}
+.menu-btn{
+  min-height:54px!important;
+  padding:7px 10px!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  color:#351f27!important;
+  gap:5px!important;
+}
+.menu-btn:hover,.menu-btn.ativo{background:#fff3f6!important;color:#351f27!important}
+.fy-category-icon{font-size:18px!important;color:#d74f6b!important}
+.fy-category-label{font-size:9px!important;font-weight:700!important}
+@media(max-width:800px){
+  .menu-principal{padding-bottom:10px!important}
+  .fy-main-nav{margin-bottom:10px!important}
+  .busca{margin-bottom:10px!important}
+  .menu-lista{justify-content:flex-start!important;overflow-x:auto!important;padding:0 12px 5px!important;gap:4px!important;scrollbar-width:none!important}
+  .menu-lista::-webkit-scrollbar{display:none!important}
+  .menu-item{flex:0 0 92px!important;min-width:92px!important}
+  .menu-btn{min-height:50px!important;padding:6px!important}
+}
+</style>
 </head>
 
 <body>
@@ -5220,7 +5265,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="logo">
 <h1>FOR YOU</h1>
-<span>BELEZA • CUIDADOS • ACHADINHOS</span>
+
 </div>
 
 <div class="acoes">
@@ -5249,6 +5294,20 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
   <a href="#achadinhoSemana">Achadinhos</a>
   <a href="#marcas">Marcas</a>
 </div>
+<div class="busca">
+
+<div class="busca-linha">
+<input
+id="busca"
+type="text"
+placeholder="Buscar produto..."
+onkeydown="if(event.key==='Enter')buscarProdutos()"
+>
+<button onclick="buscarProdutos()">⌕</button>
+</div>
+<div class="busca-sugestoes" id="buscaSugestoes"></div>
+</div>
+
 <div class="menu-lista">
 
 <div class="menu-item">
@@ -5373,19 +5432,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 </div>
 
-<div class="busca">
 
-<div class="busca-linha">
-<input
-id="busca"
-type="text"
-placeholder="Buscar produto..."
-onkeydown="if(event.key==='Enter')buscarProdutos()"
->
-<button onclick="buscarProdutos()">⌕</button>
-</div>
-<div class="busca-sugestoes" id="buscaSugestoes"></div>
-</div>
 
 </div>
 </div>
