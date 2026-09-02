@@ -9387,58 +9387,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.addEventListener('DOMContentLoaded',()=>setTimeout(polishEntry,120));
 })();
 </script>
-
-
-<script id="foryou-v19-categories-script">
-(function(){
-  function makeCategoryList(){
-    if(document.querySelector('.fy19-category-nav')) return;
-
-    const original =
-      document.querySelector('.categorias') ||
-      document.querySelector('.categories') ||
-      document.querySelector('.category-list');
-
-    if(!original) return;
-
-    const links=[...original.querySelectorAll('a')].filter(a=>(a.textContent||'').trim());
-    if(!links.length) return;
-
-    const nav=document.createElement('nav');
-    nav.className='fy19-category-nav';
-    nav.setAttribute('aria-label','Categorias');
-
-    const list=document.createElement('div');
-    list.className='fy19-category-list';
-
-    links.forEach((oldLink,index)=>{
-      const a=document.createElement('a');
-      a.href=oldLink.getAttribute('href') || '#';
-      a.textContent=(oldLink.textContent||'').trim();
-      a.dataset.categoryIndex=index;
-      a.addEventListener('click',function(){
-        list.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
-        a.classList.add('active');
-      });
-      list.appendChild(a);
-    });
-
-    nav.appendChild(list);
-    original.parentNode.insertBefore(nav,original);
-    original.classList.add('fy19-original-hidden');
-
-    // First item starts as the active navigation state.
-    if(list.firstElementChild) list.firstElementChild.classList.add('active');
-  }
-
-  document.addEventListener('DOMContentLoaded',function(){
-    document.body.classList.add('foryou-v19');
-    setTimeout(makeCategoryList,180);
-  });
-})();
-</script>
-
-
 <script id="foryou-v20-cart-script">
 (function(){
   function refineCart(){
@@ -11951,25 +11899,35 @@ footer h3,.footer-logo{color:var(--fy-wine)!important}
   setTimeout(atualizarNomeBoasVindas,300);
 })();
 </script>
+<style id="fy-remove-old-category-strip-structural">
+/* A faixa antiga foi removida do HTML. Este contêiner guarda apenas os dropdowns. */
+.category-dropdown-store{position:relative;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;}
+.category-dropdown-store .dropdown{position:fixed!important;top:170px!important;left:50%!important;right:auto!important;transform:translateX(-50%) translateY(-6px)!important;z-index:1200!important;}
+.category-dropdown-store .dropdown.aberto{transform:translateX(-50%) translateY(0)!important;}
+</style>
 
-<style id="fy-fix-faixa-duplicada-final">
-/* Remove somente a faixa ANTIGA de categorias do header.
-   Mantém a navegação principal e a busca visíveis. */
+<style id="fy-fix-faixa-duplicada-definitivo">
+/* Mantém somente a faixa nova .home-quick. */
+#loja > .fy19-category-nav,
+#loja > .categorias,
+#loja > .categories,
+#loja > .category-list,
+.fy19-category-nav{
+  display:none !important;
+}
 header .menu-principal > .menu-lista{
+  display:none !important;
+}
+.category-dropdown-store{
+  position:relative !important;
   height:0 !important;
   min-height:0 !important;
-  max-height:0 !important;
   margin:0 !important;
   padding:0 !important;
   border:0 !important;
   overflow:visible !important;
 }
-header .menu-principal > .menu-lista > .menu-item > .menu-btn{
-  display:none !important;
-}
-
-/* Os dropdowns continuam disponíveis para os botões da faixa nova. */
-header .menu-principal > .menu-lista .dropdown{
+.category-dropdown-store .dropdown{
   position:fixed !important;
   top:170px !important;
   left:50% !important;
@@ -11977,31 +11935,22 @@ header .menu-principal > .menu-lista .dropdown{
   transform:translateX(-50%) translateY(-6px) !important;
   z-index:1200 !important;
 }
-header .menu-principal > .menu-lista .dropdown.aberto{
+.category-dropdown-store .dropdown.aberto{
   transform:translateX(-50%) translateY(0) !important;
 }
-
-/* A faixa NOVA da home fica limpa e logo acima do banner. */
 #loja > .home-quick{
   display:block !important;
+  max-width:1200px !important;
+  margin:18px auto 24px !important;
+  padding:0 5% !important;
   position:relative !important;
   z-index:20 !important;
-  margin:18px auto 24px !important;
   transform:none !important;
 }
 #loja > .home-quick + .hero-image-final{
   margin-top:0 !important;
 }
-
-/* Remove qualquer outra faixa antiga injetada por scripts. */
-.fy19-category-nav{display:none !important;}
 </style>
 
-<style id="fy-remove-old-category-strip-structural">
-/* A faixa antiga foi removida do HTML. Este contêiner guarda apenas os dropdowns. */
-.category-dropdown-store{position:relative;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;}
-.category-dropdown-store .dropdown{position:fixed!important;top:170px!important;left:50%!important;right:auto!important;transform:translateX(-50%) translateY(-6px)!important;z-index:1200!important;}
-.category-dropdown-store .dropdown.aberto{transform:translateX(-50%) translateY(0)!important;}
-</style>
 </body>
 </html>
