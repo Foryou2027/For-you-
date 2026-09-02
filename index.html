@@ -5703,7 +5703,7 @@ Promoções de datas especiais
 
         <button class="fy2-nav-item" onclick="abrirAbaConta('dadosConta',this)">
           <span class="fy2-nav-icon">♙</span>
-          <span>Dados pessoais</span>
+          <span>Meus dados</span>
         </button>
 
         <button class="fy2-nav-item" onclick="abrirAbaConta('pedidosConta',this)">
@@ -5713,12 +5713,17 @@ Promoções de datas especiais
 
         <button class="fy2-nav-item" onclick="abrirAbaConta('enderecosConta',this)">
           <span class="fy2-nav-icon">⌖</span>
-          <span>Endereços</span>
+          <span>Meus endereços</span>
         </button>
 
         <button class="fy2-nav-item" onclick="abrirFavoritos()">
           <span class="fy2-nav-icon">♡</span>
           <span>Favoritos</span>
+        </button>
+
+        <button class="fy2-nav-item" onclick="abrirAbaConta('cuponsConta',this)">
+          <span class="fy2-nav-icon">◇</span>
+          <span>Cupons</span>
         </button>
 
         <button class="fy2-nav-item" onclick="abrirAbaConta('segurancaConta',this)">
@@ -5743,7 +5748,7 @@ Promoções de datas especiais
           <div class="fy2-welcome-row">
             <div>
               <div class="fy2-section-kicker">RESUMO DA CONTA</div>
-              <h2>Olá, seja bem-vinda à FOR YOU</h2>
+              <h2>Olá, <span id="nomeBoasVindasConta">seja bem-vinda</span> ♡</h2>
               <p>Veja rapidamente as principais informações da sua conta.</p>
             </div>
           </div>
@@ -5838,7 +5843,7 @@ Promoções de datas especiais
         <div id="dadosConta" class="conta-tab-v14">
           <div class="fy2-panel fy2-form-panel">
             <div class="fy2-section-kicker">MINHA CONTA</div>
-            <h2>Dados pessoais</h2>
+            <h2>Meus dados</h2>
             <p>Atualize suas informações de contato.</p>
 
             <form class="conta-form-v14 fy2-form" onsubmit="salvarDadosContaV14(event)">
@@ -5886,6 +5891,20 @@ Promoções de datas especiais
               <div class="full"><button class="conta-save-v14 fy2-save">SALVAR ENDEREÇO</button></div>
             </form>
             <div id="enderecoSalvoV14" style="margin-top:18px"></div>
+          </div>
+        </div>
+
+        <!-- CUPONS -->
+        <div id="cuponsConta" class="conta-tab-v14">
+          <div class="fy2-panel">
+            <div class="fy2-section-kicker">BENEFÍCIOS</div>
+            <h2>Meus cupons</h2>
+            <p>Seus descontos disponíveis ficam reunidos aqui.</p>
+            <div id="listaCuponsConta" class="conta-empty-v14 fy2-empty">
+              <div class="icon">◇</div>
+              <strong>Nenhum cupom disponível</strong>
+              <br>Quando você receber um desconto, ele aparecerá aqui.
+            </div>
           </div>
         </div>
 
@@ -11953,5 +11972,21 @@ footer h3,.footer-logo{color:var(--fy-wine)!important}
 })();
 </script>
 
+
+<script>
+(function(){
+  function atualizarNomeBoasVindas(){
+    var el=document.getElementById('nomeBoasVindasConta');
+    if(!el) return;
+    try{
+      var c=(typeof contaSalva==='function' ? contaSalva() : null) || (typeof contaAtual!=='undefined' ? contaAtual : null);
+      var nome=c&&c.nome ? String(c.nome).trim().split(/\s+/)[0] : '';
+      el.textContent=nome || 'seja bem-vinda';
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded',atualizarNomeBoasVindas);
+  setTimeout(atualizarNomeBoasVindas,300);
+})();
+</script>
 </body>
 </html>
