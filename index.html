@@ -5302,6 +5302,15 @@ body{background:#fff!important;color:#3f2028!important}
 .fy-brand-chip .melu{font-family:Georgia,serif;font-size:29px;font-weight:700;letter-spacing:-1px}
 .fy-brand-chip .melu small{font-family:Arial,sans-serif;font-size:7px;letter-spacing:0;margin-top:2px}
 @media(max-width:760px){.fy-brands-grid{grid-template-columns:repeat(2,1fr)!important;gap:20px!important}.fy-brand-chip:last-child{grid-column:1/-1}.fy-brand-chip{min-height:62px!important}.fy-brand-chip .bt{font-size:19px}.fy-brand-chip .mari{font-size:17px}.fy-brand-chip .fran,.fy-brand-chip .melu{font-size:25px}.fy-brand-chip .ruby{font-size:22px}}
+
+/* FOR YOU — busca clean restaurada */
+.menu-principal > .busca{display:block!important;max-width:720px!important;margin:16px auto 14px!important;padding:0 10px!important;}
+.menu-principal > .busca .busca-linha{height:46px!important;border:1px solid #f0d7df!important;border-radius:999px!important;background:#fff!important;box-shadow:0 5px 18px rgba(74,13,27,.035)!important;overflow:hidden!important;}
+.menu-principal > .busca input{padding:0 18px!important;font-size:11px!important;color:#4a0d1b!important;background:#fff!important;}
+.menu-principal > .busca input::placeholder{color:#b99ca5!important;}
+.menu-principal > .busca button{width:52px!important;background:#fff!important;color:#4a0d1b!important;font-size:22px!important;border:0!important;}
+.menu-principal > .busca .busca-linha:focus-within{border-color:#e9a9ba!important;box-shadow:0 0 0 4px rgba(255,95,134,.07)!important;}
+
 </style>
 </head>
 
@@ -5354,7 +5363,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 <input
 id="busca"
 type="text"
-placeholder="Buscar produto..."
+placeholder="Buscar produtos..."
 onkeydown="if(event.key==='Enter')buscarProdutos()"
 >
 <button onclick="buscarProdutos()">⌕</button>
