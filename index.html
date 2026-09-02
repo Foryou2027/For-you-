@@ -2093,87 +2093,35 @@ footer p{
 @media(max-width:800px){.banner-box{padding:20px;min-height:110px}.banner-box h3{font-size:23px}.avaliacao-form-grid{grid-template-columns:1fr}.avaliacao-form textarea{grid-column:auto}}
 
 /* =========================
-   SEGURANÇA E CONFIANÇA
+   SEGURANÇA E CONFIANÇA — CLEAN
 ========================= */
 .seguranca{
-  background:#fff;
-  border-top:1px solid #ead9de;
-  padding:45px 5% 35px;
+  background:linear-gradient(180deg,#fffafb 0%,#fff5f7 100%);
+  padding:38px 5% 42px;
 }
-.seguranca-inner{
-  max-width:1200px;
-  margin:auto;
-}
-.seguranca-topo{
-  text-align:center;
-  margin-bottom:28px;
-}
-.seguranca-topo small{
-  color:#a88955;
-  letter-spacing:3px;
-  font-size:9px;
-  font-weight:bold;
-}
-.seguranca-topo h2{
-  font-family:Georgia,serif;
-  font-size:34px;
-  font-weight:normal;
-  margin:8px 0;
-}
-.seguranca-topo p{
-  color:#777;
-  font-size:11px;
-}
-.seguranca-cards{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-}
+.seguranca-inner{max-width:1180px;margin:auto;}
+.seguranca-topo{text-align:center;margin-bottom:24px;}
+.seguranca-topo small{color:#b83f61;letter-spacing:2.4px;font-size:8px;font-weight:700;}
+.seguranca-topo h2{font-family:Georgia,serif;color:#351f27;font-size:32px;font-weight:normal;margin:7px 0 6px;}
+.seguranca-topo p{color:#8d7b81;font-size:10px;}
+.seguranca-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
 .seguranca-card{
-  border:1px solid #ead9de;
-  padding:22px 14px;
+  border:1px solid #f1dce2;
+  border-radius:18px;
+  padding:24px 14px 21px;
   text-align:center;
-  background:#fff;
-  transition:.2s;
+  background:rgba(255,255,255,.88);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  cursor:pointer;
 }
-.seguranca-card:hover{
-  transform:translateY(-2px);
-  border-color:#b83f61;
-  box-shadow:0 8px 20px rgba(53,31,39,.06);
-}
-.seguranca-icone{
-  font-size:24px;
-  margin-bottom:9px;
-}
-.seguranca-card strong{
-  display:block;
-  font-size:11px;
-  margin-bottom:6px;
-}
-.seguranca-card span{
-  display:block;
-  color:#777;
-  font-size:9px;
-  line-height:1.5;
-}
-.seguranca-links{
-  margin-top:22px;
-  padding-top:18px;
-  border-top:1px solid #ead9de;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px 24px;
-}
-.seguranca-links button{
-  border:0;
-  background:none;
-  color:#66585d;
-  font-size:9px;
-  text-decoration:underline;
-  text-underline-offset:3px;
-}
-.seguranca-links button:hover{color:#b83f61}
+.seguranca-card:hover{transform:translateY(-3px);border-color:#e8b9c6;box-shadow:0 12px 28px rgba(92,45,59,.07);}
+.seguranca-icone{width:34px;height:34px;margin:0 auto 12px;color:#a94c68;display:flex;align-items:center;justify-content:center;}
+.seguranca-icone svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;}
+.seguranca-card strong{display:block;color:#351f27;font-size:11px;font-weight:700;margin-bottom:5px;}
+.seguranca-card span{display:block;color:#8d7b81;font-size:8.5px;line-height:1.5;}
+.seguranca-links{display:none!important;}
+@media(max-width:900px){.seguranca-cards{grid-template-columns:repeat(2,1fr)}.seguranca-card:last-child{grid-column:1/-1}}
+@media(max-width:520px){.seguranca{padding:32px 16px}.seguranca-topo h2{font-size:28px}.seguranca-cards{grid-template-columns:1fr}.seguranca-card:last-child{grid-column:auto}}
 
 /* MODAIS DE POLÍTICAS */
 .politica-modal{
@@ -6228,47 +6176,33 @@ required
     <div class="seguranca-topo">
       <small>COMPRE COM TRANQUILIDADE</small>
       <h2>Segurança e confiança</h2>
-      <p>Transparência em cada etapa da sua compra na FOR YOU.</p>
+      <p>Tudo para você comprar com segurança e tranquilidade.</p>
     </div>
 
     <div class="seguranca-cards">
-      <div class="seguranca-card">
-        <div class="seguranca-icone">🔒</div>
-        <strong>Compra segura</strong>
-        <span>Seus dados são tratados com cuidado durante a navegação e a compra.</span>
+      <div class="seguranca-card" onclick="abrirPolitica('seguranca')">
+        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg></div>
+        <strong>Compra segura</strong><span>Seus dados protegidos.</span>
       </div>
-      <div class="seguranca-card">
-        <div class="seguranca-icone">🛡️</div>
-        <strong>Privacidade</strong>
-        <span>Informações sobre como seus dados são utilizados e protegidos.</span>
+      <div class="seguranca-card" onclick="abrirPolitica('privacidade')">
+        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.7 7.7-7 10-4.3-2.3-7-5.5-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-3.7"/></svg></div>
+        <strong>Privacidade</strong><span>Respeitamos seus dados.</span>
       </div>
-      <div class="seguranca-card">
-        <div class="seguranca-icone">↩️</div>
-        <strong>Trocas e devoluções</strong>
-        <span>Consulte as condições e prazos para solicitar uma troca ou devolução.</span>
+      <div class="seguranca-card" onclick="abrirPolitica('trocas')">
+        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-8a5 5 0 0 0-5 5"/><path d="m17 4 3 3-3 3"/><path d="M4 17h8a5 5 0 0 0 5-5"/><path d="m7 20-3-3 3-3"/></svg></div>
+        <strong>Trocas fáceis</strong><span>Processo simples.</span>
       </div>
-      <div class="seguranca-card">
-        <div class="seguranca-icone">💳</div>
-        <strong>Pagamento</strong>
-        <span>Veja as formas de pagamento aceitas e informações importantes.</span>
+      <div class="seguranca-card" onclick="abrirPolitica('pagamento')">
+        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="m15.5 15 1.2 1.2 2.3-2.5"/></svg></div>
+        <strong>Pagamento seguro</strong><span>Compra protegida.</span>
       </div>
-      <div class="seguranca-card">
-        <div class="seguranca-icone">📄</div>
-        <strong>Termos de uso</strong>
-        <span>Conheça as regras para utilização da loja e dos nossos serviços.</span>
+      <div class="seguranca-card" onclick="abrirPolitica('termos')">
+        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h4"/><path d="M10 12h5M10 16h5"/></svg></div>
+        <strong>Termos de uso</strong><span>Tudo transparente.</span>
       </div>
-    </div>
-
-    <div class="seguranca-links">
-      <button onclick="abrirPolitica('privacidade')">Política de privacidade</button>
-      <button onclick="abrirPolitica('termos')">Termos de uso</button>
-      <button onclick="abrirPolitica('trocas')">Política de troca/devolução</button>
-      <button onclick="abrirPolitica('pagamento')">Informações de pagamento</button>
-      <button onclick="abrirPolitica('seguranca')">Compra segura</button>
     </div>
   </div>
 </section>
-
 
 <section id="paginaCarrinhoV17" class="pagina secao" style="display:none">
   <div class="fy17-cart">
