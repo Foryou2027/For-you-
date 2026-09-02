@@ -5179,6 +5179,16 @@ footer{background:var(--fy-wine);padding:65px 5% 22px}.footer-logo{color:#f3c8d3
   .menu-principal{margin-top:9px!important}
 }
 </style>
+
+<style id="fy-favoritos-feedback">
+.favoritar{transition:transform .18s ease,color .18s ease,background .18s ease!important}
+.favoritar.favoritado{color:#e31b23!important;background:#fff!important}
+.favoritar.fav-pop{animation:fyFavPop .42s ease}
+@keyframes fyFavPop{0%{transform:scale(1)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.fav-toast{position:fixed;right:24px;bottom:24px;width:min(360px,calc(100vw - 32px));background:#fff;border:1px solid #f2dfe5;border-radius:20px;box-shadow:0 18px 50px rgba(53,31,39,.16);padding:16px 18px;z-index:9999;display:flex;gap:13px;align-items:center;opacity:0;transform:translateY(18px);pointer-events:none;transition:.28s ease}
+.fav-toast.ativo{opacity:1;transform:translateY(0);pointer-events:auto}.fav-toast-icon{width:42px;height:42px;flex:0 0 42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff0f2;color:#e31b23;font-size:22px}.fav-toast-text{flex:1}.fav-toast-text strong{display:block;font-family:Georgia,serif;font-size:16px;color:#351f27;font-weight:400}.fav-toast-text span{display:block;margin-top:3px;font-size:9px;color:#8b777e;line-height:1.45}.fav-toast-btn{border:0;background:none;color:#b83f61;font-size:8px;font-weight:800;letter-spacing:.7px;white-space:nowrap;padding:8px 0}.acao-favoritos.tem-favoritos{color:#e31b23!important}.contador-favoritos{background:#e31b23!important}
+@media(max-width:600px){.fav-toast{right:16px;left:16px;bottom:16px;width:auto}.fav-toast-btn{font-size:7px}}
+</style>
 </head>
 
 <body>
@@ -7475,6 +7485,7 @@ function alternarFavorito(id){
 
 const posicao =
 favoritos.indexOf(id);
+const adicionando=posicao<0;
 
 if(posicao>=0){
 
@@ -7485,6 +7496,8 @@ favoritos.splice(posicao,1);
 favoritos.push(id);
 
 }
+
+mostrarFeedbackFavorito(adicionando);
 
 salvarFavoritos();
 atualizarContadorFavoritos();
@@ -7509,11 +7522,30 @@ renderFavoritos();
 }
 
 
+function mostrarFeedbackFavorito(adicionado){
+  let toast=document.getElementById("favToast");
+  if(!toast){
+    toast=document.createElement("div");
+    toast.id="favToast";
+    toast.className="fav-toast";
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML=adicionado
+    ? '<div class="fav-toast-icon">♥</div><div class="fav-toast-text"><strong>Adicionado aos favoritos</strong><span>Seu queridinho foi salvo para você encontrar depois.</span></div><button class="fav-toast-btn" onclick="abrirFavoritos();fecharFeedbackFavorito()">VER FAVORITOS →</button>'
+    : '<div class="fav-toast-icon">♡</div><div class="fav-toast-text"><strong>Removido dos favoritos</strong><span>O produto foi retirado da sua lista.</span></div>';
+  clearTimeout(window.fyFavToastTimer);
+  requestAnimationFrame(()=>toast.classList.add("ativo"));
+  window.fyFavToastTimer=setTimeout(fecharFeedbackFavorito,3200);
+}
+function fecharFeedbackFavorito(){const t=document.getElementById("favToast");if(t)t.classList.remove("ativo");}
+
 function atualizarContadorFavoritos(){
   const el=document.getElementById("contadorFavoritos");
   const total=document.getElementById("favoritosTotalPagina");
   const qtd=favoritos.length;
   if(el){el.textContent=qtd;el.classList.toggle("vazio",qtd===0);}
+  const btn=el?el.closest(".acao-favoritos"):null;
+  if(btn){btn.classList.toggle("tem-favoritos",qtd>0);btn.childNodes[0].nodeValue=qtd>0?"♥":"♡";}
   if(total) total.textContent=qtd;
 }
 
