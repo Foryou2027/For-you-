@@ -5291,26 +5291,21 @@ body{background:#fff!important;color:#3f2028!important}
 
 </style>
 
-<style id="fy-fix-legacy-category-duplicate-final">
-/* Oculta somente a faixa antiga de categorias do cabeçalho.
-   Mantém navegação principal, busca, dropdowns e a faixa nova .home-quick. */
-header .menu-principal > .menu-lista{
+<style id="fy-remove-old-category-bar-real">
+/* Remove APENAS a faixa antiga de categorias do header. A faixa .home-quick permanece. */
+html body header .header .menu-principal > .menu-lista {
   display:none !important;
+  visibility:hidden !important;
   height:0 !important;
   min-height:0 !important;
+  max-height:0 !important;
   margin:0 !important;
   padding:0 !important;
   border:0 !important;
   overflow:hidden !important;
 }
-/* Reativa o contêiner do menu porque versões anteriores o esconderam por inteiro. */
-header .menu-principal{display:block !important;}
-/* A faixa nova fica no fluxo normal, sem sobreposição. */
-main#loja > .home-quick{
-  margin:18px auto 24px !important;
-  transform:none !important;
-  position:relative !important;
-}
+/* garante que nenhum espaço da faixa antiga fique entre a busca e o conteúdo */
+html body header .header .menu-principal { padding-bottom:0 !important; }
 </style>
 </head>
 
