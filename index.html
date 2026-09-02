@@ -5349,11 +5349,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <div class="busca-sugestoes" id="buscaSugestoes"></div>
 </div>
 
-<div class="menu-lista">
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('labios',event)"><span class="fy-category-icon" aria-hidden="true">♡</span><span class="fy-category-label">Lábios</span></button>
-
+<div class="category-dropdown-store" aria-hidden="true">
 <div class="dropdown" id="dropdown-labios">
 <h3>Lábios</h3>
 <a href="#labios">Batom</a>
@@ -5366,11 +5362,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#labios">Delineador Labial</a>
 <a class="menu-ver-todos" href="#labios" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('pele',event)"><span class="fy-category-icon" aria-hidden="true">✦</span><span class="fy-category-label">Pele</span></button>
-
 <div class="dropdown" id="dropdown-pele">
 <h3>Pele</h3>
 <a href="#pele">Base</a>
@@ -5385,11 +5376,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#pele">Fixador</a>
 <a class="menu-ver-todos" href="#pele" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('skincare',event)"><span class="fy-category-icon" aria-hidden="true">✧</span><span class="fy-category-label">Skincare</span></button>
-
 <div class="dropdown" id="dropdown-skincare">
 <h3>Skincare</h3>
 <a href="#skincare">Sabonete Facial</a>
@@ -5403,11 +5389,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#skincare">Lip Care</a>
 <a class="menu-ver-todos" href="#skincare" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('olhos',event)"><span class="fy-category-icon" aria-hidden="true">◌</span><span class="fy-category-label">Olhos</span></button>
-
 <div class="dropdown" id="dropdown-olhos">
 <h3>Olhos</h3>
 <a href="#olhos">Paletas</a>
@@ -5420,11 +5401,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#olhos">Sobrancelhas</a>
 <a class="menu-ver-todos" href="#olhos" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('face',event)"><span class="fy-category-icon" aria-hidden="true">◇</span><span class="fy-category-label">Face</span></button>
-
 <div class="dropdown" id="dropdown-face">
 <h3>Face</h3>
 <a href="#face">Blush</a>
@@ -5437,11 +5413,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#face">Fixador</a>
 <a class="menu-ver-todos" href="#face" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('acessorios',event)"><span class="fy-category-icon" aria-hidden="true">♢</span><span class="fy-category-label">Acessórios</span></button>
-
 <div class="dropdown" id="dropdown-acessorios">
 <h3>Acessórios</h3>
 <a href="#acessorios">Pincéis</a>
@@ -5453,11 +5424,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#acessorios">Organizadores</a>
 <a class="menu-ver-todos" href="#acessorios" onclick="fecharMenu()">Ver todos</a>
 </div>
-</div>
-
-<div class="menu-item">
-<button class="menu-btn" onclick="abrirMenu('corpo',event)"><span class="fy-category-icon" aria-hidden="true">♡</span><span class="fy-category-label">Corpo</span></button>
-
 <div class="dropdown" id="dropdown-corpo">
 <h3>Corpo</h3>
 <a href="#corpo">Body Splash</a>
@@ -5470,9 +5436,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a class="menu-ver-todos" href="#corpo" onclick="fecharMenu()">Ver todos</a>
 </div>
 </div>
-
-</div>
-
 
 
 </div>
@@ -12032,6 +11995,13 @@ header .menu-principal > .menu-lista .dropdown.aberto{
 
 /* Remove qualquer outra faixa antiga injetada por scripts. */
 .fy19-category-nav{display:none !important;}
+</style>
+
+<style id="fy-remove-old-category-strip-structural">
+/* A faixa antiga foi removida do HTML. Este contêiner guarda apenas os dropdowns. */
+.category-dropdown-store{position:relative;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:visible!important;}
+.category-dropdown-store .dropdown{position:fixed!important;top:170px!important;left:50%!important;right:auto!important;transform:translateX(-50%) translateY(-6px)!important;z-index:1200!important;}
+.category-dropdown-store .dropdown.aberto{transform:translateX(-50%) translateY(0)!important;}
 </style>
 </body>
 </html>
