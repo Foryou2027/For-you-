@@ -5267,6 +5267,42 @@ header .menu-principal{display:none!important;}
 @media(max-width:800px){#novidades .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;}.home-quick{margin:12px auto 18px!important;}}
 @media(max-width:520px){#novidades .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}.home-quick button{min-width:105px!important;min-height:68px!important;}}
 </style>
+
+<style id="fy-pastel-pink-loved-brands-v1">
+/* Paleta rosa pastel aprovada */
+:root{
+ --fy-rose:#ff6f91;--fy-rose-deep:#e9577d;--fy-pink:#fff0f4;
+ --fy-wine:#4a0d1b;--fy-gold:#d9a66f;--fy-cream:#fffdfd;
+ --fy-line:#f5dfe5;--fy-text:#3f2028;--fy-muted:#806f76;
+ --fy-clean-rose:#ff6f91;--fy-clean-rose-dark:#d94e72;
+ --fy-clean-rose-light:#fff0f4;--fy-clean-bg:#fffdfd;
+ --fy-clean-line:#f4dfe5;--fy-clean-text:#3f2028;
+}
+body{background:#fff!important;color:#3f2028!important}
+.topo{background:#fff0f4!important;color:#4a0d1b!important}
+.fy-main-nav{background:#fff!important;border-color:#f5dfe5!important}
+.fy-main-nav a:hover{color:#ff5f86!important}
+.menu-principal .menu-lista{border-color:#f4dfe5!important;box-shadow:0 12px 32px rgba(128,58,78,.06)!important}
+.menu-principal .fy-category-icon{color:#ff668b!important}
+.menu-principal .menu-btn:hover,.menu-principal .menu-btn.ativo{background:#fff7f9!important;color:#e9577d!important}
+.search-bar input,.busca input{border-color:#f3dce3!important}
+/* Marcas que amamos — nomes limpos, sem SHEGLAM */
+.fy-loved-brands-section{padding-top:34px!important;padding-bottom:34px!important;background:#fff!important}
+.fy-loved-brands-title{margin-bottom:22px!important}
+.fy-loved-brands-title h2{font-family:inherit!important;font-size:16px!important;font-weight:800!important;letter-spacing:.3px!important;color:#4a0d1b!important;text-transform:uppercase!important}
+.fy-brands-grid{max-width:980px!important;display:grid!important;grid-template-columns:repeat(5,1fr)!important;align-items:center!important;gap:30px!important;padding:5px 12px!important}
+.fy-brand-chip{border:0!important;background:transparent!important;border-radius:0!important;padding:8px 4px!important;min-height:72px!important;color:#4a0d1b!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:none!important;transition:transform .2s ease,color .2s ease!important}
+.fy-brand-chip:hover{background:transparent!important;border:0!important;color:#ff5f86!important;transform:translateY(-2px)!important}
+.fy-brand-chip span{display:block;color:inherit;line-height:.95;text-align:center}
+.fy-brand-chip small{display:block;margin-top:7px;font-size:6px;letter-spacing:2px;font-family:Arial,sans-serif;font-weight:700}
+.fy-brand-chip .bt{font-family:Georgia,serif;font-size:22px;letter-spacing:.5px;line-height:1.02}
+.fy-brand-chip .mari{font-family:Georgia,serif;font-size:20px;letter-spacing:5px;line-height:1.05}
+.fy-brand-chip .fran{font-family:Georgia,serif;font-size:29px;letter-spacing:4px}
+.fy-brand-chip .ruby{font-family:Arial,sans-serif;font-size:25px;font-weight:500;letter-spacing:-1.5px}
+.fy-brand-chip .melu{font-family:Georgia,serif;font-size:29px;font-weight:700;letter-spacing:-1px}
+.fy-brand-chip .melu small{font-family:Arial,sans-serif;font-size:7px;letter-spacing:0;margin-top:2px}
+@media(max-width:760px){.fy-brands-grid{grid-template-columns:repeat(2,1fr)!important;gap:20px!important}.fy-brand-chip:last-child{grid-column:1/-1}.fy-brand-chip{min-height:62px!important}.fy-brand-chip .bt{font-size:19px}.fy-brand-chip .mari{font-size:17px}.fy-brand-chip .fran,.fy-brand-chip .melu{font-size:25px}.fy-brand-chip .ruby{font-size:22px}}
+</style>
 </head>
 
 <body>
@@ -5551,8 +5587,8 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   </div>
 </section>
 
-<section class="secao" id="marcas">
-  <div class="titulo"><small>ENCONTRE SEU FAVORITO</small><h2>Marcas</h2><p>Explore a loja pela marca que você procura.</p></div>
+<section class="secao fy-loved-brands-section" id="marcas">
+  <div class="titulo fy-loved-brands-title"><h2>MARCAS QUE AMAMOS</h2></div>
   <div class="fy-brands-grid" id="listaMarcasHome"></div>
 </section>
 
@@ -11817,8 +11853,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
   window.renderMarcasHome=function(){
     const el=document.getElementById('listaMarcasHome');if(!el)return;
-    const marcas=[...new Set(produtos.map(p=>p.marca).filter(Boolean))].slice(0,12);
-    el.innerHTML=marcas.map(m=>`<button class="fy-brand-chip" onclick="filtrarPorMarcaHome(${JSON.stringify(m)})">${m}</button>`).join('');
+    const marcas=[
+      {nome:'Bruna Tavares',html:'<span class="bt">BRUNA<br>TAVARES</span>'},
+      {nome:'Mari Maria',html:'<span class="mari">MARI<br>MARIA<small>MAKEUP</small></span>'},
+      {nome:'Fran',html:'<span class="fran">FRAN<small>BY FRANCINY EHLKE</small></span>'},
+      {nome:'Ruby Rose',html:'<span class="ruby">RubyRose</span>'},
+      {nome:'Melu',html:'<span class="melu">melu.<small>by RubyRose</small></span>'}
+    ];
+    el.innerHTML=marcas.map(m=>`<button class="fy-brand-chip" onclick="filtrarPorMarcaHome(${JSON.stringify(m.nome)})" aria-label="Ver produtos ${m.nome}">${m.html}</button>`).join('');
   };
   window.filtrarPorMarcaHome=function(marca){
     const f=document.getElementById('filtroMarca');if(f){f.value=marca;aplicarFiltros();document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});}else{window.location.hash='novidades';}
