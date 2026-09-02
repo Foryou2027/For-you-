@@ -5550,15 +5550,9 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   </div>
 </section>
 
-<section class="hero hero-premium hero-novo">
-  <div class="hero-content hero-content-premium">
-    <h2>Beleza que<br>realça quem<br>você é.</h2>
-    <p>Produtos selecionados com amor<br>para o seu dia a dia.</p>
-    <div class="hero-actions">
-      <button class="btn btn-hero-primary" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})">COMPRAR AGORA</button>
-    </div>
-    <div class="hero-dots" aria-hidden="true"><span class="ativo"></span><span></span><span></span></div>
-  </div>
+<section class="hero-image-final" aria-label="Beleza que realça quem você é">
+  <img src="banner-for-you.png" alt="Beleza que realça quem você é. Produtos selecionados com amor para o seu dia a dia.">
+  <button class="hero-image-click" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})" aria-label="Comprar agora"></button>
 </section>
 
 
@@ -12002,6 +11996,12 @@ footer{background:var(--fy-blush)!important;color:var(--fy-wine)!important}
 footer a,footer p,.copyright{color:var(--fy-muted)!important}
 footer h3,.footer-logo{color:var(--fy-wine)!important}
 .copyright{border-color:var(--fy-line)!important}
+
+/* Banner final FOR YOU — imagem aprovada */
+.hero-image-final{position:relative;margin:18px 5% 0;border-radius:20px;overflow:hidden;background:#fff2f6;box-shadow:none}
+.hero-image-final img{display:block;width:100%;height:auto;object-fit:cover}
+.hero-image-click{position:absolute;left:6.5%;top:67%;width:16%;height:13%;border:0;background:transparent;cursor:pointer}
+@media(max-width:700px){.hero-image-final{margin:12px 3% 0;border-radius:14px}.hero-image-final img{min-height:220px;object-fit:cover;object-position:center}.hero-image-click{left:5%;top:67%;width:30%;height:14%}}
 </style>
 
 <script id="fy-admin-v7-script">
