@@ -11990,12 +11990,9 @@ footer h3,.footer-logo{color:var(--fy-wine)!important}
 </script>
 
 <style id="fy-fix-faixa-duplicada-final">
-/* Correção final: mantém os dropdowns no DOM, mas remove visualmente a faixa antiga do header. */
-header .menu-principal,
-header #menuPrincipal,
-header .menu-categorias,
-header .categorias-menu {
-  display:none !important;
+/* Remove somente a faixa ANTIGA de categorias do header.
+   Mantém a navegação principal e a busca visíveis. */
+header .menu-principal > .menu-lista{
   height:0 !important;
   min-height:0 !important;
   max-height:0 !important;
@@ -12004,21 +12001,37 @@ header .categorias-menu {
   border:0 !important;
   overflow:visible !important;
 }
+header .menu-principal > .menu-lista > .menu-item > .menu-btn{
+  display:none !important;
+}
 
-/* A faixa correta da home fica no fluxo normal, sem sobreposição. */
-#loja > .home-quick {
+/* Os dropdowns continuam disponíveis para os botões da faixa nova. */
+header .menu-principal > .menu-lista .dropdown{
+  position:fixed !important;
+  top:170px !important;
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) translateY(-6px) !important;
+  z-index:1200 !important;
+}
+header .menu-principal > .menu-lista .dropdown.aberto{
+  transform:translateX(-50%) translateY(0) !important;
+}
+
+/* A faixa NOVA da home fica limpa e logo acima do banner. */
+#loja > .home-quick{
   display:block !important;
   position:relative !important;
   z-index:20 !important;
   margin:18px auto 24px !important;
   transform:none !important;
 }
-#loja > .home-quick + .hero-image-final {
+#loja > .home-quick + .hero-image-final{
   margin-top:0 !important;
 }
 
-/* Evita qualquer navegação antiga criada por scripts. */
-.fy19-category-nav { display:none !important; }
+/* Remove qualquer outra faixa antiga injetada por scripts. */
+.fy19-category-nav{display:none !important;}
 </style>
 </body>
 </html>
