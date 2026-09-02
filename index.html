@@ -5290,6 +5290,43 @@ body{background:#fff!important;color:#3f2028!important}
 .menu-principal > .busca .busca-linha:focus-within{border-color:#e9a9ba!important;box-shadow:0 0 0 4px rgba(255,95,134,.07)!important;}
 
 </style>
+
+<style id="foryou-fix-faixa-categorias">
+/* Correção: impede que a faixa de categorias fique cortada/sobreposta */
+.menu-principal{
+  position:relative !important;
+  z-index:30 !important;
+  margin-top:14px !important;
+  padding-top:6px !important;
+  overflow:visible !important;
+}
+.menu-principal .menu-lista{
+  min-height:74px !important;
+  height:auto !important;
+  align-items:stretch !important;
+  position:relative !important;
+  z-index:31 !important;
+}
+.menu-principal .menu-item{
+  min-height:72px !important;
+}
+.menu-principal .menu-btn{
+  min-height:72px !important;
+  height:72px !important;
+  line-height:normal !important;
+}
+.menu-principal .fy-category-icon,
+.menu-principal .fy-category-label{
+  position:relative !important;
+  top:auto !important;
+  transform:none !important;
+}
+@media(max-width:700px){
+  .menu-principal{margin-top:10px !important;padding-top:4px !important;}
+  .menu-principal .menu-lista{min-height:68px !important;}
+  .menu-principal .menu-item,.menu-principal .menu-btn{min-height:68px !important;height:68px !important;}
+}
+</style>
 </head>
 
 <body>
