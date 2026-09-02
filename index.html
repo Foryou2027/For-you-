@@ -11952,5 +11952,141 @@ header .menu-principal > .menu-lista{
 }
 </style>
 
+
+<style id="fy-mobile-ux-v1">
+/* FOR YOU — refinamento mobile, sem alterar o desktop */
+@media (max-width: 700px){
+
+  html,body{max-width:100%;overflow-x:hidden}
+
+  /* Cabeçalho mais compacto */
+  .topo{font-size:8px!important;padding:7px 10px!important;letter-spacing:1px!important}
+  .header{padding:12px 14px 10px!important}
+  .header-top{min-height:52px!important;gap:8px!important}
+  .logo{min-width:0!important;text-align:left!important;flex:1!important}
+  .logo h1{font-size:27px!important;letter-spacing:4px!important;white-space:nowrap!important}
+  .acoes{gap:3px!important}
+  .acao-btn{width:38px!important;height:38px!important;font-size:19px!important}
+
+  /* Navegação superior: não deixa o topo poluído */
+  .fy-main-nav{
+    overflow-x:auto!important;
+    justify-content:flex-start!important;
+    gap:18px!important;
+    padding:7px 14px!important;
+    margin:0!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  .fy-main-nav::-webkit-scrollbar{display:none!important}
+  .fy-main-nav a{flex:0 0 auto!important;white-space:nowrap!important;font-size:10px!important}
+
+  /* Busca grande e confortável */
+  .menu-principal > .busca{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:8px auto 10px!important;
+    padding:0 14px!important;
+  }
+  .menu-principal > .busca .busca-linha{
+    height:44px!important;
+    border-radius:999px!important;
+  }
+  .menu-principal > .busca input{font-size:12px!important;padding:0 15px!important}
+  .menu-principal > .busca button{width:46px!important;font-size:19px!important}
+
+  /* Única faixa de categorias: desliza com o dedo */
+  #loja > .home-quick{
+    width:100%!important;
+    max-width:none!important;
+    margin:10px auto 14px!important;
+    padding:0 12px!important;
+  }
+  #loja > .home-quick .home-quick-inner{
+    display:flex!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    border-radius:15px!important;
+    scroll-snap-type:x proximity!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
+  #loja > .home-quick button{
+    flex:0 0 92px!important;
+    min-width:92px!important;
+    min-height:68px!important;
+    padding:11px 7px!important;
+    scroll-snap-align:start!important;
+    font-size:9px!important;
+  }
+  #loja > .home-quick button span{font-size:16px!important;margin-bottom:4px!important}
+
+  /* Banner mais baixo para mostrar conteúdo logo na primeira tela */
+  .hero-image-final{
+    min-height:0!important;
+    height:auto!important;
+    margin:0 10px!important;
+    border-radius:15px!important;
+    overflow:hidden!important;
+  }
+  .hero-image-final img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    object-fit:cover!important;
+  }
+
+  /* Seções mais compactas */
+  section{scroll-margin-top:80px}
+  #novidades,#marcas{padding-left:12px!important;padding-right:12px!important}
+  #novidades{padding-top:30px!important;padding-bottom:24px!important}
+  #marcas{padding-top:28px!important;padding-bottom:25px!important}
+
+  /* Produtos: 2 por linha, toque confortável */
+  #novidades .produtos,
+  .produtos{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .produto{min-width:0!important;border-radius:14px!important;overflow:hidden!important}
+  .produto img{width:100%!important;height:auto!important;aspect-ratio:1/1!important;object-fit:cover!important}
+  .produto h3,.produto .nome-produto{font-size:11px!important;line-height:1.35!important}
+  .produto .preco{font-size:14px!important}
+  .produto button:not(.favoritar){min-height:42px!important;font-size:10px!important}
+  .favoritar{width:38px!important;height:38px!important;font-size:19px!important}
+
+  /* Marcas sem aperto */
+  .fy-brands-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .fy-brand-chip{min-width:0!important}
+
+  /* Painéis, conta e carrinho */
+  .carrinho,.cart-drawer,.painel-carrinho{
+    max-width:100vw!important;
+  }
+  .modal-conteudo,.modal-content{
+    width:calc(100% - 24px)!important;
+    max-width:calc(100% - 24px)!important;
+    max-height:88vh!important;
+    overflow-y:auto!important;
+  }
+
+  /* WhatsApp não cobre os produtos */
+  .whatsapp-float,.whatsapp-flutuante{
+    width:48px!important;height:48px!important;
+    right:12px!important;bottom:12px!important;
+  }
+}
+
+@media (max-width: 380px){
+  .logo h1{font-size:24px!important;letter-spacing:3px!important}
+  .acao-btn{width:35px!important;height:35px!important}
+  #loja > .home-quick button{flex-basis:86px!important;min-width:86px!important}
+  #novidades .produtos,.produtos{gap:8px!important}
+}
+</style>
+
 </body>
 </html>
