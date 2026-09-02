@@ -5249,6 +5249,24 @@ footer{background:var(--fy-wine);padding:65px 5% 22px}.footer-logo{color:#f3c8d3
   .menu-btn{min-height:50px!important;padding:6px!important}
 }
 </style>
+
+<style id="fy-home-clean-final-v2">
+/* Página inicial clean: uma única faixa de categorias */
+header .menu-principal{display:none!important;}
+.home-quick{max-width:1200px;margin:18px auto 24px!important;padding:0 5%!important;position:relative;z-index:8;}
+.home-quick-inner{border-radius:18px!important;box-shadow:0 10px 30px rgba(53,31,39,.06)!important;border:1px solid #f0dfe4!important;}
+.home-quick button{min-height:76px!important;padding:14px 8px!important;font-size:10px!important;background:#fff!important;}
+.home-quick button span{font-size:18px!important;color:#d84f72!important;}
+.hero-premium{margin-top:0!important;}
+.home-story,.home-section-divider,.banner-rotativo{display:none!important;}
+#novidades .filtros{display:none!important;}
+#novidades{padding-top:52px!important;padding-bottom:35px!important;}
+#novidades .produtos{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;}
+#novidades .produto:nth-child(n+5){display:none!important;}
+#marcas{padding-top:38px!important;padding-bottom:30px!important;}
+@media(max-width:800px){#novidades .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;}.home-quick{margin:12px auto 18px!important;}}
+@media(max-width:520px){#novidades .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}.home-quick button{min-width:105px!important;min-height:68px!important;}}
+</style>
 </head>
 
 <body>
@@ -5445,6 +5463,18 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <main id="loja">
 
+<section class="home-quick" aria-label="Acesso rápido às categorias">
+  <div class="home-quick-inner">
+    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
+    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
+    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
+    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
+    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
+    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
+    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
+  </div>
+</section>
+
 <section class="hero hero-premium">
   <div class="hero-overlay-decor" aria-hidden="true"></div>
   <div class="hero-content hero-content-premium">
@@ -5480,48 +5510,13 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 </section>
 
 
-<section class="home-quick" aria-label="Acesso rápido às categorias">
-  <div class="home-quick-inner">
-    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
-    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
-    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
-    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
-    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
-    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
-    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
-  </div>
-</section>
 
-<section class="home-story" aria-label="Sobre a experiência FOR YOU">
-  <div class="home-story-copy">
-    <small>A EXPERIÊNCIA FOR YOU</small>
-    <h2>Escolhas bonitas, <span>feitas para você.</span></h2>
-    <p>Descubra uma seleção de maquiagem, skincare, corpo e acessórios pensada para deixar sua rotina mais especial. Encontre novidades, ofertas e os produtos que podem virar seus próximos favoritos.</p>
-    <button class="home-story-link" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})">EXPLORAR A SELEÇÃO →</button>
-  </div>
-  <div class="home-story-panel">
-    <div class="home-story-stat highlight"><strong>FOR YOU</strong><span>Seu espaço de beleza e autocuidado.</span></div>
-    <div class="home-story-stat"><strong>Novidades</strong><span>Descubra produtos que acabaram de chegar.</span></div>
-    <div class="home-story-stat"><strong>Ofertas</strong><span>Condições especiais enquanto durar o estoque.</span></div>
-    <div class="home-story-stat"><strong>Favoritos</strong><span>Guarde seus achadinhos para voltar depois.</span></div>
-  </div>
-</section>
 
-<div class="home-section-divider"><span>SELEÇÃO FOR YOU</span></div>
 
-<section class="banner-rotativo">
-  <div class="banner-box" id="bannerBox">
-    <button class="banner-arrow banner-prev" onclick="mudarBanner(-1)" aria-label="Banner anterior">‹</button>
-    <div class="banner-conteudo">
-      <small id="bannerEtiqueta">FOR YOU</small>
-      <h3 id="bannerTitulo">Frete grátis acima de R$ 199</h3>
-      <p id="bannerTexto">Aproveite e compre seus favoritos.</p>
-      <button class="banner-cta" id="bannerCta" onclick="document.getElementById('ofertas').scrollIntoView({behavior:'smooth'})">APROVEITAR AGORA</button>
-    </div>
-    <button class="banner-arrow banner-next" onclick="mudarBanner(1)" aria-label="Próximo banner">›</button>
-  </div>
-  <div class="banner-dots" id="bannerDots"></div>
-</section>
+
+
+
+
 
 <section class="beneficios destaque-beneficios">
   <div class="beneficio">
@@ -5564,91 +5559,19 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <section class="secao" id="novidades">
 
 <div class="titulo">
-<small>NOVIDADES</small>
-<h2>Acabou de chegar</h2>
-<p>Conheça os novos produtos da FOR YOU.</p>
+<small>SELEÇÃO ESPECIAL</small>
+<h2>Destaques FOR YOU</h2>
+<p>Uma seleção pequena dos nossos queridinhos.</p>
 </div>
 
-<div class="filtros">
 
-<select id="filtroMarca" onchange="aplicarFiltros()">
-<option value="">Todas as marcas/categorias</option>
-<option value="Lábios">Lábios</option>
-<option value="Pele">Pele</option>
-<option value="Skincare">Skincare</option>
-<option value="Olhos">Olhos</option>
-<option value="Face">Face</option>
-<option value="Acessórios">Acessórios</option>
-<option value="Corpo">Corpo</option>
-</select>
-
-<select id="filtroCategoria" onchange="aplicarFiltros()">
-<option value="">Todas as categorias</option>
-<option value="Lábios">Lábios</option>
-<option value="Pele">Pele</option>
-<option value="Skincare">Skincare</option>
-<option value="Olhos">Olhos</option>
-<option value="Face">Face</option>
-<option value="Acessórios">Acessórios</option>
-<option value="Corpo">Corpo</option>
-</select>
-
-<select id="filtroPreco" onchange="aplicarFiltros()">
-<option value="">Todos os preços</option>
-<option value="0-20">Até R$ 20</option>
-<option value="20-40">R$ 20 a R$ 40</option>
-<option value="40-999">Acima de R$ 40</option>
-</select>
-
-<select id="filtroNota" onchange="aplicarFiltros()">
-<option value="">Todas as avaliações</option>
-<option value="4">4 estrelas ou mais</option>
-<option value="4.5">4,5 estrelas ou mais</option>
-</select>
-
-<select id="ordenacao" onchange="aplicarFiltros()">
-<option value="">Ordenar</option>
-<option value="menor">Menor preço</option>
-<option value="maior">Maior preço</option>
-<option value="nota">Melhor avaliação</option>
-<option value="novidades">Novidades</option>
-<option value="vendidos">Mais vendidos</option>
-</select>
-
-<button onclick="limparFiltros()">LIMPAR FILTROS</button>
-
-</div>
 
 <div class="resultado-busca" id="resultadoBusca"></div>
 <div class="produtos" id="listaProdutos"></div>
 <div class="ver-todos-wrap"><button class="ver-todos-btn" onclick="mostrarTodosProdutos()">VER TODOS OS PRODUTOS</button></div>
 
 </section>
-<section class="secao">
 
-<div class="beneficios">
-
-<div class="beneficio">
-<div>♡</div>
-<strong>Produtos escolhidos</strong>
-<span>Achadinhos selecionados para você.</span>
-</div>
-
-<div class="beneficio">
-<div>✦</div>
-<strong>Novidades toda semana</strong>
-<span>Sempre tem novidade na FOR YOU.</span>
-</div>
-
-<div class="beneficio">
-<div>🚚</div>
-<strong>Enviamos para todo Brasil</strong>
-<span>Escolha a melhor forma de entrega.</span>
-</div>
-
-</div>
-
-</section>
 
 </main>
 
