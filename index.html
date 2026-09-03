@@ -5304,6 +5304,10 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="header-top">
 
+<button class="fy-mobile-menu-btn" type="button" aria-label="Abrir menu" onclick="document.body.classList.toggle('fy-mobile-menu-open')">
+  <span></span><span></span><span></span>
+</button>
+
 <div class="logo">
 <h1>FOR YOU</h1>
 
@@ -5335,7 +5339,19 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
   <a href="#achadinhoSemana">Achadinhos</a>
   <a href="#marcas">Marcas</a>
 </div>
+<div class="busca">
 
+<div class="busca-linha">
+<input
+id="busca"
+type="text"
+placeholder="Buscar produtos..."
+onkeydown="if(event.key==='Enter')buscarProdutos()"
+>
+<button onclick="buscarProdutos()">⌕</button>
+</div>
+<div class="busca-sugestoes" id="buscaSugestoes"></div>
+</div>
 
 <div class="category-dropdown-store" aria-hidden="true">
 <div class="dropdown" id="dropdown-labios">
@@ -5430,6 +5446,20 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 </div>
 </header>
 
+<div class="fy-mobile-drawer" id="fyMobileDrawer" aria-label="Menu mobile">
+  <div class="fy-mobile-drawer-head">
+    <strong>FOR YOU</strong>
+    <button type="button" onclick="document.body.classList.remove('fy-mobile-menu-open')" aria-label="Fechar menu">×</button>
+  </div>
+  <a href="#inicio" onclick="document.body.classList.remove('fy-mobile-menu-open');voltarLoja();window.scrollTo({top:0,behavior:'smooth'});return false;">Início</a>
+  <a href="#achadinhoSemana" onclick="document.body.classList.remove('fy-mobile-menu-open')">Achadinhos</a>
+  <a href="#ofertas" onclick="document.body.classList.remove('fy-mobile-menu-open')">Ofertas</a>
+  <a href="#marcas" onclick="document.body.classList.remove('fy-mobile-menu-open')">Marcas que amamos</a>
+  <button class="fy-mobile-account-link" type="button" onclick="document.body.classList.remove('fy-mobile-menu-open');abrirConta()">Minha conta</button>
+</div>
+<div class="fy-mobile-overlay" onclick="document.body.classList.remove('fy-mobile-menu-open')"></div>
+
+
 
 <!-- =========================
      LOJA PRINCIPAL
@@ -5439,34 +5469,14 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
   <div class="home-quick-inner">
-    <button onclick="event.stopPropagation();abrirMenu('labios',event)"><span>♡</span>Lábios</button>
-    <button onclick="event.stopPropagation();abrirMenu('pele',event)"><span>✦</span>Pele</button>
-    <button onclick="event.stopPropagation();abrirMenu('skincare',event)"><span>✧</span>Skincare</button>
-    <button onclick="event.stopPropagation();abrirMenu('olhos',event)"><span>◌</span>Olhos</button>
-    <button onclick="event.stopPropagation();abrirMenu('face',event)"><span>◇</span>Face</button>
-    <button onclick="event.stopPropagation();abrirMenu('acessorios',event)"><span>♢</span>Acessórios</button>
-    <button onclick="event.stopPropagation();abrirMenu('corpo',event)"><span>♡</span>Corpo</button>
+    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
+    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
+    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
+    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
+    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
+    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
+    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
   </div>
-</section>
-
-<section class="fy-home-search-section" aria-label="Busca de produtos">
-  <div class="fy-busca-home-titulo">
-    <span>ENCONTRE SEU ACHADINHO</span>
-    <strong>🔍 O que você está procurando?</strong>
-  </div>
-  <div class="busca fy-busca-home">
-
-<div class="busca-linha">
-<input
-id="busca"
-type="text"
-placeholder="Gloss rosa, base, blush, Mari Maria..."
-onkeydown="if(event.key==='Enter')buscarProdutos()"
->
-<button onclick="buscarProdutos()" aria-label="Buscar produtos">BUSCAR</button>
-</div>
-<div class="busca-sugestoes" id="buscaSugestoes"></div>
-</div>
 </section>
 
 <section class="hero-image-final" aria-label="Beleza que realça quem você é">
@@ -5673,6 +5683,12 @@ Promoções de datas especiais
           <span>Meus endereços</span>
         </button>
 
+        <button class="fy2-nav-item" onclick="abrirAbaConta('clubConta',this)">
+          <span class="fy2-nav-icon">◇</span>
+          <span>FOR YOU CLUB</span>
+        </button>
+
+
         <button class="fy2-nav-item" onclick="abrirFavoritos()">
           <span class="fy2-nav-icon">♡</span>
           <span>Favoritos</span>
@@ -5813,6 +5829,21 @@ Promoções de datas especiais
             </form>
           </div>
         </div>
+
+
+        <!-- FOR YOU CLUB — somente dentro da Área do Cliente -->
+        <div id="clubConta" class="conta-tab-v14">
+          <div class="fy2-panel fy2-club">
+            <div class="fy2-section-kicker">BENEFÍCIOS</div>
+            <h2>FOR YOU CLUB</h2>
+            <p>Seu espaço de benefícios, pontos e vantagens especiais.</p>
+            <div id="clubConteudoFY"></div>
+            <div style="margin-top:16px">
+              <button type="button" class="btn-fy" onclick="abrirFidelidade()">VER PONTOS E BENEFÍCIOS</button>
+            </div>
+          </div>
+        </div>
+
 
         <!-- PEDIDOS -->
         <div id="pedidosConta" class="conta-tab-v14">
@@ -6100,19 +6131,6 @@ Promoções de datas especiais
     </div>
   </div>
 </section>
-
-
-
-<section class="fy-club-home" id="clubHome">
-  <div class="fy-club-home-copy">
-    <small>FOR YOU CLUB</small>
-    <h2>💗 Comprar, acumular e ganhar benefícios.</h2>
-    <p>Entre para o clube e acompanhe seus pontos, vantagens e ofertas especiais.</p>
-    <button onclick="document.getElementById('paginaFidelidade')?.classList.add('ativa');window.scrollTo({top:0,behavior:'smooth'});">CONHECER O CLUB →</button>
-  </div>
-  <div class="fy-club-home-points"><span>✦</span><strong>1 ponto</strong><small>a cada R$ 1 em compras</small></div>
-</section>
-
 <!-- =========================
      NEWSLETTER
 ========================= -->
@@ -7462,7 +7480,7 @@ function abrirMenu(nome,event){
 }
 
 document.addEventListener("click",function(event){
-  if(!event.target.closest(".menu-item") && !event.target.closest(".home-quick") && !event.target.closest(".category-dropdown-store")){
+  if(!event.target.closest(".menu-item")){
     fecharMenu();
   }
 });
@@ -12083,375 +12101,181 @@ header .menu-principal > .menu-lista{
 </style>
 
 
-
-<!-- FOR YOU: filtro real por categoria e subcategoria -->
-<style id="fy-subcategorias-produtos-style">
-#fyCategoriaProdutos{display:none;padding:48px 5%;background:#fff8fa;border-top:1px solid #f1dce2}
-#fyCategoriaProdutos.ativo{display:block}
-#fyCategoriaProdutos .fy-cat-head{max-width:1200px;margin:0 auto 26px;display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap}
-#fyCategoriaProdutos .fy-cat-kicker{font-size:9px;letter-spacing:2.2px;color:#a88955;font-weight:700;text-transform:uppercase}
-#fyCategoriaProdutos h2{font-family:Georgia,serif;font-size:38px;font-weight:400;color:#351f27;margin:7px 0 5px}
-#fyCategoriaProdutos .fy-cat-desc{font-size:11px;color:#806f75}
-#fyCategoriaProdutos .fy-cat-close{border:1px solid #e7c8d1;background:#fff;color:#8f3150;border-radius:999px;padding:10px 15px;font-size:9px;font-weight:700}
-#fyCategoriaProdutos .fy-cat-close:hover{background:#351f27;color:#fff;border-color:#351f27}
-#fyCategoriaProdutos .fy-cat-empty{max-width:700px;margin:25px auto;text-align:center;padding:35px 20px;background:#fff;border:1px solid #ead9de;border-radius:16px;color:#777;font-size:11px}
-.category-dropdown-store .dropdown a{cursor:pointer}
-@media(max-width:600px){#fyCategoriaProdutos{padding:34px 12px}#fyCategoriaProdutos h2{font-size:30px}}
+<style id="fy-club-account-only-v1">
+/* FOR YOU CLUB: somente dentro da Área do Cliente */
+#clubHome{display:none!important;}
+#paginaConta #clubConta{display:none;}
+#paginaConta #clubConta.ativo{display:block;}
+#paginaConta #clubConta .fy2-club{display:block!important;}
+/* Oculta cards antigos do Club em outras abas da conta, sem afetar a aba exclusiva */
+#paginaConta .conta-tab-v14:not(#clubConta) > .fy2-panel.fy2-club{display:none!important;}
+@media(max-width:700px){
+  #paginaConta #clubConta .club-benefits-fy{grid-template-columns:1fr!important;}
+}
 </style>
-<script id="fy-subcategorias-produtos-script">
-(function(){
-  const mapa={
-    labios:['Batom','Gloss','Lip Tint','Lip Balm','Lápis de Boca','Hidratante Labial','Óleo Labial','Delineador Labial'],
-    pele:['Base','Corretivo','Primer','Bruma','Pó Facial','Blush','Contorno','Bronzer','Iluminador','Fixador'],
-    skincare:['Sabonete Facial','Hidratante','Sérum','Esfoliante','Água Micelar','Protetor Solar','Máscara Facial','Tônico','Lip Care'],
-    olhos:['Paletas','Sombras','Máscara de Cílios','Delineador','Lápis de Olho','Cílios','Cola para Cílios','Sobrancelhas'],
-    face:['Blush','Iluminador','Contorno','Bronzer','Pó','Primer','Bruma','Fixador'],
-    acessorios:['Pincéis','Esponjas','Necessaires','Espelhos','Acessórios de Cabelo','Pinças','Organizadores'],
-    corpo:['Body Splash','Hidratante Corporal','Esfoliante Corporal','Sabonete Corporal','Óleo Corporal','Desodorante','Cuidados para Mãos']
-  };
-  const nomes={labios:'Lábios',pele:'Pele',skincare:'Skincare',olhos:'Olhos',face:'Face',acessorios:'Acessórios',corpo:'Corpo'};
-  const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 
-  function prepararProduto(p){
-    if(!p) return p;
-    if(!p.categoria){
-      const m=norm(p.marca), n=norm(p.nome);
-      const cat=Object.keys(nomes).find(k=>m===norm(nomes[k])) ||
-        (n.includes('body')?'corpo':n.includes('paleta')?'olhos':n.includes('gloss')||n.includes('batom')?'labios':n.includes('hidratante facial')?'skincare':n.includes('base')?'pele':n.includes('blush')?'face':'');
-      if(cat) p.categoria=nomes[cat];
-    }
-    if(!p.subcategoria){
-      const texto=norm((p.nome||'')+' '+(p.descricao||''));
-      const catKey=Object.keys(nomes).find(k=>norm(p.categoria)===norm(nomes[k]));
-      if(catKey){
-        const candidatos=[...mapa[catKey]].sort((a,b)=>b.length-a.length);
-        const achou=candidatos.find(x=>texto.includes(norm(x).replace('paletas','paleta')) || texto.includes(norm(x)));
-        if(achou) p.subcategoria=achou;
-      }
-    }
-    return p;
-  }
-  function prepararCatalogo(){ if(typeof produtos!=='undefined' && Array.isArray(produtos)) produtos.forEach(prepararProduto); }
 
-  function garantirSecao(){
-    let sec=document.getElementById('fyCategoriaProdutos');
-    if(sec) return sec;
-    sec=document.createElement('section'); sec.id='fyCategoriaProdutos';
-    sec.innerHTML='<div class="fy-cat-head"><div><div class="fy-cat-kicker">COMPRE POR CATEGORIA</div><h2 id="fyCatTitulo">Produtos</h2><p class="fy-cat-desc" id="fyCatDesc"></p></div><button class="fy-cat-close" type="button" onclick="fyFecharCategoriaProdutos()">VER TODOS OS PRODUTOS</button></div><div class="produtos" id="fyCatGrid"></div><div class="fy-cat-empty" id="fyCatEmpty" style="display:none"></div>';
-    const alvo=document.getElementById('novidades') || document.getElementById('marcas') || document.querySelector('footer');
-    if(alvo && alvo.parentNode) alvo.parentNode.insertBefore(sec,alvo); else document.getElementById('loja')?.appendChild(sec);
-    return sec;
+<style id="fy-reference-mobile-layout-v2">
+/* FOR YOU — mobile inspirado no layout de referência */
+.fy-mobile-menu-btn,.fy-mobile-drawer,.fy-mobile-overlay{display:none}
+
+@media(max-width:700px){
+  body{background:#fff!important}
+  .topo{
+    background:#8b1837!important;
+    color:#fff!important;
+    font-size:7px!important;
+    letter-spacing:.8px!important;
+    padding:6px 8px!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-align:center!important;
   }
 
-  window.fyMostrarSubcategoria=function(categoria,subcategoria){
-    prepararCatalogo(); const sec=garantirSecao(), grid=document.getElementById('fyCatGrid'), vazio=document.getElementById('fyCatEmpty');
-    const catNome=nomes[categoria]||categoria;
-    let lista=(typeof produtos!=='undefined'?produtos:[]).filter(p=>norm(p.categoria)===norm(catNome) || norm(p.marca)===norm(catNome));
-    if(subcategoria) lista=lista.filter(p=>norm(p.subcategoria)===norm(subcategoria) || norm(p.nome).includes(norm(subcategoria).replace('paletas','paleta')));
-    document.getElementById('fyCatTitulo').textContent=subcategoria || catNome;
-    document.getElementById('fyCatDesc').textContent=subcategoria ? ('Produtos de '+subcategoria+' em '+catNome) : ('Todos os produtos de '+catNome);
-    grid.innerHTML='';
-    if(lista.length){ vazio.style.display='none'; grid.style.display='grid'; lista.forEach(p=>grid.appendChild(criarCard(p))); }
-    else { grid.style.display='none'; vazio.style.display='block'; vazio.innerHTML='<strong>Ainda não há produtos cadastrados aqui.</strong><br><br>Quando você cadastrar um produto em <b>'+catNome+'</b> → <b>'+(subcategoria||'qualquer subcategoria')+'</b>, ele aparecerá automaticamente nesta página.'; }
-    sec.classList.add('ativo');
-    if(typeof fecharMenu==='function') fecharMenu();
-    sec.scrollIntoView({behavior:'smooth',block:'start'});
-  };
-  window.fyFecharCategoriaProdutos=function(){
-    const sec=document.getElementById('fyCategoriaProdutos'); if(sec) sec.classList.remove('ativo');
-    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
-  };
-
-  function ligarDropdowns(){
-    Object.keys(mapa).forEach(cat=>{
-      const drop=document.getElementById('dropdown-'+cat); if(!drop)return;
-      drop.querySelectorAll('a').forEach(a=>{
-        const todos=a.classList.contains('menu-ver-todos');
-        a.onclick=function(e){e.preventDefault();fyMostrarSubcategoria(cat,todos?'':a.textContent.trim());return false;};
-      });
-    });
+  header{background:#fff!important;border-bottom:0!important}
+  .header{padding:0 10px 8px!important}
+  .header-top{
+    display:grid!important;
+    grid-template-columns:42px 1fr auto!important;
+    align-items:center!important;
+    min-height:58px!important;
+    padding:3px 0!important;
+  }
+  .fy-mobile-menu-btn{
+    display:flex!important;width:38px;height:38px;border:0;background:transparent;
+    flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;
+  }
+  .fy-mobile-menu-btn span{width:17px;height:1.5px;background:#351f27;border-radius:2px}
+  .logo{display:flex!important;align-items:center!important;justify-content:center!important}
+  .logo h1{
+    font-family:Arial,sans-serif!important;font-size:17px!important;font-weight:500!important;
+    letter-spacing:7px!important;margin:0!important;color:#21171a!important;text-align:center!important;
+  }
+  .acoes{display:flex!important;align-items:center!important;gap:0!important}
+  .acao-btn,.carrinho-icon{
+    width:35px!important;height:35px!important;min-width:35px!important;
+    border:0!important;background:transparent!important;padding:7px!important;
+  }
+  .acao-btn svg{width:19px!important;height:19px!important}
+  .carrinho-icon{font-size:17px!important}
+  .contador,.contador-favoritos{
+    transform:scale(.78)!important;transform-origin:center!important;
   }
 
-  function melhorarAdmin(){
-    const form=document.querySelector('#fyAdminProdutoModal .fy-admin-fields'); if(!form || document.getElementById('fyProdSubcategoria'))return;
-    const cat=document.getElementById('fyProdCategoria'); if(!cat)return;
-    const wrap=document.createElement('div');wrap.className='fy-admin-field';wrap.innerHTML='<label>SUBCATEGORIA</label><input id="fyProdSubcategoria" placeholder="Ex.: Gloss, Batom, Base...">';
-    cat.closest('.fy-admin-field')?.insertAdjacentElement('afterend',wrap);
-    const original=window.fySalvarProduto;
-    if(typeof original==='function') window.fySalvarProduto=function(ev){
-      const id=document.getElementById('fyProdId')?.value;
-      const sub=document.getElementById('fyProdSubcategoria')?.value.trim()||'';
-      const r=original(ev);
-      const p=id?produtos.find(x=>String(x.id)===String(id)):produtos[produtos.length-1];
-      if(p){p.subcategoria=sub;prepararProduto(p);if(typeof salvarCatalogoAdmin==='function')salvarCatalogoAdmin();}
-      return r;
-    };
+  /* Busca igual à referência: abaixo do cabeçalho */
+  .menu-principal{padding:0!important}
+  .fy-main-nav{display:none!important}
+  .menu-principal > .busca{
+    display:block!important;width:100%!important;margin:2px 0 8px!important;padding:0!important;
+  }
+  .menu-principal > .busca .busca-linha{
+    height:39px!important;background:#fff!important;border:1px solid #f0e5e8!important;
+    border-radius:999px!important;box-shadow:0 4px 14px rgba(53,31,39,.055)!important;
+  }
+  .menu-principal > .busca input{font-size:10px!important;padding-left:14px!important}
+  .menu-principal > .busca button{width:40px!important;font-size:17px!important}
+
+  /* Categorias compactas em uma única linha rolável */
+  #loja > .home-quick{margin:3px 0 10px!important;padding:0 9px!important}
+  #loja > .home-quick .home-quick-inner{
+    display:flex!important;border:0!important;background:#fff6f8!important;border-radius:10px!important;
+    box-shadow:none!important;overflow-x:auto!important;scrollbar-width:none!important;
+  }
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none}
+  #loja > .home-quick button{
+    flex:0 0 70px!important;min-width:70px!important;min-height:42px!important;
+    padding:7px 4px!important;border:0!important;background:transparent!important;
+    font-size:7px!important;color:#351f27!important;
+  }
+  #loja > .home-quick button span{
+    display:inline!important;font-size:11px!important;margin:0 4px 0 0!important;color:#e34f78!important;
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{prepararCatalogo();ligarDropdowns();setTimeout(melhorarAdmin,400)});
-  setTimeout(()=>{prepararCatalogo();ligarDropdowns();melhorarAdmin()},700);
-})();
-</script>
+  /* Banner */
+  .hero-image-final{
+    margin:0 9px 10px!important;border-radius:10px!important;box-shadow:none!important;
+  }
+  .hero-image-final img{
+    width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;
+    object-fit:contain!important;background:#fff1f5!important;
+  }
 
+  /* Benefícios em 4 colunas compactas como a referência */
+  .beneficios.destaque-beneficios{
+    display:grid!important;grid-template-columns:repeat(4,1fr)!important;
+    margin:10px 9px 18px!important;padding:9px 2px!important;gap:0!important;
+    border:1px solid #f5eaed!important;border-radius:9px!important;background:#fff!important;
+  }
+  .beneficios.destaque-beneficios .beneficio{
+    min-width:0!important;padding:3px 5px!important;border-right:1px solid #f2e7ea!important;
+    display:grid!important;grid-template-columns:20px 1fr!important;column-gap:4px!important;
+    align-items:center!important;text-align:left!important;
+  }
+  .beneficios.destaque-beneficios .beneficio:nth-child(4){border-right:0!important}
+  .beneficios.destaque-beneficios .beneficio:nth-child(n+5){display:none!important}
+  .beneficio-icone{grid-row:1/3!important;width:18px!important;height:18px!important;margin:0!important}
+  .beneficio-icone svg{width:17px!important;height:17px!important;stroke:#e34f78!important}
+  .beneficio strong{font-size:6.5px!important;line-height:1.2!important}
+  .beneficio span{font-size:5.8px!important;line-height:1.25!important;color:#777!important}
 
+  /* Cards e seções mais próximos da referência */
+  .secao{padding-left:9px!important;padding-right:9px!important}
+  .titulo{text-align:left!important;margin-bottom:12px!important}
+  .titulo h2{font-size:13px!important;letter-spacing:.2px!important;color:#d94d70!important}
+  .titulo small{font-size:7px!important}
+  .produtos{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .produto{
+    border:1px solid #f1e8ea!important;border-radius:9px!important;box-shadow:none!important;background:#fff!important;
+  }
+  .produto img{border-radius:9px 9px 0 0!important}
+  .produto h3,.produto .nome-produto{font-size:9px!important}
+  .produto .preco{font-size:11px!important}
+  .produto button:not(.favoritar){min-height:34px!important;font-size:7px!important}
+  .favoritar{width:30px!important;height:30px!important;font-size:15px!important}
 
-<!-- FOR YOU: VARIAÇÕES / TONALIDADES + ESTOQUE POR COR -->
-<style id="fy-variacoes-style">
-.fy-variacoes{margin:22px 0 8px}.fy-variacoes-titulo{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:10px}.fy-variacoes-opcoes{display:flex;flex-wrap:wrap;gap:8px}.fy-var-btn{border:1px solid #e3cbd2;background:#fff;color:#351f27;border-radius:999px;padding:10px 14px;font-size:9px;font-weight:700;transition:.2s}.fy-var-btn:hover,.fy-var-btn.ativa{background:#351f27;color:#fff;border-color:#351f27}.fy-var-btn:disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through}.fy-var-estoque{font-size:8px;color:#8a7078;margin-top:9px;min-height:14px}.fy-var-alerta{color:#b83f61;font-weight:700}.fy-admin-field textarea#fyProdVariacoes{min-height:86px;resize:vertical}.fy-admin-var-help{font-size:8px;color:#927d84;margin-top:5px;line-height:1.5}
+  /* Marcas */
+  #marcas{padding-top:18px!important}
+  .fy-loved-brands-title h2{font-size:12px!important}
+  .fy-brands-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+
+  /* Menu lateral mobile */
+  .fy-mobile-drawer{
+    display:block!important;position:fixed;z-index:5000;left:0;top:0;bottom:0;width:min(82vw,320px);
+    background:#fff;transform:translateX(-105%);transition:transform .25s ease;
+    padding:18px;box-shadow:12px 0 40px rgba(53,31,39,.12);
+  }
+  .fy-mobile-overlay{
+    display:block!important;position:fixed;z-index:4999;inset:0;background:rgba(53,31,39,.22);
+    opacity:0;visibility:hidden;transition:.25s;
+  }
+  body.fy-mobile-menu-open .fy-mobile-drawer{transform:translateX(0)}
+  body.fy-mobile-menu-open .fy-mobile-overlay{opacity:1;visibility:visible}
+  .fy-mobile-drawer-head{
+    display:flex;align-items:center;justify-content:space-between;padding:4px 2px 18px;
+    border-bottom:1px solid #f0e4e7;margin-bottom:10px;
+  }
+  .fy-mobile-drawer-head strong{letter-spacing:5px;font-size:15px}
+  .fy-mobile-drawer-head button{border:0;background:transparent;font-size:26px;color:#6d3b49}
+  .fy-mobile-drawer a,.fy-mobile-account-link{
+    display:block;width:100%;padding:14px 4px;border:0;border-bottom:1px solid #f5edef;
+    background:#fff;text-align:left;color:#351f27;text-decoration:none;font-size:11px;
+  }
+  .fy-mobile-account-link{color:#d84f72;font-weight:700}
+
+  /* Minha Conta em formato de painel limpo no celular */
+  #paginaConta{padding:0!important;background:#fff!important}
+  #paginaConta .conta-premium-v14{margin:0!important;max-width:none!important}
+  #paginaConta .conta-hero-v14{border-radius:0!important;box-shadow:none!important;padding:20px 16px!important}
+  #paginaConta .conta-layout-v14{margin-top:0!important}
+  #paginaConta .conta-menu-v14{border-radius:0!important;box-shadow:none!important}
+  #paginaConta .fy2-nav-item{min-height:48px!important;font-size:10px!important}
+
+  .whatsapp-float,.whatsapp-flutuante{width:43px!important;height:43px!important;right:10px!important;bottom:10px!important}
+}
 </style>
-<script id="fy-variacoes-script">
-(function(){
-  function norm(s){return String(s||'').trim();}
-  function prepararVariacoes(p){
-    if(!p || !Array.isArray(p.variacoes)) return;
-    p.variacoes=p.variacoes.map(v=>typeof v==='string'?{nome:v,estoque:Number(p.estoque||0)}:{nome:norm(v.nome),estoque:Math.max(0,Number(v.estoque||0))}).filter(v=>v.nome);
-    p.estoque=p.variacoes.reduce((s,v)=>s+Number(v.estoque||0),0);
-  }
-  function prepararTudo(){try{produtos.forEach(prepararVariacoes)}catch(e){}}
-  prepararTudo();
-
-  const abrirOriginal=window.abrirProduto;
-  if(typeof abrirOriginal==='function') window.abrirProduto=function(id){
-    abrirOriginal(id);
-    const p=typeof encontrarProduto==='function'?encontrarProduto(id):null;
-    if(!p || !Array.isArray(p.variacoes) || !p.variacoes.length) return;
-    prepararVariacoes(p);
-    const info=document.querySelector('#produtoDetalhe .detalhe-info');
-    const acoes=info?.querySelector('.detalhe-acoes');
-    if(!info||!acoes)return;
-    const box=document.createElement('div');box.className='fy-variacoes';
-    box.innerHTML='<div class="fy-variacoes-titulo">ESCOLHA A COR / TONALIDADE</div><div class="fy-variacoes-opcoes"></div><div class="fy-var-estoque">Selecione uma opção para continuar.</div>';
-    info.insertBefore(box,acoes);
-    const op=box.querySelector('.fy-variacoes-opcoes'), msg=box.querySelector('.fy-var-estoque');
-    p.variacoes.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='fy-var-btn';b.textContent=v.nome+(v.estoque<=0?' · ESGOTADO':'');b.disabled=v.estoque<=0;b.onclick=()=>{box.querySelectorAll('.fy-var-btn').forEach(x=>x.classList.remove('ativa'));b.classList.add('ativa');window.fyVariacaoSelecionada={produtoId:p.id,nome:v.nome,estoque:v.estoque};msg.innerHTML=v.estoque<=3?'<span class="fy-var-alerta">🔥 Últimas '+v.estoque+' unidades desta tonalidade</span>':v.estoque+' unidades disponíveis nesta tonalidade';};op.appendChild(b)});
-    window.fyVariacaoSelecionada=null;
-    const estoque=info.querySelector('.estoque');if(estoque)estoque.textContent='Estoque total: '+p.estoque+' unidades';
-  };
-
-  const addDetalheOriginal=window.adicionarDetalhe;
-  if(typeof addDetalheOriginal==='function') window.adicionarDetalhe=function(id){
-    const p=typeof encontrarProduto==='function'?encontrarProduto(id):null;
-    if(p && Array.isArray(p.variacoes) && p.variacoes.length){
-      const sel=window.fyVariacaoSelecionada;
-      if(!sel || String(sel.produtoId)!==String(p.id)){alert('Escolha uma cor / tonalidade antes de adicionar ao carrinho.');return;}
-      const qtd=window.quantidadeDetalhe||1;
-      const v=p.variacoes.find(x=>x.nome===sel.nome);
-      if(!v || v.estoque<qtd){alert('Não há estoque suficiente desta tonalidade.');return;}
-      for(let i=0;i<qtd;i++) adicionar(p.nome+' · '+sel.nome,p.preco,p.id+'::'+sel.nome);
-      return;
-    }
-    return addDetalheOriginal(id);
-  };
-
-  function parseVariacoes(txt){
-    return String(txt||'').split(/\n|,/).map(x=>x.trim()).filter(Boolean).map(item=>{const m=item.match(/^(.+?)\s*[:=]\s*(\d+)$/);return m?{nome:m[1].trim(),estoque:Number(m[2])}:{nome:item,estoque:0};});
-  }
-  function textoVariacoes(p){return Array.isArray(p?.variacoes)?p.variacoes.map(v=>v.nome+': '+v.estoque).join('\n'):'';}
-  function melhorarAdminVariacoes(){
-    const form=document.querySelector('#fyAdminProdutoModal .fy-admin-fields');if(!form||document.getElementById('fyProdVariacoes'))return;
-    const estoque=document.getElementById('fyProdEstoque');if(!estoque)return;
-    const wrap=document.createElement('div');wrap.className='fy-admin-field full';wrap.innerHTML='<label>CORES / TONALIDADES E ESTOQUE</label><textarea id="fyProdVariacoes" placeholder="Ex.:\nNude: 5\nRosa: 3\nCereja: 0"></textarea><div class="fy-admin-var-help">Use uma linha por opção no formato Nome: estoque. Se preencher aqui, o estoque total será calculado automaticamente.</div>';
-    estoque.closest('.fy-admin-field')?.insertAdjacentElement('afterend',wrap);
-    const antigoAdicionar=window.adminAdicionarProduto;
-    if(typeof antigoAdicionar==='function')window.adminAdicionarProduto=function(){const r=antigoAdicionar.apply(this,arguments);setTimeout(()=>{const e=document.getElementById('fyProdVariacoes');if(e)e.value='';},0);return r;};
-    document.addEventListener('click',function(e){const btn=e.target.closest('[onclick*="adminEditarProduto"]');if(!btn)return;setTimeout(()=>{const id=document.getElementById('fyProdId')?.value;const p=produtos.find(x=>String(x.id)===String(id));const t=document.getElementById('fyProdVariacoes');if(t&&p)t.value=textoVariacoes(p);},80)},true);
-    const salvarAnterior=window.fySalvarProduto;
-    if(typeof salvarAnterior==='function')window.fySalvarProduto=function(ev){
-      const txt=document.getElementById('fyProdVariacoes')?.value||'';
-      const id=document.getElementById('fyProdId')?.value;
-      const vars=parseVariacoes(txt);
-      const r=salvarAnterior(ev);
-      const p=id?produtos.find(x=>String(x.id)===String(id)):produtos[produtos.length-1];
-      if(p){p.variacoes=vars;if(vars.length)p.estoque=vars.reduce((s,v)=>s+v.estoque,0);if(typeof salvarCatalogoAdmin==='function')salvarCatalogoAdmin();}
-      return r;
-    };
-  }
-  document.addEventListener('DOMContentLoaded',()=>setTimeout(melhorarAdminVariacoes,650));
-  setTimeout(melhorarAdminVariacoes,1000);
-})();
-</script>
-
-<style id="fy-smart-search-share-track">
-.fy-share-box{margin-top:18px;padding:16px;border:1px solid #ead9de;border-radius:14px;background:#fffafa}.fy-share-box strong{display:block;font-size:10px;margin-bottom:10px}.fy-share-actions{display:flex;gap:8px;flex-wrap:wrap}.fy-share-actions button{border:1px solid #351f27;background:#fff;color:#351f27;padding:10px 13px;border-radius:999px;font-size:8px;font-weight:800;letter-spacing:.5px}.fy-share-actions button:first-child{background:#25d366;border-color:#25d366;color:#fff}.pedido-rastreio-acoes{display:flex!important;gap:7px!important;flex-wrap:wrap}.pedido-rastreio-acoes button{border-radius:999px!important}.pedido-rastreio-acoes .copiar-rastreio{background:#fff!important;color:#351f27!important;border:1px solid #351f27!important}.busca-inteligente-dica{font-size:9px;color:#9b7b86;margin:7px 14px 0}
-
-/* =========================
-   BUSCA EM DESTAQUE NA HOME
-========================= */
-.fy-busca-home-titulo{
-  max-width:760px;
-  margin:24px auto 0;
-  padding:0 16px;
-  text-align:center;
-}
-.fy-busca-home-titulo span{
-  display:block;
-  color:#b83f61;
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:2.2px;
-  margin-bottom:6px;
-}
-.fy-busca-home-titulo strong{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:22px;
-  font-weight:400;
-  color:#351f27;
-}
-.busca.fy-busca-home{
-  max-width:760px;
-  margin:13px auto 22px;
-  padding:0 16px;
-}
-.fy-busca-home .busca-linha{
-  min-height:54px;
-  border:1px solid #efc4d0;
-  border-radius:999px;
-  box-shadow:0 10px 28px rgba(53,31,39,.08);
-}
-.fy-busca-home .busca-linha:focus-within{
-  border-color:#b83f61;
-  box-shadow:0 12px 30px rgba(184,63,97,.14);
-}
-.fy-busca-home input{
-  padding:15px 22px;
-  font-size:12px;
-}
-.fy-busca-home button{
-  width:auto;
-  min-width:105px;
-  padding:0 22px;
-  border-radius:999px;
-  background:#b83f61;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-.fy-busca-home button:hover{background:#9f3150}
-.fy-busca-home .busca-sugestoes,
-.busca-sugestoes{
-  z-index:1200;
-}
-@media(max-width:560px){
-  .fy-busca-home-titulo{margin-top:18px}
-  .fy-busca-home-titulo strong{font-size:19px}
-  .busca.fy-busca-home{padding:0 10px;margin-bottom:17px}
-  .fy-busca-home .busca-linha{min-height:50px}
-  .fy-busca-home input{padding:13px 15px;font-size:11px}
-  .fy-busca-home button{min-width:82px;padding:0 13px;font-size:8px}
-}
-
-
-/* BUSCA PRINCIPAL — ENTRE CATEGORIAS E BANNER */
-.fy-home-search-section{
-  width:100%;
-  padding:22px 20px 18px;
-  background:#fff8fa;
-  position:relative;
-  z-index:20;
-}
-.fy-busca-home-titulo{
-  max-width:820px;
-  margin:0 auto 12px;
-  text-align:center;
-}
-.fy-busca-home-titulo span{
-  display:block;
-  color:#c9456b;
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:2.4px;
-  margin-bottom:6px;
-}
-.fy-busca-home-titulo strong{
-  display:block;
-  color:#351f27;
-  font-family:Georgia,serif;
-  font-size:23px;
-  font-weight:400;
-}
-.busca.fy-busca-home{
-  max-width:820px;
-  margin:0 auto;
-  position:relative;
-}
-.fy-busca-home .busca-linha{
-  display:flex;
-  min-height:56px;
-  background:#fff;
-  border:1px solid #edc6d1;
-  border-radius:999px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(53,31,39,.08);
-}
-.fy-busca-home .busca-linha:focus-within{
-  border-color:#c9456b;
-  box-shadow:0 12px 34px rgba(201,69,107,.15);
-}
-.fy-busca-home input{
-  flex:1;
-  width:100%;
-  border:0;
-  outline:0;
-  padding:0 23px;
-  background:#fff;
-  color:#351f27;
-  font-size:12px;
-}
-.fy-busca-home button{
-  width:auto;
-  min-width:115px;
-  border:0;
-  padding:0 24px;
-  background:#8b1737;
-  color:#fff;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1.1px;
-}
-.fy-busca-home button:hover{background:#6f102b}
-.fy-busca-home .busca-sugestoes{
-  position:absolute;
-  left:10px;
-  right:10px;
-  top:calc(100% + 7px);
-  z-index:1500;
-}
-@media(max-width:600px){
-  .fy-home-search-section{padding:17px 12px 14px}
-  .fy-busca-home-titulo strong{font-size:19px}
-  .fy-busca-home .busca-linha{min-height:50px}
-  .fy-busca-home input{padding:0 15px;font-size:11px}
-  .fy-busca-home button{min-width:82px;padding:0 13px;font-size:8px}
-}
-
-</style>
-<script id="fy-smart-search-share-track-js">
-(function(){
-  function norm(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
-  function textoProduto(p){return norm([p.nome,p.marca,p.categoria,p.subcategoria,p.descricao,(p.variacoes||[]).map(v=>v.nome||v.cor||v.tonalidade).join(' ')].join(' '))}
-  window.buscarProdutos=function(){
-    const campo=document.getElementById('busca'); const termo=(campo?.value||'').trim(); fecharSugestoesBusca?.(); if(termo&&typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(termo);
-    if(!termo){const rb=document.getElementById('resultadoBusca');if(rb)rb.textContent='';renderProdutos();document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});return}
-    const palavras=norm(termo).split(/\s+/).filter(Boolean);
-    let lista=[...produtos,...kits].map(p=>({p,t:textoProduto(p),score:0})).filter(o=>{o.score=palavras.reduce((n,w)=>n+(o.t.includes(w)?1:0),0);return o.score===palavras.length}).sort((a,b)=>b.score-a.score).map(o=>o.p);
-    document.querySelectorAll('.pagina').forEach(x=>x.classList.remove('ativa')); const loja=document.getElementById('loja');if(loja)loja.style.display='block';renderProdutos(lista);
-    const rb=document.getElementById('resultadoBusca');if(rb)rb.textContent=lista.length?`${lista.length} produto(s) encontrado(s) para “${termo}”.`:`Nenhum produto encontrado para “${termo}”.`;
-    if(!lista.length){const lp=document.getElementById('listaProdutos');if(lp)lp.innerHTML='<div class="busca-vazia">Não encontramos essa combinação. Tente, por exemplo: “gloss rosa”, “base matte” ou “blush Mari Maria”.</div>'}
-    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
-  };
-  function urlProduto(p){const u=new URL(location.href);u.searchParams.set('produto',p.id);u.hash='produto';return u.toString()}
-  window.copiarLinkProduto=async function(id){const p=encontrarProduto(id);if(!p)return;try{await navigator.clipboard.writeText(urlProduto(p));mostrarToast('Link do produto copiado! 💗')}catch(e){prompt('Copie o link:',urlProduto(p))}};
-  window.compartilharWhatsAppProduto=function(id){const p=encontrarProduto(id);if(!p)return;const msg=`Olha esse achadinho da FOR YOU 💗\n${p.nome} — ${moeda(p.preco)}\n${urlProduto(p)}`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank')};
-  window.compartilharProduto=async function(id){const p=encontrarProduto(id);if(!p)return;const dados={title:p.nome,text:`${p.nome} — ${moeda(p.preco)} | FOR YOU`,url:urlProduto(p)};try{if(navigator.share)await navigator.share(dados);else await copiarLinkProduto(id)}catch(e){if(e?.name!=='AbortError')mostrarToast('Não foi possível compartilhar agora.')}};
-  const abrirAntigo=window.abrirProduto;
-  window.abrirProduto=function(id){abrirAntigo(id);const p=encontrarProduto(id);const info=document.querySelector('#produtoDetalhe .detalhe-info');if(!p||!info)return;const old=info.querySelector('.fy-share-box');if(old)old.remove();const box=document.createElement('div');box.className='fy-share-box';box.innerHTML=`<strong>📱 COMPARTILHAR ESTE PRODUTO</strong><div class="fy-share-actions"><button type="button">WhatsApp</button><button type="button">🔗 Copiar link</button></div>`;const bs=box.querySelectorAll('button');bs[0].onclick=()=>compartilharWhatsAppProduto(p.id);bs[1].onclick=()=>copiarLinkProduto(p.id);info.appendChild(box)};
-  window.copiarCodigoRastreio=async function(codigo){try{await navigator.clipboard.writeText(String(codigo||''));mostrarToast('Código de rastreio copiado! 📦')}catch(e){prompt('Copie o código:',codigo)}};
-  const renderPedidosAntigo=window.renderPedidosConta;
-  window.renderPedidosConta=function(){renderPedidosAntigo();document.querySelectorAll('.pedido-rastreio:not(.indisponivel)').forEach(box=>{const codigo=box.querySelector('span:not(.rastreio-icon)')?.textContent?.trim();const acompanhar=box.querySelector('button');if(!codigo||!acompanhar||box.querySelector('.copiar-rastreio'))return;const acoes=document.createElement('div');acoes.className='pedido-rastreio-acoes';acompanhar.parentNode.insertBefore(acoes,acompanhar);acoes.appendChild(acompanhar);const copiar=document.createElement('button');copiar.type='button';copiar.className='copiar-rastreio';copiar.textContent='COPIAR CÓDIGO';copiar.onclick=()=>copiarCodigoRastreio(codigo);acoes.appendChild(copiar)})};
-  document.addEventListener('DOMContentLoaded',()=>{const campo=document.getElementById('busca');if(campo&&!document.querySelector('.busca-inteligente-dica')){const d=document.createElement('div');d.className='busca-inteligente-dica';d.textContent='Experimente buscar: gloss rosa, base matte, blush Mari Maria…';campo.closest('.busca')?.appendChild(d)}const id=new URL(location.href).searchParams.get('produto');if(id)setTimeout(()=>{const p=encontrarProduto(id)||encontrarProduto(Number(id));if(p)abrirProduto(p.id)},500);setTimeout(()=>renderPedidosConta(),600)});
-})();
-</script>
 
 </body>
 </html>
