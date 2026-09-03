@@ -11963,144 +11963,6 @@ header .menu-principal > .menu-lista{
   margin-top:0 !important;
 }
 </style>
-
-
-<style id="fy-mobile-ux-v1">
-/* FOR YOU — refinamento mobile, sem alterar o desktop */
-@media (max-width: 700px){
-
-  html,body{max-width:100%;overflow-x:hidden}
-
-  /* Cabeçalho mais compacto */
-  .topo{font-size:8px!important;padding:7px 10px!important;letter-spacing:1px!important}
-  .header{padding:12px 14px 10px!important}
-  .header-top{min-height:52px!important;gap:8px!important}
-  .logo{min-width:0!important;text-align:left!important;flex:1!important}
-  .logo h1{font-size:27px!important;letter-spacing:4px!important;white-space:nowrap!important}
-  .acoes{gap:3px!important}
-  .acao-btn{width:38px!important;height:38px!important;font-size:19px!important}
-
-  /* Navegação superior: não deixa o topo poluído */
-  .fy-main-nav{
-    overflow-x:auto!important;
-    justify-content:flex-start!important;
-    gap:18px!important;
-    padding:7px 14px!important;
-    margin:0!important;
-    scrollbar-width:none!important;
-    -webkit-overflow-scrolling:touch!important;
-  }
-  .fy-main-nav::-webkit-scrollbar{display:none!important}
-  .fy-main-nav a{flex:0 0 auto!important;white-space:nowrap!important;font-size:10px!important}
-
-  /* Busca grande e confortável */
-  .menu-principal > .busca{
-    display:block!important;
-    width:100%!important;
-    max-width:none!important;
-    margin:8px auto 10px!important;
-    padding:0 14px!important;
-  }
-  .menu-principal > .busca .busca-linha{
-    height:44px!important;
-    border-radius:999px!important;
-  }
-  .menu-principal > .busca input{font-size:12px!important;padding:0 15px!important}
-  .menu-principal > .busca button{width:46px!important;font-size:19px!important}
-
-  /* Única faixa de categorias: desliza com o dedo */
-  #loja > .home-quick{
-    width:100%!important;
-    max-width:none!important;
-    margin:10px auto 14px!important;
-    padding:0 12px!important;
-  }
-  #loja > .home-quick .home-quick-inner{
-    display:flex!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-    border-radius:15px!important;
-    scroll-snap-type:x proximity!important;
-    scrollbar-width:none!important;
-    -webkit-overflow-scrolling:touch!important;
-  }
-  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
-  #loja > .home-quick button{
-    flex:0 0 92px!important;
-    min-width:92px!important;
-    min-height:68px!important;
-    padding:11px 7px!important;
-    scroll-snap-align:start!important;
-    font-size:9px!important;
-  }
-  #loja > .home-quick button span{font-size:16px!important;margin-bottom:4px!important}
-
-  /* Banner mais baixo para mostrar conteúdo logo na primeira tela */
-  .hero-image-final{
-    min-height:0!important;
-    height:auto!important;
-    margin:0 10px!important;
-    border-radius:15px!important;
-    overflow:hidden!important;
-  }
-  .hero-image-final img{
-    display:block!important;
-    width:100%!important;
-    height:auto!important;
-    min-height:0!important;
-    object-fit:cover!important;
-  }
-
-  /* Seções mais compactas */
-  section{scroll-margin-top:80px}
-  #novidades,#marcas{padding-left:12px!important;padding-right:12px!important}
-  #novidades{padding-top:30px!important;padding-bottom:24px!important}
-  #marcas{padding-top:28px!important;padding-bottom:25px!important}
-
-  /* Produtos: 2 por linha, toque confortável */
-  #novidades .produtos,
-  .produtos{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:10px!important;
-  }
-  .produto{min-width:0!important;border-radius:14px!important;overflow:hidden!important}
-  .produto img{width:100%!important;height:auto!important;aspect-ratio:1/1!important;object-fit:cover!important}
-  .produto h3,.produto .nome-produto{font-size:11px!important;line-height:1.35!important}
-  .produto .preco{font-size:14px!important}
-  .produto button:not(.favoritar){min-height:42px!important;font-size:10px!important}
-  .favoritar{width:38px!important;height:38px!important;font-size:19px!important}
-
-  /* Marcas sem aperto */
-  .fy-brands-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
-  .fy-brand-chip{min-width:0!important}
-
-  /* Painéis, conta e carrinho */
-  .carrinho,.cart-drawer,.painel-carrinho{
-    max-width:100vw!important;
-  }
-  .modal-conteudo,.modal-content{
-    width:calc(100% - 24px)!important;
-    max-width:calc(100% - 24px)!important;
-    max-height:88vh!important;
-    overflow-y:auto!important;
-  }
-
-  /* WhatsApp não cobre os produtos */
-  .whatsapp-float,.whatsapp-flutuante{
-    width:48px!important;height:48px!important;
-    right:12px!important;bottom:12px!important;
-  }
-}
-
-@media (max-width: 380px){
-  .logo h1{font-size:24px!important;letter-spacing:3px!important}
-  .acao-btn{width:35px!important;height:35px!important}
-  #loja > .home-quick button{flex-basis:86px!important;min-width:86px!important}
-  #novidades .produtos,.produtos{gap:8px!important}
-}
-</style>
-
-
 <style id="fy-club-account-only-v1">
 /* FOR YOU CLUB: somente dentro da Área do Cliente */
 #clubHome{display:none!important;}
@@ -12114,410 +11976,192 @@ header .menu-principal > .menu-lista{
 }
 </style>
 
+<style id="fy-responsive-clean-final">
+/* FOR YOU — correção limpa de alinhamento para desktop e celular */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+img{max-width:100%}
 
-<style id="fy-reference-mobile-layout-v2">
-/* FOR YOU — mobile inspirado no layout de referência */
-.fy-mobile-menu-btn,.fy-mobile-drawer,.fy-mobile-overlay{display:none}
+/* Desktop: preserva o desenho original e apenas impede estouros */
+@media(min-width:801px){
+  .header,.menu-principal{width:100%}
+  #loja > .home-quick,
+  .hero-image-final,
+  .beneficios,
+  .secao{max-width:1200px;margin-left:auto;margin-right:auto}
+}
 
-@media(max-width:700px){
-  body{background:#fff!important}
+/* Celular */
+@media(max-width:800px){
   .topo{
-    background:#8b1837!important;
-    color:#fff!important;
-    font-size:7px!important;
+    padding:7px 10px!important;
+    font-size:8px!important;
     letter-spacing:.8px!important;
-    padding:6px 8px!important;
-    white-space:nowrap!important;
-    overflow:hidden!important;
+  }
+
+  header{position:relative!important}
+  .header{width:100%!important;padding:10px 12px!important}
+  .header-top{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:42px minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:4px!important;
+  }
+
+  .fy-mobile-menu-btn{
+    display:flex!important;
+    width:38px!important;height:38px!important;
+    align-items:center!important;justify-content:center!important;
+    flex-direction:column!important;gap:4px!important;
+    border:0!important;background:transparent!important;
+  }
+  .fy-mobile-menu-btn span{
+    display:block!important;width:18px!important;height:1.5px!important;
+    background:#351f27!important;
+  }
+
+  .logo{
+    min-width:0!important;
+    width:auto!important;
     text-align:center!important;
   }
-
-  header{background:#fff!important;border-bottom:0!important}
-  .header{padding:0 10px 8px!important}
-  .header-top{
-    display:grid!important;
-    grid-template-columns:42px 1fr auto!important;
-    align-items:center!important;
-    min-height:58px!important;
-    padding:3px 0!important;
-  }
-  .fy-mobile-menu-btn{
-    display:flex!important;width:38px;height:38px;border:0;background:transparent;
-    flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;
-  }
-  .fy-mobile-menu-btn span{width:17px;height:1.5px;background:#351f27;border-radius:2px}
-  .logo{display:flex!important;align-items:center!important;justify-content:center!important}
   .logo h1{
-    font-family:Arial,sans-serif!important;font-size:17px!important;font-weight:500!important;
-    letter-spacing:7px!important;margin:0!important;color:#21171a!important;text-align:center!important;
+    margin:0!important;
+    font-size:24px!important;
+    line-height:1!important;
+    letter-spacing:4px!important;
+    white-space:nowrap!important;
   }
-  .acoes{display:flex!important;align-items:center!important;gap:0!important}
+  .logo span{display:none!important}
+
+  .acoes{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:2px!important;
+    min-width:0!important;
+  }
   .acao-btn,.carrinho-icon{
-    width:35px!important;height:35px!important;min-width:35px!important;
-    border:0!important;background:transparent!important;padding:7px!important;
-  }
-  .acao-btn svg{width:19px!important;height:19px!important}
-  .carrinho-icon{font-size:17px!important}
-  .contador,.contador-favoritos{
-    transform:scale(.78)!important;transform-origin:center!important;
+    width:34px!important;height:34px!important;
+    min-width:34px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    padding:5px!important;font-size:18px!important;
   }
 
-  /* Busca igual à referência: abaixo do cabeçalho */
-  .menu-principal{padding:0!important}
+  .menu-principal{
+    width:100%!important;
+    margin:4px 0 0!important;
+    padding:0!important;
+  }
   .fy-main-nav{display:none!important}
+  header .menu-principal > .menu-lista{display:none!important}
+
   .menu-principal > .busca{
-    display:block!important;width:100%!important;margin:2px 0 8px!important;padding:0!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:8px 0 4px!important;
+    padding:0!important;
   }
-  .menu-principal > .busca .busca-linha{
-    height:39px!important;background:#fff!important;border:1px solid #f0e5e8!important;
-    border-radius:999px!important;box-shadow:0 4px 14px rgba(53,31,39,.055)!important;
+  .busca-linha{
+    width:100%!important;
+    height:42px!important;
+    border-radius:999px!important;
   }
-  .menu-principal > .busca input{font-size:10px!important;padding-left:14px!important}
-  .menu-principal > .busca button{width:40px!important;font-size:17px!important}
+  .busca input{min-width:0!important;padding:0 14px!important;font-size:11px!important}
+  .busca button{width:44px!important;flex:0 0 44px!important}
 
-  /* Categorias compactas em uma única linha rolável */
-  #loja > .home-quick{margin:3px 0 10px!important;padding:0 9px!important}
+  /* única faixa de categorias, sem sair da tela */
+  #loja > .home-quick{
+    width:100%!important;
+    max-width:100%!important;
+    margin:10px 0 12px!important;
+    padding:0 12px!important;
+    transform:none!important;
+  }
   #loja > .home-quick .home-quick-inner{
-    display:flex!important;border:0!important;background:#fff6f8!important;border-radius:10px!important;
-    box-shadow:none!important;overflow-x:auto!important;scrollbar-width:none!important;
+    width:100%!important;
+    display:flex!important;
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    flex-wrap:nowrap!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
   }
-  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none}
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
   #loja > .home-quick button{
-    flex:0 0 70px!important;min-width:70px!important;min-height:42px!important;
-    padding:7px 4px!important;border:0!important;background:transparent!important;
-    font-size:7px!important;color:#351f27!important;
-  }
-  #loja > .home-quick button span{
-    display:inline!important;font-size:11px!important;margin:0 4px 0 0!important;color:#e34f78!important;
+    flex:0 0 82px!important;
+    min-width:82px!important;
+    max-width:82px!important;
   }
 
-  /* Banner */
   .hero-image-final{
-    margin:0 9px 10px!important;border-radius:10px!important;box-shadow:none!important;
+    width:calc(100% - 24px)!important;
+    max-width:none!important;
+    margin:0 12px 12px!important;
+    border-radius:12px!important;
+    overflow:hidden!important;
   }
   .hero-image-final img{
-    width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;
-    object-fit:contain!important;background:#fff1f5!important;
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
   }
 
-  /* Benefícios em 4 colunas compactas como a referência */
-  .beneficios.destaque-beneficios{
-    display:grid!important;grid-template-columns:repeat(4,1fr)!important;
-    margin:10px 9px 18px!important;padding:9px 2px!important;gap:0!important;
-    border:1px solid #f5eaed!important;border-radius:9px!important;background:#fff!important;
-  }
-  .beneficios.destaque-beneficios .beneficio{
-    min-width:0!important;padding:3px 5px!important;border-right:1px solid #f2e7ea!important;
-    display:grid!important;grid-template-columns:20px 1fr!important;column-gap:4px!important;
-    align-items:center!important;text-align:left!important;
-  }
-  .beneficios.destaque-beneficios .beneficio:nth-child(4){border-right:0!important}
-  .beneficios.destaque-beneficios .beneficio:nth-child(n+5){display:none!important}
-  .beneficio-icone{grid-row:1/3!important;width:18px!important;height:18px!important;margin:0!important}
-  .beneficio-icone svg{width:17px!important;height:17px!important;stroke:#e34f78!important}
-  .beneficio strong{font-size:6.5px!important;line-height:1.2!important}
-  .beneficio span{font-size:5.8px!important;line-height:1.25!important;color:#777!important}
-
-  /* Cards e seções mais próximos da referência */
-  .secao{padding-left:9px!important;padding-right:9px!important}
-  .titulo{text-align:left!important;margin-bottom:12px!important}
-  .titulo h2{font-size:13px!important;letter-spacing:.2px!important;color:#d94d70!important}
-  .titulo small{font-size:7px!important}
-  .produtos{
-    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  .beneficios{
+    width:calc(100% - 24px)!important;
+    max-width:none!important;
+    margin:0 12px 18px!important;
+    padding:10px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
     gap:8px!important;
   }
-  .produto{
-    border:1px solid #f1e8ea!important;border-radius:9px!important;box-shadow:none!important;background:#fff!important;
+  .beneficio{
+    width:100%!important;
+    min-width:0!important;
+    min-height:96px!important;
+    padding:12px 7px!important;
   }
-  .produto img{border-radius:9px 9px 0 0!important}
-  .produto h3,.produto .nome-produto{font-size:9px!important}
-  .produto .preco{font-size:11px!important}
-  .produto button:not(.favoritar){min-height:34px!important;font-size:7px!important}
-  .favoritar{width:30px!important;height:30px!important;font-size:15px!important}
+  .beneficio:last-child{grid-column:1/-1!important}
 
-  /* Marcas */
-  #marcas{padding-top:18px!important}
-  .fy-loved-brands-title h2{font-size:12px!important}
-  .fy-brands-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+  .secao{
+    width:100%!important;
+    max-width:100%!important;
+    padding:34px 12px!important;
+  }
+  .titulo{margin-bottom:22px!important}
+  .titulo h2{font-size:30px!important;line-height:1.1!important;margin:8px 0!important}
 
-  /* Menu lateral mobile */
-  .fy-mobile-drawer{
-    display:block!important;position:fixed;z-index:5000;left:0;top:0;bottom:0;width:min(82vw,320px);
-    background:#fff;transform:translateX(-105%);transition:transform .25s ease;
-    padding:18px;box-shadow:12px 0 40px rgba(53,31,39,.12);
-  }
-  .fy-mobile-overlay{
-    display:block!important;position:fixed;z-index:4999;inset:0;background:rgba(53,31,39,.22);
-    opacity:0;visibility:hidden;transition:.25s;
-  }
-  body.fy-mobile-menu-open .fy-mobile-drawer{transform:translateX(0)}
-  body.fy-mobile-menu-open .fy-mobile-overlay{opacity:1;visibility:visible}
-  .fy-mobile-drawer-head{
-    display:flex;align-items:center;justify-content:space-between;padding:4px 2px 18px;
-    border-bottom:1px solid #f0e4e7;margin-bottom:10px;
-  }
-  .fy-mobile-drawer-head strong{letter-spacing:5px;font-size:15px}
-  .fy-mobile-drawer-head button{border:0;background:transparent;font-size:26px;color:#6d3b49}
-  .fy-mobile-drawer a,.fy-mobile-account-link{
-    display:block;width:100%;padding:14px 4px;border:0;border-bottom:1px solid #f5edef;
-    background:#fff;text-align:left;color:#351f27;text-decoration:none;font-size:11px;
-  }
-  .fy-mobile-account-link{color:#d84f72;font-weight:700}
-
-  /* Minha Conta em formato de painel limpo no celular */
-  #paginaConta{padding:0!important;background:#fff!important}
-  #paginaConta .conta-premium-v14{margin:0!important;max-width:none!important}
-  #paginaConta .conta-hero-v14{border-radius:0!important;box-shadow:none!important;padding:20px 16px!important}
-  #paginaConta .conta-layout-v14{margin-top:0!important}
-  #paginaConta .conta-menu-v14{border-radius:0!important;box-shadow:none!important}
-  #paginaConta .fy2-nav-item{min-height:48px!important;font-size:10px!important}
-
-  .whatsapp-float,.whatsapp-flutuante{width:43px!important;height:43px!important;right:10px!important;bottom:10px!important}
-}
-</style>
-
-
-<style id="fy-reference-desktop-layout-v1">
-/* FOR YOU — mesma identidade visual no desktop e no celular */
-
-/* Desktop / tablet grande */
-@media (min-width:701px){
-  body{background:#fff!important;color:#351f27!important}
-
-  .topo{
-    background:#8b1837!important;color:#fff!important;
-    font-size:9px!important;letter-spacing:1.2px!important;padding:7px 18px!important;
-  }
-
-  header{background:#fff!important;border-bottom:1px solid #f3e8eb!important}
-  .header{max-width:1240px!important;margin:auto!important;padding:13px 24px 12px!important}
-  .header-top{
-    display:grid!important;grid-template-columns:180px 1fr 180px!important;
-    align-items:center!important;min-height:66px!important;
-  }
-  .fy-mobile-menu-btn{display:none!important}
-  .logo{grid-column:2!important;display:flex!important;justify-content:center!important}
-  .logo h1{
-    font-family:Arial,sans-serif!important;font-size:24px!important;font-weight:500!important;
-    letter-spacing:9px!important;color:#21171a!important;margin:0!important;
-  }
-  .acoes{grid-column:3!important;justify-self:end!important;display:flex!important;gap:4px!important}
-  .acao-btn,.carrinho-icon{
-    width:42px!important;height:42px!important;border:0!important;background:transparent!important;
-  }
-
-  .menu-principal{max-width:1240px!important;margin:auto!important;padding:0 24px 12px!important}
-  .fy-main-nav{
-    display:flex!important;justify-content:center!important;gap:34px!important;
-    padding:8px 0 12px!important;border:0!important;
-  }
-  .fy-main-nav a{
-    font-size:10px!important;letter-spacing:1px!important;color:#5f424b!important;
-    text-transform:uppercase!important;
-  }
-  .menu-principal > .busca{
-    width:min(720px,70%)!important;max-width:720px!important;margin:0 auto!important;padding:0!important;
-  }
-  .menu-principal > .busca .busca-linha{
-    height:44px!important;border-radius:999px!important;border:1px solid #eee1e5!important;
-    box-shadow:0 5px 16px rgba(53,31,39,.045)!important;background:#fff!important;
-  }
-
-  /* Categorias */
-  #loja > .home-quick{
-    max-width:1180px!important;margin:16px auto 20px!important;padding:0!important;
-  }
-  #loja > .home-quick .home-quick-inner{
-    display:flex!important;justify-content:center!important;
-    background:#fff6f8!important;border:0!important;border-radius:13px!important;
-    overflow:visible!important;box-shadow:none!important;
-  }
-  #loja > .home-quick button{
-    flex:1 1 0!important;min-height:58px!important;padding:11px 8px!important;
-    background:transparent!important;border:0!important;color:#351f27!important;font-size:9px!important;
-  }
-  #loja > .home-quick button span{color:#e34f78!important;font-size:15px!important}
-
-  /* Banner */
-  .hero-image-final{
-    max-width:1180px!important;margin:0 auto 18px!important;border-radius:16px!important;
-    overflow:hidden!important;box-shadow:none!important;
-  }
-  .hero-image-final img{
-    display:block!important;width:100%!important;height:auto!important;object-fit:contain!important;
-  }
-
-  /* Benefícios */
-  .beneficios.destaque-beneficios{
-    max-width:1180px!important;margin:0 auto 38px!important;
-    display:grid!important;grid-template-columns:repeat(4,1fr)!important;
-    padding:16px 10px!important;border:1px solid #f3e8eb!important;border-radius:13px!important;
-    background:#fff!important;
-  }
-  .beneficios.destaque-beneficios .beneficio{
-    padding:5px 18px!important;border-right:1px solid #f1e5e8!important;
-  }
-  .beneficios.destaque-beneficios .beneficio:nth-child(4){border-right:0!important}
-  .beneficios.destaque-beneficios .beneficio:nth-child(n+5){display:none!important}
-  .beneficio-icone svg{stroke:#e34f78!important}
-
-  /* Conteúdo */
-  .secao{max-width:1180px!important;margin-left:auto!important;margin-right:auto!important}
-  .titulo h2{color:#d94d70!important}
   .produtos{
-    display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
-    gap:18px!important;
+    width:100%!important;
+    max-width:100%!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
   }
-  .produto{
-    border:1px solid #f1e8ea!important;border-radius:14px!important;background:#fff!important;
-    box-shadow:0 7px 22px rgba(53,31,39,.045)!important;overflow:hidden!important;
-  }
-  .produto img{width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important}
-  .produto button:not(.favoritar){min-height:42px!important}
+  .produto{min-width:0!important}
+  .produto-img{height:auto!important;aspect-ratio:1/1!important}
+  .produto-info{padding:11px!important}
+  .nome{font-size:16px!important}
+  .preco{font-size:15px!important}
 
-  /* Marcas */
-  #marcas{max-width:1180px!important}
-  .fy-brands-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:14px!important}
+  .footer-grid{grid-template-columns:1fr!important}
 
-  /* Área do cliente: painel sofisticado e consistente com o novo site */
-  #paginaConta{background:#fff!important}
-  #paginaConta .conta-premium-v14{max-width:1180px!important;margin:25px auto 60px!important}
-  #paginaConta .conta-layout-v14{
-    display:grid!important;grid-template-columns:245px 1fr!important;gap:20px!important;
-  }
-  #paginaConta .conta-menu-v14{
-    border:1px solid #eee1e5!important;border-radius:16px!important;padding:10px!important;
-    background:#fff!important;box-shadow:0 8px 25px rgba(53,31,39,.04)!important;
-  }
-  #paginaConta .conta-painel-v14,
-  #paginaConta .fy2-panel{
-    border:1px solid #eee1e5!important;border-radius:18px!important;
-    box-shadow:0 8px 25px rgba(53,31,39,.04)!important;background:#fff!important;
-  }
-
-  /* Drawer mobile não aparece no desktop */
-  .fy-mobile-drawer,.fy-mobile-overlay{display:none!important}
-}
-
-/* Tablet intermediário */
-@media (min-width:701px) and (max-width:980px){
-  .header,.menu-principal{padding-left:18px!important;padding-right:18px!important}
-  #loja > .home-quick,.hero-image-final,.beneficios.destaque-beneficios,.secao{margin-left:18px!important;margin-right:18px!important}
-  .produtos{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-  #paginaConta .conta-layout-v14{grid-template-columns:210px 1fr!important}
-}
-</style>
-
-
-<style id="fy-cart-redesign-v1">
-/* FOR YOU — carrinho lateral clean */
-.overlay{
-  background:rgba(53,31,39,.28)!important;
-  backdrop-filter:blur(2px);
-}
-.carrinho{
-  width:min(440px,100vw)!important;
-  max-width:440px!important;
-  background:#fff!important;
-  border-left:1px solid #f1e5e8!important;
-  box-shadow:-18px 0 50px rgba(53,31,39,.12)!important;
-  padding:0!important;
-  overflow-y:auto!important;
-}
-.carrinho-header{
-  position:sticky!important;top:0!important;z-index:5!important;
-  display:flex!important;align-items:center!important;justify-content:space-between!important;
-  padding:20px 22px 16px!important;background:rgba(255,255,255,.97)!important;
-  border-bottom:1px solid #f3e8eb!important;backdrop-filter:blur(8px);
-}
-.fy-cart-kicker{
-  display:block;font-size:7px;letter-spacing:2px;color:#c85a78;font-weight:800;margin-bottom:3px;
-}
-.carrinho-header h2{
-  margin:0!important;font-family:Georgia,"Times New Roman",serif!important;
-  font-size:23px!important;font-weight:500!important;color:#351f27!important;
-}
-.carrinho-header .fechar{
-  width:38px!important;height:38px!important;border:1px solid #eee1e5!important;
-  border-radius:50%!important;background:#fff!important;color:#5b3c46!important;
-  font-size:22px!important;line-height:1!important;
-}
-.carrinho .itens{padding:14px 22px 4px!important}
-.carrinho .item{
-  display:grid!important;grid-template-columns:82px 1fr!important;gap:13px!important;
-  padding:14px 0!important;border-bottom:1px solid #f3e9ec!important;
-}
-.carrinho .item img{
-  width:82px!important;height:82px!important;object-fit:cover!important;border-radius:12px!important;
-  background:#fff7f9!important;
-}
-.carrinho .item h3,.carrinho .item strong{color:#351f27!important}
-.carrinho .item button{
-  border-radius:999px!important;border:1px solid #eadce0!important;background:#fff!important;
-  min-width:28px!important;min-height:28px!important;color:#6d3b49!important;
-}
-.carrinho .frete-gratis{
-  margin:14px 22px!important;padding:14px 15px!important;border-radius:13px!important;
-  background:#fff6f8!important;border:1px solid #f3e3e8!important;
-}
-.carrinho .frete-gratis p{
-  margin:0 0 9px!important;font-size:9px!important;color:#684751!important;font-weight:700!important;
-}
-.carrinho .barra{height:6px!important;background:#eadfe2!important;border-radius:999px!important;overflow:hidden!important}
-.carrinho .barra-progresso{height:100%!important;background:#d94d70!important;border-radius:999px!important}
-.carrinho .frete,.carrinho .cupom,.carrinho .resumo{
-  margin:14px 22px!important;padding:17px!important;border:1px solid #f0e4e7!important;
-  border-radius:14px!important;background:#fff!important;
-}
-.carrinho .frete h3,.carrinho .cupom h3{
-  font-size:8px!important;letter-spacing:1.4px!important;color:#6d3b49!important;margin-bottom:10px!important;
-}
-.carrinho .cep-linha,.carrinho .cupom-linha{display:flex!important;gap:7px!important}
-.carrinho .cep-linha input,.carrinho .cupom-linha input,.carrinho .campos input{
-  min-height:40px!important;border:1px solid #eadde1!important;border-radius:9px!important;
-  background:#fff!important;font-size:10px!important;
-}
-.carrinho .cep-linha button,.carrinho .cupom-linha button{
-  border:0!important;border-radius:9px!important;background:#8b1837!important;color:#fff!important;
-  padding:0 14px!important;font-size:8px!important;font-weight:800!important;
-}
-.carrinho .cupons-disponiveis{margin-top:14px!important}
-.carrinho .cupom-card{
-  border:1px dashed #e7cbd3!important;background:#fff9fa!important;border-radius:10px!important;
-}
-.carrinho .resumo{background:#fffafb!important}
-.carrinho .resumo .linha{
-  display:flex!important;justify-content:space-between!important;padding:7px 0!important;
-  font-size:10px!important;color:#6b5a60!important;
-}
-.carrinho .resumo .linha.total{
-  margin-top:7px!important;padding-top:13px!important;border-top:1px solid #eadde1!important;
-  font-size:15px!important;color:#351f27!important;
-}
-.carrinho .resumo .whatsapp{
-  width:100%!important;min-height:48px!important;border-radius:11px!important;border:0!important;
-  background:#8b1837!important;color:#fff!important;font-size:9px!important;font-weight:800!important;
-  letter-spacing:1px!important;margin-top:13px!important;
-}
-.carrinho .resumo .whatsapp + .whatsapp{
-  background:#fff!important;color:#6d3b49!important;border:1px solid #dcc9cf!important;
-}
-.carrinho-vazio{text-align:center!important;padding:45px 12px!important;color:#8a777d!important}
-
-@media(max-width:700px){
+  /* Carrinho continua funcional e não ultrapassa a tela */
   .carrinho{
-    width:100vw!important;max-width:100vw!important;left:0!important;right:0!important;
-    border-left:0!important;
+    width:100%!important;
+    max-width:100%!important;
+    left:auto!important;
+    right:0!important;
   }
-  .carrinho-header{padding:16px 16px 13px!important}
-  .carrinho-header h2{font-size:21px!important}
-  .carrinho .itens{padding:10px 16px 2px!important}
-  .carrinho .frete-gratis,.carrinho .frete,.carrinho .cupom,.carrinho .resumo{
-    margin-left:16px!important;margin-right:16px!important;
+  .frete,.itens{min-width:0!important}
+  .campos{grid-template-columns:1fr!important}
+  .completo{grid-column:auto!important}
+
+  .category-dropdown-store .dropdown,.dropdown{
+    max-width:calc(100vw - 24px)!important;
   }
-  .carrinho .item{grid-template-columns:72px 1fr!important}
-  .carrinho .item img{width:72px!important;height:72px!important}
 }
 </style>
 
