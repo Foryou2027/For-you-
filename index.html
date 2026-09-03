@@ -12074,5 +12074,116 @@ header .menu-principal > .menu-lista{
 }
 </style>
 
+
+
+<!-- FOR YOU: filtro real por categoria e subcategoria -->
+<style id="fy-subcategorias-produtos-style">
+#fyCategoriaProdutos{display:none;padding:48px 5%;background:#fff8fa;border-top:1px solid #f1dce2}
+#fyCategoriaProdutos.ativo{display:block}
+#fyCategoriaProdutos .fy-cat-head{max-width:1200px;margin:0 auto 26px;display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+#fyCategoriaProdutos .fy-cat-kicker{font-size:9px;letter-spacing:2.2px;color:#a88955;font-weight:700;text-transform:uppercase}
+#fyCategoriaProdutos h2{font-family:Georgia,serif;font-size:38px;font-weight:400;color:#351f27;margin:7px 0 5px}
+#fyCategoriaProdutos .fy-cat-desc{font-size:11px;color:#806f75}
+#fyCategoriaProdutos .fy-cat-close{border:1px solid #e7c8d1;background:#fff;color:#8f3150;border-radius:999px;padding:10px 15px;font-size:9px;font-weight:700}
+#fyCategoriaProdutos .fy-cat-close:hover{background:#351f27;color:#fff;border-color:#351f27}
+#fyCategoriaProdutos .fy-cat-empty{max-width:700px;margin:25px auto;text-align:center;padding:35px 20px;background:#fff;border:1px solid #ead9de;border-radius:16px;color:#777;font-size:11px}
+.category-dropdown-store .dropdown a{cursor:pointer}
+@media(max-width:600px){#fyCategoriaProdutos{padding:34px 12px}#fyCategoriaProdutos h2{font-size:30px}}
+</style>
+<script id="fy-subcategorias-produtos-script">
+(function(){
+  const mapa={
+    labios:['Batom','Gloss','Lip Tint','Lip Balm','Lápis de Boca','Hidratante Labial','Óleo Labial','Delineador Labial'],
+    pele:['Base','Corretivo','Primer','Bruma','Pó Facial','Blush','Contorno','Bronzer','Iluminador','Fixador'],
+    skincare:['Sabonete Facial','Hidratante','Sérum','Esfoliante','Água Micelar','Protetor Solar','Máscara Facial','Tônico','Lip Care'],
+    olhos:['Paletas','Sombras','Máscara de Cílios','Delineador','Lápis de Olho','Cílios','Cola para Cílios','Sobrancelhas'],
+    face:['Blush','Iluminador','Contorno','Bronzer','Pó','Primer','Bruma','Fixador'],
+    acessorios:['Pincéis','Esponjas','Necessaires','Espelhos','Acessórios de Cabelo','Pinças','Organizadores'],
+    corpo:['Body Splash','Hidratante Corporal','Esfoliante Corporal','Sabonete Corporal','Óleo Corporal','Desodorante','Cuidados para Mãos']
+  };
+  const nomes={labios:'Lábios',pele:'Pele',skincare:'Skincare',olhos:'Olhos',face:'Face',acessorios:'Acessórios',corpo:'Corpo'};
+  const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+
+  function prepararProduto(p){
+    if(!p) return p;
+    if(!p.categoria){
+      const m=norm(p.marca), n=norm(p.nome);
+      const cat=Object.keys(nomes).find(k=>m===norm(nomes[k])) ||
+        (n.includes('body')?'corpo':n.includes('paleta')?'olhos':n.includes('gloss')||n.includes('batom')?'labios':n.includes('hidratante facial')?'skincare':n.includes('base')?'pele':n.includes('blush')?'face':'');
+      if(cat) p.categoria=nomes[cat];
+    }
+    if(!p.subcategoria){
+      const texto=norm((p.nome||'')+' '+(p.descricao||''));
+      const catKey=Object.keys(nomes).find(k=>norm(p.categoria)===norm(nomes[k]));
+      if(catKey){
+        const candidatos=[...mapa[catKey]].sort((a,b)=>b.length-a.length);
+        const achou=candidatos.find(x=>texto.includes(norm(x).replace('paletas','paleta')) || texto.includes(norm(x)));
+        if(achou) p.subcategoria=achou;
+      }
+    }
+    return p;
+  }
+  function prepararCatalogo(){ if(typeof produtos!=='undefined' && Array.isArray(produtos)) produtos.forEach(prepararProduto); }
+
+  function garantirSecao(){
+    let sec=document.getElementById('fyCategoriaProdutos');
+    if(sec) return sec;
+    sec=document.createElement('section'); sec.id='fyCategoriaProdutos';
+    sec.innerHTML='<div class="fy-cat-head"><div><div class="fy-cat-kicker">COMPRE POR CATEGORIA</div><h2 id="fyCatTitulo">Produtos</h2><p class="fy-cat-desc" id="fyCatDesc"></p></div><button class="fy-cat-close" type="button" onclick="fyFecharCategoriaProdutos()">VER TODOS OS PRODUTOS</button></div><div class="produtos" id="fyCatGrid"></div><div class="fy-cat-empty" id="fyCatEmpty" style="display:none"></div>';
+    const alvo=document.getElementById('novidades') || document.getElementById('marcas') || document.querySelector('footer');
+    if(alvo && alvo.parentNode) alvo.parentNode.insertBefore(sec,alvo); else document.getElementById('loja')?.appendChild(sec);
+    return sec;
+  }
+
+  window.fyMostrarSubcategoria=function(categoria,subcategoria){
+    prepararCatalogo(); const sec=garantirSecao(), grid=document.getElementById('fyCatGrid'), vazio=document.getElementById('fyCatEmpty');
+    const catNome=nomes[categoria]||categoria;
+    let lista=(typeof produtos!=='undefined'?produtos:[]).filter(p=>norm(p.categoria)===norm(catNome) || norm(p.marca)===norm(catNome));
+    if(subcategoria) lista=lista.filter(p=>norm(p.subcategoria)===norm(subcategoria) || norm(p.nome).includes(norm(subcategoria).replace('paletas','paleta')));
+    document.getElementById('fyCatTitulo').textContent=subcategoria || catNome;
+    document.getElementById('fyCatDesc').textContent=subcategoria ? ('Produtos de '+subcategoria+' em '+catNome) : ('Todos os produtos de '+catNome);
+    grid.innerHTML='';
+    if(lista.length){ vazio.style.display='none'; grid.style.display='grid'; lista.forEach(p=>grid.appendChild(criarCard(p))); }
+    else { grid.style.display='none'; vazio.style.display='block'; vazio.innerHTML='<strong>Ainda não há produtos cadastrados aqui.</strong><br><br>Quando você cadastrar um produto em <b>'+catNome+'</b> → <b>'+(subcategoria||'qualquer subcategoria')+'</b>, ele aparecerá automaticamente nesta página.'; }
+    sec.classList.add('ativo');
+    if(typeof fecharMenu==='function') fecharMenu();
+    sec.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  window.fyFecharCategoriaProdutos=function(){
+    const sec=document.getElementById('fyCategoriaProdutos'); if(sec) sec.classList.remove('ativo');
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+
+  function ligarDropdowns(){
+    Object.keys(mapa).forEach(cat=>{
+      const drop=document.getElementById('dropdown-'+cat); if(!drop)return;
+      drop.querySelectorAll('a').forEach(a=>{
+        const todos=a.classList.contains('menu-ver-todos');
+        a.onclick=function(e){e.preventDefault();fyMostrarSubcategoria(cat,todos?'':a.textContent.trim());return false;};
+      });
+    });
+  }
+
+  function melhorarAdmin(){
+    const form=document.querySelector('#fyAdminProdutoModal .fy-admin-fields'); if(!form || document.getElementById('fyProdSubcategoria'))return;
+    const cat=document.getElementById('fyProdCategoria'); if(!cat)return;
+    const wrap=document.createElement('div');wrap.className='fy-admin-field';wrap.innerHTML='<label>SUBCATEGORIA</label><input id="fyProdSubcategoria" placeholder="Ex.: Gloss, Batom, Base...">';
+    cat.closest('.fy-admin-field')?.insertAdjacentElement('afterend',wrap);
+    const original=window.fySalvarProduto;
+    if(typeof original==='function') window.fySalvarProduto=function(ev){
+      const id=document.getElementById('fyProdId')?.value;
+      const sub=document.getElementById('fyProdSubcategoria')?.value.trim()||'';
+      const r=original(ev);
+      const p=id?produtos.find(x=>String(x.id)===String(id)):produtos[produtos.length-1];
+      if(p){p.subcategoria=sub;prepararProduto(p);if(typeof salvarCatalogoAdmin==='function')salvarCatalogoAdmin();}
+      return r;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{prepararCatalogo();ligarDropdowns();setTimeout(melhorarAdmin,400)});
+  setTimeout(()=>{prepararCatalogo();ligarDropdowns();melhorarAdmin()},700);
+})();
+</script>
+
 </body>
 </html>
