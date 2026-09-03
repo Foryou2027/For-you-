@@ -12816,5 +12816,147 @@ function limparFiltroSubcategoria(){
 }
 </style>
 
+
+<style id="fy-mobile-final-fix-v2">
+/* FOR YOU — correção exclusiva para celular */
+@media (max-width:700px){
+
+  html,body{
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:hidden!important;
+  }
+
+  /* categorias: cards menores e rolagem horizontal */
+  #loja > .home-quick{
+    width:100%!important;
+    max-width:100%!important;
+    padding:0 14px!important;
+    margin:18px auto 14px!important;
+    overflow:hidden!important;
+  }
+  #loja > .home-quick .home-quick-inner{
+    display:flex!important;
+    grid-template-columns:none!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    border-radius:18px!important;
+  }
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{
+    display:none!important;
+  }
+  #loja > .home-quick button{
+    flex:0 0 104px!important;
+    min-width:104px!important;
+    width:104px!important;
+    min-height:82px!important;
+    padding:12px 6px!important;
+    scroll-snap-align:start;
+    font-size:10px!important;
+  }
+
+  /* banner: mostra a arte inteira, sem cortar texto nem produtos */
+  .hero-image-final{
+    width:calc(100% - 24px)!important;
+    max-width:calc(100% - 24px)!important;
+    margin:16px 12px 0!important;
+    border-radius:14px!important;
+    overflow:hidden!important;
+    aspect-ratio:auto!important;
+  }
+  .hero-image-final img{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  .hero-image-click{
+    left:5.5%!important;
+    top:67%!important;
+    width:31%!important;
+    height:15%!important;
+  }
+
+  /* benefícios: 2 por linha, todos dentro da tela */
+  .beneficios,
+  .destaque-beneficios{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:18px 12px!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+    overflow:visible!important;
+  }
+  .beneficio{
+    width:auto!important;
+    min-width:0!important;
+    max-width:100%!important;
+    min-height:112px!important;
+    padding:14px 7px!important;
+    border:1px solid #eee4e7!important;
+    border-radius:14px!important;
+  }
+  .beneficio:last-child{
+    grid-column:auto!important;
+  }
+  .beneficio strong{
+    font-size:11px!important;
+    line-height:1.25!important;
+  }
+  .beneficio span{
+    font-size:8px!important;
+    line-height:1.35!important;
+  }
+
+  /* demais grades e seções */
+  .secao{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  .produtos{
+    width:100%!important;
+    max-width:100%!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .produto{
+    min-width:0!important;
+  }
+
+  /* WhatsApp não invade os cards */
+  .whatsapp-flutuante{
+    right:14px!important;
+    bottom:18px!important;
+    width:52px!important;
+    height:52px!important;
+  }
+}
+
+@media (max-width:380px){
+  #loja > .home-quick button{
+    flex-basis:96px!important;
+    min-width:96px!important;
+    width:96px!important;
+  }
+  .beneficios,.destaque-beneficios{
+    padding-left:9px!important;
+    padding-right:9px!important;
+    gap:7px!important;
+  }
+}
+</style>
+
 </body>
 </html>
