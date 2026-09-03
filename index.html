@@ -12185,5 +12185,82 @@ header .menu-principal > .menu-lista{
 })();
 </script>
 
+
+
+<!-- FOR YOU: VARIAÇÕES / TONALIDADES + ESTOQUE POR COR -->
+<style id="fy-variacoes-style">
+.fy-variacoes{margin:22px 0 8px}.fy-variacoes-titulo{font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:10px}.fy-variacoes-opcoes{display:flex;flex-wrap:wrap;gap:8px}.fy-var-btn{border:1px solid #e3cbd2;background:#fff;color:#351f27;border-radius:999px;padding:10px 14px;font-size:9px;font-weight:700;transition:.2s}.fy-var-btn:hover,.fy-var-btn.ativa{background:#351f27;color:#fff;border-color:#351f27}.fy-var-btn:disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through}.fy-var-estoque{font-size:8px;color:#8a7078;margin-top:9px;min-height:14px}.fy-var-alerta{color:#b83f61;font-weight:700}.fy-admin-field textarea#fyProdVariacoes{min-height:86px;resize:vertical}.fy-admin-var-help{font-size:8px;color:#927d84;margin-top:5px;line-height:1.5}
+</style>
+<script id="fy-variacoes-script">
+(function(){
+  function norm(s){return String(s||'').trim();}
+  function prepararVariacoes(p){
+    if(!p || !Array.isArray(p.variacoes)) return;
+    p.variacoes=p.variacoes.map(v=>typeof v==='string'?{nome:v,estoque:Number(p.estoque||0)}:{nome:norm(v.nome),estoque:Math.max(0,Number(v.estoque||0))}).filter(v=>v.nome);
+    p.estoque=p.variacoes.reduce((s,v)=>s+Number(v.estoque||0),0);
+  }
+  function prepararTudo(){try{produtos.forEach(prepararVariacoes)}catch(e){}}
+  prepararTudo();
+
+  const abrirOriginal=window.abrirProduto;
+  if(typeof abrirOriginal==='function') window.abrirProduto=function(id){
+    abrirOriginal(id);
+    const p=typeof encontrarProduto==='function'?encontrarProduto(id):null;
+    if(!p || !Array.isArray(p.variacoes) || !p.variacoes.length) return;
+    prepararVariacoes(p);
+    const info=document.querySelector('#produtoDetalhe .detalhe-info');
+    const acoes=info?.querySelector('.detalhe-acoes');
+    if(!info||!acoes)return;
+    const box=document.createElement('div');box.className='fy-variacoes';
+    box.innerHTML='<div class="fy-variacoes-titulo">ESCOLHA A COR / TONALIDADE</div><div class="fy-variacoes-opcoes"></div><div class="fy-var-estoque">Selecione uma opção para continuar.</div>';
+    info.insertBefore(box,acoes);
+    const op=box.querySelector('.fy-variacoes-opcoes'), msg=box.querySelector('.fy-var-estoque');
+    p.variacoes.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='fy-var-btn';b.textContent=v.nome+(v.estoque<=0?' · ESGOTADO':'');b.disabled=v.estoque<=0;b.onclick=()=>{box.querySelectorAll('.fy-var-btn').forEach(x=>x.classList.remove('ativa'));b.classList.add('ativa');window.fyVariacaoSelecionada={produtoId:p.id,nome:v.nome,estoque:v.estoque};msg.innerHTML=v.estoque<=3?'<span class="fy-var-alerta">🔥 Últimas '+v.estoque+' unidades desta tonalidade</span>':v.estoque+' unidades disponíveis nesta tonalidade';};op.appendChild(b)});
+    window.fyVariacaoSelecionada=null;
+    const estoque=info.querySelector('.estoque');if(estoque)estoque.textContent='Estoque total: '+p.estoque+' unidades';
+  };
+
+  const addDetalheOriginal=window.adicionarDetalhe;
+  if(typeof addDetalheOriginal==='function') window.adicionarDetalhe=function(id){
+    const p=typeof encontrarProduto==='function'?encontrarProduto(id):null;
+    if(p && Array.isArray(p.variacoes) && p.variacoes.length){
+      const sel=window.fyVariacaoSelecionada;
+      if(!sel || String(sel.produtoId)!==String(p.id)){alert('Escolha uma cor / tonalidade antes de adicionar ao carrinho.');return;}
+      const qtd=window.quantidadeDetalhe||1;
+      const v=p.variacoes.find(x=>x.nome===sel.nome);
+      if(!v || v.estoque<qtd){alert('Não há estoque suficiente desta tonalidade.');return;}
+      for(let i=0;i<qtd;i++) adicionar(p.nome+' · '+sel.nome,p.preco,p.id+'::'+sel.nome);
+      return;
+    }
+    return addDetalheOriginal(id);
+  };
+
+  function parseVariacoes(txt){
+    return String(txt||'').split(/\n|,/).map(x=>x.trim()).filter(Boolean).map(item=>{const m=item.match(/^(.+?)\s*[:=]\s*(\d+)$/);return m?{nome:m[1].trim(),estoque:Number(m[2])}:{nome:item,estoque:0};});
+  }
+  function textoVariacoes(p){return Array.isArray(p?.variacoes)?p.variacoes.map(v=>v.nome+': '+v.estoque).join('\n'):'';}
+  function melhorarAdminVariacoes(){
+    const form=document.querySelector('#fyAdminProdutoModal .fy-admin-fields');if(!form||document.getElementById('fyProdVariacoes'))return;
+    const estoque=document.getElementById('fyProdEstoque');if(!estoque)return;
+    const wrap=document.createElement('div');wrap.className='fy-admin-field full';wrap.innerHTML='<label>CORES / TONALIDADES E ESTOQUE</label><textarea id="fyProdVariacoes" placeholder="Ex.:\nNude: 5\nRosa: 3\nCereja: 0"></textarea><div class="fy-admin-var-help">Use uma linha por opção no formato Nome: estoque. Se preencher aqui, o estoque total será calculado automaticamente.</div>';
+    estoque.closest('.fy-admin-field')?.insertAdjacentElement('afterend',wrap);
+    const antigoAdicionar=window.adminAdicionarProduto;
+    if(typeof antigoAdicionar==='function')window.adminAdicionarProduto=function(){const r=antigoAdicionar.apply(this,arguments);setTimeout(()=>{const e=document.getElementById('fyProdVariacoes');if(e)e.value='';},0);return r;};
+    document.addEventListener('click',function(e){const btn=e.target.closest('[onclick*="adminEditarProduto"]');if(!btn)return;setTimeout(()=>{const id=document.getElementById('fyProdId')?.value;const p=produtos.find(x=>String(x.id)===String(id));const t=document.getElementById('fyProdVariacoes');if(t&&p)t.value=textoVariacoes(p);},80)},true);
+    const salvarAnterior=window.fySalvarProduto;
+    if(typeof salvarAnterior==='function')window.fySalvarProduto=function(ev){
+      const txt=document.getElementById('fyProdVariacoes')?.value||'';
+      const id=document.getElementById('fyProdId')?.value;
+      const vars=parseVariacoes(txt);
+      const r=salvarAnterior(ev);
+      const p=id?produtos.find(x=>String(x.id)===String(id)):produtos[produtos.length-1];
+      if(p){p.variacoes=vars;if(vars.length)p.estoque=vars.reduce((s,v)=>s+v.estoque,0);if(typeof salvarCatalogoAdmin==='function')salvarCatalogoAdmin();}
+      return r;
+    };
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(melhorarAdminVariacoes,650));
+  setTimeout(melhorarAdminVariacoes,1000);
+})();
+</script>
 </body>
 </html>
