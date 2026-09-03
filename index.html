@@ -5335,23 +5335,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
   <a href="#achadinhoSemana">Achadinhos</a>
   <a href="#marcas">Marcas</a>
 </div>
-<div class="fy-busca-home-titulo">
-  <span>ENCONTRE SEU ACHADINHO</span>
-  <strong>🔍 O que você está procurando?</strong>
-</div>
-<div class="busca fy-busca-home">
 
-<div class="busca-linha">
-<input
-id="busca"
-type="text"
-placeholder="Gloss rosa, base, blush, Mari Maria..."
-onkeydown="if(event.key==='Enter')buscarProdutos()"
->
-<button onclick="buscarProdutos()" aria-label="Buscar produtos">BUSCAR</button>
-</div>
-<div class="busca-sugestoes" id="buscaSugestoes"></div>
-</div>
 
 <div class="category-dropdown-store" aria-hidden="true">
 <div class="dropdown" id="dropdown-labios">
@@ -5463,6 +5447,26 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
     <button onclick="event.stopPropagation();abrirMenu('acessorios',event)"><span>♢</span>Acessórios</button>
     <button onclick="event.stopPropagation();abrirMenu('corpo',event)"><span>♡</span>Corpo</button>
   </div>
+</section>
+
+<section class="fy-home-search-section" aria-label="Busca de produtos">
+  <div class="fy-busca-home-titulo">
+    <span>ENCONTRE SEU ACHADINHO</span>
+    <strong>🔍 O que você está procurando?</strong>
+  </div>
+  <div class="busca fy-busca-home">
+
+<div class="busca-linha">
+<input
+id="busca"
+type="text"
+placeholder="Gloss rosa, base, blush, Mari Maria..."
+onkeydown="if(event.key==='Enter')buscarProdutos()"
+>
+<button onclick="buscarProdutos()" aria-label="Buscar produtos">BUSCAR</button>
+</div>
+<div class="busca-sugestoes" id="buscaSugestoes"></div>
+</div>
 </section>
 
 <section class="hero-image-final" aria-label="Beleza que realça quem você é">
@@ -12334,6 +12338,90 @@ header .menu-principal > .menu-lista{
   .busca.fy-busca-home{padding:0 10px;margin-bottom:17px}
   .fy-busca-home .busca-linha{min-height:50px}
   .fy-busca-home input{padding:13px 15px;font-size:11px}
+  .fy-busca-home button{min-width:82px;padding:0 13px;font-size:8px}
+}
+
+
+/* BUSCA PRINCIPAL — ENTRE CATEGORIAS E BANNER */
+.fy-home-search-section{
+  width:100%;
+  padding:22px 20px 18px;
+  background:#fff8fa;
+  position:relative;
+  z-index:20;
+}
+.fy-busca-home-titulo{
+  max-width:820px;
+  margin:0 auto 12px;
+  text-align:center;
+}
+.fy-busca-home-titulo span{
+  display:block;
+  color:#c9456b;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:2.4px;
+  margin-bottom:6px;
+}
+.fy-busca-home-titulo strong{
+  display:block;
+  color:#351f27;
+  font-family:Georgia,serif;
+  font-size:23px;
+  font-weight:400;
+}
+.busca.fy-busca-home{
+  max-width:820px;
+  margin:0 auto;
+  position:relative;
+}
+.fy-busca-home .busca-linha{
+  display:flex;
+  min-height:56px;
+  background:#fff;
+  border:1px solid #edc6d1;
+  border-radius:999px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(53,31,39,.08);
+}
+.fy-busca-home .busca-linha:focus-within{
+  border-color:#c9456b;
+  box-shadow:0 12px 34px rgba(201,69,107,.15);
+}
+.fy-busca-home input{
+  flex:1;
+  width:100%;
+  border:0;
+  outline:0;
+  padding:0 23px;
+  background:#fff;
+  color:#351f27;
+  font-size:12px;
+}
+.fy-busca-home button{
+  width:auto;
+  min-width:115px;
+  border:0;
+  padding:0 24px;
+  background:#8b1737;
+  color:#fff;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1.1px;
+}
+.fy-busca-home button:hover{background:#6f102b}
+.fy-busca-home .busca-sugestoes{
+  position:absolute;
+  left:10px;
+  right:10px;
+  top:calc(100% + 7px);
+  z-index:1500;
+}
+@media(max-width:600px){
+  .fy-home-search-section{padding:17px 12px 14px}
+  .fy-busca-home-titulo strong{font-size:19px}
+  .fy-busca-home .busca-linha{min-height:50px}
+  .fy-busca-home input{padding:0 15px;font-size:11px}
   .fy-busca-home button{min-width:82px;padding:0 13px;font-size:8px}
 }
 
