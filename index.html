@@ -5451,13 +5451,13 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
   <div class="home-quick-inner">
-    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
-    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
-    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
-    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
-    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
-    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
-    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
+    <button onclick="event.stopPropagation();abrirMenu('labios',event)"><span>♡</span>Lábios</button>
+    <button onclick="event.stopPropagation();abrirMenu('pele',event)"><span>✦</span>Pele</button>
+    <button onclick="event.stopPropagation();abrirMenu('skincare',event)"><span>✧</span>Skincare</button>
+    <button onclick="event.stopPropagation();abrirMenu('olhos',event)"><span>◌</span>Olhos</button>
+    <button onclick="event.stopPropagation();abrirMenu('face',event)"><span>◇</span>Face</button>
+    <button onclick="event.stopPropagation();abrirMenu('acessorios',event)"><span>♢</span>Acessórios</button>
+    <button onclick="event.stopPropagation();abrirMenu('corpo',event)"><span>♡</span>Corpo</button>
   </div>
 </section>
 
@@ -7454,7 +7454,7 @@ function abrirMenu(nome,event){
 }
 
 document.addEventListener("click",function(event){
-  if(!event.target.closest(".menu-item")){
+  if(!event.target.closest(".menu-item") && !event.target.closest(".home-quick") && !event.target.closest(".category-dropdown-store")){
     fecharMenu();
   }
 });
