@@ -12662,12 +12662,40 @@ function limparFiltroSubcategoria(){
 </style>
 
 
-<style id="fy-logo-font-editorial-v1">
-/* Muda somente o formato da letra do FOR YOU; mantém cor, tamanho e posição */
+<style id="fy-logo-brush-v1">
+/* FOR YOU — assinatura marcante inspirada em brush lettering */
 .logo h1{
-  font-family:"Bodoni 72","Bodoni MT","Didot","Times New Roman",serif !important;
-  font-weight:400 !important;
-  font-style:normal !important;
+  font-family:"Segoe Script","Brush Script MT","Lucida Handwriting",cursive !important;
+  font-size:38px !important;
+  font-weight:700 !important;
+  font-style:italic !important;
+  letter-spacing:-2px !important;
+  line-height:1.05 !important;
+  color:#74152f !important;
+  transform:rotate(-1deg);
+  transform-origin:left center;
+  text-shadow:none !important;
+}
+.logo h1::after{
+  content:"" !important;
+  display:none !important;
+}
+.logo .fy-logo-subtitle{
+  margin-top:8px !important;
+  color:#d98aa0 !important;
+  font-size:11px !important;
+  font-weight:600 !important;
+  letter-spacing:.1px !important;
+}
+@media(max-width:700px){
+  .logo h1{
+    font-size:29px !important;
+    letter-spacing:-1.5px !important;
+  }
+  .logo .fy-logo-subtitle{
+    font-size:8px !important;
+    margin-top:5px !important;
+  }
 }
 </style>
 
