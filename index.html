@@ -5449,13 +5449,13 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
   <div class="home-quick-inner">
-    <button onclick="abrirMenu('labios',this)"><span>♡</span>Lábios</button>
-    <button onclick="abrirMenu('pele',this)"><span>✦</span>Pele</button>
-    <button onclick="abrirMenu('skincare',this)"><span>✧</span>Skincare</button>
-    <button onclick="abrirMenu('olhos',this)"><span>◌</span>Olhos</button>
-    <button onclick="abrirMenu('face',this)"><span>◇</span>Face</button>
-    <button onclick="abrirMenu('acessorios',this)"><span>♢</span>Acessórios</button>
-    <button onclick="abrirMenu('corpo',this)"><span>♡</span>Corpo</button>
+    <button onclick="abrirSubmenuHomeFY('labios')"><span>♡</span>Lábios</button>
+    <button onclick="abrirSubmenuHomeFY('pele')"><span>✦</span>Pele</button>
+    <button onclick="abrirSubmenuHomeFY('skincare')"><span>✧</span>Skincare</button>
+    <button onclick="abrirSubmenuHomeFY('olhos')"><span>◌</span>Olhos</button>
+    <button onclick="abrirSubmenuHomeFY('face')"><span>◇</span>Face</button>
+    <button onclick="abrirSubmenuHomeFY('acessorios')"><span>♢</span>Acessórios</button>
+    <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span>Corpo</button>
   </div>
 </section>
 
@@ -12418,6 +12418,231 @@ function limparFiltroSubcategoria(){
     font-weight:700!important;
     color:#4d3039!important;
   }
+}
+</style>
+
+
+<script id="fy-home-submenu-fix-v2">
+(function(){
+  const dados = {
+    labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
+    pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Lip Care"],
+    olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
+    face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
+    acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
+    corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
+  };
+  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo"};
+
+  window.abrirSubmenuHomeFY=function(cat){
+    let box=document.getElementById("fyHomeSubmenu");
+    if(!box){
+      box=document.createElement("div");
+      box.id="fyHomeSubmenu";
+      box.className="fy-home-submenu";
+      document.body.appendChild(box);
+    }
+    const itens=(dados[cat]||[]).map(s =>
+      `<button type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`
+    ).join("");
+    box.innerHTML=`
+      <div class="fy-home-submenu-card">
+        <div class="fy-home-submenu-head">
+          <div><small>COMPRE POR CATEGORIA</small><h3>${nomes[cat]||cat}</h3></div>
+          <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
+        </div>
+        <div class="fy-home-submenu-grid">${itens}</div>
+        <button class="fy-home-submenu-all" type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
+      </div>`;
+    requestAnimationFrame(()=>box.classList.add("aberto"));
+  };
+
+  window.fecharSubmenuHomeFY=function(){
+    const box=document.getElementById("fyHomeSubmenu");
+    if(box) box.classList.remove("aberto");
+  };
+
+  document.addEventListener("click",function(e){
+    const box=document.getElementById("fyHomeSubmenu");
+    if(box && e.target===box) fecharSubmenuHomeFY();
+  });
+})();
+</script>
+
+
+<style id="fy-home-submenu-fix-v2-css">
+.fy-home-submenu{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:150px 20px 30px;
+  background:rgba(53,31,39,.16);
+  opacity:0;visibility:hidden;transition:.2s ease;
+}
+.fy-home-submenu.aberto{opacity:1;visibility:visible}
+.fy-home-submenu-card{
+  width:min(720px,100%);background:#fff;border:1px solid #efdfe4;
+  border-radius:20px;padding:24px;box-shadow:0 25px 70px rgba(53,31,39,.16);
+  transform:translateY(-8px);transition:.2s ease;
+}
+.fy-home-submenu.aberto .fy-home-submenu-card{transform:translateY(0)}
+.fy-home-submenu-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:17px}
+.fy-home-submenu-head small{font-size:7px;letter-spacing:2px;font-weight:800;color:#d94f73}
+.fy-home-submenu-head h3{
+  margin:5px 0 0;font:400 27px Georgia,"Times New Roman",serif;color:#74152f
+}
+.fy-home-submenu-close{
+  width:36px;height:36px;border:1px solid #efdfe4;border-radius:50%;
+  background:#fff;color:#6d3b49;font-size:22px
+}
+.fy-home-submenu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fy-home-submenu-grid button{
+  min-height:43px;padding:9px 12px;border:1px solid #f0e2e6;border-radius:10px;
+  background:#fff9fa;color:#4b3038;font-size:10px;text-align:left
+}
+.fy-home-submenu-grid button:hover{background:#fff0f4;color:#b83f61;border-color:#edcbd5}
+.fy-home-submenu-all{
+  margin-top:16px;width:100%;min-height:43px;border:0;border-radius:10px;
+  background:#7d1734;color:#fff;font-size:9px;font-weight:800;letter-spacing:.6px
+}
+@media(max-width:700px){
+  .fy-home-submenu{padding:90px 12px 18px;align-items:flex-end}
+  .fy-home-submenu-card{border-radius:20px 20px 0 0;padding:18px 15px 20px}
+  .fy-home-submenu-grid{grid-template-columns:repeat(2,1fr)}
+  .fy-home-submenu-grid button{font-size:9px}
+  .fy-home-submenu-head h3{font-size:24px}
+}
+</style>
+
+
+<script id="fy-subcategory-page-v1">
+(function(){
+  const nomesCat = {
+    labios:"Lábios", pele:"Pele", skincare:"Skincare", olhos:"Olhos",
+    face:"Face", acessorios:"Acessórios", corpo:"Corpo"
+  };
+
+  function normFY(s){
+    return (s||"").toString().normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+  }
+
+  function garantirPaginaSubcategoria(){
+    let pg=document.getElementById("paginaSubcategoriaFY");
+    if(pg) return pg;
+    pg=document.createElement("section");
+    pg.id="paginaSubcategoriaFY";
+    pg.className="fy-subcat-page";
+    pg.innerHTML=`
+      <div class="fy-subcat-wrap">
+        <button class="fy-subcat-back" type="button" onclick="voltarSubcategoriaFY()">← Voltar</button>
+        <div class="fy-subcat-heading">
+          <small id="fySubcatCategoria"></small>
+          <h1 id="fySubcatTitulo"></h1>
+          <p id="fySubcatContagem"></p>
+        </div>
+        <div class="fy-subcat-products produtos" id="fySubcatProdutos"></div>
+        <div class="fy-subcat-empty" id="fySubcatVazio" hidden>
+          <span>♡</span>
+          <h3>Nenhum produto encontrado</h3>
+          <p>Quando você cadastrar produtos desta subcategoria, eles aparecerão aqui.</p>
+        </div>
+      </div>`;
+    document.body.insertBefore(pg, document.querySelector("footer"));
+    return pg;
+  }
+
+  window.selecionarSubcategoria=function(categoria, subcategoria){
+    try{fecharMenu()}catch(e){}
+    try{fecharSubmenuHomeFY()}catch(e){}
+
+    const pg=garantirPaginaSubcategoria();
+    const loja=document.getElementById("loja");
+    const conta=document.getElementById("paginaConta");
+    const checkout=document.getElementById("paginaCheckout");
+    const cat=normFY(categoria), sub=normFY(subcategoria);
+    const titulo=subcategoria || ("Todos de "+(nomesCat[categoria]||categoria));
+
+    const originais=Array.from(document.querySelectorAll("#loja .produto"));
+    const destino=document.getElementById("fySubcatProdutos");
+    destino.innerHTML="";
+
+    let n=0;
+    originais.forEach(card=>{
+      const txt=normFY(
+        (card.innerText||"")+" "+
+        (card.dataset.categoria||"")+" "+(card.dataset.category||"")+" "+
+        (card.dataset.subcategoria||"")+" "+(card.dataset.subcategory||"")
+      );
+      const ok = sub ? txt.includes(sub) : txt.includes(cat);
+      if(ok){
+        const clone=card.cloneNode(true);
+        clone.style.display="";
+        destino.appendChild(clone);
+        n++;
+      }
+    });
+
+    document.getElementById("fySubcatCategoria").textContent=(nomesCat[categoria]||categoria).toUpperCase();
+    document.getElementById("fySubcatTitulo").textContent=titulo;
+    document.getElementById("fySubcatContagem").textContent=n+" produto"+(n===1?"":"s");
+    document.getElementById("fySubcatVazio").hidden=n!==0;
+
+    if(loja) loja.style.display="none";
+    if(conta) conta.style.display="none";
+    if(checkout) checkout.style.display="none";
+    pg.style.display="block";
+
+    history.pushState({fySubcat:true},"","#categoria="+encodeURIComponent(categoria)+"&subcategoria="+encodeURIComponent(subcategoria||"todos"));
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  window.voltarSubcategoriaFY=function(){
+    const pg=document.getElementById("paginaSubcategoriaFY");
+    const loja=document.getElementById("loja");
+    if(pg) pg.style.display="none";
+    if(loja) loja.style.display="";
+    history.pushState({},"",location.pathname);
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  window.addEventListener("popstate",function(){
+    const pg=document.getElementById("paginaSubcategoriaFY");
+    const loja=document.getElementById("loja");
+    if(pg) pg.style.display="none";
+    if(loja) loja.style.display="";
+  });
+})();
+</script>
+
+
+<style id="fy-subcategory-page-v1-css">
+.fy-subcat-page{display:none;background:#fff9fb;min-height:70vh;padding:34px 24px 70px}
+.fy-subcat-wrap{max-width:1200px;margin:0 auto}
+.fy-subcat-back{
+  border:0;background:transparent;color:#7d1734;font-size:10px;font-weight:800;
+  padding:8px 0;margin-bottom:25px
+}
+.fy-subcat-heading{text-align:center;margin:0 auto 34px}
+.fy-subcat-heading small{font-size:8px;letter-spacing:3px;font-weight:800;color:#d94f73}
+.fy-subcat-heading h1{
+  margin:8px 0 7px;font:400 38px Georgia,"Times New Roman",serif;color:#351f27
+}
+.fy-subcat-heading p{font-size:10px;color:#8a747b}
+.fy-subcat-products{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important
+}
+.fy-subcat-empty{text-align:center;padding:60px 20px;border:1px solid #f0e2e6;border-radius:18px;background:#fff}
+.fy-subcat-empty span{font-size:30px;color:#d94f73}
+.fy-subcat-empty h3{font:400 24px Georgia,serif;color:#351f27;margin:10px 0}
+.fy-subcat-empty p{font-size:10px;color:#806e74}
+@media(max-width:900px){
+  .fy-subcat-products{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  .fy-subcat-page{padding:20px 12px 50px}
+  .fy-subcat-heading{margin-bottom:22px}
+  .fy-subcat-heading h1{font-size:29px}
+  .fy-subcat-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
 }
 </style>
 
