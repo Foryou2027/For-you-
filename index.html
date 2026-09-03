@@ -12021,5 +12021,164 @@ img{max-width:100%}
 }
 </style>
 
+
+<style id="fy-topo-visual-clean-v1">
+/* FOR YOU — novo visual do topo, sem alterar funções */
+:root{
+  --fy-vinho:#7d1734;
+  --fy-rosa:#d94f73;
+  --fy-rosa-claro:#fff6f8;
+  --fy-borda:#f0e2e6;
+  --fy-texto:#351f27;
+}
+
+header{
+  background:#fff!important;
+  border-bottom:1px solid var(--fy-borda)!important;
+}
+
+.header{
+  max-width:1220px!important;
+  margin:0 auto!important;
+  padding:18px 24px 12px!important;
+}
+
+.header-top{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  min-height:62px!important;
+}
+
+.logo{
+  position:absolute!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  text-align:center!important;
+}
+
+.logo h1{
+  margin:0!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:30px!important;
+  font-weight:400!important;
+  letter-spacing:8px!important;
+  color:var(--fy-vinho)!important;
+  white-space:nowrap!important;
+}
+
+.logo span{
+  display:none!important;
+}
+
+.acoes{
+  margin-left:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+}
+
+.acao-btn,.carrinho-icon{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  transition:.2s ease!important;
+}
+
+.acao-btn:hover,.carrinho-icon:hover{
+  background:var(--fy-rosa-claro)!important;
+}
+
+.menu-principal{
+  max-width:1220px!important;
+  margin:0 auto!important;
+  padding:0 24px 15px!important;
+}
+
+.menu-principal > .busca{
+  width:min(700px,72%)!important;
+  max-width:700px!important;
+  margin:4px auto 0!important;
+}
+
+.busca-linha{
+  height:44px!important;
+  border:1px solid var(--fy-borda)!important;
+  border-radius:999px!important;
+  background:#fff!important;
+  box-shadow:0 5px 18px rgba(85,39,52,.045)!important;
+  overflow:hidden!important;
+}
+
+.busca-linha:focus-within{
+  border-color:#e7a8b9!important;
+  box-shadow:0 0 0 3px rgba(217,79,115,.07)!important;
+}
+
+.busca input{
+  font-size:11px!important;
+  color:var(--fy-texto)!important;
+  padding-left:17px!important;
+}
+
+.busca button{
+  width:46px!important;
+  background:transparent!important;
+  color:var(--fy-rosa)!important;
+  border:0!important;
+}
+
+/* celular */
+@media(max-width:700px){
+  .header{
+    padding:9px 12px 6px!important;
+  }
+
+  .header-top{
+    min-height:52px!important;
+  }
+
+  .logo h1{
+    font-size:22px!important;
+    letter-spacing:5px!important;
+  }
+
+  .acoes{
+    gap:0!important;
+  }
+
+  .acao-btn,.carrinho-icon{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+  }
+
+  .menu-principal{
+    padding:0 12px 10px!important;
+  }
+
+  .menu-principal > .busca{
+    width:100%!important;
+    max-width:none!important;
+    margin:4px 0 0!important;
+  }
+
+  .busca-linha{
+    height:40px!important;
+  }
+
+  .busca input{
+    font-size:10px!important;
+  }
+}
+</style>
+
 </body>
 </html>
