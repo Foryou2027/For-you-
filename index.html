@@ -5303,10 +5303,13 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 <div class="header">
 
 <div class="header-top">
-<div class="logo">
-<h1>FOR YOU</h1>
-<span class="fy-logo-subtitle">Testamos, gostamos e colocamos na loja.</span>
+<div class="fy-header-slogan" aria-hidden="true"><span>Testamos, gostamos e colocamos na loja.</span></div>
 
+<div class="logo">
+  <a href="#" class="fy-brand-logo" aria-label="FOR YOU - Página inicial" onclick="event.preventDefault(); if(typeof mostrarLoja==='function'){mostrarLoja();} else {window.scrollTo({top:0,behavior:'smooth'});}">
+    <img src="logo-for-you-final.png" alt="FOR YOU">
+    <span class="fy-visually-hidden">FOR YOU</span>
+  </a>
 </div>
 
 <div class="acoes">
@@ -12662,20 +12665,154 @@ function limparFiltroSubcategoria(){
 </style>
 
 
-<style id="fy-logo-option-03_beauty_premium">
-
-.logo h1{
- font-family:"Baskerville","Palatino Linotype","Book Antiqua","Times New Roman",serif!important;
- font-size:37px!important;font-weight:600!important;font-style:normal!important;
- letter-spacing:5px!important;color:#74152f!important;transform:none!important;text-shadow:none!important;
+<style id="fy-brand-image-logo-v1">
+.logo{
+  position:static!important;
+  transform:none!important;
+  margin-right:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  text-align:left!important;
 }
-.logo h1::after{content:""!important;display:none!important}
-
-.logo .fy-logo-subtitle{
- color:#d98aa0!important;font-weight:600!important;
+.fy-brand-logo{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:190px!important;
+  height:82px!important;
+  overflow:hidden!important;
+  text-decoration:none!important;
+}
+.fy-brand-logo img{
+  display:block!important;
+  width:190px!important;
+  height:190px!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border-radius:0!important;
+}
+.fy-visually-hidden{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important;
 }
 @media(max-width:700px){
- .logo h1{font-size:28px!important;letter-spacing:3px!important}
+  .fy-brand-logo{
+    width:118px!important;
+    height:56px!important;
+  }
+  .fy-brand-logo img{
+    width:124px!important;
+    height:124px!important;
+  }
+}
+</style>
+
+
+<style id="fy-logo-header-fit-v2">
+.header{padding-top:12px!important;padding-bottom:10px!important}
+.header-top{min-height:112px!important}
+.logo{min-width:280px!important}
+.fy-brand-logo{width:280px!important;height:108px!important;overflow:visible!important;justify-content:flex-start!important}
+.fy-brand-logo img{width:280px!important;height:108px!important;max-width:100%!important;object-fit:contain!important;object-position:left center!important}
+@media(max-width:700px){
+.header{padding-top:7px!important;padding-bottom:7px!important}
+.header-top{min-height:78px!important}
+.logo{min-width:0!important;max-width:165px!important}
+.fy-brand-logo{width:165px!important;height:72px!important}
+.fy-brand-logo img{width:165px!important;height:72px!important;object-fit:contain!important;object-position:left center!important}
+}
+</style>
+
+
+<style id="fy-remove-logo-subtitle-final">
+.logo .fy-logo-subtitle,
+.logo .subtitle,
+.logo .tagline,
+.fy-brand-logo + .fy-logo-subtitle{
+  display:none !important;
+}
+</style>
+
+
+<style id="fy-approved-header-brand-v1">
+/* CABEÇALHO APROVADO — logo à esquerda + frase desenhada no centro */
+.header-top{
+  position:relative !important;
+  min-height:108px !important;
+}
+.logo{
+  position:static !important;
+  transform:none !important;
+  margin-right:auto !important;
+  z-index:2 !important;
+}
+.fy-brand-logo{
+  width:275px !important;
+  height:104px !important;
+  overflow:visible !important;
+}
+.fy-brand-logo img{
+  width:275px !important;
+  height:104px !important;
+  max-width:100% !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+
+/* frase central com aparência mais desenhada */
+.fy-header-slogan{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(-1deg);
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#d77f99;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.fy-header-slogan::before{
+  content:"♡";
+  font-size:16px;
+  color:#e7a0b4;
+}
+.fy-header-slogan::after{
+  content:"✦";
+  font-size:12px;
+  color:#e7a0b4;
+}
+.fy-header-slogan span{
+  font-family:"Segoe Script","Bradley Hand","Lucida Handwriting",cursive;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.1px;
+}
+.acoes{
+  position:relative;
+  z-index:2;
+}
+
+/* No celular, preserva o logo e evita apertar os ícones */
+@media(max-width:900px){
+  .fy-header-slogan{display:none !important}
+}
+@media(max-width:700px){
+  .header-top{min-height:72px !important}
+  .fy-brand-logo{
+    width:158px !important;
+    height:68px !important;
+  }
+  .fy-brand-logo img{
+    width:158px !important;
+    height:68px !important;
+    object-fit:contain !important;
+    object-position:left center !important;
+  }
 }
 </style>
 
