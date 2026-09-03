@@ -12262,5 +12262,36 @@ header .menu-principal > .menu-lista{
   setTimeout(melhorarAdminVariacoes,1000);
 })();
 </script>
+
+<style id="fy-smart-search-share-track">
+.fy-share-box{margin-top:18px;padding:16px;border:1px solid #ead9de;border-radius:14px;background:#fffafa}.fy-share-box strong{display:block;font-size:10px;margin-bottom:10px}.fy-share-actions{display:flex;gap:8px;flex-wrap:wrap}.fy-share-actions button{border:1px solid #351f27;background:#fff;color:#351f27;padding:10px 13px;border-radius:999px;font-size:8px;font-weight:800;letter-spacing:.5px}.fy-share-actions button:first-child{background:#25d366;border-color:#25d366;color:#fff}.pedido-rastreio-acoes{display:flex!important;gap:7px!important;flex-wrap:wrap}.pedido-rastreio-acoes button{border-radius:999px!important}.pedido-rastreio-acoes .copiar-rastreio{background:#fff!important;color:#351f27!important;border:1px solid #351f27!important}.busca-inteligente-dica{font-size:9px;color:#9b7b86;margin:7px 14px 0}
+</style>
+<script id="fy-smart-search-share-track-js">
+(function(){
+  function norm(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+  function textoProduto(p){return norm([p.nome,p.marca,p.categoria,p.subcategoria,p.descricao,(p.variacoes||[]).map(v=>v.nome||v.cor||v.tonalidade).join(' ')].join(' '))}
+  window.buscarProdutos=function(){
+    const campo=document.getElementById('busca'); const termo=(campo?.value||'').trim(); fecharSugestoesBusca?.(); if(termo&&typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(termo);
+    if(!termo){const rb=document.getElementById('resultadoBusca');if(rb)rb.textContent='';renderProdutos();document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});return}
+    const palavras=norm(termo).split(/\s+/).filter(Boolean);
+    let lista=[...produtos,...kits].map(p=>({p,t:textoProduto(p),score:0})).filter(o=>{o.score=palavras.reduce((n,w)=>n+(o.t.includes(w)?1:0),0);return o.score===palavras.length}).sort((a,b)=>b.score-a.score).map(o=>o.p);
+    document.querySelectorAll('.pagina').forEach(x=>x.classList.remove('ativa')); const loja=document.getElementById('loja');if(loja)loja.style.display='block';renderProdutos(lista);
+    const rb=document.getElementById('resultadoBusca');if(rb)rb.textContent=lista.length?`${lista.length} produto(s) encontrado(s) para “${termo}”.`:`Nenhum produto encontrado para “${termo}”.`;
+    if(!lista.length){const lp=document.getElementById('listaProdutos');if(lp)lp.innerHTML='<div class="busca-vazia">Não encontramos essa combinação. Tente, por exemplo: “gloss rosa”, “base matte” ou “blush Mari Maria”.</div>'}
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  function urlProduto(p){const u=new URL(location.href);u.searchParams.set('produto',p.id);u.hash='produto';return u.toString()}
+  window.copiarLinkProduto=async function(id){const p=encontrarProduto(id);if(!p)return;try{await navigator.clipboard.writeText(urlProduto(p));mostrarToast('Link do produto copiado! 💗')}catch(e){prompt('Copie o link:',urlProduto(p))}};
+  window.compartilharWhatsAppProduto=function(id){const p=encontrarProduto(id);if(!p)return;const msg=`Olha esse achadinho da FOR YOU 💗\n${p.nome} — ${moeda(p.preco)}\n${urlProduto(p)}`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank')};
+  window.compartilharProduto=async function(id){const p=encontrarProduto(id);if(!p)return;const dados={title:p.nome,text:`${p.nome} — ${moeda(p.preco)} | FOR YOU`,url:urlProduto(p)};try{if(navigator.share)await navigator.share(dados);else await copiarLinkProduto(id)}catch(e){if(e?.name!=='AbortError')mostrarToast('Não foi possível compartilhar agora.')}};
+  const abrirAntigo=window.abrirProduto;
+  window.abrirProduto=function(id){abrirAntigo(id);const p=encontrarProduto(id);const info=document.querySelector('#produtoDetalhe .detalhe-info');if(!p||!info)return;const old=info.querySelector('.fy-share-box');if(old)old.remove();const box=document.createElement('div');box.className='fy-share-box';box.innerHTML=`<strong>📱 COMPARTILHAR ESTE PRODUTO</strong><div class="fy-share-actions"><button type="button">WhatsApp</button><button type="button">🔗 Copiar link</button></div>`;const bs=box.querySelectorAll('button');bs[0].onclick=()=>compartilharWhatsAppProduto(p.id);bs[1].onclick=()=>copiarLinkProduto(p.id);info.appendChild(box)};
+  window.copiarCodigoRastreio=async function(codigo){try{await navigator.clipboard.writeText(String(codigo||''));mostrarToast('Código de rastreio copiado! 📦')}catch(e){prompt('Copie o código:',codigo)}};
+  const renderPedidosAntigo=window.renderPedidosConta;
+  window.renderPedidosConta=function(){renderPedidosAntigo();document.querySelectorAll('.pedido-rastreio:not(.indisponivel)').forEach(box=>{const codigo=box.querySelector('span:not(.rastreio-icon)')?.textContent?.trim();const acompanhar=box.querySelector('button');if(!codigo||!acompanhar||box.querySelector('.copiar-rastreio'))return;const acoes=document.createElement('div');acoes.className='pedido-rastreio-acoes';acompanhar.parentNode.insertBefore(acoes,acompanhar);acoes.appendChild(acompanhar);const copiar=document.createElement('button');copiar.type='button';copiar.className='copiar-rastreio';copiar.textContent='COPIAR CÓDIGO';copiar.onclick=()=>copiarCodigoRastreio(codigo);acoes.appendChild(copiar)})};
+  document.addEventListener('DOMContentLoaded',()=>{const campo=document.getElementById('busca');if(campo&&!document.querySelector('.busca-inteligente-dica')){const d=document.createElement('div');d.className='busca-inteligente-dica';d.textContent='Experimente buscar: gloss rosa, base matte, blush Mari Maria…';campo.closest('.busca')?.appendChild(d)}const id=new URL(location.href).searchParams.get('produto');if(id)setTimeout(()=>{const p=encontrarProduto(id)||encontrarProduto(Number(id));if(p)abrirProduto(p.id)},500);setTimeout(()=>renderPedidosConta(),600)});
+})();
+</script>
+
 </body>
 </html>
