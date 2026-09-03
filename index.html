@@ -6344,7 +6344,7 @@ onclick="fecharCarrinho()"
 
 <div class="carrinho-header">
 
-<h2>Seu carrinho</h2>
+<div><small class="fy-cart-kicker">SUA COMPRA</small><h2>Minha sacola</h2></div>
 
 <button type="button" class="fechar" id="btnFecharCarrinho" aria-label="Fechar carrinho" title="Fechar carrinho">×</button>
 
@@ -12406,6 +12406,118 @@ header .menu-principal > .menu-lista{
   #loja > .home-quick,.hero-image-final,.beneficios.destaque-beneficios,.secao{margin-left:18px!important;margin-right:18px!important}
   .produtos{grid-template-columns:repeat(3,minmax(0,1fr))!important}
   #paginaConta .conta-layout-v14{grid-template-columns:210px 1fr!important}
+}
+</style>
+
+
+<style id="fy-cart-redesign-v1">
+/* FOR YOU — carrinho lateral clean */
+.overlay{
+  background:rgba(53,31,39,.28)!important;
+  backdrop-filter:blur(2px);
+}
+.carrinho{
+  width:min(440px,100vw)!important;
+  max-width:440px!important;
+  background:#fff!important;
+  border-left:1px solid #f1e5e8!important;
+  box-shadow:-18px 0 50px rgba(53,31,39,.12)!important;
+  padding:0!important;
+  overflow-y:auto!important;
+}
+.carrinho-header{
+  position:sticky!important;top:0!important;z-index:5!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  padding:20px 22px 16px!important;background:rgba(255,255,255,.97)!important;
+  border-bottom:1px solid #f3e8eb!important;backdrop-filter:blur(8px);
+}
+.fy-cart-kicker{
+  display:block;font-size:7px;letter-spacing:2px;color:#c85a78;font-weight:800;margin-bottom:3px;
+}
+.carrinho-header h2{
+  margin:0!important;font-family:Georgia,"Times New Roman",serif!important;
+  font-size:23px!important;font-weight:500!important;color:#351f27!important;
+}
+.carrinho-header .fechar{
+  width:38px!important;height:38px!important;border:1px solid #eee1e5!important;
+  border-radius:50%!important;background:#fff!important;color:#5b3c46!important;
+  font-size:22px!important;line-height:1!important;
+}
+.carrinho .itens{padding:14px 22px 4px!important}
+.carrinho .item{
+  display:grid!important;grid-template-columns:82px 1fr!important;gap:13px!important;
+  padding:14px 0!important;border-bottom:1px solid #f3e9ec!important;
+}
+.carrinho .item img{
+  width:82px!important;height:82px!important;object-fit:cover!important;border-radius:12px!important;
+  background:#fff7f9!important;
+}
+.carrinho .item h3,.carrinho .item strong{color:#351f27!important}
+.carrinho .item button{
+  border-radius:999px!important;border:1px solid #eadce0!important;background:#fff!important;
+  min-width:28px!important;min-height:28px!important;color:#6d3b49!important;
+}
+.carrinho .frete-gratis{
+  margin:14px 22px!important;padding:14px 15px!important;border-radius:13px!important;
+  background:#fff6f8!important;border:1px solid #f3e3e8!important;
+}
+.carrinho .frete-gratis p{
+  margin:0 0 9px!important;font-size:9px!important;color:#684751!important;font-weight:700!important;
+}
+.carrinho .barra{height:6px!important;background:#eadfe2!important;border-radius:999px!important;overflow:hidden!important}
+.carrinho .barra-progresso{height:100%!important;background:#d94d70!important;border-radius:999px!important}
+.carrinho .frete,.carrinho .cupom,.carrinho .resumo{
+  margin:14px 22px!important;padding:17px!important;border:1px solid #f0e4e7!important;
+  border-radius:14px!important;background:#fff!important;
+}
+.carrinho .frete h3,.carrinho .cupom h3{
+  font-size:8px!important;letter-spacing:1.4px!important;color:#6d3b49!important;margin-bottom:10px!important;
+}
+.carrinho .cep-linha,.carrinho .cupom-linha{display:flex!important;gap:7px!important}
+.carrinho .cep-linha input,.carrinho .cupom-linha input,.carrinho .campos input{
+  min-height:40px!important;border:1px solid #eadde1!important;border-radius:9px!important;
+  background:#fff!important;font-size:10px!important;
+}
+.carrinho .cep-linha button,.carrinho .cupom-linha button{
+  border:0!important;border-radius:9px!important;background:#8b1837!important;color:#fff!important;
+  padding:0 14px!important;font-size:8px!important;font-weight:800!important;
+}
+.carrinho .cupons-disponiveis{margin-top:14px!important}
+.carrinho .cupom-card{
+  border:1px dashed #e7cbd3!important;background:#fff9fa!important;border-radius:10px!important;
+}
+.carrinho .resumo{background:#fffafb!important}
+.carrinho .resumo .linha{
+  display:flex!important;justify-content:space-between!important;padding:7px 0!important;
+  font-size:10px!important;color:#6b5a60!important;
+}
+.carrinho .resumo .linha.total{
+  margin-top:7px!important;padding-top:13px!important;border-top:1px solid #eadde1!important;
+  font-size:15px!important;color:#351f27!important;
+}
+.carrinho .resumo .whatsapp{
+  width:100%!important;min-height:48px!important;border-radius:11px!important;border:0!important;
+  background:#8b1837!important;color:#fff!important;font-size:9px!important;font-weight:800!important;
+  letter-spacing:1px!important;margin-top:13px!important;
+}
+.carrinho .resumo .whatsapp + .whatsapp{
+  background:#fff!important;color:#6d3b49!important;border:1px solid #dcc9cf!important;
+}
+.carrinho-vazio{text-align:center!important;padding:45px 12px!important;color:#8a777d!important}
+
+@media(max-width:700px){
+  .carrinho{
+    width:100vw!important;max-width:100vw!important;left:0!important;right:0!important;
+    border-left:0!important;
+  }
+  .carrinho-header{padding:16px 16px 13px!important}
+  .carrinho-header h2{font-size:21px!important}
+  .carrinho .itens{padding:10px 16px 2px!important}
+  .carrinho .frete-gratis,.carrinho .frete,.carrinho .cupom,.carrinho .resumo{
+    margin-left:16px!important;margin-right:16px!important;
+  }
+  .carrinho .item{grid-template-columns:72px 1fr!important}
+  .carrinho .item img{width:72px!important;height:72px!important}
 }
 </style>
 
