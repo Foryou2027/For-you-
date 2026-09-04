@@ -5567,9 +5567,62 @@ body{background:#fff!important;color:#3f2028!important}
 }
 </style>
 
+
+<style id="fy-carrinho-pagina-css">
+#paginaCarrinhoFY{
+  display:none; min-height:70vh; background:#fff8fa; padding:34px 5% 70px;
+}
+#paginaCarrinhoFY.ativa{display:block}
+.fy-cart-page-wrap{max-width:1050px;margin:auto}
+.fy-cart-page-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:28px}
+.fy-cart-page-voltar{border:0;background:transparent;color:#b83f61;font-size:10px;font-weight:800}
+.fy-cart-page-top h1{font-family:Georgia,serif;font-size:38px;font-weight:400;color:#351f27}
+.fy-cart-page-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.7fr);gap:24px;align-items:start}
+.fy-cart-page-box{background:#fff;border:1px solid #ead9de;border-radius:18px;padding:20px}
+.fy-cart-page-resumo{position:sticky;top:125px}
+.fy-cart-page-resumo h2{font-family:Georgia,serif;font-size:23px;font-weight:400;margin-bottom:16px}
+.fy-cart-page-row{display:flex;justify-content:space-between;gap:15px;font-size:11px;padding:8px 0}
+.fy-cart-page-total{border-top:1px solid #ead9de;margin-top:7px;padding-top:15px;font-size:17px;font-weight:800}
+.fy-cart-page-finalizar{width:100%;height:50px;border:0;border-radius:12px;background:#351f27;color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;margin-top:15px}
+.fy-cart-page-seguro{text-align:center;font-size:8px;color:#958187;margin-top:10px}
+#fyCartPageItems .item{padding:15px 0}
+@media(max-width:760px){
+ #paginaCarrinhoFY{padding:20px 14px 55px}
+ .fy-cart-page-top h1{font-size:29px}
+ .fy-cart-page-grid{grid-template-columns:1fr}
+ .fy-cart-page-resumo{position:static}
+}
+</style>
+
 </head>
 
 <body>
+
+<!-- PÁGINA DA SACOLA -->
+<section id="paginaCarrinhoFY">
+  <div class="fy-cart-page-wrap">
+    <div class="fy-cart-page-top">
+      <button type="button" class="fy-cart-page-voltar" onclick="fyFecharPaginaCarrinho()">← CONTINUAR COMPRANDO</button>
+      <h1>Minha Sacola</h1>
+      <span></span>
+    </div>
+    <div class="fy-cart-page-grid">
+      <div class="fy-cart-page-box">
+        <div id="fyCartPageItems"></div>
+      </div>
+      <aside class="fy-cart-page-box fy-cart-page-resumo">
+        <h2>Resumo do pedido</h2>
+        <div class="fy-cart-page-row"><span>Subtotal</span><strong id="fyPageSubtotal">R$ 0,00</strong></div>
+        <div class="fy-cart-page-row"><span>Desconto</span><strong id="fyPageDesconto">R$ 0,00</strong></div>
+        <div class="fy-cart-page-row"><span>Frete</span><strong id="fyPageFrete">A calcular</strong></div>
+        <div class="fy-cart-page-row fy-cart-page-total"><span>Total</span><strong id="fyPageTotal">R$ 0,00</strong></div>
+        <button type="button" class="fy-cart-page-finalizar" onclick="fyFinalizarCompra()">FINALIZAR COMPRA</button>
+        <div class="fy-cart-page-seguro">🔒 Compra segura • Seus dados protegidos</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 
 <div class="topo">
 ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
@@ -13368,6 +13421,100 @@ function fecharOfertasMenu(){
 }
 document.addEventListener("click",function(e){
   if(!e.target.closest(".fy-ofertas-item")) fecharOfertasMenu();
+});
+</script>
+
+
+<script id="fy-carrinho-pagina-js">
+let fyPaginaAnteriorDisplay=[];
+
+function fyMoeda(v){
+  return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+function fyRenderPaginaCarrinho(){
+  const box=document.getElementById("fyCartPageItems");
+  if(!box)return;
+  let lista=(typeof carrinho!=="undefined" && Array.isArray(carrinho)) ? carrinho : [];
+  if(!lista.length){
+    box.innerHTML='<div class="fy-sacola-vazia"><div class="icone">🛍️</div><strong>Sua sacola está vazia</strong><p style="margin-top:7px;font-size:9px">Adicione seus produtos favoritos para continuar.</p></div>';
+  }else{
+    box.innerHTML=lista.map((item,i)=>{
+      const p=item.produto||item;
+      const nome=p.nome||p.name||"Produto";
+      const img=p.imagem||p.img||p.image||"";
+      const preco=Number(p.preco||p.price||0);
+      const qtd=Number(item.quantidade||item.qtd||1);
+      return `<div class="item">
+        <div class="item-img">${img?`<img src="${img}" alt="${nome}">`:""}</div>
+        <div class="item-dados">
+          <strong>${nome}</strong>
+          <div class="item-preco">${fyMoeda(preco)}</div>
+          <div class="quantidade">
+            <button onclick="fyAlterarQtdPagina(${i},-1)">−</button>
+            <span>${qtd}</span>
+            <button onclick="fyAlterarQtdPagina(${i},1)">+</button>
+          </div>
+          <button class="remover" onclick="fyRemoverPagina(${i})">Remover</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  let subtotal=lista.reduce((s,item)=>{
+    const p=item.produto||item;
+    return s + Number(p.preco||p.price||0)*Number(item.quantidade||item.qtd||1);
+  },0);
+  const sub=document.getElementById("fyPageSubtotal"), tot=document.getElementById("fyPageTotal");
+  if(sub)sub.textContent=fyMoeda(subtotal);
+  if(tot)tot.textContent=fyMoeda(subtotal);
+}
+function fyAlterarQtdPagina(i,d){
+  if(typeof carrinho==="undefined"||!carrinho[i])return;
+  let atual=Number(carrinho[i].quantidade||carrinho[i].qtd||1)+d;
+  if(atual<=0){fyRemoverPagina(i);return}
+  if("quantidade" in carrinho[i]) carrinho[i].quantidade=atual; else carrinho[i].qtd=atual;
+  if(typeof salvar==="function")salvar();
+  if(typeof atualizar==="function")atualizar();
+  fyRenderPaginaCarrinho();
+}
+function fyRemoverPagina(i){
+  if(typeof carrinho==="undefined")return;
+  carrinho.splice(i,1);
+  if(typeof salvar==="function")salvar();
+  if(typeof atualizar==="function")atualizar();
+  fyRenderPaginaCarrinho();
+}
+function fyAbrirPaginaCarrinho(){
+  const pg=document.getElementById("paginaCarrinhoFY");
+  if(!pg)return;
+  fyPaginaAnteriorDisplay=[];
+  document.querySelectorAll("body > section, body > main, body > header, body > footer, body > .topo").forEach(el=>{
+    if(el===pg)return;
+    fyPaginaAnteriorDisplay.push([el,el.style.display]);
+    el.style.display="none";
+  });
+  const lateral=document.querySelector(".carrinho"), overlay=document.querySelector(".overlay");
+  if(lateral)lateral.classList.remove("aberto");
+  if(overlay)overlay.classList.remove("ativo");
+  pg.classList.add("ativa");
+  fyRenderPaginaCarrinho();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function fyFecharPaginaCarrinho(){
+  const pg=document.getElementById("paginaCarrinhoFY");
+  if(pg)pg.classList.remove("ativa");
+  fyPaginaAnteriorDisplay.forEach(([el,d])=>el.style.display=d);
+  fyPaginaAnteriorDisplay=[];
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* Faz o clique no ícone atual da sacola abrir a página, sem precisar trocar o HTML original. */
+document.addEventListener("DOMContentLoaded",function(){
+  document.querySelectorAll(".carrinho-icon").forEach(el=>{
+    el.addEventListener("click",function(e){
+      e.preventDefault(); e.stopImmediatePropagation();
+      fyAbrirPaginaCarrinho();
+    },true);
+  });
 });
 </script>
 
