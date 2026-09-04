@@ -6757,6 +6757,34 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 @media(max-width:520px){.fy20-filterbar{grid-template-columns:repeat(2,1fr)}.fy20-wrap{padding:18px 12px 50px}.fy20-products{gap:9px}.fy20-info{padding:10px}}
 </style>
 
+
+<style id="fy20-fotos-demonstrativas-reais">
+.fy20-img{
+  padding:0!important;
+  overflow:hidden!important;
+  background:#f8f4f5!important;
+}
+.fy20-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+  transition:transform .3s ease!important;
+}
+.fy20-card:hover .fy20-img img{transform:scale(1.035)}
+.fy20-img:after{
+  content:"IMAGEM DEMONSTRATIVA"!important;
+  background:rgba(255,255,255,.92)!important;
+  color:#6d6467!important;
+  z-index:2!important;
+}
+/* Recortes diferentes da mesma coleção para dar aparência de produtos distintos */
+.fy20-card:nth-child(4n+1) .fy20-img img{object-position:12% center!important}
+.fy20-card:nth-child(4n+2) .fy20-img img{object-position:38% center!important}
+.fy20-card:nth-child(4n+3) .fy20-img img{object-position:65% center!important}
+.fy20-card:nth-child(4n+4) .fy20-img img{object-position:88% center!important}
+</style>
+
 </head>
 
 
@@ -15174,17 +15202,17 @@ document.addEventListener("DOMContentLoaded", function () {
 <script id="fy-filtros-categorias-demo-v20-js">
 (function(){
  const demo=[
- {cat:"Lábios",nome:"Gloss Crystal Shine",marca:"Ruby Rose",preco:14.90,old:19.90,promo:true,best:true,disp:"sim",emoji:"💄",novo:9},
- {cat:"Lábios",nome:"Lip Tint Rosé",marca:"Max Love",preco:12.90,promo:false,best:true,disp:"sim",emoji:"💋",novo:8},
- {cat:"Lábios",nome:"Batom Velvet Nude",marca:"Melú",preco:18.90,promo:true,best:false,disp:"baixo",emoji:"💄",novo:7},
- {cat:"Pele",nome:"Base Skin Glow",marca:"Ruby Rose",preco:29.90,promo:false,best:true,disp:"sim",emoji:"✨",novo:9},
- {cat:"Pele",nome:"Blush Rosé",marca:"Bruna Tavares",preco:54.90,promo:false,best:true,disp:"sim",emoji:"🌸",novo:8},
- {cat:"Pele",nome:"Corretivo Soft",marca:"Max Love",preco:16.90,old:21.90,promo:true,best:false,disp:"baixo",emoji:"✨",novo:6},
- {cat:"Skincare",nome:"Sérum Facial",marca:"Melú",preco:24.90,promo:false,best:true,disp:"sim",emoji:"🧴",novo:9},
- {cat:"Olhos",nome:"Máscara Volume",marca:"Ruby Rose",preco:19.90,promo:true,best:true,disp:"sim",emoji:"👁️",novo:8},
- {cat:"Face",nome:"Iluminador Glow",marca:"Max Love",preco:17.90,promo:false,best:false,disp:"sim",emoji:"✨",novo:7},
- {cat:"Acessórios",nome:"Kit Esponjas",marca:"Melú",preco:15.90,promo:true,best:true,disp:"sim",emoji:"🩷",novo:8},
- {cat:"Corpo",nome:"Body Splash Floral",marca:"Ruby Rose",preco:34.90,promo:false,best:true,disp:"baixo",emoji:"🌷",novo:9}
+ {cat:"Lábios",nome:"Gloss Crystal Shine",marca:"Ruby Rose",preco:14.90,old:19.90,promo:true,best:true,disp:"sim",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
+ {cat:"Lábios",nome:"Lip Tint Rosé",marca:"Max Love",preco:12.90,promo:false,best:true,disp:"sim",emoji:"💋",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
+ {cat:"Lábios",nome:"Batom Velvet Nude",marca:"Melú",preco:18.90,promo:true,best:false,disp:"baixo",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
+ {cat:"Pele",nome:"Base Skin Glow",marca:"Ruby Rose",preco:29.90,promo:false,best:true,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
+ {cat:"Pele",nome:"Blush Rosé",marca:"Bruna Tavares",preco:54.90,promo:false,best:true,disp:"sim",emoji:"🌸",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
+ {cat:"Pele",nome:"Corretivo Soft",marca:"Max Love",preco:16.90,old:21.90,promo:true,best:false,disp:"baixo",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:6},
+ {cat:"Skincare",nome:"Sérum Facial",marca:"Melú",preco:24.90,promo:false,best:true,disp:"sim",emoji:"🧴",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
+ {cat:"Olhos",nome:"Máscara Volume",marca:"Ruby Rose",preco:19.90,promo:true,best:true,disp:"sim",emoji:"👁️",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
+ {cat:"Face",nome:"Iluminador Glow",marca:"Max Love",preco:17.90,promo:false,best:false,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
+ {cat:"Acessórios",nome:"Kit Esponjas",marca:"Melú",preco:15.90,promo:true,best:true,disp:"sim",emoji:"🩷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
+ {cat:"Corpo",nome:"Body Splash Floral",marca:"Ruby Rose",preco:34.90,promo:false,best:true,disp:"baixo",emoji:"🌷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9}
  ];
  let atual="Lábios";
  const money=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
@@ -15195,7 +15223,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const preco=+document.getElementById("fy20Preco").value,marca=document.getElementById("fy20Marca").value,promo=document.getElementById("fy20Promo").value,best=document.getElementById("fy20Best").value,disp=document.getElementById("fy20Disp").value,ord=document.getElementById("fy20Order").value;
   if(preco)a=a.filter(p=>p.preco<=preco);if(marca)a=a.filter(p=>p.marca===marca);if(promo)a=a.filter(p=>p.promo);if(best)a=a.filter(p=>p.best);if(disp)a=a.filter(p=>p.disp===disp);
   a.sort((x,y)=>ord==="menor"?x.preco-y.preco:ord==="maior"?y.preco-x.preco:y.novo-x.novo);
-  document.getElementById("fy20Produtos").innerHTML=a.length?a.map(p=>`<article class="fy20-card">${p.promo?'<span class="fy20-tag">OFERTA</span>':''}<div class="fy20-img">${p.emoji}</div><div class="fy20-info"><span class="fy20-brand">${p.marca}</span><h3>${p.nome}</h3><span class="fy20-price">${money(p.preco)}</span>${p.old?`<span class="fy20-old">${money(p.old)}</span>`:''}<button class="fy20-add">ADICIONAR À SACOLA</button></div></article>`).join(""):'<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
+  document.getElementById("fy20Produtos").innerHTML=a.length?a.map(p=>`<article class="fy20-card">${p.promo?'<span class="fy20-tag">OFERTA</span>':''}<div class="fy20-img"><img src="${p.foto||'https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg'}" alt="${p.nome}" loading="lazy"></div><div class="fy20-info"><span class="fy20-brand">${p.marca}</span><h3>${p.nome}</h3><span class="fy20-price">${money(p.preco)}</span>${p.old?`<span class="fy20-old">${money(p.old)}</span>`:''}<button class="fy20-add">ADICIONAR À SACOLA</button></div></article>`).join(""):'<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
  };
  document.addEventListener("DOMContentLoaded",()=>{
   ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
