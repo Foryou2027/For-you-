@@ -5689,6 +5689,50 @@ body{background:#fff!important;color:#3f2028!important}
 }
 </style>
 
+
+<style id="fy-header-final-fix">
+/* Remove a linha antiga que estava aparecendo cortada acima do banner */
+header .destaques-menu:not(.fy-destaques-loja),
+.header .destaques-menu:not(.fy-destaques-loja){
+  display:none!important;
+}
+
+/* 2ª linha oficial: Destaques da loja */
+.fy-destaques-loja{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:relative!important;
+  z-index:1100!important;
+  width:100%!important;
+  max-width:1250px!important;
+  margin:12px auto 14px!important;
+  padding:0 25px!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:12px!important;
+  overflow:visible!important;
+}
+.fy-destaques-loja .fy-destaque-loja-btn{
+  display:inline-flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+/* Garante espaço entre as categorias e o banner */
+.menu-principal{margin-bottom:0!important}
+.hero{margin-top:0!important}
+
+@media(max-width:600px){
+  .fy-destaques-loja{
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+    padding:3px 15px 10px!important;
+    margin:7px auto 8px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -13756,6 +13800,21 @@ function fyAbrirKitsPromocionais(){
     }
   }catch(e){}
 }
+</script>
+
+
+<script id="fy-header-final-fix-js">
+document.addEventListener("DOMContentLoaded",function(){
+  const menu=document.querySelector(".menu-principal");
+  const destaques=document.querySelector(".fy-destaques-loja");
+  if(menu && destaques){
+    menu.insertAdjacentElement("afterend",destaques);
+  }
+  /* Remove visualmente qualquer segunda faixa antiga duplicada */
+  document.querySelectorAll(".destaques-menu").forEach(function(el){
+    if(!el.classList.contains("fy-destaques-loja")) el.style.display="none";
+  });
+});
 </script>
 
 </body>
