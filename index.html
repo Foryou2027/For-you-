@@ -15662,5 +15662,115 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 
+
+<style id="fy-checkout-entrega-pagamento-premium">
+/* Entrega e pagamento: visual mais elegante e menos "caixa" */
+.checkout-page h2,
+.checkout-container h2,
+.checkout h2{
+  font-size:30px!important;
+  margin:26px 0 14px!important;
+  color:#222!important;
+}
+
+/* opções */
+.delivery-options,.payment-options,
+.opcoes-entrega,.opcoes-pagamento,
+.entrega-opcoes,.pagamento-opcoes{
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr)!important;
+  gap:10px!important;
+}
+.delivery-option,.payment-option,
+.opcao-entrega,.opcao-pagamento{
+  min-height:72px!important;
+  border:1px solid #ece7e8!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  padding:13px!important;
+  transition:.2s ease!important;
+}
+.delivery-option:hover,.payment-option:hover,
+.opcao-entrega:hover,.opcao-pagamento:hover{
+  border-color:#d9cdd0!important;
+  background:#fdfbfb!important;
+}
+.delivery-option.active,.payment-option.active,
+.delivery-option.selected,.payment-option.selected,
+.opcao-entrega.ativa,.opcao-pagamento.ativa{
+  border:1.5px solid #c7aeb5!important;
+  background:#faf6f7!important;
+  box-shadow:0 0 0 3px rgba(199,174,181,.09)!important;
+}
+
+/* revisão mais clean */
+.review-box,.revisao-pedido{
+  background:#faf9f9!important;
+  border:1px solid #ece8e9!important;
+  border-radius:14px!important;
+  padding:18px!important;
+  margin-top:18px!important;
+}
+.review-box h3,.revisao-pedido h3{
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:19px!important;
+  font-weight:400!important;
+  color:#222!important;
+  margin-bottom:6px!important;
+}
+.review-box p,.revisao-pedido p{
+  color:#716a6c!important;
+  font-size:11px!important;
+}
+
+/* botões inferiores */
+.checkout-actions,.acoes-checkout{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:10px!important;
+  margin-top:16px!important;
+}
+.checkout-actions button,.acoes-checkout button{
+  min-height:48px!important;
+  border-radius:12px!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.5px!important;
+}
+.checkout-actions button:first-child,.acoes-checkout button:first-child{
+  background:#fff!important;
+  color:#333!important;
+  border:1px solid #ded8da!important;
+}
+.checkout-actions button:last-child,.acoes-checkout button:last-child{
+  background:#222!important;
+  color:#fff!important;
+  border:1px solid #222!important;
+}
+
+/* remove vinho residual desta região */
+.checkout-page .forma-entrega,
+.checkout-page .pagamento,
+.checkout-page .revisao-pedido,
+.checkout-page .checkout-actions{
+  color:#222!important;
+}
+
+@media(max-width:700px){
+  .delivery-options,.payment-options,
+  .opcoes-entrega,.opcoes-pagamento,
+  .entrega-opcoes,.pagamento-opcoes{
+    grid-template-columns:1fr!important;
+  }
+  .delivery-option,.payment-option,
+  .opcao-entrega,.opcao-pagamento{
+    min-height:64px!important;
+  }
+  .checkout-actions,.acoes-checkout{grid-template-columns:1fr!important}
+  .checkout-page h2,.checkout-container h2,.checkout h2{font-size:25px!important}
+}
+</style>
+
 </body>
 </html>
