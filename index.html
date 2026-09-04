@@ -7218,14 +7218,19 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <main id="loja">
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
+  <div class="home-quick-heading">
+    <small>ENCONTRE SEU FAVORITO</small>
+    <h2>Compre por categoria</h2>
+    <p>Escolha uma categoria e descubra nossos produtos.</p>
+  </div>
   <div class="home-quick-inner">
-    <button onclick="abrirSubmenuHomeFY('labios')"><span>♡</span>Lábios</button>
-    <button onclick="abrirSubmenuHomeFY('pele')"><span>✦</span>Pele</button>
-    <button onclick="abrirSubmenuHomeFY('skincare')"><span>✧</span>Skincare</button>
-    <button onclick="abrirSubmenuHomeFY('olhos')"><span>◌</span>Olhos</button>
-    <button onclick="abrirSubmenuHomeFY('face')"><span>◇</span>Face</button>
-    <button onclick="abrirSubmenuHomeFY('acessorios')"><span>♢</span>Acessórios</button>
-    <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span>Corpo</button>
+    <button onclick="abrirSubmenuHomeFY('labios')"><span>♡</span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
+    <button onclick="abrirSubmenuHomeFY('pele')"><span>✦</span><strong>Pele</strong><small>Base, blush e pó</small></button>
+    <button onclick="abrirSubmenuHomeFY('skincare')"><span>✧</span><strong>Skincare</strong><small>Cuidados diários</small></button>
+    <button onclick="abrirSubmenuHomeFY('olhos')"><span>◌</span><strong>Olhos</strong><small>Máscara e sombras</small></button>
+    <button onclick="abrirSubmenuHomeFY('face')"><span>◇</span><strong>Face</strong><small>Contorno e iluminador</small></button>
+    <button onclick="abrirSubmenuHomeFY('acessorios')"><span>♢</span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
+    <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
   </div>
 </section>
 <!-- FY DESTAQUES LOJA -->
@@ -15891,5 +15896,84 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 
+<style id="fy-categorias-destaque-v1">
+#loja > .home-quick{
+  max-width:1250px!important;
+  margin:34px auto 24px!important;
+  padding:0 25px!important;
+}
+.home-quick-heading{text-align:center;margin:0 auto 22px}
+.home-quick-heading small{display:block;color:#b83f61;font-size:9px;font-weight:800;letter-spacing:2.4px;margin-bottom:7px}
+.home-quick-heading h2{font-family:Georgia,serif;font-size:34px;font-weight:400;color:#351f27;margin:0 0 7px}
+.home-quick-heading p{font-size:11px;color:#8c747c}
+#loja > .home-quick .home-quick-inner{
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  gap:12px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#loja > .home-quick button{
+  position:relative!important;
+  min-height:142px!important;
+  padding:17px 11px!important;
+  border:1.5px solid #edc7d1!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#fff 0%,#fff1f5 100%)!important;
+  color:#552331!important;
+  text-align:left!important;
+  box-shadow:0 8px 22px rgba(130,47,70,.08)!important;
+}
+#loja > .home-quick button span{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:46px!important;
+  height:46px!important;
+  margin:0 0 14px!important;
+  border-radius:15px!important;
+  background:#b83f61!important;
+  color:#fff!important;
+  font-size:21px!important;
+  box-shadow:0 6px 15px rgba(184,63,97,.22)!important;
+}
+#loja > .home-quick button::after{content:"›";position:absolute;right:12px;top:17px;color:#b83f61;font-size:21px;font-weight:400}
+#loja > .home-quick button strong{display:block;font-family:Georgia,serif;font-size:17px;font-weight:400;color:#552331;margin-bottom:5px}
+#loja > .home-quick button small{display:block!important;font-size:9px!important;font-weight:400!important;line-height:1.4!important;letter-spacing:0!important;color:#8d737b!important}
+#loja > .home-quick button:hover{
+  transform:translateY(-4px)!important;
+  border-color:#b83f61!important;
+  background:#fff!important;
+  color:#b83f61!important;
+}
+@media(max-width:700px){
+  #loja > .home-quick{margin:26px auto 18px!important;padding:0 12px!important;overflow:visible!important}
+  .home-quick-heading{margin-bottom:16px;padding:0 8px;text-align:left}
+  .home-quick-heading small{font-size:8px;letter-spacing:2px}
+  .home-quick-heading h2{font-size:28px}
+  .home-quick-heading p{font-size:10px;line-height:1.5}
+  #loja > .home-quick .home-quick-inner{
+    display:flex!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    padding:2px 2px 14px!important;
+    scroll-padding-left:2px!important;
+  }
+  #loja > .home-quick button{
+    flex:0 0 132px!important;
+    width:132px!important;
+    min-width:132px!important;
+    min-height:150px!important;
+    padding:16px 11px!important;
+    border-radius:20px!important;
+  }
+  #loja > .home-quick button span{width:46px!important;height:46px!important;font-size:20px!important;margin:0 0 15px!important}
+  #loja > .home-quick button strong{font-size:18px!important}
+  #loja > .home-quick button small{font-size:10px!important}
+}
+</style>
 </body>
 </html>
