@@ -6803,6 +6803,7 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   overflow:hidden;
   border-radius:22px;
   box-shadow:0 12px 34px rgba(105,39,58,.12);
+  transition:height .45s ease;
 }
 .fy-banner-r10-track{
   display:flex;
@@ -6850,8 +6851,10 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   .fy-banner-r10 a{border-radius:15px;box-shadow:none}
   .fy-banner-r10-viewport{border-radius:15px;box-shadow:0 8px 24px rgba(105,39,58,.10)}
   .fy-banner-r10 img{
-    aspect-ratio:1.35/1;
-    object-position:34% center;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center;
   }
   .fy-banner-r10 a:nth-child(2) img{
     object-fit:contain;
@@ -7171,13 +7174,24 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 (function(){
   const area=document.querySelector('.fy-banner-r10');
   const track=document.getElementById('fyBannerTrack');
+  const viewport=area&&area.querySelector('.fy-banner-r10-viewport');
+  const slides=track?Array.from(track.querySelectorAll('a')):[];
   const dots=Array.from(document.querySelectorAll('.fy-banner-r10-dot'));
-  if(!area||!track||dots.length<2) return;
+  if(!area||!track||!viewport||dots.length<2) return;
   let atual=0, timer;
+  function ajustarAltura(){
+    if(window.innerWidth<=700){
+      const img=slides[atual]&&slides[atual].querySelector('img');
+      if(img) viewport.style.height=img.getBoundingClientRect().height+'px';
+    }else{
+      viewport.style.height='';
+    }
+  }
   function mostrar(indice){
     atual=(indice+dots.length)%dots.length;
     track.style.transform='translateX(-'+(atual*100)+'%)';
     dots.forEach((dot,i)=>dot.classList.toggle('ativo',i===atual));
+    requestAnimationFrame(ajustarAltura);
   }
   function iniciar(){ clearInterval(timer); timer=setInterval(()=>mostrar(atual+1),5000); }
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>{mostrar(i);iniciar();}));
@@ -7185,6 +7199,12 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   area.addEventListener('mouseleave',iniciar);
   area.addEventListener('focusin',()=>clearInterval(timer));
   area.addEventListener('focusout',iniciar);
+  slides.forEach(slide=>{
+    const img=slide.querySelector('img');
+    if(img&&!img.complete) img.addEventListener('load',ajustarAltura);
+  });
+  window.addEventListener('resize',ajustarAltura);
+  ajustarAltura();
   iniciar();
 })();
 </script>
