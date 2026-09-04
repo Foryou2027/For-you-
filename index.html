@@ -6650,7 +6650,46 @@ a{accent-color:var(--fy-rosa)}
 }
 </style>
 
+
+<style id="fy-confianca-politicas">
+.fy-trust-strip{
+  margin:12px 0 2px;padding:11px 12px;border-top:1px solid #eee6e8;
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+  color:#6f686a;font-size:8px;letter-spacing:.2px;
+}
+.fy-trust-strip span{white-space:nowrap}
+.fy-politica-pagina{
+  display:none;position:fixed;inset:0;z-index:7000;background:#fcfafb;overflow:auto;
+}
+.fy-politica-pagina.ativa{display:block}
+.fy-politica-top{
+  position:sticky;top:0;background:#fff;border-bottom:1px solid #eee6e8;
+  min-height:68px;padding:12px 5%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;z-index:2;
+}
+.fy-politica-top h1{font-family:Georgia,serif;font-size:25px;font-weight:400;color:#222!important}
+.fy-politica-top button{border:0;background:none;color:#333;font-size:9px;font-weight:800}
+.fy-politica-top .fechar{justify-self:end;font-size:20px}
+.fy-politica-body{max-width:760px;margin:auto;padding:42px 20px 70px}
+.fy-politica-body h2{font-family:Georgia,serif;font-size:30px;font-weight:400;margin-bottom:12px;color:#222!important}
+.fy-politica-body h3{font-size:11px;margin:24px 0 7px;color:#333!important}
+.fy-politica-body p,.fy-politica-body li{font-size:10px;line-height:1.8;color:#6c6567}
+.fy-politica-body ul{padding-left:18px}
+.fy-footer-links-extra{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;padding:14px 15px}
+.fy-footer-links-extra button{border:0;background:none;color:inherit;font-size:8px;text-decoration:underline;cursor:pointer}
+@media(max-width:600px){.fy-trust-strip{gap:7px 10px}.fy-politica-body{padding:30px 16px 55px}}
+</style>
+
 </head>
+
+
+<div id="fyPoliticaPagina" class="fy-politica-pagina">
+ <div class="fy-politica-top">
+  <button onclick="fyFecharPolitica()">← VOLTAR À LOJA</button>
+  <h1 id="fyPoliticaTitulo">FOR YOU</h1>
+  <button class="fechar" onclick="fyFecharPolitica()">×</button>
+ </div>
+ <div class="fy-politica-body" id="fyPoliticaConteudo"></div>
+</div>
 
 <body>
 <!-- PÁGINA OFERTAS -->
@@ -14927,6 +14966,47 @@ document.addEventListener("DOMContentLoaded", function () {
  };
  document.addEventListener("DOMContentLoaded",montar);
  setTimeout(montar,300);
+})();
+</script>
+
+
+<script id="fy-confianca-politicas-js">
+(function(){
+ const conteudos={
+  trocas:`<h2>Trocas e devoluções</h2><p>Queremos que sua experiência com a FOR YOU seja tranquila também depois da compra.</p><h3>COMO SOLICITAR</h3><p>Entre em contato pelos nossos canais informando o número do pedido e o motivo da solicitação.</p><h3>CONDIÇÕES</h3><p>Os produtos devem ser enviados conforme as condições informadas no atendimento. Antes da publicação oficial da loja, revise esta política de acordo com as regras aplicáveis ao seu negócio.</p>`,
+  entregas:`<h2>Entregas</h2><p>📦 Enviamos pedidos para todo o Brasil.</p><h3>PRAZO</h3><p>O prazo e o valor da entrega são apresentados conforme o CEP informado e passam a contar de acordo com o processamento do pedido.</p><h3>RASTREAMENTO</h3><p>Quando disponível, o código de rastreio poderá ser acompanhado em Minha Conta › Meus Pedidos.</p>`,
+  pagamentos:`<h2>Formas de pagamento</h2><p>As formas disponíveis serão apresentadas no checkout antes da confirmação da compra.</p><h3>SEGURANÇA</h3><p>💳 O pagamento deve ser processado pelo provedor de pagamento integrado à loja. A FOR YOU não deve armazenar dados completos de cartão no navegador.</p>`,
+  privacidade:`<h2>Privacidade</h2><p>Seus dados devem ser utilizados somente para operações necessárias à compra, atendimento, entrega e demais finalidades informadas pela loja.</p><h3>PROTEÇÃO DE DADOS</h3><p>Antes de publicar, esta página deve ser complementada com os dados da empresa, bases e finalidades de tratamento, fornecedores envolvidos e canal para solicitações relacionadas à privacidade.</p>`,
+  contato:`<h2>Contato</h2><p>Precisa falar com a FOR YOU? Aqui ficarão os canais oficiais de atendimento da loja.</p><h3>ATENDIMENTO</h3><p>Cadastre antes da publicação o WhatsApp, e-mail e horário oficial de atendimento.</p>`
+ };
+ window.fyAbrirPolitica=function(tipo){
+   const pg=document.getElementById("fyPoliticaPagina"), body=document.getElementById("fyPoliticaConteudo");
+   if(!pg||!body)return; body.innerHTML=conteudos[tipo]||""; pg.classList.add("ativa");document.body.style.overflow="hidden";
+ };
+ window.fyFecharPolitica=function(){const pg=document.getElementById("fyPoliticaPagina");if(pg)pg.classList.remove("ativa");document.body.style.overflow="";};
+
+ document.addEventListener("DOMContentLoaded",function(){
+   /* confiança perto dos botões de compra */
+   document.querySelectorAll(".adicionar-carrinho,.btn-add,.add,.comprar-agora,.btn-comprar").forEach(function(btn){
+     if(btn.parentElement && !btn.parentElement.querySelector(".fy-trust-strip")){
+       const t=document.createElement("div");t.className="fy-trust-strip";
+       t.innerHTML="<span>🔒 Compra segura</span><span>📦 Enviamos para todo Brasil</span><span>💳 Pagamento protegido</span>";
+       btn.insertAdjacentElement("afterend",t);
+     }
+   });
+
+   /* links institucionais no rodapé */
+   const footer=document.querySelector("footer");
+   if(footer && !footer.querySelector(".fy-footer-links-extra")){
+     const d=document.createElement("div");d.className="fy-footer-links-extra";
+     d.innerHTML=`<button onclick="fyAbrirPolitica('trocas')">Trocas e devoluções</button>
+     <button onclick="fyAbrirPolitica('entregas')">Entregas</button>
+     <button onclick="fyAbrirPolitica('pagamentos')">Formas de pagamento</button>
+     <button onclick="fyAbrirPolitica('privacidade')">Privacidade</button>
+     <button onclick="fyAbrirPolitica('contato')">Contato</button>`;
+     footer.appendChild(d);
+   }
+ });
 })();
 </script>
 
