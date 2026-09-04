@@ -5525,6 +5525,48 @@ body{background:#fff!important;color:#3f2028!important}
 }
 </style>
 
+
+<style id="fy-ofertas-dropdown-css">
+.fy-ofertas-menu{
+  display:flex;justify-content:center;
+  max-width:1250px;margin:10px auto 4px;padding:0 25px;
+  position:relative;z-index:490;
+}
+.fy-ofertas-item{position:relative}
+.fy-ofertas-btn{
+  border:1px solid #e5a7b9;background:#fff5f8;color:#b83f61;
+  padding:10px 20px;border-radius:999px;font-size:10px;font-weight:800;
+  letter-spacing:.8px;box-shadow:0 3px 10px rgba(184,63,97,.08);
+}
+.fy-ofertas-btn:hover,.fy-ofertas-btn.ativo{background:#b83f61;color:#fff;border-color:#b83f61}
+.fy-ofertas-btn .fy-seta{display:inline-block;margin-left:6px;transition:.2s}
+.fy-ofertas-btn.ativo .fy-seta{transform:rotate(180deg)}
+.fy-ofertas-dropdown{
+  display:none;position:absolute;top:calc(100% + 9px);left:50%;
+  transform:translateX(-50%);width:355px;max-width:calc(100vw - 30px);
+  background:#fff;border:1px solid #efc4d0;border-radius:17px;
+  box-shadow:0 18px 45px rgba(53,31,39,.16);overflow:hidden;z-index:1000;
+}
+.fy-ofertas-dropdown.aberto{display:block}
+.fy-ofertas-cabecalho{padding:16px 18px;background:#fff7f9;border-bottom:1px solid #f1dce2}
+.fy-ofertas-cabecalho strong{display:block;font-family:Georgia,serif;font-size:20px;color:#351f27}
+.fy-ofertas-cabecalho small{font-size:8px;color:#a88991;text-transform:uppercase;letter-spacing:1px}
+.fy-ofertas-dropdown>button{
+  width:100%;border:0;border-bottom:1px solid #f7e8ec;background:#fff;
+  padding:13px 16px;display:grid;grid-template-columns:32px 1fr 14px;
+  gap:9px;align-items:center;text-align:left;color:#351f27;
+}
+.fy-ofertas-dropdown>button:hover{background:#fff2f6}
+.fy-ofertas-dropdown>button>span{font-size:19px}
+.fy-ofertas-dropdown>button div strong{display:block;font-size:10px;margin-bottom:3px}
+.fy-ofertas-dropdown>button div small{display:block;font-size:8px;color:#8d7b81}
+.fy-ofertas-dropdown>button>b{font-size:18px;color:#d58ca1}
+@media(max-width:600px){
+ .fy-ofertas-menu{justify-content:flex-start;padding:0 15px;margin-top:6px}
+ .fy-ofertas-dropdown{position:fixed;left:15px;right:15px;top:145px;width:auto;max-width:none;transform:none}
+}
+</style>
+
 </head>
 
 <body>
@@ -5684,34 +5726,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 ========================= -->
 
 
-<!-- CATEGORIA OFERTAS -->
-<section class="ofertas-categoria-home" id="ofertasCategoria">
-  <div class="ofertas-categoria-titulo">
-    <small>OPORTUNIDADES FOR YOU</small>
-    <h2>Ofertas</h2>
-    <p>Encontre descontos especiais e oportunidades por tempo limitado.</p>
-  </div>
 
-  <div class="ofertas-categoria-grid">
-    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('validade')">
-      <span class="oferta-categoria-icone">⏳</span>
-      <strong>Próximo ao vencimento</strong>
-      <small>Produtos selecionados com desconto especial</small>
-    </button>
-
-    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('queima')">
-      <span class="oferta-categoria-icone">🔥</span>
-      <strong>Queima de estoque</strong>
-      <small>Últimas unidades com preços reduzidos</small>
-    </button>
-
-    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('datas')">
-      <span class="oferta-categoria-icone">🎁</span>
-      <strong>Datas comemorativas</strong>
-      <small>Ofertas e kits para momentos especiais</small>
-    </button>
-  </div>
-</section>
 
 <main id="loja">
 
@@ -13332,6 +13347,28 @@ function fyFinalizarCompra(){
     console.error(e);
   }
 }
+</script>
+
+
+<script id="fy-ofertas-dropdown-js">
+function toggleOfertasMenu(e){
+  if(e) e.stopPropagation();
+  const menu=document.getElementById("fyOfertasDropdown");
+  const btn=document.querySelector(".fy-ofertas-btn");
+  if(!menu)return;
+  const abrir=!menu.classList.contains("aberto");
+  menu.classList.toggle("aberto",abrir);
+  if(btn)btn.classList.toggle("ativo",abrir);
+}
+function fecharOfertasMenu(){
+  const menu=document.getElementById("fyOfertasDropdown");
+  const btn=document.querySelector(".fy-ofertas-btn");
+  if(menu)menu.classList.remove("aberto");
+  if(btn)btn.classList.remove("ativo");
+}
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".fy-ofertas-item")) fecharOfertasMenu();
+});
 </script>
 
 </body>
