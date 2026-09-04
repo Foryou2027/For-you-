@@ -15975,5 +15975,66 @@ button,a,input,select{touch-action:manipulation}
   #loja > .home-quick button small{font-size:10px!important}
 }
 </style>
+<style id="fy-categorias-retas-v2">
+#loja > .home-quick{max-width:1000px!important}
+#loja > .home-quick .home-quick-inner{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  border-top:1px solid #e8ccd4!important;
+  border-left:1px solid #e8ccd4!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+#loja > .home-quick button{
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:88px!important;
+  padding:13px 34px 13px 14px!important;
+  border:0!important;
+  border-right:1px solid #e8ccd4!important;
+  border-bottom:1px solid #e8ccd4!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+#loja > .home-quick button span{
+  width:42px!important;
+  height:42px!important;
+  margin:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#b83f61!important;
+  font-size:23px!important;
+  box-shadow:none!important;
+}
+#loja > .home-quick button strong{font-size:18px!important;margin-bottom:4px!important}
+#loja > .home-quick button small{font-size:10px!important}
+#loja > .home-quick button::after{right:12px!important;top:50%!important;transform:translateY(-50%)!important}
+#loja > .home-quick button:hover{background:#fff5f8!important;color:#b83f61!important}
+@media(max-width:700px){
+  #loja > .home-quick .home-quick-inner{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    overflow:hidden!important;
+    padding:0!important;
+  }
+  #loja > .home-quick button{
+    width:auto!important;
+    min-width:0!important;
+    min-height:82px!important;
+    padding:10px 22px 10px 8px!important;
+    grid-template-columns:34px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  #loja > .home-quick button span{width:34px!important;height:34px!important;font-size:20px!important}
+  #loja > .home-quick button strong{font-size:15px!important}
+  #loja > .home-quick button small{font-size:9px!important;line-height:1.3!important}
+  #loja > .home-quick button::after{right:6px!important;font-size:16px!important}
+}
+</style>
 </body>
 </html>
