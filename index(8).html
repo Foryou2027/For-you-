@@ -6803,6 +6803,7 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   overflow:hidden;
   border-radius:22px;
   box-shadow:0 12px 34px rgba(105,39,58,.12);
+  transition:height .45s ease;
 }
 .fy-banner-r10-track{
   display:flex;
@@ -6815,6 +6816,13 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   height:auto;
   aspect-ratio:2.25/1;
   object-fit:cover;
+}
+.fy-banner-r10 a:nth-child(2){
+  background:#fff5f7;
+}
+.fy-banner-r10 a:nth-child(2) img{
+  object-fit:contain;
+  object-position:center;
 }
 .fy-banner-r10-dots{
   display:flex;
@@ -6843,8 +6851,14 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   .fy-banner-r10 a{border-radius:15px;box-shadow:none}
   .fy-banner-r10-viewport{border-radius:15px;box-shadow:0 8px 24px rgba(105,39,58,.10)}
   .fy-banner-r10 img{
-    aspect-ratio:1.35/1;
-    object-position:34% center;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+    object-position:center;
+  }
+  .fy-banner-r10 a:nth-child(2) img{
+    object-fit:contain;
+    object-position:center;
   }
 }
 </style>
@@ -7160,13 +7174,24 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 (function(){
   const area=document.querySelector('.fy-banner-r10');
   const track=document.getElementById('fyBannerTrack');
+  const viewport=area&&area.querySelector('.fy-banner-r10-viewport');
+  const slides=track?Array.from(track.querySelectorAll('a')):[];
   const dots=Array.from(document.querySelectorAll('.fy-banner-r10-dot'));
-  if(!area||!track||dots.length<2) return;
+  if(!area||!track||!viewport||dots.length<2) return;
   let atual=0, timer;
+  function ajustarAltura(){
+    if(window.innerWidth<=700){
+      const img=slides[atual]&&slides[atual].querySelector('img');
+      if(img) viewport.style.height=img.getBoundingClientRect().height+'px';
+    }else{
+      viewport.style.height='';
+    }
+  }
   function mostrar(indice){
     atual=(indice+dots.length)%dots.length;
     track.style.transform='translateX(-'+(atual*100)+'%)';
     dots.forEach((dot,i)=>dot.classList.toggle('ativo',i===atual));
+    requestAnimationFrame(ajustarAltura);
   }
   function iniciar(){ clearInterval(timer); timer=setInterval(()=>mostrar(atual+1),5000); }
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>{mostrar(i);iniciar();}));
@@ -7174,6 +7199,12 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   area.addEventListener('mouseleave',iniciar);
   area.addEventListener('focusin',()=>clearInterval(timer));
   area.addEventListener('focusout',iniciar);
+  slides.forEach(slide=>{
+    const img=slide.querySelector('img');
+    if(img&&!img.complete) img.addEventListener('load',ajustarAltura);
+  });
+  window.addEventListener('resize',ajustarAltura);
+  ajustarAltura();
   iniciar();
 })();
 </script>
@@ -7187,14 +7218,19 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <main id="loja">
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
+  <div class="home-quick-heading">
+    <small>ENCONTRE SEU FAVORITO</small>
+    <h2>Compre por categoria</h2>
+    <p>Escolha uma categoria e descubra nossos produtos.</p>
+  </div>
   <div class="home-quick-inner">
-    <button onclick="abrirSubmenuHomeFY('labios')"><span>♡</span>Lábios</button>
-    <button onclick="abrirSubmenuHomeFY('pele')"><span>✦</span>Pele</button>
-    <button onclick="abrirSubmenuHomeFY('skincare')"><span>✧</span>Skincare</button>
-    <button onclick="abrirSubmenuHomeFY('olhos')"><span>◌</span>Olhos</button>
-    <button onclick="abrirSubmenuHomeFY('face')"><span>◇</span>Face</button>
-    <button onclick="abrirSubmenuHomeFY('acessorios')"><span>♢</span>Acessórios</button>
-    <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span>Corpo</button>
+    <button onclick="abrirSubmenuHomeFY('labios')"><span><img src="categoria-labios.png" alt=""></span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
+    <button onclick="abrirSubmenuHomeFY('pele')"><span><img src="categoria-pele.png" alt=""></span><strong>Pele</strong><small>Base, blush e pó</small></button>
+    <button onclick="abrirSubmenuHomeFY('skincare')"><span><img src="categoria-skincare.png" alt=""></span><strong>Skincare</strong><small>Cuidados diários</small></button>
+    <button onclick="abrirSubmenuHomeFY('olhos')"><span><img src="categoria-olhos.png" alt=""></span><strong>Olhos</strong><small>Máscara e sombras</small></button>
+    <button onclick="abrirSubmenuHomeFY('face')"><span><img src="categoria-face.png" alt=""></span><strong>Face</strong><small>Contorno e iluminador</small></button>
+    <button onclick="abrirSubmenuHomeFY('acessorios')"><span><img src="categoria-acessorios.png" alt=""></span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
+    <button onclick="abrirSubmenuHomeFY('corpo')"><span><img src="categoria-corpo.png" alt=""></span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
   </div>
 </section>
 <!-- FY DESTAQUES LOJA -->
@@ -15860,5 +15896,221 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 
+<style id="fy-categorias-destaque-v1">
+#loja > .home-quick{
+  max-width:1250px!important;
+  margin:34px auto 24px!important;
+  padding:0 25px!important;
+}
+.home-quick-heading{text-align:center;margin:0 auto 22px}
+.home-quick-heading small{display:block;color:#b83f61;font-size:9px;font-weight:800;letter-spacing:2.4px;margin-bottom:7px}
+.home-quick-heading h2{font-family:Georgia,serif;font-size:34px;font-weight:400;color:#351f27;margin:0 0 7px}
+.home-quick-heading p{font-size:11px;color:#8c747c}
+#loja > .home-quick .home-quick-inner{
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  gap:12px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#loja > .home-quick button{
+  position:relative!important;
+  min-height:142px!important;
+  padding:17px 11px!important;
+  border:1.5px solid #edc7d1!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#fff 0%,#fff1f5 100%)!important;
+  color:#552331!important;
+  text-align:left!important;
+  box-shadow:0 8px 22px rgba(130,47,70,.08)!important;
+}
+#loja > .home-quick button span{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:46px!important;
+  height:46px!important;
+  margin:0 0 14px!important;
+  border-radius:15px!important;
+  background:#b83f61!important;
+  color:#fff!important;
+  font-size:21px!important;
+  box-shadow:0 6px 15px rgba(184,63,97,.22)!important;
+}
+#loja > .home-quick button::after{content:"›";position:absolute;right:12px;top:17px;color:#b83f61;font-size:21px;font-weight:400}
+#loja > .home-quick button strong{display:block;font-family:Georgia,serif;font-size:17px;font-weight:400;color:#552331;margin-bottom:5px}
+#loja > .home-quick button small{display:block!important;font-size:9px!important;font-weight:400!important;line-height:1.4!important;letter-spacing:0!important;color:#8d737b!important}
+#loja > .home-quick button:hover{
+  transform:translateY(-4px)!important;
+  border-color:#b83f61!important;
+  background:#fff!important;
+  color:#b83f61!important;
+}
+@media(max-width:700px){
+  #loja > .home-quick{margin:26px auto 18px!important;padding:0 12px!important;overflow:visible!important}
+  .home-quick-heading{margin-bottom:16px;padding:0 8px;text-align:left}
+  .home-quick-heading small{font-size:8px;letter-spacing:2px}
+  .home-quick-heading h2{font-size:28px}
+  .home-quick-heading p{font-size:10px;line-height:1.5}
+  #loja > .home-quick .home-quick-inner{
+    display:flex!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    padding:2px 2px 14px!important;
+    scroll-padding-left:2px!important;
+  }
+  #loja > .home-quick button{
+    flex:0 0 132px!important;
+    width:132px!important;
+    min-width:132px!important;
+    min-height:150px!important;
+    padding:16px 11px!important;
+    border-radius:20px!important;
+  }
+  #loja > .home-quick button span{width:46px!important;height:46px!important;font-size:20px!important;margin:0 0 15px!important}
+  #loja > .home-quick button strong{font-size:18px!important}
+  #loja > .home-quick button small{font-size:10px!important}
+}
+</style>
+<style id="fy-categorias-retas-v2">
+#loja > .home-quick{max-width:1000px!important}
+#loja > .home-quick .home-quick-inner{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  border-top:1px solid #e8ccd4!important;
+  border-left:1px solid #e8ccd4!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+}
+#loja > .home-quick button{
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:88px!important;
+  padding:13px 34px 13px 14px!important;
+  border:0!important;
+  border-right:1px solid #e8ccd4!important;
+  border-bottom:1px solid #e8ccd4!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+#loja > .home-quick button span{
+  width:42px!important;
+  height:42px!important;
+  margin:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#b83f61!important;
+  font-size:23px!important;
+  box-shadow:none!important;
+}
+#loja > .home-quick button strong{font-size:18px!important;margin-bottom:4px!important}
+#loja > .home-quick button small{font-size:10px!important}
+#loja > .home-quick button::after{right:12px!important;top:50%!important;transform:translateY(-50%)!important}
+#loja > .home-quick button:hover{background:#fff5f8!important;color:#b83f61!important}
+@media(max-width:700px){
+  #loja > .home-quick .home-quick-inner{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    overflow:hidden!important;
+    padding:0!important;
+  }
+  #loja > .home-quick button{
+    width:auto!important;
+    min-width:0!important;
+    min-height:82px!important;
+    padding:10px 22px 10px 8px!important;
+    grid-template-columns:34px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  #loja > .home-quick button span{width:34px!important;height:34px!important;font-size:20px!important}
+  #loja > .home-quick button strong{font-size:15px!important}
+  #loja > .home-quick button small{font-size:9px!important;line-height:1.3!important}
+  #loja > .home-quick button::after{right:6px!important;font-size:16px!important}
+}
+</style>
+<style id="fy-categorias-circulares-v3">
+#loja > .home-quick{max-width:1100px!important;margin:34px auto 28px!important}
+.home-quick-heading{text-align:center!important;margin-bottom:24px!important}
+.home-quick-heading p{display:none!important}
+#loja > .home-quick .home-quick-inner{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:16px!important;
+  padding:4px 0 10px!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+#loja > .home-quick button{
+  display:flex!important;
+  flex:0 0 94px!important;
+  width:94px!important;
+  min-width:94px!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:0!important;
+  text-align:center!important;
+}
+#loja > .home-quick button span{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:76px!important;
+  height:76px!important;
+  margin:0 auto 9px!important;
+  border:2px solid #f1c9d4!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,#ffeef3,#f5bfd0)!important;
+  color:#a93255!important;
+  font-size:26px!important;
+  box-shadow:0 9px 22px rgba(137,50,75,.13)!important;
+  transition:.25s ease!important;
+}
+#loja > .home-quick button strong{
+  display:block!important;
+  color:#542b37!important;
+  font-family:Georgia,serif!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  margin:0!important;
+}
+#loja > .home-quick button span img{display:block!important;width:88%!important;height:88%!important;object-fit:contain!important;mix-blend-mode:multiply!important}
+#loja > .home-quick button small,#loja > .home-quick button::after{display:none!important}
+#loja > .home-quick button:hover span{transform:translateY(-4px) scale(1.03)!important;border-color:#b83f61!important;background:linear-gradient(145deg,#ffe5ed,#efa9bd)!important}
+@media(max-width:700px){
+  #loja > .home-quick{padding:0 10px!important;margin:23px auto 16px!important;overflow:hidden!important}
+  .home-quick-heading{text-align:left!important;margin-bottom:15px!important;padding-left:3px!important}
+  .home-quick-heading h2{font-size:25px!important}
+  #loja > .home-quick .home-quick-inner{
+    justify-content:flex-start!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:3px 2px 12px!important;
+    scroll-snap-type:x proximity!important;
+    scrollbar-width:none!important;
+  }
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
+  #loja > .home-quick button{flex:0 0 68px!important;width:68px!important;min-width:68px!important;scroll-snap-align:start!important}
+  #loja > .home-quick button span{width:58px!important;height:58px!important;font-size:21px!important;margin-bottom:7px!important;border-width:1.5px!important}
+  #loja > .home-quick button strong{font-size:12px!important}
+}
+</style>
 </body>
 </html>
