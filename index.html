@@ -16036,5 +16036,79 @@ button,a,input,select{touch-action:manipulation}
   #loja > .home-quick button::after{right:6px!important;font-size:16px!important}
 }
 </style>
+<style id="fy-categorias-circulares-v3">
+#loja > .home-quick{max-width:1100px!important;margin:34px auto 28px!important}
+.home-quick-heading{text-align:center!important;margin-bottom:24px!important}
+.home-quick-heading p{display:none!important}
+#loja > .home-quick .home-quick-inner{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:22px!important;
+  padding:4px 0 10px!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+#loja > .home-quick button{
+  display:flex!important;
+  flex:0 0 108px!important;
+  width:108px!important;
+  min-width:108px!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:0!important;
+  text-align:center!important;
+}
+#loja > .home-quick button span{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:86px!important;
+  height:86px!important;
+  margin:0 auto 11px!important;
+  border:2px solid #f1c9d4!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,#ffeef3,#f5bfd0)!important;
+  color:#a93255!important;
+  font-size:29px!important;
+  box-shadow:0 9px 22px rgba(137,50,75,.13)!important;
+  transition:.25s ease!important;
+}
+#loja > .home-quick button strong{
+  display:block!important;
+  color:#542b37!important;
+  font-family:Georgia,serif!important;
+  font-size:15px!important;
+  font-weight:400!important;
+  margin:0!important;
+}
+#loja > .home-quick button small,#loja > .home-quick button::after{display:none!important}
+#loja > .home-quick button:hover span{transform:translateY(-4px) scale(1.03)!important;border-color:#b83f61!important;background:linear-gradient(145deg,#ffe5ed,#efa9bd)!important}
+@media(max-width:700px){
+  #loja > .home-quick{padding:0 12px!important;margin:27px auto 20px!important;overflow:hidden!important}
+  .home-quick-heading{text-align:left!important;margin-bottom:18px!important;padding-left:3px!important}
+  #loja > .home-quick .home-quick-inner{
+    justify-content:flex-start!important;
+    gap:15px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:3px 2px 15px!important;
+    scroll-snap-type:x proximity!important;
+    scrollbar-width:none!important;
+  }
+  #loja > .home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
+  #loja > .home-quick button{flex:0 0 82px!important;width:82px!important;min-width:82px!important;scroll-snap-align:start!important}
+  #loja > .home-quick button span{width:72px!important;height:72px!important;font-size:25px!important;margin-bottom:9px!important}
+  #loja > .home-quick button strong{font-size:13px!important}
+}
+</style>
 </body>
 </html>
