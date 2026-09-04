@@ -14088,5 +14088,45 @@ function fyFecharPaginaDestaque(id){
 }
 </script>
 
+
+<script id="fy-carrinho-direto-final">
+document.addEventListener("DOMContentLoaded", function () {
+  const seletores = [
+    ".carrinho-icon",
+    "[data-carrinho]",
+    "a[href='#carrinho']",
+    "button[aria-label*='carrinho' i]",
+    "button[title*='carrinho' i]"
+  ];
+
+  document.querySelectorAll(seletores.join(",")).forEach(function(el){
+    el.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      /* Fecha qualquer carrinho lateral antigo */
+      const lateral = document.querySelector(".carrinho");
+      const overlay = document.querySelector(".overlay");
+      if(lateral) lateral.classList.remove("aberto");
+      if(overlay) overlay.classList.remove("ativo");
+
+      /* Vai direto para a página Minha Sacola */
+      if(typeof fyAbrirCarrinhoPagina === "function"){
+        fyAbrirCarrinhoPagina();
+      } else {
+        const pagina = document.getElementById("fyCarrinhoPagina");
+        if(pagina){
+          pagina.classList.add("ativa");
+          pagina.setAttribute("aria-hidden","false");
+          document.body.style.overflow="hidden";
+          if(typeof fyRenderCarrinhoPagina === "function") fyRenderCarrinhoPagina();
+        }
+      }
+      return false;
+    };
+  });
+});
+</script>
+
 </body>
 </html>
