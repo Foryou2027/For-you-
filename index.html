@@ -5398,6 +5398,29 @@ body{background:#fff!important;color:#3f2028!important}
 .menu-principal > .busca .busca-linha:focus-within{border-color:#e9a9ba!important;box-shadow:0 0 0 4px rgba(255,95,134,.07)!important;}
 
 </style>
+
+<style>
+.ofertas-categoria-home{padding:55px 5%;background:#fff8fa}
+.ofertas-categoria-titulo{text-align:center;max-width:700px;margin:0 auto 28px}
+.ofertas-categoria-titulo small{color:#a88955;font-size:9px;font-weight:700;letter-spacing:2.5px}
+.ofertas-categoria-titulo h2{font-family:Georgia,serif;font-size:42px;font-weight:400;color:#351f27;margin:8px 0}
+.ofertas-categoria-titulo p{font-size:11px;color:#776a6f}
+.ofertas-categoria-grid{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.oferta-categoria-card{min-height:155px;border:1px solid #efc4d0;border-radius:20px;background:#fff;padding:24px 18px;text-align:center;transition:.22s;box-shadow:0 6px 20px rgba(53,31,39,.05)}
+.oferta-categoria-card:hover{transform:translateY(-4px);border-color:#e91e63;box-shadow:0 12px 28px rgba(233,30,99,.12)}
+.oferta-categoria-icone{display:flex;width:48px;height:48px;margin:0 auto 12px;align-items:center;justify-content:center;border-radius:50%;background:#fff0f4;font-size:22px}
+.oferta-categoria-card strong{display:block;font-family:Georgia,serif;font-size:18px;color:#351f27;margin-bottom:7px}
+.oferta-categoria-card small{display:block;font-size:9px;line-height:1.5;color:#8a777d}
+@media(max-width:700px){
+ .ofertas-categoria-home{padding:38px 15px}
+ .ofertas-categoria-titulo h2{font-size:34px}
+ .ofertas-categoria-grid{grid-template-columns:1fr;gap:10px}
+ .oferta-categoria-card{min-height:auto;padding:18px 15px;display:grid;grid-template-columns:48px 1fr;column-gap:12px;text-align:left;align-items:center}
+ .oferta-categoria-icone{grid-row:1/3;margin:0}
+ .oferta-categoria-card strong{margin:0;font-size:16px}
+}
+</style>
+
 </head>
 
 <body>
@@ -5555,6 +5578,36 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <!-- =========================
      LOJA PRINCIPAL
 ========================= -->
+
+
+<!-- CATEGORIA OFERTAS -->
+<section class="ofertas-categoria-home" id="ofertasCategoria">
+  <div class="ofertas-categoria-titulo">
+    <small>OPORTUNIDADES FOR YOU</small>
+    <h2>Ofertas</h2>
+    <p>Encontre descontos especiais e oportunidades por tempo limitado.</p>
+  </div>
+
+  <div class="ofertas-categoria-grid">
+    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('validade')">
+      <span class="oferta-categoria-icone">⏳</span>
+      <strong>Próximo ao vencimento</strong>
+      <small>Produtos selecionados com desconto especial</small>
+    </button>
+
+    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('queima')">
+      <span class="oferta-categoria-icone">🔥</span>
+      <strong>Queima de estoque</strong>
+      <small>Últimas unidades com preços reduzidos</small>
+    </button>
+
+    <button type="button" class="oferta-categoria-card" onclick="abrirOfertaEspecial('datas')">
+      <span class="oferta-categoria-icone">🎁</span>
+      <strong>Datas comemorativas</strong>
+      <small>Ofertas e kits para momentos especiais</small>
+    </button>
+  </div>
+</section>
 
 <main id="loja">
 
@@ -13118,6 +13171,24 @@ function limparFiltroSubcategoria(){
   }
 }
 </style>
+
+
+<script>
+function abrirOfertaEspecial(tipo){
+  const termos = {
+    validade: ['validade','próximo','vencimento'],
+    queima: ['queima','estoque','últimas'],
+    datas: ['comemorativa','presente','kit']
+  };
+  const campo = document.querySelector('.busca input, #buscaInput, input[type="search"]');
+  if(campo){
+    campo.value = termos[tipo][0];
+    campo.dispatchEvent(new Event('input', {bubbles:true}));
+  }
+  const alvo = document.querySelector('.ofertas, #ofertas, .produtos');
+  if(alvo) alvo.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
 
 </body>
 </html>
