@@ -5659,6 +5659,36 @@ body{background:#fff!important;color:#3f2028!important}
 }
 </style>
 
+
+<style id="fy-destaques-loja-css">
+.fy-destaques-loja{
+  max-width:1250px;margin:11px auto 5px;padding:0 25px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  position:relative;z-index:920;
+}
+.fy-destaques-loja .fy-ofertas-item{position:relative}
+.fy-destaque-loja-btn{
+  min-height:39px;padding:10px 20px;border-radius:999px;
+  border:1px solid #d6b06a;background:#fffaf0;color:#9a7738;
+  font-size:9px;font-weight:800;letter-spacing:.8px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  white-space:nowrap;transition:.2s;
+}
+.fy-destaque-loja-btn:hover{background:#a88955;color:#fff;border-color:#a88955}
+.fy-destaques-loja .fy-ofertas-btn{
+  border-color:#e5a7b9;background:#fff3f6;color:#b83f61;
+}
+.fy-destaques-loja .fy-ofertas-btn:hover,
+.fy-destaques-loja .fy-ofertas-btn.ativo{
+  background:#b83f61;color:#fff;border-color:#b83f61;
+}
+@media(max-width:600px){
+ .fy-destaques-loja{justify-content:flex-start;overflow-x:auto;padding:2px 15px 8px;margin-top:7px;scrollbar-width:none}
+ .fy-destaques-loja::-webkit-scrollbar{display:none}
+ .fy-destaque-loja-btn{padding:10px 16px}
+}
+</style>
+
 </head>
 
 <body>
@@ -5757,12 +5787,14 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
   <a href="#marcas">Marcas</a>
 </div>
 
-<!-- OFERTAS VISÍVEL ABAIXO DAS CATEGORIAS -->
-<div class="fy-ofertas-faixa">
+
+<!-- FY DESTAQUES LOJA -->
+<div class="fy-destaques-loja">
   <div class="fy-ofertas-item">
-    <button type="button" class="fy-ofertas-btn" onclick="toggleOfertasMenu(event)">
-      🏷️ <span>OFERTAS</span> <span class="fy-seta">⌄</span>
+    <button type="button" class="fy-destaque-loja-btn fy-ofertas-btn" onclick="toggleOfertasMenu(event)">
+      🏷️ <span>Ofertas</span> <span class="fy-seta">⌄</span>
     </button>
+
     <div class="fy-ofertas-dropdown" id="fyOfertasDropdown">
       <div class="fy-ofertas-cabecalho">
         <strong>Ofertas</strong>
@@ -5779,7 +5811,12 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
       </button>
     </div>
   </div>
+
+  <button type="button" class="fy-destaque-loja-btn" onclick="fyAbrirKitsPromocionais()">
+    🎁 <span>Kits Promocionais</span>
+  </button>
 </div>
+<!-- /FY DESTAQUES LOJA -->
 
 <div class="busca">
 
@@ -13701,6 +13738,24 @@ document.addEventListener("DOMContentLoaded",()=>{
     el.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();fyAbrirCarrinhoPagina();},true);
   });
 });
+</script>
+
+
+<script id="fy-kits-link-js">
+function fyAbrirKitsPromocionais(){
+  try{
+    if(typeof abrirPagina==="function"){ abrirPagina("kits"); return; }
+    if(typeof mostrarPagina==="function"){ mostrarPagina("kits"); return; }
+    const alvo=document.querySelector("#kits,.kits,[data-secao='kits']");
+    if(alvo){ alvo.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+    const campo=document.querySelector(".busca input,#buscaInput,input[type='search']");
+    if(campo){
+      campo.value="kit";
+      campo.dispatchEvent(new Event("input",{bubbles:true}));
+      campo.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+  }catch(e){}
+}
 </script>
 
 </body>
