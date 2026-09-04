@@ -15281,5 +15281,168 @@ document.addEventListener("DOMContentLoaded", function () {
 #paginaCarrinhoV17 .fy18-product button{background:#f1f1ee!important;color:#202020!important}
 </style>
 
+
+<style id="fy-mobile-profissional-v21">
+/* ===== FOR YOU • MOBILE PROFISSIONAL ===== */
+html,body{max-width:100%;overflow-x:hidden}
+button,a,input,select{touch-action:manipulation}
+@media(max-width:700px){
+  body{font-size:14px!important}
+
+  /* topo */
+  .topo{padding:7px 10px!important;font-size:8px!important;letter-spacing:.8px!important}
+  header,.header{position:relative!important}
+  .header-main,.header-content,.cabecalho{
+    padding-left:12px!important;padding-right:12px!important;
+  }
+  .logo h1,.logo,.brand-logo{
+    font-size:27px!important;letter-spacing:3px!important;
+  }
+
+  /* busca: largura total e fácil de tocar */
+  .busca,.search-box,.busca-container{
+    width:calc(100% - 24px)!important;max-width:none!important;margin:10px 12px!important;
+  }
+  .busca input,#buscaInput,input[type="search"]{
+    height:46px!important;font-size:16px!important;border-radius:12px!important;
+  }
+
+  /* categorias em rolagem horizontal — sem quebrar o layout */
+  .home-quick{
+    display:flex!important;grid-template-columns:none!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    gap:9px!important;padding:5px 12px 10px!important;
+    scroll-snap-type:x proximity!important;scrollbar-width:none!important;
+  }
+  .home-quick::-webkit-scrollbar{display:none}
+  .home-quick>*{
+    flex:0 0 92px!important;min-width:92px!important;scroll-snap-align:start!important;
+  }
+
+  /* Ofertas / Kits */
+  .fy-destaques-loja{
+    display:flex!important;width:100%!important;overflow-x:auto!important;
+    justify-content:flex-start!important;gap:9px!important;padding:2px 12px 10px!important;
+    scrollbar-width:none!important;
+  }
+  .fy-destaques-loja::-webkit-scrollbar{display:none}
+  .fy-destaques-loja .fy-destaque-loja-btn,
+  .fy-destaques-loja .fy-ofertas-btn{
+    flex:0 0 auto!important;min-height:42px!important;padding:0 17px!important;
+  }
+
+  /* hero */
+  .hero,.hero-image-final,.banner-principal{
+    min-height:300px!important;border-radius:0!important;
+  }
+  .hero h1,.hero h2,.hero-image-final h1,.hero-image-final h2{
+    font-size:30px!important;line-height:1.08!important;
+  }
+  .hero p,.hero-image-final p{font-size:11px!important;line-height:1.5!important}
+
+  /* grids de produtos: 2 colunas */
+  .produtos,.products-grid,.grid-produtos,.vitrine-produtos{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;padding-left:12px!important;padding-right:12px!important;
+  }
+  .produto-card,.product-card,.card-produto,.produto{
+    min-width:0!important;border-radius:13px!important;
+  }
+  .produto-card img,.product-card img,.card-produto img,.produto img{
+    width:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;
+  }
+  .produto-card h3,.product-card h3,.card-produto h3,.produto h3{
+    font-size:13px!important;line-height:1.25!important;
+  }
+
+  /* botões grandes para toque */
+  .adicionar-carrinho,.btn-add,.add,.btn-comprar,.comprar-agora{
+    min-height:44px!important;font-size:8px!important;
+  }
+
+  /* filtros: barra horizontal compacta */
+  .fy20-wrap{padding:14px 10px 45px!important}
+  .fy20-filterbar{
+    display:flex!important;overflow-x:auto!important;gap:8px!important;
+    padding:10px!important;border-radius:12px!important;scrollbar-width:none!important;
+  }
+  .fy20-filterbar::-webkit-scrollbar{display:none}
+  .fy20-filterbar>div{flex:0 0 145px!important}
+  .fy20-filterbar select{height:43px!important;font-size:12px!important}
+  .fy20-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .fy20-img{aspect-ratio:1/1!important}
+  .fy20-info h3{font-size:14px!important}
+  .fy20-add{min-height:42px!important}
+
+  /* carrinho real: uma coluna */
+  #paginaCarrinhoV17{overflow-x:hidden!important}
+  #paginaCarrinhoV17 .fy17-layout,
+  #paginaCarrinhoV17 .fy17-cart-layout,
+  #paginaCarrinhoV17 .fy17-grid{
+    display:grid!important;grid-template-columns:1fr!important;gap:12px!important;
+    padding-left:10px!important;padding-right:10px!important;
+  }
+  #paginaCarrinhoV17 .fy17-cart-summary,
+  #paginaCarrinhoV17 .fy17-summary{
+    position:static!important;width:100%!important;
+  }
+  #paginaCarrinhoV17 .fy17-cart-item{
+    grid-template-columns:72px minmax(0,1fr)!important;gap:10px!important;
+  }
+  #paginaCarrinhoV17 .fy17-cart-item img{width:72px!important;height:82px!important;object-fit:cover!important}
+  #paginaCarrinhoV17 .fy17-checkout,
+  #paginaCarrinhoV17 .finalizar-compra{min-height:50px!important;font-size:9px!important}
+
+  /* confiança: 3 itens legíveis */
+  .fy-trust-strip{
+    display:grid!important;grid-template-columns:1fr!important;text-align:left!important;
+    gap:7px!important;padding:11px 4px!important;
+  }
+
+  /* páginas internas */
+  .fy-pd-topo,.fy-politica-top,.fy19-top,.fy20-cat-top{
+    min-height:60px!important;padding:10px 12px!important;
+  }
+  .fy-pd-topo h1,.fy-politica-top h1,.fy19-top h1,.fy20-cat-top h1{
+    font-size:21px!important;text-align:center!important;
+  }
+  .fy-pd-conteudo,.fy-politica-body,.fy19-wrap{padding-left:12px!important;padding-right:12px!important}
+  .fy-pd-opcoes{grid-template-columns:1fr!important}
+
+  /* checkout */
+  .checkout-layout{grid-template-columns:1fr!important;padding:0 10px!important}
+  .checkout-etapas{
+    display:flex!important;overflow-x:auto!important;gap:6px!important;scrollbar-width:none!important;
+  }
+  .checkout-etapas::-webkit-scrollbar{display:none}
+  .checkout-etapa{flex:0 0 105px!important;min-height:48px!important}
+  .checkout-form{grid-template-columns:1fr!important}
+  .checkout-form input,.checkout-form select{font-size:16px!important;min-height:46px!important}
+  .pagamento-opcoes{grid-template-columns:1fr!important}
+
+  /* rodapé */
+  footer{padding-left:14px!important;padding-right:14px!important}
+  .fy-footer-links-extra{
+    display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;text-align:left!important;
+  }
+  .fy-footer-links-extra button{text-align:left!important;min-height:36px!important}
+
+  /* evita elementos fixos cobrindo conteúdo */
+  .whatsapp,.whatsapp-float,.btn-whatsapp{
+    right:12px!important;bottom:14px!important;transform:scale(.9)!important;transform-origin:bottom right!important;
+  }
+}
+
+/* celulares bem pequenos */
+@media(max-width:380px){
+  .fy20-products,.produtos,.products-grid,.grid-produtos,.vitrine-produtos{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;
+  }
+  .home-quick>*{flex-basis:84px!important;min-width:84px!important}
+  .fy20-info{padding:9px!important}
+  .fy20-info h3{font-size:12px!important}
+}
+</style>
+
 </body>
 </html>
