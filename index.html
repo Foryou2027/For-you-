@@ -6037,6 +6037,138 @@ footer{background:var(--fy-preto)!important;color:#fff!important}
 a{accent-color:var(--fy-rosa)}
 </style>
 
+
+<style id="fy-destaques-em-lista">
+/* Ofertas e Kits agora aparecem como uma lista elegante, não como botões arredondados */
+.fy-destaques-loja{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:0!important;
+  background:#fff!important;
+  border-top:1px solid #f1e4e8!important;
+  border-bottom:1px solid #f1e4e8!important;
+  width:100%!important;
+  max-width:none!important;
+  padding:0!important;
+  margin:10px 0 16px!important;
+}
+
+.fy-destaques-loja .fy-ofertas-item{
+  position:relative!important;
+}
+
+.fy-destaques-loja .fy-destaque-loja-btn,
+.fy-destaques-loja .fy-ofertas-btn{
+  background:transparent!important;
+  color:#171717!important;
+  border:0!important;
+  border-radius:0!important;
+  min-height:46px!important;
+  padding:0 28px!important;
+  box-shadow:none!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.5px!important;
+  text-transform:none!important;
+}
+
+.fy-destaques-loja .fy-ofertas-item:first-child{
+  border-right:1px solid #eadde1!important;
+}
+
+.fy-destaques-loja .fy-destaque-loja-btn:hover,
+.fy-destaques-loja .fy-ofertas-btn:hover,
+.fy-destaques-loja .fy-ofertas-btn.ativo{
+  background:#fff4f7!important;
+  color:#d98ca3!important;
+}
+
+/* Página de Ofertas: opções em LISTA */
+#fyPaginaOfertas .fy-pd-opcoes{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+  max-width:780px!important;
+  margin:0 auto!important;
+}
+
+#fyPaginaOfertas .fy-pd-card{
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:52px 1fr auto!important;
+  grid-template-rows:auto auto!important;
+  column-gap:16px!important;
+  align-items:center!important;
+  text-align:left!important;
+  padding:17px 20px!important;
+  border-radius:14px!important;
+  background:#fff!important;
+}
+
+#fyPaginaOfertas .fy-pd-card > span{
+  grid-row:1 / 3!important;
+  width:48px!important;
+  height:48px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#fff4f7!important;
+  border-radius:50%!important;
+  font-size:21px!important;
+}
+
+#fyPaginaOfertas .fy-pd-card > strong{
+  margin:0 0 3px!important;
+  font-size:17px!important;
+}
+
+#fyPaginaOfertas .fy-pd-card > small{
+  font-size:9px!important;
+}
+
+#fyPaginaOfertas .fy-pd-card > button{
+  grid-column:3!important;
+  grid-row:1 / 3!important;
+  margin:0!important;
+  min-width:110px!important;
+}
+
+/* Kits: produtos também podem ser apresentados verticalmente */
+#fyPaginaKits #fyKitsConteudo .produtos{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:12px!important;
+  max-width:780px!important;
+  margin:0 auto!important;
+}
+
+@media(max-width:600px){
+  .fy-destaques-loja{
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+  }
+  .fy-destaques-loja .fy-destaque-loja-btn,
+  .fy-destaques-loja .fy-ofertas-btn{
+    padding:0 18px!important;
+    min-height:44px!important;
+  }
+  #fyPaginaOfertas .fy-pd-card{
+    grid-template-columns:45px 1fr!important;
+    padding:15px!important;
+  }
+  #fyPaginaOfertas .fy-pd-card > span{
+    width:42px!important;height:42px!important;
+  }
+  #fyPaginaOfertas .fy-pd-card > button{
+    grid-column:2!important;
+    grid-row:3!important;
+    justify-self:start!important;
+    margin-top:10px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
