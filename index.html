@@ -5733,6 +5733,59 @@ header .destaques-menu:not(.fy-destaques-loja),
 }
 </style>
 
+
+<style id="fy-categorias-destaques-definitivo">
+/* Impede os menus antigos de categorias de aparecerem cortados sobre o banner */
+.category-dropdown-store{
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.category-dropdown-store .dropdown:not(.aberto){
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+/* A 2ª linha fica exatamente abaixo dos cards de categorias */
+#loja > .home-quick + .fy-destaques-loja{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:min(1040px,calc(100% - 32px))!important;
+  margin:10px auto 18px!important;
+  padding:0!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:12px!important;
+  position:relative!important;
+  z-index:120!important;
+  background:#fff8fa!important;
+}
+#loja > .home-quick + .fy-destaques-loja .fy-destaque-loja-btn{
+  display:inline-flex!important;
+  min-height:40px!important;
+}
+
+/* Banner começa somente depois da segunda linha */
+#loja > .fy-destaques-loja + .hero-image-final{
+  margin-top:0!important;
+}
+
+@media(max-width:600px){
+  #loja > .home-quick + .fy-destaques-loja{
+    width:100%!important;
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+    padding:2px 14px 9px!important;
+    margin:5px auto 10px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -5832,35 +5885,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 </div>
 
 
-<!-- FY DESTAQUES LOJA -->
-<div class="fy-destaques-loja">
-  <div class="fy-ofertas-item">
-    <button type="button" class="fy-destaque-loja-btn fy-ofertas-btn" onclick="toggleOfertasMenu(event)">
-      🏷️ <span>Ofertas</span> <span class="fy-seta">⌄</span>
-    </button>
 
-    <div class="fy-ofertas-dropdown" id="fyOfertasDropdown">
-      <div class="fy-ofertas-cabecalho">
-        <strong>Ofertas</strong>
-        <small>Escolha uma opção</small>
-      </div>
-      <button type="button" onclick="abrirOfertaEspecial('validade');fecharOfertasMenu()">
-        <span>⏳</span><div><strong>Próximo ao vencimento</strong><small>Produtos selecionados com desconto</small></div><b>›</b>
-      </button>
-      <button type="button" onclick="abrirOfertaEspecial('queima');fecharOfertasMenu()">
-        <span>🔥</span><div><strong>Queima de estoque</strong><small>Últimas unidades e preços especiais</small></div><b>›</b>
-      </button>
-      <button type="button" onclick="abrirOfertaEspecial('datas');fecharOfertasMenu()">
-        <span>🎁</span><div><strong>Datas comemorativas</strong><small>Promoções e kits especiais</small></div><b>›</b>
-      </button>
-    </div>
-  </div>
-
-  <button type="button" class="fy-destaque-loja-btn" onclick="fyAbrirKitsPromocionais()">
-    🎁 <span>Kits Promocionais</span>
-  </button>
-</div>
-<!-- /FY DESTAQUES LOJA -->
 
 <div class="busca">
 
@@ -5988,6 +6013,36 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
     <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span>Corpo</button>
   </div>
 </section>
+<!-- FY DESTAQUES LOJA -->
+<div class="fy-destaques-loja">
+  <div class="fy-ofertas-item">
+    <button type="button" class="fy-destaque-loja-btn fy-ofertas-btn" onclick="toggleOfertasMenu(event)">
+      🏷️ <span>Ofertas</span> <span class="fy-seta">⌄</span>
+    </button>
+
+    <div class="fy-ofertas-dropdown" id="fyOfertasDropdown">
+      <div class="fy-ofertas-cabecalho">
+        <strong>Ofertas</strong>
+        <small>Escolha uma opção</small>
+      </div>
+      <button type="button" onclick="abrirOfertaEspecial('validade');fecharOfertasMenu()">
+        <span>⏳</span><div><strong>Próximo ao vencimento</strong><small>Produtos selecionados com desconto</small></div><b>›</b>
+      </button>
+      <button type="button" onclick="abrirOfertaEspecial('queima');fecharOfertasMenu()">
+        <span>🔥</span><div><strong>Queima de estoque</strong><small>Últimas unidades e preços especiais</small></div><b>›</b>
+      </button>
+      <button type="button" onclick="abrirOfertaEspecial('datas');fecharOfertasMenu()">
+        <span>🎁</span><div><strong>Datas comemorativas</strong><small>Promoções e kits especiais</small></div><b>›</b>
+      </button>
+    </div>
+  </div>
+
+  <button type="button" class="fy-destaque-loja-btn" onclick="fyAbrirKitsPromocionais()">
+    🎁 <span>Kits Promocionais</span>
+  </button>
+</div>
+<!-- /FY DESTAQUES LOJA -->
+
 
 <section class="hero-image-final" aria-label="Beleza que realça quem você é">
   <img src="banner-for-you.png" alt="Beleza que realça quem você é. Produtos selecionados com amor para o seu dia a dia.">
@@ -13803,16 +13858,21 @@ function fyAbrirKitsPromocionais(){
 </script>
 
 
-<script id="fy-header-final-fix-js">
+
+
+
+<script id="fy-posicao-destaques-final">
 document.addEventListener("DOMContentLoaded",function(){
-  const menu=document.querySelector(".menu-principal");
+  const categorias=document.querySelector("#loja > .home-quick");
   const destaques=document.querySelector(".fy-destaques-loja");
-  if(menu && destaques){
-    menu.insertAdjacentElement("afterend",destaques);
+  if(categorias && destaques && categorias.nextElementSibling!==destaques){
+    categorias.insertAdjacentElement("afterend",destaques);
   }
-  /* Remove visualmente qualquer segunda faixa antiga duplicada */
-  document.querySelectorAll(".destaques-menu").forEach(function(el){
-    if(!el.classList.contains("fy-destaques-loja")) el.style.display="none";
+  document.querySelectorAll(".category-dropdown-store .dropdown").forEach(function(menu){
+    if(!menu.classList.contains("aberto")){
+      menu.style.display="none";
+      menu.style.visibility="hidden";
+    }
   });
 });
 </script>
