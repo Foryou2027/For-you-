@@ -5421,6 +5421,110 @@ body{background:#fff!important;color:#3f2028!important}
 }
 </style>
 
+
+<style id="fy-cart-upgrade">
+/* ===== FOR YOU • SACOLA PREMIUM ===== */
+.carrinho{
+  width:min(470px,100%);
+  box-shadow:-18px 0 55px rgba(53,31,39,.16);
+}
+.carrinho-header{
+  padding:20px 22px 16px;
+  background:linear-gradient(180deg,#fff8fa 0%,#fff 100%);
+}
+.carrinho-header h2{
+  font-size:25px;
+  font-weight:400;
+}
+.carrinho-header h2::after{
+  content:"Confira seus produtos antes de finalizar";
+  display:block;
+  margin-top:4px;
+  font-family:Arial,sans-serif;
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:#a48d95;
+}
+.fechar{
+  width:38px;height:38px;border-radius:50%;
+  background:#fff!important;border:1px solid #ead9de!important;
+  font-size:20px;line-height:1;
+}
+.itens{padding:12px 20px}
+.item{
+  gap:13px;padding:15px 0;align-items:flex-start;
+}
+.item-img{
+  width:78px;height:88px;border-radius:12px;overflow:hidden;
+  border:1px solid #f0dfe4;background:#fff8fa;
+}
+.item-img img{width:100%;height:100%;object-fit:cover}
+.item-dados strong{font-size:16px;line-height:1.25}
+.item-preco{font-size:13px;margin:7px 0}
+.quantidade{
+  width:max-content;border:1px solid #ead9de;border-radius:999px;
+  padding:2px;background:#fff;
+}
+.quantidade button{
+  width:28px;height:28px;border:0;border-radius:50%;
+  background:#fff8fa;font-size:14px;
+}
+.quantidade button:hover{background:#f8e4e9;color:#b83f61}
+.remover{
+  margin-top:8px;color:#a06f7e;text-decoration:underline;
+  text-underline-offset:2px;font-size:8px;
+}
+.frete-gratis{padding:14px 20px;background:#fff8fa}
+.frete-gratis p{font-size:9px;line-height:1.45;color:#65555b}
+.barra{height:8px;background:#f0dfe4}
+.barra-progresso{background:linear-gradient(90deg,#d65b7d,#b83f61)}
+.frete,.cupom,.resumo{padding-left:20px;padding-right:20px}
+.cep-linha input,.cupom input{
+  border-radius:10px 0 0 10px;outline:none;
+}
+.cep-linha button,.cupom button{
+  border-radius:0 10px 10px 0;background:#b83f61;
+}
+.entrega{border-radius:10px}
+.resumo{
+  box-shadow:0 -8px 24px rgba(53,31,39,.05);
+  padding-top:17px;padding-bottom:18px;
+}
+.resumo .total{
+  padding-top:10px;border-top:1px dashed #e7d3d9;
+  font-size:18px;
+}
+.fy-finalizar-compra{
+  width:100%;min-height:50px;margin-top:12px;border:0;border-radius:12px;
+  background:#351f27;color:#fff;font-size:10px;font-weight:800;
+  letter-spacing:1.1px;text-transform:uppercase;
+  box-shadow:0 8px 20px rgba(53,31,39,.16);
+}
+.fy-finalizar-compra:hover{transform:translateY(-1px)}
+.fy-continuar-comprando{
+  width:100%;margin-top:9px;border:0;background:transparent;color:#b83f61;
+  font-size:9px;font-weight:700;text-decoration:underline;text-underline-offset:3px;
+}
+.fy-seguranca-sacola{
+  display:flex;justify-content:center;gap:5px;align-items:center;
+  margin-top:11px;font-size:7.5px;color:#958187;
+}
+.fy-sacola-vazia{
+  text-align:center;padding:55px 20px;color:#7b696f;
+}
+.fy-sacola-vazia .icone{font-size:35px;margin-bottom:12px}
+@media(max-width:600px){
+  .carrinho{width:100%;height:100dvh}
+  .carrinho-header{padding:15px 16px 13px}
+  .carrinho-header h2{font-size:22px}
+  .itens{padding:8px 15px}
+  .item-img{width:70px;height:80px}
+  .frete,.cupom,.resumo,.frete-gratis{padding-left:15px;padding-right:15px}
+  .fy-finalizar-compra{min-height:52px;font-size:10px}
+}
+</style>
+
 </head>
 
 <body>
@@ -6713,7 +6817,12 @@ APLICAR
 <strong id="total">R$ 0,00</strong>
 </div>
 
+
 <button class="whatsapp" onclick="abrirCheckout()">FINALIZAR PEDIDO</button>
+<button type="button" class="fy-finalizar-compra" onclick="fyFinalizarCompra()">Finalizar compra</button>
+<button type="button" class="fy-continuar-comprando" onclick="fyContinuarComprando()">Continuar comprando</button>
+<div class="fy-seguranca-sacola">🔒 Compra segura • Seus dados protegidos</div>
+
 <button class="whatsapp" style="margin-top:7px;background:white;color:#351f27;border:1px solid #351f27" onclick="finalizarWhatsApp()">FINALIZAR PELO WHATSAPP</button>
 
 </div>
@@ -13187,6 +13296,41 @@ function abrirOfertaEspecial(tipo){
   }
   const alvo = document.querySelector('.ofertas, #ofertas, .produtos');
   if(alvo) alvo.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+
+
+<script id="fy-cart-upgrade-js">
+function fyContinuarComprando(){
+  try{
+    if(typeof fecharCarrinho==="function"){ fecharCarrinho(); return; }
+    const c=document.querySelector(".carrinho");
+    const o=document.querySelector(".overlay");
+    if(c)c.classList.remove("aberto");
+    if(o)o.classList.remove("ativo");
+    document.body.style.overflow="";
+  }catch(e){}
+}
+function fyFinalizarCompra(){
+  try{
+    if(typeof carrinho!=="undefined" && Array.isArray(carrinho) && carrinho.length===0){
+      alert("Sua sacola está vazia. Adicione um produto para continuar 💕");
+      return;
+    }
+    /* Reaproveita o checkout já existente, se houver. */
+    const nomes=["abrirCheckout","irCheckout","finalizarCompra","checkout"];
+    for(const nome of nomes){
+      if(typeof window[nome]==="function" && window[nome]!==fyFinalizarCompra){
+        window[nome](); return;
+      }
+    }
+    /* Se a versão atual ainda não tiver checkout separado, orienta sem perder o carrinho. */
+    alert("Sua sacola está pronta 💕 O próximo passo é preencher entrega e pagamento.");
+    const frete=document.querySelector(".frete");
+    if(frete) frete.scrollIntoView({behavior:"smooth",block:"center"});
+  }catch(e){
+    console.error(e);
+  }
 }
 </script>
 
