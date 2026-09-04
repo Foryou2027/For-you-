@@ -6793,10 +6793,21 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 .fy-banner-r10 a{
   display:block;
+  flex:0 0 100%;
   border-radius:22px;
   overflow:hidden;
   box-shadow:0 12px 34px rgba(105,39,58,.12);
   background:#fbe9ec;
+}
+.fy-banner-r10-viewport{
+  overflow:hidden;
+  border-radius:22px;
+  box-shadow:0 12px 34px rgba(105,39,58,.12);
+}
+.fy-banner-r10-track{
+  display:flex;
+  transition:transform .7s cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
 }
 .fy-banner-r10 img{
   display:block;
@@ -6805,12 +6816,32 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   aspect-ratio:2.25/1;
   object-fit:cover;
 }
+.fy-banner-r10-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+.fy-banner-r10-dot{
+  width:8px;
+  height:8px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:#dfbdc7;
+  transition:width .25s ease,background .25s ease;
+}
+.fy-banner-r10-dot.ativo{
+  width:25px;
+  background:#b83f61;
+}
 @media(max-width:700px){
   .fy-banner-r10{
     margin:14px auto 10px;
     padding:0 12px;
   }
-  .fy-banner-r10 a{border-radius:15px}
+  .fy-banner-r10 a{border-radius:15px;box-shadow:none}
+  .fy-banner-r10-viewport{border-radius:15px;box-shadow:0 8px 24px rgba(105,39,58,.10)}
   .fy-banner-r10 img{
     aspect-ratio:1.35/1;
     object-position:34% center;
@@ -7109,18 +7140,43 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 </div>
 </header>
 
-<section class="fy-banner-r10" id="inicio" aria-label="Achadinhos a partir de dez reais e marcas especiais">
-  <a href="#produtos" aria-label="Ver produtos a partir de dez reais e marcas especiais">
-    <img
-      src="banner-for-you-r10.png"
-      alt="Beleza para todos os bolsos. Achadinhos a partir de R$10 e marcas especiais para você escolher."
-      width="1879"
-      height="837"
-      loading="eager"
-      fetchpriority="high"
-    >
-  </a>
+<section class="fy-banner-r10" id="inicio" aria-label="Destaques da FOR YOU">
+  <div class="fy-banner-r10-viewport">
+    <div class="fy-banner-r10-track" id="fyBannerTrack">
+      <a href="#produtos" aria-label="Ver produtos a partir de dez reais e marcas especiais">
+        <img src="banner-for-you-r10.png" alt="Beleza para todos os bolsos. Achadinhos a partir de R$10 e marcas especiais para você escolher." width="1879" height="837" loading="eager" fetchpriority="high">
+      </a>
+      <a href="#produtos" aria-label="Comprar produtos selecionados com amor">
+        <img src="banner-for-you-beleza.png" alt="Beleza que realça quem você é. Produtos selecionados com amor para o seu dia a dia." width="1557" height="432" loading="lazy">
+      </a>
+    </div>
+  </div>
+  <div class="fy-banner-r10-dots" aria-label="Selecionar banner">
+    <button class="fy-banner-r10-dot ativo" type="button" aria-label="Mostrar primeiro banner"></button>
+    <button class="fy-banner-r10-dot" type="button" aria-label="Mostrar segundo banner"></button>
+  </div>
 </section>
+<script>
+(function(){
+  const area=document.querySelector('.fy-banner-r10');
+  const track=document.getElementById('fyBannerTrack');
+  const dots=Array.from(document.querySelectorAll('.fy-banner-r10-dot'));
+  if(!area||!track||dots.length<2) return;
+  let atual=0, timer;
+  function mostrar(indice){
+    atual=(indice+dots.length)%dots.length;
+    track.style.transform='translateX(-'+(atual*100)+'%)';
+    dots.forEach((dot,i)=>dot.classList.toggle('ativo',i===atual));
+  }
+  function iniciar(){ clearInterval(timer); timer=setInterval(()=>mostrar(atual+1),5000); }
+  dots.forEach((dot,i)=>dot.addEventListener('click',()=>{mostrar(i);iniciar();}));
+  area.addEventListener('mouseenter',()=>clearInterval(timer));
+  area.addEventListener('mouseleave',iniciar);
+  area.addEventListener('focusin',()=>clearInterval(timer));
+  area.addEventListener('focusout',iniciar);
+  iniciar();
+})();
+</script>
 <!-- =========================
      LOJA PRINCIPAL
 ========================= -->
@@ -7170,20 +7226,6 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   </button>
 </div>
 <!-- /FY DESTAQUES LOJA -->
-
-
-<section class="hero-image-final" aria-label="Beleza que realça quem você é">
-  <img src="banner-for-you.png" alt="Beleza que realça quem você é. Produtos selecionados com amor para o seu dia a dia.">
-  <button class="hero-image-click" onclick="document.getElementById('novidades').scrollIntoView({behavior:'smooth'})" aria-label="Comprar agora"></button>
-</section>
-
-
-
-
-
-
-
-
 
 
 <section class="beneficios destaque-beneficios">
