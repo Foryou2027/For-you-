@@ -15605,5 +15605,62 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 
+
+<style id="fy-checkout-etapas-maiores">
+/* Etapas do checkout maiores e mais legíveis */
+.checkout-etapa,
+.checkout-step,
+.step-item,
+.etapa-checkout,
+.checkout-steps button{
+  font-size:12px!important;
+  min-height:58px!important;
+  padding:14px 12px!important;
+  letter-spacing:.35px!important;
+}
+
+/* Ícones maiores */
+.checkout-etapa > span:first-child,
+.checkout-step > span:first-child,
+.step-item > span:first-child,
+.etapa-checkout > span:first-child,
+.checkout-steps button > span:first-child{
+  font-size:17px!important;
+  margin-bottom:6px!important;
+}
+
+/* Mais espaço entre a navegação e a linha inferior */
+.checkout-etapas,
+.checkout-steps{
+  min-height:76px!important;
+  align-items:center!important;
+}
+
+/* Linha da etapa ativa um pouco mais visível */
+.checkout-etapa.ativo::after,
+.checkout-etapa.active::after,
+.checkout-step.active::after,
+.step-item.active::after,
+.etapa-checkout.ativa::after,
+.checkout-steps button.active::after,
+.checkout-steps .ativo::after{
+  height:3px!important;
+}
+
+/* No celular também fica maior, sem ficar apertado */
+@media(max-width:700px){
+  .checkout-etapa,
+  .checkout-step,
+  .step-item,
+  .etapa-checkout,
+  .checkout-steps button{
+    font-size:10px!important;
+    min-height:55px!important;
+    padding:12px 10px!important;
+    flex:0 0 118px!important;
+  }
+}
+</style>
+
 </body>
 </html>
