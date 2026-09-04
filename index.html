@@ -6785,6 +6785,39 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 .fy20-card:nth-child(4n+4) .fy20-img img{object-position:88% center!important}
 </style>
 
+<style id="fy-banner-r10">
+.fy-banner-r10{
+  max-width:1250px;
+  margin:22px auto 14px;
+  padding:0 25px;
+}
+.fy-banner-r10 a{
+  display:block;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 12px 34px rgba(105,39,58,.12);
+  background:#fbe9ec;
+}
+.fy-banner-r10 img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:2.25/1;
+  object-fit:cover;
+}
+@media(max-width:700px){
+  .fy-banner-r10{
+    margin:14px auto 10px;
+    padding:0 12px;
+  }
+  .fy-banner-r10 a{border-radius:15px}
+  .fy-banner-r10 img{
+    aspect-ratio:1.35/1;
+    object-position:34% center;
+  }
+}
+</style>
+
 </head>
 
 
@@ -7075,6 +7108,19 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 </div>
 </div>
 </header>
+
+<section class="fy-banner-r10" id="inicio" aria-label="Achadinhos a partir de dez reais e marcas especiais">
+  <a href="#produtos" aria-label="Ver produtos a partir de dez reais e marcas especiais">
+    <img
+      src="banner-for-you-r10.png"
+      alt="Beleza para todos os bolsos. Achadinhos a partir de R$10 e marcas especiais para você escolher."
+      width="1879"
+      height="837"
+      loading="eager"
+      fetchpriority="high"
+    >
+  </a>
+</section>
 <!-- =========================
      LOJA PRINCIPAL
 ========================= -->
