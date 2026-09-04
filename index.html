@@ -7224,13 +7224,13 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
     <p>Escolha uma categoria e descubra nossos produtos.</p>
   </div>
   <div class="home-quick-inner">
-    <button onclick="abrirSubmenuHomeFY('labios')"><span>♡</span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
-    <button onclick="abrirSubmenuHomeFY('pele')"><span>✦</span><strong>Pele</strong><small>Base, blush e pó</small></button>
-    <button onclick="abrirSubmenuHomeFY('skincare')"><span>✧</span><strong>Skincare</strong><small>Cuidados diários</small></button>
-    <button onclick="abrirSubmenuHomeFY('olhos')"><span>◌</span><strong>Olhos</strong><small>Máscara e sombras</small></button>
-    <button onclick="abrirSubmenuHomeFY('face')"><span>◇</span><strong>Face</strong><small>Contorno e iluminador</small></button>
-    <button onclick="abrirSubmenuHomeFY('acessorios')"><span>♢</span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
-    <button onclick="abrirSubmenuHomeFY('corpo')"><span>♡</span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
+    <button onclick="abrirSubmenuHomeFY('labios')"><span><img src="categoria-labios.png" alt=""></span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
+    <button onclick="abrirSubmenuHomeFY('pele')"><span><img src="categoria-pele.png" alt=""></span><strong>Pele</strong><small>Base, blush e pó</small></button>
+    <button onclick="abrirSubmenuHomeFY('skincare')"><span><img src="categoria-skincare.png" alt=""></span><strong>Skincare</strong><small>Cuidados diários</small></button>
+    <button onclick="abrirSubmenuHomeFY('olhos')"><span><img src="categoria-olhos.png" alt=""></span><strong>Olhos</strong><small>Máscara e sombras</small></button>
+    <button onclick="abrirSubmenuHomeFY('face')"><span><img src="categoria-face.png" alt=""></span><strong>Face</strong><small>Contorno e iluminador</small></button>
+    <button onclick="abrirSubmenuHomeFY('acessorios')"><span><img src="categoria-acessorios.png" alt=""></span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
+    <button onclick="abrirSubmenuHomeFY('corpo')"><span><img src="categoria-corpo.png" alt=""></span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
   </div>
 </section>
 <!-- FY DESTAQUES LOJA -->
@@ -16090,6 +16090,7 @@ button,a,input,select{touch-action:manipulation}
   font-weight:400!important;
   margin:0!important;
 }
+#loja > .home-quick button span img{display:block!important;width:88%!important;height:88%!important;object-fit:contain!important;mix-blend-mode:multiply!important}
 #loja > .home-quick button small,#loja > .home-quick button::after{display:none!important}
 #loja > .home-quick button:hover span{transform:translateY(-4px) scale(1.03)!important;border-color:#b83f61!important;background:linear-gradient(145deg,#ffe5ed,#efa9bd)!important}
 @media(max-width:700px){
