@@ -15444,5 +15444,75 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 
+
+<style id="fy-checkout-etapas-sem-preenchimento">
+/* Checkout: etapas sem caixas/preenchimento */
+.checkout-etapas{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.checkout-etapa,
+.checkout-step,
+.step-item,
+.etapa-checkout,
+.checkout-steps button{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  color:#8a8385!important;
+  position:relative!important;
+}
+
+/* Etapa ativa: apenas texto escuro + linha delicada */
+.checkout-etapa.ativo,
+.checkout-etapa.active,
+.checkout-step.active,
+.step-item.active,
+.etapa-checkout.ativa,
+.checkout-steps button.active,
+.checkout-steps .ativo{
+  background:transparent!important;
+  border:0!important;
+  color:#222!important;
+  font-weight:800!important;
+}
+.checkout-etapa.ativo::after,
+.checkout-etapa.active::after,
+.checkout-step.active::after,
+.step-item.active::after,
+.etapa-checkout.ativa::after,
+.checkout-steps button.active::after,
+.checkout-steps .ativo::after{
+  content:""!important;
+  position:absolute!important;
+  left:18%!important;
+  right:18%!important;
+  bottom:0!important;
+  height:2px!important;
+  background:#c9aeb6!important;
+  border-radius:999px!important;
+}
+
+/* Separação discreta entre as etapas */
+.checkout-etapas{
+  border-bottom:1px solid #eee8ea!important;
+  padding-bottom:4px!important;
+}
+
+/* Mobile: mantém clean e permite deslizar */
+@media(max-width:700px){
+  .checkout-etapa,
+  .checkout-step,
+  .step-item,
+  .etapa-checkout,
+  .checkout-steps button{
+    min-height:42px!important;
+    padding:10px 7px!important;
+  }
+}
+</style>
+
 </body>
 </html>
