@@ -6726,6 +6726,37 @@ a{accent-color:var(--fy-rosa)}
 }
 </style>
 
+
+<style id="fy-filtros-categorias-demo-v20">
+.fy20-cat-page{display:none;position:fixed;inset:0;z-index:6500;background:#fcfafb;overflow-y:auto}
+.fy20-cat-page.ativa{display:block}
+.fy20-cat-top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid #eee6e8;padding:14px 4%;
+display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.fy20-cat-top h1{font-family:Georgia,serif;font-size:27px;font-weight:400;color:#222!important}
+.fy20-cat-top button{border:0;background:none;font-size:9px;font-weight:800;color:#333}
+.fy20-cat-top .x{justify-self:end;font-size:20px}
+.fy20-wrap{max-width:1180px;margin:auto;padding:30px 18px 70px}
+.fy20-filterbar{background:#fff;border:1px solid #eee5e7;border-radius:16px;padding:14px;display:grid;
+grid-template-columns:repeat(6,minmax(120px,1fr));gap:9px;margin-bottom:22px}
+.fy20-filterbar label{font-size:7px;font-weight:800;color:#8b8184;letter-spacing:.7px}
+.fy20-filterbar select{width:100%;height:39px;margin-top:5px;border:1px solid #e8dfe2;border-radius:9px;background:#fff;
+padding:0 9px;color:#333;font-size:9px}
+.fy20-products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.fy20-card{background:#fff;border:1px solid #eee5e7;border-radius:15px;overflow:hidden;position:relative}
+.fy20-img{aspect-ratio:1/1;background:linear-gradient(135deg,#f9edf1,#f3e7e9);display:flex;align-items:center;justify-content:center;
+font-size:55px;position:relative}
+.fy20-img:after{content:"FOTO DEMONSTRATIVA";position:absolute;bottom:8px;left:8px;background:rgba(255,255,255,.88);padding:5px 7px;
+border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777}
+.fy20-info{padding:13px}.fy20-brand{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:1px}
+.fy20-info h3{font-family:Georgia,serif;font-size:15px;font-weight:400;margin:5px 0;color:#252525!important}
+.fy20-price{font-size:13px;font-weight:800;color:#c98799}.fy20-old{font-size:8px;color:#aaa;text-decoration:line-through;margin-left:5px}
+.fy20-tag{position:absolute;top:9px;left:9px;z-index:2;background:#252525;color:#fff;border-radius:999px;padding:5px 8px;font-size:6px;font-weight:800}
+.fy20-add{width:100%;margin-top:10px;height:37px;border:0;border-radius:9px;background:#252525!important;color:#fff!important;font-size:7px;font-weight:800}
+.fy20-empty{grid-column:1/-1;text-align:center;padding:60px;color:#888;font-size:10px}
+@media(max-width:850px){.fy20-filterbar{grid-template-columns:repeat(3,1fr)}.fy20-products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.fy20-filterbar{grid-template-columns:repeat(2,1fr)}.fy20-wrap{padding:18px 12px 50px}.fy20-products{gap:9px}.fy20-info{padding:10px}}
+</style>
+
 </head>
 
 
@@ -6739,6 +6770,21 @@ a{accent-color:var(--fy-rosa)}
 </div>
 
 <body>
+<div id="fy20Categoria" class="fy20-cat-page">
+ <div class="fy20-cat-top"><button onclick="fy20Fechar()">← VOLTAR</button><h1 id="fy20Titulo">Categoria</h1><button class="x" onclick="fy20Fechar()">×</button></div>
+ <main class="fy20-wrap">
+  <div class="fy20-filterbar">
+   <div><label>PREÇO</label><select id="fy20Preco" onchange="fy20Render()"><option value="">Todos</option><option value="20">Até R$ 20</option><option value="40">Até R$ 40</option><option value="80">Até R$ 80</option></select></div>
+   <div><label>MARCA</label><select id="fy20Marca" onchange="fy20Render()"><option value="">Todas</option><option>Ruby Rose</option><option>Max Love</option><option>Melú</option><option>Bruna Tavares</option></select></div>
+   <div><label>PROMOÇÃO</label><select id="fy20Promo" onchange="fy20Render()"><option value="">Todas</option><option value="sim">Em promoção</option></select></div>
+   <div><label>MAIS VENDIDOS</label><select id="fy20Best" onchange="fy20Render()"><option value="">Todos</option><option value="sim">Mais vendidos</option></select></div>
+   <div><label>DISPONIBILIDADE</label><select id="fy20Disp" onchange="fy20Render()"><option value="">Todos</option><option value="sim">Em estoque</option><option value="baixo">Últimas unidades</option></select></div>
+   <div><label>ORDENAR</label><select id="fy20Order" onchange="fy20Render()"><option value="novo">Novidades</option><option value="menor">Menor preço</option><option value="maior">Maior preço</option></select></div>
+  </div>
+  <div class="fy20-products" id="fy20Produtos"></div>
+ </main>
+</div>
+
 <div id="fyPedidoSucesso">
  <div class="fy19-top">
   <button onclick="fy19FecharPedido()">← CONTINUAR COMPRANDO</button>
@@ -15120,6 +15166,43 @@ document.addEventListener("DOMContentLoaded", function () {
    document.querySelectorAll(".finalizar-pedido,.confirmar-pedido,.btn-confirmar-pedido,[data-finalizar-pedido]").forEach(b=>{
      b.addEventListener("click",function(){setTimeout(fy19MostrarPedido,150)});
    });
+ });
+})();
+</script>
+
+
+<script id="fy-filtros-categorias-demo-v20-js">
+(function(){
+ const demo=[
+ {cat:"Lábios",nome:"Gloss Crystal Shine",marca:"Ruby Rose",preco:14.90,old:19.90,promo:true,best:true,disp:"sim",emoji:"💄",novo:9},
+ {cat:"Lábios",nome:"Lip Tint Rosé",marca:"Max Love",preco:12.90,promo:false,best:true,disp:"sim",emoji:"💋",novo:8},
+ {cat:"Lábios",nome:"Batom Velvet Nude",marca:"Melú",preco:18.90,promo:true,best:false,disp:"baixo",emoji:"💄",novo:7},
+ {cat:"Pele",nome:"Base Skin Glow",marca:"Ruby Rose",preco:29.90,promo:false,best:true,disp:"sim",emoji:"✨",novo:9},
+ {cat:"Pele",nome:"Blush Rosé",marca:"Bruna Tavares",preco:54.90,promo:false,best:true,disp:"sim",emoji:"🌸",novo:8},
+ {cat:"Pele",nome:"Corretivo Soft",marca:"Max Love",preco:16.90,old:21.90,promo:true,best:false,disp:"baixo",emoji:"✨",novo:6},
+ {cat:"Skincare",nome:"Sérum Facial",marca:"Melú",preco:24.90,promo:false,best:true,disp:"sim",emoji:"🧴",novo:9},
+ {cat:"Olhos",nome:"Máscara Volume",marca:"Ruby Rose",preco:19.90,promo:true,best:true,disp:"sim",emoji:"👁️",novo:8},
+ {cat:"Face",nome:"Iluminador Glow",marca:"Max Love",preco:17.90,promo:false,best:false,disp:"sim",emoji:"✨",novo:7},
+ {cat:"Acessórios",nome:"Kit Esponjas",marca:"Melú",preco:15.90,promo:true,best:true,disp:"sim",emoji:"🩷",novo:8},
+ {cat:"Corpo",nome:"Body Splash Floral",marca:"Ruby Rose",preco:34.90,promo:false,best:true,disp:"baixo",emoji:"🌷",novo:9}
+ ];
+ let atual="Lábios";
+ const money=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+ window.fy20Abrir=function(cat){atual=cat;document.getElementById("fy20Titulo").textContent=cat;document.getElementById("fy20Categoria").classList.add("ativa");document.body.style.overflow="hidden";fy20Render()};
+ window.fy20Fechar=function(){document.getElementById("fy20Categoria").classList.remove("ativa");document.body.style.overflow=""};
+ window.fy20Render=function(){
+  let a=demo.filter(p=>p.cat===atual);
+  const preco=+document.getElementById("fy20Preco").value,marca=document.getElementById("fy20Marca").value,promo=document.getElementById("fy20Promo").value,best=document.getElementById("fy20Best").value,disp=document.getElementById("fy20Disp").value,ord=document.getElementById("fy20Order").value;
+  if(preco)a=a.filter(p=>p.preco<=preco);if(marca)a=a.filter(p=>p.marca===marca);if(promo)a=a.filter(p=>p.promo);if(best)a=a.filter(p=>p.best);if(disp)a=a.filter(p=>p.disp===disp);
+  a.sort((x,y)=>ord==="menor"?x.preco-y.preco:ord==="maior"?y.preco-x.preco:y.novo-x.novo);
+  document.getElementById("fy20Produtos").innerHTML=a.length?a.map(p=>`<article class="fy20-card">${p.promo?'<span class="fy20-tag">OFERTA</span>':''}<div class="fy20-img">${p.emoji}</div><div class="fy20-info"><span class="fy20-brand">${p.marca}</span><h3>${p.nome}</h3><span class="fy20-price">${money(p.preco)}</span>${p.old?`<span class="fy20-old">${money(p.old)}</span>`:''}<button class="fy20-add">ADICIONAR À SACOLA</button></div></article>`).join(""):'<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
+ };
+ document.addEventListener("DOMContentLoaded",()=>{
+  ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
+   document.querySelectorAll("button,a").forEach(el=>{
+    if(el.textContent.trim().replace(/[▾⌄]/g,"").trim()===cat)el.addEventListener("click",e=>{e.preventDefault();fy20Abrir(cat)});
+   });
+  });
  });
 })();
 </script>
