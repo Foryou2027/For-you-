@@ -6679,6 +6679,53 @@ a{accent-color:var(--fy-rosa)}
 @media(max-width:600px){.fy-trust-strip{gap:7px 10px}.fy-politica-body{padding:30px 16px 55px}}
 </style>
 
+
+<style id="fy-pedido-pos-compra-v19">
+#fyPedidoSucesso{
+ display:none;position:fixed;inset:0;z-index:8000;background:#fcfafb;overflow-y:auto;color:#242424
+}
+#fyPedidoSucesso.ativo{display:block}
+.fy19-top{position:sticky;top:0;z-index:3;background:#fff;border-bottom:1px solid #eee6e8;
+ min-height:68px;padding:12px 5%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.fy19-top h1{font-family:Georgia,serif;font-size:25px;font-weight:400;color:#222!important}
+.fy19-top button{border:0;background:none;color:#333;font-size:9px;font-weight:800}
+.fy19-top .fy19-x{justify-self:end;font-size:20px}
+.fy19-wrap{max-width:850px;margin:auto;padding:45px 18px 70px}
+.fy19-ok{text-align:center;margin-bottom:32px}
+.fy19-check{width:58px;height:58px;margin:0 auto 14px;border-radius:50%;background:#f1e6e9;
+ display:flex;align-items:center;justify-content:center;font-size:25px}
+.fy19-ok small{font-size:8px;letter-spacing:2px;color:#9a8f92}
+.fy19-ok h2{font-family:Georgia,serif;font-size:34px;font-weight:400;margin:6px 0;color:#222!important}
+.fy19-ok p{font-size:10px;color:#746c6f}
+.fy19-numero{font-weight:800;color:#c98799!important}
+.fy19-card{background:#fff;border:1px solid #eee5e7;border-radius:16px;padding:22px;margin-top:14px}
+.fy19-card h3{font-family:Georgia,serif;font-size:21px;font-weight:400;margin-bottom:18px;color:#222!important}
+.fy19-status{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.fy19-status:before{content:"";position:absolute;top:16px;left:12.5%;right:12.5%;height:2px;background:#eee7e9}
+.fy19-step{text-align:center;position:relative;z-index:1}
+.fy19-dot{width:34px;height:34px;margin:auto;border-radius:50%;background:#f0ebec;color:#aaa;
+ display:flex;align-items:center;justify-content:center;border:4px solid #fff;font-size:12px}
+.fy19-step.concluido .fy19-dot,.fy19-step.ativo .fy19-dot{background:#d9a5b3;color:#fff}
+.fy19-step strong{display:block;font-size:8px;margin-top:7px;color:#555!important}
+.fy19-step small{font-size:7px;color:#999}
+.fy19-actions{display:flex;gap:9px;justify-content:center;margin-top:20px}
+.fy19-actions button{min-height:43px;padding:0 18px;border-radius:10px;font-size:8px;font-weight:800}
+.fy19-primary{background:#242424!important;color:#fff!important;border:1px solid #242424!important}
+.fy19-secondary{background:#fff!important;color:#333!important;border:1px solid #e5dcdf!important}
+.fy19-order-list{display:grid;gap:10px}
+.fy19-order-mini{background:#fff;border:1px solid #eee5e7;border-radius:14px;padding:16px;
+ display:flex;justify-content:space-between;align-items:center;gap:15px}
+.fy19-order-mini strong{font-size:11px;color:#242424!important}
+.fy19-order-mini small{display:block;margin-top:4px;color:#8a8083;font-size:8px}
+.fy19-badge{background:#f5ecef;color:#9b6373;border-radius:999px;padding:7px 10px;font-size:7px;font-weight:800}
+@media(max-width:650px){
+ .fy19-wrap{padding:30px 13px 50px}.fy19-status{grid-template-columns:1fr;gap:14px}
+ .fy19-status:before{display:none}.fy19-step{display:grid;grid-template-columns:38px 1fr;text-align:left;align-items:center}
+ .fy19-dot{margin:0}.fy19-step strong,.fy19-step small{grid-column:2;margin:0}
+ .fy19-actions{display:grid}.fy19-actions button{width:100%}
+}
+</style>
+
 </head>
 
 
@@ -6692,6 +6739,34 @@ a{accent-color:var(--fy-rosa)}
 </div>
 
 <body>
+<div id="fyPedidoSucesso">
+ <div class="fy19-top">
+  <button onclick="fy19FecharPedido()">← CONTINUAR COMPRANDO</button>
+  <h1>Meu Pedido</h1>
+  <button class="fy19-x" onclick="fy19FecharPedido()">×</button>
+ </div>
+ <main class="fy19-wrap">
+  <div class="fy19-ok">
+   <div class="fy19-check">✓</div><small>FOR YOU</small>
+   <h2>Pedido realizado com sucesso!</h2>
+   <p>Recebemos o seu pedido <span class="fy19-numero" data-fy19-numero>#FY1025</span>.</p>
+  </div>
+  <section class="fy19-card">
+   <h3>Acompanhe seu pedido</h3>
+   <div class="fy19-status">
+    <div class="fy19-step concluido"><div class="fy19-dot">✓</div><strong>Pagamento aprovado</strong><small>Pedido confirmado</small></div>
+    <div class="fy19-step ativo"><div class="fy19-dot">2</div><strong>Preparando pedido</strong><small>Em separação</small></div>
+    <div class="fy19-step"><div class="fy19-dot">3</div><strong>Enviado</strong><small>Aguardando envio</small></div>
+    <div class="fy19-step"><div class="fy19-dot">4</div><strong>Entregue</strong><small>Aguardando entrega</small></div>
+   </div>
+   <div class="fy19-actions">
+    <button class="fy19-primary" onclick="fy19AbrirMeusPedidos()">VER MEUS PEDIDOS</button>
+    <button class="fy19-secondary" onclick="fy19FecharPedido()">CONTINUAR COMPRANDO</button>
+   </div>
+  </section>
+ </main>
+</div>
+
 <!-- PÁGINA OFERTAS -->
 <div id="fyPaginaOfertas" class="fy-pagina-destaque">
   <div class="fy-pd-topo">
@@ -15006,6 +15081,45 @@ document.addEventListener("DOMContentLoaded", function () {
      <button onclick="fyAbrirPolitica('contato')">Contato</button>`;
      footer.appendChild(d);
    }
+ });
+})();
+</script>
+
+
+<script id="fy-pedido-pos-compra-v19-js">
+(function(){
+ function pedidos(){try{return JSON.parse(localStorage.getItem("fyPedidos")||"[]")}catch(e){return[]}}
+ function salvar(p){localStorage.setItem("fyPedidos",JSON.stringify(p))}
+ function numero(){return "#FY"+String(1025+pedidos().length)}
+ window.fy19MostrarPedido=function(){
+   const n=numero(), arr=pedidos();
+   arr.unshift({numero:n,status:"Preparando pedido",data:new Date().toLocaleDateString("pt-BR")});
+   salvar(arr);
+   document.querySelectorAll("[data-fy19-numero]").forEach(e=>e.textContent=n);
+   const pg=document.getElementById("fyPedidoSucesso");if(pg){pg.classList.add("ativo");document.body.style.overflow="hidden"}
+   fy19RenderPedidos();
+ };
+ window.fy19FecharPedido=function(){const p=document.getElementById("fyPedidoSucesso");if(p)p.classList.remove("ativo");document.body.style.overflow=""};
+ window.fy19RenderPedidos=function(){
+   const arr=pedidos();
+   const alvos=document.querySelectorAll("#meusPedidos,.meus-pedidos,[data-meus-pedidos]");
+   alvos.forEach(a=>{
+     if(!arr.length)return;
+     a.innerHTML='<div class="fy19-order-list">'+arr.map(p=>`<div class="fy19-order-mini"><div><strong>${p.numero}</strong><small>${p.data}</small></div><span class="fy19-badge">${p.status}</span></div>`).join("")+'</div>';
+   });
+ };
+ window.fy19AbrirMeusPedidos=function(){
+   fy19FecharPedido();
+   if(typeof abrirPagina==="function"){try{abrirPagina("conta");}catch(e){}}
+   const a=document.querySelector("#meusPedidos,.meus-pedidos,[data-meus-pedidos]");
+   if(a)a.scrollIntoView({behavior:"smooth",block:"start"});
+ };
+ document.addEventListener("DOMContentLoaded",function(){
+   fy19RenderPedidos();
+   /* Liga a tela de sucesso aos botões finais já existentes */
+   document.querySelectorAll(".finalizar-pedido,.confirmar-pedido,.btn-confirmar-pedido,[data-finalizar-pedido]").forEach(b=>{
+     b.addEventListener("click",function(){setTimeout(fy19MostrarPedido,150)});
+   });
  });
 })();
 </script>
