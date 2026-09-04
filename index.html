@@ -6596,9 +6596,83 @@ a{accent-color:var(--fy-rosa)}
 }
 </style>
 
+
+<style id="fy-produto-individual-v1">
+#fyProdutoPagina{display:none;position:fixed;inset:0;z-index:6500;background:#fcfafb;overflow:auto;color:#242424}
+#fyProdutoPagina.ativa{display:block}
+.fyp-top{position:sticky;top:0;z-index:4;background:#fff;border-bottom:1px solid #eee7e9;padding:15px 5%;display:flex;align-items:center;justify-content:space-between}
+.fyp-top button{border:0;background:transparent;color:#333;font-size:10px;font-weight:800}
+.fyp-logo{font-family:Georgia,serif;font-size:23px;letter-spacing:3px}
+.fyp-wrap{max-width:1120px;margin:auto;padding:42px 20px 70px}
+.fyp-main{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:start}
+.fyp-photo{background:#fff;border:1px solid #eee5e7;border-radius:20px;min-height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.fyp-photo img{width:100%;height:520px;object-fit:contain}
+.fyp-info{padding-top:8px}
+.fyp-category{font-size:9px;letter-spacing:1.6px;text-transform:uppercase;color:#9a8e92}
+.fyp-info h1{font-family:Georgia,serif;font-size:37px;font-weight:400;line-height:1.15;margin:10px 0 8px;color:#222!important}
+.fyp-rating{font-size:10px;color:#a78a62;margin-bottom:18px}
+.fyp-price{font-size:27px;font-weight:800;color:#c98799}
+.fyp-installments{font-size:10px;color:#777;margin:5px 0 15px}
+.fyp-stock{display:inline-block;background:#f2f7f1;color:#56705a;border-radius:999px;padding:7px 10px;font-size:8px;font-weight:800;margin-bottom:18px}
+.fyp-desc{font-size:11px;line-height:1.75;color:#666;border-top:1px solid #eee7e9;padding-top:18px}
+.fyp-actions{display:grid;grid-template-columns:105px 1fr;gap:10px;margin-top:22px}
+.fyp-qty{height:50px;border:1px solid #e7dfe1;border-radius:12px;display:flex;align-items:center;justify-content:space-around;background:#fff}
+.fyp-qty button{border:0;background:transparent;font-size:17px}
+.fyp-add,.fyp-buy{height:50px;border-radius:12px;font-size:9px;font-weight:800;letter-spacing:.8px}
+.fyp-add{border:1px solid #222;background:#fff;color:#222}
+.fyp-buy{border:0;background:#222;color:#fff;grid-column:1/-1}
+.fyp-freight{margin-top:22px;background:#fff;border:1px solid #eee5e7;border-radius:15px;padding:17px}
+.fyp-freight strong{font-size:10px}
+.fyp-cep{display:flex;gap:8px;margin-top:10px}
+.fyp-cep input{flex:1;height:43px;border:1px solid #e7dfe1;border-radius:9px;padding:0 12px}
+.fyp-cep button{border:0;border-radius:9px;background:#f2e8eb;color:#333;padding:0 16px;font-size:8px;font-weight:800}
+.fyp-cep-result{font-size:9px;color:#6d6568;margin-top:9px}
+.fyp-tabs{margin-top:48px;border-top:1px solid #eee5e7}
+.fyp-tab-buttons{display:flex;gap:25px;border-bottom:1px solid #eee5e7}
+.fyp-tab-buttons button{padding:17px 0;border:0;background:none;font-size:9px;font-weight:800;color:#777}
+.fyp-tab-buttons button.ativo{color:#222;border-bottom:2px solid #c98799}
+.fyp-tab-content{padding:22px 0;font-size:11px;line-height:1.8;color:#666}
+.fyp-related{margin-top:40px}
+.fyp-related h2{font-family:Georgia,serif;font-size:27px;font-weight:400;text-align:center;margin-bottom:20px}
+@media(max-width:760px){
+ .fyp-wrap{padding:22px 14px 50px}.fyp-main{grid-template-columns:1fr;gap:24px}
+ .fyp-photo,.fyp-photo img{min-height:350px;height:350px}.fyp-info h1{font-size:30px}
+ .fyp-actions{grid-template-columns:90px 1fr}.fyp-tab-buttons{overflow:auto;gap:18px}
+}
+</style>
+
 </head>
 
 <body>
+<div id="fyProdutoPagina">
+ <div class="fyp-top"><button onclick="fyFecharProduto()">← VOLTAR À LOJA</button><div class="fyp-logo">FOR YOU</div><button onclick="fyAbrirCarrinhoPagina()">SACOLA 🛍️</button></div>
+ <div class="fyp-wrap">
+  <div class="fyp-main">
+   <div class="fyp-photo"><img id="fypImagem" alt="Produto"></div>
+   <div class="fyp-info">
+    <div class="fyp-category" id="fypCategoria">FOR YOU</div>
+    <h1 id="fypNome">Produto</h1>
+    <div class="fyp-rating">★★★★★ <span>5.0 • Avaliações</span></div>
+    <div class="fyp-price" id="fypPreco">R$ 0,00</div>
+    <div class="fyp-installments" id="fypParcelamento"></div>
+    <div class="fyp-stock" id="fypEstoque">✓ Em estoque</div>
+    <div class="fyp-desc" id="fypDescricao">Um produto escolhido especialmente para você.</div>
+    <div class="fyp-actions">
+      <div class="fyp-qty"><button onclick="fyProdutoQtd(-1)">−</button><span id="fypQtd">1</span><button onclick="fyProdutoQtd(1)">+</button></div>
+      <button class="fyp-add" onclick="fyProdutoAdicionar(false)">ADICIONAR À SACOLA</button>
+      <button class="fyp-buy" onclick="fyProdutoAdicionar(true)">COMPRAR AGORA</button>
+    </div>
+    <div class="fyp-freight"><strong>🚚 Calcule o prazo e frete</strong><div class="fyp-cep"><input id="fypCep" maxlength="9" placeholder="Digite seu CEP"><button onclick="fyProdutoFrete()">CALCULAR</button></div><div class="fyp-cep-result" id="fypCepResultado"></div></div>
+   </div>
+  </div>
+  <div class="fyp-tabs">
+    <div class="fyp-tab-buttons"><button class="ativo" onclick="fyProdutoTab(this,'descricao')">DESCRIÇÃO</button><button onclick="fyProdutoTab(this,'uso')">COMO USAR</button><button onclick="fyProdutoTab(this,'info')">INFORMAÇÕES</button></div>
+    <div class="fyp-tab-content" id="fypTabConteudo">Conheça todos os detalhes deste produto FOR YOU.</div>
+  </div>
+  <div class="fyp-related"><h2>Você também pode gostar</h2><div id="fypRelacionados"></div></div>
+ </div>
+</div>
+
 <!-- PÁGINA OFERTAS -->
 <div id="fyPaginaOfertas" class="fy-pagina-destaque">
   <div class="fy-pd-topo">
@@ -14776,6 +14850,59 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     };
   });
+});
+</script>
+
+
+<script id="fy-produto-individual-js">
+let fyProdutoAtual=null, fyProdutoQuantidade=1;
+function fyBRLProduto(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+function fyAbrirProduto(prod){
+  if(!prod)return; fyProdutoAtual=prod; fyProdutoQuantidade=1;
+  const nome=prod.nome||prod.name||"Produto", preco=Number(prod.preco||prod.price||0);
+  document.getElementById("fypNome").textContent=nome;
+  document.getElementById("fypPreco").textContent=fyBRLProduto(preco);
+  document.getElementById("fypParcelamento").textContent=preco?`ou até 2x de ${fyBRLProduto(preco/2)} sem juros`:"";
+  document.getElementById("fypImagem").src=prod.imagem||prod.img||prod.image||"";
+  document.getElementById("fypCategoria").textContent=prod.categoria||prod.category||"FOR YOU";
+  document.getElementById("fypDescricao").textContent=prod.descricao||prod.description||"Um produto escolhido especialmente para você.";
+  document.getElementById("fypEstoque").textContent=(prod.estoque===0?"Produto esgotado":"✓ Em estoque");
+  document.getElementById("fypQtd").textContent="1";
+  document.getElementById("fyProdutoPagina").classList.add("ativa"); document.body.style.overflow="hidden";
+}
+function fyFecharProduto(){document.getElementById("fyProdutoPagina").classList.remove("ativa");document.body.style.overflow="";}
+function fyProdutoQtd(d){fyProdutoQuantidade=Math.max(1,fyProdutoQuantidade+d);document.getElementById("fypQtd").textContent=fyProdutoQuantidade;}
+function fyProdutoAdicionar(comprar){
+  if(!fyProdutoAtual)return;
+  for(let i=0;i<fyProdutoQuantidade;i++){
+    if(typeof adicionarAoCarrinho==="function") adicionarAoCarrinho(fyProdutoAtual);
+    else if(typeof adicionarCarrinho==="function") adicionarCarrinho(fyProdutoAtual);
+  }
+  if(comprar && typeof fyAbrirCarrinhoPagina==="function"){fyFecharProduto();fyAbrirCarrinhoPagina();}
+}
+function fyProdutoFrete(){
+ const cep=document.getElementById("fypCep").value.replace(/\D/g,""), r=document.getElementById("fypCepResultado");
+ r.textContent=cep.length===8?"CEP informado. O prazo e valor serão confirmados no checkout.":"Digite um CEP válido com 8 números.";
+}
+function fyProdutoTab(btn,tipo){
+ document.querySelectorAll(".fyp-tab-buttons button").forEach(b=>b.classList.remove("ativo"));btn.classList.add("ativo");
+ const c=document.getElementById("fypTabConteudo");
+ c.textContent=tipo==="uso"?"As instruções de uso cadastradas para o produto aparecerão aqui.":tipo==="info"?"Marca, composição, conteúdo, validade e demais informações cadastradas aparecerão aqui.":(fyProdutoAtual?.descricao||fyProdutoAtual?.description||"Conheça todos os detalhes deste produto FOR YOU.");
+}
+/* Torna os cards clicáveis sem interferir nos botões internos */
+document.addEventListener("click",function(e){
+ const card=e.target.closest(".produto-card,.product-card,.card-produto,.produto");
+ if(!card || e.target.closest("button,a,input"))return;
+ let prod=null;
+ if(card.dataset.produto){try{prod=JSON.parse(card.dataset.produto)}catch(_){}}
+ if(!prod){
+   const nome=card.querySelector("h3,h4,strong,.nome")?.textContent?.trim();
+   const precoTxt=card.querySelector(".preco,.produto-preco")?.textContent||"";
+   const img=card.querySelector("img")?.src||"";
+   const preco=Number(precoTxt.replace(/[^\d,]/g,"").replace(",","."));
+   if(nome)prod={nome,preco,imagem:img};
+ }
+ if(prod)fyAbrirProduto(prod);
 });
 </script>
 
