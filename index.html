@@ -3822,6 +3822,16 @@ textarea:focus-visible{
   .hero h2{font-size:34px}
 }
 
+
+/* FOR YOU — busca de produtos em destaque */
+.menu-principal > .busca{max-width:760px!important;margin:18px auto 16px!important;padding:0 14px!important;z-index:700!important;}
+.menu-principal > .busca .busca-linha{height:50px!important;border:1.5px solid #e9b8c6!important;border-radius:999px!important;background:#fff!important;box-shadow:0 7px 22px rgba(184,63,97,.10)!important;overflow:hidden!important;}
+.menu-principal > .busca input{font-size:13px!important;padding:0 20px!important;color:#351f27!important;}
+.menu-principal > .busca input::placeholder{color:#a98c95!important;}
+.menu-principal > .busca button{width:58px!important;flex:0 0 58px!important;background:#b83f61!important;color:#fff!important;border:0!important;font-size:18px!important;}
+.menu-principal > .busca .busca-linha:focus-within{border-color:#b83f61!important;box-shadow:0 0 0 4px rgba(184,63,97,.10),0 8px 24px rgba(184,63,97,.10)!important;}
+.busca-sugestoes{top:56px!important;border-radius:16px!important;}
+@media(max-width:600px){.menu-principal > .busca{margin:12px auto 12px!important;padding:0 10px!important}.menu-principal > .busca .busca-linha{height:48px!important}.menu-principal > .busca input{font-size:16px!important;padding:0 15px!important}.menu-principal > .busca button{width:52px!important;flex-basis:52px!important}}
 </style>
 
 </style>
@@ -5442,10 +5452,10 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 <input
 id="busca"
 type="text"
-placeholder="Buscar produtos..."
+placeholder="Buscar produto, marca ou categoria..."
 onkeydown="if(event.key==='Enter')buscarProdutos()"
 >
-<button onclick="buscarProdutos()">⌕</button>
+<button onclick="buscarProdutos()" aria-label="Buscar produtos" title="Buscar">🔍</button>
 </div>
 <div class="busca-sugestoes" id="buscaSugestoes"></div>
 </div>
