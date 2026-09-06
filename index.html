@@ -7012,7 +7012,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="logo">
   <a href="#" class="fy-brand-logo" aria-label="FOR YOU - Página inicial" onclick="event.preventDefault(); if(typeof mostrarLoja==='function'){mostrarLoja();} else {window.scrollTo({top:0,behavior:'smooth'});}">
-    <img src="logo-for-you-final.png" alt="FOR YOU">
+    <span style="display:block;font-family:Georgia,serif;font-size:34px;line-height:.9;letter-spacing:5px;color:#b83f61;font-weight:700;text-align:center">FOR YOU<small style="display:block;margin-top:8px;font:600 8px/1 Arial,sans-serif;letter-spacing:3px;color:#a88955">BY DÉ</small></span>
     <span class="fy-visually-hidden">FOR YOU</span>
   </a>
 </div>
@@ -8936,7 +8936,7 @@ function produtosOrdenadosMaisVendidos(){
 function mostrarTodosProdutos(){
   const container=document.getElementById("listaProdutos");
   if(!container)return;
-  renderProdutos(produtos);
+  renderProdutos(produtos,true);
   const btn=document.querySelector(".ver-todos-btn");
   if(btn)btn.textContent="MOSTRANDO TODOS OS PRODUTOS";
   document.getElementById("novidades")?.scrollIntoView({behavior:"smooth"});
@@ -8983,14 +8983,18 @@ function inicializarBuscaProfissional(){const input=document.getElementById("bus
    RENDER PRODUTOS
 ========================= */
 
-function renderProdutos(lista=produtos){
+function renderProdutos(lista=produtos,mostrarTodos=false){
   const container=document.getElementById("listaProdutos");
   if(!container)return;
   container.innerHTML="";
-  const mostrar=lista===produtos ? produtosOrdenadosMaisVendidos().slice(0,4) : lista;
+  const produtosNovosDez=produtos.filter(p=>Number(p.id)>=201&&Number(p.id)<=211);
+  const restantes=produtosOrdenadosMaisVendidos().filter(p=>!produtosNovosDez.some(n=>String(n.id)===String(p.id)));
+  const mostrar=lista===produtos
+    ? (mostrarTodos ? [...produtosNovosDez,...restantes] : produtosNovosDez)
+    : lista;
   mostrar.forEach(produto=>container.appendChild(criarCard(produto)));
   const btn=document.querySelector(".ver-todos-btn");
-  if(btn && lista===produtos)btn.textContent=produtos.length>4?"VER TODOS OS PRODUTOS":"TODOS OS PRODUTOS";
+  if(btn && lista===produtos)btn.textContent=mostrarTodos?"MOSTRANDO TODOS OS PRODUTOS":"VER TODOS OS PRODUTOS";
 }
 
 
@@ -16287,5 +16291,29 @@ button,a,input,select{touch-action:manipulation}
   .fy-produto-miniaturas button{flex-basis:62px;width:62px;height:62px}
 }
 </style>
+<style id="fy-safe-css">
+#fySafeModal{display:none;position:fixed;inset:0;z-index:99999;background:#351f27aa;padding:18px;overflow:auto}#fySafeModal.aberto{display:flex;align-items:center;justify-content:center}.fy-safe-box{position:relative;width:min(820px,100%);background:#fff;border-radius:22px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.fy-safe-box>button{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:#351f27;color:#fff;font-size:20px}.fy-safe-box>img{width:100%;height:370px;object-fit:contain;background:#fff8fa;border-radius:16px}.fy-safe-info{padding:25px 5px}.fy-safe-info small{color:#b83f61;letter-spacing:1px}.fy-safe-info h2{font:400 30px/1.15 Georgia,serif;margin:10px 0;color:#351f27}.fy-safe-price{font-size:25px;font-weight:700;color:#b83f61;margin:15px 0}.fy-safe-info p{font-size:12px;line-height:1.7;color:#715f65}.fy-safe-buy{width:100%;margin-top:18px;padding:14px;border:0;border-radius:99px;background:#351f27;color:#fff;font-weight:700}@media(max-width:650px){.fy-safe-box{grid-template-columns:1fr;padding:15px;gap:5px}.fy-safe-box>img{height:270px}.fy-safe-info{padding:8px 2px}.fy-safe-info h2{font-size:24px}}
+</style>
+<div id="fySafeModal" onclick="if(event.target===this)fyFecharProduto()"><div class="fy-safe-box"><button onclick="fyFecharProduto()">×</button><img id="fySafeImg" alt=""><div class="fy-safe-info"><small id="fySafeMarca"></small><h2 id="fySafeNome"></h2><div>★★★★★</div><div class="fy-safe-price">R$ 10,00</div><p id="fySafeDesc"></p><button class="fy-safe-buy" id="fySafeBuy">ADICIONAR AO CARRINHO</button></div></div></div>
+<script id="fy-safe-catalog">
+(function(){
+const itens=[
+[201,'Escova Mágica — Cores Sortidas','FOR YOU','produto-escova-magica.webp','Escova desembaraçadora. Cor enviada conforme a disponibilidade.'],
+[202,'Lápis Preto com Apontador Vivai','Vivai','produto-lapis-vivai.webp','Lápis preto para olhos acompanhado de apontador.'],
+[203,'Touca de Cetim Simples — Cores Sortidas','FOR YOU','produto-touca-cetim.webp','Touca de cetim simples. Cor enviada conforme a disponibilidade.'],
+[204,'Lenço Removedor de Maquiagem Vivai','Vivai','produto-lenco-vivai.webp','Lenço removedor de maquiagem para todos os tipos de pele.'],
+[205,'Massageador Capilar de Lavatório — Cores Sortidas','FOR YOU','produto-massageador-capilar.webp','Massageador para lavagem e limpeza do couro cabeludo.'],
+[206,'Esponja Make Blender — Cores Sortidas','FOR YOU','produto-esponja-blender.webp','Esponja para aplicação e acabamento da maquiagem.'],
+[207,'Esponja para Maquiagem Manga','FOR YOU','produto-esponja-manga.webp','Pode ser utilizada seca ou úmida para aplicação uniforme.'],
+[208,'Esponja para Maquiagem Gota Ruby Anjo','Ruby Anjo','produto-esponja-gota-ruby-anjo.webp','Esponja em formato de gota para aplicação uniforme.'],
+[209,'Tônico Facial de Limpeza Love 290 ml','Max Love Studio','produto-tonico-max-love.webp','Solução para limpeza facial com ação adstringente.'],
+[210,'Primer Hidratante Anticraquelamento Love 30 ml','Max Love','produto-primer-max-love.webp','Primer hidratante que prepara a pele para a maquiagem.'],
+[211,'Água Micelar Rosa Mosqueta Love 290 ml','Max Love Studio','produto-agua-micelar-max-love.webp','Auxilia na remoção da maquiagem, hidratação e limpeza da pele.']];
+window.fyAbrirProduto=function(id){const p=itens.find(x=>x[0]===Number(id));if(!p)return;fySafeImg.src=p[3];fySafeImg.alt=p[1];fySafeMarca.textContent=p[2];fySafeNome.textContent=p[1];fySafeDesc.textContent=p[4];fySafeBuy.onclick=function(){if(typeof adicionar==='function')adicionar(p[1],10,p[0]);else alert('Produto adicionado: '+p[1]);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
+window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow=''};
+function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p[0]+')"><span class="etiqueta">R$ 10</span><img src="'+p[3]+'" alt="'+p[1]+'"></div><div class="produto-info"><div class="marca">'+p[2]+'</div><div class="nome">'+p[1]+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">R$ 10,00</div><button class="adicionar" onclick="fyAbrirProduto('+p[0]+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',montar);else montar();
+})();
+</script>
 </body>
 </html>
