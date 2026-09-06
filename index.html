@@ -14471,20 +14471,13 @@ function limparFiltroSubcategoria(){
   window.abrirProdutosDezFY=function(tipo){
     const box=caixaMenuFY();
     const categorias=Object.keys(nomes).map(cat=>`<button type="button" onclick='abrirSubmenuDezFY(${JSON.stringify(cat)})'>${nomes[cat]}</button>`).join("");
-    const marcas=["Max Love","Vivai","Miss Lary","Fenzza","Ruby Rose","Mia Make","Melu","Bella Femme","Belle Angel","Dapop","Luisance","Macrilan","Playboy"];
-    const botoesMarcas=marcas.map(m=>`<button type="button" onclick='filtrarMarcaDezFY(${JSON.stringify(m)});fecharSubmenuHomeFY()'>${m}</button>`).join("");
-    const porCategoria=tipo!=="marcas";
     box.innerHTML=`
       <div class="fy-home-submenu-card">
         <div class="fy-home-submenu-head">
           <div><small>NOVA CATEGORIA</small><h3>Achadinhos de R$ 10</h3></div>
           <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
         </div>
-        <div class="fy-menu-dez-abas">
-          <button class="${porCategoria?'ativa':''}" type="button" onclick="abrirProdutosDezFY('categorias')">Categorias</button>
-          <button class="${porCategoria?'':'ativa'}" type="button" onclick="abrirProdutosDezFY('marcas')">Marcas</button>
-        </div>
-        <div class="fy-home-submenu-grid">${porCategoria?categorias:botoesMarcas}</div>
+        <div class="fy-home-submenu-grid">${categorias}</div>
         <button class="fy-home-submenu-all" type="button" onclick='mostrarProdutosDezFY();fecharSubmenuHomeFY()'>Ver todos os achadinhos de R$ 10</button>
       </div>`;
     requestAnimationFrame(()=>box.classList.add("aberto"));
@@ -16428,7 +16421,7 @@ window.fySelecionarVariante=function(indice){if(!produtoAtual||!produtoAtual.var
 window.fyAbrirProduto=function(id){const p=itens.find(x=>Number(x.id)===Number(id));if(!p)return;produtoAtual=p;varianteAtual=null;fySafeMarca.textContent=p.marca||'FOR YOU';fySafeNome.textContent=p.nome;fySafePrice.textContent=dinheiro(p.preco);fySafeDesc.textContent=(p.descricao||'')+(p.validade?' Validade: '+p.validade+'.':'');montarFotos(p);const variantes=Array.isArray(p.variantes)?p.variantes:[];fySafeVariantWrap.style.display=variantes.length?'block':'none';fySafeVariantLabel.textContent=p.rotuloVariante||'Escolha uma opção';fySafeVariants.innerHTML=variantes.map((v,i)=>'<button type="button" onclick="fySelecionarVariante('+i+')">'+v.nome+'</button>').join('');fySafeBuy.onclick=function(){if(variantes.length&&!varianteAtual){alert((p.rotuloVariante||'Escolha uma opção')+' antes de adicionar ao carrinho.');return}const nomeCarrinho=p.nome+(varianteAtual?' — '+varianteAtual.nome:'');if(typeof adicionar==='function')adicionar(nomeCarrinho,p.preco,p.id);else alert('Produto adicionado: '+nomeCarrinho);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
 window.abrirProduto=window.fyAbrirProduto;
 window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow='';produtoAtual=null;varianteAtual=null};
-function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';d.dataset.marca=p.marca||'';d.dataset.preco=Number(p.preco||0);d.dataset.proximoValidade=p.proximoValidade?'true':'false';const preco=dinheiro(p.preco);const validade=p.proximoValidade?'<span class="fy-expiry-badge">Validade '+p.validade+'</span>':'';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span>'+validade+'<img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
+function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';d.dataset.marca=p.marca||'';d.dataset.preco=Number(p.preco||0);d.dataset.proximoValidade=p.proximoValidade?'true':'false';if(Number(p.preco||0)<=10)d.style.setProperty('display','none','important');const preco=dinheiro(p.preco);const validade=p.proximoValidade?'<span class="fy-expiry-badge">Validade '+p.validade+'</span>':'';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span>'+validade+'<img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
 window.selecionarSubcategoria=function(categoria,subcategoria){
   const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   const cat=normalizar(categoria),sub=normalizar(subcategoria);
@@ -16437,7 +16430,7 @@ window.selecionarSubcategoria=function(categoria,subcategoria){
   cards.forEach(card=>{
     const cardCat=normalizar(card.dataset.categoria);
     const cardSub=normalizar(card.dataset.subcategoria);
-    const mostrar=sub ? cardSub===sub : (!cat||cardCat===cat);
+    const mostrar=Number(card.dataset.preco)>10 && (sub ? cardSub===sub : (!cat||cardCat===cat));
     card.style.setProperty('display',mostrar?'block':'none','important');
     if(mostrar)encontrados++;
   });
@@ -16450,7 +16443,7 @@ window.selecionarSubcategoria=function(categoria,subcategoria){
 };
 window.mostrarTodosProdutos=function(){
   montar();
-  document.querySelectorAll('#listaProdutos .produto').forEach(card=>card.style.setProperty('display','block','important'));
+  document.querySelectorAll('#listaProdutos .produto').forEach(card=>card.style.setProperty('display',Number(card.dataset.preco)>10?'block':'none','important'));
   const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Todos os Produtos';
   const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent='Achadinhos e marcas especiais selecionados para você.';
 };
