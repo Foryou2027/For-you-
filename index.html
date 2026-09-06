@@ -7221,17 +7221,26 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
   <div class="home-quick-heading">
-    <small>ACHADINHOS PARA VOCÊ</small>
-    <h2>Produtos de R$ 10</h2>
-    <p>Escolha por categoria ou por marca.</p>
+    <small>ENCONTRE SEU FAVORITO</small>
+    <h2>Compre por categoria</h2>
+    <p>Escolha uma categoria e descubra nossos produtos.</p>
   </div>
   <div class="home-quick-inner">
-    <button onclick="abrirProdutosDezFY('categorias')"><span>♡</span><strong>Categorias</strong><small>Lábios, pele, olhos e mais</small></button>
-    <button onclick="abrirProdutosDezFY('marcas')"><span>✦</span><strong>Marcas</strong><small>Escolha sua marca favorita</small></button>
+    <button onclick="abrirSubmenuHomeFY('labios')"><span><img src="categoria-labios.png" alt=""></span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
+    <button onclick="abrirSubmenuHomeFY('pele')"><span><img src="categoria-pele.png" alt=""></span><strong>Pele</strong><small>Base, blush e pó</small></button>
+    <button onclick="abrirSubmenuHomeFY('skincare')"><span><img src="categoria-skincare.png" alt=""></span><strong>Skincare</strong><small>Cuidados diários</small></button>
+    <button onclick="abrirSubmenuHomeFY('olhos')"><span><img src="categoria-olhos.png" alt=""></span><strong>Olhos</strong><small>Máscara e sombras</small></button>
+    <button onclick="abrirSubmenuHomeFY('face')"><span><img src="categoria-face.png" alt=""></span><strong>Face</strong><small>Contorno e iluminador</small></button>
+    <button onclick="abrirSubmenuHomeFY('acessorios')"><span><img src="categoria-acessorios.png" alt=""></span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
+    <button onclick="abrirSubmenuHomeFY('corpo')"><span><img src="categoria-corpo.png" alt=""></span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
   </div>
 </section>
 <!-- FY DESTAQUES LOJA -->
 <div class="fy-destaques-loja">
+  <button type="button" class="fy-destaque-loja-btn" onclick="abrirProdutosDezFY('categorias')">
+    💄 <span>Achadinhos de R$ 10</span>
+  </button>
+
   <div class="fy-ofertas-item">
     <button type="button" class="fy-destaque-loja-btn fy-ofertas-btn" onclick="fyAbrirPaginaDestaque('fyPaginaOfertas')">
       🏷️ <span>Ofertas</span> <span class="fy-seta">⌄</span>
@@ -14453,26 +14462,50 @@ function limparFiltroSubcategoria(){
   };
   const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo"};
 
-  window.abrirProdutosDezFY=function(tipo){
+  function caixaMenuFY(){
     let box=document.getElementById("fyHomeSubmenu");
     if(!box){box=document.createElement("div");box.id="fyHomeSubmenu";box.className="fy-home-submenu";document.body.appendChild(box)}
-    const categorias=Object.keys(nomes).map(cat=>`<button type="button" onclick='abrirSubmenuHomeFY(${JSON.stringify(cat)},true)'>${nomes[cat]}</button>`).join("");
+    return box;
+  }
+
+  window.abrirProdutosDezFY=function(tipo){
+    const box=caixaMenuFY();
+    const categorias=Object.keys(nomes).map(cat=>`<button type="button" onclick='abrirSubmenuDezFY(${JSON.stringify(cat)})'>${nomes[cat]}</button>`).join("");
     const marcas=["Max Love","Vivai","Miss Lary","Fenzza","Ruby Rose","Mia Make","Melu","Bella Femme","Belle Angel","Dapop","Luisance","Macrilan","Playboy"];
     const botoesMarcas=marcas.map(m=>`<button type="button" onclick='filtrarMarcaDezFY(${JSON.stringify(m)});fecharSubmenuHomeFY()'>${m}</button>`).join("");
-    const porCategoria=tipo==="categorias";
+    const porCategoria=tipo!=="marcas";
     box.innerHTML=`
       <div class="fy-home-submenu-card">
         <div class="fy-home-submenu-head">
-          <div><small>PRODUTOS DE R$ 10</small><h3>${porCategoria?'Escolha uma categoria':'Escolha uma marca'}</h3></div>
+          <div><small>NOVA CATEGORIA</small><h3>Achadinhos de R$ 10</h3></div>
           <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
         </div>
+        <div class="fy-menu-dez-abas">
+          <button class="${porCategoria?'ativa':''}" type="button" onclick="abrirProdutosDezFY('categorias')">Categorias</button>
+          <button class="${porCategoria?'':'ativa'}" type="button" onclick="abrirProdutosDezFY('marcas')">Marcas</button>
+        </div>
         <div class="fy-home-submenu-grid">${porCategoria?categorias:botoesMarcas}</div>
-        <button class="fy-home-submenu-all" type="button" onclick='mostrarProdutosDezFY();fecharSubmenuHomeFY()'>Ver todos os produtos de R$ 10</button>
+        <button class="fy-home-submenu-all" type="button" onclick='mostrarProdutosDezFY();fecharSubmenuHomeFY()'>Ver todos os achadinhos de R$ 10</button>
       </div>`;
     requestAnimationFrame(()=>box.classList.add("aberto"));
   };
 
-  window.abrirSubmenuHomeFY=function(cat,somenteDez=false){
+  window.abrirSubmenuDezFY=function(cat){
+    const box=caixaMenuFY();
+    const itens=(dados[cat]||[]).map(s=>`<button type="button" onclick='selecionarSubcategoriaDezFY(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`).join("");
+    box.innerHTML=`
+      <div class="fy-home-submenu-card">
+        <div class="fy-home-submenu-head">
+          <div><small>ACHADINHOS DE R$ 10</small><h3>${nomes[cat]||cat}</h3></div>
+          <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
+        </div>
+        <button class="fy-menu-dez-voltar" type="button" onclick="abrirProdutosDezFY('categorias')">← Voltar às categorias</button>
+        <div class="fy-home-submenu-grid">${itens}</div>
+        <button class="fy-home-submenu-all" type="button" onclick='selecionarSubcategoriaDezFY(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
+      </div>`;
+  };
+
+  window.abrirSubmenuHomeFY=function(cat){
     let box=document.getElementById("fyHomeSubmenu");
     if(!box){
       box=document.createElement("div");
@@ -14480,18 +14513,17 @@ function limparFiltroSubcategoria(){
       box.className="fy-home-submenu";
       document.body.appendChild(box);
     }
-    const acao=somenteDez?'selecionarSubcategoriaDezFY':'selecionarSubcategoria';
     const itens=(dados[cat]||[]).map(s =>
-      `<button type="button" onclick='${acao}(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`
+      `<button type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`
     ).join("");
     box.innerHTML=`
       <div class="fy-home-submenu-card">
         <div class="fy-home-submenu-head">
-          <div><small>${somenteDez?'PRODUTOS DE R$ 10':'COMPRE POR CATEGORIA'}</small><h3>${nomes[cat]||cat}</h3></div>
+          <div><small>COMPRE POR CATEGORIA</small><h3>${nomes[cat]||cat}</h3></div>
           <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
         </div>
         <div class="fy-home-submenu-grid">${itens}</div>
-        <button class="fy-home-submenu-all" type="button" onclick='${acao}(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
+        <button class="fy-home-submenu-all" type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
       </div>`;
     requestAnimationFrame(()=>box.classList.add("aberto"));
   };
@@ -14529,6 +14561,10 @@ function limparFiltroSubcategoria(){
 .fy-home-submenu-head h3{
   margin:5px 0 0;font:400 27px Georgia,"Times New Roman",serif;color:#74152f
 }
+.fy-menu-dez-abas{display:flex;gap:8px;margin:-3px 0 16px}
+.fy-menu-dez-abas button{flex:1;padding:10px 14px;border:1px solid #ecd9df;border-radius:999px;background:#fff;color:#5b3540;font-size:10px;font-weight:800}
+.fy-menu-dez-abas button.ativa{background:#351f27;color:#fff;border-color:#351f27}
+.fy-menu-dez-voltar{margin:-4px 0 14px;padding:0;border:0;background:transparent;color:#b83f61;font-size:9px;font-weight:800;text-decoration:underline}
 .fy-home-submenu-close{
   width:36px;height:36px;border:1px solid #efdfe4;border-radius:50%;
   background:#fff;color:#6d3b49;font-size:22px
