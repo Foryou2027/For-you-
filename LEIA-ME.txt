@@ -1,0 +1,2 @@
+Estas imagens acompanham o index.html atualizado da loja FOR YOU.
+Depois de extrair o arquivo ZIP, envie todos os arquivos .webp para a mesma pasta do index.html no GitHub.

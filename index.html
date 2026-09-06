@@ -7332,7 +7332,9 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <style id="fy-produtos-visiveis-correcao">
 #novidades{display:block!important;visibility:visible!important;opacity:1!important}
 #listaProdutos{display:grid!important;visibility:visible!important;opacity:1!important}
-#listaProdutos .produto{display:block!important;visibility:visible!important;opacity:1!important}
+#novidades #listaProdutos .produto,
+#novidades #listaProdutos .produto:nth-child(n),
+#novidades #listaProdutos .produto:nth-child(n+5){display:block!important;visibility:visible!important;opacity:1!important}
 </style>
 
 
@@ -8662,7 +8664,39 @@ preco:10.00,
 nota:5,
 imagem:"produto-agua-micelar-max-love.webp",
 descricao:"Água micelar com extrato de rosa-mosqueta, ácido hialurônico e água termal. Auxilia na remoção da maquiagem, hidratação e limpeza da pele."
-}
+},
+
+{id:212,nome:"Óleo de Rosa Mosqueta 100% Puro 10 ml",marca:"Max Love",categoria:"Skincare",subcategoria:"Óleos Faciais",preco:10.00,nota:5,imagem:"produto-oleo-rosa-mosqueta.webp",descricao:"Óleo de rosa mosqueta 100% puro para corpo, rosto, cabelos e unhas."},
+{id:213,nome:"Pó Facial Finalizador Porcelana Vegano",marca:"Max Love",categoria:"Pele",subcategoria:"Pó Facial",preco:10.00,nota:5,imagem:"produto-po-porcelana-max-love.webp",galeria:["produto-po-porcelana-max-love-2.webp"],descricao:"Pó facial finalizador porcelana vegano com toque aveludado e efeito soft focus."},
+{id:214,nome:"Máscara Facial Peel Off Total Black 50 g",marca:"Max Love",categoria:"Skincare",subcategoria:"Máscara Facial",preco:10.00,nota:5,imagem:"produto-mascara-total-black.webp",descricao:"Máscara facial peel off Total Black com ação hidratante."},
+{id:215,nome:"Lip Volumoso 3 em 1 5 ml",marca:"Max Love",categoria:"Lábios",subcategoria:"Gloss",preco:10.00,nota:5,imagem:"produto-lip-volumoso-3em1.webp",galeria:["produto-lip-volumoso-3em1-2.webp"],descricao:"Gloss 3 em 1 que auxilia no aumento do volume dos lábios."},
+{id:216,nome:"Gloss Volume Chilli 5 ml",marca:"Max Love",categoria:"Lábios",subcategoria:"Gloss",preco:10.00,nota:5,imagem:"produto-gloss-chilli-rosa.webp",galeria:["produto-gloss-chilli-vermelho.webp","produto-gloss-chilli-chocolate.webp","produto-gloss-chilli-incolor.webp","produto-gloss-chilli-incolor-2.webp"],variantes:[{nome:"Rosa",imagem:"produto-gloss-chilli-rosa.webp"},{nome:"Vermelho",imagem:"produto-gloss-chilli-vermelho.webp"},{nome:"Chocolate",imagem:"produto-gloss-chilli-chocolate.webp"},{nome:"Incolor",imagem:"produto-gloss-chilli-incolor.webp"}],rotuloVariante:"Escolha o sabor",descricao:"Gloss labial Volume Chilli. Escolha o sabor antes de adicionar ao carrinho."},
+{id:217,nome:"Máscara de Cílios Loong Lashes 3 g",marca:"Miss Lary",categoria:"Olhos",subcategoria:"Máscara de Cílios",preco:10.00,nota:5,imagem:"produto-mascara-loong-lashes.webp",galeria:["produto-mascara-loong-lashes-2.webp"],descricao:"Máscara para cílios com efeito de alongamento e definição."},
+{id:218,nome:"Pó Facial Finalizador Translúcido Rosa Mosqueta Vegano",marca:"Max Love",categoria:"Pele",subcategoria:"Pó Facial",preco:10.00,nota:5,imagem:"produto-po-rosa-mosqueta.webp",galeria:["produto-po-rosa-mosqueta-2.webp"],descricao:"Pó facial translúcido de rosa mosqueta, vegano e com toque aveludado."},
+{id:219,nome:"Esponja para Maquiagem Fantasminha — Modelos Sortidos",marca:"Vivai",categoria:"Acessórios",subcategoria:"Esponjas",preco:10.00,nota:5,imagem:"produto-esponja-fantasminha.webp",galeria:["produto-esponja-fantasminha-2.webp","produto-esponja-fantasminha-3.webp","produto-esponja-fantasminha-4.webp"],descricao:"Esponja para maquiagem em formato de fantasminha. Modelo enviado conforme disponibilidade."},
+{id:220,nome:"Tônico Facial Glow Love Melancia 200 ml",marca:"Max Love",categoria:"Skincare",subcategoria:"Tônico",preco:10.00,nota:5,imagem:"produto-tonico-melancia.webp",descricao:"Tônico facial hidratante de melancia com vitamina E e efeito iluminador."},
+{id:221,nome:"Água Micelar de Pepino 290 ml",marca:"Max Love",categoria:"Skincare",subcategoria:"Água Micelar",preco:10.00,nota:5,imagem:"produto-agua-micelar-pepino.webp",descricao:"Água micelar de pepino que demaquila, hidrata e acalma a pele."},
+{id:222,nome:"Água Micelar Hidratante Noite 290 ml",marca:"Max Love",categoria:"Skincare",subcategoria:"Água Micelar",preco:10.00,nota:5,imagem:"produto-agua-micelar-noite.webp",descricao:"Água micelar noturna que demaquila, limpa, hidrata e tonifica a pele."},
+{id:223,nome:"Máscara Multifuncional para Sobrancelhas e Cílios 3,5 ml",marca:"Max Love",categoria:"Olhos",subcategoria:"Sobrancelhas",preco:10.00,nota:5,imagem:"produto-mascara-sobrancelhas-cor30.webp",galeria:["produto-mascara-sobrancelhas-cor32.webp"],variantes:[{nome:"Cor 30",imagem:"produto-mascara-sobrancelhas-cor30.webp"},{nome:"Cor 32",imagem:"produto-mascara-sobrancelhas-cor32.webp"}],rotuloVariante:"Escolha a cor",descricao:"Máscara multifuncional para preencher e definir sobrancelhas e cílios."},
+{id:224,nome:"Balm Labial Morango do Amor 3,5 g",marca:"Miss Lary",categoria:"Lábios",subcategoria:"Lip Balm",preco:10.00,nota:5,imagem:"produto-balm-morango-miss-lary.webp",descricao:"Balm labial vegano na cor Morango do Amor."},
+{id:225,nome:"Hidratante Facial Glow Love Amora 60 g",marca:"Max Love",categoria:"Skincare",subcategoria:"Hidratante",preco:5.00,nota:5,imagem:"produto-hidratante-amora.webp",descricao:"Hidratante facial de amora com efeito glow e ação hidratante."},
+{id:226,nome:"Bruma Fixadora Calmante 200 ml",marca:"Max Love",categoria:"Pele",subcategoria:"Bruma",preco:10.00,nota:5,imagem:"produto-bruma-fixadora.webp",descricao:"Bruma fixadora com ação calmante para maquiagem, pós-maquiagem ou uso diário."},
+{id:227,nome:"Máscara Facial Peel Off de Pepino 50 g",marca:"Max Love",categoria:"Skincare",subcategoria:"Máscara Facial",preco:10.00,nota:5,imagem:"produto-mascara-peeloff-pepino.webp",descricao:"Máscara facial peel off de pepino com ação hidratante."},
+{id:228,nome:"Hidratante Facial Glow Love Goiaba 60 g",marca:"Max Love",categoria:"Skincare",subcategoria:"Hidratante",preco:10.00,nota:5,imagem:"produto-hidratante-goiaba.webp",descricao:"Hidratante facial de goiaba enriquecido com vitaminas."},
+{id:229,nome:"Creme para Área dos Olhos Glow Love Uva 60 g",marca:"Max Love",categoria:"Skincare",subcategoria:"Área dos Olhos",preco:10.00,nota:5,imagem:"produto-creme-olhos-uva.webp",descricao:"Creme para a área dos olhos de uva que auxilia na renovação da pele."},
+{id:230,nome:"Lip Oil Roll-on Sugar Shop",marca:"Fenzza",categoria:"Lábios",subcategoria:"Óleo Labial",preco:10.00,nota:5,imagem:"produto-lip-oil-sugar-shop.webp",descricao:"Lip oil roll-on para hidratar e dar brilho aos lábios."},
+{id:231,nome:"Máscara de Cílios Olhar Perfeito",marca:"Vivai",categoria:"Olhos",subcategoria:"Máscara de Cílios",preco:10.00,nota:5,imagem:"produto-mascara-olhar-perfeito.webp",descricao:"Máscara de cílios Olhar Perfeito com aplicador curvado."},
+{id:232,nome:"Copo com 10 Esponjas para Maquiagem",marca:"FOR YOU",categoria:"Acessórios",subcategoria:"Esponjas",preco:10.00,nota:5,imagem:"produto-copo-10-esponjas.webp",galeria:["produto-copo-10-esponjas-2.webp"],descricao:"Copo com 10 esponjas para maquiagem em formatos e cores sortidos."},
+{id:233,nome:"Delineador Líquido Ultra Black 8 g",marca:"Vivai",categoria:"Olhos",subcategoria:"Delineador",preco:10.00,nota:5,imagem:"produto-delineador-ultra-black.webp",descricao:"Delineador líquido preto Ultra Black com aplicador preciso."},
+{id:234,nome:"Lip Balm Hidratante com Vitamina E e Vaselina",marca:"Vivai",categoria:"Lábios",subcategoria:"Lip Balm",preco:10.00,nota:5,imagem:"produto-lip-balm-vivai.webp",descricao:"Hidratante labial com vitamina E e vaselina."},
+{id:235,nome:"Hidramatte Primer Facial HD Vegano 20 ml",marca:"Miss Lary",categoria:"Pele",subcategoria:"Primer",preco:10.00,nota:5,imagem:"produto-primer-hidramatte.webp",descricao:"Primer facial HD vegano com toque aveludado, controle da oleosidade e hidratação."},
+{id:236,nome:"Gel Incolor 2 em 1 Antifrizz para Cabelos e Sobrancelhas",marca:"Miss Lary",categoria:"Olhos",subcategoria:"Sobrancelhas",preco:10.00,nota:5,imagem:"produto-gel-incolor-2em1.webp",descricao:"Gel incolor 2 em 1 para alinhar cabelos e sobrancelhas."},
+{id:237,nome:"Contorno e Corretivo 2 em 1 — Cor 06",marca:"Miss Lary",categoria:"Pele",subcategoria:"Corretivo",preco:10.00,nota:5,imagem:"produto-corretivo-contorno-cor06.webp",descricao:"Contorno e corretivo 2 em 1 vegano, cremoso e de alta cobertura. Cor 06."},
+{id:238,nome:"Blindagem Spray 100 ml",marca:"Miss Lary",categoria:"Pele",subcategoria:"Fixador",preco:10.00,nota:5,imagem:"produto-blindagem-spray.webp",descricao:"Blindagem em spray resistente ao suor, que fixa a maquiagem e aumenta a durabilidade."},
+{id:239,nome:"Paleta de Iluminador 3 Cores 10 g",marca:"Max Love",categoria:"Pele",subcategoria:"Iluminador",preco:10.00,nota:5,imagem:"produto-paleta-iluminador.webp",galeria:["produto-paleta-iluminador-2.webp","produto-paleta-iluminador-3.webp"],descricao:"Paleta de iluminador com três tonalidades."},
+{id:240,nome:"Delineador Precisão Preto Intenso 3 ml",marca:"Miss Lary",categoria:"Olhos",subcategoria:"Delineador",preco:10.00,nota:5,imagem:"produto-delineador-miss-lary.webp",galeria:["produto-delineador-miss-lary-2.webp"],descricao:"Delineador preto intenso de longa duração, traço preciso e fórmula vegana."},
+{id:241,nome:"Brilho de Diamante Rose Gold",marca:"Miss Lary",categoria:"Pele",subcategoria:"Iluminador",preco:10.00,nota:5,imagem:"produto-brilho-diamante.webp",descricao:"Brilho de diamante na tonalidade Rose Gold."},
+{id:242,nome:"Kit de Esponjas — 1 Polvo + 3 Simples",marca:"FOR YOU",categoria:"Acessórios",subcategoria:"Esponjas",preco:10.00,nota:5,imagem:"produto-kit-esponja-polvo.webp",descricao:"Kit com uma esponja polvo e três esponjas simples para maquiagem."}
 
 ];
 
@@ -8947,7 +8981,7 @@ ${produto.nome}
 ${produto.estoque===0 ? 'ESGOTADO' : (produto.estoque <= 5 ? `⚠️ Restam apenas ${produto.estoque} unidades` : "Em estoque")}
 </div>
 
-<button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="adicionar('${produto.nome}',${produto.preco},${produto.id})">${produto.estoque===0?'ESGOTADO':'ADICIONAR AO CARRINHO'}</button>
+<button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="${produto.variantes&&produto.variantes.length?`abrirProduto(${produto.id})`:`adicionar('${produto.nome}',${produto.preco},${produto.id})`}">${produto.estoque===0?'ESGOTADO':(produto.variantes&&produto.variantes.length?'ESCOLHER OPÇÃO':'ADICIONAR AO CARRINHO')}</button>
 
 </div>
 `;
@@ -9017,7 +9051,7 @@ function renderProdutos(lista=produtos,mostrarTodos=false){
   const container=document.getElementById("listaProdutos");
   if(!container)return;
   container.innerHTML="";
-  const produtosNovosDez=produtos.filter(p=>Number(p.id)>=201&&Number(p.id)<=211);
+  const produtosNovosDez=produtos.filter(p=>Number(p.id)>=201&&Number(p.id)<=242);
   const restantes=produtosOrdenadosMaisVendidos().filter(p=>!produtosNovosDez.some(n=>String(n.id)===String(p.id)));
   const mostrar=lista===produtos
     ? (mostrarTodos ? [...produtosNovosDez,...restantes] : produtosNovosDez)
@@ -14413,7 +14447,7 @@ function limparFiltroSubcategoria(){
   const dados = {
     labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
     pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
-    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Lip Care"],
+    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
     face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
     acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
@@ -16322,27 +16356,24 @@ button,a,input,select{touch-action:manipulation}
 }
 </style>
 <style id="fy-safe-css">
-#fySafeModal{display:none;position:fixed;inset:0;z-index:99999;background:#351f27aa;padding:18px;overflow:auto}#fySafeModal.aberto{display:flex;align-items:center;justify-content:center}.fy-safe-box{position:relative;width:min(820px,100%);background:#fff;border-radius:22px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.fy-safe-box>button{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:#351f27;color:#fff;font-size:20px}.fy-safe-box>img{width:100%;height:370px;object-fit:contain;background:#fff8fa;border-radius:16px}.fy-safe-info{padding:25px 5px}.fy-safe-info small{color:#b83f61;letter-spacing:1px}.fy-safe-info h2{font:400 30px/1.15 Georgia,serif;margin:10px 0;color:#351f27}.fy-safe-price{font-size:25px;font-weight:700;color:#b83f61;margin:15px 0}.fy-safe-info p{font-size:12px;line-height:1.7;color:#715f65}.fy-safe-buy{width:100%;margin-top:18px;padding:14px;border:0;border-radius:99px;background:#351f27;color:#fff;font-weight:700}@media(max-width:650px){.fy-safe-box{grid-template-columns:1fr;padding:15px;gap:5px}.fy-safe-box>img{height:270px}.fy-safe-info{padding:8px 2px}.fy-safe-info h2{font-size:24px}}
+#fySafeModal{display:none;position:fixed;inset:0;z-index:99999;background:#351f27aa;padding:18px;overflow:auto}#fySafeModal.aberto{display:flex;align-items:center;justify-content:center}.fy-safe-box{position:relative;width:min(860px,100%);background:#fff;border-radius:22px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.fy-safe-close{position:absolute;right:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;background:#351f27;color:#fff;font-size:20px;z-index:2}.fy-safe-media>img{display:block;width:100%;height:370px;object-fit:contain;background:#fff8fa;border-radius:16px}.fy-safe-thumbs{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.fy-safe-thumbs button{flex:0 0 62px;width:62px;height:62px;padding:3px;border:1px solid #ead9de;border-radius:9px;background:#fff}.fy-safe-thumbs button.ativa{border:2px solid #b83f61}.fy-safe-thumbs img{width:100%;height:100%;object-fit:contain}.fy-safe-info{padding:25px 5px}.fy-safe-info>small{color:#b83f61;letter-spacing:1px}.fy-safe-info h2{font:400 30px/1.15 Georgia,serif;margin:10px 0;color:#351f27}.fy-safe-price{font-size:25px;font-weight:700;color:#b83f61;margin:15px 0}.fy-safe-info p{font-size:12px;line-height:1.7;color:#715f65}.fy-safe-variant-wrap{margin:16px 0}.fy-safe-variant-wrap>strong{display:block;font-size:12px;color:#351f27;margin-bottom:9px}.fy-safe-variants{display:flex;flex-wrap:wrap;gap:7px}.fy-safe-variants button{padding:9px 13px;border:1px solid #d9c4ca;border-radius:99px;background:#fff;color:#351f27;font-weight:700}.fy-safe-variants button.ativa{border-color:#b83f61;background:#fff0f4;color:#9d294c}.fy-safe-buy{width:100%;margin-top:18px;padding:14px;border:0;border-radius:99px;background:#351f27;color:#fff;font-weight:700}@media(max-width:650px){#fySafeModal{padding:10px}.fy-safe-box{grid-template-columns:1fr;padding:15px;gap:5px}.fy-safe-media>img{height:270px}.fy-safe-info{padding:8px 2px}.fy-safe-info h2{font-size:24px}.fy-safe-thumbs button{flex-basis:54px;width:54px;height:54px}}
 </style>
-<div id="fySafeModal" onclick="if(event.target===this)fyFecharProduto()"><div class="fy-safe-box"><button onclick="fyFecharProduto()">×</button><img id="fySafeImg" alt=""><div class="fy-safe-info"><small id="fySafeMarca"></small><h2 id="fySafeNome"></h2><div>★★★★★</div><div class="fy-safe-price">R$ 10,00</div><p id="fySafeDesc"></p><button class="fy-safe-buy" id="fySafeBuy">ADICIONAR AO CARRINHO</button></div></div></div>
+<div id="fySafeModal" onclick="if(event.target===this)fyFecharProduto()"><div class="fy-safe-box"><button class="fy-safe-close" onclick="fyFecharProduto()">×</button><div class="fy-safe-media"><img id="fySafeImg" alt=""><div class="fy-safe-thumbs" id="fySafeThumbs"></div></div><div class="fy-safe-info"><small id="fySafeMarca"></small><h2 id="fySafeNome"></h2><div>★★★★★</div><div class="fy-safe-price" id="fySafePrice"></div><p id="fySafeDesc"></p><div class="fy-safe-variant-wrap" id="fySafeVariantWrap"><strong id="fySafeVariantLabel"></strong><div class="fy-safe-variants" id="fySafeVariants"></div></div><button class="fy-safe-buy" id="fySafeBuy">ADICIONAR AO CARRINHO</button></div></div></div>
 <script id="fy-safe-catalog">
 (function(){
-const itens=[
-[201,'Escova Mágica — Cores Sortidas','FOR YOU','produto-escova-magica.webp','Escova desembaraçadora. Cor enviada conforme a disponibilidade.'],
-[202,'Lápis Preto com Apontador Vivai','Vivai','produto-lapis-vivai.webp','Lápis preto para olhos acompanhado de apontador.'],
-[203,'Touca de Cetim Simples — Cores Sortidas','FOR YOU','produto-touca-cetim.webp','Touca de cetim simples. Cor enviada conforme a disponibilidade.'],
-[204,'Lenço Removedor de Maquiagem Vivai','Vivai','produto-lenco-vivai.webp','Lenço removedor de maquiagem para todos os tipos de pele.'],
-[205,'Massageador Capilar de Lavatório — Cores Sortidas','FOR YOU','produto-massageador-capilar.webp','Massageador para lavagem e limpeza do couro cabeludo.'],
-[206,'Esponja Make Blender — Cores Sortidas','FOR YOU','produto-esponja-blender.webp','Esponja para aplicação e acabamento da maquiagem.'],
-[207,'Esponja para Maquiagem Manga','FOR YOU','produto-esponja-manga.webp','Pode ser utilizada seca ou úmida para aplicação uniforme.'],
-[208,'Esponja para Maquiagem Gota Ruby Anjo','Ruby Anjo','produto-esponja-gota-ruby-anjo.webp','Esponja em formato de gota para aplicação uniforme.'],
-[209,'Tônico Facial de Limpeza Love 290 ml','Max Love Studio','produto-tonico-max-love.webp','Solução para limpeza facial com ação adstringente.'],
-[210,'Primer Hidratante Anticraquelamento Love 30 ml','Max Love','produto-primer-max-love.webp','Primer hidratante que prepara a pele para a maquiagem.'],
-[211,'Água Micelar Rosa Mosqueta Love 290 ml','Max Love Studio','produto-agua-micelar-max-love.webp','Auxilia na remoção da maquiagem, hidratação e limpeza da pele.']];
-window.fyAbrirProduto=function(id){const p=itens.find(x=>x[0]===Number(id));if(!p)return;fySafeImg.src=p[3];fySafeImg.alt=p[1];fySafeMarca.textContent=p[2];fySafeNome.textContent=p[1];fySafeDesc.textContent=p[4];fySafeBuy.onclick=function(){if(typeof adicionar==='function')adicionar(p[1],10,p[0]);else alert('Produto adicionado: '+p[1]);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
-window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow=''};
-const grupos={201:['Acessórios','Acessórios de Cabelo'],202:['Olhos','Lápis de Olho'],203:['Acessórios','Acessórios de Cabelo'],204:['Skincare','Removedores de Maquiagem'],205:['Acessórios','Acessórios de Cabelo'],206:['Acessórios','Esponjas'],207:['Acessórios','Esponjas'],208:['Acessórios','Esponjas'],209:['Skincare','Tônico'],210:['Pele','Primer'],211:['Skincare','Água Micelar']};
-function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');const grupo=grupos[p[0]]||['',''];d.className='produto fy-produto-real';d.dataset.categoria=grupo[0];d.dataset.subcategoria=grupo[1];d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p[0]+')"><span class="etiqueta">R$ 10</span><img src="'+p[3]+'" alt="'+p[1]+'"></div><div class="produto-info"><div class="marca">'+p[2]+'</div><div class="nome">'+p[1]+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">R$ 10,00</div><button class="adicionar" onclick="fyAbrirProduto('+p[0]+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
+const itens=(typeof produtos!=="undefined"&&Array.isArray(produtos))?produtos.filter(p=>Number(p.id)>=201&&Number(p.id)<=242):[];
+let produtoAtual=null;
+let varianteAtual=null;
+const dinheiro=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+function fotosProduto(p){return [...new Set([p.imagem,...(Array.isArray(p.galeria)?p.galeria:[])].filter(Boolean))]}
+function selecionarFoto(src){fySafeImg.src=src;document.querySelectorAll('#fySafeThumbs button').forEach(b=>b.classList.toggle('ativa',b.dataset.src===src))}
+function montarFotos(p){const fotos=fotosProduto(p);fySafeThumbs.innerHTML=fotos.length>1?fotos.map((src,i)=>'<button type="button" class="'+(i===0?'ativa':'')+'" data-src="'+src+'" onclick="fySelecionarFoto(\''+src+'\')"><img src="'+src+'" alt=""></button>').join(''):'';selecionarFoto(p.imagem)}
+window.fySelecionarFoto=selecionarFoto;
+window.fySelecionarVariante=function(indice){if(!produtoAtual||!produtoAtual.variantes)return;varianteAtual=produtoAtual.variantes[indice];document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>b.classList.toggle('ativa',i===indice));if(varianteAtual.imagem)selecionarFoto(varianteAtual.imagem)};
+window.fyAbrirProduto=function(id){const p=itens.find(x=>Number(x.id)===Number(id));if(!p)return;produtoAtual=p;varianteAtual=null;fySafeMarca.textContent=p.marca||'FOR YOU';fySafeNome.textContent=p.nome;fySafePrice.textContent=dinheiro(p.preco);fySafeDesc.textContent=p.descricao||'';montarFotos(p);const variantes=Array.isArray(p.variantes)?p.variantes:[];fySafeVariantWrap.style.display=variantes.length?'block':'none';fySafeVariantLabel.textContent=p.rotuloVariante||'Escolha uma opção';fySafeVariants.innerHTML=variantes.map((v,i)=>'<button type="button" onclick="fySelecionarVariante('+i+')">'+v.nome+'</button>').join('');fySafeBuy.onclick=function(){if(variantes.length&&!varianteAtual){alert((p.rotuloVariante||'Escolha uma opção')+' antes de adicionar ao carrinho.');return}const nomeCarrinho=p.nome+(varianteAtual?' — '+varianteAtual.nome:'');if(typeof adicionar==='function')adicionar(nomeCarrinho,p.preco,p.id);else alert('Produto adicionado: '+nomeCarrinho);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
+window.abrirProduto=window.fyAbrirProduto;
+window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow='';produtoAtual=null;varianteAtual=null};
+function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';const preco=dinheiro(p.preco);d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span><img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
 window.selecionarSubcategoria=function(categoria,subcategoria){
   const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   const cat=normalizar(categoria),sub=normalizar(subcategoria);
