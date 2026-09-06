@@ -7028,7 +7028,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 <svg class="fy-user-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c.8-4.1 3.4-6.2 7.5-6.2s6.7 2.1 7.5 6.2"/></svg>
 </button>
 
-<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" aria-label="Abrir carrinho" title="Carrinho">
+<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" onclick="fyAbrirPaginaCarrinho();return false;" aria-label="Abrir carrinho" title="Carrinho">
   🛒<span class="contador" id="contadorCarrinho">0</span>
 </button>
 
@@ -7098,6 +7098,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <a href="#produtos" onclick="selecionarSubcategoria('skincare','Protetor Solar');return false;">Protetor Solar</a>
 <a href="#produtos" onclick="selecionarSubcategoria('skincare','Máscara Facial');return false;">Máscara Facial</a>
 <a href="#produtos" onclick="selecionarSubcategoria('skincare','Tônico');return false;">Tônico</a>
+<a href="#produtos" onclick="selecionarSubcategoria('skincare','Removedores de Maquiagem');return false;">Removedores de Maquiagem</a>
 <a href="#produtos" onclick="selecionarSubcategoria('skincare','Lip Care');return false;">Lip Care</a>
 <a class="menu-ver-todos" href="#produtos" onclick="selecionarSubcategoria('skincare','');return false;">Ver todos</a>
 </div>
@@ -8492,6 +8493,145 @@ nota:4.6,
 estoque:10,
 imagem:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85",
 descricao:"Blush especial com preço promocional."
+},
+
+{
+id:201,
+nome:"Escova Mágica — Cores Sortidas",
+marca:"FOR YOU",
+categoria:"Acessórios",
+subcategoria:"Acessórios de Cabelo",
+preco:10.00,
+nota:5,
+imagem:"produto-escova-magica.webp",
+descricao:"Escova desembaraçadora de formato anatômico. A cor será enviada conforme a disponibilidade em estoque."
+},
+
+{
+id:202,
+nome:"Lápis Preto com Apontador Vivai",
+marca:"Vivai",
+categoria:"Olhos",
+subcategoria:"Lápis de Olho",
+preco:10.00,
+nota:5,
+imagem:"produto-lapis-vivai.webp",
+galeria:["produto-lapis-vivai-2.webp","produto-lapis-vivai-3.webp"],
+descricao:"Lápis preto para olhos acompanhado de apontador."
+},
+
+{
+id:203,
+nome:"Touca de Cetim Simples — Cores Sortidas",
+marca:"FOR YOU",
+categoria:"Acessórios",
+subcategoria:"Acessórios de Cabelo",
+preco:10.00,
+nota:5,
+imagem:"produto-touca-cetim.webp",
+galeria:["produto-touca-cetim-2.webp"],
+descricao:"Touca de cetim simples. A cor será enviada conforme a disponibilidade em estoque."
+},
+
+{
+id:204,
+nome:"Lenço Removedor de Maquiagem Vivai",
+marca:"Vivai",
+categoria:"Skincare",
+subcategoria:"Removedores de Maquiagem",
+preco:10.00,
+nota:5,
+imagem:"produto-lenco-vivai.webp",
+galeria:["produto-lenco-vivai-2.webp"],
+descricao:"Lenço removedor de maquiagem para todos os tipos de pele, com ação calmante e regenerante."
+},
+
+{
+id:205,
+nome:"Massageador Capilar de Lavatório — Cores Sortidas",
+marca:"FOR YOU",
+categoria:"Acessórios",
+subcategoria:"Acessórios de Cabelo",
+preco:10.00,
+nota:5,
+imagem:"produto-massageador-capilar.webp",
+galeria:["produto-massageador-capilar-2.webp"],
+descricao:"Massageador para usar durante a lavagem dos cabelos. Auxilia na massagem e na limpeza do couro cabeludo. Cor enviada conforme a disponibilidade."
+},
+
+{
+id:206,
+nome:"Esponja Make Blender — Cores Sortidas",
+marca:"FOR YOU",
+categoria:"Acessórios",
+subcategoria:"Esponjas",
+preco:10.00,
+nota:5,
+imagem:"produto-esponja-blender.webp",
+galeria:["produto-esponja-blender-2.webp","produto-esponja-blender-3.webp"],
+descricao:"Esponja Make Blender para aplicação e acabamento da maquiagem. Cor enviada conforme a disponibilidade em estoque."
+},
+
+{
+id:207,
+nome:"Esponja para Maquiagem Manga",
+marca:"FOR YOU",
+categoria:"Acessórios",
+subcategoria:"Esponjas",
+preco:10.00,
+nota:5,
+imagem:"produto-esponja-manga.webp",
+galeria:["produto-esponja-manga-2.webp"],
+descricao:"Esponja em formato de manga. Pode ser utilizada seca ou úmida para uma aplicação uniforme e acabamento aveludado."
+},
+
+{
+id:208,
+nome:"Esponja para Maquiagem Gota Ruby Anjo",
+marca:"Ruby Anjo",
+categoria:"Acessórios",
+subcategoria:"Esponjas",
+preco:10.00,
+nota:5,
+imagem:"produto-esponja-gota-ruby-anjo.webp",
+galeria:["produto-esponja-gota-ruby-anjo-2.webp"],
+descricao:"Esponja em formato de gota para aplicação uniforme da maquiagem. Cor enviada conforme a disponibilidade em estoque."
+},
+
+{
+id:209,
+nome:"Tônico Facial de Limpeza Love 290 ml",
+marca:"Max Love Studio",
+categoria:"Skincare",
+subcategoria:"Tônico",
+preco:10.00,
+nota:5,
+imagem:"produto-tonico-max-love.webp",
+descricao:"Solução para limpeza facial com ação adstringente. Fórmula vegana, livre de parabenos e petrolatos."
+},
+
+{
+id:210,
+nome:"Primer Hidratante Anticraquelamento Love 30 ml",
+marca:"Max Love",
+categoria:"Pele",
+subcategoria:"Primer",
+preco:10.00,
+nota:5,
+imagem:"produto-primer-max-love.webp",
+descricao:"Primer hidratante anticraquelamento que auxilia no controle da oleosidade e prepara a pele para a maquiagem."
+},
+
+{
+id:211,
+nome:"Água Micelar Rosa Mosqueta Love 290 ml",
+marca:"Max Love Studio",
+categoria:"Skincare",
+subcategoria:"Água Micelar",
+preco:10.00,
+nota:5,
+imagem:"produto-agua-micelar-max-love.webp",
+descricao:"Água micelar com extrato de rosa-mosqueta, ácido hialurônico e água termal. Auxilia na remoção da maquiagem, hidratação e limpeza da pele."
 }
 
 ];
@@ -8551,9 +8691,12 @@ descricao:"Uma combinação especial para presentear."
 
 
 /* Catálogo persistente do administrador */
+const catalogoPadraoFY = [...produtos];
 try {
   const catalogoSalvo = JSON.parse(localStorage.getItem('forYouCatalogo') || 'null');
-  if(Array.isArray(catalogoSalvo) && catalogoSalvo.length) produtos = catalogoSalvo;
+  if(Array.isArray(catalogoSalvo) && catalogoSalvo.length){
+    produtos = [...catalogoPadraoFY.filter(base=>!catalogoSalvo.some(salvo=>String(salvo.id)===String(base.id))),...catalogoSalvo];
+  }
 } catch(e) {}
 
 /* =========================
@@ -8716,12 +8859,14 @@ favoritos.includes(produto.id);
 const div =
 document.createElement("div");
 
-div.className="produto";
+div.className="produto"+(String(produto.imagem||"").startsWith("produto-")?" fy-produto-real":"");
 
 div.dataset.nome=produto.nome;
 div.dataset.marca=produto.marca;
 div.dataset.preco=produto.preco;
 div.dataset.nota=produto.nota;
+div.dataset.categoria=produto.categoria||"";
+div.dataset.subcategoria=produto.subcategoria||"";
 
 div.innerHTML=`
 
@@ -9571,14 +9716,19 @@ favoritos.includes(produto.id);
 const detalhe =
 document.getElementById("produtoDetalhe");
 
+const fotosProduto=[produto.imagem,...(Array.isArray(produto.galeria)?produto.galeria:[])];
+
 detalhe.innerHTML=`
 
-<div class="detalhe-img">
+<div class="detalhe-img ${fotosProduto.length>1?'fy-com-galeria':''} ${String(produto.imagem||'').startsWith('produto-')?'fy-detalhe-real':''}">
 
 <img
+id="fyFotoProdutoPrincipal"
 src="${produto.imagem}"
 alt="${produto.nome}"
 >
+
+${fotosProduto.length>1?`<div class="fy-produto-miniaturas">${fotosProduto.map((foto,i)=>`<button type="button" class="${i===0?'ativa':''}" onclick="trocarFotoProduto('${foto}',this)" aria-label="Ver foto ${i+1} de ${produto.nome}"><img src="${foto}" alt=""></button>`).join('')}</div>`:''}
 
 </div>
 
@@ -9661,6 +9811,12 @@ top:0,
 behavior:"smooth"
 });
 
+}
+
+function trocarFotoProduto(src,botao){
+  const principal=document.getElementById("fyFotoProdutoPrincipal");
+  if(principal) principal.src=src;
+  document.querySelectorAll(".fy-produto-miniaturas button").forEach(b=>b.classList.toggle("ativa",b===botao));
 }
 
 
@@ -14942,7 +15098,8 @@ function fyAbrirPaginaCarrinho(){
   const pg=document.getElementById("paginaCarrinhoFY");
   if(!pg)return;
   fyPaginaAnteriorDisplay=[];
-  document.querySelectorAll("body > section, body > main, body > header, body > footer, body > .topo").forEach(el=>{
+  /* Mantém o cabeçalho visível e troca apenas o conteúdo central, como uma aba interna. */
+  document.querySelectorAll("body > section, body > main, body > footer").forEach(el=>{
     if(el===pg)return;
     fyPaginaAnteriorDisplay.push([el,el.style.display]);
     el.style.display="none";
@@ -14950,6 +15107,7 @@ function fyAbrirPaginaCarrinho(){
   const lateral=document.querySelector(".carrinho"), overlay=document.querySelector(".overlay");
   if(lateral)lateral.classList.remove("aberto");
   if(overlay)overlay.classList.remove("ativo");
+  document.body.style.overflow="";
   pg.classList.add("ativa");
   fyRenderPaginaCarrinho();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -16110,6 +16268,23 @@ button,a,input,select{touch-action:manipulation}
   #loja > .home-quick button{flex:0 0 68px!important;width:68px!important;min-width:68px!important;scroll-snap-align:start!important}
   #loja > .home-quick button span{width:58px!important;height:58px!important;font-size:21px!important;margin-bottom:7px!important;border-width:1.5px!important}
   #loja > .home-quick button strong{font-size:12px!important}
+}
+</style>
+<style id="fy-produtos-fotos-reais-v1">
+.produto.fy-produto-real .produto-img{background:#fff!important}
+.produto.fy-produto-real .produto-img img{object-fit:contain!important;object-position:center!important;padding:10px!important;background:#fff!important}
+.detalhe-img.fy-detalhe-real{background:#fff!important}
+.detalhe-img.fy-detalhe-real>img{object-fit:contain!important;object-position:center!important;background:#fff!important;padding:12px!important}
+.detalhe-img.fy-com-galeria{height:auto!important;overflow:visible!important}
+.detalhe-img.fy-com-galeria>img{display:block!important;width:100%!important;height:410px!important}
+.fy-produto-miniaturas{display:flex;gap:9px;margin-top:10px;overflow-x:auto;padding:2px 1px 6px;scrollbar-width:thin}
+.fy-produto-miniaturas button{flex:0 0 72px;width:72px;height:72px;padding:3px;border:1px solid #ead9de;border-radius:10px;background:#fff;overflow:hidden}
+.fy-produto-miniaturas button.ativa{border:2px solid #b83f61}
+.fy-produto-miniaturas button img{display:block;width:100%!important;height:100%!important;padding:0!important;object-fit:contain!important;background:#fff!important}
+@media(max-width:700px){
+  .produto.fy-produto-real .produto-img img{padding:6px!important}
+  .detalhe-img.fy-com-galeria>img{height:320px!important}
+  .fy-produto-miniaturas button{flex-basis:62px;width:62px;height:62px}
 }
 </style>
 </body>
