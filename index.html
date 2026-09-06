@@ -7221,18 +7221,13 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <section class="home-quick" aria-label="Acesso rápido às categorias">
   <div class="home-quick-heading">
-    <small>ENCONTRE SEU FAVORITO</small>
-    <h2>Compre por categoria</h2>
-    <p>Escolha uma categoria e descubra nossos produtos.</p>
+    <small>ACHADINHOS PARA VOCÊ</small>
+    <h2>Produtos de R$ 10</h2>
+    <p>Escolha por categoria ou por marca.</p>
   </div>
   <div class="home-quick-inner">
-    <button onclick="abrirSubmenuHomeFY('labios')"><span><img src="categoria-labios.png" alt=""></span><strong>Lábios</strong><small>Gloss, batom e mais</small></button>
-    <button onclick="abrirSubmenuHomeFY('pele')"><span><img src="categoria-pele.png" alt=""></span><strong>Pele</strong><small>Base, blush e pó</small></button>
-    <button onclick="abrirSubmenuHomeFY('skincare')"><span><img src="categoria-skincare.png" alt=""></span><strong>Skincare</strong><small>Cuidados diários</small></button>
-    <button onclick="abrirSubmenuHomeFY('olhos')"><span><img src="categoria-olhos.png" alt=""></span><strong>Olhos</strong><small>Máscara e sombras</small></button>
-    <button onclick="abrirSubmenuHomeFY('face')"><span><img src="categoria-face.png" alt=""></span><strong>Face</strong><small>Contorno e iluminador</small></button>
-    <button onclick="abrirSubmenuHomeFY('acessorios')"><span><img src="categoria-acessorios.png" alt=""></span><strong>Acessórios</strong><small>Pincéis e esponjas</small></button>
-    <button onclick="abrirSubmenuHomeFY('corpo')"><span><img src="categoria-corpo.png" alt=""></span><strong>Corpo</strong><small>Hidratação e aromas</small></button>
+    <button onclick="abrirProdutosDezFY('categorias')"><span>♡</span><strong>Categorias</strong><small>Lábios, pele, olhos e mais</small></button>
+    <button onclick="abrirProdutosDezFY('marcas')"><span>✦</span><strong>Marcas</strong><small>Escolha sua marca favorita</small></button>
   </div>
 </section>
 <!-- FY DESTAQUES LOJA -->
@@ -14458,7 +14453,26 @@ function limparFiltroSubcategoria(){
   };
   const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo"};
 
-  window.abrirSubmenuHomeFY=function(cat){
+  window.abrirProdutosDezFY=function(tipo){
+    let box=document.getElementById("fyHomeSubmenu");
+    if(!box){box=document.createElement("div");box.id="fyHomeSubmenu";box.className="fy-home-submenu";document.body.appendChild(box)}
+    const categorias=Object.keys(nomes).map(cat=>`<button type="button" onclick='abrirSubmenuHomeFY(${JSON.stringify(cat)},true)'>${nomes[cat]}</button>`).join("");
+    const marcas=["Max Love","Vivai","Miss Lary","Fenzza","Ruby Rose","Mia Make","Melu","Bella Femme","Belle Angel","Dapop","Luisance","Macrilan","Playboy"];
+    const botoesMarcas=marcas.map(m=>`<button type="button" onclick='filtrarMarcaDezFY(${JSON.stringify(m)});fecharSubmenuHomeFY()'>${m}</button>`).join("");
+    const porCategoria=tipo==="categorias";
+    box.innerHTML=`
+      <div class="fy-home-submenu-card">
+        <div class="fy-home-submenu-head">
+          <div><small>PRODUTOS DE R$ 10</small><h3>${porCategoria?'Escolha uma categoria':'Escolha uma marca'}</h3></div>
+          <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
+        </div>
+        <div class="fy-home-submenu-grid">${porCategoria?categorias:botoesMarcas}</div>
+        <button class="fy-home-submenu-all" type="button" onclick='mostrarProdutosDezFY();fecharSubmenuHomeFY()'>Ver todos os produtos de R$ 10</button>
+      </div>`;
+    requestAnimationFrame(()=>box.classList.add("aberto"));
+  };
+
+  window.abrirSubmenuHomeFY=function(cat,somenteDez=false){
     let box=document.getElementById("fyHomeSubmenu");
     if(!box){
       box=document.createElement("div");
@@ -14466,17 +14480,18 @@ function limparFiltroSubcategoria(){
       box.className="fy-home-submenu";
       document.body.appendChild(box);
     }
+    const acao=somenteDez?'selecionarSubcategoriaDezFY':'selecionarSubcategoria';
     const itens=(dados[cat]||[]).map(s =>
-      `<button type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`
+      `<button type="button" onclick='${acao}(${JSON.stringify(cat)},${JSON.stringify(s)});fecharSubmenuHomeFY()'>${s}</button>`
     ).join("");
     box.innerHTML=`
       <div class="fy-home-submenu-card">
         <div class="fy-home-submenu-head">
-          <div><small>COMPRE POR CATEGORIA</small><h3>${nomes[cat]||cat}</h3></div>
+          <div><small>${somenteDez?'PRODUTOS DE R$ 10':'COMPRE POR CATEGORIA'}</small><h3>${nomes[cat]||cat}</h3></div>
           <button class="fy-home-submenu-close" type="button" onclick="fecharSubmenuHomeFY()">×</button>
         </div>
         <div class="fy-home-submenu-grid">${itens}</div>
-        <button class="fy-home-submenu-all" type="button" onclick='selecionarSubcategoria(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
+        <button class="fy-home-submenu-all" type="button" onclick='${acao}(${JSON.stringify(cat)},"");fecharSubmenuHomeFY()'>Ver todos de ${nomes[cat]||cat}</button>
       </div>`;
     requestAnimationFrame(()=>box.classList.add("aberto"));
   };
@@ -16377,7 +16392,7 @@ window.fySelecionarVariante=function(indice){if(!produtoAtual||!produtoAtual.var
 window.fyAbrirProduto=function(id){const p=itens.find(x=>Number(x.id)===Number(id));if(!p)return;produtoAtual=p;varianteAtual=null;fySafeMarca.textContent=p.marca||'FOR YOU';fySafeNome.textContent=p.nome;fySafePrice.textContent=dinheiro(p.preco);fySafeDesc.textContent=(p.descricao||'')+(p.validade?' Validade: '+p.validade+'.':'');montarFotos(p);const variantes=Array.isArray(p.variantes)?p.variantes:[];fySafeVariantWrap.style.display=variantes.length?'block':'none';fySafeVariantLabel.textContent=p.rotuloVariante||'Escolha uma opção';fySafeVariants.innerHTML=variantes.map((v,i)=>'<button type="button" onclick="fySelecionarVariante('+i+')">'+v.nome+'</button>').join('');fySafeBuy.onclick=function(){if(variantes.length&&!varianteAtual){alert((p.rotuloVariante||'Escolha uma opção')+' antes de adicionar ao carrinho.');return}const nomeCarrinho=p.nome+(varianteAtual?' — '+varianteAtual.nome:'');if(typeof adicionar==='function')adicionar(nomeCarrinho,p.preco,p.id);else alert('Produto adicionado: '+nomeCarrinho);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
 window.abrirProduto=window.fyAbrirProduto;
 window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow='';produtoAtual=null;varianteAtual=null};
-function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';d.dataset.marca=p.marca||'';d.dataset.proximoValidade=p.proximoValidade?'true':'false';const preco=dinheiro(p.preco);const validade=p.proximoValidade?'<span class="fy-expiry-badge">Validade '+p.validade+'</span>':'';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span>'+validade+'<img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
+function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';d.dataset.marca=p.marca||'';d.dataset.preco=Number(p.preco||0);d.dataset.proximoValidade=p.proximoValidade?'true':'false';const preco=dinheiro(p.preco);const validade=p.proximoValidade?'<span class="fy-expiry-badge">Validade '+p.validade+'</span>':'';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span>'+validade+'<img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
 window.selecionarSubcategoria=function(categoria,subcategoria){
   const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   const cat=normalizar(categoria),sub=normalizar(subcategoria);
@@ -16402,6 +16417,37 @@ window.mostrarTodosProdutos=function(){
   document.querySelectorAll('#listaProdutos .produto').forEach(card=>card.style.setProperty('display','block','important'));
   const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Todos os Produtos';
   const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent='Achadinhos e marcas especiais selecionados para você.';
+};
+function prepararFiltroDez(){
+  montar();
+  document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
+  const loja=document.getElementById('loja');if(loja)loja.style.display='block';
+  return Array.from(document.querySelectorAll('#listaProdutos .produto'));
+}
+window.mostrarProdutosDezFY=function(){
+  const cards=prepararFiltroDez();let encontrados=0;
+  cards.forEach(card=>{const mostrar=Number(card.dataset.preco)<=10;card.style.setProperty('display',mostrar?'block':'none','important');if(mostrar)encontrados++});
+  const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Produtos de R$ 10';
+  const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent=encontrados+' achadinho(s) por até R$ 10.';
+  document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+};
+window.selecionarSubcategoriaDezFY=function(categoria,subcategoria){
+  const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const cat=normalizar(categoria),sub=normalizar(subcategoria),cards=prepararFiltroDez();let encontrados=0;
+  cards.forEach(card=>{const precoDez=Number(card.dataset.preco)<=10;const combina=sub?normalizar(card.dataset.subcategoria)===sub:normalizar(card.dataset.categoria)===cat;const mostrar=precoDez&&combina;card.style.setProperty('display',mostrar?'block':'none','important');if(mostrar)encontrados++});
+  const nome=subcategoria||categoria;
+  const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Produtos de R$ 10 — '+nome;
+  const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent=encontrados+' produto(s) encontrado(s).';
+  document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+};
+window.filtrarMarcaDezFY=function(marca){
+  const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const familia=t=>{const n=normalizar(t);return n.startsWith('max love')?'max love':n};
+  const procurada=familia(marca),cards=prepararFiltroDez();let encontrados=0;
+  cards.forEach(card=>{const mostrar=Number(card.dataset.preco)<=10&&familia(card.dataset.marca)===procurada;card.style.setProperty('display',mostrar?'block':'none','important');if(mostrar)encontrados++});
+  const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Produtos de R$ 10 — '+marca;
+  const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent=encontrados+' produto(s) da marca.';
+  document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
 };
 window.filtrarPorMarcaHome=function(marca){
   montar();
