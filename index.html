@@ -16343,6 +16343,30 @@ window.fyAbrirProduto=function(id){const p=itens.find(x=>x[0]===Number(id));if(!
 window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow=''};
 const grupos={201:['Acessórios','Acessórios de Cabelo'],202:['Olhos','Lápis de Olho'],203:['Acessórios','Acessórios de Cabelo'],204:['Skincare','Removedores de Maquiagem'],205:['Acessórios','Acessórios de Cabelo'],206:['Acessórios','Esponjas'],207:['Acessórios','Esponjas'],208:['Acessórios','Esponjas'],209:['Skincare','Tônico'],210:['Pele','Primer'],211:['Skincare','Água Micelar']};
 function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');const grupo=grupos[p[0]]||['',''];d.className='produto fy-produto-real';d.dataset.categoria=grupo[0];d.dataset.subcategoria=grupo[1];d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p[0]+')"><span class="etiqueta">R$ 10</span><img src="'+p[3]+'" alt="'+p[1]+'"></div><div class="produto-info"><div class="marca">'+p[2]+'</div><div class="nome">'+p[1]+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">R$ 10,00</div><button class="adicionar" onclick="fyAbrirProduto('+p[0]+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
+window.selecionarSubcategoria=function(categoria,subcategoria){
+  const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const cat=normalizar(categoria),sub=normalizar(subcategoria);
+  const cards=Array.from(document.querySelectorAll('#listaProdutos .produto'));
+  let encontrados=0;
+  cards.forEach(card=>{
+    const cardCat=normalizar(card.dataset.categoria);
+    const cardSub=normalizar(card.dataset.subcategoria);
+    const mostrar=sub ? cardSub===sub : (!cat||cardCat===cat);
+    card.style.setProperty('display',mostrar?'block':'none','important');
+    if(mostrar)encontrados++;
+  });
+  const titulo=document.querySelector('#novidades .titulo h2');
+  const texto=document.querySelector('#novidades .titulo p');
+  if(titulo)titulo.textContent=subcategoria||('Produtos de '+categoria);
+  if(texto)texto.textContent=encontrados+' produto(s) encontrado(s).';
+  document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  try{fecharMenu()}catch(e){}try{fecharSubmenuHomeFY()}catch(e){}
+};
+window.mostrarTodosProdutos=function(){
+  document.querySelectorAll('#listaProdutos .produto').forEach(card=>card.style.setProperty('display','block','important'));
+  const titulo=document.querySelector('#novidades .titulo h2');if(titulo)titulo.textContent='Produtos por R$ 10';
+  const texto=document.querySelector('#novidades .titulo p');if(texto)texto.textContent='Todos os nossos achadinhos selecionados para você.';
+};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',montar);else montar();
 })();
 </script>
