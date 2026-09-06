@@ -7028,7 +7028,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 <svg class="fy-user-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c.8-4.1 3.4-6.2 7.5-6.2s6.7 2.1 7.5 6.2"/></svg>
 </button>
 
-<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" aria-label="Abrir carrinho" title="Carrinho">
+<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" onclick="fyAbrirPaginaCarrinho();return false;" aria-label="Abrir carrinho" title="Carrinho">
   🛒<span class="contador" id="contadorCarrinho">0</span>
 </button>
 
@@ -14942,7 +14942,8 @@ function fyAbrirPaginaCarrinho(){
   const pg=document.getElementById("paginaCarrinhoFY");
   if(!pg)return;
   fyPaginaAnteriorDisplay=[];
-  document.querySelectorAll("body > section, body > main, body > header, body > footer, body > .topo").forEach(el=>{
+  /* Mantém o cabeçalho visível e troca apenas o conteúdo central, como uma aba interna. */
+  document.querySelectorAll("body > section, body > main, body > footer").forEach(el=>{
     if(el===pg)return;
     fyPaginaAnteriorDisplay.push([el,el.style.display]);
     el.style.display="none";
@@ -14950,6 +14951,7 @@ function fyAbrirPaginaCarrinho(){
   const lateral=document.querySelector(".carrinho"), overlay=document.querySelector(".overlay");
   if(lateral)lateral.classList.remove("aberto");
   if(overlay)overlay.classList.remove("ativo");
+  document.body.style.overflow="";
   pg.classList.add("ativa");
   fyRenderPaginaCarrinho();
   window.scrollTo({top:0,behavior:"smooth"});
