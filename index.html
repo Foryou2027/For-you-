@@ -13724,6 +13724,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 <!-- FOR YOU V23: camada de dados preparada para Supabase.
      Preencha URL e chave pública (anon/publishable) do seu projeto para ativar
      autenticação e dados persistentes. Nunca coloque service_role no navegador. -->
+<script>window.FOR_YOU_SUPABASE={url:'https://gqsmewyjwhoajhozjkqu.supabase.co',anonKey:'sb_publishable_L7tQ9H99_WSpsR2I6AboNg_ixEpIyf1'};</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script id="foryou-v23-data-layer">
 (function(){
@@ -16509,5 +16510,35 @@ window.abrirOfertaEspecial=function(tipo){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',montar);else montar();
 })();
 </script>
+
+<script id="foryou-supabase-products">
+(function(){
+  function normalizarProduto(p){
+    return {
+      id:Number(p.id), nome:p.nome, marca:p.marca, categoria:p.categoria, subcategoria:p.subcategoria,
+      preco:Number(p.preco), precoAntigo:p.preco_antigo==null?undefined:Number(p.preco_antigo),
+      nota:Number(p.nota||0), estoque:Number(p.estoque||0), imagem:p.imagem, galeria:p.galeria||[],
+      variantes:p.variantes||[], rotuloVariante:p.rotulo_variante, descricao:p.descricao, validade:p.validade,
+      proximoValidade:!!p.proximo_validade, achadinhoDe:!!p.achadinho_de, escolhaDe:!!p.escolha_de,
+      destaqueDe:!!p.destaque_de, ativo:p.ativo!==false
+    };
+  }
+  async function carregarProdutosSupabase(){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!sb) return;
+    const {data,error}=await sb.from('produtos').select('*').eq('ativo',true).order('id');
+    if(error){console.warn('Não foi possível carregar o catálogo do Supabase:',error.message);return;}
+    if(!Array.isArray(data)||!data.length)return;
+    produtos=data.map(normalizarProduto);
+    try{localStorage.removeItem('forYouCatalogo')}catch(e){}
+    ['renderProdutos','renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
+      try{if(typeof window[nome]==='function')window[nome]()}catch(e){}
+    });
+  }
+  window.carregarProdutosSupabase=carregarProdutosSupabase;
+  window.addEventListener('load',carregarProdutosSupabase);
+})();
+</script>
+
 </body>
 </html>
