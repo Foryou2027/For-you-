@@ -16643,7 +16643,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       nota:Number(p.nota||0), estoque:Number(p.estoque||0), imagem:p.imagem, galeria:p.galeria||[],
       variantes:p.variantes||[], rotuloVariante:p.rotulo_variante, descricao:p.descricao, validade:p.validade,
       proximoValidade:!!p.proximo_validade, achadinhoDe:!!p.achadinho_de, escolhaDe:!!p.escolha_de,
-      destaqueDe:!!p.destaque_de, ativo:p.ativo!==false
+      destaqueDe:!!p.destaque_de, novidade:!!p.novidade, ativo:p.ativo!==false
     };
   }
   async function carregarProdutosSupabase(){
@@ -16654,12 +16654,70 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(!Array.isArray(data)||!data.length)return;
     produtos=data.map(normalizarProduto);
     try{localStorage.removeItem('forYouCatalogo')}catch(e){}
-    ['renderProdutos','renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
+    ['renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
       try{if(typeof window[nome]==='function')window[nome]()}catch(e){}
     });
+    try{if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();else if(typeof window.renderProdutos==='function')window.renderProdutos([])}catch(e){}
   }
   window.carregarProdutosSupabase=carregarProdutosSupabase;
   window.addEventListener('load',carregarProdutosSupabase);
+})();
+</script>
+
+<style id="fy-catalogo-somente-categorias">
+#novidades .fy-novidades-vazio{grid-column:1/-1;text-align:center;padding:54px 20px;border:1px dashed #edcdd6;border-radius:22px;background:#fff;color:#8f747d}
+#novidades .fy-novidades-vazio span{display:block;font-size:30px;margin-bottom:10px}
+#novidades .fy-novidades-vazio strong{display:block;font:400 24px Georgia,serif;color:#7d1734;margin-bottom:7px}
+</style>
+<script id="fy-catalogo-somente-categorias">
+(function(){
+  const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  function grade(){return document.getElementById('listaProdutos')}
+  function titulo(t,s,tag){
+    const box=document.querySelector('#novidades>.titulo');if(!box)return;
+    const small=box.querySelector('small'),h=box.querySelector('h2'),p=box.querySelector('p');
+    if(small)small.textContent=tag||'FOR YOU';if(h)h.textContent=t;if(p)p.textContent=s||'';
+  }
+  function renderLista(lista){
+    const c=grade();if(!c)return;c.innerHTML='';
+    lista.forEach(p=>c.appendChild(criarCard(p)));
+  }
+  window.renderNovidadesHome=function(){
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&p.novidade);
+    titulo('Novidades da Semana','Os novos achadinhos escolhidos para você.','ACABOU DE CHEGAR');
+    renderLista(lista);
+    if(!lista.length&&grade())grade().innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Novidades chegando</strong><p>Os próximos lançamentos da FOR YOU aparecerão aqui.</p></div>';
+  };
+  window.selecionarSubcategoria=function(categoria,subcategoria){
+    const cat=normalizar(categoria),sub=normalizar(subcategoria);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>{
+      const pc=normalizar(p.categoria),ps=normalizar(p.subcategoria);
+      return p.ativo!==false&&(sub?ps===sub:pc===cat);
+    });
+    titulo(subcategoria||('Produtos de '+categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.',(categoria||'CATEGORIA').toUpperCase());
+    renderLista(lista);
+    if(!lista.length&&grade())grade().innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Nenhum produto nesta categoria</strong><p>Novos produtos serão adicionados em breve.</p></div>';
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+    try{fecharMenu()}catch(e){}try{fecharSubmenuHomeFY()}catch(e){}
+  };
+  window.mostrarProdutosDezFY=function(){
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&Number(p.preco)<=10);
+    titulo('Produtos de R$ 10',lista.length+' achadinho'+(lista.length===1?'':'s')+' por até R$ 10.','ACHADINHOS');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  window.selecionarSubcategoriaDezFY=function(categoria,subcategoria){
+    const cat=normalizar(categoria),sub=normalizar(subcategoria);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&Number(p.preco)<=10&&(sub?normalizar(p.subcategoria)===sub:normalizar(p.categoria)===cat));
+    titulo('Produtos de R$ 10 — '+(subcategoria||categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','ACHADINHOS');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  window.filtrarPorMarcaHome=function(marca){
+    const alvo=normalizar(marca);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&normalizar(p.marca)===alvo);
+    titulo(marca,lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','COMPRE POR MARCA');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  document.addEventListener('DOMContentLoaded',window.renderNovidadesHome);
 })();
 </script>
 
