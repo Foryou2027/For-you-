@@ -8933,6 +8933,18 @@ function criarCard(produto){
 const favorito =
 favoritos.includes(produto.id);
 
+const etiquetaUnica = produto.precoAntigo
+? '<span class="etiqueta">OFERTA</span>'
+: produto.proximoValidade
+? '<span class="etiqueta">PRÓXIMO DA VALIDADE</span>'
+: Number(produto.estoque) === 1
+? '<span class="etiqueta">ÚLTIMA UNIDADE</span>'
+: produto.novidade
+? '<span class="etiqueta">NOVIDADE</span>'
+: produto.maisVendido
+? '<span class="etiqueta">MAIS VENDIDO</span>'
+: '';
+
 const div =
 document.createElement("div");
 
@@ -8950,11 +8962,7 @@ div.innerHTML=`
 <div class="produto-img"
 onclick="abrirProduto(${produto.id})">
 
-<span class="etiqueta">
-${produto.precoAntigo ? "OFERTA" : (produto.nota>=4.9 ? "NOVIDADE" : "DESTAQUE")}
-</span>
-${produto.nota>=4.9 ? '<span class="selo-vendido">MAIS VENDIDO</span>' : ''}
-${produto.estoque<=5 ? '<span class="selo-ultimas">ÚLTIMAS UNIDADES</span>' : ''}
+${etiquetaUnica}
 
 ${produto.precoAntigo ? `<span class="selo-desconto">-${Math.round((1-(Number(produto.preco)/Number(produto.precoAntigo)))*100)}%</span>` : ''}
 
@@ -8991,7 +8999,7 @@ ${produto.nome}
 </div>
 
 <div class="estoque ${produto.estoque===0?'estoque-alerta':''}">
-${produto.estoque===0 ? 'ESGOTADO' : (produto.estoque <= 5 ? `⚠️ Restam apenas ${produto.estoque} unidades` : "Em estoque")}
+${produto.estoque===0 ? 'ESGOTADO' : (produto.estoque===1 ? '⚠️ Resta apenas 1 unidade' : (produto.estoque <= 5 ? `⚠️ Restam apenas ${produto.estoque} unidades` : "Em estoque"))}
 </div>
 
 <button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="${produto.variantes&&produto.variantes.length?`abrirProduto(${produto.id})`:`adicionar('${produto.nome}',${produto.preco},${produto.id})`}">${produto.estoque===0?'ESGOTADO':(produto.variantes&&produto.variantes.length?'ESCOLHER OPÇÃO':'ADICIONAR AO CARRINHO')}</button>
