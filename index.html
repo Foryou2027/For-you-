@@ -16519,6 +16519,121 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+<style id="fy-novidades-opcao-2">
+/* Novidades da Semana — opção 2: destaque concentrado nos produtos */
+#novidades{
+  background:linear-gradient(180deg,#fff 0%,#fff9fb 100%)!important;
+  padding-top:54px!important;
+}
+#novidades>.titulo{
+  max-width:680px!important;
+  margin:0 auto 30px!important;
+  text-align:center!important;
+}
+#novidades>.titulo small{
+  color:#a88955!important;
+  font-size:9px!important;
+  letter-spacing:3px!important;
+}
+#novidades>.titulo h2{
+  color:#7d1734!important;
+  font-size:44px!important;
+  font-weight:400!important;
+  margin:8px 0 7px!important;
+}
+#novidades>.titulo p{
+  color:#8f747d!important;
+  font-size:11px!important;
+}
+#novidades #listaProdutos{
+  max-width:1280px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:22px!important;
+  align-items:stretch!important;
+}
+#novidades #listaProdutos .produto{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  border:1px solid #f0d9e0!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:0 14px 38px rgba(111,48,68,.10)!important;
+  overflow:hidden!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+#novidades #listaProdutos .produto:hover{
+  transform:translateY(-7px)!important;
+  box-shadow:0 22px 48px rgba(111,48,68,.16)!important;
+}
+#novidades #listaProdutos .produto-img{
+  height:330px!important;
+  background:linear-gradient(145deg,#fff7f9,#fdebf0)!important;
+}
+#novidades #listaProdutos .produto-img img{
+  width:100%!important;
+  height:100%!important;
+  padding:12px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+#novidades #listaProdutos .etiqueta{
+  top:14px!important;
+  left:14px!important;
+  padding:8px 12px!important;
+  border-radius:999px!important;
+  background:#d94f73!important;
+  box-shadow:0 5px 14px rgba(185,63,97,.22)!important;
+}
+#novidades #listaProdutos .favoritar{
+  top:14px!important;
+  right:14px!important;
+  width:40px!important;
+  height:40px!important;
+}
+#novidades #listaProdutos .produto-info{
+  display:flex!important;
+  flex:1!important;
+  flex-direction:column!important;
+  padding:19px 18px 20px!important;
+}
+#novidades #listaProdutos .nome{
+  min-height:48px!important;
+  font-size:20px!important;
+}
+#novidades #listaProdutos .preco{
+  color:#b83f61!important;
+  font-size:23px!important;
+}
+#novidades #listaProdutos .estoque{
+  margin:9px 0 3px!important;
+}
+#novidades #listaProdutos .adicionar{
+  margin-top:auto!important;
+  padding:14px 12px!important;
+  border:0!important;
+  border-radius:12px!important;
+  background:#7d1734!important;
+  color:#fff!important;
+  box-shadow:0 8px 20px rgba(125,23,52,.18)!important;
+}
+#novidades #listaProdutos .adicionar:hover{
+  background:#b83f61!important;
+}
+@media(max-width:1000px){
+  #novidades #listaProdutos{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px){
+  #novidades{padding-top:38px!important}
+  #novidades>.titulo h2{font-size:34px!important}
+  #novidades #listaProdutos{gap:12px!important}
+  #novidades #listaProdutos .produto-img{height:220px!important}
+  #novidades #listaProdutos .produto-info{padding:14px 12px 15px!important}
+  #novidades #listaProdutos .nome{font-size:16px!important;min-height:42px!important}
+  #novidades #listaProdutos .preco{font-size:19px!important}
+}
+</style>
+
 <script id="foryou-supabase-products">
 (function(){
   function normalizarProduto(p){
