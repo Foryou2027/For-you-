@@ -6864,6 +6864,290 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 </style>
 
+
+<style id="foryou-product-cards-modern-v24">
+/* ===== FOR YOU — VITRINE DE PRODUTOS MODERNA ===== */
+.produtos{
+  max-width:1280px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:24px!important;
+  align-items:stretch!important;
+}
+
+.produto{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  background:#fff!important;
+  border:1px solid #f1e5e8!important;
+  border-radius:22px!important;
+  overflow:hidden!important;
+  box-shadow:0 6px 24px rgba(53,31,39,.045)!important;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease!important;
+}
+
+.produto:hover{
+  transform:translateY(-5px)!important;
+  border-color:#ead0d7!important;
+  box-shadow:0 18px 42px rgba(53,31,39,.10)!important;
+}
+
+.produto-img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1/1.08!important;
+  background:#fffafb!important;
+  overflow:hidden!important;
+  position:relative!important;
+}
+
+.produto-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  padding:12px!important;
+  transition:transform .4s ease!important;
+}
+
+.produto:hover .produto-img img{
+  transform:scale(1.035)!important;
+}
+
+.etiqueta{
+  top:13px!important;
+  left:13px!important;
+  border-radius:999px!important;
+  padding:7px 10px!important;
+  background:#b83f61!important;
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:.8px!important;
+  box-shadow:none!important;
+}
+
+.selo-desconto{
+  top:13px!important;
+  left:auto!important;
+  right:58px!important;
+  border-radius:999px!important;
+  background:#f0f7f2!important;
+  color:#347451!important;
+  padding:6px 8px!important;
+}
+
+.favoritar{
+  top:12px!important;
+  right:12px!important;
+  width:39px!important;
+  height:39px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:1px solid #f0e3e7!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.96)!important;
+  color:#765e66!important;
+  font-size:20px!important;
+  box-shadow:0 5px 16px rgba(53,31,39,.08)!important;
+  transition:.2s ease!important;
+}
+
+.favoritar:hover{
+  transform:scale(1.07)!important;
+  color:#c53d65!important;
+}
+
+.favoritar.favoritado{
+  color:#d63264!important;
+  background:#fff5f7!important;
+}
+
+.produto-info{
+  display:flex!important;
+  flex-direction:column!important;
+  flex:1!important;
+  padding:17px 17px 18px!important;
+}
+
+.marca{
+  color:#aa8753!important;
+  font-size:8px!important;
+  font-weight:700!important;
+  letter-spacing:1.5px!important;
+  line-height:1.2!important;
+}
+
+.nome{
+  min-height:44px!important;
+  margin:7px 0 5px!important;
+  color:#351f27!important;
+  font-family:Arial,sans-serif!important;
+  font-size:15px!important;
+  font-weight:600!important;
+  line-height:1.42!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+}
+
+.produto-meta{
+  margin-top:3px!important;
+  min-height:20px!important;
+}
+
+.produto-avaliacao{
+  color:#8e7d82!important;
+  font-size:9px!important;
+}
+
+.produto-avaliacao strong{
+  color:#c59a48!important;
+  font-size:10px!important;
+  letter-spacing:.5px!important;
+}
+
+.preco-linha{
+  margin-top:8px!important;
+  min-height:28px!important;
+  gap:6px!important;
+}
+
+.preco{
+  color:#b83f61!important;
+  font-size:21px!important;
+  font-weight:800!important;
+  letter-spacing:-.3px!important;
+}
+
+.preco-antigo{
+  color:#a79ba0!important;
+  font-size:10px!important;
+}
+
+.desconto-percentual{
+  border-radius:999px!important;
+  padding:4px 7px!important;
+  background:#eef7f1!important;
+  color:#347451!important;
+  font-size:8px!important;
+}
+
+.estoque{
+  min-height:18px!important;
+  margin-top:7px!important;
+  color:#9a5368!important;
+  font-size:8px!important;
+  line-height:1.4!important;
+}
+
+.adicionar{
+  width:100%!important;
+  min-height:44px!important;
+  margin-top:auto!important;
+  padding:12px 10px!important;
+  border:1px solid #b83f61!important;
+  border-radius:999px!important;
+  background:#b83f61!important;
+  color:#fff!important;
+  font-size:8px!important;
+  font-weight:800!important;
+  letter-spacing:.75px!important;
+  transition:background .2s ease,border-color .2s ease,transform .2s ease!important;
+}
+
+.adicionar:hover{
+  background:#351f27!important;
+  border-color:#351f27!important;
+  transform:translateY(-1px)!important;
+}
+
+.adicionar:disabled{
+  background:#eee7e9!important;
+  border-color:#eee7e9!important;
+  color:#a89ca0!important;
+  transform:none!important;
+}
+
+@media(max-width:1000px){
+  .produtos{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:18px!important;
+  }
+}
+
+@media(max-width:760px){
+  .produtos{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px!important;
+  }
+  .produto{
+    border-radius:17px!important;
+  }
+  .produto-img{
+    aspect-ratio:1/1.06!important;
+  }
+  .produto-img img{
+    padding:8px!important;
+  }
+  .produto-info{
+    padding:12px 11px 13px!important;
+  }
+  .marca{
+    font-size:7px!important;
+    letter-spacing:1px!important;
+  }
+  .nome{
+    min-height:38px!important;
+    font-size:13px!important;
+    line-height:1.35!important;
+  }
+  .produto-meta{
+    min-height:17px!important;
+  }
+  .produto-avaliacao{
+    font-size:8px!important;
+  }
+  .preco{
+    font-size:17px!important;
+  }
+  .preco-antigo{
+    font-size:9px!important;
+  }
+  .estoque{
+    min-height:16px!important;
+    font-size:7px!important;
+  }
+  .adicionar{
+    min-height:40px!important;
+    padding:10px 6px!important;
+    font-size:7px!important;
+    letter-spacing:.45px!important;
+  }
+  .favoritar{
+    width:35px!important;
+    height:35px!important;
+    top:9px!important;
+    right:9px!important;
+    font-size:18px!important;
+  }
+  .etiqueta{
+    top:10px!important;
+    left:9px!important;
+    padding:6px 8px!important;
+    font-size:6px!important;
+  }
+}
+
+@media(max-width:360px){
+  .produtos{gap:8px!important;}
+  .produto-info{padding:10px 9px 11px!important;}
+  .nome{font-size:12px!important;}
+  .preco{font-size:16px!important;}
+  .adicionar{font-size:6.5px!important;}
+}
+</style>
+
 </head>
 
 
@@ -9003,7 +9287,7 @@ ${produto.nome}
 ${produto.estoque===0 ? 'ESGOTADO' : (produto.estoque===1 ? '⚠️ Resta apenas 1 unidade' : (produto.estoque <= 5 ? `⚠️ Restam apenas ${produto.estoque} unidades` : "Em estoque"))}
 </div>
 
-<button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="${produto.variantes&&produto.variantes.length?`abrirProduto(${produto.id})`:`adicionar('${produto.nome}',${produto.preco},${produto.id})`}">${produto.estoque===0?'ESGOTADO':(produto.variantes&&produto.variantes.length?'ESCOLHER OPÇÃO':'ADICIONAR AO CARRINHO')}</button>
+<button class="adicionar" ${produto.estoque===0?'disabled':''} onclick="${produto.variantes&&produto.variantes.length?`abrirProduto(${produto.id})`:`adicionar('${produto.nome}',${produto.preco},${produto.id})`}">${produto.estoque===0?'ESGOTADO':(produto.variantes&&produto.variantes.length?'ESCOLHER OPÇÃO':'ADICIONAR À SACOLA')}</button>
 
 </div>
 `;
