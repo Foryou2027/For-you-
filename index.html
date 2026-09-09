@@ -17671,5 +17671,51 @@ document.addEventListener('DOMContentLoaded',function(){
 }
 </style>
 
+
+<style id="fy-categorias-rabisco-visivel-v2">
+/* Rabisco aplicado diretamente ao texto da categoria para ficar visível */
+#loja>.home-quick .home-quick-inner>button{
+  overflow:visible!important;
+  padding:7px 2px 14px!important;
+}
+#loja>.home-quick .home-quick-inner>button>strong{
+  position:relative!important;
+  display:inline-block!important;
+  z-index:1!important;
+  padding:0 2px 5px!important;
+  font-family:Arial,sans-serif!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  color:#211b1e!important;
+}
+#loja>.home-quick .home-quick-inner>button>strong::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:-1!important;
+  left:-5%!important;
+  right:-5%!important;
+  bottom:1px!important;
+  height:7px!important;
+  background:#f3a0b8!important;
+  opacity:.72!important;
+  transform:rotate(-2deg)!important;
+  border-radius:55% 35% 60% 40%!important;
+  clip-path:polygon(0 45%,8% 28%,18% 42%,30% 20%,43% 39%,55% 23%,68% 43%,80% 26%,92% 39%,100% 32%,98% 70%,88% 61%,76% 78%,62% 60%,49% 77%,35% 59%,22% 75%,9% 58%,0 69%)!important;
+}
+#loja>.home-quick .home-quick-inner>button:nth-child(2)>strong::after{height:5px!important;transform:rotate(1.5deg)!important;background:#ee7899!important}
+#loja>.home-quick .home-quick-inner>button:nth-child(3)>strong::after{height:8px!important;transform:rotate(-.8deg)!important;background:#f5b1c4!important}
+#loja>.home-quick .home-quick-inner>button:nth-child(4)>strong::after{height:5px!important;transform:rotate(2deg)!important;background:#d85a7e!important}
+#loja>.home-quick .home-quick-inner>button:nth-child(5)>strong::after{height:7px!important;transform:rotate(-2.5deg)!important;background:#f3a0b8!important}
+#loja>.home-quick .home-quick-inner>button:nth-child(6)>strong::after{height:6px!important;transform:rotate(1deg)!important;background:#ef8faa!important}
+#loja>.home-quick .home-quick-inner>button:nth-child(7)>strong::after{height:7px!important;transform:rotate(-1deg)!important;background:#f5b1c4!important}
+#loja>.home-quick .home-quick-inner>button:hover>strong{color:#b83f61!important}
+#loja>.home-quick .home-quick-inner>button:hover>strong::after{opacity:1!important}
+@media(max-width:700px){
+ #loja>.home-quick .home-quick-inner>button>strong{font-size:13px!important;padding-bottom:5px!important}
+ #loja>.home-quick .home-quick-inner>button>strong::after{height:6px!important}
+}
+</style>
+
 </body>
 </html>
