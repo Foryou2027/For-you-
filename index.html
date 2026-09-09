@@ -16790,9 +16790,42 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="fy-carrinho-unificado-final">
 (function(){
+  const CHAVE_CARRINHO_ANTIGO='foryou_cart_v17';
+
   function produtoDoCatalogo(id){
     if(typeof produtos==='undefined'||!Array.isArray(produtos))return null;
     return produtos.find(function(p){return Number(p.id)===Number(id)})||null;
+  }
+
+  function salvarEmTodosOsCarrinhos(){
+    const listaV17=carrinho.map(function(item){
+      return {
+        id:item.id,
+        name:item.nome,
+        price:Number(item.preco||0),
+        qty:Number(item.quantidade||1),
+        image:item.imagem||''
+      };
+    });
+    localStorage.setItem(CHAVE_CARRINHO_ANTIGO,JSON.stringify(listaV17));
+    localStorage.setItem('forYouCarrinho',JSON.stringify(carrinho));
+  }
+
+  function recuperarCarrinhoAntigo(){
+    if(carrinho.length)return;
+    let antigo=[];
+    try{antigo=JSON.parse(localStorage.getItem(CHAVE_CARRINHO_ANTIGO)||'[]')}catch(e){antigo=[]}
+    if(!Array.isArray(antigo)||!antigo.length)return;
+    antigo.forEach(function(item){
+      carrinho.push({
+        id:item.id,
+        nome:item.name||item.nome||'Produto',
+        preco:Number(item.price||item.preco||0),
+        quantidade:Number(item.qty||item.quantidade||1),
+        imagem:item.image||item.imagem||''
+      });
+    });
+    if(typeof salvar==='function')salvar();
   }
 
   window.adicionar=function(nome,preco,id){
@@ -16811,20 +16844,43 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       });
     }
     if(typeof salvar==='function')salvar();
+    salvarEmTodosOsCarrinhos();
     if(typeof atualizar==='function')atualizar();
     if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
     if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
   };
 
   window.fyAbrirPaginaCarrinho=function(){
+    recuperarCarrinhoAntigo();
     if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
   };
 
   window.abrirCarrinho=function(){
+    recuperarCarrinhoAntigo();
     if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
   };
 
+  window.adicionarV17=function(item){
+    window.adicionar(item.name||item.nome,Number(item.price||item.preco||0),item.id||null);
+  };
+
+  window.finalizarCompraV17=function(){
+    window.fyFinalizarCompra();
+  };
+
+  window.fyFinalizarCompra=function(){
+    recuperarCarrinhoAntigo();
+    if(!carrinho.length){
+      alert('Sua sacola está vazia. Adicione um produto para continuar.');
+      return;
+    }
+    salvarEmTodosOsCarrinhos();
+    if(typeof abrirCheckout==='function')abrirCheckout();
+  };
+
   document.addEventListener('DOMContentLoaded',function(){
+    recuperarCarrinhoAntigo();
+    salvarEmTodosOsCarrinhos();
     const botao=document.getElementById('btnAbrirCarrinho');
     if(botao){
       botao.setAttribute('onclick','fyAbrirCarrinhoPagina();return false;');
