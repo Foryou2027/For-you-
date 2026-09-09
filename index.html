@@ -7251,6 +7251,133 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 </style>
 
+
+<style id="foryou-produtos-clean-global-v1">
+/* FOR YOU — padrão clean único para TODOS os produtos do site */
+.produtos{
+  max-width:1200px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:34px 22px!important;
+}
+.produto, .produto-card, .product-card{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  min-width:0!important;
+  transition:transform .2s ease!important;
+}
+.produto:hover, .produto-card:hover, .product-card:hover{
+  transform:translateY(-2px)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.produto-img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1 / 1.12!important;
+  border-radius:16px!important;
+  background:#fbf8f9!important;
+  overflow:hidden!important;
+  position:relative!important;
+}
+.produto-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+.produto-info{padding:13px 2px 0!important;}
+.marca{
+  margin:0 0 6px!important;
+  color:#9b8f93!important;
+  font-family:Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:1.3px!important;
+  text-transform:uppercase!important;
+}
+.nome{
+  margin:0 0 7px!important;
+  min-height:38px!important;
+  color:#2d2528!important;
+  font-family:Arial,sans-serif!important;
+  font-size:14px!important;
+  line-height:1.35!important;
+  font-weight:600!important;
+  letter-spacing:0!important;
+}
+.estrelas,.produto-avaliacao{font-size:10px!important;color:#a98a43!important;}
+.produto-meta{margin-top:6px!important;}
+.preco-linha{margin-top:7px!important;gap:6px!important;}
+.preco{color:#2d2528!important;font-size:17px!important;font-weight:800!important;}
+.preco-antigo{font-size:10px!important;color:#aaa!important;}
+.estoque{font-size:8px!important;min-height:14px!important;margin-top:6px!important;}
+.adicionar, .produto .adicionar{
+  width:100%!important;
+  min-height:40px!important;
+  margin-top:10px!important;
+  padding:10px 12px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#f8dce5!important;
+  color:#7f2f49!important;
+  font-family:Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.25px!important;
+  box-shadow:none!important;
+}
+.adicionar:hover, .produto .adicionar:hover{background:#f2cbd8!important;color:#6e263f!important;}
+.favoritar{
+  top:10px!important;right:10px!important;
+  width:34px!important;height:34px!important;
+  background:rgba(255,255,255,.94)!important;
+  color:#b83f61!important;
+  border:0!important;border-radius:50%!important;
+  box-shadow:0 3px 12px rgba(53,31,39,.08)!important;
+}
+.etiqueta,.selo-vendido,.selo-ultimas,.selo-desconto{
+  border-radius:999px!important;
+  font-family:Arial,sans-serif!important;
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:.6px!important;
+}
+/* Títulos das vitrines: menores, modernos e discretos */
+.titulo h2, .secao .titulo h2{
+  font-family:Arial,sans-serif!important;
+  font-size:clamp(25px,3vw,34px)!important;
+  line-height:1.15!important;
+  font-weight:600!important;
+  letter-spacing:-.7px!important;
+  color:#2d2528!important;
+}
+.titulo small{font-family:Arial,sans-serif!important;font-size:9px!important;letter-spacing:2px!important;}
+/* Mobile: exatamente 2 produtos por linha */
+@media(max-width:800px){
+  .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px 12px!important;padding:0 12px!important;}
+  .produto-img{aspect-ratio:1 / 1.15!important;border-radius:13px!important;}
+  .produto-info{padding-top:10px!important;}
+  .marca{font-size:7px!important;letter-spacing:1px!important;margin-bottom:5px!important;}
+  .nome{font-size:11px!important;line-height:1.3!important;min-height:30px!important;}
+  .preco{font-size:14px!important;}
+  .produto-avaliacao,.estrelas{font-size:8px!important;}
+  .adicionar,.produto .adicionar{min-height:36px!important;font-size:8px!important;padding:9px 7px!important;margin-top:8px!important;}
+  .favoritar{width:30px!important;height:30px!important;font-size:16px!important;}
+  .titulo h2,.secao .titulo h2{font-size:25px!important;}
+}
+@media(max-width:380px){
+  .produtos{gap:22px 9px!important;padding:0 9px!important;}
+  .nome{font-size:10px!important;}
+  .adicionar,.produto .adicionar{font-size:7px!important;}
+}
+</style>
+
 </head>
 
 
