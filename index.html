@@ -16809,6 +16809,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     });
     localStorage.setItem(CHAVE_CARRINHO_ANTIGO,JSON.stringify(listaV17));
     localStorage.setItem('forYouCarrinho',JSON.stringify(carrinho));
+    try{
+      const chaveDaConta=typeof chaveContaDados==='function'?chaveContaDados('Carrinho'):'forYouCarrinho';
+      localStorage.setItem(chaveDaConta,JSON.stringify(carrinho));
+    }catch(e){}
   }
 
   function recuperarCarrinhoAntigo(){
@@ -16828,9 +16832,24 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(typeof salvar==='function')salvar();
   }
 
+  function renderizarCarrinhoUnificado(){
+    salvarEmTodosOsCarrinhos();
+    if(typeof atualizar==='function')atualizar();
+    if(typeof fyRenderPaginaCarrinho==='function')fyRenderPaginaCarrinho();
+    if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
+  }
+
+  function abrirSacolaUnificada(){
+    recuperarCarrinhoAntigo();
+    renderizarCarrinhoUnificado();
+    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+  }
+
   window.adicionar=function(nome,preco,id){
     const base=produtoDoCatalogo(id);
-    const itemExistente=carrinho.find(function(item){return item.nome===nome});
+    const itemExistente=carrinho.find(function(item){
+      return (id!=null&&String(item.id)===String(id)&&item.nome===nome)||item.nome===nome;
+    });
     if(itemExistente){
       itemExistente.quantidade=Number(itemExistente.quantidade||0)+1;
     }else{
@@ -16843,21 +16862,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         marca:base&&base.marca?base.marca:'FOR YOU'
       });
     }
-    if(typeof salvar==='function')salvar();
-    salvarEmTodosOsCarrinhos();
-    if(typeof atualizar==='function')atualizar();
-    if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
-    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+    renderizarCarrinhoUnificado();
+    abrirSacolaUnificada();
   };
 
   window.fyAbrirPaginaCarrinho=function(){
-    recuperarCarrinhoAntigo();
-    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+    abrirSacolaUnificada();
   };
 
   window.abrirCarrinho=function(){
-    recuperarCarrinhoAntigo();
-    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+    abrirSacolaUnificada();
+  };
+
+  window.abrirCarrinhoV17=function(){
+    abrirSacolaUnificada();
   };
 
   window.adicionarV17=function(item){
@@ -16866,6 +16884,19 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
   window.finalizarCompraV17=function(){
     window.fyFinalizarCompra();
+  };
+
+  window.alterarQtdV17=function(indice,diferenca){
+    if(!carrinho[indice])return;
+    const quantidade=Number(carrinho[indice].quantidade||1)+Number(diferenca||0);
+    if(quantidade<=0)carrinho.splice(indice,1);
+    else carrinho[indice].quantidade=quantidade;
+    renderizarCarrinhoUnificado();
+  };
+
+  window.removerV17=function(indice){
+    if(carrinho[indice])carrinho.splice(indice,1);
+    renderizarCarrinhoUnificado();
   };
 
   window.fyFinalizarCompra=function(){
@@ -16878,14 +16909,24 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(typeof abrirCheckout==='function')abrirCheckout();
   };
 
+  /* O documento possuía ouvintes antigos no ícone da sacola. Interceptar aqui,
+     antes deles, garante que celular e computador abram o mesmo carrinho. */
+  document.addEventListener('click',function(evento){
+    const botao=evento.target.closest&&evento.target.closest('#btnAbrirCarrinho,.carrinho-icon');
+    if(!botao)return;
+    evento.preventDefault();
+    evento.stopImmediatePropagation();
+    abrirSacolaUnificada();
+  },true);
+
   document.addEventListener('DOMContentLoaded',function(){
     recuperarCarrinhoAntigo();
-    salvarEmTodosOsCarrinhos();
+    renderizarCarrinhoUnificado();
     const botao=document.getElementById('btnAbrirCarrinho');
     if(botao){
-      botao.setAttribute('onclick','fyAbrirCarrinhoPagina();return false;');
+      botao.removeAttribute('onclick');
+      botao.setAttribute('aria-label','Abrir minha sacola');
     }
-    if(typeof atualizar==='function')atualizar();
   });
 })();
 </script>
