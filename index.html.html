@@ -7312,9 +7312,9 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 
 <section class="secao" id="novidades">
   <div class="titulo">
-    <small>FOR YOU</small>
-    <h2>Produtos por R$ 10</h2>
-    <p>Achadinhos de beleza selecionados para você.</p>
+    <small>ACABOU DE CHEGAR</small>
+    <h2>Novidades da Semana</h2>
+    <p>Os novos achadinhos escolhidos para você.</p>
   </div>
   <div class="produtos" id="listaProdutos">
     <article class="produto fy-produto-real"><div class="produto-img" onclick="fyAbrirProduto(201)"><span class="etiqueta">R$ 10</span><img src="produto-escova-magica.webp" alt="Escova Mágica — Cores Sortidas"></div><div class="produto-info"><div class="marca">FOR YOU</div><div class="nome">Escova Mágica — Cores Sortidas</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">R$ 10,00</div><button class="adicionar" onclick="fyAbrirProduto(201)">VER PRODUTO</button></div></article>
@@ -8709,7 +8709,8 @@ descricao:"Água micelar com extrato de rosa-mosqueta, ácido hialurônico e ág
 {id:247,nome:"Corretivo Cover Up",marca:"Mari Maria",categoria:"Pele",subcategoria:"Corretivo",preco:30.00,nota:5,imagem:"produto-corretivo-cover-up-mmc10.webp",galeria:["produto-corretivo-cover-up-mmc01.webp","produto-corretivo-cover-up-mmc02.webp","produto-corretivo-cover-up-mmc02-2.webp","produto-corretivo-cover-up-mmc02-3.webp","produto-corretivo-cover-up-mmc02-4.webp","produto-corretivo-cover-up-mmc10-2.webp","produto-corretivo-cover-up-mmc10-3.webp","produto-corretivo-cover-up-mmc10-4.webp","produto-corretivo-cover-up-mmc12.webp","produto-corretivo-cover-up-mmc13.webp","produto-corretivo-cover-up-tabela-bracos.webp","produto-corretivo-cover-up-tabela-tons.webp","produto-corretivo-cover-up-beneficios.webp"],variantes:[{nome:"MMC01",imagem:"produto-corretivo-cover-up-mmc01.webp"},{nome:"MMC02",imagem:"produto-corretivo-cover-up-mmc02.webp"},{nome:"MMC10",imagem:"produto-corretivo-cover-up-mmc10.webp"},{nome:"MMC11",imagem:"produto-corretivo-cover-up-tabela-tons.webp"},{nome:"MMC12",imagem:"produto-corretivo-cover-up-mmc12.webp"},{nome:"MMC13",imagem:"produto-corretivo-cover-up-mmc13.webp"}],rotuloVariante:"Escolha a cor",descricao:"Corretivo Cover Up Mari Maria de alta cobertura e acabamento uniforme. Escolha a cor antes de adicionar à sacola."},
 {id:248,nome:"Base e Corretivo Matte Velvet Skin — Baunilha",marca:"Mari Maria",categoria:"Pele",subcategoria:"Base",preco:40.00,nota:5,imagem:"produto-base-corretivo-velvet-skin-baunilha.webp",galeria:["produto-base-corretivo-velvet-skin-baunilha-2.webp","produto-base-corretivo-velvet-skin-baunilha-3.webp","produto-base-corretivo-velvet-skin-baunilha-4.webp","produto-base-corretivo-velvet-skin-baunilha-5.webp","produto-base-corretivo-velvet-skin-beneficios.webp","produto-base-corretivo-velvet-skin-tabela.webp"],descricao:"Base e corretivo matte Velvet Skin Mari Maria na cor Baunilha, com acabamento aveludado e cobertura de média a alta."},
 {id:249,nome:"Acqua Tint — Gummy",marca:"Mari Maria",categoria:"Lábios",subcategoria:"Lip Tint",preco:15.00,nota:5,imagem:"produto-acqua-tint-gummy.webp",galeria:["produto-acqua-tint-gummy-2.webp"],validade:"10/2026",proximoValidade:true,descricao:"Acqua Tint Mari Maria na cor Gummy, com textura leve e tonalidade vibrante. Produto selecionado da seção Próximos da Validade."},
-{id:250,nome:"Pó Solto Soft Silk — Vanilla Puff (MM1400-1)",marca:"Mari Maria",categoria:"Pele",subcategoria:"Pó Facial",preco:30.00,nota:5,imagem:"produto-po-solto-soft-silk-vanilla-puff.webp",galeria:["produto-po-solto-soft-silk-vanilla-puff-2.webp","produto-po-solto-soft-silk-vanilla-puff-3.webp"],descricao:"Pó solto Soft Silk Mari Maria na cor Vanilla Puff (MM1400-1), ideal para selar a maquiagem com acabamento suave."}
+{id:250,nome:"Pó Solto Soft Silk — Vanilla Puff (MM1400-1)",marca:"Mari Maria",categoria:"Pele",subcategoria:"Pó Facial",preco:30.00,nota:5,imagem:"produto-po-solto-soft-silk-vanilla-puff.webp",galeria:["produto-po-solto-soft-silk-vanilla-puff-2.webp","produto-po-solto-soft-silk-vanilla-puff-3.webp"],descricao:"Pó solto Soft Silk Mari Maria na cor Vanilla Puff (MM1400-1), ideal para selar a maquiagem com acabamento suave."},
+{id:251,nome:"Lenço Umedecido Fenzza — 25 Unidades",marca:"Fenzza",categoria:"Skincare",subcategoria:"Removedores de Maquiagem",preco:10.00,nota:5,estoque:5,imagem:"produto-lenco-fenzza-maracuja.webp",galeria:["produto-lenco-fenzza-amora.webp","produto-lenco-fenzza-cherry.webp","produto-lenco-fenzza-melancia.webp"],variantes:[{nome:"Maracujá",imagem:"produto-lenco-fenzza-maracuja.webp",estoque:5}],rotuloVariante:"Aroma disponível",novidade:true,ativo:true,descricao:"Lenços umedecidos Fenzza Skincare com aroma de maracujá. Contém 25 unidades de 20 cm x 12 cm, dobradas individualmente."}
 
 ];
 
@@ -16519,6 +16520,121 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+<style id="fy-novidades-opcao-2">
+/* Novidades da Semana — opção 2: destaque concentrado nos produtos */
+#novidades{
+  background:linear-gradient(180deg,#fff 0%,#fff9fb 100%)!important;
+  padding-top:54px!important;
+}
+#novidades>.titulo{
+  max-width:680px!important;
+  margin:0 auto 30px!important;
+  text-align:center!important;
+}
+#novidades>.titulo small{
+  color:#a88955!important;
+  font-size:9px!important;
+  letter-spacing:3px!important;
+}
+#novidades>.titulo h2{
+  color:#7d1734!important;
+  font-size:44px!important;
+  font-weight:400!important;
+  margin:8px 0 7px!important;
+}
+#novidades>.titulo p{
+  color:#8f747d!important;
+  font-size:11px!important;
+}
+#novidades #listaProdutos{
+  max-width:1280px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:22px!important;
+  align-items:stretch!important;
+}
+#novidades #listaProdutos .produto{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  border:1px solid #f0d9e0!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:0 14px 38px rgba(111,48,68,.10)!important;
+  overflow:hidden!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+#novidades #listaProdutos .produto:hover{
+  transform:translateY(-7px)!important;
+  box-shadow:0 22px 48px rgba(111,48,68,.16)!important;
+}
+#novidades #listaProdutos .produto-img{
+  height:330px!important;
+  background:linear-gradient(145deg,#fff7f9,#fdebf0)!important;
+}
+#novidades #listaProdutos .produto-img img{
+  width:100%!important;
+  height:100%!important;
+  padding:12px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+#novidades #listaProdutos .etiqueta{
+  top:14px!important;
+  left:14px!important;
+  padding:8px 12px!important;
+  border-radius:999px!important;
+  background:#d94f73!important;
+  box-shadow:0 5px 14px rgba(185,63,97,.22)!important;
+}
+#novidades #listaProdutos .favoritar{
+  top:14px!important;
+  right:14px!important;
+  width:40px!important;
+  height:40px!important;
+}
+#novidades #listaProdutos .produto-info{
+  display:flex!important;
+  flex:1!important;
+  flex-direction:column!important;
+  padding:19px 18px 20px!important;
+}
+#novidades #listaProdutos .nome{
+  min-height:48px!important;
+  font-size:20px!important;
+}
+#novidades #listaProdutos .preco{
+  color:#b83f61!important;
+  font-size:23px!important;
+}
+#novidades #listaProdutos .estoque{
+  margin:9px 0 3px!important;
+}
+#novidades #listaProdutos .adicionar{
+  margin-top:auto!important;
+  padding:14px 12px!important;
+  border:0!important;
+  border-radius:12px!important;
+  background:#7d1734!important;
+  color:#fff!important;
+  box-shadow:0 8px 20px rgba(125,23,52,.18)!important;
+}
+#novidades #listaProdutos .adicionar:hover{
+  background:#b83f61!important;
+}
+@media(max-width:1000px){
+  #novidades #listaProdutos{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px){
+  #novidades{padding-top:38px!important}
+  #novidades>.titulo h2{font-size:34px!important}
+  #novidades #listaProdutos{gap:12px!important}
+  #novidades #listaProdutos .produto-img{height:220px!important}
+  #novidades #listaProdutos .produto-info{padding:14px 12px 15px!important}
+  #novidades #listaProdutos .nome{font-size:16px!important;min-height:42px!important}
+  #novidades #listaProdutos .preco{font-size:19px!important}
+}
+</style>
+
 <script id="foryou-supabase-products">
 (function(){
   function normalizarProduto(p){
@@ -16528,7 +16644,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       nota:Number(p.nota||0), estoque:Number(p.estoque||0), imagem:p.imagem, galeria:p.galeria||[],
       variantes:p.variantes||[], rotuloVariante:p.rotulo_variante, descricao:p.descricao, validade:p.validade,
       proximoValidade:!!p.proximo_validade, achadinhoDe:!!p.achadinho_de, escolhaDe:!!p.escolha_de,
-      destaqueDe:!!p.destaque_de, ativo:p.ativo!==false
+      destaqueDe:!!p.destaque_de, novidade:!!p.novidade, ativo:p.ativo!==false
     };
   }
   async function carregarProdutosSupabase(){
@@ -16537,14 +16653,77 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     const {data,error}=await sb.from('produtos').select('*').eq('ativo',true).order('id');
     if(error){console.warn('Não foi possível carregar o catálogo do Supabase:',error.message);return;}
     if(!Array.isArray(data)||!data.length)return;
-    produtos=data.map(normalizarProduto);
+    const produtosDoSupabase=data.map(normalizarProduto);
+    const idsDoSupabase=new Set(produtosDoSupabase.map(function(p){return String(p.id)}));
+    const produtosDoGithub=(Array.isArray(produtos)?produtos:[]).filter(function(p){
+      return Number(p.id)>=251&&!idsDoSupabase.has(String(p.id));
+    });
+    produtos=produtosDoSupabase.concat(produtosDoGithub);
     try{localStorage.removeItem('forYouCatalogo')}catch(e){}
-    ['renderProdutos','renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
+    ['renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
       try{if(typeof window[nome]==='function')window[nome]()}catch(e){}
     });
+    try{if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();else if(typeof window.renderProdutos==='function')window.renderProdutos([])}catch(e){}
   }
   window.carregarProdutosSupabase=carregarProdutosSupabase;
   window.addEventListener('load',carregarProdutosSupabase);
+})();
+</script>
+
+<style id="fy-catalogo-somente-categorias">
+#novidades .fy-novidades-vazio{grid-column:1/-1;text-align:center;padding:54px 20px;border:1px dashed #edcdd6;border-radius:22px;background:#fff;color:#8f747d}
+#novidades .fy-novidades-vazio span{display:block;font-size:30px;margin-bottom:10px}
+#novidades .fy-novidades-vazio strong{display:block;font:400 24px Georgia,serif;color:#7d1734;margin-bottom:7px}
+</style>
+<script id="fy-catalogo-somente-categorias">
+(function(){
+  const normalizar=t=>(t||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  function grade(){return document.getElementById('listaProdutos')}
+  function titulo(t,s,tag){
+    const box=document.querySelector('#novidades>.titulo');if(!box)return;
+    const small=box.querySelector('small'),h=box.querySelector('h2'),p=box.querySelector('p');
+    if(small)small.textContent=tag||'FOR YOU';if(h)h.textContent=t;if(p)p.textContent=s||'';
+  }
+  function renderLista(lista){
+    const c=grade();if(!c)return;c.innerHTML='';
+    lista.forEach(p=>c.appendChild(criarCard(p)));
+  }
+  window.renderNovidadesHome=function(){
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&p.novidade);
+    titulo('Novidades da Semana','Os novos achadinhos escolhidos para você.','ACABOU DE CHEGAR');
+    renderLista(lista);
+    if(!lista.length&&grade())grade().innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Novidades chegando</strong><p>Os próximos lançamentos da FOR YOU aparecerão aqui.</p></div>';
+  };
+  window.selecionarSubcategoria=function(categoria,subcategoria){
+    const cat=normalizar(categoria),sub=normalizar(subcategoria);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>{
+      const pc=normalizar(p.categoria),ps=normalizar(p.subcategoria);
+      return p.ativo!==false&&(sub?ps===sub:pc===cat);
+    });
+    titulo(subcategoria||('Produtos de '+categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.',(categoria||'CATEGORIA').toUpperCase());
+    renderLista(lista);
+    if(!lista.length&&grade())grade().innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Nenhum produto nesta categoria</strong><p>Novos produtos serão adicionados em breve.</p></div>';
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+    try{fecharMenu()}catch(e){}try{fecharSubmenuHomeFY()}catch(e){}
+  };
+  window.mostrarProdutosDezFY=function(){
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&Number(p.preco)<=10);
+    titulo('Produtos de R$ 10',lista.length+' achadinho'+(lista.length===1?'':'s')+' por até R$ 10.','ACHADINHOS');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  window.selecionarSubcategoriaDezFY=function(categoria,subcategoria){
+    const cat=normalizar(categoria),sub=normalizar(subcategoria);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&Number(p.preco)<=10&&(sub?normalizar(p.subcategoria)===sub:normalizar(p.categoria)===cat));
+    titulo('Produtos de R$ 10 — '+(subcategoria||categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','ACHADINHOS');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  window.filtrarPorMarcaHome=function(marca){
+    const alvo=normalizar(marca);
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&normalizar(p.marca)===alvo);
+    titulo(marca,lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','COMPRE POR MARCA');
+    renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
+  document.addEventListener('DOMContentLoaded',window.renderNovidadesHome);
 })();
 </script>
 
