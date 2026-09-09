@@ -17475,5 +17475,59 @@ document.addEventListener('DOMContentLoaded',function(){
  }
 });
 </script>
+
+<style id="fy-final-duas-atualizacoes">
+/* FINAL: navegação clean + produtos clean juntos, colocado no fim para vencer estilos antigos */
+#loja>.home-quick{max-width:none!important;padding:0!important;margin:0!important;background:#fff!important;border:0!important;box-shadow:none!important}
+#loja>.home-quick .home-quick-heading{display:none!important}
+#loja>.home-quick .home-quick-inner{max-width:1240px!important;margin:0 auto!important;padding:16px 28px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:36px!important;overflow-x:auto!important;scrollbar-width:none!important;background:#fff!important}
+#loja>.home-quick .home-quick-inner::-webkit-scrollbar{display:none!important}
+#loja>.home-quick .home-quick-inner>button{flex:0 0 auto!important;min-width:0!important;width:auto!important;padding:6px 0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#211b1e!important;font:400 15px Arial,sans-serif!important;letter-spacing:.01em!important;white-space:nowrap!important}
+#loja>.home-quick .home-quick-inner>button:hover{transform:none!important;color:#c94f73!important;background:transparent!important}
+#loja>.home-quick .home-quick-inner>button span,#loja>.home-quick .home-quick-inner>button small{display:none!important}
+#loja>.home-quick .home-quick-inner>button strong{font:inherit!important;color:inherit!important}
+#loja>.home-quick+.fy-destaques-loja{max-width:1240px!important;width:calc(100% - 56px)!important;margin:-53px auto 0!important;padding:0!important;display:flex!important;justify-content:flex-end!important;gap:14px!important;background:transparent!important;position:relative!important;z-index:130!important;pointer-events:none!important}
+#loja>.home-quick+.fy-destaques-loja>*{pointer-events:auto!important}
+#loja>.home-quick+.fy-destaques-loja>.fy-destaque-loja-btn:first-child{display:none!important}
+#loja>.home-quick+.fy-destaques-loja .fy-destaque-loja-btn{min-height:42px!important;padding:0 25px!important;border:0!important;border-radius:999px!important;background:#fcecf1!important;color:#7f2944!important;box-shadow:none!important;font:700 13px Arial,sans-serif!important;letter-spacing:0!important}
+#loja>.home-quick+.fy-destaques-loja .fy-ofertas-btn{background:#df5278!important;color:#fff!important;padding:0 30px!important}
+#loja>.home-quick+.fy-destaques-loja .fy-seta{display:none!important}
+
+/* todos os grids de produto */
+.produtos,#novidades .produtos,#paginaFavoritos .produtos,.fy-subcat-products{max-width:1200px!important;margin-left:auto!important;margin-right:auto!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:34px 22px!important}
+.produto,.produto.fy-produto-real,#novidades .produto,#novidades .fy-produto-real{display:block!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;padding:0!important;min-width:0!important;transform:none!important}
+.produto:hover,#novidades .produto:hover{transform:none!important;border:0!important;box-shadow:none!important}
+.produto .produto-img,#novidades .produto-img{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:1/1.08!important;border:0!important;border-radius:14px!important;background:#fbf8f9!important;overflow:hidden!important;margin:0 0 10px!important;padding:0!important}
+.produto .produto-img img,.produto.fy-produto-real .produto-img img,#novidades .produto-img img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:8px!important;background:#fbf8f9!important;border-radius:0!important}
+.produto .produto-info,#novidades .produto-info{padding:0 3px!important;text-align:left!important}
+.produto .marca,#novidades .marca{font:700 8px/1.2 Arial,sans-serif!important;letter-spacing:2px!important;text-transform:uppercase!important;color:#696064!important;margin:0 0 6px!important}
+.produto .nome,#novidades .nome{font:500 14px/1.3 Arial,sans-serif!important;letter-spacing:0!important;color:#211b1e!important;margin:0 0 6px!important;min-height:36px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+.produto .estrelas,.produto .produto-avaliacao,#novidades .estrelas{font-size:9px!important;color:#c79a2b!important;margin:0 0 7px!important}
+.produto .preco,#novidades .preco{font:800 17px/1.2 Arial,sans-serif!important;color:#211b1e!important;margin:0!important}
+.produto .adicionar,#novidades .adicionar{display:block!important;width:100%!important;min-height:40px!important;margin-top:10px!important;padding:10px 12px!important;border:0!important;border-radius:999px!important;background:#fde8ee!important;color:#7b3048!important;font:700 10px Arial,sans-serif!important;letter-spacing:0!important;box-shadow:none!important}
+.produto .adicionar:hover,#novidades .adicionar:hover{background:#f9d8e2!important;color:#6e263f!important;transform:none!important}
+.produto .favoritar{top:10px!important;right:10px!important;width:34px!important;height:34px!important;border:0!important;border-radius:50%!important;background:rgba(255,255,255,.94)!important;color:#c94f73!important;box-shadow:none!important}
+.produto .etiqueta,#novidades .produto-img .etiqueta,.produto .selo-vendido,.produto .selo-desconto{border:0!important;border-radius:999px!important;background:#ed5d83!important;color:#fff!important;padding:6px 10px!important;font:800 8px Arial,sans-serif!important}
+.titulo h2,.secao .titulo h2,#novidades .titulo h2{font-family:Arial,sans-serif!important;font-size:clamp(25px,3vw,34px)!important;font-weight:600!important;line-height:1.15!important;letter-spacing:-.6px!important;color:#211b1e!important}
+#novidades .titulo small{display:none!important}
+#novidades .titulo{max-width:1200px!important;margin:0 auto 22px!important;text-align:left!important}
+#novidades .titulo p{font:400 12px Arial,sans-serif!important;color:#75696d!important;margin:0!important}
+@media(max-width:900px){
+ #loja>.home-quick .home-quick-inner{gap:25px!important;padding:13px 16px!important}
+ #loja>.home-quick+.fy-destaques-loja{width:100%!important;margin:0!important;padding:0 16px 12px!important;justify-content:flex-start!important;overflow-x:auto!important;gap:10px!important;background:#fff!important;scrollbar-width:none!important}
+ #loja>.home-quick+.fy-destaques-loja .fy-destaque-loja-btn{min-height:38px!important;padding:0 18px!important;font-size:11px!important}
+}
+@media(max-width:800px){
+ .produtos,#novidades .produtos,#paginaFavoritos .produtos,.fy-subcat-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px 12px!important;padding-left:12px!important;padding-right:12px!important}
+ .produto .produto-img,#novidades .produto-img{aspect-ratio:1/1.08!important;border-radius:12px!important}
+ .produto .produto-info,#novidades .produto-info{padding:0 2px!important}
+ .produto .marca,#novidades .marca{font-size:7px!important;letter-spacing:1.3px!important}
+ .produto .nome,#novidades .nome{font-size:12px!important;min-height:32px!important}
+ .produto .preco,#novidades .preco{font-size:15px!important}
+ .produto .adicionar,#novidades .adicionar{min-height:37px!important;font-size:8px!important;padding:9px 6px!important}
+ .produto .favoritar{width:30px!important;height:30px!important;font-size:16px!important}
+}
+</style>
+
 </body>
 </html>
