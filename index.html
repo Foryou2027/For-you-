@@ -16637,6 +16637,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="foryou-supabase-products">
 (function(){
+  /* Não exibe produtos cuja foto esteja ausente ou com link quebrado. */
+  document.addEventListener('error',function(evento){
+    const imagem=evento.target;
+    if(!imagem||imagem.tagName!=='IMG')return;
+    const card=imagem.closest('.produto');
+    if(card)card.remove();
+  },true);
+
   function normalizarProduto(p){
     return {
       id:Number(p.id), nome:p.nome, marca:p.marca, categoria:p.categoria, subcategoria:p.subcategoria,
@@ -16647,13 +16655,33 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       destaqueDe:!!p.destaque_de, novidade:!!p.novidade, ativo:p.ativo!==false
     };
   }
+  function imagemDisponivel(endereco){
+    return new Promise(function(resolver){
+      if(!endereco){resolver(false);return;}
+      const teste=new Image();
+      let terminou=false;
+      function finalizar(resultado){
+        if(terminou)return;
+        terminou=true;
+        resolver(resultado);
+      }
+      teste.onload=function(){finalizar(true)};
+      teste.onerror=function(){finalizar(false)};
+      teste.src=endereco;
+      setTimeout(function(){finalizar(false)},10000);
+    });
+  }
   async function carregarProdutosSupabase(){
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
     if(!sb) return;
     const {data,error}=await sb.from('produtos').select('*').eq('ativo',true).order('id');
     if(error){console.warn('Não foi possível carregar o catálogo do Supabase:',error.message);return;}
     if(!Array.isArray(data)||!data.length)return;
-    const produtosDoSupabase=data.map(normalizarProduto);
+    const produtosNormalizados=data.map(normalizarProduto);
+    const testesDeImagem=await Promise.all(produtosNormalizados.map(async function(produto){
+      return {produto:produto,imagemOk:await imagemDisponivel(produto.imagem)};
+    }));
+    const produtosDoSupabase=testesDeImagem.filter(function(item){return item.imagemOk}).map(function(item){return item.produto});
     const idsDoSupabase=new Set(produtosDoSupabase.map(function(p){return String(p.id)}));
     const produtosDoGithub=(Array.isArray(produtos)?produtos:[]).filter(function(p){
       return Number(p.id)>=251&&!idsDoSupabase.has(String(p.id));
