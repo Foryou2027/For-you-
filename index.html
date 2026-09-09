@@ -7210,6 +7210,47 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 </style>
 
+
+<style id="fy-clean-vitrines-final-v1">
+/* FOR YOU — vitrines clean conforme referência aprovada */
+#novidades{background:#fff!important;padding:34px clamp(16px,3vw,42px) 44px!important;}
+#novidades .titulo{max-width:1200px!important;margin:0 auto 24px!important;text-align:left!important;position:relative!important;}
+#novidades .titulo small{display:none!important;}
+#novidades .titulo h2{font-family:inherit!important;font-size:clamp(25px,3vw,34px)!important;font-weight:600!important;letter-spacing:-.03em!important;line-height:1.05!important;color:#171214!important;margin:0 0 5px!important;}
+#novidades .titulo h2::after{content:' ♡';color:#ef8fac;font-weight:400;}
+#novidades .titulo p{font-size:13px!important;color:#6f6267!important;margin:0!important;}
+#novidades .produtos{max-width:1200px!important;margin:0 auto!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:30px 22px!important;}
+#novidades .produto,#novidades .fy-produto-real{display:block!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;padding:0!important;min-width:0!important;}
+#novidades .produto:hover{transform:none!important;box-shadow:none!important;}
+#novidades .produto-img{position:relative!important;width:100%!important;aspect-ratio:1/1!important;background:#fffafa!important;border:0!important;border-radius:4px!important;overflow:hidden!important;margin:0 0 10px!important;padding:0!important;}
+#novidades .produto-img img{width:100%!important;height:100%!important;object-fit:contain!important;padding:10px!important;background:#fffafa!important;border-radius:0!important;}
+#novidades .produto-img .etiqueta{position:absolute!important;left:10px!important;top:10px!important;background:#eb5f87!important;color:#fff!important;border:0!important;border-radius:999px!important;padding:6px 11px!important;font-size:9px!important;font-weight:700!important;letter-spacing:.03em!important;z-index:2!important;}
+#novidades .produto-info{padding:0 5px!important;text-align:left!important;}
+#novidades .marca{font-size:8px!important;font-weight:600!important;letter-spacing:.25em!important;text-transform:uppercase!important;color:#494044!important;margin:0 0 5px!important;}
+#novidades .nome{font-family:inherit!important;font-size:15px!important;font-weight:500!important;line-height:1.2!important;color:#171214!important;min-height:36px!important;margin:0 0 5px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+#novidades .estrelas{font-size:10px!important;line-height:1.2!important;color:#dca51d!important;margin:0 0 7px!important;letter-spacing:0!important;}
+#novidades .preco{font-size:18px!important;font-weight:800!important;color:#171214!important;margin:0 0 9px!important;}
+#novidades .adicionar{width:100%!important;min-height:40px!important;border:0!important;border-radius:999px!important;background:#fde8ee!important;color:#21191c!important;font-size:11px!important;font-weight:600!important;box-shadow:none!important;padding:10px 12px!important;}
+#novidades .adicionar:hover{background:#fbdbe4!important;transform:none!important;}
+#novidades .ver-todos-btn{background:transparent!important;color:#e65c83!important;border:0!important;box-shadow:none!important;font-size:11px!important;padding:8px 10px!important;}
+#novidades .ver-todos-btn::after{content:'  →';}
+@media(max-width:800px){
+ #novidades{padding:28px 14px 38px!important;}
+ #novidades .titulo{margin-bottom:18px!important;}
+ #novidades .titulo h2{font-size:27px!important;}
+ #novidades .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px 12px!important;}
+ #novidades .produto-img{aspect-ratio:1/1.08!important;margin-bottom:8px!important;}
+ #novidades .produto-img img{padding:6px!important;}
+ #novidades .produto-img .etiqueta{left:7px!important;top:7px!important;padding:5px 8px!important;font-size:8px!important;}
+ #novidades .produto-info{padding:0 2px!important;}
+ #novidades .marca{font-size:7px!important;}
+ #novidades .nome{font-size:13px!important;min-height:32px!important;}
+ #novidades .estrelas{font-size:9px!important;}
+ #novidades .preco{font-size:17px!important;}
+ #novidades .adicionar{min-height:38px!important;font-size:10px!important;padding:9px 7px!important;}
+}
+</style>
+
 </head>
 
 
@@ -7659,7 +7700,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 <section class="secao" id="novidades">
   <div class="titulo">
     <small>ACABOU DE CHEGAR</small>
-    <h2>Novidades da Semana</h2>
+    <h2>Novidades</h2>
     <p>Os novos achadinhos escolhidos para você.</p>
   </div>
   <div class="produtos" id="listaProdutos">
@@ -7680,13 +7721,7 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   </div>
 </section>
 
-<style id="fy-produtos-visiveis-correcao">
-#novidades{display:block!important;visibility:visible!important;opacity:1!important}
-#listaProdutos{display:grid!important;visibility:visible!important;opacity:1!important}
-#novidades #listaProdutos .produto,
-#novidades #listaProdutos .produto:nth-child(n),
-#novidades #listaProdutos .produto:nth-child(n+5){display:block!important;visibility:visible!important;opacity:1!important}
-</style>
+
 
 
 </main>
