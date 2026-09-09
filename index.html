@@ -8710,7 +8710,7 @@ descricao:"Água micelar com extrato de rosa-mosqueta, ácido hialurônico e ág
 {id:248,nome:"Base e Corretivo Matte Velvet Skin — Baunilha",marca:"Mari Maria",categoria:"Pele",subcategoria:"Base",preco:40.00,nota:5,imagem:"produto-base-corretivo-velvet-skin-baunilha.webp",galeria:["produto-base-corretivo-velvet-skin-baunilha-2.webp","produto-base-corretivo-velvet-skin-baunilha-3.webp","produto-base-corretivo-velvet-skin-baunilha-4.webp","produto-base-corretivo-velvet-skin-baunilha-5.webp","produto-base-corretivo-velvet-skin-beneficios.webp","produto-base-corretivo-velvet-skin-tabela.webp"],descricao:"Base e corretivo matte Velvet Skin Mari Maria na cor Baunilha, com acabamento aveludado e cobertura de média a alta."},
 {id:249,nome:"Acqua Tint — Gummy",marca:"Mari Maria",categoria:"Lábios",subcategoria:"Lip Tint",preco:15.00,nota:5,imagem:"produto-acqua-tint-gummy.webp",galeria:["produto-acqua-tint-gummy-2.webp"],validade:"10/2026",proximoValidade:true,descricao:"Acqua Tint Mari Maria na cor Gummy, com textura leve e tonalidade vibrante. Produto selecionado da seção Próximos da Validade."},
 {id:250,nome:"Pó Solto Soft Silk — Vanilla Puff (MM1400-1)",marca:"Mari Maria",categoria:"Pele",subcategoria:"Pó Facial",preco:30.00,nota:5,imagem:"produto-po-solto-soft-silk-vanilla-puff.webp",galeria:["produto-po-solto-soft-silk-vanilla-puff-2.webp","produto-po-solto-soft-silk-vanilla-puff-3.webp"],descricao:"Pó solto Soft Silk Mari Maria na cor Vanilla Puff (MM1400-1), ideal para selar a maquiagem com acabamento suave."},
-{id:251,nome:"Lenço Umedecido Fenzza — 25 Unidades",marca:"Fenzza",categoria:"Skincare",subcategoria:"Removedores de Maquiagem",preco:10.00,nota:5,estoque:5,imagem:"produto-lenco-fenzza-maracuja.webp",galeria:["produto-lenco-fenzza-amora.webp","produto-lenco-fenzza-cherry.webp","produto-lenco-fenzza-melancia.webp"],variantes:[{nome:"Maracujá",imagem:"produto-lenco-fenzza-maracuja.webp",estoque:5}],rotuloVariante:"Aroma disponível",novidade:true,ativo:true,descricao:"Lenços umedecidos Fenzza Skincare com aroma de maracujá. Contém 25 unidades de 20 cm x 12 cm, dobradas individualmente."}
+{id:1001,nome:"Lenço Umedecido Fenzza — 25 Unidades",marca:"Fenzza",categoria:"Skincare",subcategoria:"Removedores de Maquiagem",preco:10.00,nota:5,estoque:5,imagem:"produto-lenco-fenzza-maracuja.webp",galeria:["produto-lenco-fenzza-amora.webp","produto-lenco-fenzza-cherry.webp","produto-lenco-fenzza-melancia.webp"],variantes:[{nome:"Maracujá",imagem:"produto-lenco-fenzza-maracuja.webp",estoque:5}],rotuloVariante:"Aroma disponível",novidade:true,ativo:true,descricao:"Lenços umedecidos Fenzza Skincare com aroma de maracujá. Contém 25 unidades de 20 cm x 12 cm, dobradas individualmente."}
 
 ];
 
@@ -16428,7 +16428,40 @@ function selecionarFoto(src){fySafeImg.src=src;document.querySelectorAll('#fySaf
 function montarFotos(p){const fotos=fotosProduto(p);fySafeThumbs.innerHTML=fotos.length>1?fotos.map((src,i)=>'<button type="button" class="'+(i===0?'ativa':'')+'" data-src="'+src+'" onclick="fySelecionarFoto(\''+src+'\')"><img src="'+src+'" alt=""></button>').join(''):'';selecionarFoto(p.imagem)}
 window.fySelecionarFoto=selecionarFoto;
 window.fySelecionarVariante=function(indice){if(!produtoAtual||!produtoAtual.variantes)return;varianteAtual=produtoAtual.variantes[indice];document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>b.classList.toggle('ativa',i===indice));if(varianteAtual.imagem)selecionarFoto(varianteAtual.imagem)};
-window.fyAbrirProduto=function(id){const catalogoAtual=(typeof produtos!=="undefined"&&Array.isArray(produtos))?produtos:itens;const p=catalogoAtual.find(x=>Number(x.id)===Number(id));if(!p)return;produtoAtual=p;varianteAtual=null;fySafeMarca.textContent=p.marca||'FOR YOU';fySafeNome.textContent=p.nome;fySafePrice.textContent=dinheiro(p.preco);fySafeDesc.textContent=(p.descricao||'')+(p.validade?' Validade: '+p.validade+'.':'');montarFotos(p);const variantes=Array.isArray(p.variantes)?p.variantes:[];fySafeVariantWrap.style.display=variantes.length?'block':'none';fySafeVariantLabel.textContent=p.rotuloVariante||'Escolha uma opção';fySafeVariants.innerHTML=variantes.map((v,i)=>'<button type="button" onclick="fySelecionarVariante('+i+')">'+v.nome+'</button>').join('');fySafeBuy.onclick=function(){if(variantes.length&&!varianteAtual){alert((p.rotuloVariante||'Escolha uma opção')+' antes de adicionar ao carrinho.');return}const nomeCarrinho=p.nome+(varianteAtual?' — '+varianteAtual.nome:'');if(typeof adicionar==='function')adicionar(nomeCarrinho,p.preco,p.id);else alert('Produto adicionado: '+nomeCarrinho);};fySafeModal.classList.add('aberto');document.body.style.overflow='hidden'};
+window.fyAbrirProduto=function(id){
+  const catalogoAtual=(typeof produtos!=="undefined"&&Array.isArray(produtos))?produtos:itens;
+  const p=catalogoAtual.find(x=>Number(x.id)===Number(id));
+  if(!p)return;
+  produtoAtual=p;
+  varianteAtual=null;
+  fySafeMarca.textContent=p.marca||'FOR YOU';
+  fySafeNome.textContent=p.nome;
+  fySafePrice.textContent=dinheiro(p.preco);
+  fySafeDesc.textContent=(p.descricao||'')+(p.validade?' Validade: '+p.validade+'.':'');
+  montarFotos(p);
+  const variantes=Array.isArray(p.variantes)?p.variantes:[];
+  fySafeVariantWrap.style.display=variantes.length?'block':'none';
+  fySafeVariantLabel.textContent=p.rotuloVariante||'Escolha uma opção';
+  fySafeVariants.innerHTML=variantes.map((v,i)=>'<button type="button" onclick="fySelecionarVariante('+i+')">'+v.nome+'</button>').join('');
+  if(variantes.length===1)window.fySelecionarVariante(0);
+  fySafeBuy.onclick=function(){
+    if(variantes.length&&!varianteAtual){
+      alert((p.rotuloVariante||'Escolha uma opção')+' antes de adicionar ao carrinho.');
+      return;
+    }
+    const nomeCarrinho=p.nome+(varianteAtual?' — '+varianteAtual.nome:'');
+    if(typeof adicionar==='function'){
+      adicionar(nomeCarrinho,p.preco,p.id);
+      window.fyFecharProduto();
+      if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+      else if(typeof abrirCarrinho==='function')abrirCarrinho();
+    }else{
+      alert('Produto adicionado: '+nomeCarrinho);
+    }
+  };
+  fySafeModal.classList.add('aberto');
+  document.body.style.overflow='hidden';
+};
 window.abrirProduto=window.fyAbrirProduto;
 window.fyFecharProduto=function(){fySafeModal.classList.remove('aberto');document.body.style.overflow='';produtoAtual=null;varianteAtual=null};
 function montar(){const c=document.getElementById('listaProdutos');if(!c)return;c.innerHTML='';itens.forEach(p=>{const d=document.createElement('article');d.className='produto fy-produto-real';d.dataset.categoria=p.categoria||'';d.dataset.subcategoria=p.subcategoria||'';d.dataset.marca=p.marca||'';d.dataset.preco=Number(p.preco||0);d.dataset.proximoValidade=p.proximoValidade?'true':'false';const marcaNormalizada=(p.marca||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();if(Number(p.preco||0)<=10||marcaNormalizada==='mari maria')d.style.setProperty('display','none','important');const preco=dinheiro(p.preco);const validade=p.proximoValidade?'<span class="fy-expiry-badge">Validade '+p.validade+'</span>':'';d.innerHTML='<div class="produto-img" onclick="fyAbrirProduto('+p.id+')"><span class="etiqueta">'+preco.replace(',00','')+'</span>'+validade+'<img src="'+p.imagem+'" alt="'+p.nome+'"></div><div class="produto-info"><div class="marca">'+(p.marca||'FOR YOU')+'</div><div class="nome">'+p.nome+'</div><div class="estrelas">★★★★★ 5,0</div><div class="preco">'+preco+'</div><button class="adicionar" onclick="fyAbrirProduto('+p.id+')">VER PRODUTO</button></div>';c.appendChild(d)});const loja=document.getElementById('loja');if(loja)loja.style.display='block'}
@@ -16752,6 +16785,52 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
   };
   document.addEventListener('DOMContentLoaded',window.renderNovidadesHome);
+})();
+</script>
+
+<script id="fy-carrinho-unificado-final">
+(function(){
+  function produtoDoCatalogo(id){
+    if(typeof produtos==='undefined'||!Array.isArray(produtos))return null;
+    return produtos.find(function(p){return Number(p.id)===Number(id)})||null;
+  }
+
+  window.adicionar=function(nome,preco,id){
+    const base=produtoDoCatalogo(id);
+    const itemExistente=carrinho.find(function(item){return item.nome===nome});
+    if(itemExistente){
+      itemExistente.quantidade=Number(itemExistente.quantidade||0)+1;
+    }else{
+      carrinho.push({
+        id:id,
+        nome:nome,
+        preco:Number(preco||0),
+        quantidade:1,
+        imagem:base&&base.imagem?base.imagem:'',
+        marca:base&&base.marca?base.marca:'FOR YOU'
+      });
+    }
+    if(typeof salvar==='function')salvar();
+    if(typeof atualizar==='function')atualizar();
+    if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
+    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+  };
+
+  window.fyAbrirPaginaCarrinho=function(){
+    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+  };
+
+  window.abrirCarrinho=function(){
+    if(typeof fyAbrirCarrinhoPagina==='function')fyAbrirCarrinhoPagina();
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const botao=document.getElementById('btnAbrirCarrinho');
+    if(botao){
+      botao.setAttribute('onclick','fyAbrirCarrinhoPagina();return false;');
+    }
+    if(typeof atualizar==='function')atualizar();
+  });
 })();
 </script>
 
