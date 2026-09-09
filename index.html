@@ -17277,5 +17277,41 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+
+<style id="fy-nav-clean-referencia-final">
+/* FOR YOU — navegação clean conforme referência aprovada */
+#loja>.home-quick{max-width:none!important;padding:0!important;margin:0!important;background:#fff!important;border:0!important;box-shadow:none!important}
+#loja>.home-quick .home-quick-heading{display:none!important}
+#loja>.home-quick .home-quick-inner{max-width:1240px!important;margin:0 auto!important;padding:16px 28px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:36px!important;overflow-x:auto!important;scrollbar-width:none!important;background:#fff!important}
+#loja>.home-quick .home-quick-inner::-webkit-scrollbar{display:none}
+#loja>.home-quick .home-quick-inner>button{flex:0 0 auto!important;min-width:0!important;width:auto!important;padding:6px 0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#211b1e!important;display:block!important;font-size:15px!important;font-weight:400!important;letter-spacing:.01em!important;white-space:nowrap!important;transition:color .2s ease!important}
+#loja>.home-quick .home-quick-inner>button:hover{transform:none!important;color:#c94f73!important;background:transparent!important}
+#loja>.home-quick .home-quick-inner>button span,#loja>.home-quick .home-quick-inner>button small{display:none!important}
+#loja>.home-quick .home-quick-inner>button strong{font:inherit!important;color:inherit!important}
+#loja>.home-quick+.fy-destaques-loja{max-width:1240px!important;width:calc(100% - 56px)!important;margin:-53px auto 0!important;padding:0!important;display:flex!important;justify-content:flex-end!important;gap:14px!important;background:transparent!important;position:relative!important;z-index:130!important;pointer-events:none!important}
+#loja>.home-quick+.fy-destaques-loja>*{pointer-events:auto!important}
+#loja>.home-quick+.fy-destaques-loja>.fy-destaque-loja-btn:first-child{display:none!important}
+#loja>.home-quick+.fy-destaques-loja .fy-destaque-loja-btn{min-height:42px!important;padding:0 25px!important;border:0!important;border-radius:999px!important;background:#fcecf1!important;color:#7f2944!important;box-shadow:none!important;font-size:13px!important;font-weight:700!important;letter-spacing:0!important}
+#loja>.home-quick+.fy-destaques-loja .fy-ofertas-btn{background:#df5278!important;color:#fff!important;padding:0 30px!important}
+#loja>.home-quick+.fy-destaques-loja .fy-destaque-loja-btn:hover{transform:none!important;filter:brightness(.98)!important}
+#loja>.home-quick+.fy-destaques-loja .fy-seta{display:none!important}
+#loja>.home-quick+.fy-destaques-loja + *{margin-top:16px!important}
+@media(max-width:900px){
+ #loja>.home-quick .home-quick-inner{gap:25px!important;padding:13px 16px!important}
+ #loja>.home-quick+.fy-destaques-loja{width:100%!important;margin:0!important;padding:0 16px 12px!important;justify-content:flex-start!important;overflow-x:auto!important;gap:10px!important;background:#fff!important;scrollbar-width:none!important}
+ #loja>.home-quick+.fy-destaques-loja::-webkit-scrollbar{display:none}
+ #loja>.home-quick+.fy-destaques-loja .fy-destaque-loja-btn{min-height:38px!important;padding:0 18px!important;font-size:11px!important}
+}
+</style>
+<script id="fy-nav-clean-marcas-final">
+document.addEventListener('DOMContentLoaded',function(){
+ const linha=document.querySelector('#loja .home-quick .home-quick-inner');
+ if(linha && !linha.querySelector('.fy-marcas-nav-clean')){
+   const b=document.createElement('button'); b.type='button'; b.className='fy-marcas-nav-clean'; b.innerHTML='<strong>Marcas</strong>';
+   b.onclick=function(){ const el=document.getElementById('marcas'); if(el) el.scrollIntoView({behavior:'smooth'}); };
+   linha.appendChild(b);
+ }
+});
+</script>
 </body>
 </html>
