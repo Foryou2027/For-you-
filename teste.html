@@ -7392,6 +7392,20 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 </style>
 
+
+<style id="fy-banner-height-current-slide-fix">
+.fy-banner-r10-viewport{
+  overflow:hidden !important;
+  min-height:0 !important;
+}
+.fy-banner-r10-track{
+  align-items:flex-start !important;
+}
+.fy-banner-r10-track > a{
+  align-self:flex-start !important;
+}
+</style>
+
 </head>
 
 
@@ -7730,12 +7744,10 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   if(!area||!track||!viewport||dots.length<2) return;
   let atual=0, timer;
   function ajustarAltura(){
-    if(window.innerWidth<=700){
-      const img=slides[atual]&&slides[atual].querySelector('img');
-      if(img) viewport.style.height=img.getBoundingClientRect().height+'px';
-    }else{
-      viewport.style.height='';
-    }
+    const img=slides[atual]&&slides[atual].querySelector('img');
+    if(!img) return;
+    const altura=img.getBoundingClientRect().height;
+    if(altura>0) viewport.style.height=Math.ceil(altura)+'px';
   }
   function mostrar(indice){
     atual=(indice+dots.length)%dots.length;
