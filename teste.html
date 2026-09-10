@@ -7393,16 +7393,13 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 </style>
 
 
-<style id="fy-banner-height-current-slide-fix">
+<style id="fy-banner-sem-vazio-definitivo">
 .fy-banner-r10-viewport{
   overflow:hidden !important;
   min-height:0 !important;
 }
 .fy-banner-r10-track{
   align-items:flex-start !important;
-}
-.fy-banner-r10-track > a{
-  align-self:flex-start !important;
 }
 </style>
 
@@ -7746,8 +7743,19 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
   function ajustarAltura(){
     const img=slides[atual]&&slides[atual].querySelector('img');
     if(!img) return;
-    const altura=img.getBoundingClientRect().height;
-    if(altura>0) viewport.style.height=Math.ceil(altura)+'px';
+
+    const aplicarAltura = () => {
+      const altura = img.getBoundingClientRect().height;
+      if(altura > 0){
+        viewport.style.setProperty('height', Math.ceil(altura) + 'px', 'important');
+      }
+    };
+
+    if(img.complete){
+      aplicarAltura();
+    }else{
+      img.addEventListener('load', aplicarAltura, {once:true});
+    }
   }
   function mostrar(indice){
     atual=(indice+dots.length)%dots.length;
