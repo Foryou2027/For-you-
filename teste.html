@@ -8126,6 +8126,134 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 
 <link rel="preconnect" href="https://gqsmewyjwhoajhozjkqu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="//gqsmewyjwhoajhozjkqu.supabase.co">
+
+<style id="fy-mobile-search-spacing-final">
+/* Mobile: busca larga com respiro antes dos ícones */
+@media(max-width:700px){
+  .header-top{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 122px !important;
+    grid-template-rows:auto auto !important;
+    column-gap:16px !important;
+    row-gap:12px !important;
+    padding:15px 14px 14px !important;
+    align-items:center !important;
+  }
+
+  .header-top::before{
+    content:"FOR YOU" !important;
+    grid-column:1 / -1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    text-align:center !important;
+    font-family:Georgia,"Times New Roman",serif !important;
+    font-size:27px !important;
+    line-height:1 !important;
+    font-weight:400 !important;
+    letter-spacing:5px !important;
+    color:#351f27 !important;
+    margin:2px 0 9px !important;
+    white-space:nowrap !important;
+  }
+
+  .fy-busca-topo{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin-right:0 !important;
+  }
+
+  .fy-busca-topo .busca,
+  .fy-busca-topo .busca-linha{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+  }
+
+  .fy-busca-topo .busca-linha input{
+    width:100% !important;
+    height:46px !important;
+    min-width:0 !important;
+    padding:0 36px 0 43px !important;
+    border:1px solid #f1cbd5 !important;
+    border-radius:999px !important;
+    background:#fff7f9 !important;
+    box-shadow:0 0 0 3px rgba(246,211,220,.20) !important;
+    font-size:11px !important;
+    color:#351f27 !important;
+  }
+
+  .fy-search-icon{
+    left:15px !important;
+    font-size:22px !important;
+  }
+
+  .header-top .acoes{
+    grid-column:2 !important;
+    grid-row:2 !important;
+    display:grid !important;
+    grid-template-columns:repeat(3,36px) !important;
+    gap:7px !important;
+    width:122px !important;
+    margin:0 !important;
+    justify-content:end !important;
+    align-items:center !important;
+  }
+
+  .header-top .acao-favoritos,
+  .header-top .acao-conta,
+  .header-top .carrinho-icon.fy-top-action{
+    width:36px !important;
+    min-width:36px !important;
+    height:46px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .header-top .acao-favoritos svg,
+  .header-top .acao-conta svg{
+    width:22px !important;
+    height:22px !important;
+  }
+
+  .header-top .carrinho-icon .fy-cart-symbol::before{
+    font-size:23px !important;
+  }
+
+  .fy-action-label{
+    display:none !important;
+  }
+}
+
+@media(max-width:390px){
+  .header-top{
+    grid-template-columns:minmax(0,1fr) 108px !important;
+    column-gap:12px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+  .header-top .acoes{
+    width:108px !important;
+    grid-template-columns:repeat(3,32px) !important;
+    gap:6px !important;
+  }
+
+  .header-top .acao-favoritos,
+  .header-top .acao-conta,
+  .header-top .carrinho-icon.fy-top-action{
+    width:32px !important;
+    min-width:32px !important;
+  }
+
+  .fy-busca-topo .busca-linha input{
+    font-size:10px !important;
+    padding-left:39px !important;
+  }
+}
+</style>
+
 </head>
 
 
