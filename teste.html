@@ -17781,7 +17781,50 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
  .produto .preco,.product-card .price,.produto-card .preco{font-size:14px!important}
  .produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{font-size:8.5px!important;min-height:36px!important;padding:8px 5px!important}
 }
-</style>
+</style>/* ===== CORREÇÃO DEFINITIVA DO TAMANHO DO BANNER ===== */
+
+.fy-banner-r10{
+    width: 85% !important;
+    max-width: 1050px !important;
+    margin: 18px auto !important;
+}
+
+.fy-banner-r10-viewport{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.fy-banner-r10-track{
+    height: auto !important;
+}
+
+.fy-banner-r10-track a{
+    height: auto !important;
+}
+
+.fy-banner-r10-track img{
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 220px !important;
+    object-fit: contain !important;
+}
+
+/* CELULAR */
+@media (max-width: 600px){
+    .fy-banner-r10{
+        width: 94% !important;
+        max-width: none !important;
+        margin: 10px auto !important;
+    }
+
+    .fy-banner-r10-track img{
+        width: 100% !important;
+        height: auto !important;
+        max-height: 135px !important;
+        object-fit: contain !important;
+    }
+}
   /* BANNER FOR YOU - TAMANHO MENOR */
 .fy-banner-r10{
   max-width: 1180px !important;
