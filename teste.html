@@ -7567,6 +7567,22 @@ onkeydown="if(event.key==='Enter')buscarProdutos()"
 </div>
 </header>
 
+
+<!-- FY TESTE: categorias clean acima do banner -->
+<nav class="fy-clean-cat-top" aria-label="Categorias principais">
+  <button onclick="abrirSubmenuHomeFY('labios')">Lábios</button>
+  <button onclick="abrirSubmenuHomeFY('pele')">Pele</button>
+  <button onclick="abrirSubmenuHomeFY('olhos')">Olhos</button>
+  <button onclick="abrirSubmenuHomeFY('skincare')">Skincare</button>
+  <button onclick="abrirSubmenuHomeFY('face')">Face</button>
+  <button onclick="abrirSubmenuHomeFY('acessorios')">Acessórios</button>
+  <button onclick="abrirSubmenuHomeFY('corpo')">Corpo</button>
+  <button onclick="document.getElementById('marcas')?.scrollIntoView({behavior:'smooth'})">Marcas</button>
+  <button class="fy-pill forte" onclick="document.getElementById('ofertas')?.scrollIntoView({behavior:'smooth'})">Ofertas</button>
+  <button class="fy-pill" onclick="abrirPaginaKitsFY?.()">Kits</button>
+  <button class="fy-pill" onclick="abrirOfertaEspecial?.('validade')">Próximos da validade</button>
+</nav>
+
 <section class="fy-banner-r10" id="inicio" aria-label="Destaques da FOR YOU">
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
@@ -17723,5 +17739,67 @@ function alterarSenhaConta(){const conta=contaSalva();if(!conta)return;const atu
 function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 
 </script>
+
+<style id="fy-teste-clean-final">
+/* ===== TESTE CLEAN — aplicado por último para prevalecer ===== */
+.fy-clean-cat-top{max-width:1240px;margin:12px auto 8px;padding:10px 22px;display:flex;align-items:center;justify-content:center;gap:22px;overflow-x:auto;scrollbar-width:none;background:#fff;position:relative;z-index:5}
+.fy-clean-cat-top::-webkit-scrollbar{display:none}
+.fy-clean-cat-top button{position:relative;flex:0 0 auto;border:0;background:transparent;color:#2d2428;padding:9px 3px 12px;font:500 13px/1.1 "Trebuchet MS",Arial,sans-serif;white-space:nowrap;cursor:pointer}
+.fy-clean-cat-top button:not(.fy-pill)::after{content:"";position:absolute;left:8%;right:8%;bottom:4px;height:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M3 7 C20 2 37 9 52 5 S78 4 97 6' fill='none' stroke='%23e88ba7' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.72}
+.fy-clean-cat-top .fy-pill{padding:10px 18px;border-radius:999px;background:#fdebf1;color:#7f2946;font-weight:700}
+.fy-clean-cat-top .fy-pill.forte{background:#e9577e;color:#fff}
+
+/* banner atual preservado, só com acabamento mais clean */
+.fy-banner-r10{max-width:1240px!important;margin:8px auto 0!important;padding:0 22px!important}
+.fy-banner-r10-viewport{border-radius:18px!important;overflow:hidden!important;box-shadow:none!important}
+
+/* categorias ilustradas abaixo do banner */
+.home-quick{max-width:1240px!important;margin:0 auto!important;padding:34px 22px 18px!important;background:#fff!important}
+.home-quick h2{font-family:"Trebuchet MS",Arial,sans-serif!important;font-size:24px!important;letter-spacing:-.5px!important;font-weight:700!important}
+.home-quick p{font-size:11px!important;color:#8d7f84!important}
+.home-quick-grid{gap:18px!important}
+.home-quick-grid button{border:0!important;background:transparent!important;box-shadow:none!important;padding:4px!important}
+.home-quick-grid button>span{width:92px!important;height:92px!important;border-radius:50%!important;background:#fff3f6!important;overflow:hidden!important;border:1px solid #f5dce4!important}
+.home-quick-grid button>span img{width:100%!important;height:100%!important;object-fit:cover!important}
+.home-quick-grid button strong{font-size:11px!important;color:#2d2428!important;margin-top:9px!important}
+.home-quick-grid button small{display:none!important}
+
+/* cards de produto — sem card alto, sem borda rosa, botão rosa-claro */
+.produtos,.products-grid,.grid-produtos,.vitrine-produtos{gap:30px 22px!important}
+.produto,.product-card,.produto-card,.fy-produto-real{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;padding:0!important}
+.produto:hover,.product-card:hover,.produto-card:hover,.fy-produto-real:hover{transform:translateY(-2px)!important;box-shadow:none!important}
+.produto-img,.product-image,.produto-imagem{position:relative!important;width:100%!important;aspect-ratio:1/1.05!important;height:auto!important;min-height:0!important;border:0!important;border-radius:12px!important;background:#fbf8f9!important;overflow:hidden!important}
+.produto-img img,.product-image img,.produto-imagem img{width:100%!important;height:100%!important;object-fit:contain!important;padding:5px!important}
+.produto-info,.product-info{padding:12px 1px 0!important;background:transparent!important}
+.produto .marca,.product-card .brand,.produto-card .marca{font-size:8px!important;letter-spacing:1.5px!important;color:#8f8085!important;text-transform:uppercase!important;font-weight:700!important}
+.produto .nome,.product-card .name,.produto-card .nome{font-family:"Trebuchet MS",Arial,sans-serif!important;font-size:12px!important;line-height:1.35!important;font-weight:600!important;color:#241a1e!important;min-height:33px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+.produto .estrelas,.product-card .stars,.produto-card .estrelas{font-size:10px!important;color:#d9a126!important;margin-top:6px!important}
+.produto .preco,.product-card .price,.produto-card .preco{font-size:16px!important;color:#241a1e!important;font-weight:800!important;margin-top:7px!important}
+.produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{width:100%!important;margin-top:10px!important;border:0!important;border-radius:999px!important;background:#f8dce5!important;color:#532c39!important;min-height:40px!important;padding:10px 8px!important;font-size:10px!important;font-weight:700!important;box-shadow:none!important}
+.produto .adicionar:hover,.product-card .add-to-cart:hover,.produto-card .adicionar:hover{background:#f2cad7!important}
+/* identificação discreta */
+#novidades .etiqueta{background:#e9577e!important;color:#fff!important;border:0!important;border-radius:999px!important;font-size:8px!important;padding:6px 9px!important;box-shadow:none!important}
+
+@media(max-width:800px){
+ .fy-clean-cat-top{justify-content:flex-start;gap:18px;padding:9px 13px;margin-top:6px}
+ .fy-clean-cat-top button{font-size:11px}
+ .fy-clean-cat-top .fy-pill{padding:9px 14px}
+ .fy-banner-r10{padding:0 10px!important}
+ .fy-banner-r10-viewport{border-radius:13px!important}
+ .home-quick{padding:26px 0 14px!important;overflow:hidden}
+ .home-quick-head{padding:0 14px!important}
+ .home-quick-grid{display:flex!important;overflow-x:auto!important;gap:14px!important;padding:0 14px 10px!important;scrollbar-width:none}
+ .home-quick-grid::-webkit-scrollbar{display:none}
+ .home-quick-grid button{flex:0 0 72px!important}
+ .home-quick-grid button>span{width:68px!important;height:68px!important}
+ .home-quick-grid button strong{font-size:9px!important}
+ .produtos,.products-grid,.grid-produtos,.vitrine-produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px 11px!important}
+ .produto-img,.product-image,.produto-imagem{aspect-ratio:1/1.04!important;border-radius:9px!important}
+ .produto .nome,.product-card .name,.produto-card .nome{font-size:10.5px!important;min-height:29px!important}
+ .produto .preco,.product-card .price,.produto-card .preco{font-size:14px!important}
+ .produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{font-size:8.5px!important;min-height:36px!important;padding:8px 5px!important}
+}
+</style>
+
 </body>
 </html>
