@@ -7324,6 +7324,74 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 </style>
 
+
+<style id="fy-banner-final-fix">
+/* ===== FOR YOU — CARROSSEL SEM ZOOM / SEM CORTE ===== */
+.fy-banner-r10{
+  width:min(92%,1200px) !important;
+  max-width:1200px !important;
+  margin:16px auto 8px !important;
+}
+
+.fy-banner-r10-viewport{
+  width:100% !important;
+  height:auto !important;
+  overflow:hidden !important;
+  border-radius:14px !important;
+}
+
+.fy-banner-r10-track{
+  display:flex !important;
+  align-items:flex-start !important;
+  width:100% !important;
+  height:auto !important;
+}
+
+.fy-banner-r10-track > a{
+  display:block !important;
+  flex:0 0 100% !important;
+  width:100% !important;
+  min-width:100% !important;
+  height:auto !important;
+  overflow:hidden !important;
+}
+
+.fy-banner-r10-track > a > img{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  transform:none !important;
+}
+
+.fy-banner-r10-dots{
+  margin-top:9px !important;
+}
+
+/* Celular */
+@media(max-width:600px){
+  .fy-banner-r10{
+    width:96% !important;
+    margin:10px auto 6px !important;
+  }
+
+  .fy-banner-r10-viewport{
+    border-radius:10px !important;
+  }
+
+  .fy-banner-r10-track > a > img{
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    object-fit:contain !important;
+  }
+}
+</style>
+
 </head>
 
 
@@ -17781,78 +17849,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
  .produto .preco,.product-card .price,.produto-card .preco{font-size:14px!important}
  .produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{font-size:8.5px!important;min-height:36px!important;padding:8px 5px!important}
 }
-</style>/* ===== CORREÇÃO DEFINITIVA DO TAMANHO DO BANNER ===== */
-
-.fy-banner-r10{
-    width: 85% !important;
-    max-width: 1050px !important;
-    margin: 18px auto !important;
-}
-
-.fy-banner-r10-viewport{
-    width: 100% !important;
-    height: auto !important;
-}
-
-.fy-banner-r10-track{
-    height: auto !important;
-}
-
-.fy-banner-r10-track a{
-    height: auto !important;
-}
-
-.fy-banner-r10-track img{
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: 220px !important;
-    object-fit: contain !important;
-}
-
-/* CELULAR */
-@media (max-width: 600px){
-    .fy-banner-r10{
-        width: 94% !important;
-        max-width: none !important;
-        margin: 10px auto !important;
-    }
-
-    .fy-banner-r10-track img{
-        width: 100% !important;
-        height: auto !important;
-        max-height: 135px !important;
-        object-fit: contain !important;
-    }
-}
-  /* BANNER FOR YOU - TAMANHO MENOR */
-.fy-banner-r10{
-  max-width: 1180px !important;
-  width: calc(100% - 40px) !important;
-  margin: 18px auto !important;
-}
-
-.fy-banner-r10-slide img,
-.fy-banner-r10-track img{
-  width: 100% !important;
-  height: auto !important;
-  max-height: 280px !important;
-  object-fit: contain !important;
-}
-
-/* CELULAR */
-@media (max-width: 600px){
-  .fy-banner-r10{
-    width: calc(100% - 20px) !important;
-    margin: 10px auto !important;
-  }
-
-  .fy-banner-r10-slide img,
-  .fy-banner-r10-track img{
-    max-height: 170px !important;
-    object-fit: contain !important;
-  }
-}
+</style>
 
 </body>
 </html>
