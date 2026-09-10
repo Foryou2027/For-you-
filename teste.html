@@ -17849,7 +17849,42 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
  .produto .preco,.product-card .price,.produto-card .preco{font-size:14px!important}
  .produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{font-size:8.5px!important;min-height:36px!important;padding:8px 5px!important}
 }
-</style>
+</style>/* ===== REMOVE O ESPAÇO VAZIO ABAIXO DO BANNER ===== */
+
+.fy-banner-r10,
+.fy-banner-r10-viewport,
+.fy-banner-r10-track,
+.fy-banner-r10-track > a {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.fy-banner-r10 {
+    padding-bottom: 0 !important;
+}
+
+.fy-banner-r10-viewport {
+    aspect-ratio: auto !important;
+}
+
+.fy-banner-r10-track > a {
+    aspect-ratio: auto !important;
+}
+
+.fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* pontinhos logo abaixo do banner */
+.fy-banner-r10-dots {
+    position: static !important;
+    margin: 8px auto 0 !important;
+    padding: 0 !important;
+    height: 12px !important;
+}
 
 </body>
 </html>
