@@ -7404,69 +7404,187 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 </style>
 
 
-<style id="fy-header-search-clean-v1">
-/* FOR YOU — busca clean inspirada no modelo aprovado */
-.header-actions,
-.header-tools,
-.acoes-header{
-  gap:18px !important;
+<style id="fy-search-top-row-v2">
+/* FOR YOU — busca na mesma linha de Minha Conta, Favoritos e Carrinho */
+.header-top{
+  display:grid !important;
+  grid-template-columns:minmax(280px,1fr) auto !important;
+  gap:28px !important;
+  align-items:center !important;
+  min-height:74px !important;
 }
 
-.search-box,
-.busca,
-.search-container,
-.header-search{
-  flex:1 1 520px !important;
-  max-width:620px !important;
+.header-top .fy-header-slogan,
+.header-top .logo{
+  display:none !important;
 }
 
-.search-box input,
-.busca input,
-.search-container input,
-.header-search input,
-#buscaProduto,
-#searchInput{
+.fy-busca-topo{
+  min-width:0 !important;
   width:100% !important;
-  min-height:46px !important;
-  padding:0 48px 0 48px !important;
+}
+
+.fy-busca-topo .busca{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  position:relative !important;
+}
+
+.fy-busca-topo .busca-linha{
+  position:relative !important;
+  width:100% !important;
+}
+
+.fy-busca-topo .busca-linha input{
+  display:block !important;
+  width:100% !important;
+  height:46px !important;
+  padding:0 48px 0 50px !important;
   border:0 !important;
-  outline:none !important;
+  outline:0 !important;
   border-radius:999px !important;
   background:#fff4f6 !important;
   box-shadow:none !important;
   font-family:"Trebuchet MS",Arial,sans-serif !important;
   font-size:13px !important;
-  font-weight:400 !important;
   color:#351f27 !important;
 }
 
-.search-box input::placeholder,
-.busca input::placeholder,
-.search-container input::placeholder,
-.header-search input::placeholder,
-#buscaProduto::placeholder,
-#searchInput::placeholder{
+.fy-busca-topo .busca-linha input::placeholder{
   color:#8d8589 !important;
   opacity:1 !important;
 }
 
-@media(max-width:700px){
-  .search-box,
-  .busca,
-  .search-container,
-  .header-search{
-    flex:1 1 100% !important;
-    max-width:none !important;
-  }
+.fy-search-icon{
+  position:absolute !important;
+  left:17px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  z-index:2 !important;
+  font-size:27px !important;
+  line-height:1 !important;
+  color:#7d1734 !important;
+  pointer-events:none !important;
+}
 
-  .search-box input,
-  .busca input,
-  .search-container input,
-  .header-search input,
-  #buscaProduto,
-  #searchInput{
-    min-height:42px !important;
-    font-size:12px !important;
+.fy-search-submit{
+  position:absolute !important;
+  right:5px !important;
+  top:5px !important;
+  width:36px !important;
+  height:36px !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#7d1734 !important;
+  cursor:pointer !important;
+  opacity:0 !important;
+}
+
+.header-top .acoes{
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:22px !important;
+}
+
+.header-top .fy-top-action{
+  position:relative !important;
+  width:66px !important;
+  min-width:66px !important;
+  height:58px !important;
+  padding:2px 0 0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  color:#111 !important;
+}
+
+.header-top .fy-top-action svg{
+  width:24px !important;
+  height:24px !important;
+  fill:none !important;
+  stroke:#111 !important;
+  stroke-width:1.8 !important;
+}
+
+.fy-cart-symbol{
+  font-size:27px !important;
+  line-height:22px !important;
+  transform:rotate(180deg);
+}
+
+.fy-action-label{
+  display:block !important;
+  font-family:"Trebuchet MS",Arial,sans-serif !important;
+  font-size:9px !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  color:#111 !important;
+}
+
+.header-top .contador,
+.header-top .contador-favoritos{
+  position:absolute !important;
+  top:0 !important;
+  right:7px !important;
+  min-width:18px !important;
+  height:18px !important;
+  padding:0 4px !important;
+  border-radius:999px !important;
+  background:#ef4e73 !important;
+  color:#fff !important;
+  font-size:9px !important;
+  border:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+.header-top .contador-favoritos.vazio{
+  display:none !important;
+}
+
+@media(max-width:700px){
+  .header-top{
+    grid-template-columns:1fr auto !important;
+    gap:8px !important;
+    min-height:58px !important;
+  }
+  .fy-busca-topo .busca-linha input{
+    height:42px !important;
+    padding-left:42px !important;
+    font-size:11px !important;
+  }
+  .fy-search-icon{
+    left:14px !important;
+    font-size:23px !important;
+  }
+  .header-top .acoes{
+    gap:2px !important;
+  }
+  .header-top .fy-top-action{
+    width:38px !important;
+    min-width:38px !important;
+    height:44px !important;
+  }
+  .header-top .fy-top-action svg{
+    width:21px !important;
+    height:21px !important;
+  }
+  .fy-action-label{
+    display:none !important;
+  }
+  .header-top .contador,
+  .header-top .contador-favoritos{
+    top:0 !important;
+    right:0 !important;
   }
 }
 </style>
@@ -7625,19 +7743,37 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
   </a>
 </div>
 
+<div class="fy-busca-topo">
+  <div class="busca">
+    <div class="busca-linha">
+      <span class="fy-search-icon" aria-hidden="true">⌕</span>
+      <input
+        id="busca"
+        type="text"
+        placeholder="O que você está procurando?"
+        onkeydown="if(event.key==='Enter')buscarProdutos()"
+      >
+      <button class="fy-search-submit" onclick="buscarProdutos()" aria-label="Buscar produtos" title="Buscar">🔍</button>
+    </div>
+    <div class="busca-sugestoes" id="buscaSugestoes"></div>
+  </div>
+</div>
+
 <div class="acoes">
 
-<button class="acao-btn acao-favoritos" onclick="abrirFavoritos()" title="Favoritos" aria-label="Abrir favoritos">
+<button class="acao-btn acao-favoritos fy-top-action" onclick="abrirFavoritos()" title="Favoritos" aria-label="Abrir favoritos">
 <svg class="fy-heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>
+<span class="fy-action-label">Favoritos</span>
 <span class="contador-favoritos vazio" id="contadorFavoritos">0</span>
 </button>
 
-<button class="acao-btn acao-conta" onclick="abrirConta()" title="Área do cliente" aria-label="Área do cliente">
+<button class="acao-btn acao-conta fy-top-action" onclick="abrirConta()" title="Área do cliente" aria-label="Área do cliente">
 <svg class="fy-user-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c.8-4.1 3.4-6.2 7.5-6.2s6.7 2.1 7.5 6.2"/></svg>
+<span class="fy-action-label">Minha Conta</span>
 </button>
 
-<button type="button" class="carrinho-icon" id="btnAbrirCarrinho" onclick="fyAbrirPaginaCarrinho();return false;" aria-label="Abrir carrinho" title="Carrinho">
-  🛒<span class="contador" id="contadorCarrinho">0</span>
+<button type="button" class="carrinho-icon fy-top-action" id="btnAbrirCarrinho" onclick="fyAbrirPaginaCarrinho();return false;" aria-label="Abrir carrinho" title="Carrinho">
+  <span class="fy-cart-symbol">♧</span><span class="fy-action-label">Carrinho</span><span class="contador" id="contadorCarrinho">0</span>
 </button>
 
 </div>
@@ -7655,19 +7791,7 @@ ENVIO PARA TODO O BRASIL • NOVIDADES E OFERTAS TODA SEMANA
 
 
 
-<div class="busca">
 
-<div class="busca-linha">
-<input
-id="busca"
-type="text"
-placeholder="Buscar produto, marca ou categoria..."
-onkeydown="if(event.key==='Enter')buscarProdutos()"
->
-<button onclick="buscarProdutos()" aria-label="Buscar produtos" title="Buscar">🔍</button>
-</div>
-<div class="busca-sugestoes" id="buscaSugestoes"></div>
-</div>
 
 <div class="category-dropdown-store" aria-hidden="true">
 <div class="dropdown" id="dropdown-labios">
