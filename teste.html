@@ -17782,6 +17782,34 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
  .produto .adicionar,.product-card .add-to-cart,.produto-card .adicionar{font-size:8.5px!important;min-height:36px!important;padding:8px 5px!important}
 }
 </style>
+  /* BANNER FOR YOU - TAMANHO MENOR */
+.fy-banner-r10{
+  max-width: 1180px !important;
+  width: calc(100% - 40px) !important;
+  margin: 18px auto !important;
+}
+
+.fy-banner-r10-slide img,
+.fy-banner-r10-track img{
+  width: 100% !important;
+  height: auto !important;
+  max-height: 280px !important;
+  object-fit: contain !important;
+}
+
+/* CELULAR */
+@media (max-width: 600px){
+  .fy-banner-r10{
+    width: calc(100% - 20px) !important;
+    margin: 10px auto !important;
+  }
+
+  .fy-banner-r10-slide img,
+  .fy-banner-r10-track img{
+    max-height: 170px !important;
+    object-fit: contain !important;
+  }
+}
 
 </body>
 </html>
