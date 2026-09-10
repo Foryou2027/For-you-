@@ -7292,8 +7292,8 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 
 <style id="fy-beneficios-imagem-css">
 .fy-beneficios-imagem{
-  width:min(100% - 24px, 1500px);
-  margin:12px auto 18px;
+  width:min(76%, 1140px);
+  margin:9px auto 16px;
   padding:0;
   line-height:0;
   overflow:hidden;
@@ -7302,18 +7302,23 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   display:block;
   width:100%;
   height:auto;
-  margin:0;
+  margin:0 auto;
   border:0;
+}
+@media(max-width:1000px){
+  .fy-beneficios-imagem{ width:88%; }
 }
 @media(max-width:800px){
   .fy-beneficios-imagem{
     width:calc(100% - 16px);
-    margin:8px auto 14px;
+    margin:7px auto 12px;
     overflow-x:auto;
-    border-radius:12px;
+    border-radius:10px;
+    scrollbar-width:none;
   }
+  .fy-beneficios-imagem::-webkit-scrollbar{ display:none; }
   .fy-beneficios-imagem img{
-    width:900px;
+    width:680px;
     max-width:none;
   }
 }
@@ -17775,5 +17780,4 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 </style>
 
 </body>
-  <!-- atualizar teste -->
 </html>
