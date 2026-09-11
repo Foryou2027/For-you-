@@ -6671,7 +6671,7 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 }
 .fy20-card:hover .fy20-img img{transform:scale(1.035)}
 .fy20-img:after{
-  content:"IMAGEM DEMONSTRATIVA"!important;
+  content:""!important;
   background:rgba(255,255,255,.92)!important;
   color:#6d6467!important;
   z-index:2!important;
@@ -16952,45 +16952,6 @@ document.addEventListener("DOMContentLoaded", function () {
  });
 })();
 </script>
-
-
-<script id="fy-filtros-categorias-demo-v20-js">
-(function(){
- const demo=[
- {cat:"Lábios",nome:"Gloss Crystal Shine",marca:"Ruby Rose",preco:14.90,old:19.90,promo:true,best:true,disp:"sim",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Lábios",nome:"Lip Tint Rosé",marca:"Max Love",preco:12.90,promo:false,best:true,disp:"sim",emoji:"💋",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Lábios",nome:"Batom Velvet Nude",marca:"Melú",preco:18.90,promo:true,best:false,disp:"baixo",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
- {cat:"Pele",nome:"Base Skin Glow",marca:"Ruby Rose",preco:29.90,promo:false,best:true,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Pele",nome:"Blush Rosé",marca:"Bruna Tavares",preco:54.90,promo:false,best:true,disp:"sim",emoji:"🌸",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Pele",nome:"Corretivo Soft",marca:"Max Love",preco:16.90,old:21.90,promo:true,best:false,disp:"baixo",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:6},
- {cat:"Skincare",nome:"Sérum Facial",marca:"Melú",preco:24.90,promo:false,best:true,disp:"sim",emoji:"🧴",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Olhos",nome:"Máscara Volume",marca:"Ruby Rose",preco:19.90,promo:true,best:true,disp:"sim",emoji:"👁️",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Face",nome:"Iluminador Glow",marca:"Max Love",preco:17.90,promo:false,best:false,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
- {cat:"Acessórios",nome:"Kit Esponjas",marca:"Melú",preco:15.90,promo:true,best:true,disp:"sim",emoji:"🩷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Corpo",nome:"Body Splash Floral",marca:"Ruby Rose",preco:34.90,promo:false,best:true,disp:"baixo",emoji:"🌷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9}
- ];
- let atual="Lábios";
- const money=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
- window.fy20Abrir=function(cat){atual=cat;document.getElementById("fy20Titulo").textContent=cat;document.getElementById("fy20Categoria").classList.add("ativa");document.body.style.overflow="hidden";fy20Render()};
- window.fy20Fechar=function(){document.getElementById("fy20Categoria").classList.remove("ativa");document.body.style.overflow=""};
- window.fy20Render=function(){
-  let a=demo.filter(p=>p.cat===atual);
-  const preco=+document.getElementById("fy20Preco").value,marca=document.getElementById("fy20Marca").value,promo=document.getElementById("fy20Promo").value,best=document.getElementById("fy20Best").value,disp=document.getElementById("fy20Disp").value,ord=document.getElementById("fy20Order").value;
-  if(preco)a=a.filter(p=>p.preco<=preco);if(marca)a=a.filter(p=>p.marca===marca);if(promo)a=a.filter(p=>p.promo);if(best)a=a.filter(p=>p.best);if(disp)a=a.filter(p=>p.disp===disp);
-  a.sort((x,y)=>ord==="menor"?x.preco-y.preco:ord==="maior"?y.preco-x.preco:y.novo-x.novo);
-  document.getElementById("fy20Produtos").innerHTML=a.length?a.map(p=>`<article class="fy20-card">${p.promo?'<span class="fy20-tag">OFERTA</span>':''}<div class="fy20-img"><img decoding="async" src="${p.foto||'https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg'}" alt="${p.nome}" loading="lazy"></div><div class="fy20-info"><span class="fy20-brand">${p.marca}</span><h3>${p.nome}</h3><span class="fy20-price">${money(p.preco)}</span>${p.old?`<span class="fy20-old">${money(p.old)}</span>`:''}<button class="fy20-add">ADICIONAR À SACOLA</button></div></article>`).join(""):'<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
- };
- document.addEventListener("DOMContentLoaded",()=>{
-  ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
-   document.querySelectorAll("button,a").forEach(el=>{
-    if(el.textContent.trim().replace(/[▾⌄]/g,"").trim()===cat)el.addEventListener("click",e=>{e.preventDefault();fy20Abrir(cat)});
-   });
-  });
- });
-})();
-</script>
-
-
 <style id="fy-carrinho-paleta-final-forcada">
 /* PALETA FINAL DO CARRINHO REAL — inserida por último para sobrescrever o rosa/vinho antigo */
 #paginaCarrinhoV17{background:#f6f6f4!important;color:#202020!important}
@@ -18018,64 +17979,128 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="foryou-supabase-products">
 (function(){
-  /* Não exibe produtos cuja foto esteja ausente ou com link quebrado. */
-  document.addEventListener('error',function(evento){
-    const imagem=evento.target;
-    if(!imagem||imagem.tagName!=='IMG')return;
-    const card=imagem.closest('.produto');
-    if(card)card.remove();
-  },true);
-
   function normalizarProduto(p){
+    let galeria = p.galeria || [];
+    if(typeof galeria === "string"){
+      try{ galeria = JSON.parse(galeria); }catch(e){ galeria = []; }
+    }
+    if(!Array.isArray(galeria)) galeria = [];
+
+    let variantes = p.variantes || [];
+    if(typeof variantes === "string"){
+      try{ variantes = JSON.parse(variantes); }catch(e){ variantes = []; }
+    }
+    if(!Array.isArray(variantes)) variantes = [];
+
+    const imagemPrincipal =
+      (p.imagem && String(p.imagem).trim()) ||
+      (galeria.length ? galeria[0] : "");
+
     return {
-      id:Number(p.id), nome:p.nome, marca:p.marca, categoria:p.categoria, subcategoria:p.subcategoria,
-      preco:Number(p.preco), precoAntigo:p.preco_antigo==null?undefined:Number(p.preco_antigo),
-      nota:Number(p.nota||0), estoque:Number(p.estoque||0), imagem:p.imagem, galeria:p.galeria||[],
-      variantes:p.variantes||[], rotuloVariante:p.rotulo_variante, descricao:p.descricao, validade:p.validade,
-      proximoValidade:!!p.proximo_validade, achadinhoDe:!!p.achadinho_de, escolhaDe:!!p.escolha_de,
-      destaqueDe:!!p.destaque_de, novidade:!!p.novidade, ativo:p.ativo!==false
+      id: p.id,
+      nome: p.nome || "Produto",
+      marca: p.marca || "FOR YOU",
+      categoria: p.categoria || "",
+      subcategoria: p.subcategoria || "",
+      preco: Number(p.preco || 0),
+      precoAntigo: p.preco_antigo == null ? undefined : Number(p.preco_antigo),
+      nota: Number(p.nota || 5),
+      estoque: Number(p.estoque || 0),
+      imagem: imagemPrincipal,
+      galeria: galeria,
+      variantes: variantes,
+      rotuloVariante: p.rotulo_variante || "",
+      descricao: p.descricao || "",
+      validade: p.validade || "",
+      proximoValidade: !!p.proximo_validade,
+      achadinhoDe: !!p.achadinho_de,
+      escolhaDe: !!p.escolha_de,
+      destaqueDe: !!p.destaque_de,
+      novidade: !!p.novidade,
+      ativo: p.ativo !== false
     };
   }
-  function imagemDisponivel(endereco){
-    return new Promise(function(resolver){
-      if(!endereco){resolver(false);return;}
-      const teste=new Image();
-      let terminou=false;
-      function finalizar(resultado){
-        if(terminou)return;
-        terminou=true;
-        resolver(resultado);
+
+  function atualizarCatalogoNaTela(){
+    const funcoes = [
+      "renderProdutos",
+      "renderOfertas",
+      "renderKits",
+      "renderMaisVendidos",
+      "renderUltimasUnidades",
+      "renderRecomendados",
+      "renderAchadinhosDe",
+      "renderAdmin"
+    ];
+
+    funcoes.forEach(function(nome){
+      try{
+        if(typeof window[nome] === "function"){
+          if(nome === "renderProdutos") window[nome]([]);
+          else window[nome]();
+        }
+      }catch(e){
+        console.warn("Erro ao atualizar "+nome, e);
       }
-      teste.onload=function(){finalizar(true)};
-      teste.onerror=function(){finalizar(false)};
-      teste.src=endereco;
-      setTimeout(function(){finalizar(false)},10000);
     });
+
+    try{
+      if(typeof window.renderNovidadesHome === "function"){
+        window.renderNovidadesHome();
+      }
+    }catch(e){}
   }
+
   async function carregarProdutosSupabase(){
-    const sb=window.FOR_YOU_SUPABASE_CLIENT;
-    if(!sb) return;
-    const {data,error}=await sb.from('produtos').select('*').eq('ativo',true).order('id');
-    if(error){console.warn('Não foi possível carregar o catálogo do Supabase:',error.message);return;}
-    if(!Array.isArray(data)||!data.length)return;
-    const produtosNormalizados=data.map(normalizarProduto);
-    const testesDeImagem=await Promise.all(produtosNormalizados.map(async function(produto){
-      return {produto:produto,imagemOk:await imagemDisponivel(produto.imagem)};
-    }));
-    const produtosDoSupabase=testesDeImagem.filter(function(item){return item.imagemOk}).map(function(item){return item.produto});
-    const idsDoSupabase=new Set(produtosDoSupabase.map(function(p){return String(p.id)}));
-    const produtosDoGithub=(Array.isArray(produtos)?produtos:[]).filter(function(p){
-      return Number(p.id)>=251&&!idsDoSupabase.has(String(p.id));
-    });
-    produtos=produtosDoSupabase.concat(produtosDoGithub);
-    try{localStorage.removeItem('forYouCatalogo')}catch(e){}
-    ['renderOfertas','renderKits','renderMaisVendidos','renderUltimasUnidades','renderRecomendados','renderAchadinhosDe','renderAdmin'].forEach(function(nome){
-      try{if(typeof window[nome]==='function')window[nome]()}catch(e){}
-    });
-    try{if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();else if(typeof window.renderProdutos==='function')window.renderProdutos([])}catch(e){}
+    const sb = window.FOR_YOU_SUPABASE_CLIENT;
+
+    if(!sb){
+      console.warn("Cliente Supabase ainda não disponível.");
+      setTimeout(carregarProdutosSupabase, 400);
+      return;
+    }
+
+    const {data,error} = await sb
+      .from("produtos")
+      .select("*")
+      .eq("ativo", true)
+      .order("id", {ascending:true});
+
+    if(error){
+      console.error("Erro ao carregar produtos do Supabase:", error.message);
+      return;
+    }
+
+    if(!Array.isArray(data)){
+      console.warn("O Supabase não retornou uma lista de produtos.");
+      return;
+    }
+
+    // O catálogo do site passa a ser exatamente o catálogo ativo do Supabase.
+    produtos = data.map(normalizarProduto);
+
+    // Evita que versões antigas salvas no navegador voltem a aparecer.
+    try{ localStorage.removeItem("forYouCatalogo"); }catch(e){}
+
+    atualizarCatalogoNaTela();
+
+    // Se uma categoria estiver aberta, redesenha usando os produtos reais.
+    try{
+      if(window.fyCategoriaAtual && typeof window.abrirCategoria === "function"){
+        window.abrirCategoria(window.fyCategoriaAtual);
+      }
+    }catch(e){}
   }
-  window.carregarProdutosSupabase=carregarProdutosSupabase;
-  window.addEventListener('load',carregarProdutosSupabase);
+
+  window.carregarProdutosSupabase = carregarProdutosSupabase;
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", function(){
+      setTimeout(carregarProdutosSupabase, 150);
+    });
+  }else{
+    setTimeout(carregarProdutosSupabase, 150);
+  }
 })();
 </script>
 
