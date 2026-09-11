@@ -18763,5 +18763,43 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     height: 12px !important;
 }
 
+
+<style id="fy-mobile-speed-final-v1">
+/* Mobile: abre menus e painéis imediatamente, sem animação pesada */
+@media(max-width:700px){
+  html{scroll-behavior:auto!important;}
+  .fy-home-submenu,
+  .fy-home-submenu-card,
+  .dropdown,
+  .dropdown.aberto,
+  .carrinho,
+  .carrinho.aberto{
+    transition:none!important;
+    animation:none!important;
+  }
+  .fy-home-submenu{opacity:0!important;visibility:hidden!important;}
+  .fy-home-submenu.aberto{opacity:1!important;visibility:visible!important;}
+  .fy-home-submenu-card,
+  .fy-home-submenu.aberto .fy-home-submenu-card{transform:none!important;}
+  .dropdown.aberto{opacity:1!important;transform:none!important;}
+  button:not(:disabled),a{transition:none!important;}
+  .produto,.product-card,.produto-card,.card{animation:none!important;}
+}
+</style>
+<script id="fy-mobile-speed-js-v1">
+/* Evita o frame extra ao abrir o submenu no celular */
+(function(){
+  function ativarImediato(){
+    if(window.innerWidth>700) return;
+    const box=document.getElementById('fyHomeSubmenu');
+    if(box && !box.classList.contains('aberto')) box.classList.add('aberto');
+  }
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[onclick*="abrirSubmenuHomeFY"],[onclick*="abrirProdutosDezFY"]')){
+      setTimeout(ativarImediato,0);
+    }
+  },true);
+})();
+</script>
 </body>
 </html>
