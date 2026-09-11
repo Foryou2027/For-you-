@@ -16959,37 +16959,83 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script id="fy-filtros-categorias-demo-v20-js">
 (function(){
- const demo=[
- {cat:"Lábios",nome:"Gloss Crystal Shine",marca:"Ruby Rose",preco:14.90,old:19.90,promo:true,best:true,disp:"sim",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Lábios",nome:"Lip Tint Rosé",marca:"Max Love",preco:12.90,promo:false,best:true,disp:"sim",emoji:"💋",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Lábios",nome:"Batom Velvet Nude",marca:"Melú",preco:18.90,promo:true,best:false,disp:"baixo",emoji:"💄",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
- {cat:"Pele",nome:"Base Skin Glow",marca:"Ruby Rose",preco:29.90,promo:false,best:true,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Pele",nome:"Blush Rosé",marca:"Bruna Tavares",preco:54.90,promo:false,best:true,disp:"sim",emoji:"🌸",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Pele",nome:"Corretivo Soft",marca:"Max Love",preco:16.90,old:21.90,promo:true,best:false,disp:"baixo",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:6},
- {cat:"Skincare",nome:"Sérum Facial",marca:"Melú",preco:24.90,promo:false,best:true,disp:"sim",emoji:"🧴",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9},
- {cat:"Olhos",nome:"Máscara Volume",marca:"Ruby Rose",preco:19.90,promo:true,best:true,disp:"sim",emoji:"👁️",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Face",nome:"Iluminador Glow",marca:"Max Love",preco:17.90,promo:false,best:false,disp:"sim",emoji:"✨",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:7},
- {cat:"Acessórios",nome:"Kit Esponjas",marca:"Melú",preco:15.90,promo:true,best:true,disp:"sim",emoji:"🩷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:8},
- {cat:"Corpo",nome:"Body Splash Floral",marca:"Ruby Rose",preco:34.90,promo:false,best:true,disp:"baixo",emoji:"🌷",foto:"https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg",novo:9}
- ];
- let atual="Lábios";
- const money=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
- window.fy20Abrir=function(cat){atual=cat;document.getElementById("fy20Titulo").textContent=cat;document.getElementById("fy20Categoria").classList.add("ativa");document.body.style.overflow="hidden";fy20Render()};
- window.fy20Fechar=function(){document.getElementById("fy20Categoria").classList.remove("ativa");document.body.style.overflow=""};
- window.fy20Render=function(){
-  let a=demo.filter(p=>p.cat===atual);
-  const preco=+document.getElementById("fy20Preco").value,marca=document.getElementById("fy20Marca").value,promo=document.getElementById("fy20Promo").value,best=document.getElementById("fy20Best").value,disp=document.getElementById("fy20Disp").value,ord=document.getElementById("fy20Order").value;
-  if(preco)a=a.filter(p=>p.preco<=preco);if(marca)a=a.filter(p=>p.marca===marca);if(promo)a=a.filter(p=>p.promo);if(best)a=a.filter(p=>p.best);if(disp)a=a.filter(p=>p.disp===disp);
-  a.sort((x,y)=>ord==="menor"?x.preco-y.preco:ord==="maior"?y.preco-x.preco:y.novo-x.novo);
-  document.getElementById("fy20Produtos").innerHTML=a.length?a.map(p=>`<article class="fy20-card">${p.promo?'<span class="fy20-tag">OFERTA</span>':''}<div class="fy20-img"><img decoding="async" src="${p.foto||'https://images.stockcake.com/public/d/1/e/d1e603c7-b4be-4dff-903b-4c5824b6454c_large/makeup-collection-display-stockcake.jpg'}" alt="${p.nome}" loading="lazy"></div><div class="fy20-info"><span class="fy20-brand">${p.marca}</span><h3>${p.nome}</h3><span class="fy20-price">${money(p.preco)}</span>${p.old?`<span class="fy20-old">${money(p.old)}</span>`:''}<button class="fy20-add">ADICIONAR À SACOLA</button></div></article>`).join(""):'<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
- };
- document.addEventListener("DOMContentLoaded",()=>{
-  ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
-   document.querySelectorAll("button,a").forEach(el=>{
-    if(el.textContent.trim().replace(/[▾⌄]/g,"").trim()===cat)el.addEventListener("click",e=>{e.preventDefault();fy20Abrir(cat)});
-   });
+  let atual="Lábios";
+  const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+
+  function produtosDaCategoria(){
+    const alvo=norm(atual);
+    return (Array.isArray(produtos)?produtos:[]).filter(p=>{
+      if(p.ativo===false)return false;
+      const cat=norm(p.categoria), sub=norm(p.subcategoria);
+      if(alvo==="corpo" && (cat==="cabelo" || sub==="cabelo")) return true;
+      return cat===alvo || sub===alvo;
+    });
+  }
+
+  function atualizarMarcas(lista){
+    const select=document.getElementById("fy20Marca");
+    if(!select)return;
+    const atualMarca=select.value;
+    const marcas=[...new Set(lista.map(p=>p.marca).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+    select.innerHTML='<option value="">Todas</option>'+marcas.map(m=>`<option value="${String(m).replace(/"/g,"&quot;")}">${m}</option>`).join("");
+    if(marcas.includes(atualMarca))select.value=atualMarca;
+  }
+
+  window.fy20Abrir=function(cat){
+    atual=cat;
+    document.getElementById("fy20Titulo").textContent=cat;
+    document.getElementById("fy20Categoria").classList.add("ativa");
+    document.body.style.overflow="hidden";
+    fy20Render(true);
+  };
+
+  window.fy20Fechar=function(){
+    document.getElementById("fy20Categoria").classList.remove("ativa");
+    document.body.style.overflow="";
+  };
+
+  window.fy20Render=function(recarregarMarcas=false){
+    let a=produtosDaCategoria();
+    if(recarregarMarcas) atualizarMarcas(a);
+
+    const preco=+document.getElementById("fy20Preco").value;
+    const marca=document.getElementById("fy20Marca").value;
+    const promo=document.getElementById("fy20Promo").value;
+    const best=document.getElementById("fy20Best").value;
+    const disp=document.getElementById("fy20Disp").value;
+    const ord=document.getElementById("fy20Order").value;
+
+    if(preco)a=a.filter(p=>Number(p.preco)<=preco);
+    if(marca)a=a.filter(p=>p.marca===marca);
+    if(promo)a=a.filter(p=>p.precoAntigo!=null && Number(p.precoAntigo)>Number(p.preco));
+    if(best)a=a.filter(p=>p.maisVendido || Number(p.vendas||0)>0);
+    if(disp==="sim")a=a.filter(p=>Number(p.estoque)>1);
+    if(disp==="baixo")a=a.filter(p=>Number(p.estoque)>0 && Number(p.estoque)<=5);
+
+    a.sort((x,y)=>{
+      if(ord==="menor")return Number(x.preco)-Number(y.preco);
+      if(ord==="maior")return Number(y.preco)-Number(x.preco);
+      return Number(y.id||0)-Number(x.id||0);
+    });
+
+    const container=document.getElementById("fy20Produtos");
+    container.innerHTML="";
+    if(!a.length){
+      container.innerHTML='<div class="fy20-empty">Nenhum produto encontrado com esses filtros.</div>';
+      return;
+    }
+    a.forEach(p=>container.appendChild(criarCard(p)));
+  };
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
+      document.querySelectorAll("button,a").forEach(el=>{
+        if(el.textContent.trim().replace(/[▾⌄]/g,"").trim()===cat){
+          el.addEventListener("click",e=>{e.preventDefault();fy20Abrir(cat)});
+        }
+      });
+    });
   });
- });
 })();
 </script>
 
@@ -18075,6 +18121,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       try{if(typeof window[nome]==='function')window[nome]()}catch(e){}
     });
     try{if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();else if(typeof window.renderProdutos==='function')window.renderProdutos([])}catch(e){}
+    try{if(document.getElementById('fy20Categoria')?.classList.contains('ativa') && typeof window.fy20Render==='function')window.fy20Render(true)}catch(e){}
   }
   window.carregarProdutosSupabase=carregarProdutosSupabase;
   if(document.readyState==='loading'){
