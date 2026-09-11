@@ -18916,5 +18916,87 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 })();
 </script>
 
+
+
+<script id="fy-catalogo-total-supabase-v2">
+(function(){
+  const norm = v => (v || "").toString().normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+
+  function ehKit(p){
+    const nome = norm(p && p.nome);
+    const cat  = norm(p && p.categoria);
+    const sub  = norm(p && p.subcategoria);
+    return cat === "kits" || cat === "kit" ||
+           nome.startsWith("kit ") ||
+           sub.startsWith("kit ") || sub.startsWith("kits ");
+  }
+
+  function normalizar(p){
+    let galeria = p.galeria || [];
+    let variantes = p.variantes || [];
+    if(typeof galeria === "string"){try{galeria=JSON.parse(galeria)}catch(e){galeria=[]}}
+    if(typeof variantes === "string"){try{variantes=JSON.parse(variantes)}catch(e){variantes=[]}}
+    if(!Array.isArray(galeria)) galeria=[];
+    if(!Array.isArray(variantes)) variantes=[];
+
+    return {
+      id:p.id, nome:p.nome||"Produto", marca:p.marca||"FOR YOU",
+      categoria:p.categoria||"", subcategoria:p.subcategoria||"",
+      preco:Number(p.preco||0),
+      precoAntigo:p.preco_antigo==null?undefined:Number(p.preco_antigo),
+      nota:Number(p.nota||5), estoque:Number(p.estoque||0),
+      imagem:(p.imagem&&String(p.imagem).trim()) || galeria[0] || "",
+      galeria, variantes, rotuloVariante:p.rotulo_variante||"",
+      descricao:p.descricao||"", validade:p.validade||"",
+      proximoValidade:!!p.proximo_validade, achadinhoDe:!!p.achadinho_de,
+      escolhaDe:!!p.escolha_de, destaqueDe:!!p.destaque_de,
+      novidade:!!p.novidade, ativo:p.ativo!==false
+    };
+  }
+
+  async function carregarCatalogoTotal(){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!sb){setTimeout(carregarCatalogoTotal,500);return;}
+
+    let todos=[], inicio=0, tamanho=1000;
+    while(true){
+      const {data,error}=await sb.from("produtos").select("*")
+        .eq("ativo",true).order("id",{ascending:true})
+        .range(inicio,inicio+tamanho-1);
+      if(error){console.error("Erro catálogo:",error.message);return;}
+      if(!Array.isArray(data)||!data.length) break;
+      todos=todos.concat(data);
+      if(data.length<tamanho) break;
+      inicio+=tamanho;
+    }
+
+    produtos=todos.map(normalizar);
+    window.FOR_YOU_TODOS_PRODUTOS=produtos;
+    window.FOR_YOU_KITS=produtos.filter(ehKit);
+    window.FOR_YOU_PRODUTOS_NORMAIS=produtos.filter(p=>!ehKit(p));
+
+    try{localStorage.removeItem("forYouCatalogo")}catch(e){}
+
+    [
+      "renderOfertas","renderKits","renderMaisVendidos","renderUltimasUnidades",
+      "renderRecomendados","renderAchadinhosDe","renderAdmin"
+    ].forEach(nome=>{
+      try{if(typeof window[nome]==="function")window[nome]()}catch(e){}
+    });
+    try{if(typeof window.renderNovidadesHome==="function")window.renderNovidadesHome()}catch(e){}
+
+    console.log("FOR YOU: "+produtos.length+" produtos ativos carregados do Supabase.");
+  }
+
+  window.carregarProdutosSupabase=carregarCatalogoTotal;
+  window.fyEhKit=ehKit;
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>setTimeout(carregarCatalogoTotal,250));
+  }else setTimeout(carregarCatalogoTotal,250);
+})();
+</script>
+
 </body>
 </html>
