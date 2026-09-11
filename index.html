@@ -18998,5 +18998,88 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 })();
 </script>
 
+
+
+<script id="fy-catalogo-final-categorias-v3">
+(function(){
+  const N=v=>(v||"").toString().normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+
+  function ehKit(p){
+    const n=N(p&&p.nome), c=N(p&&p.categoria), s=N(p&&p.subcategoria);
+    return c==="kit" || c==="kits" || c==="kit promocional" || c==="kits promocionais" ||
+           n.startsWith("kit ") || s.startsWith("kit ") || s.startsWith("kits ");
+  }
+
+  function listaNormal(){
+    return (Array.isArray(produtos)?produtos:[]).filter(p=>p && p.ativo!==false && !ehKit(p));
+  }
+
+  function listaKits(){
+    return (Array.isArray(produtos)?produtos:[]).filter(p=>p && p.ativo!==false && ehKit(p));
+  }
+
+  window.fyEhKit=ehKit;
+  window.fyCatalogoCategorias=listaNormal;
+  window.fyKitsReais=listaKits;
+
+  function renderNoAlvo(alvo,lista){
+    if(!alvo)return;
+    alvo.innerHTML="";
+    if(!lista.length){
+      alvo.innerHTML='<div class="fy-novidades-vazio"><strong>Nenhum produto encontrado</strong></div>';
+      return;
+    }
+    lista.forEach(p=>{
+      try{
+        if(typeof criarCard==="function") alvo.appendChild(criarCard(p));
+      }catch(e){console.warn("Erro ao criar card",p&&p.nome,e)}
+    });
+  }
+
+  /* Kits Promocionais: sempre usa os kits reais do catálogo carregado. */
+  window.renderKits=function(){
+    const lista=listaKits();
+    const seletores=["#listaKits","#kitsProdutos","[data-lista-kits]",".lista-kits"];
+    let achou=false;
+    seletores.forEach(sel=>{
+      document.querySelectorAll(sel).forEach(el=>{achou=true;renderNoAlvo(el,lista)});
+    });
+    return lista;
+  };
+
+  /* Função única para obter produtos de uma categoria normal.
+     Kits nunca entram em Corpo/Cabelo/Lábios/Pele etc. */
+  window.fyProdutosDaCategoria=function(categoria,subcategoria){
+    const cat=N(categoria), sub=N(subcategoria);
+    return listaNormal().filter(p=>{
+      const okCat=!cat || N(p.categoria)===cat ||
+        (cat==="corpo" && ["corpo"].includes(N(p.categoria)));
+      const okSub=!sub || N(p.subcategoria)===sub;
+      return okCat && okSub;
+    });
+  };
+
+  /* Atualiza áreas abertas após o Supabase carregar. */
+  function atualizar(){
+    try{window.renderKits()}catch(e){}
+    try{if(typeof window.renderNovidadesHome==="function")window.renderNovidadesHome()}catch(e){}
+    try{if(typeof window.renderOfertas==="function")window.renderOfertas()}catch(e){}
+    try{if(typeof window.renderMaisVendidos==="function")window.renderMaisVendidos()}catch(e){}
+  }
+
+  const antigo=window.carregarProdutosSupabase;
+  if(typeof antigo==="function"){
+    window.carregarProdutosSupabase=async function(){
+      const r=await antigo.apply(this,arguments);
+      atualizar();
+      return r;
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded",()=>setTimeout(atualizar,700));
+  window.addEventListener("load",()=>setTimeout(atualizar,900));
+})();
+</script>
+
 </body>
 </html>
