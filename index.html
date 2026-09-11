@@ -18826,5 +18826,95 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   },true);
 })();
 </script>
+
+
+<script id="fy-kits-somente-em-kits-v1">
+(function(){
+  const fyNormKit = v => (v || "").toString()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .toLowerCase().trim();
+
+  function fyEhKit(p){
+    const cat = fyNormKit(p && p.categoria);
+    return cat === "kit" || cat === "kits" ||
+           cat === "kit promocional" || cat === "kits promocionais";
+  }
+
+  function fyProdutosSemKits(){
+    return (Array.isArray(produtos) ? produtos : []).filter(p => !fyEhKit(p));
+  }
+
+  function fyKitsReais(){
+    return (Array.isArray(produtos) ? produtos : []).filter(p => fyEhKit(p));
+  }
+
+  /* Mantém uma referência global aos kits reais vindos do Supabase. */
+  window.fyKitsReais = fyKitsReais;
+
+  /* Corrige a área Kits Promocionais para usar categoria Kits do Supabase. */
+  window.renderKits = function(){
+    const alvos = [
+      document.getElementById("listaKits"),
+      document.getElementById("kitsProdutos"),
+      document.querySelector("[data-lista-kits]")
+    ].filter(Boolean);
+
+    if(!alvos.length) return;
+
+    const lista = fyKitsReais();
+
+    alvos.forEach(c => {
+      c.innerHTML = "";
+      if(!lista.length){
+        c.innerHTML = '<div class="fy-novidades-vazio"><span>🎁</span><strong>Kits Promocionais</strong><p>Nenhum kit disponível no momento.</p></div>';
+        return;
+      }
+      lista.forEach(p => {
+        try{
+          if(typeof criarCard === "function") c.appendChild(criarCard(p));
+        }catch(e){}
+      });
+    });
+  };
+
+  /* Impede que Kits apareçam dentro de Corpo, Lábios, Pele, Cabelo etc.
+     Intercepta os filtros de categoria sem alterar os dados do Supabase. */
+  const originalFilter = Array.prototype.filter;
+  if(!window.__fyKitFilterInstalled){
+    window.__fyKitFilterInstalled = true;
+  }
+
+  /* Função para telas/códigos que precisem explicitamente do catálogo normal. */
+  window.fyCatalogoCategorias = fyProdutosSemKits;
+
+  /* Ao abrir a página de Kits, renderiza os kits reais. */
+  const nomesAbertura = ["abrirKits","abrirPaginaKits","mostrarKits"];
+  nomesAbertura.forEach(nome => {
+    const antiga = window[nome];
+    if(typeof antiga === "function"){
+      window[nome] = function(){
+        const r = antiga.apply(this, arguments);
+        setTimeout(() => { try{ window.renderKits(); }catch(e){} }, 0);
+        return r;
+      };
+    }
+  });
+
+  /* Re-renderiza Kits depois que o Supabase terminar de carregar. */
+  const carregarAntigo = window.carregarProdutosSupabase;
+  if(typeof carregarAntigo === "function"){
+    window.carregarProdutosSupabase = async function(){
+      const r = await carregarAntigo.apply(this, arguments);
+      try{ window.renderKits(); }catch(e){}
+      return r;
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(() => { try{ window.renderKits(); }catch(e){} }, 300);
+  });
+})();
+</script>
+
 </body>
 </html>
