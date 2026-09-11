@@ -16967,7 +16967,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return (Array.isArray(produtos)?produtos:[]).filter(p=>{
       if(p.ativo===false)return false;
       const cat=norm(p.categoria), sub=norm(p.subcategoria);
-      if(alvo==="corpo" && (cat==="cabelo" || sub==="cabelo")) return true;
+      /* Organização real da loja:
+         - Cabelo aparece dentro de Corpo
+         - qualquer produto classificado como kit aparece em Kits */
+      if(alvo==="corpo"){
+        if(cat==="corpo" || cat==="cabelo") return true;
+      }
+      if(alvo==="kits"){
+        if(cat==="kits" || cat==="kit" || sub.includes("kit")) return true;
+      }
       return cat===alvo || sub===alvo;
     });
   }
@@ -16996,6 +17004,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.fy20Render=function(recarregarMarcas=false){
     let a=produtosDaCategoria();
+
+    /* Dentro de Corpo mostramos itens de Corpo/Cabelo,
+       mas kits ficam exclusivamente na área Kits. */
+    if(norm(atual)==="corpo"){
+      a=a.filter(p=>!norm(p.subcategoria).includes("kit") && norm(p.categoria)!=="kits" && norm(p.categoria)!=="kit");
+    }
+
     if(recarregarMarcas) atualizarMarcas(a);
 
     const preco=+document.getElementById("fy20Preco").value;
@@ -17028,7 +17043,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   document.addEventListener("DOMContentLoaded",()=>{
-    ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo"].forEach(cat=>{
+    ["Lábios","Pele","Skincare","Olhos","Face","Acessórios","Corpo","Kits"].forEach(cat=>{
       document.querySelectorAll("button,a").forEach(el=>{
         if(el.textContent.trim().replace(/[▾⌄]/g,"").trim()===cat){
           el.addEventListener("click",e=>{e.preventDefault();fy20Abrir(cat)});
