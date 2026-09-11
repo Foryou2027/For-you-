@@ -3729,155 +3729,6 @@ textarea:focus-visible{
 .menu-principal > .busca .busca-linha:focus-within{border-color:#b83f61!important;box-shadow:0 0 0 4px rgba(184,63,97,.10),0 8px 24px rgba(184,63,97,.10)!important;}
 .busca-sugestoes{top:56px!important;border-radius:16px!important;}
 @media(max-width:600px){.menu-principal > .busca{margin:12px auto 12px!important;padding:0 10px!important}.menu-principal > .busca .busca-linha{height:48px!important}.menu-principal > .busca input{font-size:16px!important;padding:0 15px!important}.menu-principal > .busca button{width:52px!important;flex-basis:52px!important}}
-
-
-/* =========================================================
-   FOR YOU — SUBCATEGORIAS MOBILE CLEAN
-========================================================= */
-@media (max-width:800px){
-  .dropdown{
-    position:fixed !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    bottom:0 !important;
-    width:100% !important;
-    max-width:none !important;
-    max-height:none !important;
-    padding:0 18px 30px !important;
-    background:#fff !important;
-    border:0 !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-    overflow-y:auto !important;
-    z-index:9999 !important;
-  }
-
-  .dropdown.aberto{
-    animation:fyCategoriaMobile .20s ease forwards !important;
-  }
-
-  @keyframes fyCategoriaMobile{
-    from{opacity:0;transform:translateY(12px)}
-    to{opacity:1;transform:translateY(0)}
-  }
-
-  .dropdown h3{
-    position:sticky;
-    top:0;
-    z-index:2;
-    background:#fff !important;
-    margin:0 0 14px !important;
-    padding:58px 2px 20px !important;
-    border-bottom:1px solid #f3e8eb !important;
-    font-family:Georgia,serif !important;
-    font-size:30px !important;
-    line-height:1.1 !important;
-    font-weight:400 !important;
-    color:#251a1e !important;
-  }
-
-  .dropdown h3::before{
-    content:"COMPRE POR CATEGORIA";
-    display:block;
-    margin-bottom:10px;
-    font-family:Arial,sans-serif;
-    font-size:8px;
-    font-weight:800;
-    letter-spacing:2.3px;
-    color:#d73d6c;
-  }
-
-  .dropdown h3::after{
-    content:"Escolha o que você procura";
-    display:block;
-    margin-top:8px;
-    font-family:Arial,sans-serif;
-    font-size:10px;
-    line-height:1.4;
-    font-weight:400;
-    letter-spacing:0;
-    text-transform:none;
-    color:#9a8b90;
-  }
-
-  .dropdown a:not(.menu-ver-todos){
-    width:100% !important;
-    min-height:55px !important;
-    margin:0 0 9px !important;
-    padding:0 17px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    background:#fffafb !important;
-    border:1px solid #f0dce2 !important;
-    border-radius:15px !important;
-    color:#3d3035 !important;
-    font-size:11px !important;
-    font-weight:500 !important;
-    text-decoration:none !important;
-    box-shadow:0 3px 12px rgba(53,31,39,.025);
-  }
-
-  .dropdown a:not(.menu-ver-todos)::after{
-    content:"›" !important;
-    font-size:22px !important;
-    font-weight:300;
-    color:#d7839d !important;
-  }
-
-  .dropdown a:not(.menu-ver-todos):hover,
-  .dropdown a:not(.menu-ver-todos):active{
-    padding-left:17px !important;
-    background:#fff3f6 !important;
-    border-color:#e8bdca !important;
-    color:#b83f61 !important;
-  }
-
-  .dropdown .menu-ver-todos{
-    width:100% !important;
-    min-height:52px !important;
-    margin-top:18px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    background:#8f1738 !important;
-    border:1px solid #8f1738 !important;
-    border-radius:15px !important;
-    color:#fff !important;
-    font-size:9px !important;
-    font-weight:800 !important;
-    letter-spacing:.7px !important;
-    text-transform:uppercase !important;
-  }
-
-  .dropdown .menu-ver-todos::after{
-    display:none !important;
-  }
-
-  .dropdown::before{
-    content:"×";
-    position:fixed;
-    top:17px;
-    right:20px;
-    width:38px;
-    height:38px;
-    border:1px solid #eed9df;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#fff;
-    color:#6d555d;
-    font-family:Arial,sans-serif;
-    font-size:24px;
-    font-weight:300;
-    line-height:1;
-    pointer-events:none;
-    z-index:10001;
-  }
-}
-
 </style>
 
 </style>
@@ -8401,6 +8252,200 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
     padding-left:39px !important;
   }
 }
+
+
+/* =========================================================
+   FOR YOU — NOVO VISUAL DA TELA REAL DE CATEGORIAS (fy20)
+   ========================================================= */
+.fy20-cat-page{
+  background:#fffafb !important;
+}
+
+.fy20-cat-top{
+  background:#fff !important;
+  border-bottom:1px solid #f1e4e8 !important;
+}
+
+.fy20-cat-top h1{
+  font-family:Georgia,serif !important;
+  font-weight:400 !important;
+  color:#2d2025 !important;
+}
+
+.fy20-wrap{
+  max-width:1180px !important;
+}
+
+/* filtros mais leves */
+.fy20-filterbar{
+  background:#fff !important;
+  border:1px solid #f1e4e8 !important;
+  border-radius:20px !important;
+  box-shadow:0 8px 28px rgba(53,31,39,.04) !important;
+}
+
+.fy20-filterbar select{
+  border:1px solid #eadde1 !important;
+  border-radius:12px !important;
+  background:#fff !important;
+}
+
+/* cards */
+.fy20-products{
+  gap:18px !important;
+}
+
+.fy20-card{
+  background:#fff !important;
+  border:1px solid #f0e4e7 !important;
+  border-radius:20px !important;
+  box-shadow:0 7px 24px rgba(53,31,39,.045) !important;
+  transition:transform .2s ease,box-shadow .2s ease !important;
+}
+
+.fy20-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(53,31,39,.08) !important;
+}
+
+@media(max-width:650px){
+
+  .fy20-cat-page{
+    background:#fff !important;
+  }
+
+  .fy20-cat-top{
+    padding:15px 16px !important;
+    min-height:62px;
+    grid-template-columns:42px 1fr 42px !important;
+  }
+
+  .fy20-cat-top button:first-child{
+    width:38px;
+    height:38px;
+    overflow:hidden;
+    font-size:0 !important;
+    border:1px solid #f0dfe4 !important;
+    border-radius:50% !important;
+    background:#fff !important;
+  }
+
+  .fy20-cat-top button:first-child::after{
+    content:"‹";
+    font-size:27px;
+    font-weight:300;
+    color:#8f3150;
+  }
+
+  .fy20-cat-top h1{
+    text-align:center;
+    font-size:25px !important;
+  }
+
+  .fy20-cat-top .x{
+    justify-self:end;
+    width:38px;
+    height:38px;
+    border:1px solid #f0dfe4 !important;
+    border-radius:50% !important;
+    font-size:22px !important;
+    color:#8f3150 !important;
+  }
+
+  .fy20-wrap{
+    padding:24px 14px 55px !important;
+  }
+
+  /* filtros viram uma faixa horizontal, sem ocupar a tela inteira */
+  .fy20-filterbar{
+    display:flex !important;
+    overflow-x:auto !important;
+    gap:8px !important;
+    padding:10px !important;
+    margin-bottom:20px !important;
+    border-radius:16px !important;
+    scrollbar-width:none;
+  }
+
+  .fy20-filterbar::-webkit-scrollbar{
+    display:none;
+  }
+
+  .fy20-filterbar > div{
+    min-width:128px;
+    flex:0 0 128px;
+  }
+
+  .fy20-filterbar label{
+    display:block;
+    padding-left:3px;
+    font-size:7px !important;
+    color:#a07d88 !important;
+  }
+
+  .fy20-filterbar select{
+    height:38px !important;
+    margin-top:5px !important;
+    font-size:9px !important;
+  }
+
+  /* dois produtos por linha */
+  .fy20-products{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:11px !important;
+  }
+
+  .fy20-card{
+    border-radius:16px !important;
+    overflow:hidden !important;
+    box-shadow:none !important;
+  }
+
+  .fy20-img{
+    aspect-ratio:1/1 !important;
+    background:#fff6f8 !important;
+  }
+
+  .fy20-img img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+  }
+
+  .fy20-img:after{
+    display:none !important;
+  }
+
+  .fy20-info{
+    padding:11px 10px 13px !important;
+  }
+
+  .fy20-brand{
+    font-size:7px !important;
+    letter-spacing:.8px !important;
+    color:#b08a95 !important;
+  }
+
+  .fy20-info h3,
+  .fy20-name{
+    font-family:Georgia,serif !important;
+    font-size:15px !important;
+    line-height:1.22 !important;
+    color:#33262b !important;
+  }
+
+  .fy20-price,
+  .fy20-preco{
+    color:#b83f61 !important;
+    font-size:14px !important;
+    font-weight:700 !important;
+  }
+
+  .fy20-card button{
+    border-radius:12px !important;
+  }
+}
+
 </style>
 
 </head>
