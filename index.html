@@ -13090,6 +13090,20 @@ document.addEventListener("DOMContentLoaded",()=>{
 <script id="fy-cart-final-fix-script">
 (function(){
   function openCart(){
+    /* Esta funcao antiga ainda recebe o primeiro clique do cabecalho.
+       Redireciona imediatamente para a pagina completa da sacola. */
+    var paginaCompleta=document.getElementById('fyCarrinhoPagina');
+    if(paginaCompleta){
+      try{if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();}catch(e){}
+      paginaCompleta.classList.add('ativa');
+      paginaCompleta.style.setProperty('display','block','important');
+      paginaCompleta.style.setProperty('visibility','visible','important');
+      paginaCompleta.style.setProperty('pointer-events','auto','important');
+      paginaCompleta.setAttribute('aria-hidden','false');
+      paginaCompleta.scrollTop=0;
+      document.body.style.overflow='hidden';
+      return;
+    }
     var c=document.getElementById('carrinho');
     var o=document.getElementById('overlay');
     if(c){
