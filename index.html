@@ -19213,5 +19213,55 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   #fyCarrinhoPagina .fy-cp-summary{position:static!important}
 }
 </style>
+<style id="fy-desativa-carrinho-lateral-final">
+/* A loja usa somente a pagina completa Minha Sacola. */
+#carrinho.carrinho,
+#overlay.overlay{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+</style>
+<script id="fy-abre-somente-sacola-completa-final">
+(function(){
+  function abrirSacolaCompleta(){
+    var lateral=document.getElementById('carrinho');
+    var overlay=document.getElementById('overlay');
+    if(lateral)lateral.classList.remove('aberto');
+    if(overlay)overlay.classList.remove('ativo');
+
+    if(typeof fyRenderCarrinhoPagina==='function'){
+      try{fyRenderCarrinhoPagina();}catch(e){}
+    }
+
+    var pagina=document.getElementById('fyCarrinhoPagina');
+    if(!pagina)return;
+    pagina.classList.add('ativa');
+    pagina.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    pagina.scrollTop=0;
+  }
+
+  window.abrirCarrinho=abrirSacolaCompleta;
+  window.abrirCarrinhoV17=abrirSacolaCompleta;
+  window.fyAbrirPaginaCarrinho=abrirSacolaCompleta;
+
+  document.addEventListener('click',function(evento){
+    var alvo=evento.target.closest&&evento.target.closest('#btnAbrirCarrinho,.carrinho-icon,[data-carrinho],a[href="#carrinho"]');
+    if(!alvo)return;
+    evento.preventDefault();
+    evento.stopImmediatePropagation();
+    abrirSacolaCompleta();
+  },true);
+
+  document.addEventListener('DOMContentLoaded',function(){
+    var botao=document.getElementById('btnAbrirCarrinho');
+    if(botao){
+      botao.removeAttribute('onclick');
+      botao.setAttribute('aria-label','Abrir pagina completa da Minha Sacola');
+    }
+  });
+})();
+</script>
 </body>
 </html>
