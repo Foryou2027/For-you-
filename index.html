@@ -8356,6 +8356,11 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
       <div class="fy-cp-row"><span>Subtotal</span><strong id="fyCpSubtotal">R$ 0,00</strong></div>
       <div class="fy-cp-row"><span>Desconto</span><strong id="fyCpDesconto">R$ 0,00</strong></div>
       <div class="fy-cp-row"><span>Frete</span><strong id="fyCpFrete">A calcular</strong></div>
+      <div class="fy-cp-cupom">
+        <label for="fyCpCupom">Cupom de desconto</label>
+        <div><input id="fyCpCupom" placeholder="Digite seu cupom"><button type="button" onclick="fyAplicarCupomPagina()">APLICAR</button></div>
+        <small id="fyCpCupomMsg"></small>
+      </div>
       <div class="fy-cp-row fy-cp-total"><span>Total</span><strong id="fyCpTotal">R$ 0,00</strong></div>
       <button class="fy-cp-checkout" type="button" onclick="fyFinalizarCompra()">FINALIZAR COMPRA</button>
       <div class="fy-cp-safe">&#x1F512; Compra segura &#x2022; Seus dados protegidos</div>
@@ -10300,6 +10305,7 @@ document.createElement("div");
 div.className="produto"+(String(produto.imagem||"").startsWith("produto-")?" fy-produto-real":"");
 
 div.dataset.nome=produto.nome;
+div.dataset.id=produto.id;
 div.dataset.marca=produto.marca;
 div.dataset.preco=produto.preco;
 div.dataset.nota=produto.nota;
@@ -16649,8 +16655,27 @@ function fyRenderCarrinhoPagina(){
     }).join("");
   }
   const subtotal=lista.reduce((s,it)=>s+fyCartPrice(it)*fyCartQty(it),0);
+  const codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
+  const percentual=codigo==='FORYOU10'?0.10:codigo==='BEMVINDA'?0.15:0;
+  const valorDesconto=subtotal*percentual;
   document.getElementById("fyCpSubtotal").textContent=fyBRL(subtotal);
-  document.getElementById("fyCpTotal").textContent=fyBRL(subtotal);
+  document.getElementById("fyCpDesconto").textContent=valorDesconto?'- '+fyBRL(valorDesconto):fyBRL(0);
+  document.getElementById("fyCpTotal").textContent=fyBRL(subtotal-valorDesconto);
+  const campoCupom=document.getElementById('fyCpCupom');
+  if(campoCupom&&codigo)campoCupom.value=codigo;
+}
+function fyAplicarCupomPagina(){
+  const campo=document.getElementById('fyCpCupom');
+  const msg=document.getElementById('fyCpCupomMsg');
+  const codigo=(campo&&campo.value||'').trim().toUpperCase();
+  if(codigo==='FORYOU10'||codigo==='BEMVINDA'){
+    localStorage.setItem('forYouCupomCarrinho',codigo);
+    if(msg){msg.textContent='Cupom aplicado com sucesso!';msg.className='sucesso';}
+  }else{
+    localStorage.removeItem('forYouCupomCarrinho');
+    if(msg){msg.textContent='Cupom invalido.';msg.className='erro';}
+  }
+  fyRenderCarrinhoPagina();
 }
 function fyCartSave(){
   try{
@@ -19188,6 +19213,14 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   color:#282326!important;font-size:16px!important;font-weight:700!important;
 }
 #fyCarrinhoPagina .fy-cp-total strong{color:#c77890!important;font-size:20px!important}
+#fyCarrinhoPagina .fy-cp-cupom{margin:15px 0 5px!important;padding:15px 0!important;border-top:1px solid #ebe1e4!important}
+#fyCarrinhoPagina .fy-cp-cupom label{display:block!important;margin-bottom:8px!important;color:#4d4447!important;font-size:9px!important;font-weight:800!important;text-transform:uppercase!important;letter-spacing:.7px!important}
+#fyCarrinhoPagina .fy-cp-cupom>div{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important}
+#fyCarrinhoPagina .fy-cp-cupom input{min-width:0!important;height:43px!important;padding:0 12px!important;border:1px solid #e5dadd!important;border-radius:9px!important;background:#fff!important;color:#292527!important;font-size:10px!important}
+#fyCarrinhoPagina .fy-cp-cupom button{height:43px!important;padding:0 15px!important;border:0!important;border-radius:9px!important;background:#743247!important;color:#fff!important;font-size:8px!important;font-weight:800!important}
+#fyCarrinhoPagina .fy-cp-cupom small{display:block!important;min-height:16px!important;margin-top:7px!important;font-size:9px!important}
+#fyCarrinhoPagina .fy-cp-cupom small.sucesso{color:#34805b!important}
+#fyCarrinhoPagina .fy-cp-cupom small.erro{color:#b43c4e!important}
 #fyCarrinhoPagina .fy-cp-checkout{
   width:100%!important;min-height:52px!important;margin-top:18px!important;border:0!important;
   border-radius:12px!important;background:#292627!important;color:#fff!important;
@@ -19224,6 +19257,25 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 </style>
 <script id="fy-abre-somente-sacola-completa-final">
 (function(){
+  function produtoPeloId(id){
+    try{
+      return Array.isArray(produtos)
+        ? produtos.find(function(p){return String(p.id)===String(id);})||null
+        : null;
+    }catch(e){return null;}
+  }
+
+  function salvarSacolaCompleta(){
+    try{localStorage.setItem('forYouCarrinho',JSON.stringify(carrinho));}catch(e){}
+    try{
+      if(typeof chaveContaDados==='function'){
+        localStorage.setItem(chaveContaDados('Carrinho'),JSON.stringify(carrinho));
+      }
+    }catch(e){}
+    try{if(typeof atualizar==='function')atualizar();}catch(e){}
+    try{if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();}catch(e){}
+  }
+
   function abrirSacolaCompleta(){
     var lateral=document.getElementById('carrinho');
     var overlay=document.getElementById('overlay');
@@ -19242,11 +19294,69 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     pagina.scrollTop=0;
   }
 
+  function adicionarSeguro(nome,preco,id){
+    var base=produtoPeloId(id);
+    var nomeFinal=(base&&base.nome)||nome||'Produto';
+    var precoFinal=Number((base&&base.preco)!=null?base.preco:preco)||0;
+    var existente=null;
+    try{
+      existente=carrinho.find(function(item){
+        return id!=null&&String(item.id)===String(id);
+      })||carrinho.find(function(item){return item.nome===nomeFinal;});
+      if(existente){
+        existente.quantidade=Number(existente.quantidade||1)+1;
+      }else{
+        carrinho.push({
+          id:id,
+          nome:nomeFinal,
+          preco:precoFinal,
+          quantidade:1,
+          imagem:(base&&base.imagem)||'',
+          marca:(base&&base.marca)||'FOR YOU'
+        });
+      }
+    }catch(e){
+      alert('Nao foi possivel adicionar este produto. Atualize a pagina e tente novamente.');
+      return;
+    }
+    salvarSacolaCompleta();
+    mostrarConfirmacaoAdicionado(nomeFinal);
+  }
+
+  function mostrarConfirmacaoAdicionado(nome){
+    var aviso=document.getElementById('fyAvisoCarrinhoFinal');
+    if(!aviso){
+      aviso=document.createElement('div');
+      aviso.id='fyAvisoCarrinhoFinal';
+      aviso.style.cssText='position:fixed;right:18px;bottom:22px;z-index:100000;max-width:300px;padding:14px 17px;border-radius:13px;background:#292627;color:#fff;box-shadow:0 12px 35px rgba(0,0,0,.18);font:11px/1.4 Arial,sans-serif;transition:.2s';
+      document.body.appendChild(aviso);
+    }
+    aviso.innerHTML='<strong style="display:block;margin-bottom:3px">Produto adicionado</strong><span style="color:#eadfe2">Clique no carrinho para ver sua sacola.</span>';
+    aviso.style.display='block';
+    clearTimeout(window.fyAvisoCarrinhoTimer);
+    window.fyAvisoCarrinhoTimer=setTimeout(function(){aviso.style.display='none';},2600);
+  }
+
+  window.adicionar=adicionarSeguro;
   window.abrirCarrinho=abrirSacolaCompleta;
   window.abrirCarrinhoV17=abrirSacolaCompleta;
   window.fyAbrirPaginaCarrinho=abrirSacolaCompleta;
 
   document.addEventListener('click',function(evento){
+    var botaoAdicionar=evento.target.closest&&evento.target.closest('.produto .adicionar');
+    if(botaoAdicionar&&!botaoAdicionar.disabled){
+      var card=botaoAdicionar.closest('.produto');
+      var base=card&&produtoPeloId(card.dataset.id);
+      if(base&&Array.isArray(base.variantes)&&base.variantes.length)return;
+      evento.preventDefault();
+      evento.stopImmediatePropagation();
+      adicionarSeguro(
+        (base&&base.nome)||(card&&card.dataset.nome)||'Produto',
+        (base&&base.preco)||(card&&card.dataset.preco)||0,
+        (base&&base.id)||(card&&card.dataset.id)||null
+      );
+      return;
+    }
     var alvo=evento.target.closest&&evento.target.closest('#btnAbrirCarrinho,.carrinho-icon,[data-carrinho],a[href="#carrinho"]');
     if(!alvo)return;
     evento.preventDefault();
