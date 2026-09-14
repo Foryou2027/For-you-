@@ -8442,7 +8442,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 <span class="fy-action-label">Minha Conta</span>
 </button>
 
-<button type="button" class="carrinho-icon fy-top-action" id="btnAbrirCarrinho" onclick="fyAbrirPaginaCarrinho();return false;" aria-label="Abrir carrinho" title="Carrinho">
+<button type="button" class="carrinho-icon fy-top-action" id="btnAbrirCarrinho" onclick="fyAbrirCarrinhoDireto();return false;" aria-label="Abrir carrinho" title="Carrinho">
   <span class="fy-cart-symbol">&#x2667;</span><span class="fy-action-label">Carrinho</span><span class="contador" id="contadorCarrinho">0</span>
 </button>
 
@@ -19289,6 +19289,9 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     var pagina=document.getElementById('fyCarrinhoPagina');
     if(!pagina)return;
     pagina.classList.add('ativa');
+    pagina.style.setProperty('display','block','important');
+    pagina.style.setProperty('visibility','visible','important');
+    pagina.style.setProperty('pointer-events','auto','important');
     pagina.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
     pagina.scrollTop=0;
@@ -19338,9 +19341,20 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   }
 
   window.adicionar=adicionarSeguro;
+  window.fyAbrirCarrinhoDireto=abrirSacolaCompleta;
   window.abrirCarrinho=abrirSacolaCompleta;
   window.abrirCarrinhoV17=abrirSacolaCompleta;
   window.fyAbrirPaginaCarrinho=abrirSacolaCompleta;
+  window.fyFecharCarrinhoPagina=function(){
+    var pagina=document.getElementById('fyCarrinhoPagina');
+    if(!pagina)return;
+    pagina.classList.remove('ativa');
+    pagina.style.removeProperty('display');
+    pagina.style.removeProperty('visibility');
+    pagina.style.removeProperty('pointer-events');
+    pagina.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  };
 
   document.addEventListener('click',function(evento){
     var botaoAdicionar=evento.target.closest&&evento.target.closest('.produto .adicionar');
