@@ -19401,5 +19401,90 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   });
 })();
 </script>
+<!-- Minha Conta e Favoritos em abas exclusivas -->
+<style>
+body.fy-pagina-exclusiva > .topo,
+body.fy-pagina-exclusiva > header,
+body.fy-pagina-exclusiva > footer,
+body.fy-pagina-exclusiva #loja,
+body.fy-pagina-exclusiva .pagina:not(.ativa){
+  display:none !important;
+}
+
+body.fy-pagina-exclusiva{
+  min-height:100vh;
+  background:#fff8fa;
+}
+
+body.fy-pagina-exclusiva .pagina.ativa{
+  display:block !important;
+  min-height:100vh;
+  padding-top:28px;
+}
+</style>
+
+<script>
+(function(){
+  const ROTAS_EXCLUSIVAS={
+    "#minha-conta":"paginaConta",
+    "#favoritos":"paginaFavoritos"
+  };
+
+  function urlExclusiva(hash){
+    const url=new URL(window.location.href);
+    url.hash=hash;
+    return url.href;
+  }
+
+  function mostrarExclusiva(hash){
+    const paginaId=ROTAS_EXCLUSIVAS[hash];
+    if(!paginaId) return false;
+
+    document.body.classList.add("fy-pagina-exclusiva");
+    document.querySelectorAll(".pagina").forEach(function(pagina){
+      pagina.classList.toggle("ativa",pagina.id===paginaId);
+    });
+
+    const loja=document.getElementById("loja");
+    if(loja) loja.style.display="none";
+
+    if(hash==="#minha-conta" && typeof atualizarMinhaConta==="function"){
+      atualizarMinhaConta();
+    }
+    if(hash==="#favoritos" && typeof renderFavoritos==="function"){
+      renderFavoritos();
+    }
+
+    window.scrollTo({top:0,behavior:"auto"});
+    return true;
+  }
+
+  function abrirNovaAba(hash){
+    if(window.location.hash===hash){
+      mostrarExclusiva(hash);
+      return;
+    }
+    const novaAba=window.open(urlExclusiva(hash),"_blank","noopener");
+    if(!novaAba){
+      window.location.href=urlExclusiva(hash);
+    }
+  }
+
+  window.abrirConta=function(){ abrirNovaAba("#minha-conta"); };
+  window.abrirFavoritos=function(){ abrirNovaAba("#favoritos"); };
+
+  function iniciarRotaExclusiva(){
+    mostrarExclusiva(window.location.hash);
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",iniciarRotaExclusiva);
+  }else{
+    iniciarRotaExclusiva();
+  }
+
+  window.addEventListener("hashchange",iniciarRotaExclusiva);
+})();
+</script>
 </body>
 </html>
