@@ -19464,8 +19464,10 @@ body.fy-pagina-exclusiva .pagina.ativa{
       mostrarExclusiva(hash);
       return;
     }
-    const novaAba=window.open(urlExclusiva(hash),"_blank","noopener");
-    if(!novaAba){
+    const novaAba=window.open(urlExclusiva(hash),"_blank");
+    if(novaAba){
+      novaAba.opener=null;
+    }else{
       window.location.href=urlExclusiva(hash);
     }
   }
