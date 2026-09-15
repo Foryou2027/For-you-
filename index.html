@@ -19475,6 +19475,19 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.abrirConta=function(){ abrirNovaAba("#minha-conta"); };
   window.abrirFavoritos=function(){ abrirNovaAba("#favoritos"); };
 
+  const voltarLojaOriginal=window.voltarLoja;
+  window.voltarLoja=function(){
+    if(document.body.classList.contains("fy-pagina-exclusiva") || ROTAS_EXCLUSIVAS[window.location.hash]){
+      const urlInicial=new URL(window.location.href);
+      urlInicial.hash="";
+      window.location.href=urlInicial.href;
+      return;
+    }
+    if(typeof voltarLojaOriginal==="function"){
+      voltarLojaOriginal();
+    }
+  };
+
   function iniciarRotaExclusiva(){
     mostrarExclusiva(window.location.hash);
   }
