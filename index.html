@@ -8560,17 +8560,15 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 
 <!-- FY TESTE: categorias clean acima do banner -->
 <nav class="fy-clean-cat-top" aria-label="Categorias principais">
-  <button onclick="abrirSubmenuHomeFY('labios')">L&#xE1;bios</button>
-  <button onclick="abrirSubmenuHomeFY('pele')">Pele</button>
-  <button onclick="abrirSubmenuHomeFY('olhos')">Olhos</button>
-  <button onclick="abrirSubmenuHomeFY('skincare')">Skincare</button>
-  <button onclick="abrirSubmenuHomeFY('face')">Face</button>
-  <button onclick="abrirSubmenuHomeFY('acessorios')">Acess&#xF3;rios</button>
-  <button onclick="abrirSubmenuHomeFY('corpo')">Corpo</button>
-  <button onclick="document.getElementById('marcas')?.scrollIntoView({behavior:'smooth'})">Marcas</button>
-  <button class="fy-pill forte" onclick="document.getElementById('ofertas')?.scrollIntoView({behavior:'smooth'})">Ofertas</button>
-  <button class="fy-pill" onclick="abrirPaginaKitsFY?.()">Kits</button>
-  <button class="fy-pill" onclick="abrirOfertaEspecial?.('validade')">Pr&#xF3;ximos da validade</button>
+  <button onclick="abrirSubmenuHomeFY('labios')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M8 25c6-8 11-10 16-5 5-5 10-3 16 5-6 8-26 8-32 0Z"/><path d="M8 25c8 1 24 1 32 0"/></svg></span><b>L&#xE1;bios</b></button>
+  <button onclick="abrirSubmenuHomeFY('pele')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M15 36c-3-6-2-17 2-23 3-4 10-4 14 0 4 6 5 17 2 23"/><path d="M19 19c3 2 7 2 10 0M18 28c4 3 8 3 12 0M12 36c7-4 17-4 24 0"/></svg></span><b>Pele</b></button>
+  <button onclick="abrirSubmenuHomeFY('skincare')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="16" rx="12" ry="5"/><path d="M12 16v19c0 5 24 5 24 0V16M12 25c7 4 17 4 24 0"/></svg></span><b>Skincare</b></button>
+  <button onclick="abrirSubmenuHomeFY('olhos')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M5 25c10-13 28-13 38 0-10 13-28 13-38 0Z"/><circle cx="24" cy="25" r="7"/><circle cx="24" cy="25" r="2"/></svg></span><b>Olhos</b></button>
+  <button onclick="selecionarSubcategoria('corpo','Cabelo');return false"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M14 39c-8-13 7-17 2-30M24 39c-8-13 7-17 2-30M34 39c-8-13 7-17 2-30"/></svg></span><b>Cabelos</b></button>
+  <button onclick="abrirSubmenuHomeFY('face')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M10 37 30 17l6 6-20 20H9l1-6Z"/><path d="m29 18 5-8 5 5-4 8M12 36l5 5"/></svg></span><b>Maquiagem</b></button>
+  <button onclick="abrirSubmenuHomeFY('acessorios')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M9 18h30v23H9zM17 18v-5c0-7 14-7 14 0v5"/><path d="M17 24v3M31 24v3"/></svg></span><b>Acess&#xF3;rios</b></button>
+  <button onclick="abrirSubmenuHomeFY('corpo')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M24 41c-2-8-1-14 0-20M24 29c-8-1-13-6-14-13 8 0 13 4 14 13ZM24 24c6-2 10-7 10-14-7 2-10 7-10 14ZM25 34c7-1 12-5 13-11-7 0-12 4-13 11Z"/></svg></span><b>Corpo e Banho</b></button>
+  <button onclick="document.getElementById('marcas')?.scrollIntoView({behavior:'smooth'})"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M7 12h22l12 12-17 17L7 24V12Z"/><circle cx="17" cy="20" r="3"/></svg></span><b>Marcas</b></button>
 </nav>
 
 <section class="fy-banner-r10" id="inicio" aria-label="Destaques da FOR YOU">
@@ -19474,6 +19472,68 @@ footer{padding:45px 5% 18px!important;background:#fce8ee!important}
 </style>
 
 <!-- Minha Conta e Favoritos em abas exclusivas -->
+<style id="fy-categorias-identicas-referencia">
+.fy-clean-cat-top{max-width:1040px!important;gap:28px!important;padding-top:9px!important;padding-bottom:12px!important}
+.fy-clean-cat-top>button:not(.fy-pill){flex-basis:82px!important;width:82px!important;min-width:82px!important;gap:4px!important;padding-bottom:12px!important}
+.fy-cat-desenho{width:54px!important;height:48px!important;border-radius:54% 46% 52% 48% / 46% 55% 45% 54%!important;background:#fdecef!important}
+.fy-cat-desenho svg{display:block;width:31px;height:31px;fill:none;stroke:#b91f49;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.fy-clean-cat-top>button b{font:400 11px/1.1 Georgia,"Times New Roman",serif!important;color:#171217!important}
+.fy-clean-cat-top>button:nth-child(2)::after{transform:rotate(2deg)!important}
+.fy-clean-cat-top>button:nth-child(3)::after{height:9px!important;transform:rotate(-2deg)!important}
+.fy-clean-cat-top>button:nth-child(4)::after{background-size:115% 100%!important;transform:rotate(2deg)!important}
+.fy-clean-cat-top>button:nth-child(5)::after{height:8px!important;transform:rotate(-3deg)!important}
+.fy-clean-cat-top>button:nth-child(6)::after{width:auto!important;transform:rotate(1deg)!important}
+.fy-clean-cat-top>button:nth-child(7)::after{height:6px!important;transform:rotate(-1deg)!important}
+.fy-clean-cat-top>button:nth-child(8)::after{height:9px!important;transform:rotate(2deg)!important}
+.fy-clean-cat-top>button:nth-child(9)::after{transform:rotate(-2deg)!important}
+@media(max-width:900px){.fy-clean-cat-top{gap:17px!important}.fy-clean-cat-top>button:not(.fy-pill){flex-basis:70px!important;width:70px!important;min-width:70px!important}.fy-cat-desenho{width:50px!important;height:45px!important}.fy-cat-desenho svg{width:28px;height:28px}}
+</style>
+
+<style id="fy-categorias-estilo-referencia-final">
+.fy-clean-cat-top{
+  max-width:1280px!important;
+  margin:8px auto 12px!important;
+  padding:12px 20px 15px!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:26px!important;
+  overflow-x:auto!important;
+  background:#fff!important;
+}
+.fy-clean-cat-top>button:not(.fy-pill){
+  flex:0 0 78px!important;
+  width:78px!important;
+  min-width:78px!important;
+  padding:0 0 11px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:7px!important;
+  color:#321f26!important;
+}
+.fy-clean-cat-top>button:not(.fy-pill)::after{
+  left:12px!important;right:12px!important;bottom:2px!important;height:7px!important;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M3 8 C19 3 34 10 50 6 S78 4 97 7' fill='none' stroke='%23ef86a5' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat!important;
+  opacity:.88!important;
+}
+.fy-cat-desenho{
+  width:50px!important;height:50px!important;margin:0!important;border:0!important;border-radius:50%!important;
+  display:grid!important;place-items:center!important;background:#fff0f4!important;color:#b83f61!important;
+  font:400 22px/1 Arial,sans-serif!important;box-shadow:none!important;transition:.2s ease!important;
+}
+.fy-clean-cat-top>button b{font:400 11px/1.2 Arial,sans-serif!important;color:#26191e!important;white-space:normal!important;text-align:center!important}
+.fy-clean-cat-top>button:not(.fy-pill):hover .fy-cat-desenho{transform:translateY(-3px)!important;background:#fde0e8!important;color:#8f2947!important}
+.fy-clean-cat-top>button:not(.fy-pill):hover b{color:#b83f61!important}
+.fy-clean-cat-top>.fy-pill{align-self:center!important;margin-top:7px!important}
+@media(max-width:900px){
+ .fy-clean-cat-top{justify-content:flex-start!important;gap:17px!important;padding:10px 12px 14px!important;scroll-snap-type:x proximity}
+ .fy-clean-cat-top>button:not(.fy-pill){flex-basis:68px!important;width:68px!important;min-width:68px!important;scroll-snap-align:start}
+ .fy-cat-desenho{width:46px!important;height:46px!important;font-size:20px!important}
+ .fy-clean-cat-top>button b{font-size:10px!important}
+}
+</style>
+
 <style>
 body.fy-pagina-exclusiva > .topo,
 body.fy-pagina-exclusiva > header,
