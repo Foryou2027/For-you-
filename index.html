@@ -8945,6 +8945,38 @@ Promo&#xE7;&#xF5;es de datas especiais
 <section class="pagina secao" id="paginaConta">
   <button class="voltar fy2-voltar" onclick="voltarLoja()">&#x2190; VOLTAR PARA A LOJA</button>
 
+  <div id="fyAuthGate" class="fy-auth-gate carregando" aria-live="polite">
+    <div class="fy-auth-card">
+      <div class="fy-auth-brand">FOR YOU</div>
+      <h2>Minha conta</h2>
+      <p id="fyAuthIntro">Entre para acompanhar seus pedidos, endere&#xE7;os e favoritos.</p>
+
+      <div class="fy-auth-tabs" role="tablist">
+        <button type="button" id="fyAuthTabEntrar" class="ativo" onclick="fyMostrarAuth('entrar')">ENTRAR</button>
+        <button type="button" id="fyAuthTabCadastrar" onclick="fyMostrarAuth('cadastrar')">CRIAR CONTA</button>
+      </div>
+
+      <form id="fyAuthLogin" class="fy-auth-form" onsubmit="return fySupabaseEntrar(event)">
+        <label>E-mail<input id="fyLoginEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
+        <label>Senha<input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"></label>
+        <button type="submit" class="fy-auth-submit">ENTRAR NA MINHA CONTA</button>
+        <div id="fyLoginMsg" class="fy-auth-msg"></div>
+      </form>
+
+      <form id="fyAuthCadastro" class="fy-auth-form" onsubmit="return fySupabaseCadastrar(event)" hidden>
+        <label>Nome completo<input id="fyCadNome" autocomplete="name" required placeholder="Seu nome completo"></label>
+        <label>E-mail<input id="fyCadEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
+        <label>Telefone<input id="fyCadTelefone" type="tel" autocomplete="tel" required placeholder="(00) 00000-0000"></label>
+        <label>Senha<input id="fyCadSenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"></label>
+        <label>Confirmar senha<input id="fyCadConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a senha novamente"></label>
+        <button type="submit" class="fy-auth-submit">CRIAR MINHA CONTA</button>
+        <div id="fyCadastroMsg" class="fy-auth-msg"></div>
+      </form>
+
+      <div id="fyAuthLoading" class="fy-auth-loading">Verificando seu acesso...</div>
+    </div>
+  </div>
+
   <div class="fy2-account">
 
     <!-- Cabe&#xE7;alho -->
@@ -21104,5 +21136,178 @@ body.fy-pagina-exclusiva .pagina.ativa{
   .fy-clean-cat-top>button:not(.fy-pill) b{font:400 10px/1.15 Arial,sans-serif!important;color:#26191e!important;text-align:center!important}
 }
 </style>
+<style id="fy-auth-supabase-definitivo-css">
+#paginaConta .fy2-account{display:none}
+.fy-auth-gate{max-width:560px;margin:22px auto 60px;padding:0 16px}
+.fy-auth-card{background:#fff;border:1px solid #eddde2;border-radius:24px;padding:34px;box-shadow:0 16px 45px rgba(53,31,39,.07);text-align:center}
+.fy-auth-brand{font:700 9px/1 Arial,sans-serif;letter-spacing:3px;color:#a31640;margin-bottom:12px}
+.fy-auth-card h2{font:400 34px/1.15 Georgia,serif;color:#351f27;margin:0 0 8px}
+.fy-auth-card>p{font-size:10px;line-height:1.6;color:#806f75;margin:0 auto 22px}
+.fy-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;background:#fff5f7;border-radius:999px;margin-bottom:20px}
+.fy-auth-tabs button{border:0;border-radius:999px;padding:11px;background:transparent;color:#806f75;font-size:8px;font-weight:800;letter-spacing:1px;cursor:pointer}
+.fy-auth-tabs button.ativo{background:#8f1739;color:#fff;box-shadow:0 5px 14px rgba(143,23,57,.18)}
+.fy-auth-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+.fy-auth-form[hidden]{display:none!important}
+.fy-auth-form label{display:grid;gap:6px;font-size:8px;font-weight:800;letter-spacing:.6px;color:#694f58}
+.fy-auth-form input{width:100%;box-sizing:border-box;height:46px;border:1px solid #e5d6da;border-radius:12px;padding:0 13px;background:#fff;color:#351f27;outline:none;font-size:11px}
+.fy-auth-form input:focus{border-color:#b85f78;box-shadow:0 0 0 3px rgba(184,95,120,.1)}
+.fy-auth-submit,.fy-auth-msg{grid-column:1/-1}
+.fy-auth-submit{height:46px;border:0;border-radius:999px;background:#8f1739;color:#fff;font-size:8px;font-weight:800;letter-spacing:1px;cursor:pointer;margin-top:3px}
+.fy-auth-submit:disabled{opacity:.55;cursor:wait}
+.fy-auth-msg{min-height:17px;text-align:center;color:#9d294c;font-size:9px;line-height:1.5}
+.fy-auth-msg.sucesso{color:#35744a}
+.fy-auth-loading{display:none;color:#806f75;font-size:10px;padding:26px 0 10px}
+.fy-auth-gate.carregando .fy-auth-tabs,.fy-auth-gate.carregando .fy-auth-form,.fy-auth-gate.carregando #fyAuthIntro{display:none!important}
+.fy-auth-gate.carregando .fy-auth-loading{display:block}
+#paginaConta label:has(#contaCpf),#paginaConta label:has(#contaNascimento){display:none!important}
+#paginaConta #contaEmail[readonly]{background:#f8f5f6;color:#807278;cursor:not-allowed}
+@media(max-width:600px){.fy-auth-gate{margin-top:12px;padding:0 4px}.fy-auth-card{padding:25px 17px;border-radius:20px}.fy-auth-card h2{font-size:29px}.fy-auth-form{grid-template-columns:1fr}.fy-auth-submit,.fy-auth-msg{grid-column:1}.fy-auth-form input{font-size:16px}}
+</style>
+<script id="fy-auth-supabase-definitivo-js">
+(function(){
+  let sb=null,assinaturaAuth=null,processandoSessao=false;
+  const $=id=>document.getElementById(id);
+  const valor=id=>String($(id)?.value||'').trim();
+
+  function clienteSupabase(){
+    return window.FOR_YOU_SUPABASE_CLIENT||null;
+  }
+  function mensagem(id,texto,sucesso){
+    const el=$(id);if(!el)return;el.textContent=texto||'';el.classList.toggle('sucesso',!!sucesso);
+  }
+  function traduzirErro(erro){
+    const codigo=String(erro?.code||'');
+    const texto=String(erro?.message||'').toLowerCase();
+    if(codigo==='invalid_credentials'||texto.includes('invalid login'))return 'E-mail ou senha incorretos.';
+    if(codigo==='email_not_confirmed'||texto.includes('email not confirmed'))return 'Confirme seu e-mail antes de entrar.';
+    if(codigo==='user_already_exists'||texto.includes('already registered'))return 'Este e-mail j\u00E1 possui uma conta.';
+    if(codigo==='weak_password'||texto.includes('password'))return 'A senha precisa ter pelo menos 6 caracteres.';
+    if(texto.includes('rate limit'))return 'Aguarde alguns minutos e tente novamente.';
+    return 'N\u00E3o foi poss\u00EDvel concluir. Tente novamente.';
+  }
+  function bloquear(form,bloquear){
+    form?.querySelectorAll('button,input').forEach(el=>el.disabled=!!bloquear);
+  }
+  function limparSenhasAntigas(){
+    try{
+      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
+      if(Array.isArray(lista))localStorage.setItem('forYouContas',JSON.stringify(lista.map(item=>{const copia={...item};delete copia.senha;return copia;})));
+      const antiga=JSON.parse(localStorage.getItem('forYouConta')||'null');
+      if(antiga){delete antiga.senha;localStorage.setItem('forYouConta',JSON.stringify(antiga));}
+    }catch(e){}
+  }
+  function iniciais(nome){
+    return String(nome||'FY').trim().split(/\s+/).slice(0,2).map(x=>x.charAt(0)).join('').toUpperCase()||'FY';
+  }
+  function guardarCompatibilidade(perfil){
+    contaAtual={nome:perfil.nome||'',email:perfil.email||'',telefone:perfil.telefone||'',endereco:''};
+    try{localStorage.setItem('forYouContaAtual',JSON.stringify(contaAtual));}catch(e){}
+    try{
+      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
+      const semSenha={nome:perfil.nome||'',email:perfil.email||'',telefone:perfil.telefone||'',pedidos:[]};
+      const i=lista.findIndex(x=>String(x.email||'').toLowerCase()===String(perfil.email||'').toLowerCase());
+      if(i>=0)lista[i]={...lista[i],...semSenha,senha:undefined};else lista.push(semSenha);
+      localStorage.setItem('forYouContas',JSON.stringify(lista));
+      localStorage.setItem('forYouConta',JSON.stringify(semSenha));
+    }catch(e){}
+  }
+  function preencherConta(perfil){
+    const primeiro=String(perfil.nome||'').trim().split(/\s+/)[0]||'seja bem-vinda';
+    if($('contaSaudacao'))$('contaSaudacao').textContent='Ol\u00E1, '+primeiro+' \u2661';
+    if($('nomeBoasVindasConta'))$('nomeBoasVindasConta').textContent=primeiro;
+    if($('contaAvatar'))$('contaAvatar').textContent=iniciais(perfil.nome);
+    if($('contaNome'))$('contaNome').value=perfil.nome||'';
+    if($('contaEmail')){$('contaEmail').value=perfil.email||'';$('contaEmail').readOnly=true;$('contaEmail').title='O e-mail de acesso ser\u00E1 alterado em uma etapa segura separada.';}
+    if($('contaTelefone'))$('contaTelefone').value=perfil.telefone||'';
+  }
+  function mostrarLogada(logada){
+    const gate=$('fyAuthGate'),painel=document.querySelector('#paginaConta .fy2-account');
+    if(gate){gate.classList.remove('carregando');gate.style.display=logada?'none':'block';}
+    if(painel)painel.style.display=logada?'block':'none';
+  }
+  async function carregarPerfil(usuario){
+    const meta=usuario.user_metadata||{};
+    let perfil={id:usuario.id,nome:meta.nome||meta.full_name||'',email:usuario.email||'',telefone:meta.telefone||''};
+    const {data,error}=await sb.from('clientes').select('id,nome,email,telefone').eq('id',usuario.id).maybeSingle();
+    if(!error&&data)perfil={...perfil,...data,email:data.email||usuario.email||''};
+    else await sb.from('clientes').upsert(perfil,{onConflict:'id'});
+    guardarCompatibilidade(perfil);preencherConta(perfil);mostrarLogada(true);
+    try{if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();}catch(e){}
+    return perfil;
+  }
+  async function aplicarSessao(usuario){
+    if(processandoSessao)return;processandoSessao=true;
+    try{
+      if(!usuario){contaAtual=null;try{localStorage.removeItem('forYouContaAtual');localStorage.removeItem('forYouConta');}catch(e){}mostrarLogada(false);return;}
+      await carregarPerfil(usuario);
+    }catch(e){console.warn('N\u00E3o foi poss\u00EDvel carregar o perfil',e);mostrarLogada(false);mensagem('fyLoginMsg','N\u00E3o foi poss\u00EDvel carregar sua conta. Tente novamente.');}
+    finally{processandoSessao=false;}
+  }
+  window.fyMostrarAuth=function(tipo){
+    const cadastro=tipo==='cadastrar';
+    $('fyAuthLogin').hidden=cadastro;$('fyAuthCadastro').hidden=!cadastro;
+    $('fyAuthTabEntrar').classList.toggle('ativo',!cadastro);$('fyAuthTabCadastrar').classList.toggle('ativo',cadastro);
+    mensagem('fyLoginMsg','');mensagem('fyCadastroMsg','');
+  };
+  window.fySupabaseEntrar=async function(event){
+    event.preventDefault();const form=event.currentTarget,email=valor('fyLoginEmail').toLowerCase(),senha=valor('fyLoginSenha');
+    mensagem('fyLoginMsg','Entrando...');bloquear(form,true);
+    try{const {data,error}=await sb.auth.signInWithPassword({email,password:senha});if(error)throw error;await aplicarSessao(data.user);}
+    catch(e){mensagem('fyLoginMsg',traduzirErro(e));}
+    finally{bloquear(form,false);}return false;
+  };
+  window.fySupabaseCadastrar=async function(event){
+    event.preventDefault();const form=event.currentTarget,nome=valor('fyCadNome'),email=valor('fyCadEmail').toLowerCase(),telefone=valor('fyCadTelefone'),senha=valor('fyCadSenha'),confirmar=valor('fyCadConfirmar');
+    if(nome.length<2)return mensagem('fyCadastroMsg','Digite seu nome completo.'),false;
+    if(senha.length<6)return mensagem('fyCadastroMsg','A senha precisa ter pelo menos 6 caracteres.'),false;
+    if(senha!==confirmar)return mensagem('fyCadastroMsg','As senhas n\u00E3o s\u00E3o iguais.'),false;
+    mensagem('fyCadastroMsg','Criando sua conta...');bloquear(form,true);
+    try{
+      const redirecionamento=location.origin+location.pathname+'#minha-conta';
+      const {data,error}=await sb.auth.signUp({email,password:senha,options:{emailRedirectTo:redirecionamento,data:{nome,telefone}}});
+      if(error)throw error;
+      if(data.session){await aplicarSessao(data.user);}
+      else{mensagem('fyCadastroMsg','Conta criada! Confira seu e-mail para confirmar o cadastro.',true);}
+    }catch(e){mensagem('fyCadastroMsg',traduzirErro(e));}
+    finally{bloquear(form,false);}return false;
+  };
+  window.salvarDadosContaV14=async function(event){
+    event.preventDefault();const nome=valor('contaNome'),telefone=valor('contaTelefone');
+    if(nome.length<2){alert('Digite seu nome completo.');return false;}
+    const {data:{user}}=await sb.auth.getUser();if(!user){mostrarLogada(false);return false;}
+    const {error}=await sb.from('clientes').upsert({id:user.id,nome,email:user.email||'',telefone},{onConflict:'id'});
+    if(error){alert('N\u00E3o foi poss\u00EDvel salvar seus dados.');return false;}
+    await sb.auth.updateUser({data:{...(user.user_metadata||{}),nome,telefone}});
+    const perfil={id:user.id,nome,email:user.email||'',telefone};guardarCompatibilidade(perfil);preencherConta(perfil);alert('Dados atualizados com sucesso! \u2661');return false;
+  };
+  window.alterarSenhaContaV14=async function(event){
+    event.preventDefault();const atual=valor('senhaAtualV14'),nova=valor('senhaNovaV14');
+    if(nova.length<6){alert('A nova senha precisa ter pelo menos 6 caracteres.');return false;}
+    const {data:{user}}=await sb.auth.getUser();if(!user)return false;
+    const reentrada=await sb.auth.signInWithPassword({email:user.email,password:atual});
+    if(reentrada.error){alert('A senha atual est\u00E1 incorreta.');return false;}
+    const troca=await sb.auth.updateUser({password:nova});
+    if(troca.error){alert(traduzirErro(troca.error));return false;}
+    event.target.reset();alert('Senha atualizada com sucesso! \u2661');return false;
+  };
+  async function sair(){
+    if(!confirm('Deseja sair da sua conta neste dispositivo?'))return;
+    await sb.auth.signOut();contaAtual=null;
+    try{localStorage.removeItem('forYouContaAtual');localStorage.removeItem('forYouConta');}catch(e){}
+    mostrarLogada(false);window.fyMostrarAuth('entrar');
+  }
+  window.sairContaV14=sair;window.sairDaConta=sair;
+
+  async function iniciar(){
+    limparSenhasAntigas();
+    sb=clienteSupabase();
+    if(!sb){$('fyAuthGate')?.classList.remove('carregando');mensagem('fyLoginMsg','A conex\u00E3o da conta ainda n\u00E3o est\u00E1 dispon\u00EDvel. Atualize a p\u00E1gina.');return;}
+    const {data}=await sb.auth.getSession();await aplicarSessao(data?.session?.user||null);
+    const retorno=sb.auth.onAuthStateChange((evento,sessao)=>setTimeout(()=>aplicarSessao(sessao?.user||null),0));
+    assinaturaAuth=retorno?.data?.subscription||null;
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});else iniciar();
+})();
+</script>
 </body>
 </html>
