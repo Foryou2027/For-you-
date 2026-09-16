@@ -20395,5 +20395,34 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 })();
 </script>
+<!-- Passo 5 de 7: página inicial mais curta e organizada -->
+<style id="fy-home-passo-5-final">
+/* Avaliações e newsletter ficam fora da página inicial compacta. */
+#avaliacoesClientes,
+.newsletter{
+  display:none!important;
+}
+</style>
+<script id="fy-home-passo-5-script">
+(function(){
+  function organizarHome(){
+    const loja=document.getElementById('loja');
+    const novidades=document.getElementById('novidades');
+    const marcas=document.getElementById('marcas');
+    const beneficios=loja&&loja.querySelector('.fy-beneficios-imagem');
+    if(!loja||!novidades)return;
+
+    loja.appendChild(novidades);
+    if(marcas)loja.appendChild(marcas);
+    if(beneficios)loja.appendChild(beneficios);
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',organizarHome,{once:true});
+  }else{
+    organizarHome();
+  }
+})();
+</script>
 </body>
 </html>
