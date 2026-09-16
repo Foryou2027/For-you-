@@ -21253,6 +21253,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     guardarCompatibilidade(perfil);preencherConta(perfil);
     try{await carregarEndereco(usuario);}catch(e){console.warn('N\u00E3o foi poss\u00EDvel carregar o endere\u00E7o',e);}
     mostrarLogada(true);
+    try{if(typeof window.fyCarregarPedidosSupabase==='function')await window.fyCarregarPedidosSupabase();}catch(e){console.warn('N\u00E3o foi poss\u00EDvel carregar os pedidos',e);}
     try{if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();}catch(e){}
     return perfil;
   }
@@ -21372,6 +21373,142 @@ body.fy-pagina-exclusiva .pagina.ativa{
     assinaturaAuth=retorno?.data?.subscription||null;
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});else iniciar();
+})();
+</script>
+<style id="fy-pedidos-supabase-final-css">
+#paginaCheckout .checkout-form input[readonly]{background:#f8f5f6;color:#706268;cursor:not-allowed}
+#paginaCheckout .checkout-btn[disabled]{opacity:.6;cursor:wait}
+</style>
+<script id="fy-pedidos-supabase-final-js">
+(function(){
+  const $=id=>document.getElementById(id);
+  const numero=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
+  const dataBR=v=>{try{return new Date(v).toLocaleDateString('pt-BR')}catch(e){return '\u2014'}};
+  function etapaPedido(pedido){
+    const status=String(pedido?.status_pedido||'').toLowerCase();
+    const pagamento=String(pedido?.status_pagamento||'').toLowerCase();
+    if(status==='entregue')return 5;
+    if(status==='enviado')return 4;
+    if(status==='preparando')return 3;
+    if(['pago','aprovado','confirmado'].some(x=>pagamento.includes(x)))return 2;
+    return 1;
+  }
+  function textoStatus(pedido){
+    const status=String(pedido?.status_pedido||'').toLowerCase();
+    const pagamento=String(pedido?.status_pagamento||'').toLowerCase();
+    if(status==='cancelado')return 'Pedido cancelado';
+    if(status==='entregue')return 'Pedido entregue';
+    if(status==='enviado')return 'Pedido enviado';
+    if(status==='preparando')return 'Preparando seu pedido';
+    if(['pago','aprovado','confirmado'].some(x=>pagamento.includes(x)))return 'Pagamento aprovado';
+    return 'Aguardando pagamento Pix';
+  }
+  function mapearPedido(pedido){
+    const itens=Array.isArray(pedido?.itens_pedido)?pedido.itens_pedido:Array.isArray(pedido?.itens)?pedido.itens:[];
+    return {
+      id:String(pedido?.id||''),numero:'#'+String(pedido?.numero||'Pedido').replace(/^#/,''),
+      data:dataBR(pedido?.criado_em||new Date()),dataISO:pedido?.criado_em||new Date().toISOString(),
+      status:pedido?.status_pedido||'recebido',statusTexto:textoStatus(pedido),etapa:etapaPedido(pedido),
+      pagamentoStatus:pedido?.status_pagamento||'aguardando_pagamento',codigoRastreio:pedido?.codigo_rastreio||'',
+      total:numero(pedido?.total),subtotal:numero(pedido?.subtotal),desconto:numero(pedido?.desconto),frete:numero(pedido?.frete),
+      freteDetalhes:{servico:pedido?.servico_frete||'Entrega',prazo:pedido?.prazo_frete||'Prazo informado pela transportadora',gratis:numero(pedido?.frete)===0},
+      pagamento:'PIX',parcelas:1,entrega:'padrao',endereco:pedido?.endereco_entrega||pedido?.endereco||{},
+      itens:itens.map(item=>({id:item.produto_id,nome:item.nome_produto||item.nome||'Produto',quantidade:numero(item.quantidade)||1,preco:numero(item.preco_unitario??item.preco)}))
+    };
+  }
+  function guardarPedidosCompatibilidade(pedidos,email){
+    try{
+      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
+      let conta=lista.find(c=>String(c.email||'').toLowerCase()===String(email||'').toLowerCase());
+      if(!conta){conta={nome:contaAtual?.nome||'',email:email||'',telefone:contaAtual?.telefone||'',pedidos:[]};lista.push(conta);}
+      conta.pedidos=pedidos;delete conta.senha;
+      localStorage.setItem('forYouContas',JSON.stringify(lista));localStorage.setItem('forYouConta',JSON.stringify(conta));
+    }catch(e){console.warn('N\u00E3o foi poss\u00EDvel atualizar o hist\u00F3rico local.',e);}
+  }
+  function atualizarResumoPedidos(pedidos){
+    if($('statPedidos'))$('statPedidos').textContent=String(pedidos.length);
+    const preview=$('fy2-order-preview');if(!preview)return;
+    if(!pedidos.length){preview.innerHTML='<div class="fy2-empty-icon">\u25A3</div><div><strong>Nenhum pedido ainda</strong><p>Quando voc\u00EA fizer uma compra, ela aparecer\u00E1 aqui.</p></div>';return;}
+    const p=pedidos[0];preview.innerHTML='<div class="fy2-empty-icon">\u2661</div><div><strong>'+p.numero+' \u2022 '+moeda(p.total)+'</strong><p>'+p.statusTexto+' \u2022 '+p.data+'</p></div>';
+  }
+  window.fyCarregarPedidosSupabase=async function(){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb)return [];
+    const {data:{user},error:authError}=await sb.auth.getUser();if(authError||!user)return [];
+    const {data,error}=await sb.from('pedidos').select('*,itens_pedido(*)').eq('cliente_id',user.id).order('criado_em',{ascending:false});
+    if(error)throw error;
+    const pedidos=(data||[]).map(mapearPedido);guardarPedidosCompatibilidade(pedidos,user.email);atualizarResumoPedidos(pedidos);
+    if(typeof renderPedidosConta==='function')renderPedidosConta();return pedidos;
+  };
+  async function preencherCheckoutSupabase(usuario){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb)return false;
+    let user=usuario||null;
+    if(!user){const {data}=await sb.auth.getSession();user=data?.session?.user||null;}
+    if(!user)return false;
+    const [perfilResp,enderecoResp]=await Promise.all([
+      sb.from('clientes').select('nome,email,telefone').eq('id',user.id).maybeSingle(),
+      sb.from('enderecos').select('*').eq('cliente_id',user.id).order('principal',{ascending:false}).order('criado_em',{ascending:true}).limit(1).maybeSingle()
+    ]);
+    if(perfilResp.error)throw perfilResp.error;if(enderecoResp.error)throw enderecoResp.error;
+    const perfil=perfilResp.data||{},end=enderecoResp.data;
+    if(!end){alert('Salve seu endere\u00E7o em Minha Conta antes de finalizar a compra.');if(typeof abrirConta==='function')abrirConta();return false;}
+    const valores={checkoutNome:perfil.nome||user.user_metadata?.nome||'',checkoutEmail:perfil.email||user.email||'',checkoutTelefone:perfil.telefone||user.user_metadata?.telefone||'',checkoutCEP:String(end.cep||'').replace(/^(\d{5})(\d{3})$/,'$1-$2'),checkoutEndereco:end.logradouro||'',checkoutNumero:end.numero||'',checkoutComplemento:end.complemento||''};
+    Object.entries(valores).forEach(([id,valor])=>{const campo=$(id);if(campo){campo.value=valor;campo.readOnly=true;}});return true;
+  }
+  window.abrirCheckout=async function(){
+    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho est\u00E1 vazio.');return;}
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!sb){alert('A conex\u00E3o da loja ainda n\u00E3o est\u00E1 dispon\u00EDvel. Atualize a p\u00E1gina.');return;}
+    try{
+      pagamentoSelecionado='PIX';entregaSelecionada='';freteAtual=0;window.FY_FRETE_CALCULADO=false;window.FY_FRETE_CEP='';
+      if(typeof fecharCarrinho==='function')fecharCarrinho();fecharTodasPaginas();$('paginaCheckout')?.classList.add('ativa');
+      const aviso=$('checkoutMensagem');if(aviso)aviso.textContent='Carregando seus dados...';
+      const retirada=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao')[2];if(retirada)retirada.style.display='none';
+      window.scrollTo({top:0,behavior:'auto'});
+      const sessao=await Promise.race([
+        sb.auth.getSession(),
+        new Promise((_,rejeitar)=>setTimeout(()=>rejeitar(new Error('A conex\u00E3o demorou demais. Atualize a p\u00E1gina e tente novamente.')),10000))
+      ]);
+      const user=sessao?.data?.session?.user||null;
+      if(!user){if(aviso)aviso.textContent='Entre na sua conta para continuar.';alert('Entre na sua conta antes de finalizar o pedido.');if(typeof abrirConta==='function')abrirConta();return;}
+      const pronto=await preencherCheckoutSupabase(user);if(!pronto)return;
+      if(aviso)aviso.textContent='';
+      renderCheckout();const pix=document.querySelector('#paginaCheckout .fy-pagamento-grid .pagamento-opcao:not(:disabled)');if(pix)selecionarPagamento('PIX',pix);
+      if($('checkoutCEP')?.value&&typeof window.calcularFreteCheckout==='function')await window.calcularFreteCheckout();
+    }catch(e){console.warn(e);const aviso=$('checkoutMensagem');if(aviso)aviso.textContent=e.message||'N\u00E3o foi poss\u00EDvel carregar os dados do checkout.';alert(e.message||'N\u00E3o foi poss\u00EDvel carregar os dados do checkout. Tente novamente.');}
+  };
+  async function mensagemErroFuncao(error){
+    try{const json=await error?.context?.json();return json?.erro||json?.message||error?.message}catch(e){return error?.message}
+  }
+  window.confirmarPedido=async function(){
+    const msg=$('checkoutMensagem');if(msg)msg.textContent='';
+    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho est\u00E1 vazio.');return;}
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb){if(msg)msg.textContent='A conex\u00E3o da loja ainda n\u00E3o est\u00E1 dispon\u00EDvel.';return;}
+    const {data:{user}}=await sb.auth.getUser();if(!user){alert('Sua sess\u00E3o expirou. Entre novamente.');if(typeof abrirConta==='function')abrirConta();return;}
+    const cep=String($('checkoutCEP')?.value||'').replace(/\D/g,'');
+    if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endere\u00E7o salvo.';return;}
+    if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma op\u00E7\u00E3o de entrega antes de confirmar.';return;}
+    if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
+    const botao=document.querySelector('#paginaCheckout .checkout-acoes .checkout-btn:not(.sec)');const textoBotao=botao?.textContent;
+    if(botao){botao.disabled=true;botao.textContent='REGISTRANDO PEDIDO...';}
+    const itensAntes=carrinho.map(item=>({...item}));
+    try{
+      const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,itens:itensAntes.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}))}});
+      if(error)throw new Error(await mensagemErroFuncao(error)||'N\u00E3o foi poss\u00EDvel registrar o pedido.');if(data?.erro)throw new Error(data.erro);if(!data?.pedido)throw new Error('O pedido n\u00E3o foi confirmado pelo servidor.');
+      const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
+      localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
+      carrinho.length=0;if(typeof salvar==='function')salvar();else localStorage.setItem('forYouCarrinho','[]');
+      localStorage.setItem('forYouCarrinho','[]');if(typeof atualizar==='function')atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
+      await window.fyCarregarPedidosSupabase();mostrarPedidoSucesso(pedido);
+      const end=pedido.endereco||{},perfil={nome:$('checkoutNome')?.value||'',email:$('checkoutEmail')?.value||'',telefone:$('checkoutTelefone')?.value||''};
+      abrirWhatsAppPedido(pedido,perfil.nome,perfil.email,perfil.telefone,end.logradouro||$('checkoutEndereco')?.value||'',end.numero||$('checkoutNumero')?.value||'',end.cep||cep,pedido.total);
+    }catch(e){console.warn(e);if(msg)msg.textContent=e.message||'N\u00E3o foi poss\u00EDvel registrar o pedido. Tente novamente.';}
+    finally{if(botao){botao.disabled=false;botao.textContent=textoBotao||'CONFIRMAR PEDIDO';}}
+  };
+  window.fyFinalizarCompra=function(){
+    if(!Array.isArray(carrinho)||!carrinho.length){alert('Sua sacola est\u00E1 vazia. Adicione um produto para continuar.');return;}
+    window.abrirCheckout();
+  };
+  window.finalizarCompraV17=window.fyFinalizarCompra;
 })();
 </script>
 </body>
