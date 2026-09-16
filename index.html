@@ -19886,6 +19886,22 @@ body.fy-pagina-exclusiva .pagina.ativa{
     flex:0 0 auto;min-height:39px;padding:8px 36px 8px 14px;border:1px solid #edcfd8;
     border-radius:9px;background:#fff;color:#55343e;font-size:10px;cursor:pointer;
   }
+  #novidades.fy-category-active{padding-top:42px!important}
+  #novidades.fy-category-active>.titulo{
+    display:block!important;text-align:left!important;max-width:1380px!important;
+    margin:0 auto 15px!important;padding:0!important;
+  }
+  #novidades.fy-category-active>.titulo small{display:none!important}
+  #novidades.fy-category-active>.titulo h2{
+    margin:0 0 4px!important;font:400 42px/1.05 Georgia,"Times New Roman",serif!important;
+    color:#24181c!important;text-transform:none!important;
+  }
+  #novidades.fy-category-active>.titulo p{
+    margin:0!important;font-size:11px!important;color:#806d74!important;
+  }
+  #novidades.fy-category-active>.titulo+ .fy-category-toolbar{max-width:1380px;margin-left:auto;margin-right:auto}
+  #novidades.fy-category-active>#listaProdutos{max-width:1380px!important}
+  #novidades.fy-category-active>div:last-child{display:none!important}
   @media(max-width:700px){
     .fy-subcat-heading h1{font-size:31px!important}
     .fy-category-toolbar{display:block;margin-bottom:20px}
@@ -19893,6 +19909,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
     .fy-category-chips::-webkit-scrollbar{display:none}
     .fy-category-chip{flex:0 0 auto;min-height:35px;padding:7px 14px;font-size:9px}
     .fy-category-sort{width:100%;margin-top:5px}
+    #novidades.fy-category-active{padding-top:28px!important}
+    #novidades.fy-category-active>.titulo h2{font-size:32px!important}
   }
 </style>
 <script id="fy-category-direct-page-v1-script">
@@ -19915,7 +19933,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 
   function ordenarProdutos(tipo){
-    const grade=document.getElementById('fySubcatProdutos');
+    const grade=document.getElementById('listaProdutos') || document.getElementById('fySubcatProdutos');
     if(!grade)return;
     const cards=Array.from(grade.children);
     if(tipo==='menor')cards.sort((a,b)=>precoDoCard(a)-precoDoCard(b));
@@ -19925,7 +19943,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 
   function montarFiltros(categoria,selecionada){
-    const heading=document.querySelector('#paginaSubcategoriaFY .fy-subcat-heading');
+    /* O catálogo real do Supabase usa a seção #novidades para exibir categorias. */
+    const heading=document.querySelector('#novidades>.titulo') || document.querySelector('#paginaSubcategoriaFY .fy-subcat-heading');
     if(!heading)return;
     let barra=document.getElementById('fyCategoryToolbar');
     if(!barra){
@@ -19951,13 +19970,24 @@ body.fy-pagina-exclusiva .pagina.ativa{
   if(typeof selecionarOriginal==='function'){
     window.selecionarSubcategoria=function(categoria,subcategoria){
       selecionarOriginal(categoria,subcategoria||'');
-      const titulo=document.getElementById('fySubcatTitulo');
-      const descricao=document.getElementById('fySubcatContagem');
+      const titulo=document.querySelector('#novidades>.titulo h2') || document.getElementById('fySubcatTitulo');
+      const descricao=document.querySelector('#novidades>.titulo p') || document.getElementById('fySubcatContagem');
+      const grade=document.getElementById('listaProdutos') || document.getElementById('fySubcatProdutos');
       if(titulo)titulo.textContent=nomes[categoria]||categoria;
       if(descricao){
-        const qtd=(document.getElementById('fySubcatProdutos')||{children:[]}).children.length;
-        descricao.textContent=(subcategoria?'Resultados de '+subcategoria+' · ':'')+qtd+' produto'+(qtd===1?'':'s');
+        const chamadas={
+          labios:'Encontre seus favoritos para os lábios',
+          pele:'Encontre seus favoritos para uma pele linda',
+          skincare:'Cuidados especiais para a sua rotina',
+          olhos:'Destaque o seu olhar',
+          face:'Tudo para completar a sua maquiagem',
+          acessorios:'Acessórios para facilitar sua rotina de beleza',
+          corpo:'Cuidados para o corpo e cabelos'
+        };
+        descricao.textContent=chamadas[categoria]||'Encontre seus produtos favoritos';
       }
+      const secao=document.getElementById('novidades');
+      if(secao)secao.classList.add('fy-category-active');
       montarFiltros(categoria,subcategoria||'');
     };
   }
