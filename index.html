@@ -20328,5 +20328,72 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
+<!-- Passo 4 de 7: interação e categoria selecionada -->
+<style id="fy-categorias-passo-4-final">
+.fy-clean-cat-top>button:not(.fy-pill){
+  border-radius:12px!important;
+  transition:transform .18s ease,color .18s ease!important;
+}
+.fy-clean-cat-top>button:not(.fy-pill) .fy-cat-desenho{
+  transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease!important;
+}
+.fy-clean-cat-top>button:not(.fy-pill):hover{
+  transform:translateY(-2px)!important;
+}
+.fy-clean-cat-top>button:not(.fy-pill):hover .fy-cat-desenho{
+  transform:none!important;
+  background:#fde1e9!important;
+  box-shadow:0 5px 13px rgba(143,41,71,.10)!important;
+}
+.fy-clean-cat-top>button.fy-categoria-ativa .fy-cat-desenho{
+  transform:none!important;
+  background:#94183d!important;
+  color:#fff!important;
+  box-shadow:0 6px 16px rgba(116,21,47,.18)!important;
+}
+.fy-clean-cat-top>button.fy-categoria-ativa .fy-cat-desenho svg{
+  stroke:#fff!important;
+}
+.fy-clean-cat-top>button.fy-categoria-ativa b{
+  color:#94183d!important;
+  font-weight:700!important;
+}
+.fy-clean-cat-top>button.fy-categoria-ativa::after{
+  opacity:1!important;
+  filter:saturate(1.25)!important;
+}
+.fy-clean-cat-top>button:focus-visible{
+  outline:2px solid #d96585!important;
+  outline-offset:4px!important;
+}
+@media(max-width:700px){
+  .fy-clean-cat-top>button:not(.fy-pill):hover{
+    transform:none!important;
+  }
+}
+</style>
+<script id="fy-categorias-passo-4-script">
+(function(){
+  function prepararCategorias(){
+    const botoes=Array.from(document.querySelectorAll('.fy-clean-cat-top>button'));
+    botoes.forEach(function(botao){
+      botao.setAttribute('aria-pressed','false');
+      botao.addEventListener('click',function(){
+        botoes.forEach(function(item){
+          item.classList.remove('fy-categoria-ativa');
+          item.setAttribute('aria-pressed','false');
+        });
+        botao.classList.add('fy-categoria-ativa');
+        botao.setAttribute('aria-pressed','true');
+      });
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',prepararCategorias,{once:true});
+  }else{
+    prepararCategorias();
+  }
+})();
+</script>
 </body>
 </html>
