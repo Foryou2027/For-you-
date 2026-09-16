@@ -20174,5 +20174,32 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.fyAbrirKitsComoCategoria=function(){window.fyFiltrarKitsCategoria('todos')};
 })();
 </script>
+<!-- Correção definitiva: exibe a logo real do cabeçalho pela tag IMG -->
+<style id="fy-header-logo-direct-final">
+.fy-brand-logo{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:220px!important;
+  height:112px!important;
+  background:none!important;
+  background-image:none!important;
+  overflow:visible!important;
+}
+.fy-brand-logo img{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:180px!important;
+  height:112px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+@media(max-width:700px){
+  .fy-brand-logo{width:132px!important;height:78px!important}
+  .fy-brand-logo img{width:125px!important;height:78px!important}
+}
+</style>
 </body>
 </html>
