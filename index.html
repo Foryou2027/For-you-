@@ -21509,6 +21509,18 @@ body.fy-pagina-exclusiva .pagina.ativa{
     window.abrirCheckout();
   };
   window.finalizarCompraV17=window.fyFinalizarCompra;
+  document.documentElement.setAttribute('data-fy-versao','28');
+  function avisoAbrindoCheckout(){
+    let aviso=document.getElementById('fyAvisoAbrindoCheckout');
+    if(!aviso){aviso=document.createElement('div');aviso.id='fyAvisoAbrindoCheckout';aviso.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:999999;background:#8f1739;color:#fff;padding:12px 20px;border-radius:999px;font:700 10px Arial,sans-serif;letter-spacing:.5px;box-shadow:0 8px 25px rgba(80,20,40,.25)';document.body.appendChild(aviso);}
+    aviso.textContent='ABRINDO FINALIZA\u00C7\u00C3O...';aviso.style.display='block';setTimeout(()=>{aviso.style.display='none'},3500);
+  }
+  document.addEventListener('click',function(evento){
+    const botao=evento.target.closest&&evento.target.closest('.fy-cp-checkout,.fy-cart-page-finalizar,.fy17-checkout,.fy-finalizar-compra');
+    if(!botao)return;
+    evento.preventDefault();evento.stopImmediatePropagation();
+    avisoAbrindoCheckout();window.fyFinalizarCompra();
+  },true);
 })();
 </script>
 </body>
