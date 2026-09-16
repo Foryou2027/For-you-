@@ -19746,5 +19746,226 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.addEventListener('pageshow',fecharCarrinhosAoCarregar);
 })();
 </script>
+<!-- FOR YOU: categorias abertas abaixo da faixa principal -->
+<style id="fy-category-inline-menu-v1">
+  #fyHomeSubmenu.fy-home-submenu-inline{
+    position:relative!important;
+    inset:auto!important;
+    z-index:40!important;
+    display:block!important;
+    width:100%!important;
+    max-height:0!important;
+    padding:0 5%!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    opacity:1!important;
+    visibility:visible!important;
+    transition:max-height .32s ease,padding .32s ease!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline.aberto{
+    max-height:620px!important;
+    padding-top:8px!important;
+    padding-bottom:24px!important;
+    border-bottom:1px solid #f3e3e8!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-card{
+    width:min(1180px,100%)!important;
+    margin:0 auto!important;
+    padding:22px 24px 24px!important;
+    border:1px solid #efdfe4!important;
+    border-radius:16px!important;
+    background:#fff!important;
+    box-shadow:0 12px 32px rgba(53,31,39,.08)!important;
+    transform:none!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-head{margin-bottom:15px!important}
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-head h3{
+    margin-top:4px!important;color:#351f27!important;font-size:27px!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-close{
+    width:34px!important;height:34px!important;font-size:20px!important;cursor:pointer!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-grid button{
+    min-height:42px!important;padding:10px 13px!important;border-radius:9px!important;
+    cursor:pointer!important;
+  }
+  #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-all{
+    min-height:42px!important;margin-top:13px!important;border-radius:9px!important;cursor:pointer!important;
+  }
+  @media(max-width:700px){
+    #fyHomeSubmenu.fy-home-submenu-inline{padding-left:12px!important;padding-right:12px!important}
+    #fyHomeSubmenu.fy-home-submenu-inline.aberto{padding-top:5px!important;padding-bottom:15px!important}
+    #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-card{
+      padding:17px 14px 16px!important;border-radius:14px!important;
+    }
+    #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;
+    }
+    #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-grid button{font-size:9px!important}
+    #fyHomeSubmenu.fy-home-submenu-inline .fy-home-submenu-head h3{font-size:23px!important}
+  }
+</style>
+<script id="fy-category-inline-menu-v1-script">
+(function(){
+  const dados={
+    labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
+    pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
+    olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
+    face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
+    acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
+    corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
+  };
+  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Maquiagem",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+
+  function obterMenu(){
+    let box=document.getElementById("fyHomeSubmenu");
+    if(!box){box=document.createElement("div");box.id="fyHomeSubmenu"}
+    box.className="fy-home-submenu fy-home-submenu-inline";
+    const faixa=document.querySelector(".fy-clean-cat-top");
+    if(faixa && faixa.nextElementSibling!==box) faixa.insertAdjacentElement("afterend",box);
+    return box;
+  }
+
+  window.abrirSubmenuHomeFY=function(cat){
+    const box=obterMenu();
+    const itens=(dados[cat]||[]).map(function(item){
+      return '<button type="button" data-subcategoria="'+item.replace(/"/g,'&quot;')+'">'+item+'</button>';
+    }).join("");
+    box.innerHTML='<div class="fy-home-submenu-card">'+
+      '<div class="fy-home-submenu-head"><div><small>COMPRE POR CATEGORIA</small><h3>'+ (nomes[cat]||cat) +'</h3></div>'+
+      '<button class="fy-home-submenu-close" type="button" aria-label="Fechar categorias">×</button></div>'+
+      '<div class="fy-home-submenu-grid">'+itens+'</div>'+
+      '<button class="fy-home-submenu-all" type="button">Ver todos de '+(nomes[cat]||cat)+'</button></div>';
+
+    box.querySelector('.fy-home-submenu-close').onclick=window.fecharSubmenuHomeFY;
+    box.querySelectorAll('[data-subcategoria]').forEach(function(botao){
+      botao.onclick=function(){selecionarSubcategoria(cat,botao.dataset.subcategoria);fecharSubmenuHomeFY()};
+    });
+    box.querySelector('.fy-home-submenu-all').onclick=function(){selecionarSubcategoria(cat,'');fecharSubmenuHomeFY()};
+    requestAnimationFrame(function(){box.classList.add('aberto');box.setAttribute('aria-hidden','false')});
+  };
+
+  window.fecharSubmenuHomeFY=function(){
+    const box=document.getElementById('fyHomeSubmenu');
+    if(box){box.classList.remove('aberto');box.setAttribute('aria-hidden','true')}
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const box=document.getElementById('fyHomeSubmenu');
+    if(box){box.className='fy-home-submenu fy-home-submenu-inline';box.setAttribute('aria-hidden','true')}
+  });
+})();
+</script>
+<!-- FOR YOU: clique na categoria abre diretamente a página de produtos -->
+<style id="fy-category-direct-page-v1">
+  /* A antiga caixa de categorias deixa de ser usada. */
+  #fyHomeSubmenu{display:none!important}
+  .fy-subcat-page{background:#fff!important;padding-top:24px!important}
+  .fy-subcat-wrap{max-width:1380px!important}
+  .fy-subcat-back{margin-bottom:13px!important;cursor:pointer!important}
+  .fy-subcat-heading{text-align:left!important;margin:0 0 18px!important}
+  .fy-subcat-heading small{display:none!important}
+  .fy-subcat-heading h1{font-size:42px!important;margin:2px 0 5px!important}
+  .fy-subcat-heading p{font-size:11px!important;margin:0!important;color:#816d74!important}
+  .fy-category-toolbar{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    margin:0 0 27px;padding-bottom:17px;border-bottom:1px solid #f1e2e7;
+  }
+  .fy-category-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .fy-category-chip{
+    min-height:38px;padding:8px 17px;border:1px solid #edcfd8;border-radius:999px;
+    background:#fff;color:#4b3038;font-size:10px;cursor:pointer;transition:.18s ease;
+  }
+  .fy-category-chip:hover{border-color:#b83f61;color:#9a2547;background:#fff8fa}
+  .fy-category-chip.ativo{border-color:#8d1739;background:#8d1739;color:#fff;font-weight:800}
+  .fy-category-sort{
+    flex:0 0 auto;min-height:39px;padding:8px 36px 8px 14px;border:1px solid #edcfd8;
+    border-radius:9px;background:#fff;color:#55343e;font-size:10px;cursor:pointer;
+  }
+  @media(max-width:700px){
+    .fy-subcat-heading h1{font-size:31px!important}
+    .fy-category-toolbar{display:block;margin-bottom:20px}
+    .fy-category-chips{flex-wrap:nowrap;overflow-x:auto;padding:2px 0 9px;scrollbar-width:none}
+    .fy-category-chips::-webkit-scrollbar{display:none}
+    .fy-category-chip{flex:0 0 auto;min-height:35px;padding:7px 14px;font-size:9px}
+    .fy-category-sort{width:100%;margin-top:5px}
+  }
+</style>
+<script id="fy-category-direct-page-v1-script">
+(function(){
+  const subcategorias={
+    labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
+    pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
+    olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
+    face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
+    acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
+    corpo:["Todos de Corpo","Cabelo","Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
+  };
+  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Maquiagem",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+
+  function precoDoCard(card){
+    const el=card.querySelector('.preco,.produto-preco,[data-preco]');
+    const bruto=(el?el.textContent:card.dataset.preco||'').replace(/[^0-9,.-]/g,'').replace(/\./g,'').replace(',','.');
+    const n=parseFloat(bruto);return Number.isFinite(n)?n:0;
+  }
+
+  function ordenarProdutos(tipo){
+    const grade=document.getElementById('fySubcatProdutos');
+    if(!grade)return;
+    const cards=Array.from(grade.children);
+    if(tipo==='menor')cards.sort((a,b)=>precoDoCard(a)-precoDoCard(b));
+    if(tipo==='maior')cards.sort((a,b)=>precoDoCard(b)-precoDoCard(a));
+    if(tipo==='az')cards.sort((a,b)=>(a.innerText||'').localeCompare(b.innerText||'','pt-BR'));
+    cards.forEach(card=>grade.appendChild(card));
+  }
+
+  function montarFiltros(categoria,selecionada){
+    const heading=document.querySelector('#paginaSubcategoriaFY .fy-subcat-heading');
+    if(!heading)return;
+    let barra=document.getElementById('fyCategoryToolbar');
+    if(!barra){
+      barra=document.createElement('div');barra.id='fyCategoryToolbar';barra.className='fy-category-toolbar';
+      heading.insertAdjacentElement('afterend',barra);
+    }
+    const itens=(subcategorias[categoria]||[]).filter(x=>x!=="Todos de Corpo");
+    barra.innerHTML='<div class="fy-category-chips"></div><select class="fy-category-sort" aria-label="Ordenar produtos">'+
+      '<option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preço</option>'+
+      '<option value="maior">Maior preço</option><option value="az">Nome: A–Z</option></select>';
+    const chips=barra.querySelector('.fy-category-chips');
+    ['Todos'].concat(itens).forEach(function(nome){
+      const botao=document.createElement('button');botao.type='button';botao.className='fy-category-chip';botao.textContent=nome;
+      const ativo=nome==='Todos'?!selecionada:nome===selecionada;
+      if(ativo)botao.classList.add('ativo');
+      botao.onclick=function(){window.selecionarSubcategoria(categoria,nome==='Todos'?'':nome)};
+      chips.appendChild(botao);
+    });
+    barra.querySelector('.fy-category-sort').onchange=function(){ordenarProdutos(this.value)};
+  }
+
+  const selecionarOriginal=window.selecionarSubcategoria;
+  if(typeof selecionarOriginal==='function'){
+    window.selecionarSubcategoria=function(categoria,subcategoria){
+      selecionarOriginal(categoria,subcategoria||'');
+      const titulo=document.getElementById('fySubcatTitulo');
+      const descricao=document.getElementById('fySubcatContagem');
+      if(titulo)titulo.textContent=nomes[categoria]||categoria;
+      if(descricao){
+        const qtd=(document.getElementById('fySubcatProdutos')||{children:[]}).children.length;
+        descricao.textContent=(subcategoria?'Resultados de '+subcategoria+' · ':'')+qtd+' produto'+(qtd===1?'':'s');
+      }
+      montarFiltros(categoria,subcategoria||'');
+    };
+  }
+
+  /* Clique principal: vai direto aos produtos, sem abrir caixa intermediária. */
+  window.abrirSubmenuHomeFY=function(categoria){window.selecionarSubcategoria(categoria,'')};
+  window.fecharSubmenuHomeFY=function(){};
+})();
+</script>
 </body>
 </html>
