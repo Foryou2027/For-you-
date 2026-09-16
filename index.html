@@ -8318,14 +8318,50 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
     <button class="fy-pd-fechar" onclick="fyFecharPaginaDestaque('fyPaginaOfertas')">&#xD7;</button>
   </div>
   <div class="fy-pd-conteudo">
-    <div class="fy-pd-intro"><small>FOR YOU</small><h2>Ofertas especiais</h2><p>Escolha uma categoria para encontrar produtos com condi&#xE7;&#xF5;es especiais.</p></div>
-    <div class="fy-pd-opcoes">
-      <div class="fy-pd-card"><span>&#x23F3;</span><strong>Pr&#xF3;ximo ao vencimento</strong><small>Produtos selecionados com pre&#xE7;os especiais.</small><button onclick="abrirOfertaEspecial('validade')">VER PRODUTOS</button></div>
-      <div class="fy-pd-card"><span>&#x1F525;</span><strong>Queima de estoque</strong><small>&#xDA;ltimas unidades e oportunidades para aproveitar.</small><button onclick="abrirOfertaEspecial('queima')">VER PRODUTOS</button></div>
-      <div class="fy-pd-card"><span>&#x1F381;</span><strong>Datas comemorativas</strong><small>Promo&#xE7;&#xF5;es e sele&#xE7;&#xF5;es especiais para cada ocasi&#xE3;o.</small><button onclick="abrirOfertaEspecial('datas')">VER PRODUTOS</button></div>
+    <div class="fy-pd-intro"><small>FOR YOU</small><h2>Ofertas</h2><p>Encontre ofertas especiais para voc&#xEA;</p></div>
+    <div class="fy-offer-filter-chips" aria-label="Categorias de ofertas">
+      <button class="ativo" type="button" onclick="fyMostrarTodasOfertas(this)">Todos</button>
+      <button type="button" onclick="fySelecionarOfertaChip(this,'validade')">Pr&#xF3;ximo ao vencimento</button>
+      <button type="button" onclick="fySelecionarOfertaChip(this,'queima')">Queima de estoque</button>
+      <button type="button" onclick="fySelecionarOfertaChip(this,'datas')">Datas comemorativas</button>
     </div>
   </div>
 </div>
+
+<style id="fy-offers-chips-v1">
+#fyPaginaOfertas .fy-pd-conteudo{padding-top:42px!important}
+#fyPaginaOfertas .fy-pd-intro{max-width:1100px!important;margin:0 auto 18px!important;text-align:left!important}
+#fyPaginaOfertas .fy-pd-intro small{display:none!important}
+#fyPaginaOfertas .fy-pd-intro h2{font:400 42px/1.05 Georgia,"Times New Roman",serif!important;color:#24181c!important;margin:0 0 5px!important}
+#fyPaginaOfertas .fy-pd-intro p{font-size:11px!important;color:#806d74!important;margin:0!important}
+.fy-offer-filter-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.fy-offer-filter-chips button{min-height:38px;padding:8px 17px;border:1px solid #edcfd8;border-radius:999px;background:#fff;color:#4b3038;font-size:10px;cursor:pointer;transition:.18s ease}
+.fy-offer-filter-chips button:hover{border-color:#b83f61;color:#9a2547;background:#fff8fa}
+.fy-offer-filter-chips button.ativo{border-color:#8d1739;background:#8d1739;color:#fff;font-weight:800}
+@media(max-width:700px){
+  #fyPaginaOfertas .fy-pd-conteudo{padding:27px 14px 45px!important}
+  #fyPaginaOfertas .fy-pd-intro h2{font-size:32px!important}
+  .fy-offer-filter-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+  .fy-offer-filter-chips::-webkit-scrollbar{display:none}
+  .fy-offer-filter-chips button{flex:0 0 auto;min-height:35px;padding:7px 14px;font-size:9px}
+}
+</style>
+<script id="fy-offers-chips-v1-script">
+function fyAtivarChipOferta(botao){
+  document.querySelectorAll('.fy-offer-filter-chips button').forEach(function(item){item.classList.toggle('ativo',item===botao)});
+}
+function fyMostrarTodasOfertas(botao){
+  fyAtivarChipOferta(botao);
+  try{fyFecharPaginaDestaque('fyPaginaOfertas')}catch(e){}
+  if(typeof mostrarTodosProdutos==='function')mostrarTodosProdutos();
+  document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function fySelecionarOfertaChip(botao,tipo){
+  fyAtivarChipOferta(botao);
+  try{fyFecharPaginaDestaque('fyPaginaOfertas')}catch(e){}
+  if(typeof abrirOfertaEspecial==='function')abrirOfertaEspecial(tipo);
+}
+</script>
 
 <!-- P&#xC1;GINA KITS -->
 <div id="fyPaginaKits" class="fy-pagina-destaque">
@@ -8336,9 +8372,47 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
   </div>
   <div class="fy-pd-conteudo">
     <div class="fy-pd-intro"><small>FOR YOU</small><h2>Kits Promocionais</h2><p>Combina&#xE7;&#xF5;es especiais para voc&#xEA; aproveitar mais por menos.</p></div>
+    <div class="fy-kit-filter-chips" aria-label="Categorias de kits">
+      <button class="ativo" type="button" onclick="fyFiltrarKits(this,'todos')">Todos</button>
+      <button type="button" onclick="fyFiltrarKits(this,'15')">Kits de R$ 15</button>
+      <button type="button" onclick="fyFiltrarKits(this,'25')">Kits de R$ 25</button>
+    </div>
     <div id="fyKitsConteudo"></div>
   </div>
 </div>
+
+<style id="fy-kits-category-style-v1">
+#fyPaginaKits .fy-pd-conteudo{padding-top:42px!important}
+#fyPaginaKits .fy-pd-intro{max-width:1100px!important;margin:0 auto 18px!important;text-align:left!important}
+#fyPaginaKits .fy-pd-intro small{display:none!important}
+#fyPaginaKits .fy-pd-intro h2{font:400 42px/1.05 Georgia,"Times New Roman",serif!important;color:#24181c!important;margin:0 0 5px!important}
+#fyPaginaKits .fy-pd-intro p{font-size:11px!important;color:#806d74!important;margin:0!important}
+.fy-kit-filter-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1100px;margin:0 auto 27px}
+.fy-kit-filter-chips button{min-height:38px;padding:8px 17px;border:1px solid #edcfd8;border-radius:999px;background:#fff;color:#4b3038;font-size:10px;cursor:pointer;transition:.18s ease}
+.fy-kit-filter-chips button:hover{border-color:#b83f61;color:#9a2547;background:#fff8fa}
+.fy-kit-filter-chips button.ativo{border-color:#8d1739;background:#8d1739;color:#fff;font-weight:800}
+#fyPaginaKits #fyKitsConteudo{max-width:1100px!important;margin:0 auto!important}
+@media(max-width:700px){
+  #fyPaginaKits .fy-pd-conteudo{padding:27px 14px 45px!important}
+  #fyPaginaKits .fy-pd-intro h2{font-size:32px!important}
+  .fy-kit-filter-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;margin-bottom:20px;scrollbar-width:none}
+  .fy-kit-filter-chips::-webkit-scrollbar{display:none}
+  .fy-kit-filter-chips button{flex:0 0 auto;min-height:35px;padding:7px 14px;font-size:9px}
+}
+</style>
+<script id="fy-kits-category-style-v1-script">
+function fyPrecoCardKit(card){
+  const texto=(card.querySelector('.preco,.produto-preco')?.textContent||'').replace(/[^0-9,.-]/g,'').replace(/\./g,'').replace(',','.');
+  const valor=parseFloat(texto);return Number.isFinite(valor)?valor:0;
+}
+function fyFiltrarKits(botao,filtro){
+  document.querySelectorAll('.fy-kit-filter-chips button').forEach(function(item){item.classList.toggle('ativo',item===botao)});
+  document.querySelectorAll('#fyKitsConteudo .produto').forEach(function(card){
+    const mostrar=filtro==='todos'||Math.abs(fyPrecoCardKit(card)-Number(filtro))<0.01;
+    card.style.setProperty('display',mostrar?'':'none','important');
+  });
+}
+</script>
 
 <div id="fyCarrinhoPagina" aria-hidden="true">
   <div class="fy-cp-header">
@@ -8593,11 +8667,11 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 }
 </style>
 <div class="fy-special-links" aria-label="Ofertas e kits promocionais">
-  <button class="fy-special-link fy-special-offers" type="button" onclick="fyAbrirPaginaDestaque('fyPaginaOfertas')">
+  <button class="fy-special-link fy-special-offers" type="button" onclick="fyAbrirOfertasComoCategoria()">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9-9-9Z"/><circle cx="8" cy="8" r="1.4"/></svg>
     <span>OFERTAS</span>
   </button>
-  <button class="fy-special-link fy-special-kits" type="button" onclick="fyAbrirPaginaDestaque('fyPaginaKits')">
+  <button class="fy-special-link fy-special-kits" type="button" onclick="fyAbrirKitsComoCategoria()">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16v11H4zM2.5 6.5h19V10h-19zM12 6.5V21M7.5 6.5C5 6.5 4 5.2 4.8 3.8 6 1.8 9.4 3.4 12 6.5M16.5 6.5c2.5 0 3.5-1.3 2.7-2.7C18 1.8 14.6 3.4 12 6.5"/></svg>
     <span>KITS PROMOCIONAIS</span>
   </button>
@@ -20027,6 +20101,77 @@ body.fy-pagina-exclusiva .pagina.ativa{
   /* Clique principal: vai direto aos produtos, sem abrir caixa intermediária. */
   window.abrirSubmenuHomeFY=function(categoria){window.selecionarSubcategoria(categoria,'')};
   window.fecharSubmenuHomeFY=function(){};
+})();
+</script>
+<!-- Ofertas e Kits abrem no mesmo formato das demais categorias -->
+<script id="fy-special-as-category-v1">
+(function(){
+  const N=v=>(v||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+
+  function catalogo(){
+    if(Array.isArray(window.FOR_YOU_TODOS_PRODUTOS))return window.FOR_YOU_TODOS_PRODUTOS;
+    try{if(typeof produtos!=='undefined'&&Array.isArray(produtos))return produtos}catch(e){}
+    return [];
+  }
+  function ehKit(p){
+    const c=N(p&&p.categoria);return c==='kit'||c==='kits'||c==='kit promocional'||c==='kits promocionais';
+  }
+  function render(lista){
+    const grade=document.getElementById('listaProdutos');if(!grade)return;
+    grade.innerHTML='';
+    lista.forEach(function(p){try{if(typeof criarCard==='function')grade.appendChild(criarCard(p))}catch(e){}});
+    if(!lista.length)grade.innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Nenhum produto encontrado</strong><p>Novos produtos serão adicionados em breve.</p></div>';
+  }
+  function prepararPagina(titulo,frase){
+    try{fyFecharPaginaDestaque('fyPaginaOfertas')}catch(e){}
+    try{fyFecharPaginaDestaque('fyPaginaKits')}catch(e){}
+    const loja=document.getElementById('loja');if(loja)loja.style.display='block';
+    const secao=document.getElementById('novidades');if(secao)secao.classList.add('fy-category-active');
+    const h=document.querySelector('#novidades>.titulo h2');if(h)h.textContent=titulo;
+    const p=document.querySelector('#novidades>.titulo p');if(p)p.textContent=frase;
+    const small=document.querySelector('#novidades>.titulo small');if(small)small.textContent='FOR YOU';
+  }
+  function criarBarra(opcoes,selecionada,acao){
+    const heading=document.querySelector('#novidades>.titulo');if(!heading)return;
+    let barra=document.getElementById('fyCategoryToolbar');
+    if(!barra){barra=document.createElement('div');barra.id='fyCategoryToolbar';barra.className='fy-category-toolbar';heading.insertAdjacentElement('afterend',barra)}
+    barra.innerHTML='<div class="fy-category-chips"></div><select class="fy-category-sort" aria-label="Ordenar produtos"><option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preço</option><option value="maior">Maior preço</option><option value="az">Nome: A–Z</option></select>';
+    const area=barra.querySelector('.fy-category-chips');
+    opcoes.forEach(function(item){
+      const b=document.createElement('button');b.type='button';b.className='fy-category-chip'+(item.valor===selecionada?' ativo':'');b.textContent=item.nome;b.onclick=function(){acao(item.valor)};area.appendChild(b);
+    });
+    barra.querySelector('select').onchange=function(){
+      const grade=document.getElementById('listaProdutos');if(!grade)return;
+      const cards=Array.from(grade.querySelectorAll('.produto'));
+      const preco=c=>parseFloat((c.querySelector('.preco')?.textContent||'0').replace(/[^0-9,.-]/g,'').replace(/\./g,'').replace(',','.'))||0;
+      if(this.value==='menor')cards.sort((a,b)=>preco(a)-preco(b));
+      if(this.value==='maior')cards.sort((a,b)=>preco(b)-preco(a));
+      if(this.value==='az')cards.sort((a,b)=>(a.innerText||'').localeCompare(b.innerText||'','pt-BR'));
+      cards.forEach(c=>grade.appendChild(c));
+    };
+  }
+
+  window.fyFiltrarOfertasCategoria=function(filtro){
+    const base=catalogo().filter(p=>p&&p.ativo!==false&&!ehKit(p));
+    let lista=base;
+    if(filtro==='todos')lista=base.filter(p=>(Number(p.precoAntigo||p.preco_antigo||0)>Number(p.preco||0))||p.proximoValidade||p.proximo_validade||(Number(p.estoque)>0&&Number(p.estoque)<=5));
+    if(filtro==='validade')lista=base.filter(p=>p.proximoValidade||p.proximo_validade);
+    if(filtro==='queima')lista=base.filter(p=>Number(p.estoque)>0&&Number(p.estoque)<=5);
+    if(filtro==='datas')lista=base.filter(p=>/presente|natal|comemor|dia das|kit/.test(N((p.nome||'')+' '+(p.subcategoria||''))));
+    prepararPagina('Ofertas','Encontre ofertas especiais para você');render(lista);
+    criarBarra([{nome:'Todos',valor:'todos'},{nome:'Próximo ao vencimento',valor:'validade'},{nome:'Queima de estoque',valor:'queima'},{nome:'Datas comemorativas',valor:'datas'}],filtro,window.fyFiltrarOfertasCategoria);
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  window.fyAbrirOfertasComoCategoria=function(){window.fyFiltrarOfertasCategoria('todos')};
+
+  window.fyFiltrarKitsCategoria=function(filtro){
+    const base=catalogo().filter(p=>p&&p.ativo!==false&&ehKit(p));
+    const lista=filtro==='todos'?base:base.filter(p=>Math.abs(Number(p.preco||0)-Number(filtro))<0.01);
+    prepararPagina('Kits Promocionais','Combinações especiais para você aproveitar mais por menos');render(lista);
+    criarBarra([{nome:'Todos',valor:'todos'},{nome:'Kits de R$ 15',valor:'15'},{nome:'Kits de R$ 25',valor:'25'}],filtro,window.fyFiltrarKitsCategoria);
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  window.fyAbrirKitsComoCategoria=function(){window.fyFiltrarKitsCategoria('todos')};
 })();
 </script>
 </body>
