@@ -16796,9 +16796,12 @@ function fyRenderCarrinhoPagina(){
   const codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
   const percentual=codigo==='FORYOU10'?0.10:codigo==='BEMVINDA'?0.15:0;
   const valorDesconto=subtotal*percentual;
+  const freteCalculado=!!window.FY_FRETE_CALCULADO;
+  const valorFrete=freteCalculado?Number(freteAtual||0):0;
   document.getElementById("fyCpSubtotal").textContent=fyBRL(subtotal);
   document.getElementById("fyCpDesconto").textContent=valorDesconto?'- '+fyBRL(valorDesconto):fyBRL(0);
-  document.getElementById("fyCpTotal").textContent=fyBRL(subtotal-valorDesconto);
+  document.getElementById("fyCpFrete").textContent=freteCalculado?(valorFrete?fyBRL(valorFrete):'GR\u00C1TIS'):'A calcular';
+  document.getElementById("fyCpTotal").textContent=fyBRL(subtotal-valorDesconto+valorFrete);
   const campoCupom=document.getElementById('fyCpCupom');
   if(campoCupom&&codigo)campoCupom.value=codigo;
 }
@@ -16827,10 +16830,10 @@ function fyCartQtd(i,d){
   let q=fyCartQty(lista[i])+d;
   if(q<=0){fyCartRemove(i);return}
   if("quantidade" in lista[i])lista[i].quantidade=q; else lista[i].qtd=q;
-  fyCartSave();fyRenderCarrinhoPagina();
+  window.FY_FRETE_CALCULADO=false;freteAtual=0;fyCartSave();fyRenderCarrinhoPagina();
 }
 function fyCartRemove(i){
-  const lista=fyGetCart();lista.splice(i,1);fyCartSave();fyRenderCarrinhoPagina();
+  const lista=fyGetCart();lista.splice(i,1);window.FY_FRETE_CALCULADO=false;freteAtual=0;fyCartSave();fyRenderCarrinhoPagina();
 }
 function fyAbrirCarrinhoPagina(){
   const pg=document.getElementById("fyCarrinhoPagina"); if(!pg)return;
@@ -16967,7 +16970,7 @@ document.addEventListener("DOMContentLoaded", function () {
    return 0;
  }
  function montar(){
-   const pg=document.getElementById("paginaCarrinhoV17");
+   const pg=document.getElementById("fyCarrinhoPagina")||document.getElementById("paginaCarrinhoV17");
    if(!pg || pg.querySelector(".fy18-commercial")) return;
 
    const area=document.createElement("div");
@@ -16993,9 +16996,13 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="fy18-products" id="fy18Recomendados"></div>
     </div>`;
 
-   const resumo=pg.querySelector(".fy17-summary,.fy17-resumo,.resumo");
-   const destino=resumo?.parentElement || pg.querySelector(".fy17-content,.fy17-body") || pg;
-   destino.appendChild(area);
+   const resumo=pg.querySelector(".fy-cp-summary,.fy17-summary,.fy17-resumo,.resumo");
+   const botaoFinalizar=resumo?.querySelector(".fy-cp-checkout");
+   if(botaoFinalizar) botaoFinalizar.insertAdjacentElement("beforebegin",area);
+   else {
+     const destino=resumo?.parentElement || pg.querySelector(".fy17-content,.fy17-body") || pg;
+     destino.appendChild(area);
+   }
    atualizar();
    recomendar();
  }
@@ -20927,6 +20934,17 @@ body.fy-pagina-exclusiva .pagina.ativa{
 }
 </style>
 <style id="fy-superfrete-final-css">
+#fyCarrinhoPagina .fy18-commercial{margin:16px 0;display:grid;gap:10px}
+#fyCarrinhoPagina .fy18-box{padding:13px;border:1px solid #eee5e7;border-radius:12px;background:#fff}
+#fyCarrinhoPagina .fy18-title{margin-bottom:8px;font-size:9px;font-weight:800;color:#292929}
+#fyCarrinhoPagina .fy18-frete-msg,#fyCarrinhoPagina .fy18-feedback{font-size:9px;line-height:1.5;color:#777}
+#fyCarrinhoPagina .fy18-frete-msg{margin-bottom:8px}
+#fyCarrinhoPagina .fy18-bar{height:7px;overflow:hidden;border-radius:999px;background:#f0eaec}
+#fyCarrinhoPagina .fy18-bar>div{height:100%;width:0;border-radius:999px;background:#d5a0af;transition:.3s}
+#fyCarrinhoPagina .fy18-row{display:flex;gap:7px}
+#fyCarrinhoPagina .fy18-row input{flex:1;min-width:0;height:40px;padding:0 10px;border:1px solid #e7dfe1;border-radius:9px;background:#fff}
+#fyCarrinhoPagina .fy18-row button{height:40px;padding:0 12px;border:0;border-radius:9px;background:#351f27;color:#fff;font-size:8px;font-weight:800;cursor:pointer}
+#fyCarrinhoPagina .fy18-recommend{display:none!important}
 .fy-calcular-frete-checkout{border:1px solid #351f27;background:#351f27;color:#fff;padding:12px;font-size:8px;font-weight:800;letter-spacing:.8px;cursor:pointer}
 .fy-frete-resultado{padding:11px 12px;border:1px solid #ead9de;background:#fff8fa;color:#6f6166;font-size:9px;line-height:1.55}
 .fy-superfrete-opcoes{display:grid;gap:8px;margin-top:10px}
@@ -20946,7 +20964,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   function dinheiro(v){return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
   function numero(v){const n=Number(String(v??'').replace(',','.'));return Number.isFinite(n)?n:0}
   function nomeOpcao(o){return o?.name||o?.nome||o?.service||o?.company?.name||o?.company?.name||'Entrega'}
-  function precoOpcao(o){return numero(o?.custom_price??o?.discount??o?.price??o?.preco??o?.valor)}
+  function precoOpcao(o){return numero(o?.custom_price??o?.price??o?.preco??o?.valor)}
   function prazoOpcao(o){
     const p=o?.custom_delivery_time??o?.delivery_time??o?.prazo??o?.delivery_range;
     if(p&&typeof p==='object')return p.max||p.min||0;
@@ -21004,7 +21022,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
       const tipo=btn.dataset.tipo;entregaSelecionada=tipo;freteAtual=fretes[tipo].gratis?0:Number(fretes[tipo].preco||0);
       if(origem==='checkout'){
         const b=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao')[tipo==='expressa'?1:0];if(b)selecionarCheckoutEntrega(tipo,b);
-      }else{atualizar();}
+      }else{atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();}
       if(typeof renderCheckout==='function')renderCheckout();
     }));
   }
