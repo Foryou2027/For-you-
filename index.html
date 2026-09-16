@@ -20424,5 +20424,169 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 })();
 </script>
+<!-- Passo 6 de 7: cards de produtos padronizados -->
+<style id="fy-produtos-passo-6-final">
+.produtos,
+.products-grid,
+.grid-produtos,
+.vitrine-produtos{
+  align-items:stretch!important;
+  gap:30px 20px!important;
+}
+.produtos>.produto,
+.products-grid>.product-card,
+.grid-produtos>.produto-card,
+.vitrine-produtos>.produto{
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.produto-img,
+.product-image,
+.produto-imagem{
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1/1!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#fbf8f9!important;
+  overflow:hidden!important;
+}
+.produto-img img,
+.product-image img,
+.produto-imagem img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  padding:7px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+.produto-info,
+.product-info{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:148px!important;
+  padding:12px 1px 0!important;
+  background:transparent!important;
+}
+.produto .marca,
+.product-card .brand,
+.produto-card .marca{
+  min-height:11px!important;
+  margin:0 0 5px!important;
+  color:#8e7c82!important;
+  font-size:8px!important;
+  font-weight:700!important;
+  letter-spacing:1.4px!important;
+  text-transform:uppercase!important;
+}
+.produto .nome,
+.product-card .name,
+.produto-card .nome{
+  display:-webkit-box!important;
+  min-height:34px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  color:#2b1e23!important;
+  font:600 12px/1.4 Arial,sans-serif!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+}
+.produto .estrelas,
+.product-card .stars,
+.produto-card .estrelas{
+  min-height:15px!important;
+  margin:6px 0 0!important;
+  color:#c99d45!important;
+  font-size:9px!important;
+}
+.produto .preco,
+.product-card .price,
+.produto-card .preco{
+  min-height:23px!important;
+  margin:5px 0 0!important;
+  color:#351f27!important;
+  font-size:16px!important;
+  font-weight:800!important;
+  line-height:1.35!important;
+}
+.produto .preco-antigo{
+  color:#9a8d91!important;
+  font-size:9px!important;
+}
+.produto .adicionar,
+.product-card .add-to-cart,
+.produto-card .adicionar{
+  width:100%!important;
+  min-height:39px!important;
+  margin-top:auto!important;
+  padding:9px 7px!important;
+  border:1px solid #efd8df!important;
+  border-radius:999px!important;
+  background:#f8dfe7!important;
+  color:#5d2639!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+.produto .adicionar:hover,
+.product-card .add-to-cart:hover,
+.produto-card .adicionar:hover{
+  border-color:#94183d!important;
+  background:#94183d!important;
+  color:#fff!important;
+}
+.produto .etiqueta{
+  top:10px!important;
+  left:10px!important;
+  padding:6px 9px!important;
+  border-radius:999px!important;
+  font-size:8px!important;
+}
+@media(max-width:700px){
+  .produtos,
+  .products-grid,
+  .grid-produtos,
+  .vitrine-produtos{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:25px 11px!important;
+  }
+  .produto-img,
+  .product-image,
+  .produto-imagem{
+    border-radius:10px!important;
+  }
+  .produto-info,
+  .product-info{
+    min-height:137px!important;
+    padding-top:10px!important;
+  }
+  .produto .nome,
+  .product-card .name,
+  .produto-card .nome{
+    min-height:31px!important;
+    font-size:10.5px!important;
+  }
+  .produto .preco,
+  .product-card .price,
+  .produto-card .preco{
+    font-size:14px!important;
+  }
+  .produto .adicionar,
+  .product-card .add-to-cart,
+  .produto-card .adicionar{
+    min-height:36px!important;
+    padding:8px 5px!important;
+    font-size:8px!important;
+  }
+}
+</style>
 </body>
 </html>
