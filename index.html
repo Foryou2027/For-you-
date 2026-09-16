@@ -8667,6 +8667,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 }
 </style>
 <div class="fy-special-links" aria-label="Ofertas e kits promocionais">
+  <span class="fy-special-title">Encontre algo especial</span>
   <button class="fy-special-link fy-special-offers" type="button" onclick="fyAbrirOfertasComoCategoria()">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9-9-9Z"/><circle cx="8" cy="8" r="1.4"/></svg>
     <span>OFERTAS</span>
@@ -20262,6 +20263,68 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
   .fy-banner-r10-dots{
     margin-top:6px!important;
+  }
+}
+</style>
+<!-- Passo 3 de 7: Ofertas e Kits centralizados no estilo clean -->
+<style id="fy-special-links-passo-3-final">
+.fy-special-links{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:10px!important;
+  width:100%!important;
+  padding:15px 16px 16px!important;
+  background:#fff!important;
+  border-top:1px solid #f5e8ec!important;
+  border-bottom:1px solid #f8edf0!important;
+}
+.fy-special-title{
+  display:block!important;
+  flex:0 0 100%!important;
+  margin:0 0 2px!important;
+  text-align:center!important;
+  color:#351f27!important;
+  font:400 20px/1.15 Georgia,"Times New Roman",serif!important;
+}
+.fy-special-link{
+  min-width:175px!important;
+  min-height:42px!important;
+  padding:10px 22px!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+}
+.fy-special-offers{
+  border-color:#94183d!important;
+  background:#94183d!important;
+  color:#fff!important;
+}
+.fy-special-kits{
+  border-color:#d24b70!important;
+  background:#fff!important;
+  color:#94183d!important;
+}
+.fy-special-link:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:0 6px 16px rgba(116,21,47,.10)!important;
+}
+@media(max-width:700px){
+  .fy-special-links{
+    gap:7px!important;
+    padding:12px 10px 13px!important;
+  }
+  .fy-special-title{
+    margin-bottom:3px!important;
+    font-size:17px!important;
+  }
+  .fy-special-link{
+    flex:1 1 0!important;
+    min-width:0!important;
+    min-height:40px!important;
+    padding:9px 7px!important;
+    font-size:8px!important;
+    letter-spacing:.4px!important;
   }
 }
 </style>
