@@ -21324,16 +21324,26 @@ body.fy-pagina-exclusiva .pagina.ativa{
     finally{if(botao){botao.disabled=false;botao.textContent='SALVAR ENDERE\u00C7O';}}
     return false;
   };
+  let fyCepTimer=null,fyUltimoCepConsultado='';
   async function completarEnderecoPeloCep(){
     const cep=valor('endCep').replace(/\D/g,'');if(cep.length!==8)return;
+    if(cep===fyUltimoCepConsultado)return;fyUltimoCepConsultado=cep;
     try{
       const resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');const dados=await resposta.json();if(dados.erro)return;
-      if($('endRua')&&!valor('endRua'))$('endRua').value=dados.logradouro||'';
-      if($('endBairro')&&!valor('endBairro'))$('endBairro').value=dados.bairro||'';
-      if($('endCidade')&&!valor('endCidade'))$('endCidade').value=dados.localidade||'';
-      if($('endEstado')&&!valor('endEstado'))$('endEstado').value=dados.uf||'';
-    }catch(e){}
+      if($('endRua'))$('endRua').value=dados.logradouro||'';
+      if($('endBairro'))$('endBairro').value=dados.bairro||'';
+      if($('endCidade'))$('endCidade').value=dados.localidade||'';
+      if($('endEstado'))$('endEstado').value=dados.uf||'';
+      $('endNumero')?.focus();
+    }catch(e){fyUltimoCepConsultado='';}
   }
+  document.addEventListener('input',event=>{
+    if(event.target?.id!=='endCep')return;
+    const numeros=String(event.target.value||'').replace(/\D/g,'').slice(0,8);
+    event.target.value=numeros.length>5?numeros.slice(0,5)+'-'+numeros.slice(5):numeros;
+    clearTimeout(fyCepTimer);
+    if(numeros.length===8)fyCepTimer=setTimeout(completarEnderecoPeloCep,300);
+  });
   document.addEventListener('blur',event=>{if(event.target?.id==='endCep')completarEnderecoPeloCep();},true);
   window.alterarSenhaContaV14=async function(event){
     event.preventDefault();const atual=valor('senhaAtualV14'),nova=valor('senhaNovaV14');
