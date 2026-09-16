@@ -10,13 +10,7 @@
 
 <!-- Evita que o celular exiba a estrutura sem os estilos durante o carregamento. -->
 <style id="fy-critical-loading">
-html:not(.fy-ready) body{overflow:hidden!important}
-html:not(.fy-ready) body>*:not(#fyCarregandoLoja){visibility:hidden!important}
-#fyCarregandoLoja{display:none}
-html:not(.fy-ready) #fyCarregandoLoja{
-  visibility:visible!important;display:flex!important;position:fixed;inset:0;z-index:2147483647;
-  align-items:center;justify-content:center;flex-direction:column;gap:14px;background:#fff8fa;color:#351f27
-}
+#fyCarregandoLoja{display:none!important}
 .fy-loading-marca{font-family:Georgia,serif;font-size:30px;letter-spacing:6px}
 .fy-loading-linha{width:62px;height:2px;overflow:hidden;border-radius:9px;background:#ead9de}
 .fy-loading-linha:after{content:"";display:block;width:45%;height:100%;background:#8d1739;animation:fyCarregando 1s ease-in-out infinite alternate}
@@ -24,12 +18,28 @@ html:not(.fy-ready) #fyCarregandoLoja{
 @media(max-width:700px){.fy-loading-marca{font-size:25px;letter-spacing:5px}}
 </style>
 <script>
-document.documentElement.classList.remove('fy-ready');
-window.addEventListener('DOMContentLoaded',function(){
-  requestAnimationFrame(function(){requestAnimationFrame(function(){document.documentElement.classList.add('fy-ready')})});
-},{once:true});
-setTimeout(function(){document.documentElement.classList.add('fy-ready')},8000);
+document.documentElement.classList.add('fy-ready');
 </script>
+
+<!-- Estilo essencial carregado primeiro para impedir a tela mobile deformada. -->
+<style id="fy-mobile-critical-first">
+@media(max-width:700px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  .header-top::before{content:none!important;display:none!important}
+  .header{width:100%!important;padding:7px 11px 10px!important}
+  .header-top{display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;grid-template-rows:auto auto!important;align-items:center!important;gap:7px 8px!important;padding:0!important}
+  .header-top .logo{grid-column:1!important;grid-row:1!important;width:96px!important;min-width:0!important;margin:0!important}
+  .fy-brand-logo{display:block!important;width:96px!important;height:90px!important;overflow:hidden!important}
+  .fy-brand-logo img{display:block!important;width:350px!important;max-width:none!important;height:auto!important}
+  .header-top .acoes{grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:flex-end!important;gap:4px!important}
+  .fy-busca-topo{grid-column:1/-1!important;grid-row:2!important;width:100%!important}
+  .fy-clean-cat-top{display:flex!important;flex-wrap:nowrap!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%!important;max-width:100%!important;gap:13px!important;padding:9px 12px 12px!important;overflow-x:auto!important;overflow-y:hidden!important;background:#fff!important}
+  .fy-clean-cat-top>button:not(.fy-pill){display:flex!important;flex:0 0 66px!important;width:66px!important;min-width:66px!important;flex-direction:column!important;align-items:center!important;gap:6px!important;padding:0 0 10px!important;background:transparent!important;border:0!important}
+  .fy-cat-desenho{display:grid!important;place-items:center!important;width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;border-radius:50%!important;background:#fff0f4!important}
+  .fy-cat-desenho svg{display:block!important;width:28px!important;height:28px!important;fill:none!important;stroke:#b91f49!important;stroke-width:1.65!important}
+  .fy-clean-cat-top>button b{font:400 10px/1.15 Arial,sans-serif!important;color:#26191e!important;text-align:center!important;white-space:normal!important}
+}
+</style>
 
 <style>
 *{
@@ -21084,5 +21094,15 @@ body.fy-pagina-exclusiva .pagina.ativa{
   });
 })();
 </script>
+<style id="fy-mobile-sem-trava-final">
+@media(max-width:700px){
+  .header-top::before{content:none!important;display:none!important}
+  .fy-clean-cat-top{display:flex!important;flex-wrap:nowrap!important;align-items:flex-start!important;justify-content:flex-start!important;overflow-x:auto!important;overflow-y:hidden!important}
+  .fy-clean-cat-top>button:not(.fy-pill){display:flex!important;flex:0 0 66px!important;width:66px!important;min-width:66px!important;max-width:66px!important;flex-direction:column!important;align-items:center!important;gap:6px!important}
+  .fy-clean-cat-top>button:not(.fy-pill) .fy-cat-desenho{display:grid!important;place-items:center!important;width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;max-width:46px!important;max-height:46px!important;border-radius:50%!important;background:#fff0f4!important}
+  .fy-clean-cat-top>button:not(.fy-pill) .fy-cat-desenho svg{display:block!important;width:28px!important;height:28px!important;max-width:28px!important;max-height:28px!important;fill:none!important;stroke:#b91f49!important;stroke-width:1.65!important}
+  .fy-clean-cat-top>button:not(.fy-pill) b{font:400 10px/1.15 Arial,sans-serif!important;color:#26191e!important;text-align:center!important}
+}
+</style>
 </body>
 </html>
