@@ -20176,6 +20176,15 @@ body.fy-pagina-exclusiva .pagina.ativa{
 </script>
 <!-- Correção definitiva: exibe a logo real do cabeçalho pela tag IMG -->
 <style id="fy-header-logo-direct-final">
+.header-top .logo{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.header-top::before{
+  content:none!important;
+  display:none!important;
+}
 .fy-brand-logo{
   display:inline-flex!important;
   align-items:center!important;
