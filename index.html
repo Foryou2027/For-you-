@@ -21225,13 +21225,34 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(gate){gate.classList.remove('carregando');gate.style.display=logada?'none':'block';}
     if(painel)painel.style.display=logada?'block':'none';
   }
+  function preencherEndereco(endereco){
+    if(!endereco)return;
+    const campos={endCep:'cep',endNumero:'numero',endRua:'logradouro',endBairro:'bairro',endCidade:'cidade',endEstado:'estado',endComplemento:'complemento'};
+    Object.entries(campos).forEach(([id,chave])=>{if($(id))$(id).value=endereco[chave]||'';});
+    const box=$('enderecoSalvoV14');if(!box)return;
+    box.innerHTML='';
+    const card=document.createElement('div');card.className='conta-security-v14';
+    const icone=document.createElement('span');icone.textContent='\u2316';
+    const texto=document.createElement('span');
+    const titulo=document.createElement('strong');titulo.textContent='Endere\u00E7o principal salvo';
+    const linha=document.createElement('div');
+    linha.textContent=[endereco.logradouro,endereco.numero,endereco.bairro,endereco.cidade,endereco.estado,endereco.cep].filter(Boolean).join(', ')+(endereco.complemento?' \u2014 '+endereco.complemento:'');
+    texto.append(titulo,document.createElement('br'),linha);card.append(icone,texto);box.appendChild(card);
+  }
+  async function carregarEndereco(usuario){
+    if(!usuario)return;
+    const {data,error}=await sb.from('enderecos').select('*').eq('cliente_id',usuario.id).order('principal',{ascending:false}).order('criado_em',{ascending:true}).limit(1).maybeSingle();
+    if(!error&&data)preencherEndereco(data);
+  }
   async function carregarPerfil(usuario){
     const meta=usuario.user_metadata||{};
     let perfil={id:usuario.id,nome:meta.nome||meta.full_name||'',email:usuario.email||'',telefone:meta.telefone||''};
     const {data,error}=await sb.from('clientes').select('id,nome,email,telefone').eq('id',usuario.id).maybeSingle();
     if(!error&&data)perfil={...perfil,...data,email:data.email||usuario.email||''};
     else await sb.from('clientes').upsert(perfil,{onConflict:'id'});
-    guardarCompatibilidade(perfil);preencherConta(perfil);mostrarLogada(true);
+    guardarCompatibilidade(perfil);preencherConta(perfil);
+    try{await carregarEndereco(usuario);}catch(e){console.warn('N\u00E3o foi poss\u00EDvel carregar o endere\u00E7o',e);}
+    mostrarLogada(true);
     try{if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();}catch(e){}
     return perfil;
   }
@@ -21280,6 +21301,40 @@ body.fy-pagina-exclusiva .pagina.ativa{
     await sb.auth.updateUser({data:{...(user.user_metadata||{}),nome,telefone}});
     const perfil={id:user.id,nome,email:user.email||'',telefone};guardarCompatibilidade(perfil);preencherConta(perfil);alert('Dados atualizados com sucesso! \u2661');return false;
   };
+  window.salvarEnderecoContaV14=async function(event){
+    event.preventDefault();
+    const endereco={
+      cep:valor('endCep').replace(/\D/g,''),numero:valor('endNumero'),logradouro:valor('endRua'),
+      bairro:valor('endBairro'),cidade:valor('endCidade'),estado:valor('endEstado').toUpperCase(),complemento:valor('endComplemento')
+    };
+    if(endereco.cep.length!==8){alert('Digite um CEP v\u00E1lido com 8 n\u00FAmeros.');return false;}
+    if(!endereco.numero||!endereco.logradouro||!endereco.bairro||!endereco.cidade||endereco.estado.length!==2){alert('Preencha rua, n\u00FAmero, bairro, cidade e estado.');return false;}
+    const botao=event.currentTarget.querySelector('button');if(botao){botao.disabled=true;botao.textContent='SALVANDO...';}
+    try{
+      const {data:{user}}=await sb.auth.getUser();if(!user)throw new Error('Sua sess\u00E3o expirou. Entre novamente.');
+      const {data:perfil}=await sb.from('clientes').select('nome').eq('id',user.id).maybeSingle();
+      const payload={...endereco,cliente_id:user.id,destinatario:perfil?.nome||user.user_metadata?.nome||'Cliente',apelido:'Principal',principal:true};
+      const {data:atual}=await sb.from('enderecos').select('id').eq('cliente_id',user.id).order('principal',{ascending:false}).limit(1).maybeSingle();
+      let resposta;
+      if(atual?.id)resposta=await sb.from('enderecos').update(payload).eq('id',atual.id).select().single();
+      else resposta=await sb.from('enderecos').insert(payload).select().single();
+      if(resposta.error)throw resposta.error;
+      preencherEndereco(resposta.data);alert('Endere\u00E7o salvo com sucesso! \u2661');
+    }catch(e){console.warn(e);alert(e.message&&e.message.includes('sess\u00E3o')?e.message:'N\u00E3o foi poss\u00EDvel salvar o endere\u00E7o. Tente novamente.');}
+    finally{if(botao){botao.disabled=false;botao.textContent='SALVAR ENDERE\u00C7O';}}
+    return false;
+  };
+  async function completarEnderecoPeloCep(){
+    const cep=valor('endCep').replace(/\D/g,'');if(cep.length!==8)return;
+    try{
+      const resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');const dados=await resposta.json();if(dados.erro)return;
+      if($('endRua')&&!valor('endRua'))$('endRua').value=dados.logradouro||'';
+      if($('endBairro')&&!valor('endBairro'))$('endBairro').value=dados.bairro||'';
+      if($('endCidade')&&!valor('endCidade'))$('endCidade').value=dados.localidade||'';
+      if($('endEstado')&&!valor('endEstado'))$('endEstado').value=dados.uf||'';
+    }catch(e){}
+  }
+  document.addEventListener('blur',event=>{if(event.target?.id==='endCep')completarEnderecoPeloCep();},true);
   window.alterarSenhaContaV14=async function(event){
     event.preventDefault();const atual=valor('senhaAtualV14'),nova=valor('senhaNovaV14');
     if(nova.length<6){alert('A nova senha precisa ter pelo menos 6 caracteres.');return false;}
