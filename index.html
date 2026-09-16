@@ -9214,6 +9214,8 @@ Promo&#xE7;&#xF5;es de datas especiais
         <input id="checkoutEmail" type="email" placeholder="E-mail">
         <input id="checkoutTelefone" placeholder="Telefone">
         <input id="checkoutCEP" placeholder="CEP" maxlength="9" oninput="mascaraCEP(this)">
+        <button class="fy-calcular-frete-checkout" type="button" onclick="calcularFreteCheckout()">CALCULAR FRETE</button>
+        <div id="checkoutFreteResultado" class="fy-frete-resultado completo">Informe o CEP para consultar as op&#xE7;&#xF5;es da SuperFrete.</div>
         <input id="checkoutEndereco" class="completo" placeholder="Endere&#xE7;o completo">
         <input id="checkoutNumero" placeholder="N&#xFA;mero">
         <input id="checkoutComplemento" placeholder="Complemento">
@@ -11469,7 +11471,13 @@ function preencherCheckout(){
   const cep=document.getElementById('cep')?.value||'';document.getElementById('checkoutCEP').value=cep;
   document.getElementById('checkoutNumero').value=document.getElementById('numero')?.value||'';document.getElementById('checkoutComplemento').value=document.getElementById('complemento')?.value||'';
 }
-function selecionarCheckoutEntrega(tipo,btn){entregaSelecionada=tipo;document.querySelectorAll('#paginaCheckout .pagamento-opcao').forEach((b)=>{if(b.parentElement===btn.parentElement)b.classList.remove('ativa')});btn.classList.add('ativa');renderCheckout();}
+function selecionarCheckoutEntrega(tipo,btn){
+  entregaSelecionada=tipo;
+  if(tipo==='retirada') freteAtual=0;
+  else if(window.FY_FRETES?.[tipo]) freteAtual=window.FY_FRETES[tipo].gratis?0:Number(window.FY_FRETES[tipo].preco||0);
+  document.querySelectorAll('#paginaCheckout .pagamento-opcao').forEach((b)=>{if(b.parentElement===btn.parentElement)b.classList.remove('ativa')});
+  btn.classList.add('ativa');renderCheckout();
+}
 let pagamentoSelecionado='PIX';
 function selecionarPagamento(tipo,btn){
   pagamentoSelecionado=tipo;
@@ -11522,6 +11530,7 @@ function confirmarPedido(){
   if(!contaAtual){alert('Entre na sua conta antes de finalizar o pedido. Assim o pedido ficar\u00E1 salvo no seu hist\u00F3rico.');abrirConta();return;}
   const nome=document.getElementById('checkoutNome').value.trim(),email=document.getElementById('checkoutEmail').value.trim(),telefone=document.getElementById('checkoutTelefone').value.trim(),endereco=document.getElementById('checkoutEndereco').value.trim(),numero=document.getElementById('checkoutNumero').value.trim(),cep=document.getElementById('checkoutCEP').value.trim(),complemento=document.getElementById('checkoutComplemento').value.trim();
   if(!nome||!email||!telefone||!endereco||!numero||cep.replace(/\D/g,'').length!==8){document.getElementById('checkoutMensagem').textContent='Preencha nome, e-mail, telefone, CEP, endere\u00E7o e n\u00FAmero.';return;}
+  if(entregaSelecionada!=='retirada' && (!window.FY_FRETE_CALCULADO || window.FY_FRETE_CEP!==cep.replace(/\D/g,''))){document.getElementById('checkoutMensagem').textContent='Calcule o frete para este CEP e escolha uma op\u00E7\u00E3o de entrega antes de confirmar.';return;}
   if(pagamentoSelecionado!=='PIX'){document.getElementById('checkoutMensagem').textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
   const indisponivel=carrinho.find(item=>{const p=encontrarProduto(item.id);return !p || Number(p.estoque||0)<Number(item.quantidade||0);});
   if(indisponivel){document.getElementById('checkoutMensagem').textContent='Um dos produtos n\u00E3o possui estoque suficiente. Atualize o carrinho antes de continuar.';return;}
@@ -11530,7 +11539,8 @@ function confirmarPedido(){
   const sequencia=todosPedidos.reduce((m,p)=>Math.max(m,parseInt(String(p.numero||'').replace(/\D/g,''))||0),0)+1;
   const numeroPedido=String(sequencia).padStart(4,'0');
   const parcelas=1;
-  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'recebido',statusTexto:'Pedido recebido',etapa:1,pagamentoStatus:pagamentoSelecionado==='PIX'?'Aguardando pagamento':'Pagamento em processamento',codigoRastreio:'',total,subtotal,desconto,frete:freteAtual,parcelas,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
+  const freteEscolhido=window.FY_FRETES?.[entregaSelecionada]||null;
+  const pedido={id:'pedido_'+Date.now(),numero:'#'+numeroPedido,data:new Date().toLocaleDateString('pt-BR'),dataISO:new Date().toISOString(),status:'recebido',statusTexto:'Pedido recebido',etapa:1,pagamentoStatus:pagamentoSelecionado==='PIX'?'Aguardando pagamento':'Pagamento em processamento',codigoRastreio:'',total,subtotal,desconto,frete:freteAtual,freteDetalhes:freteEscolhido?{servico:freteEscolhido.nome,prazo:freteEscolhido.prazo,valorCotado:freteEscolhido.preco,gratis:freteEscolhido.gratis}:null,parcelas,itens:carrinho.map(p=>({id:p.id,nome:p.nome,quantidade:p.quantidade,preco:p.preco})),entrega:entregaSelecionada||'padrao',pagamento:pagamentoSelecionado,cliente:{nome,email,telefone},endereco:{cep,endereco,numero,complemento}};
   const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
   if(contaAtual&&conta){conta.pedidos=[pedido,...pedidos];conta.nome=nome;conta.email=email;conta.telefone=telefone;conta.endereco=endereco;salvarConta(conta);contaAtual={nome,email,telefone,endereco};salvarContaAtual();}
   todosPedidos.unshift({...pedido,clienteEmail:email});localStorage.setItem('forYouPedidos',JSON.stringify(todosPedidos));
@@ -11554,7 +11564,8 @@ function mostrarPedidoSucesso(pedido){
 }
 
 function abrirWhatsAppPedido(pedido,nome,email,telefone,endereco,numero,cep,total){
-  let msg=`Ol\u00E1! Finalizei o pedido ${pedido.numero} na FOR YOU.\n\n*PEDIDO*\n`;pedido.itens.forEach(i=>msg+=`\u2022 ${i.nome} \u2014 ${i.quantidade}x \u2014 ${moeda(i.preco*i.quantidade)}\n`);msg+=`\nTotal: ${moeda(total)}\nEntrega: ${pedido.entrega}\nPagamento: Pix \u2014 aguardando confirma\u00E7\u00E3o\n\nCliente: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEndere\u00E7o: ${endereco}, ${numero}\nCEP: ${cep}\n\nVou enviar o comprovante do Pix em seguida.`;window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
+  const entregaTexto=pedido.freteDetalhes?`${pedido.freteDetalhes.servico} \u2014 ${pedido.freteDetalhes.prazo||'prazo a confirmar'} dias \u00FAteis \u2014 ${pedido.freteDetalhes.gratis?'GR\u00C1TIS':moeda(pedido.frete)}`:pedido.entrega;
+  let msg=`Ol\u00E1! Finalizei o pedido ${pedido.numero} na FOR YOU.\n\n*PEDIDO*\n`;pedido.itens.forEach(i=>msg+=`\u2022 ${i.nome} \u2014 ${i.quantidade}x \u2014 ${moeda(i.preco*i.quantidade)}\n`);msg+=`\nTotal: ${moeda(total)}\nEntrega: ${entregaTexto}\nPagamento: Pix \u2014 aguardando confirma\u00E7\u00E3o\n\nCliente: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}\nEndere\u00E7o: ${endereco}, ${numero}\nCEP: ${cep}\n\nVou enviar o comprovante do Pix em seguida.`;window.open('https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');}
 function renderPedidosConta(){
   const c=document.getElementById('listaPedidosConta');if(!c)return;
   const conta=contaSalva();const pedidos=(conta&&conta.pedidos)||[];
@@ -16941,7 +16952,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script id="fy-carrinho-comercial-v18-js">
 (function(){
- const META_FRETE=100;
+ const META_FRETE=150;
 
  function moeda(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
  function subtotal(){
@@ -20915,5 +20926,116 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
+<style id="fy-superfrete-final-css">
+.fy-calcular-frete-checkout{border:1px solid #351f27;background:#351f27;color:#fff;padding:12px;font-size:8px;font-weight:800;letter-spacing:.8px;cursor:pointer}
+.fy-frete-resultado{padding:11px 12px;border:1px solid #ead9de;background:#fff8fa;color:#6f6166;font-size:9px;line-height:1.55}
+.fy-superfrete-opcoes{display:grid;gap:8px;margin-top:10px}
+.fy-superfrete-opcao{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid #ead9de;border-radius:10px;background:#fff;text-align:left;cursor:pointer;color:#351f27}
+.fy-superfrete-opcao:hover,.fy-superfrete-opcao.ativa{border-color:#8f1739;background:#fff8fa}
+.fy-superfrete-opcao strong,.fy-superfrete-opcao span,.fy-superfrete-opcao small{display:block}
+.fy-superfrete-opcao strong{font-size:10px}.fy-superfrete-opcao small{margin-top:3px;color:#777;font-size:8px}.fy-superfrete-opcao>span{font-size:11px;font-weight:800;white-space:nowrap}
+@media(max-width:520px){.fy-calcular-frete-checkout{font-size:7px}.fy-superfrete-opcao{padding:11px}}
+</style>
+<script id="fy-superfrete-final-js">
+(function(){
+  const LIMITE_FRETE_GRATIS=150;
+
+  function subtotalCarrinho(){
+    try{return carrinho.reduce((s,p)=>s+Number(p.preco||0)*Number(p.quantidade||1),0)}catch(e){return 0}
+  }
+  function dinheiro(v){return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+  function numero(v){const n=Number(String(v??'').replace(',','.'));return Number.isFinite(n)?n:0}
+  function nomeOpcao(o){return o?.name||o?.nome||o?.service||o?.company?.name||o?.company?.name||'Entrega'}
+  function precoOpcao(o){return numero(o?.custom_price??o?.discount??o?.price??o?.preco??o?.valor)}
+  function prazoOpcao(o){
+    const p=o?.custom_delivery_time??o?.delivery_time??o?.prazo??o?.delivery_range;
+    if(p&&typeof p==='object')return p.max||p.min||0;
+    return numero(p);
+  }
+  function opcoesValidas(resposta){
+    const lista=Array.isArray(resposta)?resposta:Array.isArray(resposta?.data)?resposta.data:[];
+    return lista.filter(o=>!o?.error&&!o?.erro&&precoOpcao(o)>0).map(o=>({...o,_preco:precoOpcao(o),_prazo:prazoOpcao(o),_nome:nomeOpcao(o)}));
+  }
+  function itensCotacao(){
+    return (Array.isArray(carrinho)?carrinho:[]).map(item=>({
+      quantidade:Math.max(1,Number(item.quantidade||1)),
+      peso:Number(item.peso||0.12),altura:Number(item.altura||4),largura:Number(item.largura||5),comprimento:Number(item.comprimento||15)
+    }));
+  }
+  async function consultar(cep){
+    const limpo=String(cep||'').replace(/\D/g,'');
+    if(limpo.length!==8)throw new Error('Digite um CEP v\u00E1lido com 8 n\u00FAmeros.');
+    if(!Array.isArray(carrinho)||!carrinho.length)throw new Error('Adicione produtos \u00E0 sacola antes de calcular.');
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!sb)throw new Error('A conex\u00E3o de entrega ainda n\u00E3o est\u00E1 dispon\u00EDvel.');
+    const {data,error}=await sb.functions.invoke('calcular-frete',{body:{cep:limpo,itens:itensCotacao(),valorPedido:subtotalCarrinho()}});
+    if(error)throw new Error(error.message||'Falha ao consultar a SuperFrete.');
+    if(data?.erro)throw new Error(data.erro);
+    const lista=opcoesValidas(data?.opcoes);
+    if(!lista.length)throw new Error('Nenhuma op\u00E7\u00E3o de entrega foi encontrada para este CEP.');
+    lista.sort((a,b)=>a._preco-b._preco);
+    const economica=lista[0];
+    const porPrazo=[...lista].sort((a,b)=>(a._prazo||999)-(b._prazo||999)||a._preco-b._preco);
+    const rapida=porPrazo.find(o=>o!==economica)||economica;
+    const gratis=subtotalCarrinho()>=LIMITE_FRETE_GRATIS;
+    window.FY_FRETES={
+      padrao:{...economica,preco:economica._preco,prazo:economica._prazo,nome:economica._nome,gratis},
+      expressa:{...rapida,preco:rapida._preco,prazo:rapida._prazo,nome:rapida._nome,gratis}
+    };
+    window.FY_FRETE_CALCULADO=true;window.FY_FRETE_CEP=limpo;
+    valoresFrete={padrao:economica._preco,expressa:rapida._preco};
+    return window.FY_FRETES;
+  }
+  function textoPrazo(op){return op.prazo?op.prazo+' dia'+(op.prazo===1?'':'s')+' \u00FAteis':'Prazo informado pela transportadora'}
+  function valorExibido(op){return op.gratis?'GR\u00C1TIS':dinheiro(op.preco)}
+  function atualizarBotoesCheckout(fretes){
+    const botoes=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao');
+    if(!botoes||botoes.length<2)return;
+    botoes[0].innerHTML='\u{1F69A} '+fretes.padrao.nome+'<br><small>'+textoPrazo(fretes.padrao)+' \u2022 '+valorExibido(fretes.padrao)+'</small>';
+    botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';
+  }
+  function renderOpcoes(alvo,fretes,origem){
+    if(!alvo)return;
+    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].map(tipo=>{
+      const op=fretes[tipo];return '<button type="button" class="fy-superfrete-opcao" data-tipo="'+tipo+'"><span><strong>'+op.nome+'</strong><small>'+textoPrazo(op)+'</small></span><span>'+valorExibido(op)+'</span></button>';
+    }).join('')+'</div>';
+    alvo.querySelectorAll('.fy-superfrete-opcao').forEach(btn=>btn.addEventListener('click',()=>{
+      alvo.querySelectorAll('.fy-superfrete-opcao').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');
+      const tipo=btn.dataset.tipo;entregaSelecionada=tipo;freteAtual=fretes[tipo].gratis?0:Number(fretes[tipo].preco||0);
+      if(origem==='checkout'){
+        const b=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao')[tipo==='expressa'?1:0];if(b)selecionarCheckoutEntrega(tipo,b);
+      }else{atualizar();}
+      if(typeof renderCheckout==='function')renderCheckout();
+    }));
+  }
+  window.calcularFreteCheckout=async function(){
+    const input=document.getElementById('checkoutCEP'),alvo=document.getElementById('checkoutFreteResultado');
+    if(alvo)alvo.textContent='Consultando a SuperFrete...';
+    try{const f=await consultar(input?.value);atualizarBotoesCheckout(f);renderOpcoes(alvo,f,'checkout');const antigo=document.getElementById('cep');if(antigo)antigo.value=input.value;}
+    catch(e){if(alvo)alvo.textContent=e.message||'N\u00E3o foi poss\u00EDvel calcular o frete.';}
+  };
+  window.fy18CalcularCep=async function(){
+    const input=document.getElementById('fy18Cep'),alvo=document.getElementById('fy18CepResultado');
+    if(alvo)alvo.textContent='Consultando a SuperFrete...';
+    try{const f=await consultar(input?.value);renderOpcoes(alvo,f,'carrinho');const antigo=document.getElementById('cep');if(antigo)antigo.value=input.value;}
+    catch(e){if(alvo)alvo.textContent=e.message||'N\u00E3o foi poss\u00EDvel calcular o frete.';}
+  };
+  const buscarAnterior=window.buscarCEP;
+  window.buscarCEP=async function(){
+    const input=document.getElementById('cep'),box=document.getElementById('enderecoBox'),endereco=document.getElementById('endereco');
+    const cep=String(input?.value||'').replace(/\D/g,'');if(cep.length!==8){alert('Digite um CEP v\u00E1lido.');return;}
+    if(endereco)endereco.classList.add('ativo');if(box)box.textContent='Consultando endere\u00E7o e entrega...';
+    try{
+      const [via,f]=await Promise.all([fetch('https://viacep.com.br/ws/'+cep+'/json/').then(r=>r.json()),consultar(cep)]);
+      if(via.erro)throw new Error('CEP n\u00E3o encontrado.');enderecoDados=via;
+      if(box){box.innerHTML='<strong>'+(via.logradouro||'')+'</strong><br>'+(via.bairro||'')+'<br>'+(via.localidade||'')+' - '+(via.uf||'')+'<br>CEP: '+(via.cep||cep);const op=document.createElement('div');renderOpcoes(op,f,'carrinho');box.appendChild(op);}
+      atualizarBotoesCheckout(f);
+    }catch(e){if(box)box.textContent=e.message||'N\u00E3o foi poss\u00EDvel consultar o CEP.';}
+  };
+  document.addEventListener('input',function(e){
+    if(e.target?.id==='checkoutCEP'&&String(e.target.value).replace(/\D/g,'')!==window.FY_FRETE_CEP){window.FY_FRETE_CALCULADO=false;}
+  });
+})();
+</script>
 </body>
 </html>
