@@ -20830,5 +20830,44 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
+<!-- Logo do cabeçalho: somente o desenho, sem o nome inferior -->
+<style id="fy-logo-somente-desenho-final">
+.fy-brand-logo{
+  position:relative!important;
+  display:block!important;
+  width:76px!important;
+  height:86px!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  background:#fff!important;
+}
+.fy-brand-logo img{
+  position:absolute!important;
+  top:-2px!important;
+  left:50%!important;
+  display:block!important;
+  width:292px!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:initial!important;
+  object-position:initial!important;
+  transform:translateX(-50%)!important;
+}
+@media(max-width:700px){
+  .header-top .logo{
+    max-width:68px!important;
+  }
+  .fy-brand-logo{
+    width:64px!important;
+    height:74px!important;
+    margin:0!important;
+  }
+  .fy-brand-logo img{
+    top:-1px!important;
+    width:246px!important;
+    height:auto!important;
+  }
+}
+</style>
 </body>
 </html>
