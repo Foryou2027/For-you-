@@ -20588,5 +20588,247 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
+<!-- Passo 7 de 7: revisão final para celular -->
+<style id="fy-mobile-passo-7-final">
+@media(max-width:700px){
+  html,body{
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:hidden!important;
+  }
+  *,*::before,*::after{
+    box-sizing:border-box!important;
+  }
+
+  /* Cabeçalho: logo e ações na primeira linha, busca na segunda. */
+  .header{
+    width:100%!important;
+    padding:7px 11px 10px!important;
+  }
+  .header-top{
+    position:relative!important;
+    display:grid!important;
+    grid-template-columns:minmax(120px,1fr) auto!important;
+    align-items:center!important;
+    gap:7px 8px!important;
+    width:100%!important;
+    min-height:0!important;
+    padding:0!important;
+  }
+  .header-top .logo{
+    position:static!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    display:flex!important;
+    justify-content:flex-start!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:142px!important;
+    margin:0!important;
+    transform:none!important;
+  }
+  .fy-brand-logo,
+  .fy-brand-logo img{
+    width:138px!important;
+    height:70px!important;
+    margin:0!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .header-top .acoes{
+    position:static!important;
+    grid-column:2!important;
+    grid-row:1!important;
+    display:flex!important;
+    justify-content:flex-end!important;
+    align-items:center!important;
+    gap:4px!important;
+    width:auto!important;
+    margin:0!important;
+    transform:none!important;
+  }
+  .header-top .acao-btn,
+  .header-top .carrinho-icon.fy-top-action{
+    position:relative!important;
+    display:grid!important;
+    place-items:center!important;
+    width:36px!important;
+    min-width:36px!important;
+    height:38px!important;
+    min-height:38px!important;
+    padding:0!important;
+    border-radius:50%!important;
+  }
+  .header-top .fy-action-label{
+    display:none!important;
+  }
+  .header-top .contador,
+  .header-top .contador-favoritos{
+    top:-2px!important;
+    right:-2px!important;
+  }
+  .fy-busca-topo{
+    position:relative!important;
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  .fy-busca-topo .busca,
+  .fy-busca-topo .busca-linha{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .fy-busca-topo .busca-linha input{
+    display:block!important;
+    width:100%!important;
+    height:43px!important;
+    padding:0 47px 0 39px!important;
+    border-radius:999px!important;
+    font-size:16px!important;
+  }
+
+  /* Categorias em uma única linha com rolagem suave. */
+  .fy-clean-cat-top{
+    justify-content:flex-start!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:5px 0 7px!important;
+    padding:9px 12px 12px!important;
+    gap:13px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x proximity!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+  }
+  .fy-clean-cat-top::-webkit-scrollbar{
+    display:none!important;
+  }
+  .fy-clean-cat-top>button:not(.fy-pill){
+    flex:0 0 66px!important;
+    width:66px!important;
+    min-width:66px!important;
+    scroll-snap-align:start!important;
+  }
+
+  /* Ofertas e Kits continuam separados e cabem na tela. */
+  .fy-special-links{
+    padding:11px 9px 12px!important;
+    gap:7px!important;
+  }
+  .fy-special-title{
+    font-size:17px!important;
+  }
+  .fy-special-link{
+    flex:1 1 0!important;
+    min-width:0!important;
+    min-height:39px!important;
+    padding:8px 5px!important;
+  }
+
+  /* Banner inteiro, sem zoom ou corte. */
+  .fy-banner-r10{
+    width:calc(100% - 16px)!important;
+    max-width:calc(100% - 16px)!important;
+    margin:8px auto 2px!important;
+  }
+  .fy-banner-r10-viewport{
+    max-height:none!important;
+    border-radius:11px!important;
+  }
+  .fy-banner-r10-track> a > img{
+    width:100%!important;
+    height:auto!important;
+    max-height:none!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+
+  /* Seções e títulos sem excesso de espaço. */
+  .secao{
+    width:100%!important;
+    max-width:100%!important;
+    padding:36px 12px!important;
+  }
+  .titulo{
+    margin-bottom:22px!important;
+  }
+  .titulo h2{
+    font-size:30px!important;
+    line-height:1.1!important;
+  }
+  .titulo p{
+    font-size:10px!important;
+    line-height:1.5!important;
+  }
+
+  /* Marcas e benefícios adaptados à largura do aparelho. */
+  .fy-loved-brands-section{
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  .fy-brands-grid{
+    display:flex!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    padding-bottom:7px!important;
+    scroll-snap-type:x proximity!important;
+    scrollbar-width:none!important;
+  }
+  .fy-brands-grid::-webkit-scrollbar{
+    display:none!important;
+  }
+  .fy-brands-grid>*{
+    flex:0 0 72%!important;
+    min-width:0!important;
+    scroll-snap-align:start!important;
+  }
+  .fy-beneficios-imagem{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    overflow-x:auto!important;
+  }
+  .seguranca{
+    padding:34px 12px!important;
+  }
+  .seguranca-inner{
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  /* Rodapé e botão flutuante não invadem o conteúdo. */
+  .footer-grid{
+    grid-template-columns:1fr!important;
+    gap:24px!important;
+  }
+  .whatsapp-flutuante{
+    right:12px!important;
+    bottom:14px!important;
+    width:50px!important;
+    height:50px!important;
+  }
+}
+@media(max-width:380px){
+  .fy-brand-logo,
+  .fy-brand-logo img{
+    width:122px!important;
+  }
+  .header-top .logo{
+    max-width:125px!important;
+  }
+  .header-top .acao-btn,
+  .header-top .carrinho-icon.fy-top-action{
+    width:34px!important;
+    min-width:34px!important;
+  }
+  .fy-special-link{
+    font-size:7.5px!important;
+  }
+}
+</style>
 </body>
 </html>
