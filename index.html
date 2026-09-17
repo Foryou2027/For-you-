@@ -19555,6 +19555,10 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   }
 
   function mostrarConfirmacaoAdicionado(nome){
+    if(typeof window.fyAviso==='function'){
+      window.fyAviso('Produto adicionado','O item já está na sua sacola.','carrinho');
+      return;
+    }
     var aviso=document.getElementById('fyAvisoCarrinhoFinal');
     if(!aviso){
       aviso=document.createElement('div');
@@ -22853,5 +22857,145 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   #paginaFavoritos .favoritos-vazio{padding:40px 18px!important}
 }
 </style>
+<style id="fy-avisos-clean-final">
+/* Avisos delicados e consistentes em toda a loja */
+.fy-global-notice{
+  position:fixed!important;
+  right:22px!important;
+  bottom:22px!important;
+  z-index:1000000!important;
+  width:min(360px,calc(100vw - 32px))!important;
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr) 36px!important;
+  align-items:center!important;
+  gap:11px!important;
+  padding:13px 11px 13px 13px!important;
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:14px!important;
+  box-shadow:0 10px 26px rgba(68,38,48,.12)!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  transform:translateY(16px)!important;
+  transition:opacity .22s ease,transform .22s ease,visibility .22s ease!important;
+}
+.fy-global-notice.ativo{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translateY(0)!important;
+}
+.fy-global-notice-icon{
+  width:42px!important;
+  height:42px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#f8e9ee!important;
+  border-radius:50%!important;
+  color:#8d1739!important;
+  font-size:19px!important;
+  font-weight:600!important;
+}
+.fy-global-notice.erro .fy-global-notice-icon{background:#fae9ec!important;color:#a23d50!important}
+.fy-global-notice.sucesso .fy-global-notice-icon{background:#eaf3ed!important;color:#3f7254!important}
+.fy-global-notice-copy{min-width:0!important}
+.fy-global-notice-copy strong{
+  display:block!important;
+  margin:0 0 3px!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:13px!important;
+  font-weight:600!important;
+}
+.fy-global-notice-copy span{
+  display:block!important;
+  color:#806f75!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+}
+.fy-global-notice-close{
+  width:36px!important;
+  height:36px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  color:#806f75!important;
+  font-size:20px!important;
+}
+
+/* Favoritos usam a mesma linguagem visual */
+.fav-toast{
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:14px!important;
+  box-shadow:0 10px 26px rgba(68,38,48,.12)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+.fav-toast-icon{background:#f8e9ee!important;color:#8d1739!important}
+.fav-toast-text strong{color:#33262b!important;font-family:'Inter',Arial,sans-serif!important;font-size:13px!important;font-weight:600!important}
+.fav-toast-text span{color:#806f75!important;font-size:11px!important}
+.fav-toast-btn{color:#8d1739!important;font-family:'Inter',Arial,sans-serif!important}
+
+@media(max-width:600px){
+  .fy-global-notice{
+    right:16px!important;
+    left:16px!important;
+    bottom:16px!important;
+    width:auto!important;
+  }
+}
+</style>
+<script id="fy-avisos-clean-final-js">
+(function(){
+  let timer=null;
+  function fechar(){
+    const aviso=document.getElementById('fyGlobalNotice');
+    if(aviso)aviso.classList.remove('ativo');
+  }
+  function criar(){
+    let aviso=document.getElementById('fyGlobalNotice');
+    if(aviso)return aviso;
+    aviso=document.createElement('div');
+    aviso.id='fyGlobalNotice';
+    aviso.className='fy-global-notice';
+    aviso.setAttribute('role','status');
+    aviso.setAttribute('aria-live','polite');
+    aviso.innerHTML='<span class="fy-global-notice-icon" aria-hidden="true">♡</span><div class="fy-global-notice-copy"><strong>Aviso</strong><span></span></div><button type="button" class="fy-global-notice-close" aria-label="Fechar aviso">×</button>';
+    aviso.querySelector('button').addEventListener('click',fechar);
+    document.body.appendChild(aviso);
+    return aviso;
+  }
+  window.fyAviso=function(titulo,mensagem,tipo){
+    const aviso=criar();
+    const classe=tipo==='erro'?'erro':tipo==='sucesso'?'sucesso':'';
+    aviso.className='fy-global-notice '+classe;
+    aviso.querySelector('.fy-global-notice-icon').textContent=tipo==='erro'?'!':tipo==='sucesso'?'✓':tipo==='carrinho'?'♧':'♡';
+    aviso.querySelector('strong').textContent=String(titulo||'Aviso');
+    aviso.querySelector('.fy-global-notice-copy span').textContent=String(mensagem||'');
+    requestAnimationFrame(function(){aviso.classList.add('ativo')});
+    clearTimeout(timer);timer=setTimeout(fechar,3600);
+  };
+  window.fyFecharAviso=fechar;
+
+  const alertaNativo=window.alert.bind(window);
+  window.fyAlertaNativo=alertaNativo;
+  window.alert=function(texto){
+    const mensagem=String(texto==null?'':texto).replace(/\s+/g,' ').trim();
+    const minuscula=mensagem.toLowerCase();
+    let tipo='info',titulo='Atenção';
+    if(/sucesso|adicionad|salv|atualizad|pronta|realizad|copiad/.test(minuscula)){
+      tipo='sucesso';titulo=/produto.*adicionad/.test(minuscula)?'Produto adicionado':'Tudo certo';
+    }else if(/cep/.test(minuscula)&&/válido|invalido|inválido/.test(minuscula)){
+      tipo='erro';titulo='Confira o CEP';
+    }else if(/não foi|nao foi|incorret|expirou|vazi|preencha|precisa|iguais|encontrad/.test(minuscula)){
+      tipo='erro';titulo='Confira os dados';
+    }
+    window.fyAviso(titulo,mensagem,tipo);
+  };
+})();
+</script>
 </body>
 </html>
