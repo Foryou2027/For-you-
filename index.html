@@ -16981,8 +16981,9 @@ function fyRenderCarrinhoPagina(){
     }).join("");
   }
   const subtotal=lista.reduce((s,it)=>s+fyCartPrice(it)*fyCartQty(it),0);
-  const codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
-  const percentual=codigo==='FORYOU10'?0.10:codigo==='BEMVINDA'?0.15:0;
+  let codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
+  if(codigo==='BEMVINDA10'&&subtotal<100){localStorage.removeItem('forYouCupomCarrinho');codigo='';}
+  const percentual=codigo==='BEMVINDA10'&&subtotal>=100?0.10:0;
   const valorDesconto=subtotal*percentual;
   const freteCalculado=!!window.FY_FRETE_CALCULADO;
   const valorFrete=freteCalculado?Number(freteAtual||0):0;
@@ -16997,12 +16998,13 @@ function fyAplicarCupomPagina(){
   const campo=document.getElementById('fyCpCupom');
   const msg=document.getElementById('fyCpCupomMsg');
   const codigo=(campo&&campo.value||'').trim().toUpperCase();
-  if(codigo==='FORYOU10'||codigo==='BEMVINDA'){
+  const subtotal=fyGetCart().reduce((s,it)=>s+fyCartPrice(it)*fyCartQty(it),0);
+  if(codigo==='BEMVINDA10'&&subtotal>=100){
     localStorage.setItem('forYouCupomCarrinho',codigo);
     if(msg){msg.textContent='Cupom aplicado com sucesso!';msg.className='sucesso';}
   }else{
     localStorage.removeItem('forYouCupomCarrinho');
-    if(msg){msg.textContent='Cupom invalido.';msg.className='erro';}
+    if(msg){msg.textContent=codigo==='BEMVINDA10'?'O pedido m\u00EDnimo para este cupom \u00E9 R$ 100,00.':'Cupom inv\u00E1lido.';msg.className='erro';}
   }
   fyRenderCarrinhoPagina();
 }
@@ -17175,9 +17177,9 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="fy18-feedback" id="fy18CepResultado">Informe o CEP para ver o prazo estimado de entrega.</div>
     </div>
     <div class="fy18-box">
-      <div class="fy18-title">CUPOM DE DESCONTO</div>
+      <div class="fy18-title">CUPOM DE PRIMEIRA COMPRA</div>
       <div class="fy18-row"><input id="fy18Cupom" placeholder="Digite seu cupom"><button onclick="fy18AplicarCupom()">APLICAR</button></div>
-      <div class="fy18-feedback" id="fy18CupomResultado"></div>
+      <div class="fy18-feedback" id="fy18CupomResultado">Use BEMVINDA10 e ganhe 10% em compras a partir de R$ 100.</div>
     </div>
     <div class="fy18-recommend">
       <h2>Voc\u00EA tamb\u00E9m pode gostar</h2>
@@ -17227,11 +17229,27 @@ document.addEventListener("DOMContentLoaded", function () {
    else if(typeof adicionarAoCarrinho==="function") adicionarAoCarrinho(p.id ?? p);
    setTimeout(atualizar,100);
  };
- window.fy18AplicarCupom=function(){
-   const v=(document.getElementById("fy18Cupom")?.value||"").trim();
+ window.fy18AplicarCupom=async function(){
+   const codigo=(document.getElementById("fy18Cupom")?.value||"").trim().toUpperCase();
    const r=document.getElementById("fy18CupomResultado");
    if(!r)return;
-   r.textContent=v ? "Cupom recebido. O desconto v\u00E1lido ser\u00E1 aplicado no resumo do pedido." : "Digite um cupom para aplicar.";
+   localStorage.removeItem('forYouCupomCarrinho');
+   if(!codigo){r.textContent="Digite o cupom BEMVINDA10.";return;}
+   if(codigo!=="BEMVINDA10"){r.textContent="Cupom n\u00E3o encontrado.";return;}
+   const valor=subtotal();
+   if(valor<100){r.textContent=`Adicione mais ${moeda(100-valor)} para usar este cupom.`;return;}
+   const sb=window.FOR_YOU_SUPABASE_CLIENT;
+   if(!sb){r.textContent="N\u00E3o foi poss\u00EDvel verificar sua conta. Atualize a p\u00E1gina.";return;}
+   try{
+     const {data:{user}}=await sb.auth.getUser();
+     if(!user){r.textContent="Entre na sua conta para usar o cupom de primeira compra.";return;}
+     const {count,error}=await sb.from('pedidos').select('id',{count:'exact',head:true}).eq('cliente_id',user.id);
+     if(error)throw error;
+     if(Number(count||0)>0){r.textContent="Este cupom \u00E9 exclusivo para a primeira compra.";return;}
+     localStorage.setItem('forYouCupomCarrinho','BEMVINDA10');
+     r.textContent=`Cupom aplicado! Voc\u00EA ganhou ${moeda(valor*.10)} de desconto.`;
+     if(typeof window.fyRenderCarrinhoPagina==='function')window.fyRenderCarrinhoPagina();
+   }catch(e){r.textContent="N\u00E3o foi poss\u00EDvel validar o cupom agora. Tente novamente.";}
  };
  window.fy18CalcularCep=function(){
    const cep=(document.getElementById("fy18Cep")?.value||"").replace(/\D/g,"");
@@ -21665,12 +21683,13 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(botao){botao.disabled=true;botao.textContent='REGISTRANDO PEDIDO...';}
     const itensAntes=carrinho.map(item=>({...item}));
     try{
-      const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,itens:itensAntes.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}))}});
+      const codigoCupom=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
+      const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:codigoCupom==='BEMVINDA10'?codigoCupom:'',itens:itensAntes.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}))}});
       if(error)throw new Error(await mensagemErroFuncao(error)||'N\u00E3o foi poss\u00EDvel registrar o pedido.');if(data?.erro)throw new Error(data.erro);if(!data?.pedido)throw new Error('O pedido n\u00E3o foi confirmado pelo servidor.');
       const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
       localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
       carrinho.length=0;if(typeof salvar==='function')salvar();else localStorage.setItem('forYouCarrinho','[]');
-      localStorage.setItem('forYouCarrinho','[]');if(typeof atualizar==='function')atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
+      localStorage.setItem('forYouCarrinho','[]');localStorage.removeItem('forYouCupomCarrinho');if(typeof atualizar==='function')atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
       await window.fyCarregarPedidosSupabase();mostrarPedidoSucesso(pedido);
       const end=pedido.endereco||{},perfil={nome:$('checkoutNome')?.value||'',email:$('checkoutEmail')?.value||'',telefone:$('checkoutTelefone')?.value||''};
       abrirWhatsAppPedido(pedido,perfil.nome,perfil.email,perfil.telefone,end.logradouro||$('checkoutEndereco')?.value||'',end.numero||$('checkoutNumero')?.value||'',end.cep||cep,pedido.total);
@@ -24508,6 +24527,28 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
     }
   });
   document.documentElement.setAttribute('data-fy-versao','37');
+})();
+</script>
+<style id="fy-cupom-primeira-compra-v38-css">
+#fyCarrinhoPagina #fy18CupomResultado{min-height:18px!important;line-height:1.45!important}
+#fyCarrinhoPagina #fy18CupomResultado.fy-cupom-ok{color:#34805b!important;font-weight:600!important}
+#fyCarrinhoPagina #fy18CupomResultado.fy-cupom-erro{color:#a7274d!important;font-weight:500!important}
+</style>
+<script id="fy-cupom-primeira-compra-v38-js">
+(()=>{
+  const aplicarAnterior=window.fy18AplicarCupom;
+  if(typeof aplicarAnterior==='function'){
+    window.fy18AplicarCupom=async function(){
+      const resultado=document.getElementById('fy18CupomResultado');
+      if(resultado)resultado.classList.remove('fy-cupom-ok','fy-cupom-erro');
+      await aplicarAnterior.apply(this,arguments);
+      if(resultado){
+        const aplicado=localStorage.getItem('forYouCupomCarrinho')==='BEMVINDA10';
+        resultado.classList.add(aplicado?'fy-cupom-ok':'fy-cupom-erro');
+      }
+    };
+  }
+  document.documentElement.setAttribute('data-fy-versao','38');
 })();
 </script>
 </body>
