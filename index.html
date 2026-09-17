@@ -9739,9 +9739,13 @@ com carinho.
 href="#"
 class="whatsapp-flutuante"
 onclick="abrirWhatsApp();return false;"
-title="Fale conosco"
+title="Fale conosco pelo WhatsApp"
+aria-label="Fale conosco pelo WhatsApp"
 >
-&#x1F4AC;
+<svg class="whatsapp-icone" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <path class="whatsapp-balao" d="M27.2 15.6A11.2 11.2 0 0 1 10.7 25.5L4 27.3l1.8-6.5A11.2 11.2 0 1 1 27.2 15.6Z"/>
+  <path class="whatsapp-telefone" d="M11.2 9.8c.3-.7.7-.7 1.1-.7h.5c.2 0 .4.1.5.5l1.1 2.6c.1.3.1.6-.1.8l-.9 1.1c-.2.2-.2.4 0 .7.8 1.6 2.1 2.9 3.8 3.8.3.2.5.1.7-.1l1-1.2c.2-.3.5-.3.8-.2l2.6 1.2c.3.2.5.3.5.6 0 .3-.2 1.8-1.1 2.5-.8.7-1.9 1.1-3.1.8-1.2-.3-3.1-1-5.2-2.8-2.4-2.1-4-4.7-4.4-6.2-.4-1.5.1-2.8.7-3.4Z"/>
+</svg>
 </a>
 
 
@@ -24828,6 +24832,37 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
   window.addEventListener('storage',e=>{if(e.key&&(e.key.includes(PREFIXO_PRECOS)||e.key.includes(PREFIXO_ALERTAS)||e.key.includes('forYouFavoritos')))verificarPrecos()});
   document.documentElement.setAttribute('data-fy-versao','44');
 })();
+</script>
+<style id="fy-whatsapp-oficial-v45-css">
+.whatsapp-flutuante{
+  font-size:0!important;
+  background:#25d366!important;
+  border:0!important;
+  overflow:hidden;
+}
+.whatsapp-flutuante .whatsapp-icone{
+  display:block;
+  width:34px;
+  height:34px;
+  color:#fff;
+}
+.whatsapp-flutuante .whatsapp-balao{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.whatsapp-flutuante .whatsapp-telefone{
+  fill:currentColor;
+  stroke:none;
+}
+@media(max-width:600px){
+  .whatsapp-flutuante .whatsapp-icone{width:31px;height:31px}
+}
+</style>
+<script id="fy-whatsapp-oficial-v45-js">
+document.documentElement.setAttribute('data-fy-versao','45');
 </script>
 </body>
 </html>
