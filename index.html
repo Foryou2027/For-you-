@@ -23997,5 +23997,227 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   document.documentElement.setAttribute('data-fy-versao','34');
 })();
 </script>
+<style id="fy-area-cliente-clean-v35">
+/* Área da cliente — navegação clean e mobile-first */
+#paginaConta > .voltar{
+  width:auto!important;
+  min-height:38px!important;
+  margin:18px auto 0!important;
+  padding:0 4px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#8d1739!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  letter-spacing:0!important;
+}
+#paginaConta > .voltar:hover{background:transparent!important;text-decoration:underline!important;text-underline-offset:4px!important}
+#paginaConta .fy2-account{max-width:760px!important;margin-top:14px!important}
+#paginaConta .fy2-header{padding:14px 0 26px!important;border-bottom:1px solid #eadde1!important}
+#paginaConta .fy2-eyebrow{margin-bottom:8px!important;font-size:10px!important;letter-spacing:.22em!important}
+#paginaConta .fy2-header h1{font-size:32px!important;line-height:1.15!important}
+#paginaConta .fy2-header p{max-width:520px!important;margin-top:9px!important;font-size:14px!important}
+#paginaConta .fy2-layout{grid-template-columns:1fr!important;gap:24px!important}
+#paginaConta .fy2-sidebar{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  border:0!important;
+}
+#paginaConta .fy2-sidebar-title,
+#paginaConta .fy2-sidebar-separator,
+#paginaConta .fy2-nav-item[onclick*="inicioConta"],
+#paginaConta .fy2-nav-item[onclick*="clubConta"],
+#paginaConta .fy2-nav-item[onclick*="cuponsConta"],
+#paginaConta .fy2-nav-item[onclick*="segurancaConta"]{display:none!important}
+#paginaConta .fy2-nav-item{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) 20px!important;
+  grid-template-rows:auto auto!important;
+  column-gap:12px!important;
+  row-gap:3px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:72px!important;
+  padding:13px 8px!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid #eadde1!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#33262b!important;
+  text-align:left!important;
+}
+#paginaConta .fy2-nav-item::after{
+  content:'›'!important;
+  grid-column:3!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  color:#b9a6ad!important;
+  font-size:24px!important;
+  font-weight:400!important;
+}
+#paginaConta .fy2-nav-item .fy2-nav-icon{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#f8e9ee!important;
+  border:0!important;
+  border-radius:50%!important;
+  color:#8d1739!important;
+  font-size:16px!important;
+}
+#paginaConta .fy2-nav-item > span:not(.fy2-nav-icon){
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:end!important;
+  color:#33262b!important;
+  font-size:14px!important;
+  font-weight:600!important;
+}
+#paginaConta .fy2-nav-item .fy-nav-desc{
+  grid-column:2!important;
+  grid-row:2!important;
+  color:#806f75!important;
+  font-size:12px!important;
+  font-weight:400!important;
+  line-height:1.3!important;
+}
+#paginaConta .fy2-nav-item:hover,
+#paginaConta .fy2-nav-item.ativo,
+#paginaConta .fy2-nav-item.active{background:transparent!important;color:#8d1739!important}
+#paginaConta .fy2-nav-item.ativo > span:not(.fy2-nav-icon),
+#paginaConta .fy2-nav-item.active > span:not(.fy2-nav-icon){color:#8d1739!important}
+#paginaConta .fy2-nav-item[onclick*="pedidosConta"]{order:1!important}
+#paginaConta .fy2-nav-item[onclick*="dadosConta"]{order:2!important}
+#paginaConta .fy2-nav-item[onclick*="enderecosConta"]{order:3!important}
+#paginaConta .fy2-nav-item[onclick="abrirFavoritos()"]{order:4!important}
+#paginaConta .fy2-logout{
+  order:5!important;
+  min-height:54px!important;
+  margin-top:12px!important;
+  border-bottom:0!important;
+  color:#8d1739!important;
+}
+#paginaConta .fy2-logout::after{display:none!important}
+#paginaConta .fy2-logout .fy-nav-desc{display:none!important}
+#paginaConta .fy2-content{margin-top:2px!important}
+#paginaConta .fy2-panel{
+  padding:26px!important;
+  background:#fff!important;
+  border:1px solid #eadde1!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-panel h2{margin:7px 0 7px!important;font-size:24px!important}
+#paginaConta .fy2-panel > p{margin-top:0!important;line-height:1.55!important}
+#paginaConta .fy2-empty{
+  margin-top:22px!important;
+  padding:30px 18px!important;
+  background:#fbf5f7!important;
+  border:0!important;
+  border-radius:14px!important;
+}
+#paginaConta .fy2-empty .icon{color:#8d1739!important;font-size:26px!important}
+#paginaConta .fy-empty-shop{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:42px!important;
+  margin-top:18px!important;
+  padding:0 22px!important;
+  background:#8d1739!important;
+  border:0!important;
+  border-radius:11px!important;
+  color:#fff!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:700!important;
+}
+@media(max-width:700px){
+  #paginaConta > .voltar{margin-top:10px!important}
+  #paginaConta .fy2-account{width:calc(100% - 36px)!important;margin:8px auto 42px!important}
+  #paginaConta .fy2-header{padding:12px 0 23px!important}
+  #paginaConta .fy2-header h1{font-size:29px!important}
+  #paginaConta .fy2-header p{font-size:13px!important}
+  #paginaConta .fy2-layout{gap:22px!important}
+  #paginaConta .fy2-sidebar{grid-template-columns:1fr!important;gap:0!important}
+  #paginaConta .fy2-nav-item{background:transparent!important;border-width:0 0 1px!important;border-style:solid!important;border-color:#eadde1!important}
+  #paginaConta .fy2-nav-item.ativo{background:transparent!important;border-color:#eadde1!important}
+  #paginaConta .fy2-panel{padding:22px 17px!important;border-radius:15px!important}
+  #paginaConta .fy2-panel h2{font-size:22px!important}
+}
+</style>
+<script id="fy-area-cliente-clean-v35-js">
+(()=>{
+  const descricoes={
+    pedidosConta:'Status, entrega e rastreamento',
+    dadosConta:'Informações pessoais e contato',
+    enderecosConta:'Endereços usados nas entregas',
+    favoritos:'Produtos que você salvou'
+  };
+  function prepararAreaCliente(){
+    const pagina=document.getElementById('paginaConta');
+    if(!pagina)return;
+    const eyebrow=pagina.querySelector('.fy2-eyebrow');
+    const intro=pagina.querySelector('.fy2-header p');
+    if(eyebrow&&eyebrow.textContent!=='MINHA CONTA')eyebrow.textContent='MINHA CONTA';
+    const textoIntro='Acompanhe suas compras e cuide dos seus dados em um só lugar.';
+    if(intro&&intro.textContent!==textoIntro)intro.textContent=textoIntro;
+    const voltar=pagina.querySelector(':scope > .voltar');
+    if(voltar&&voltar.textContent.trim()!=='\u2190 Loja')voltar.textContent='\u2190 Loja';
+    pagina.querySelectorAll('.fy2-nav-item').forEach(botao=>{
+      const acao=botao.getAttribute('onclick')||'';
+      let chave='';
+      if(acao.includes('pedidosConta'))chave='pedidosConta';
+      else if(acao.includes('dadosConta'))chave='dadosConta';
+      else if(acao.includes('enderecosConta'))chave='enderecosConta';
+      else if(acao.includes('abrirFavoritos'))chave='favoritos';
+      if(chave&&!botao.querySelector('.fy-nav-desc')){
+        const desc=document.createElement('small');
+        desc.className='fy-nav-desc';
+        desc.textContent=descricoes[chave];
+        botao.appendChild(desc);
+      }
+    });
+    const vazio=pagina.querySelector('#listaPedidosConta .fy2-empty');
+    if(vazio&&!vazio.querySelector('.fy-empty-shop')){
+      const botao=document.createElement('button');
+      botao.type='button';
+      botao.className='fy-empty-shop';
+      botao.textContent='EXPLORAR PRODUTOS';
+      botao.onclick=()=>window.voltarLoja&&window.voltarLoja();
+      vazio.appendChild(botao);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',prepararAreaCliente);
+  window.addEventListener('pageshow',prepararAreaCliente);
+  const iniciarObservador=()=>{
+    const pagina=document.getElementById('paginaConta');
+    if(!pagina)return;
+    let agendado=false;
+    new MutationObserver(()=>{
+      if(agendado)return;
+      agendado=true;
+      requestAnimationFrame(()=>{agendado=false;prepararAreaCliente();});
+    }).observe(pagina,{childList:true,subtree:true});
+    prepararAreaCliente();
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciarObservador);
+  else iniciarObservador();
+  document.documentElement.setAttribute('data-fy-versao','35');
+})();
+</script>
 </body>
 </html>
