@@ -17078,8 +17078,10 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>`;
 
    const resumo=pg.querySelector(".fy-cp-summary,.fy17-summary,.fy17-resumo,.resumo");
+   const total=resumo?.querySelector(".fy-cp-total");
    const botaoFinalizar=resumo?.querySelector(".fy-cp-checkout");
-   if(botaoFinalizar) botaoFinalizar.insertAdjacentElement("beforebegin",area);
+   if(total) total.insertAdjacentElement("beforebegin",area);
+   else if(botaoFinalizar) botaoFinalizar.insertAdjacentElement("beforebegin",area);
    else {
      const destino=resumo?.parentElement || pg.querySelector(".fy17-content,.fy17-body") || pg;
      destino.appendChild(area);
@@ -22410,6 +22412,217 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   #paginaConta .status-linha{min-width:72px!important}
   #paginaConta .pedido-rastreio{align-items:stretch!important;flex-direction:column!important}
   #paginaConta .pedido-rastreio button{width:100%!important;min-height:44px!important}
+}
+</style>
+<style id="fy-carrinho-mobile-clean-final">
+/* Carrinho mobile — versão clean aprovada */
+#fyCarrinhoPagina{
+  background:#fbf5f7!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+#fyCarrinhoPagina .fy-cp-header{
+  min-height:66px!important;
+  padding:0 16px!important;
+  background:#fff!important;
+  border-bottom:1px solid #e6d9de!important;
+  box-shadow:none!important;
+}
+#fyCarrinhoPagina .fy-cp-header h1{
+  color:#33262b!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:22px!important;
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+}
+#fyCarrinhoPagina .fy-cp-back,
+#fyCarrinhoPagina .fy-cp-close{color:#33262b!important}
+#fyCarrinhoPagina .fy-cp-close{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#fyCarrinhoPagina .fy-cp-body{
+  max-width:980px!important;
+  gap:26px!important;
+}
+#fyCarrinhoPagina .fy-cp-box,
+#fyCarrinhoPagina .fy-cp-summary{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#fyCarrinhoPagina .fy-cp-box>h2{
+  color:#33262b!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-weight:600!important;
+}
+#fyCarrinhoPagina #fyCpItems .item{
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:15px!important;
+}
+#fyCarrinhoPagina #fyCpItems .item-img{
+  overflow:hidden!important;
+  background:#f8e9ee!important;
+  border-radius:12px!important;
+}
+#fyCarrinhoPagina #fyCpItems .item-dados>strong{
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-weight:600!important;
+}
+#fyCarrinhoPagina #fyCpItems .item-preco{
+  color:#8d1739!important;
+  font-weight:600!important;
+}
+#fyCarrinhoPagina #fyCpItems .quantidade{
+  overflow:hidden!important;
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:10px!important;
+}
+#fyCarrinhoPagina #fyCpItems .quantidade button{
+  color:#8d1739!important;
+  font-size:18px!important;
+}
+#fyCarrinhoPagina #fyCpItems .remover{
+  color:#806f75!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  text-decoration:none!important;
+}
+#fyCarrinhoPagina .fy-cp-row{
+  color:#806f75!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:13px!important;
+}
+#fyCarrinhoPagina .fy-cp-row strong{color:#33262b!important;font-weight:600!important}
+#fyCarrinhoPagina .fy-cp-total{
+  margin-top:12px!important;
+  padding-top:17px!important;
+  border-top:1px solid #e6d9de!important;
+  color:#33262b!important;
+  font-size:15px!important;
+}
+#fyCarrinhoPagina .fy-cp-total strong{color:#8d1739!important;font-size:21px!important}
+#fyCarrinhoPagina .fy-cp-cupom{display:none!important}
+
+/* Benefício de frete, CEP e cupom */
+#fyCarrinhoPagina .fy18-commercial{margin:16px 0!important;gap:10px!important}
+#fyCarrinhoPagina .fy18-box{
+  padding:14px!important;
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:13px!important;
+}
+#fyCarrinhoPagina .fy18-box:first-child{
+  background:#f8e9ee!important;
+  border-color:#f8e9ee!important;
+}
+#fyCarrinhoPagina .fy18-title{
+  margin-bottom:8px!important;
+  color:#33262b!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+}
+#fyCarrinhoPagina .fy18-frete-msg,
+#fyCarrinhoPagina .fy18-feedback{
+  color:#806f75!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+#fyCarrinhoPagina .fy18-frete-msg strong{color:#8d1739!important}
+#fyCarrinhoPagina .fy18-bar{height:5px!important;background:#eadde1!important}
+#fyCarrinhoPagina .fy18-bar>div{background:#8d1739!important}
+#fyCarrinhoPagina .fy18-row{gap:8px!important}
+#fyCarrinhoPagina .fy18-row input{
+  height:46px!important;
+  padding:0 13px!important;
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:11px!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:14px!important;
+}
+#fyCarrinhoPagina .fy18-row button{
+  height:46px!important;
+  padding:0 15px!important;
+  background:transparent!important;
+  border:1px solid #8d1739!important;
+  border-radius:11px!important;
+  color:#8d1739!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+}
+#fyCarrinhoPagina .fy-cp-checkout{
+  width:100%!important;
+  min-height:52px!important;
+  margin-top:17px!important;
+  background:#8d1739!important;
+  border:0!important;
+  border-radius:13px!important;
+  color:#fff!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  letter-spacing:.07em!important;
+  box-shadow:none!important;
+}
+#fyCarrinhoPagina .fy-cp-safe{
+  margin-top:12px!important;
+  color:#806f75!important;
+  font-size:11px!important;
+}
+
+@media(max-width:700px){
+  #fyCarrinhoPagina .fy-cp-header{grid-template-columns:44px 1fr 44px!important;padding:0 10px!important}
+  #fyCarrinhoPagina .fy-cp-header h1{font-size:18px!important}
+  #fyCarrinhoPagina .fy-cp-back{width:44px!important;height:44px!important}
+  #fyCarrinhoPagina .fy-cp-back::before{font-size:20px!important}
+  #fyCarrinhoPagina .fy-cp-close{width:44px!important;height:44px!important;font-size:23px!important}
+  #fyCarrinhoPagina .fy-cp-body{padding:18px 16px 30px!important;gap:0!important}
+  #fyCarrinhoPagina .fy-cp-box{padding:0!important}
+  #fyCarrinhoPagina .fy-cp-box>h2{display:none!important}
+  #fyCarrinhoPagina #fyCpItems .item{
+    grid-template-columns:104px minmax(0,1fr)!important;
+    gap:14px!important;
+    margin-bottom:12px!important;
+    padding:15px!important;
+  }
+  #fyCarrinhoPagina #fyCpItems .item-img{width:104px!important;height:124px!important}
+  #fyCarrinhoPagina #fyCpItems .item-dados{
+    display:grid!important;
+    grid-template-columns:auto 40px!important;
+    align-content:start!important;
+    column-gap:8px!important;
+  }
+  #fyCarrinhoPagina #fyCpItems .item-dados>strong,
+  #fyCarrinhoPagina #fyCpItems .item-preco{grid-column:1/-1!important}
+  #fyCarrinhoPagina #fyCpItems .item-dados>strong{font-size:14px!important;line-height:1.35!important}
+  #fyCarrinhoPagina #fyCpItems .item-preco{margin:8px 0 13px!important;font-size:16px!important}
+  #fyCarrinhoPagina #fyCpItems .quantidade{width:max-content!important;height:40px!important}
+  #fyCarrinhoPagina #fyCpItems .quantidade button{width:38px!important;height:38px!important}
+  #fyCarrinhoPagina #fyCpItems .quantidade span{min-width:32px!important;font-size:13px!important}
+  #fyCarrinhoPagina #fyCpItems .remover{
+    width:40px!important;
+    height:40px!important;
+    margin:0!important;
+    overflow:hidden!important;
+    font-size:0!important;
+  }
+  #fyCarrinhoPagina #fyCpItems .remover::before{content:'×'!important;font-size:21px!important}
+  #fyCarrinhoPagina .fy-cp-summary{position:static!important;margin-top:4px!important;padding:0!important;border:0!important}
+}
+
+@media(max-width:370px){
+  #fyCarrinhoPagina .fy-cp-body{padding-left:12px!important;padding-right:12px!important}
+  #fyCarrinhoPagina #fyCpItems .item{grid-template-columns:92px minmax(0,1fr)!important;gap:11px!important;padding:12px!important}
+  #fyCarrinhoPagina #fyCpItems .item-img{width:92px!important;height:116px!important}
 }
 </style>
 </body>
