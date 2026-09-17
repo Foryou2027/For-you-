@@ -8958,7 +8958,7 @@ Promo&#xE7;&#xF5;es de datas especiais
 
       <form id="fyAuthLogin" class="fy-auth-form" onsubmit="return fySupabaseEntrar(event)">
         <label>E-mail<input id="fyLoginEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
-        <label>Senha<input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"></label>
+        <label>Senha<span class="fy-password-field"><input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
         <button type="button" id="fyEsqueciSenha" class="fy-auth-forgot" onclick="fyRecuperarSenha()">Esqueci minha senha</button>
         <button type="submit" class="fy-auth-submit">ENTRAR</button>
         <div class="fy-auth-switch-copy">Ainda n&#xE3;o tem uma conta? <button type="button" onclick="fyMostrarAuth('cadastrar')">Criar conta</button></div>
@@ -8969,16 +8969,16 @@ Promo&#xE7;&#xF5;es de datas especiais
         <label>Nome completo<input id="fyCadNome" autocomplete="name" required placeholder="Seu nome completo"></label>
         <label>E-mail<input id="fyCadEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
         <label>Telefone<input id="fyCadTelefone" type="tel" autocomplete="tel" required placeholder="(00) 00000-0000"></label>
-        <label>Senha<input id="fyCadSenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"></label>
-        <label>Confirmar senha<input id="fyCadConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a senha novamente"></label>
+        <label>Senha<span class="fy-password-field"><input id="fyCadSenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
+        <label>Confirmar senha<span class="fy-password-field"><input id="fyCadConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a senha novamente"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
         <button type="submit" class="fy-auth-submit">CRIAR MINHA CONTA</button>
         <div class="fy-auth-switch-copy">J&#xE1; possui uma conta? <button type="button" onclick="fyMostrarAuth('entrar')">Entrar</button></div>
         <div id="fyCadastroMsg" class="fy-auth-msg"></div>
       </form>
 
       <form id="fyAuthRecovery" class="fy-auth-form" onsubmit="return fySalvarNovaSenha(event)" hidden>
-        <label>Nova senha<input id="fyRecoverySenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"></label>
-        <label>Confirmar nova senha<input id="fyRecoveryConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite novamente"></label>
+        <label>Nova senha<span class="fy-password-field"><input id="fyRecoverySenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
+        <label>Confirmar nova senha<span class="fy-password-field"><input id="fyRecoveryConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite novamente"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
         <button type="submit" class="fy-auth-submit">SALVAR NOVA SENHA</button>
         <div id="fyRecoveryMsg" class="fy-auth-msg"></div>
       </form>
@@ -21285,6 +21285,12 @@ body.fy-pagina-exclusiva .pagina.ativa{
     $('fyAuthTabEntrar').classList.toggle('ativo',!cadastro);$('fyAuthTabCadastrar').classList.toggle('ativo',cadastro);
     mensagem('fyLoginMsg','');mensagem('fyCadastroMsg','');mensagem('fyRecoveryMsg','');
   };
+  window.fyAlternarSenha=function(botao){
+    const campo=botao?.parentElement?.querySelector('input');if(!campo)return;
+    const mostrar=campo.type==='password';campo.type=mostrar?'text':'password';
+    botao.classList.toggle('mostrando',mostrar);
+    botao.setAttribute('aria-label',mostrar?'Ocultar senha':'Mostrar senha');
+  };
   window.fySupabaseEntrar=async function(event){
     event.preventDefault();const form=event.currentTarget,email=valor('fyLoginEmail').toLowerCase(),senha=valor('fyLoginSenha');
     const botao=form.querySelector('.fy-auth-submit'),textoBotao=botao?.textContent||'ENTRAR';
@@ -21870,6 +21876,51 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   font-size:12px!important;
   font-weight:500!important;
 }
+#paginaConta .fy-password-field{
+  display:flex!important;
+  align-items:center!important;
+  width:100%!important;
+  border-bottom:1px solid var(--fy-linha)!important;
+}
+#paginaConta .fy-password-field:focus-within{border-bottom-color:var(--fy-vinho)!important}
+#paginaConta .fy-password-field input{
+  flex:1 1 auto!important;
+  min-width:0!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy-password-toggle{
+  position:relative!important;
+  flex:0 0 44px!important;
+  width:44px!important;
+  height:44px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  color:var(--fy-muted)!important;
+}
+#paginaConta .fy-password-toggle::before{
+  content:''!important;
+  position:absolute!important;
+  left:14px!important;
+  top:16px!important;
+  width:14px!important;
+  height:10px!important;
+  border:1.5px solid currentColor!important;
+  border-radius:70% 20% 70% 20%!important;
+  transform:rotate(45deg)!important;
+}
+#paginaConta .fy-password-toggle::after{
+  content:''!important;
+  position:absolute!important;
+  left:19px!important;
+  top:19px!important;
+  width:5px!important;
+  height:5px!important;
+  background:currentColor!important;
+  border-radius:50%!important;
+}
+#paginaConta .fy-password-toggle.mostrando{color:var(--fy-vinho)!important}
 
 /* Favoritos no mesmo estilo aberto */
 #paginaFavoritos{font-family:'DM Sans',Arial,sans-serif!important}
