@@ -9282,47 +9282,66 @@ Promo&#xE7;&#xF5;es de datas especiais
   <div class="titulo"><small>FOR YOU</small><h2>Finalizar pedido</h2><p>Confira seus dados, entrega, pagamento e pedido antes de concluir.</p></div>
   <div class="checkout-layout">
     <div class="checkout-card">
-      <div class="checkout-etapas">
-        <div class="checkout-etapa ativa">&#x1F464;<br>Seus dados</div>
-        <div class="checkout-etapa ativa">&#x1F4CD;<br>Endere&#xE7;o</div>
-        <div class="checkout-etapa ativa">&#x1F69A;<br>Entrega</div>
-        <div class="checkout-etapa ativa">&#x1F4B3;<br>Pagamento</div>
-        <div class="checkout-etapa ativa">&#x2705;<br>Revis&#xE3;o</div>
+      <div class="checkout-etapas" id="fyCheckoutEtapas" aria-label="Etapas da finaliza&#xE7;&#xE3;o">
+        <button class="checkout-etapa ativa" type="button" data-etapa="0"><span>1</span><small>Dados</small></button>
+        <button class="checkout-etapa" type="button" data-etapa="1"><span>2</span><small>Entrega</small></button>
+        <button class="checkout-etapa" type="button" data-etapa="2"><span>3</span><small>Pagamento</small></button>
+        <button class="checkout-etapa" type="button" data-etapa="3"><span>4</span><small>Confirmar</small></button>
       </div>
-      <h2>Seus dados</h2>
-      <div class="checkout-form">
-        <input id="checkoutNome" placeholder="Nome completo">
-        <input id="checkoutEmail" type="email" placeholder="E-mail">
-        <input id="checkoutTelefone" placeholder="Telefone">
-        <input id="checkoutCEP" placeholder="CEP" maxlength="9" oninput="mascaraCEP(this)">
-        <button class="fy-calcular-frete-checkout" type="button" onclick="calcularFreteCheckout()">CALCULAR FRETE</button>
-        <div id="checkoutFreteResultado" class="fy-frete-resultado completo">Informe o CEP para consultar as op&#xE7;&#xF5;es da SuperFrete.</div>
-        <input id="checkoutEndereco" class="completo" placeholder="Endere&#xE7;o completo">
-        <input id="checkoutNumero" placeholder="N&#xFA;mero">
-        <input id="checkoutComplemento" placeholder="Complemento">
-      </div>
-      <h2 style="margin-top:25px">Forma de entrega</h2>
-      <div class="pagamento-opcoes">
-        <button class="pagamento-opcao ativa" type="button" onclick="selecionarCheckoutEntrega('padrao',this)">&#x1F69A; Entrega padr&#xE3;o<br><small>5 a 10 dias &#xFA;teis</small></button>
-        <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('expressa',this)">&#x26A1; Entrega expressa<br><small>2 a 5 dias &#xFA;teis</small></button>
-        <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('retirada',this)">&#x1F4E6; Retirada<br><small>Consulte disponibilidade</small></button>
-      </div>
-      <h2 style="margin-top:25px">Pagamento</h2>
-      <div class="pagamento-opcoes fy-pagamento-grid">
-        <button class="pagamento-opcao ativa" type="button" onclick="selecionarPagamento('PIX',this)">&#x1F4A0; PIX<br><small>Pagamento por chave</small></button>
-        <button class="pagamento-opcao fy-pagamento-indisponivel" type="button" disabled>&#x1F4B3; Cr&#xE9;dito<br><small>Em breve</small></button>
-        <button class="pagamento-opcao fy-pagamento-indisponivel" type="button" disabled>&#x1F4B3; D&#xE9;bito<br><small>Em breve</small></button>
-      </div>
-      <div id="pagamentoDetalhes" class="pagamento-detalhes"></div>
 
-      <div class="checkout-revisao" id="checkoutRevisao">
-        <h3>&#x1F50E; Revis&#xE3;o do pedido</h3>
-        <div id="revisaoResumo">Confira seus dados e valores antes de confirmar.</div>
+      <div class="fy-checkout-passo ativo" data-passo="0">
+        <h2>Confira seus dados</h2>
+        <p class="fy-checkout-intro">Seus dados e endere&#xE7;o ser&#xE3;o usados para preparar a entrega.</p>
+        <div class="checkout-form">
+          <input id="checkoutNome" placeholder="Nome completo">
+          <input id="checkoutEmail" type="email" placeholder="E-mail">
+          <input id="checkoutTelefone" placeholder="Telefone">
+          <input id="checkoutCEP" placeholder="CEP" maxlength="9" oninput="mascaraCEP(this)">
+          <input id="checkoutEndereco" class="completo" placeholder="Endere&#xE7;o completo">
+          <input id="checkoutNumero" placeholder="N&#xFA;mero">
+          <input id="checkoutComplemento" placeholder="Complemento">
+        </div>
+      </div>
+
+      <div class="fy-checkout-passo" data-passo="1" hidden>
+        <h2>Escolha a entrega</h2>
+        <p class="fy-checkout-intro">Calcule o frete e selecione a melhor op&#xE7;&#xE3;o para voc&#xEA;.</p>
+        <div class="fy-checkout-frete-linha">
+          <input id="fyCheckoutCepVisual" aria-label="CEP para entrega" readonly>
+          <button class="fy-calcular-frete-checkout" type="button" onclick="calcularFreteCheckout()">CALCULAR FRETE</button>
+        </div>
+        <div id="checkoutFreteResultado" class="fy-frete-resultado completo">Informe o CEP para consultar as op&#xE7;&#xF5;es da SuperFrete.</div>
+        <div class="pagamento-opcoes fy-entrega-grid">
+          <button class="pagamento-opcao ativa" type="button" onclick="selecionarCheckoutEntrega('padrao',this)">&#x1F69A; Entrega padr&#xE3;o<br><small>5 a 10 dias &#xFA;teis</small></button>
+          <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('expressa',this)">&#x26A1; Entrega expressa<br><small>2 a 5 dias &#xFA;teis</small></button>
+          <button class="pagamento-opcao" type="button" onclick="selecionarCheckoutEntrega('retirada',this)">&#x1F4E6; Retirada<br><small>Consulte disponibilidade</small></button>
+        </div>
+      </div>
+
+      <div class="fy-checkout-passo" data-passo="2" hidden>
+        <h2>Forma de pagamento</h2>
+        <p class="fy-checkout-intro">Escolha como deseja pagar seu pedido.</p>
+        <div class="pagamento-opcoes fy-pagamento-grid">
+          <button class="pagamento-opcao ativa" type="button" onclick="selecionarPagamento('PIX',this)">&#x1F4A0; PIX<br><small>Aprova&#xE7;&#xE3;o r&#xE1;pida e segura</small></button>
+          <button class="pagamento-opcao fy-pagamento-indisponivel" type="button" disabled>&#x1F4B3; Cr&#xE9;dito<br><small>Em breve</small></button>
+          <button class="pagamento-opcao fy-pagamento-indisponivel" type="button" disabled>&#x1F4B3; D&#xE9;bito<br><small>Em breve</small></button>
+        </div>
+        <div id="pagamentoDetalhes" class="pagamento-detalhes"></div>
+      </div>
+
+      <div class="fy-checkout-passo" data-passo="3" hidden>
+        <h2>Revise e confirme</h2>
+        <p class="fy-checkout-intro">Confira as informa&#xE7;&#xF5;es antes de concluir a compra.</p>
+        <div class="checkout-revisao" id="checkoutRevisao">
+          <h3>Revis&#xE3;o do pedido</h3>
+          <div id="revisaoResumo">Confira seus dados e valores antes de confirmar.</div>
+        </div>
       </div>
 
       <div class="checkout-acoes">
-        <button class="checkout-btn sec" onclick="abrirCarrinho()">VOLTAR AO CARRINHO</button>
-        <button class="checkout-btn" onclick="confirmarPedido()">CONFIRMAR PEDIDO</button>
+        <button class="checkout-btn sec fy-checkout-voltar" type="button">VOLTAR</button>
+        <button class="checkout-btn fy-checkout-proximo" type="button">CONTINUAR PARA ENTREGA</button>
+        <button class="checkout-btn fy-checkout-confirmar" type="button" onclick="confirmarPedido()" hidden>CONFIRMAR PEDIDO</button>
       </div>
       <div class="conta-mensagem" id="checkoutMensagem"></div>
     </div>
@@ -21554,7 +21573,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endere\u00E7o salvo.';return;}
     if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma op\u00E7\u00E3o de entrega antes de confirmar.';return;}
     if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
-    const botao=document.querySelector('#paginaCheckout .checkout-acoes .checkout-btn:not(.sec)');const textoBotao=botao?.textContent;
+    const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');const textoBotao=botao?.textContent;
     if(botao){botao.disabled=true;botao.textContent='REGISTRANDO PEDIDO...';}
     const itensAntes=carrinho.map(item=>({...item}));
     try{
@@ -22995,6 +23014,385 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     }
     window.fyAviso(titulo,mensagem,tipo);
   };
+})();
+</script>
+<style id="fy-carregamento-clean-final-css">
+.fy-loading-live{
+  position:fixed!important;
+  right:22px!important;
+  bottom:22px!important;
+  z-index:1000001!important;
+  width:min(360px,calc(100vw - 32px))!important;
+  padding:16px!important;
+  border:1px solid #e6d9de!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-shadow:0 14px 38px rgba(73,42,52,.14)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  transform:translateY(12px)!important;
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease!important;
+}
+.fy-loading-live.ativo{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translateY(0)!important;
+}
+.fy-loading-live-row{display:flex!important;align-items:center!important;gap:12px!important}
+.fy-loading-live-spinner{
+  flex:0 0 27px!important;
+  width:27px!important;
+  height:27px!important;
+  border:3px solid #f0dce3!important;
+  border-top-color:#8d1739!important;
+  border-radius:50%!important;
+  animation:fyLoadingSpin .8s linear infinite!important;
+}
+.fy-loading-live-copy strong{
+  display:block!important;
+  margin:0 0 3px!important;
+  color:#33262b!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:13px!important;
+  font-weight:500!important;
+}
+.fy-loading-live-copy span{
+  display:block!important;
+  color:#806f75!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+.fy-loading-live-progress{
+  height:3px!important;
+  margin-top:13px!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:#f1e3e8!important;
+}
+.fy-loading-live-progress::after{
+  display:block!important;
+  width:42%!important;
+  height:100%!important;
+  border-radius:inherit!important;
+  background:#8d1739!important;
+  animation:fyLoadingProgress 1.45s ease-in-out infinite!important;
+  content:''!important;
+}
+@keyframes fyLoadingSpin{to{transform:rotate(360deg)}}
+@keyframes fyLoadingProgress{0%{transform:translateX(-110%)}55%,100%{transform:translateX(245%)}}
+@media(max-width:600px){
+  .fy-loading-live{right:16px!important;bottom:16px!important;left:16px!important;width:auto!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .fy-loading-live,.fy-loading-live-spinner,.fy-loading-live-progress::after{animation:none!important;transition:none!important}
+  .fy-loading-live-progress::after{width:62%!important}
+}
+</style>
+<script id="fy-carregamento-clean-final-js">
+(function(){
+  let operacoes=0;
+  function criar(){
+    let painel=document.getElementById('fyLoadingLive');
+    if(painel)return painel;
+    painel=document.createElement('div');
+    painel.id='fyLoadingLive';
+    painel.className='fy-loading-live';
+    painel.setAttribute('role','status');
+    painel.setAttribute('aria-live','polite');
+    painel.innerHTML='<div class="fy-loading-live-row"><span class="fy-loading-live-spinner" aria-hidden="true"></span><div class="fy-loading-live-copy"><strong>Carregando...</strong><span>Aguarde só um instante.</span></div></div><div class="fy-loading-live-progress" aria-hidden="true"></div>';
+    document.body.appendChild(painel);
+    return painel;
+  }
+  window.fyMostrarCarregamento=function(titulo,mensagem){
+    const painel=criar();operacoes++;
+    painel.querySelector('strong').textContent=String(titulo||'Carregando...');
+    painel.querySelector('.fy-loading-live-copy span').textContent=String(mensagem||'Aguarde só um instante.');
+    requestAnimationFrame(function(){painel.classList.add('ativo')});
+  };
+  window.fyOcultarCarregamento=function(){
+    operacoes=Math.max(0,operacoes-1);
+    if(operacoes===0){const painel=document.getElementById('fyLoadingLive');if(painel)painel.classList.remove('ativo');}
+  };
+  function envolver(nome,titulo,mensagem){
+    const original=window[nome];
+    if(typeof original!=='function'||original.__fyLoadingClean)return;
+    const envolvida=async function(){
+      window.fyMostrarCarregamento(titulo,mensagem);
+      try{return await original.apply(this,arguments)}
+      finally{window.fyOcultarCarregamento()}
+    };
+    envolvida.__fyLoadingClean=true;
+    window[nome]=envolvida;
+  }
+  envolver('fySupabaseEntrar','Entrando...','Estamos acessando sua conta.');
+  envolver('calcularFreteCheckout','Calculando entrega...','Consultando as melhores opções para seu CEP.');
+  envolver('fy18CalcularCep','Calculando entrega...','Consultando as melhores opções para seu CEP.');
+  envolver('buscarCEP','Calculando entrega...','Consultando o endereço e as opções para seu CEP.');
+  envolver('confirmarPedido','Finalizando pedido...','Salvando seu pedido com segurança.');
+  document.documentElement.setAttribute('data-fy-versao','29');
+})();
+</script>
+<style id="fy-checkout-quatro-etapas-final-css">
+#paginaCheckout{
+  --fy-checkout-vinho:#8d1739;
+  --fy-checkout-texto:#33262b;
+  --fy-checkout-suave:#806f75;
+  --fy-checkout-linha:#e6d9de;
+  --fy-checkout-fundo:#fbf5f7;
+  --fy-checkout-rosa:#f8e9ee;
+  background:#fbf5f7!important;
+  color:var(--fy-checkout-texto)!important;
+}
+#paginaCheckout .titulo h2,
+#paginaCheckout .checkout-card h2,
+#paginaCheckout .checkout-resumo h3{
+  color:var(--fy-checkout-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-weight:500!important;
+}
+#paginaCheckout .titulo p,
+#paginaCheckout .fy-checkout-intro{color:var(--fy-checkout-suave)!important}
+#paginaCheckout .checkout-card,
+#paginaCheckout .checkout-resumo{
+  border:1px solid var(--fy-checkout-linha)!important;
+  border-radius:22px!important;
+  background:#fff!important;
+  box-shadow:0 14px 38px rgba(73,42,52,.07)!important;
+}
+#paginaCheckout .checkout-etapas{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+  min-height:0!important;
+  margin:0 0 28px!important;
+  padding:4px 0 20px!important;
+  overflow:visible!important;
+}
+#paginaCheckout .checkout-etapa{
+  position:relative!important;
+  display:grid!important;
+  min-width:0!important;
+  min-height:58px!important;
+  justify-items:center!important;
+  align-content:start!important;
+  gap:7px!important;
+  padding:0 3px!important;
+  border:0!important;
+  color:var(--fy-checkout-suave)!important;
+  background:transparent!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  letter-spacing:0!important;
+  cursor:pointer!important;
+}
+#paginaCheckout .checkout-etapa::before{
+  position:absolute!important;
+  top:17px!important;
+  right:50%!important;
+  left:-50%!important;
+  height:2px!important;
+  background:var(--fy-checkout-linha)!important;
+  content:''!important;
+}
+#paginaCheckout .checkout-etapa:first-child::before{display:none!important}
+#paginaCheckout .checkout-etapa span{
+  position:relative!important;
+  z-index:1!important;
+  display:grid!important;
+  width:34px!important;
+  height:34px!important;
+  place-items:center!important;
+  margin:0!important;
+  border-radius:50%!important;
+  color:var(--fy-checkout-suave)!important;
+  background:var(--fy-checkout-fundo)!important;
+  font-size:12px!important;
+  font-weight:500!important;
+}
+#paginaCheckout .checkout-etapa small{font-size:10px!important;white-space:nowrap!important}
+#paginaCheckout .checkout-etapa.ativa,
+#paginaCheckout .checkout-etapa.concluida{color:var(--fy-checkout-vinho)!important}
+#paginaCheckout .checkout-etapa.ativa span,
+#paginaCheckout .checkout-etapa.concluida span{
+  color:#fff!important;
+  background:var(--fy-checkout-vinho)!important;
+}
+#paginaCheckout .checkout-etapa.ativa::before,
+#paginaCheckout .checkout-etapa.concluida::before{background:var(--fy-checkout-vinho)!important}
+#paginaCheckout .checkout-etapa.ativa{font-weight:500!important}
+#paginaCheckout .fy-checkout-passo[hidden]{display:none!important}
+#paginaCheckout .fy-checkout-intro{margin:-7px 0 20px!important;font-size:12px!important;line-height:1.55!important}
+#paginaCheckout .checkout-form{gap:11px!important}
+#paginaCheckout .checkout-form input,
+#paginaCheckout .fy-checkout-frete-linha input{
+  min-height:48px!important;
+  border:1px solid var(--fy-checkout-linha)!important;
+  border-radius:13px!important;
+  color:var(--fy-checkout-texto)!important;
+  background:#fff!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+}
+#paginaCheckout .checkout-form input:focus{border-color:var(--fy-checkout-vinho)!important}
+#paginaCheckout .fy-checkout-frete-linha{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:10px!important;
+  margin-bottom:10px!important;
+}
+#paginaCheckout .fy-calcular-frete-checkout{
+  min-height:48px!important;
+  padding:0 18px!important;
+  border:1px solid var(--fy-checkout-vinho)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:var(--fy-checkout-vinho)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  letter-spacing:.35px!important;
+}
+#paginaCheckout .fy-frete-resultado{
+  padding:15px!important;
+  border:1px solid var(--fy-checkout-linha)!important;
+  border-radius:15px!important;
+  color:var(--fy-checkout-suave)!important;
+  background:var(--fy-checkout-fundo)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:11px!important;
+}
+#paginaCheckout .fy-entrega-grid{display:none!important}
+#paginaCheckout .fy-superfrete-opcao,
+#paginaCheckout .pagamento-opcao{
+  min-height:64px!important;
+  border:1px solid var(--fy-checkout-linha)!important;
+  border-radius:14px!important;
+  color:var(--fy-checkout-texto)!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+}
+#paginaCheckout .fy-superfrete-opcao.ativa,
+#paginaCheckout .pagamento-opcao.ativa{
+  border-color:var(--fy-checkout-vinho)!important;
+  background:var(--fy-checkout-rosa)!important;
+}
+#paginaCheckout .fy-pagamento-indisponivel{opacity:.48!important}
+#paginaCheckout .checkout-revisao{
+  margin:0!important;
+  padding:18px!important;
+  border:0!important;
+  border-radius:16px!important;
+  color:var(--fy-checkout-texto)!important;
+  background:var(--fy-checkout-fundo)!important;
+}
+#paginaCheckout .checkout-revisao h3{color:var(--fy-checkout-texto)!important;font-family:'Montserrat','Inter',Arial,sans-serif!important;font-weight:500!important}
+#paginaCheckout .checkout-acoes{display:flex!important;gap:10px!important;margin-top:24px!important}
+#paginaCheckout .checkout-btn{
+  min-height:48px!important;
+  padding:0 20px!important;
+  border:1px solid var(--fy-checkout-vinho)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:var(--fy-checkout-vinho)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  letter-spacing:.45px!important;
+}
+#paginaCheckout .checkout-btn.sec{
+  flex:0 0 auto!important;
+  color:var(--fy-checkout-texto)!important;
+  border-color:var(--fy-checkout-linha)!important;
+  background:#fff!important;
+}
+#paginaCheckout .checkout-btn[hidden]{display:none!important}
+#paginaCheckout .checkout-resumo{background:#fff!important}
+#paginaCheckout .checkout-linha{border-color:var(--fy-checkout-linha)!important;color:var(--fy-checkout-suave)!important}
+#paginaCheckout .checkout-total{color:var(--fy-checkout-texto)!important}
+#paginaCheckout #checkoutMensagem{margin-top:12px!important;color:var(--fy-checkout-vinho)!important;font-family:'Inter',Arial,sans-serif!important;font-size:11px!important}
+@media(max-width:700px){
+  #paginaCheckout .checkout-card,#paginaCheckout .checkout-resumo{padding:20px 16px!important;border-radius:18px!important}
+  #paginaCheckout .checkout-etapas{margin-bottom:20px!important;padding-bottom:14px!important}
+  #paginaCheckout .checkout-etapa{min-height:50px!important;padding:0 2px!important;flex:auto!important}
+  #paginaCheckout .checkout-etapa small{font-size:9px!important}
+  #paginaCheckout .fy-checkout-frete-linha{grid-template-columns:1fr!important}
+  #paginaCheckout .checkout-acoes{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important}
+}
+</style>
+<script id="fy-checkout-quatro-etapas-final-js">
+(function(){
+  let etapaAtual=0,etapaLiberada=0;
+  const pagina=()=>document.getElementById('paginaCheckout');
+  const mensagem=(texto)=>{const alvo=document.getElementById('checkoutMensagem');if(alvo)alvo.textContent=texto||'';};
+  function sincronizarCep(){
+    const original=document.getElementById('checkoutCEP'),visual=document.getElementById('fyCheckoutCepVisual');
+    if(visual)visual.value=original?.value||'';
+  }
+  function atualizar(){
+    const raiz=pagina();if(!raiz)return;
+    raiz.querySelectorAll('.fy-checkout-passo').forEach((painel,i)=>{painel.hidden=i!==etapaAtual;painel.classList.toggle('ativo',i===etapaAtual);});
+    raiz.querySelectorAll('.checkout-etapa').forEach((botao,i)=>{
+      botao.classList.toggle('ativa',i===etapaAtual);botao.classList.toggle('concluida',i<etapaAtual);
+      botao.setAttribute('aria-current',i===etapaAtual?'step':'false');
+      botao.querySelector('span').textContent=i<etapaAtual?'✓':String(i+1);
+    });
+    const voltar=raiz.querySelector('.fy-checkout-voltar'),proximo=raiz.querySelector('.fy-checkout-proximo'),confirmar=raiz.querySelector('.fy-checkout-confirmar');
+    const textos=['CONTINUAR PARA ENTREGA','CONTINUAR PARA PAGAMENTO','REVISAR PEDIDO'];
+    if(voltar)voltar.textContent=etapaAtual===0?'VOLTAR AO CARRINHO':'VOLTAR';
+    if(proximo){proximo.hidden=etapaAtual===3;proximo.textContent=textos[etapaAtual]||'CONTINUAR';}
+    if(confirmar)confirmar.hidden=etapaAtual!==3;
+    sincronizarCep();mensagem('');
+    if(etapaAtual===3&&typeof window.renderCheckout==='function')window.renderCheckout();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function validar(){
+    if(etapaAtual===0){
+      const ids=['checkoutNome','checkoutEmail','checkoutTelefone','checkoutCEP','checkoutEndereco','checkoutNumero'];
+      const faltando=ids.some(id=>!String(document.getElementById(id)?.value||'').trim());
+      const cep=String(document.getElementById('checkoutCEP')?.value||'').replace(/\D/g,'');
+      if(faltando||cep.length!==8){mensagem('Confira seus dados e o endereço antes de continuar.');return false;}
+    }
+    if(etapaAtual===1&&(!window.FY_FRETE_CALCULADO||!['padrao','expressa'].includes(window.entregaSelecionada||entregaSelecionada))){
+      mensagem('Calcule o frete e escolha uma opção de entrega.');return false;
+    }
+    if(etapaAtual===2&&(window.pagamentoSelecionado||pagamentoSelecionado)!=='PIX'){
+      mensagem('Escolha a forma de pagamento para continuar.');return false;
+    }
+    return true;
+  }
+  window.fyCheckoutIrPara=function(indice,forcar){
+    const destino=Math.max(0,Math.min(3,Number(indice)||0));
+    if(!forcar&&destino>etapaLiberada)return;
+    etapaAtual=destino;atualizar();
+  };
+  document.addEventListener('click',function(evento){
+    const raiz=pagina();if(!raiz)return;
+    const etapa=evento.target.closest&&evento.target.closest('#paginaCheckout .checkout-etapa');
+    if(etapa){window.fyCheckoutIrPara(Number(etapa.dataset.etapa));return;}
+    if(evento.target.closest&&evento.target.closest('#paginaCheckout .fy-checkout-voltar')){
+      if(etapaAtual===0){if(typeof window.abrirCarrinho==='function')window.abrirCarrinho();}
+      else{etapaAtual--;atualizar();}return;
+    }
+    if(evento.target.closest&&evento.target.closest('#paginaCheckout .fy-checkout-proximo')){
+      if(!validar())return;etapaLiberada=Math.max(etapaLiberada,etapaAtual+1);etapaAtual=Math.min(3,etapaAtual+1);atualizar();
+    }
+  });
+  const abrirOriginal=window.abrirCheckout;
+  if(typeof abrirOriginal==='function'){
+    window.abrirCheckout=async function(){
+      etapaAtual=0;etapaLiberada=0;atualizar();
+      const retorno=await abrirOriginal.apply(this,arguments);sincronizarCep();atualizar();return retorno;
+    };
+  }
+  const cep=document.getElementById('checkoutCEP');if(cep)cep.addEventListener('input',sincronizarCep);
+  atualizar();
+  document.documentElement.setAttribute('data-fy-versao','30');
 })();
 </script>
 </body>
