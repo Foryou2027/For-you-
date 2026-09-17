@@ -9359,27 +9359,48 @@ Promo&#xE7;&#xF5;es de datas especiais
 
 <section class="fy-sucesso" id="paginaPedidoSucesso">
   <div class="fy-sucesso-card">
-    <div class="fy-check">&#x2713;</div>
-    <small style="letter-spacing:2px;color:#777">FOR YOU</small>
-    <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:30px;margin:10px 0 5px">Pedido realizado com sucesso!</h2>
-    <p style="font-size:11px;color:#777">Obrigada pela sua compra. Seu pedido foi registrado e j&#xE1; est&#xE1; no acompanhamento da sua conta.</p>
-    <div class="fy-numero-pedido" id="sucessoNumeroPedido">Pedido #0000</div>
-    <div style="font-size:11px;margin-bottom:18px">Total: <strong id="sucessoTotal">R$ 0,00</strong> &#x2022; Pagamento: <strong id="sucessoPagamento">PIX</strong></div>
-    <div class="fy-sucesso-pix" id="sucessoPixInstrucoes">
-      <strong>Agora fa&#xE7;a o pagamento pelo Pix</strong>
-      <span>Favorecida: D&#xE9;bora Cristina Lima Pereira</span>
-      <div class="fy-pix-code"><input id="sucessoPixChave" value="+5511986943367" readonly><button class="fy-copy" type="button" onclick="copiarChavePix('sucessoPixChave')">COPIAR CHAVE PIX</button></div>
-      <small>Depois, envie o comprovante pelo WhatsApp. O pedido ficar&#xE1; aguardando a confirma&#xE7;&#xE3;o do pagamento.</small>
-    </div>
-    <div class="fy-status-timeline" id="sucessoTimeline">
-      <div class="fy-status-step ativo"><span class="fy-status-dot">&#x2713;</span><strong>Pedido recebido</strong><br><small>Seu pedido foi registrado</small></div>
-      <div class="fy-status-step"><span class="fy-status-dot">&#x1F4B3;</span><strong>Pagamento aprovado</strong><br><small>Aguardando confirma&#xE7;&#xE3;o</small></div>
-      <div class="fy-status-step"><span class="fy-status-dot">&#x1F4E6;</span><strong>Preparando</strong><br><small>Separa&#xE7;&#xE3;o dos produtos</small></div>
-      <div class="fy-status-step"><span class="fy-status-dot">&#x1F69A;</span><strong>Enviado / Entregue</strong><br><small>Acompanhe pela sua conta</small></div>
-    </div>
-    <div class="fy-sucesso-acoes">
-      <button onclick="abrirConta()">VER MEUS PEDIDOS</button>
-      <button class="sec" onclick="voltarLoja()">CONTINUAR COMPRANDO</button>
+    <header class="fy-sucesso-hero">
+      <div class="fy-check">&#x2713;</div>
+      <small>FOR YOU</small>
+      <h2>Pedido recebido!</h2>
+      <p>Seu pedido foi registrado com sucesso.</p>
+    </header>
+
+    <div class="fy-sucesso-numero"><span>N&#xFA;mero do pedido</span><strong id="sucessoNumeroPedido">#0000</strong></div>
+
+    <div class="fy-sucesso-conteudo">
+      <h3>Acompanhe seu pedido</h3>
+      <p class="fy-sucesso-intro">As atualiza&#xE7;&#xF5;es tamb&#xE9;m ficar&#xE3;o dispon&#xED;veis em Minha Conta.</p>
+
+      <div class="fy-status-timeline" id="sucessoTimeline">
+        <div class="fy-status-step ativo"><span class="fy-status-dot">&#x2713;</span><div><strong>Pedido recebido</strong><small>Registrado agora</small></div></div>
+        <div class="fy-status-step"><span class="fy-status-dot">&#x1F4B3;</span><div><strong>Pagamento</strong><small>Aguardando confirma&#xE7;&#xE3;o do Pix</small></div></div>
+        <div class="fy-status-step"><span class="fy-status-dot">&#x1F4E6;</span><div><strong>Preparando o pedido</strong><small>Pr&#xF3;xima etapa</small></div></div>
+        <div class="fy-status-step"><span class="fy-status-dot">&#x1F69A;</span><div><strong>Enviado</strong><small>O rastreio aparecer&#xE1; em Minha Conta</small></div></div>
+      </div>
+
+      <div class="fy-sucesso-pix" id="sucessoPixInstrucoes">
+        <strong>Agora fa&#xE7;a o pagamento pelo Pix</strong>
+        <span>Favorecida: D&#xE9;bora Cristina Lima Pereira</span>
+        <div class="fy-pix-code"><input id="sucessoPixChave" value="+5511986943367" readonly><button class="fy-copy" type="button" onclick="copiarChavePix('sucessoPixChave')">COPIAR CHAVE PIX</button></div>
+        <small>Depois, envie o comprovante pelo WhatsApp para confirmarmos o pagamento.</small>
+      </div>
+
+      <div class="fy-sucesso-whatsapp">&#x2661; As informa&#xE7;&#xF5;es do pedido tamb&#xE9;m ser&#xE3;o abertas no WhatsApp.</div>
+
+      <div class="fy-sucesso-acoes">
+        <button onclick="fyAbrirPedidosSucesso()">ACOMPANHAR EM MINHA CONTA</button>
+        <button class="sec" type="button" onclick="fyAlternarResumoSucesso(this)" aria-expanded="false">VER RESUMO DO PEDIDO</button>
+        <button class="sec" onclick="voltarLoja()">CONTINUAR COMPRANDO</button>
+      </div>
+
+      <div class="fy-sucesso-resumo" id="fySucessoResumo" hidden>
+        <div id="fySucessoItens"></div>
+        <div class="fy-sucesso-resumo-linha"><span>Subtotal</span><strong id="fySucessoSubtotal">R$ 0,00</strong></div>
+        <div class="fy-sucesso-resumo-linha"><span>Frete</span><strong id="fySucessoFrete">R$ 0,00</strong></div>
+        <div class="fy-sucesso-resumo-linha total"><span>Total</span><strong id="sucessoTotal">R$ 0,00</strong></div>
+        <div class="fy-sucesso-resumo-linha"><span>Pagamento</span><strong id="sucessoPagamento">PIX</strong></div>
+      </div>
     </div>
   </div>
 </section>
@@ -11655,9 +11676,24 @@ function mostrarPedidoSucesso(pedido){
   document.getElementById('paginaCheckout').classList.remove('ativa');
   const page=document.getElementById('paginaPedidoSucesso');
   if(!page)return;
-  document.getElementById('sucessoNumeroPedido').textContent='Pedido '+pedido.numero;
+  document.getElementById('sucessoNumeroPedido').textContent=String(pedido.numero||'#0000').replace(/^Pedido\s*/i,'');
   document.getElementById('sucessoTotal').textContent=moeda(pedido.total);
   document.getElementById('sucessoPagamento').textContent=pedido.pagamento+(pedido.parcelas>1?' \u2022 '+pedido.parcelas+'x':'');
+  const subtotal=document.getElementById('fySucessoSubtotal'),frete=document.getElementById('fySucessoFrete'),itens=document.getElementById('fySucessoItens');
+  if(subtotal)subtotal.textContent=moeda(Number(pedido.subtotal||0)-Number(pedido.desconto||0));
+  if(frete)frete.textContent=Number(pedido.frete||0)>0?moeda(pedido.frete):'GR\u00C1TIS';
+  if(itens){
+    itens.innerHTML='';
+    (pedido.itens||[]).forEach(item=>{
+      const linha=document.createElement('div');linha.className='fy-sucesso-resumo-linha item';
+      const nome=document.createElement('span'),valor=document.createElement('strong');
+      nome.textContent=Number(item.quantidade||1)+'x '+String(item.nome||'Produto');
+      valor.textContent=moeda(Number(item.preco||0)*Number(item.quantidade||1));
+      linha.append(nome,valor);itens.appendChild(linha);
+    });
+  }
+  const resumo=document.getElementById('fySucessoResumo');if(resumo)resumo.hidden=true;
+  const botaoResumo=page.querySelector('[onclick*="fyAlternarResumoSucesso"]');if(botaoResumo){botaoResumo.textContent='VER RESUMO DO PEDIDO';botaoResumo.setAttribute('aria-expanded','false');}
   const pix=document.getElementById('sucessoPixInstrucoes');if(pix)pix.style.display=pedido.pagamento==='PIX'?'block':'none';
   page.classList.add('ativa');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -23393,6 +23429,232 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   const cep=document.getElementById('checkoutCEP');if(cep)cep.addEventListener('input',sincronizarCep);
   atualizar();
   document.documentElement.setAttribute('data-fy-versao','30');
+})();
+</script>
+<style id="fy-pedido-confirmado-clean-final-css">
+#paginaPedidoSucesso{
+  --fy-sucesso-vinho:#8d1739;
+  --fy-sucesso-texto:#33262b;
+  --fy-sucesso-suave:#806f75;
+  --fy-sucesso-linha:#e6d9de;
+  --fy-sucesso-fundo:#fbf5f7;
+  --fy-sucesso-rosa:#f8e9ee;
+  padding:42px 20px 70px!important;
+  background:#fbf5f7!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+#paginaPedidoSucesso .fy-sucesso-card{
+  width:min(100%,560px)!important;
+  max-width:560px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid var(--fy-sucesso-linha)!important;
+  border-radius:24px!important;
+  color:var(--fy-sucesso-texto)!important;
+  background:#fff!important;
+  box-shadow:0 16px 40px rgba(73,42,52,.09)!important;
+  text-align:left!important;
+}
+#paginaPedidoSucesso .fy-sucesso-hero{
+  padding:30px 24px 26px!important;
+  background:var(--fy-sucesso-fundo)!important;
+  text-align:center!important;
+}
+#paginaPedidoSucesso .fy-check{
+  display:grid!important;
+  width:56px!important;
+  height:56px!important;
+  margin:0 auto 15px!important;
+  place-items:center!important;
+  border:0!important;
+  border-radius:50%!important;
+  color:#fff!important;
+  background:var(--fy-sucesso-vinho)!important;
+  font-size:23px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-hero small{
+  display:block!important;
+  margin-bottom:7px!important;
+  color:var(--fy-sucesso-vinho)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  letter-spacing:2px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-hero h2{
+  margin:0!important;
+  color:var(--fy-sucesso-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:27px!important;
+  font-weight:500!important;
+}
+#paginaPedidoSucesso .fy-sucesso-hero p{
+  margin:9px 0 0!important;
+  color:var(--fy-sucesso-suave)!important;
+  font-size:12px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-numero{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  padding:16px 22px!important;
+  border-top:1px solid var(--fy-sucesso-linha)!important;
+  border-bottom:1px solid var(--fy-sucesso-linha)!important;
+  color:var(--fy-sucesso-suave)!important;
+  font-size:12px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-numero strong{color:var(--fy-sucesso-vinho)!important;font-size:14px!important;font-weight:500!important}
+#paginaPedidoSucesso .fy-sucesso-conteudo{padding:24px!important}
+#paginaPedidoSucesso .fy-sucesso-conteudo h3{
+  margin:0!important;
+  color:var(--fy-sucesso-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:18px!important;
+  font-weight:500!important;
+}
+#paginaPedidoSucesso .fy-sucesso-intro{margin:7px 0 22px!important;color:var(--fy-sucesso-suave)!important;font-size:12px!important;line-height:1.5!important}
+#paginaPedidoSucesso .fy-status-timeline{
+  position:relative!important;
+  display:grid!important;
+  gap:18px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+#paginaPedidoSucesso .fy-status-timeline::before{
+  position:absolute!important;
+  top:17px!important;
+  bottom:17px!important;
+  left:16px!important;
+  width:2px!important;
+  background:var(--fy-sucesso-linha)!important;
+  content:''!important;
+}
+#paginaPedidoSucesso .fy-status-step{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:start!important;
+  padding:0!important;
+  color:var(--fy-sucesso-texto)!important;
+  background:transparent!important;
+  text-align:left!important;
+}
+#paginaPedidoSucesso .fy-status-dot{
+  z-index:1!important;
+  display:grid!important;
+  width:34px!important;
+  height:34px!important;
+  place-items:center!important;
+  border:0!important;
+  border-radius:50%!important;
+  color:var(--fy-sucesso-suave)!important;
+  background:var(--fy-sucesso-fundo)!important;
+  font-size:13px!important;
+}
+#paginaPedidoSucesso .fy-status-step.ativo .fy-status-dot{color:#fff!important;background:var(--fy-sucesso-vinho)!important}
+#paginaPedidoSucesso .fy-status-step strong{display:block!important;margin:2px 0 4px!important;font-size:12px!important;font-weight:500!important}
+#paginaPedidoSucesso .fy-status-step small{display:block!important;color:var(--fy-sucesso-suave)!important;font-size:11px!important}
+#paginaPedidoSucesso .fy-sucesso-pix{
+  margin:23px 0 0!important;
+  padding:16px!important;
+  border:0!important;
+  border-radius:16px!important;
+  color:var(--fy-sucesso-texto)!important;
+  background:var(--fy-sucesso-rosa)!important;
+  text-align:left!important;
+}
+#paginaPedidoSucesso .fy-sucesso-pix>strong,#paginaPedidoSucesso .fy-sucesso-pix>span,#paginaPedidoSucesso .fy-sucesso-pix>small{display:block!important}
+#paginaPedidoSucesso .fy-sucesso-pix>strong{margin-bottom:5px!important;font-size:13px!important;font-weight:500!important}
+#paginaPedidoSucesso .fy-sucesso-pix>span,#paginaPedidoSucesso .fy-sucesso-pix>small{color:var(--fy-sucesso-suave)!important;font-size:11px!important;line-height:1.45!important}
+#paginaPedidoSucesso .fy-pix-code{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;margin:13px 0!important}
+#paginaPedidoSucesso .fy-pix-code input{
+  min-width:0!important;
+  min-height:44px!important;
+  padding:0 12px!important;
+  border:1px solid var(--fy-sucesso-linha)!important;
+  border-radius:12px!important;
+  color:var(--fy-sucesso-texto)!important;
+  background:#fff!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+}
+#paginaPedidoSucesso .fy-copy{
+  min-height:44px!important;
+  padding:0 14px!important;
+  border:1px solid var(--fy-sucesso-vinho)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:var(--fy-sucesso-vinho)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:9px!important;
+  font-weight:500!important;
+}
+#paginaPedidoSucesso .fy-sucesso-whatsapp{
+  margin-top:13px!important;
+  padding:13px 14px!important;
+  border-radius:14px!important;
+  color:var(--fy-sucesso-suave)!important;
+  background:var(--fy-sucesso-fundo)!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+#paginaPedidoSucesso .fy-sucesso-acoes{display:grid!important;gap:9px!important;margin-top:20px!important}
+#paginaPedidoSucesso .fy-sucesso-acoes button{
+  min-height:47px!important;
+  padding:0 18px!important;
+  border:1px solid var(--fy-sucesso-vinho)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:var(--fy-sucesso-vinho)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  letter-spacing:.4px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-acoes button.sec{color:var(--fy-sucesso-texto)!important;border-color:var(--fy-sucesso-linha)!important;background:#fff!important}
+#paginaPedidoSucesso .fy-sucesso-resumo{margin-top:18px!important;padding-top:8px!important;border-top:1px solid var(--fy-sucesso-linha)!important}
+#paginaPedidoSucesso .fy-sucesso-resumo[hidden]{display:none!important}
+#paginaPedidoSucesso .fy-sucesso-resumo-linha{
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+  padding:10px 0!important;
+  border-bottom:1px solid var(--fy-sucesso-linha)!important;
+  color:var(--fy-sucesso-suave)!important;
+  font-size:11px!important;
+}
+#paginaPedidoSucesso .fy-sucesso-resumo-linha strong{color:var(--fy-sucesso-texto)!important;font-weight:500!important;text-align:right!important}
+#paginaPedidoSucesso .fy-sucesso-resumo-linha.total{color:var(--fy-sucesso-texto)!important;font-size:13px!important}
+@media(max-width:520px){
+  #paginaPedidoSucesso{padding:18px 12px 40px!important}
+  #paginaPedidoSucesso .fy-sucesso-card{border-radius:19px!important}
+  #paginaPedidoSucesso .fy-sucesso-hero{padding:25px 18px 22px!important}
+  #paginaPedidoSucesso .fy-sucesso-conteudo{padding:20px 17px!important}
+  #paginaPedidoSucesso .fy-pix-code{grid-template-columns:1fr!important}
+}
+</style>
+<script id="fy-pedido-confirmado-clean-final-js">
+(function(){
+  window.fyAlternarResumoSucesso=function(botao){
+    const resumo=document.getElementById('fySucessoResumo');if(!resumo)return;
+    resumo.hidden=!resumo.hidden;
+    botao.setAttribute('aria-expanded',String(!resumo.hidden));
+    botao.textContent=resumo.hidden?'VER RESUMO DO PEDIDO':'OCULTAR RESUMO';
+  };
+  window.fyAbrirPedidosSucesso=function(){
+    if(typeof window.abrirConta==='function')window.abrirConta();
+    setTimeout(function(){
+      const botao=[...document.querySelectorAll('#paginaConta button')].find(item=>String(item.getAttribute('onclick')||'').includes('pedidosConta'));
+      if(typeof window.abrirAbaConta==='function')window.abrirAbaConta('pedidosConta',botao||null);
+      window.scrollTo({top:0,behavior:'smooth'});
+    },80);
+  };
+  document.documentElement.setAttribute('data-fy-versao','31');
 })();
 </script>
 </body>
