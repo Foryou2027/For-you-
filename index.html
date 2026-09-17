@@ -12561,8 +12561,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharPoliti
 ========================= */
 function abrirFidelidade(){fecharTodasPaginas();document.getElementById('paginaFidelidade').classList.add('ativa');renderFidelidade();window.scrollTo({top:0,behavior:'smooth'});}
 function renderFidelidade(){const conta=contaSalva();const pontos=conta&&Number(conta.pontos||0)||0;const el=document.getElementById('pontosCliente');if(el)el.textContent=pontos.toLocaleString('pt-BR');const nivel=pontos>=1000?'FOR YOU DIAMOND':pontos>=500?'FOR YOU GOLD':'FOR YOU';const prox=pontos>=1000?0:pontos>=500?1000-pontos:500-pontos;const pct=pontos>=1000?100:Math.min(100,(pontos%500)/5);const n=document.getElementById('nivelCliente');const b=document.getElementById('barraPontos');const t=document.getElementById('textoProgresso');if(n)n.textContent='N\u00EDvel '+nivel;if(b)b.style.width=pct+'%';if(t)t.textContent=prox?`Faltam ${prox} pontos para o pr\u00F3ximo n\u00EDvel.`:'Voc\u00EA alcan\u00E7ou o n\u00EDvel m\u00E1ximo atual.';}
-const ADMIN_PASSWORD='ForYouAdmin2026';
-function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1';}
+const ADMIN_PASSWORD='';
+function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1'&&Boolean(sessionStorage.getItem('forYouAdminPassword'));}
 function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');if(card)card.style.display=adminAutenticado()?'block':'none';}
 let toquesAdminLogo=0,ultimoToqueAdminLogo=0;
 function iniciarAcessoAdminLogo(){const agora=Date.now();if(agora-ultimoToqueAdminLogo>3000)toquesAdminLogo=0;ultimoToqueAdminLogo=agora;toquesAdminLogo++;if(toquesAdminLogo>=5){toquesAdminLogo=0;abrirAdminLogin();}}
@@ -12570,11 +12570,27 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('#adminSecretLogo,.fy-brand-logo').forEach(logo=>{logo.style.cursor='pointer';logo.addEventListener('click',iniciarAcessoAdminLogo);});
   if(location.hash.toLowerCase()==='#admin')setTimeout(abrirAdminLogin,250);
 });
-function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito \u00E0 administra\u00E7\u00E3o\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
+async function abrirAdminLogin(){
+  if(adminAutenticado()){abrirAdmin();return;}
+  const senha=prompt('Acesso restrito \u00E0 administra\u00E7\u00E3o\nDigite a senha:');
+  if(senha===null)return;
+  try{
+    if(typeof window.fyAdminApiComSenha!=='function')throw new Error('A conex\u00E3o administrativa ainda n\u00E3o carregou.');
+    await window.fyAdminApiComSenha(senha,'listar');
+    sessionStorage.setItem('forYouAdminPassword',senha);
+    sessionStorage.setItem('forYouAdminAuth','1');
+    atualizarAcessoAdmin();
+    abrirAdmin();
+  }catch(error){
+    sessionStorage.removeItem('forYouAdminPassword');
+    sessionStorage.removeItem('forYouAdminAuth');
+    alert(error&&error.message?error.message:'Senha incorreta ou painel indispon\u00EDvel.');
+  }
+}
 // Acesso administrativo discreto: Ctrl + Shift + A
 document.addEventListener('keydown',function(event){if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==='a'){event.preventDefault();abrirAdminLogin();}});
-function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');fecharTodasPaginas();atualizarAcessoAdmin();alert('Voc\u00EA saiu do Painel Administrativo.');}
-function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
+function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');sessionStorage.removeItem('forYouAdminPassword');fecharTodasPaginas();atualizarAcessoAdmin();alert('Voc\u00EA saiu do Painel Administrativo.');}
+function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');window.renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
 function renderAdmin(){
   if(!adminAutenticado())return;
   const estoqueBaixo=produtos.filter(p=>Number(p.estoque||0)<=5).length;
@@ -23864,6 +23880,121 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     if(item)window.fyAdminSelecionarPedido(item.dataset.pedidoId);
   });
   document.documentElement.setAttribute('data-fy-versao','33');
+})();
+</script>
+<!-- FOR YOU: painel administrativo conectado aos pedidos reais do Supabase -->
+<script id="fy-admin-supabase-final">
+(function(){
+  const cfg=window.FOR_YOU_SUPABASE||{};
+  const endpoint=(cfg.url||'').replace(/\/$/,'')+'/functions/v1/admin-pedidos';
+  const statusEtapa={recebido:1,aguardando_pagamento:1,pagamento_aprovado:2,aprovado:2,preparando:3,em_preparacao:3,enviado:4,entregue:5};
+  const etapaStatus=['recebido','pagamento_aprovado','preparando','enviado','entregue'];
+  const etapaTexto=['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'];
+  const dinheiro=valor=>Number(valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+  async function chamarAdmin(senha,acao='listar',dados={}){
+    if(!cfg.url)throw new Error('A conex\u00E3o com o painel n\u00E3o est\u00E1 configurada.');
+    const resposta=await fetch(endpoint,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':cfg.anonKey||'',
+        'x-admin-password':senha||''
+      },
+      body:JSON.stringify({acao,...dados})
+    });
+    let retorno={};try{retorno=await resposta.json()}catch(e){}
+    if(!resposta.ok)throw new Error(retorno.error||(resposta.status===401?'Senha incorreta.':'N\u00E3o foi poss\u00EDvel acessar os pedidos.'));
+    return retorno;
+  }
+  window.fyAdminApiComSenha=chamarAdmin;
+  window.fyAdminApi=(acao,dados)=>chamarAdmin(sessionStorage.getItem('forYouAdminPassword')||'',acao,dados);
+
+  function normalizarPedido(p){
+    const endereco=p.endereco_entrega&&typeof p.endereco_entrega==='object'?p.endereco_entrega:{};
+    const status=String(p.status_pedido||'recebido').toLowerCase();
+    const criado=p.criado_em?new Date(p.criado_em):null;
+    const prazo=String(p.prazo_frete||'').match(/\d+/)?.[0]||'';
+    return {
+      ...p,
+      id:p.id,
+      numero:p.numero||('#FY'+String(p.id||'').padStart(5,'0')),
+      cliente:{nome:endereco.nome||endereco.nome_completo||endereco.destinatario||'Cliente',email:endereco.email||''},
+      clienteEmail:endereco.email||'',
+      data:criado&&!Number.isNaN(criado.getTime())?criado.toLocaleString('pt-BR'):'Data n\u00E3o informada',
+      dataIso:p.criado_em||'',
+      itens:(p.itens_pedido||[]).map(item=>({
+        ...item,
+        nome:item.nome_produto||'Produto',
+        preco:Number(item.preco_unitario||0),
+        quantidade:Number(item.quantidade||1)
+      })),
+      total:Number(p.total||0),
+      pagamento:p.forma_pagamento||'Pagamento',
+      freteDetalhes:{servico:p.servico_frete||'Entrega',prazo:prazo||'Prazo a confirmar'},
+      etapa:statusEtapa[status]||1,
+      status,
+      statusTexto:etapaTexto[(statusEtapa[status]||1)-1],
+      codigoRastreio:p.codigo_rastreio||''
+    };
+  }
+
+  const renderAdminAnterior=window.renderAdmin;
+  window.renderAdmin=async function(){
+    if(!window.adminAutenticado||!window.adminAutenticado())return;
+    if(typeof renderAdminAnterior==='function')renderAdminAnterior();
+    const lista=document.getElementById('adminTabelaPedidos');
+    if(lista)lista.innerHTML='<p class="fy-admin-pedidos-vazio">Carregando pedidos...</p>';
+    try{
+      const retorno=await window.fyAdminApi('listar');
+      const pedidos=(retorno.pedidos||[]).map(normalizarPedido);
+      window.FY_ADMIN_PEDIDOS=pedidos;
+      const hoje=new Date().toLocaleDateString('pt-BR');
+      const pedidosHoje=pedidos.filter(p=>p.data.startsWith(hoje));
+      const faturamento=pedidos.reduce((s,p)=>s+p.total,0);
+      const vendasHoje=pedidosHoje.reduce((s,p)=>s+p.total,0);
+      const pendentes=pedidos.filter(p=>p.etapa<5).length;
+      const clientes=new Set(pedidos.map(p=>p.clienteEmail||p.cliente_id).filter(Boolean));
+      const colocar=(id,valor)=>{const el=document.getElementById(id);if(el)el.textContent=valor;};
+      colocar('adminPedidos',pedidos.length);
+      colocar('adminClientes',clientes.size);
+      colocar('adminVendasHoje',dinheiro(vendasHoje));
+      colocar('adminFaturamento',dinheiro(faturamento));
+      colocar('adminPendentes',pendentes);
+      colocar('adminClientesNovos',pedidosHoje.length);
+      if(lista){
+        lista.innerHTML=pedidos.length?pedidos.map(p=>`<button class="fy-admin-pedido-item" type="button" data-pedido-id="${p.id}"><span><strong>${p.numero} \u00B7 ${p.cliente.nome}</strong><small>${p.data} \u00B7 ${p.itens.length} produto(s)</small><em>${p.statusTexto}</em></span><span class="fy-admin-pedido-valor"><strong>${dinheiro(p.total)}</strong><small>${p.pagamento}</small></span></button>`).join(''):'<p class="fy-admin-pedidos-vazio">Ainda n\u00E3o existem pedidos registrados.</p>';
+      }
+    }catch(error){
+      if(lista)lista.innerHTML='<p class="fy-admin-pedidos-vazio">N\u00E3o foi poss\u00EDvel carregar os pedidos. Saia do painel e entre novamente.</p>';
+      if(typeof window.fyAviso==='function')window.fyAviso('Painel indispon\u00EDvel',error.message||'Confira a conex\u00E3o com o Supabase.','erro');
+    }
+  };
+
+  window.fyAdminSalvarPedido=async function(){
+    if(!window.adminAutenticado||!window.adminAutenticado()){window.abrirAdminLogin();return;}
+    const id=window.FY_ADMIN_PEDIDO_SELECIONADO;if(!id)return;
+    const seletor=document.getElementById('fyAdminPedidoStatus');
+    const rastreio=document.getElementById('fyAdminPedidoRastreio');
+    const etapa=Math.max(1,Math.min(5,Number(seletor?.value||1)));
+    const botao=document.querySelector('#paginaAdmin .fy-admin-pedido-salvar');
+    if(botao){botao.disabled=true;botao.textContent='SALVANDO...';}
+    try{
+      await window.fyAdminApi('atualizar',{
+        pedido_id:id,
+        status_pedido:etapaStatus[etapa-1],
+        codigo_rastreio:String(rastreio?.value||'').trim()
+      });
+      if(typeof window.fyAviso==='function')window.fyAviso('Atualiza\u00E7\u00E3o salva','O pedido foi atualizado no Supabase.','sucesso');
+      await window.renderAdmin();
+      setTimeout(()=>window.fyAdminSelecionarPedido&&window.fyAdminSelecionarPedido(id),100);
+    }catch(error){
+      if(typeof window.fyAviso==='function')window.fyAviso('N\u00E3o foi poss\u00EDvel salvar',error.message||'Tente novamente.','erro');
+    }finally{
+      if(botao){botao.disabled=false;botao.textContent='SALVAR ATUALIZA\u00C7\u00C3O';}
+    }
+  };
+  document.documentElement.setAttribute('data-fy-versao','34');
 })();
 </script>
 </body>
