@@ -24469,5 +24469,365 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
   document.documentElement.setAttribute('data-fy-versao','42');
 })();
 </script>
+<style id="fy-conta-refinada-v43-css">
+/* Área da cliente mais compacta e sem caixas pesadas. */
+#paginaConta{position:relative!important}
+#paginaConta > .voltar{
+  width:auto!important;
+  max-width:none!important;
+  min-height:40px!important;
+  margin:12px 0 0 max(18px,calc((100% - 760px)/2))!important;
+  padding:6px 0!important;
+  color:#8d1739!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-size:12px!important;
+  text-decoration:none!important;
+}
+#paginaConta .fy2-account{margin-top:0!important}
+#paginaConta .fy2-header{
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:13px 0 15px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-header-main{margin:0!important;padding:0!important}
+#paginaConta .fy2-layout{margin-top:0!important;padding-top:0!important;gap:0!important}
+#paginaConta .fy2-sidebar{margin-top:0!important}
+#paginaConta .fy2-nav-item[data-fy-conta-tab="pedidos"]{order:1!important}
+#paginaConta .fy2-nav-item[data-fy-conta-tab="dados"]{order:2!important}
+#paginaConta .fy2-nav-item[data-fy-conta-tab="enderecos"]{order:3!important}
+#paginaConta .fy2-nav-item[data-fy-conta-tab="favoritos"]{order:4!important}
+#paginaConta .fy2-logout{
+  top:-47px!important;
+  padding:6px 0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-content{margin-top:19px!important}
+#paginaConta .fy2-panel{
+  padding:15px 0 0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-panel h2{font-size:27px!important}
+#paginaConta .fy2-panel > p{max-width:500px!important}
+#paginaConta .fy2-empty{
+  min-height:0!important;
+  margin-top:20px!important;
+  padding:27px 20px!important;
+  background:#fff!important;
+  border:1px solid #eadde1!important;
+  border-radius:20px!important;
+  box-shadow:0 10px 28px rgba(91,47,61,.045)!important;
+  text-align:center!important;
+}
+#paginaConta .fy2-empty .icon{
+  display:grid!important;
+  place-items:center!important;
+  width:52px!important;
+  height:52px!important;
+  margin:0 auto 15px!important;
+  color:#8d1739!important;
+  background:#f8e9ee!important;
+  border-radius:50%!important;
+  font-size:0!important;
+}
+#paginaConta .fy2-empty .icon svg{
+  width:25px!important;
+  height:25px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.7!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+#paginaConta .fy2-empty strong{
+  display:block!important;
+  margin-bottom:7px!important;
+  color:#33262b!important;
+  font-size:17px!important;
+  font-weight:600!important;
+}
+#paginaConta .fy2-empty br{display:none!important}
+#paginaConta .fy-empty-shop{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:min(100%,230px)!important;
+  min-height:44px!important;
+  margin:19px auto 0!important;
+  padding:0 20px!important;
+  color:#fff!important;
+  background:#8d1739!important;
+  border:1px solid #8d1739!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:.05em!important;
+  text-decoration:none!important;
+}
+#paginaConta .fy-empty-shop:hover{color:#fff!important;background:#74112f!important}
+@media(max-width:520px){
+  #paginaConta > .voltar{margin-left:15px!important}
+  #paginaConta .fy2-account{width:calc(100% - 30px)!important}
+  #paginaConta .fy2-header{padding-top:8px!important;padding-bottom:12px!important}
+  #paginaConta .fy2-header h1{font-size:36px!important}
+  #paginaConta .fy2-header p{max-width:330px!important;line-height:1.42!important}
+  #paginaConta .fy2-nav-item:not(.fy2-logout){min-height:64px!important}
+  #paginaConta .fy2-content{margin-top:17px!important}
+  #paginaConta .fy2-panel{padding-top:11px!important}
+  #paginaConta .fy2-empty{padding:25px 17px!important;border-radius:18px!important}
+}
+</style>
+<script id="fy-conta-refinada-v43-js">
+(()=>{
+  function refinarConta(){
+    const vazio=document.querySelector('#paginaConta #listaPedidosConta .fy2-empty');
+    const icon=vazio?.querySelector('.icon');
+    if(icon&&!icon.querySelector('svg')){
+      icon.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m4.5 7.7 7.5 4.2 7.5-4.2M12 12v9"/></svg>';
+    }
+  }
+  const iniciar=()=>{
+    refinarConta();
+    const lista=document.getElementById('listaPedidosConta');
+    if(lista)new MutationObserver(refinarConta).observe(lista,{childList:true,subtree:true});
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});
+  else iniciar();
+  window.addEventListener('pageshow',refinarConta);
+  document.documentElement.setAttribute('data-fy-versao','43');
+})();
+</script>
+<style id="fy-alerta-favoritos-v44-css">
+#paginaFavoritos .fy-price-watch{
+  width:min(1160px,calc(100% - 32px));margin:0 auto 22px;padding:18px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  background:#fff;border:1px solid #eadde1;border-radius:18px;color:#2f2226;
+}
+#paginaFavoritos .fy-price-watch-main{display:flex;align-items:center;gap:13px;min-width:0}
+#paginaFavoritos .fy-price-watch-icon{
+  width:42px;height:42px;flex:0 0 42px;border-radius:50%;display:grid;place-items:center;
+  background:#f9e9ee;color:#8f1f40;
+}
+#paginaFavoritos .fy-price-watch-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#paginaFavoritos .fy-price-watch-copy strong{display:block;font-size:14px;line-height:1.25;color:#2f2226}
+#paginaFavoritos .fy-price-watch-copy span{display:block;margin-top:4px;font-size:12px;line-height:1.45;color:#806f75}
+#paginaFavoritos .fy-price-watch-btn{
+  flex:0 0 auto;border:1px solid #8f1f40;border-radius:999px;background:#fff;color:#8f1f40;
+  min-height:40px;padding:0 16px;font-size:10px;font-weight:800;letter-spacing:.08em;cursor:pointer;
+}
+#paginaFavoritos .fy-price-watch.tem-alerta{background:#fff7f9;border-color:#e8c8d2}
+#paginaFavoritos .fy-price-watch.tem-alerta .fy-price-watch-icon{background:#8f1f40;color:#fff}
+#paginaFavoritos .fy-price-alert-list{width:min(1160px,calc(100% - 32px));margin:-8px auto 22px;display:grid;gap:9px}
+#paginaFavoritos .fy-price-alert{
+  display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:12px;padding:12px;
+  background:#fff;border:1px solid #eadde1;border-radius:16px;
+}
+#paginaFavoritos .fy-price-alert img{width:52px;height:52px;object-fit:contain;border-radius:11px;background:#fbf4f6}
+#paginaFavoritos .fy-price-alert strong{display:block;color:#2f2226;font-size:13px;line-height:1.3}
+#paginaFavoritos .fy-price-alert span{display:block;margin-top:4px;color:#8f1f40;font-size:12px;font-weight:700}
+#paginaFavoritos .fy-price-alert button{border:0;background:transparent;color:#8f1f40;font-size:10px;font-weight:800;letter-spacing:.06em;cursor:pointer;padding:10px}
+.acao-favoritos .fy-fav-price-badge{
+  position:absolute;right:-7px;bottom:-5px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+  display:grid;place-items:center;background:#8f1f40;color:#fff;border:2px solid #fff;font-size:8px;font-weight:800;
+}
+.fy-price-toast{
+  position:fixed;right:20px;bottom:22px;z-index:10020;width:min(360px,calc(100% - 30px));
+  display:flex;align-items:center;gap:12px;padding:15px 16px;background:#2f2226;color:#fff;border-radius:17px;
+  box-shadow:0 18px 45px rgba(47,34,38,.24);transform:translateY(25px);opacity:0;pointer-events:none;transition:.25s ease;
+}
+.fy-price-toast.ativo{transform:none;opacity:1;pointer-events:auto}
+.fy-price-toast svg{width:24px;height:24px;flex:0 0 24px;fill:none;stroke:#f5bdcd;stroke-width:1.8}
+.fy-price-toast strong{display:block;font-size:13px}.fy-price-toast span{display:block;margin-top:3px;color:#eadde1;font-size:11px}
+.fy-price-toast button{margin-left:auto;border:0;background:transparent;color:#fff;font-size:18px;cursor:pointer}
+@media(max-width:600px){
+  #paginaFavoritos .fy-price-watch{align-items:flex-start;padding:15px;margin-bottom:17px}
+  #paginaFavoritos .fy-price-watch-btn{padding:0 12px;min-height:38px;font-size:9px}
+  #paginaFavoritos .fy-price-watch-copy span{font-size:11px}
+  #paginaFavoritos .fy-price-alert{grid-template-columns:45px 1fr}
+  #paginaFavoritos .fy-price-alert img{width:45px;height:45px}
+  #paginaFavoritos .fy-price-alert button{grid-column:2;justify-self:start;padding:2px 0 6px}
+  .fy-price-toast{right:15px;bottom:18px}
+}
+</style>
+<script id="fy-alerta-favoritos-v44-js">
+(()=>{
+  const PREFIXO_PRECOS='forYouFavoritosPrecos';
+  const PREFIXO_ALERTAS='forYouAlertasFavoritos';
+  const normalizarId=id=>String(id==null?'':id);
+  const numero=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
+  const dinheiro=v=>numero(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+  function sufixoConta(){
+    try{
+      if(contaAtual&&contaAtual.email)return '_'+String(contaAtual.email).toLowerCase().replace(/[^a-z0-9]/g,'');
+    }catch(e){}
+    return '';
+  }
+  const chavePrecos=()=>PREFIXO_PRECOS+sufixoConta();
+  const chaveAlertas=()=>PREFIXO_ALERTAS+sufixoConta();
+  function ler(chave,padrao){try{const v=JSON.parse(localStorage.getItem(chave));return v&&typeof v==='object'?v:padrao}catch(e){return padrao}}
+  function gravar(chave,valor){try{localStorage.setItem(chave,JSON.stringify(valor))}catch(e){}}
+  function catalogo(){
+    const mapa=new Map();
+    try{[...(Array.isArray(produtos)?produtos:[]),...(Array.isArray(kits)?kits:[])].forEach(p=>p&&mapa.set(normalizarId(p.id),p))}catch(e){}
+    return mapa;
+  }
+  function idsFavoritos(){try{return Array.isArray(favoritos)?favoritos.map(normalizarId):[]}catch(e){return []}}
+  function precoAnterior(p){return numero(p&&(p.precoAntigo??p.preco_antigo))}
+  function estaEmOferta(p){return !!p&&precoAnterior(p)>numero(p.preco)}
+  function alertas(){const v=ler(chaveAlertas(),[]);return Array.isArray(v)?v:[]}
+  function salvarAlertas(lista){gravar(chaveAlertas(),lista.slice(0,30));atualizarSinal();renderPainel()}
+
+  function registrarBase(id){
+    const p=catalogo().get(normalizarId(id));if(!p)return;
+    const bases=ler(chavePrecos(),{});
+    bases[normalizarId(id)]={
+      id:p.id,nome:p.nome||'Produto',imagem:p.imagem||'',preco:numero(p.preco),
+      emOferta:estaEmOferta(p),registradoEm:new Date().toISOString()
+    };
+    gravar(chavePrecos(),bases);
+  }
+  function removerBase(id){
+    const sid=normalizarId(id),bases=ler(chavePrecos(),{});delete bases[sid];gravar(chavePrecos(),bases);
+    salvarAlertas(alertas().filter(a=>normalizarId(a.id)!==sid));
+  }
+  function novoAlerta(p,antes,agora,tipo){
+    const lista=alertas();
+    const assinatura=normalizarId(p.id)+'|'+agora.toFixed(2);
+    if(lista.some(a=>a.assinatura===assinatura))return false;
+    lista.unshift({
+      assinatura,id:p.id,nome:p.nome||'Produto',imagem:p.imagem||'',
+      precoAntes:antes,precoAgora:agora,tipo,lido:false,criadoEm:new Date().toISOString()
+    });
+    gravar(chaveAlertas(),lista.slice(0,30));
+    notificar(p,antes,agora);
+    return true;
+  }
+  function verificarPrecos(){
+    const mapa=catalogo(),ids=idsFavoritos(),bases=ler(chavePrecos(),{});let encontrou=false;
+    ids.forEach(id=>{
+      const p=mapa.get(id);if(!p)return;
+      const atual=numero(p.preco),oferta=estaEmOferta(p),base=bases[id];
+      if(!base){
+        bases[id]={id:p.id,nome:p.nome||'Produto',imagem:p.imagem||'',preco:atual,emOferta:oferta,registradoEm:new Date().toISOString()};
+        return;
+      }
+      const antes=numero(base.preco);
+      if((atual>0&&antes>0&&atual<antes)||(!base.emOferta&&oferta)){
+        encontrou=novoAlerta(p,antes||precoAnterior(p),atual,atual<antes?'preco':'oferta')||encontrou;
+      }
+      bases[id]={...base,id:p.id,nome:p.nome||base.nome,imagem:p.imagem||base.imagem,preco:atual,emOferta:oferta,verificadoEm:new Date().toISOString()};
+    });
+    Object.keys(bases).forEach(id=>{if(!ids.includes(id))delete bases[id]});
+    gravar(chavePrecos(),bases);
+    atualizarSinal();renderPainel();
+    if(encontrou)mostrarToast();
+  }
+
+  function notificar(p,antes,agora){
+    try{
+      if('Notification'in window&&Notification.permission==='granted'){
+        new Notification('Seu favorito baixou de preço!',{
+          body:(p.nome||'Produto')+': de '+dinheiro(antes)+' por '+dinheiro(agora),
+          icon:p.imagem||undefined,tag:'fy-preco-'+normalizarId(p.id)
+        });
+      }
+    }catch(e){}
+  }
+  function mostrarToast(){
+    let el=document.getElementById('fyPriceToast');
+    if(!el){
+      el=document.createElement('div');el.id='fyPriceToast';el.className='fy-price-toast';
+      el.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7M8 7l4-4 4 4M12 3v13"/><path d="m8 13 4 4 4-4"/></svg><div><strong>Um favorito baixou de preço</strong><span>Abra Favoritos para conferir a oferta.</span></div><button type="button" aria-label="Fechar">×</button>';
+      el.querySelector('button').onclick=()=>el.classList.remove('ativo');
+      el.onclick=e=>{if(e.target.tagName!=='BUTTON'&&typeof window.abrirFavoritos==='function')window.abrirFavoritos()};
+      document.body.appendChild(el);
+    }
+    requestAnimationFrame(()=>el.classList.add('ativo'));setTimeout(()=>el.classList.remove('ativo'),5500);
+  }
+  function atualizarSinal(){
+    const qtd=alertas().filter(a=>!a.lido).length;
+    const btn=document.querySelector('.acao-favoritos');if(!btn)return;
+    let badge=btn.querySelector('.fy-fav-price-badge');
+    if(!qtd){if(badge)badge.remove();return}
+    if(!badge){badge=document.createElement('span');badge.className='fy-fav-price-badge';btn.appendChild(badge)}
+    badge.textContent=qtd>9?'9+':qtd;badge.setAttribute('aria-label',qtd+' alerta de preço');
+  }
+  function marcarLido(assinatura){
+    const lista=alertas();lista.forEach(a=>{if(a.assinatura===assinatura)a.lido=true});salvarAlertas(lista);
+  }
+  window.fyAbrirFavoritoComAlerta=function(id,assinatura){
+    marcarLido(assinatura);
+    try{const p=catalogo().get(normalizarId(id));if(p&&typeof window.abrirDetalhe==='function')window.abrirDetalhe(p.id)}catch(e){}
+  };
+  window.fyAtivarAvisosPreco=async function(){
+    if(!('Notification'in window)){alert('Este navegador não oferece avisos. Os alertas continuarão aparecendo dentro da loja.');return}
+    try{
+      const permissao=await Notification.requestPermission();
+      if(permissao==='granted'){
+        new Notification('Avisos ativados',{body:'Você verá um aviso quando um favorito baixar de preço enquanto visitar a loja.'});
+        renderPainel();
+      }else alert('Os avisos do navegador não foram autorizados. Os alertas continuarão salvos em Favoritos.');
+    }catch(e){alert('Não foi possível ativar o aviso neste navegador.');}
+  };
+  function renderPainel(){
+    const pagina=document.getElementById('paginaFavoritos'),listaFav=document.getElementById('listaFavoritos');if(!pagina||!listaFav)return;
+    let box=document.getElementById('fyPriceWatch');
+    if(!box){box=document.createElement('div');box.id='fyPriceWatch';listaFav.parentNode.insertBefore(box,listaFav)}
+    const pendentes=alertas().filter(a=>!a.lido);
+    const permitido=('Notification'in window&&Notification.permission==='granted');
+    box.className='fy-price-watch'+(pendentes.length?' tem-alerta':'');
+    box.innerHTML='<div class="fy-price-watch-main"><div class="fy-price-watch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="m8 13 4 4 4-4M12 17V3"/><path d="M8 7h8"/></svg></div><div class="fy-price-watch-copy"><strong>'+(pendentes.length?pendentes.length+(pendentes.length===1?' favorito baixou de preço':' favoritos baixaram de preço'):'Seus favoritos ficam salvos')+'</strong><span>'+(pendentes.length?'Confira antes que a oferta termine.':'Nós comparamos os valores e avisamos aqui quando entrarem em oferta.')+'</span></div></div>'+(!permitido?'<button class="fy-price-watch-btn" type="button" onclick="fyAtivarAvisosPreco()">ATIVAR AVISOS</button>':'');
+    let painel=document.getElementById('fyPriceAlertList');
+    if(!painel){painel=document.createElement('div');painel.id='fyPriceAlertList';painel.className='fy-price-alert-list';box.insertAdjacentElement('afterend',painel)}
+    if(!pendentes.length){painel.innerHTML='';return}
+    painel.innerHTML=pendentes.slice(0,4).map(a=>'<article class="fy-price-alert">'+(a.imagem?'<img src="'+String(a.imagem).replace(/"/g,'&quot;')+'" alt="">':'<div></div>')+'<div><strong>'+String(a.nome).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))+'</strong><span>'+dinheiro(a.precoAntes)+' → '+dinheiro(a.precoAgora)+'</span></div><button type="button" onclick="fyAbrirFavoritoComAlerta('+JSON.stringify(a.id).replace(/"/g,'&quot;')+','+JSON.stringify(a.assinatura).replace(/"/g,'&quot;')+')">VER PRODUTO</button></article>').join('');
+  }
+
+  function instalar(){
+    const alternarOriginal=window.alternarFavorito;
+    if(typeof alternarOriginal==='function'&&!alternarOriginal.__fyPriceWatch){
+      const envolvida=function(id){
+        const antes=idsFavoritos().includes(normalizarId(id));
+        const retorno=alternarOriginal.apply(this,arguments);
+        const depois=idsFavoritos().includes(normalizarId(id));
+        if(!antes&&depois)registrarBase(id);else if(antes&&!depois)removerBase(id);
+        renderPainel();return retorno;
+      };
+      envolvida.__fyPriceWatch=true;window.alternarFavorito=envolvida;
+    }
+    const renderOriginal=window.renderFavoritos;
+    if(typeof renderOriginal==='function'&&!renderOriginal.__fyPriceWatch){
+      const envolvida=function(){const r=renderOriginal.apply(this,arguments);setTimeout(()=>{verificarPrecos();renderPainel()},0);return r};
+      envolvida.__fyPriceWatch=true;window.renderFavoritos=envolvida;
+    }
+    verificarPrecos();renderPainel();atualizarSinal();
+    setTimeout(verificarPrecos,1800);setTimeout(verificarPrecos,4500);
+    setInterval(verificarPrecos,60000);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',instalar,{once:true});else instalar();
+  window.addEventListener('pageshow',()=>setTimeout(verificarPrecos,350));
+  window.addEventListener('storage',e=>{if(e.key&&(e.key.includes(PREFIXO_PRECOS)||e.key.includes(PREFIXO_ALERTAS)||e.key.includes('forYouFavoritos')))verificarPrecos()});
+  document.documentElement.setAttribute('data-fy-versao','44');
+})();
+</script>
 </body>
 </html>
