@@ -24551,5 +24551,250 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
   document.documentElement.setAttribute('data-fy-versao','38');
 })();
 </script>
+<style id="fy-conta-compacta-e-atalhos-v39-css">
+/* Minha conta compacta — versão aprovada */
+#paginaConta{
+  --fy39-vinho:#8d1739;
+  --fy39-rosa:#f8e9ee;
+  --fy39-fundo:#fff8fa;
+  --fy39-texto:#33262b;
+  --fy39-suave:#806f75;
+  --fy39-linha:#eadde1;
+  background:var(--fy39-fundo)!important;
+}
+#paginaConta > .voltar{
+  display:block!important;
+  width:calc(100% - 36px)!important;
+  max-width:760px!important;
+  margin:10px auto 0!important;
+  padding:10px 0!important;
+  text-align:left!important;
+}
+#paginaConta .fy2-account{
+  position:relative!important;
+  width:calc(100% - 36px)!important;
+  max-width:760px!important;
+  margin:0 auto 42px!important;
+}
+#paginaConta .fy2-header{
+  min-height:0!important;
+  padding:14px 0 22px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-header::after,
+#paginaConta .fy2-profile{display:none!important}
+#paginaConta .fy2-eyebrow{
+  margin-bottom:9px!important;
+  color:#c9788e!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+}
+#paginaConta .fy2-header h1{
+  margin:0!important;
+  color:var(--fy39-texto)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:clamp(31px,7vw,42px)!important;
+  font-weight:500!important;
+  line-height:1.06!important;
+  letter-spacing:-.035em!important;
+}
+#paginaConta .fy2-header p{
+  max-width:520px!important;
+  margin:10px 0 0!important;
+  color:var(--fy39-suave)!important;
+  font-size:14px!important;
+  line-height:1.5!important;
+}
+#paginaConta .fy2-layout{display:block!important}
+#paginaConta .fy2-sidebar{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid var(--fy39-linha)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-sidebar-title,
+#paginaConta .fy2-sidebar-separator,
+#paginaConta .fy2-nav-item[onclick*="inicioConta"],
+#paginaConta .fy2-nav-item[onclick*="clubConta"],
+#paginaConta .fy2-nav-item[onclick*="cuponsConta"],
+#paginaConta .fy2-nav-item[onclick*="segurancaConta"]{display:none!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout){
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:72px!important;
+  padding:9px 2px 13px!important;
+  color:var(--fy39-suave)!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  text-align:center!important;
+}
+#paginaConta .fy2-nav-item:not(.fy2-logout)::after{display:none!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout)::before{
+  content:''!important;
+  position:absolute!important;
+  right:18%!important;
+  bottom:-1px!important;
+  left:18%!important;
+  height:3px!important;
+  border-radius:3px 3px 0 0!important;
+  background:transparent!important;
+}
+#paginaConta .fy2-nav-item:not(.fy2-logout).ativo::before,
+#paginaConta .fy2-nav-item:not(.fy2-logout).active::before{background:var(--fy39-vinho)!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout) .fy2-nav-icon{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  color:inherit!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  font-size:19px!important;
+  line-height:1!important;
+}
+#paginaConta .fy2-nav-item:not(.fy2-logout) > span:not(.fy2-nav-icon){
+  color:inherit!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+}
+#paginaConta .fy2-nav-item .fy-nav-desc{display:none!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout):hover,
+#paginaConta .fy2-nav-item:not(.fy2-logout).ativo,
+#paginaConta .fy2-nav-item:not(.fy2-logout).active{
+  color:var(--fy39-vinho)!important;
+  background:transparent!important;
+}
+#paginaConta .fy2-logout{
+  position:absolute!important;
+  top:-48px!important;
+  right:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  width:auto!important;
+  min-height:38px!important;
+  margin:0!important;
+  padding:6px 0!important;
+  color:var(--fy39-vinho)!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy2-logout::after{display:none!important}
+#paginaConta .fy2-logout .fy2-nav-icon{
+  width:auto!important;
+  height:auto!important;
+  color:inherit!important;
+  background:transparent!important;
+  border:0!important;
+  font-size:16px!important;
+}
+#paginaConta .fy2-logout > span:not(.fy2-nav-icon){color:inherit!important;font-size:12px!important;font-weight:600!important}
+#paginaConta .fy2-content{margin-top:25px!important}
+#paginaConta .fy2-panel{
+  padding:25px!important;
+  background:#fff!important;
+  border:1px solid var(--fy39-linha)!important;
+  border-radius:22px!important;
+  box-shadow:0 12px 34px rgba(91,47,61,.055)!important;
+}
+#paginaConta .fy2-section-kicker{color:var(--fy39-vinho)!important;font-size:10px!important;letter-spacing:.2em!important}
+#paginaConta .fy2-panel h2{
+  margin:7px 0!important;
+  color:var(--fy39-texto)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:27px!important;
+  font-weight:500!important;
+  letter-spacing:-.025em!important;
+}
+#paginaConta .fy2-panel > p{margin:0!important;color:var(--fy39-suave)!important;font-size:14px!important;line-height:1.5!important}
+#paginaConta .fy2-empty{
+  margin-top:20px!important;
+  padding:31px 18px!important;
+  color:var(--fy39-suave)!important;
+  background:#fbf5f7!important;
+  border:0!important;
+  border-radius:17px!important;
+  line-height:1.5!important;
+}
+#paginaConta .fy2-empty .icon{color:var(--fy39-vinho)!important;font-size:28px!important}
+#paginaConta .fy-empty-shop{border-radius:999px!important;font-weight:600!important}
+
+/* Ofertas e Kits com o mesmo destaque */
+.fy-special-offers,
+.fy-special-kits{
+  border-color:#94183d!important;
+  background:#94183d!important;
+  color:#fff!important;
+}
+.fy-special-offers:hover,
+.fy-special-kits:hover{background:#7f1435!important;color:#fff!important}
+
+@media(max-width:520px){
+  #paginaConta > .voltar,#paginaConta .fy2-account{width:calc(100% - 30px)!important}
+  #paginaConta .fy2-header{padding:10px 0 19px!important}
+  #paginaConta .fy2-header p{font-size:13px!important}
+  #paginaConta .fy2-nav-item:not(.fy2-logout){min-height:68px!important;padding-inline:1px!important}
+  #paginaConta .fy2-nav-item:not(.fy2-logout) > span:not(.fy2-nav-icon){font-size:10px!important}
+  #paginaConta .fy2-content{margin-top:22px!important}
+  #paginaConta .fy2-panel{padding:22px 17px!important;border-radius:18px!important}
+  #paginaConta .fy2-panel h2{font-size:24px!important}
+}
+</style>
+<script id="fy-conta-compacta-v39-js">
+(()=>{
+  function prepararContaCompacta(){
+    const pagina=document.getElementById('paginaConta');
+    if(!pagina)return;
+    const saudacao=document.getElementById('contaSaudacao');
+    if(saudacao){
+      const limpa=saudacao.textContent.replace(/[\s\u2661\u2764\u{1F497}]+$/gu,'').trim();
+      if(limpa&&saudacao.textContent!==limpa)saudacao.textContent=limpa;
+    }
+    const voltar=pagina.querySelector(':scope > .voltar');
+    if(voltar&&voltar.textContent.trim()!=='← Loja')voltar.textContent='← Loja';
+    const sair=pagina.querySelector('.fy2-logout > span:not(.fy2-nav-icon)');
+    if(sair&&sair.textContent.trim()!=='Sair')sair.textContent='Sair';
+  }
+  const iniciar=()=>{
+    const pagina=document.getElementById('paginaConta');
+    if(!pagina)return;
+    let agendado=false;
+    new MutationObserver(()=>{
+      if(agendado)return;
+      agendado=true;
+      requestAnimationFrame(()=>{agendado=false;prepararContaCompacta();});
+    }).observe(pagina,{childList:true,subtree:true,characterData:true});
+    prepararContaCompacta();
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);
+  else iniciar();
+  window.addEventListener('pageshow',prepararContaCompacta);
+  document.documentElement.setAttribute('data-fy-versao','39');
+})();
+</script>
 </body>
 </html>
