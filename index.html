@@ -1,4 +1,4 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -24394,6 +24394,120 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);
   else iniciar();
   document.documentElement.setAttribute('data-fy-versao','36');
+})();
+</script>
+<style id="fy-admin-tela-branca-v37-css">
+/* Recuperação do painel: a página ativa nunca pode permanecer invisível. */
+body.fy-admin-aberto{min-height:100vh!important;background:#fff9fb!important;overflow:auto!important}
+body.fy-admin-aberto > #paginaAdmin.ativa{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:relative!important;
+  min-height:100vh!important;
+  margin:0!important;
+  padding:18px clamp(12px,3vw,34px) 50px!important;
+}
+body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+#paginaAdmin .fy-admin-carregando{
+  margin:16px 0!important;
+  padding:14px 16px!important;
+  background:#f8e9ee!important;
+  border-radius:12px!important;
+  color:#8d1739!important;
+  font:500 12px/1.45 'Inter',Arial,sans-serif!important;
+}
+@media(max-width:700px){
+  body.fy-admin-aberto > #paginaAdmin.ativa{padding:12px 10px 40px!important}
+}
+</style>
+<script id="fy-admin-tela-branca-v37-js">
+(()=>{
+  function exibirEstruturaAdmin(){
+    const pagina=document.getElementById('paginaAdmin');
+    const painel=pagina?.querySelector('.painel-admin');
+    if(!pagina||!painel)return false;
+    document.querySelectorAll('.pagina').forEach(item=>item.classList.toggle('ativa',item===pagina));
+    const loja=document.getElementById('loja');
+    if(loja)loja.style.setProperty('display','none','important');
+    document.body.classList.remove('fy-pagina-exclusiva');
+    document.body.classList.add('fy-area-interna','fy-admin-aberto');
+    document.body.style.overflow='auto';
+    pagina.classList.add('ativa');
+    pagina.style.setProperty('display','block','important');
+    pagina.style.setProperty('visibility','visible','important');
+    pagina.style.setProperty('opacity','1','important');
+    painel.style.setProperty('display','block','important');
+    painel.style.setProperty('visibility','visible','important');
+    painel.style.setProperty('opacity','1','important');
+    return true;
+  }
+
+  function avisoPainel(texto){
+    const painel=document.querySelector('#paginaAdmin .painel-admin');
+    if(!painel)return;
+    let aviso=document.getElementById('fyAdminCarregando');
+    if(!aviso){
+      aviso=document.createElement('div');
+      aviso.id='fyAdminCarregando';
+      aviso.className='fy-admin-carregando';
+      const titulo=painel.querySelector('.titulo');
+      (titulo||painel).after(aviso);
+    }
+    aviso.textContent=texto;
+  }
+
+  const abrirAnterior=window.abrirAdmin;
+  window.abrirAdmin=function(){
+    if(typeof window.adminAutenticado==='function'&&!window.adminAutenticado()){
+      if(typeof window.abrirAdminLogin==='function')window.abrirAdminLogin();
+      return;
+    }
+    if(!exibirEstruturaAdmin()){
+      if(typeof abrirAnterior==='function')abrirAnterior.apply(this,arguments);
+      return;
+    }
+    avisoPainel('Carregando informações do painel...');
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+    Promise.resolve().then(()=>{
+      if(typeof window.renderAdmin==='function')return window.renderAdmin();
+    }).then(()=>{
+      document.getElementById('fyAdminCarregando')?.remove();
+      exibirEstruturaAdmin();
+    }).catch(erro=>{
+      console.error('Falha ao carregar o painel administrativo:',erro);
+      avisoPainel('O painel foi aberto, mas alguns dados não carregaram. Atualize a página e tente novamente.');
+      exibirEstruturaAdmin();
+    });
+    setTimeout(exibirEstruturaAdmin,250);
+    setTimeout(exibirEstruturaAdmin,1000);
+  };
+
+  const voltarAnterior=window.voltarLoja;
+  window.voltarLoja=function(){
+    document.body.classList.remove('fy-admin-aberto');
+    const pagina=document.getElementById('paginaAdmin');
+    if(pagina){
+      pagina.style.removeProperty('display');
+      pagina.style.removeProperty('visibility');
+      pagina.style.removeProperty('opacity');
+      pagina.querySelector('.painel-admin')?.style.removeProperty('display');
+      pagina.querySelector('.painel-admin')?.style.removeProperty('visibility');
+      pagina.querySelector('.painel-admin')?.style.removeProperty('opacity');
+    }
+    if(typeof voltarAnterior==='function')return voltarAnterior.apply(this,arguments);
+  };
+
+  window.addEventListener('pageshow',()=>{
+    if(typeof window.adminAutenticado==='function'&&window.adminAutenticado()&&location.hash.toLowerCase()==='#admin'){
+      setTimeout(()=>window.abrirAdmin(),100);
+    }
+  });
+  document.documentElement.setAttribute('data-fy-versao','37');
 })();
 </script>
 </body>
