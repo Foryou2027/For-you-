@@ -8960,7 +8960,8 @@ Promo&#xE7;&#xF5;es de datas especiais
         <label>E-mail<input id="fyLoginEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
         <label>Senha<input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"></label>
         <button type="button" id="fyEsqueciSenha" class="fy-auth-forgot" onclick="fyRecuperarSenha()">Esqueci minha senha</button>
-        <button type="submit" class="fy-auth-submit">ENTRAR NA MINHA CONTA</button>
+        <button type="submit" class="fy-auth-submit">ENTRAR</button>
+        <div class="fy-auth-switch-copy">Ainda n&#xE3;o tem uma conta? <button type="button" onclick="fyMostrarAuth('cadastrar')">Criar conta</button></div>
         <div id="fyLoginMsg" class="fy-auth-msg"></div>
       </form>
 
@@ -8971,6 +8972,7 @@ Promo&#xE7;&#xF5;es de datas especiais
         <label>Senha<input id="fyCadSenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"></label>
         <label>Confirmar senha<input id="fyCadConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a senha novamente"></label>
         <button type="submit" class="fy-auth-submit">CRIAR MINHA CONTA</button>
+        <div class="fy-auth-switch-copy">J&#xE1; possui uma conta? <button type="button" onclick="fyMostrarAuth('entrar')">Entrar</button></div>
         <div id="fyCadastroMsg" class="fy-auth-msg"></div>
       </form>
 
@@ -21275,6 +21277,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
   window.fyMostrarAuth=function(tipo){
     const cadastro=tipo==='cadastrar';
+    $('fyAuthGate')?.classList.remove('recuperando');
     $('fyAuthLogin').hidden=cadastro;$('fyAuthCadastro').hidden=!cadastro;
     if($('fyAuthRecovery'))$('fyAuthRecovery').hidden=true;
     const abas=document.querySelector('#paginaConta .fy-auth-tabs');if(abas)abas.style.display='';
@@ -21284,10 +21287,11 @@ body.fy-pagina-exclusiva .pagina.ativa{
   };
   window.fySupabaseEntrar=async function(event){
     event.preventDefault();const form=event.currentTarget,email=valor('fyLoginEmail').toLowerCase(),senha=valor('fyLoginSenha');
-    mensagem('fyLoginMsg','Entrando...');bloquear(form,true);
+    const botao=form.querySelector('.fy-auth-submit'),textoBotao=botao?.textContent||'ENTRAR';
+    mensagem('fyLoginMsg','');if(botao)botao.textContent='ENTRANDO...';bloquear(form,true);
     try{const {data,error}=await sb.auth.signInWithPassword({email,password:senha});if(error)throw error;await aplicarSessao(data.user);}
     catch(e){mensagem('fyLoginMsg',traduzirErro(e));}
-    finally{bloquear(form,false);}return false;
+    finally{bloquear(form,false);if(botao)botao.textContent=textoBotao;}return false;
   };
   window.fyRecuperarSenha=async function(){
     const email=valor('fyLoginEmail').toLowerCase(),botao=$('fyEsqueciSenha');
@@ -21303,6 +21307,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   };
   function mostrarRecuperacao(){
     mostrarLogada(false);
+    $('fyAuthGate')?.classList.add('recuperando');
     if($('fyAuthLogin'))$('fyAuthLogin').hidden=true;
     if($('fyAuthCadastro'))$('fyAuthCadastro').hidden=true;
     if($('fyAuthRecovery'))$('fyAuthRecovery').hidden=false;
@@ -21835,6 +21840,36 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   text-underline-offset:3px!important;
 }
 #paginaConta .fy-auth-forgot:disabled{opacity:.55!important}
+#paginaConta .fy-auth-gate{max-width:390px!important}
+#paginaConta .fy-auth-brand{margin-bottom:28px!important}
+#paginaConta .fy-auth-card h2{text-align:left!important;margin-bottom:28px!important;font-size:32px!important}
+#paginaConta #fyAuthIntro{display:none!important}
+#paginaConta .fy-auth-gate.recuperando #fyAuthIntro{display:block!important;text-align:left!important;margin:-16px 0 24px!important}
+#paginaConta .fy-auth-tabs{display:none!important}
+#paginaConta .fy-auth-forgot{
+  margin:0!important;
+  text-decoration:none!important;
+  font-weight:400!important;
+}
+#paginaConta .fy-auth-submit{border-radius:8px!important;margin-top:2px!important}
+#paginaConta .fy-auth-switch-copy{
+  grid-column:1!important;
+  margin-top:3px!important;
+  color:var(--fy-muted)!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:400!important;
+  text-align:center!important;
+}
+#paginaConta .fy-auth-switch-copy button{
+  padding:3px!important;
+  background:transparent!important;
+  border:0!important;
+  color:var(--fy-vinho)!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:500!important;
+}
 
 /* Favoritos no mesmo estilo aberto */
 #paginaFavoritos{font-family:'DM Sans',Arial,sans-serif!important}
