@@ -24300,5 +24300,174 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
   document.documentElement.setAttribute('data-fy-versao','41');
 })();
 </script>
+<style id="fy-categorias-voltar-v42-css">
+/* Categoria: produtos visíveis e retorno claro para a página principal. */
+#novidades.fy-category-active>#listaProdutos,
+#novidades.fy-category-active>#listaProdutos:last-child{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+#fyCategoryBackTop{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  width:auto!important;
+  min-height:42px!important;
+  margin:0 0 20px!important;
+  padding:0!important;
+  color:#8d1739!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  cursor:pointer!important;
+}
+#fyCategoryBackTop svg{width:19px!important;height:19px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+#fyCategoryBackBottom{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:min(100%,360px)!important;
+  min-height:46px!important;
+  margin:35px auto 5px!important;
+  padding:0 22px!important;
+  color:#8d1739!important;
+  background:#fff!important;
+  border:1px solid #d9b9c3!important;
+  border-radius:999px!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.04em!important;
+  cursor:pointer!important;
+}
+#fyCategoryBackBottom:hover{background:#fff5f8!important}
+body.fy-categoria-aberta #novidades{min-height:100vh!important}
+@media(max-width:700px){
+  #novidades.fy-category-active{padding-top:16px!important}
+  #fyCategoryBackTop{margin-left:12px!important;margin-bottom:13px!important}
+  #fyCategoryBackBottom{width:calc(100% - 30px)!important;margin-top:28px!important}
+}
+</style>
+<script id="fy-categorias-voltar-v42-js">
+(()=>{
+  let categoriaAberta=false;
+  let toqueX=0,toqueY=0,rastreando=false;
+
+  function iconeVoltar(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h11"/></svg>';
+  }
+
+  function criarRetornos(){
+    const secao=document.getElementById('novidades');
+    const grade=document.getElementById('listaProdutos');
+    if(!secao||!grade)return;
+    let topo=document.getElementById('fyCategoryBackTop');
+    if(!topo){
+      topo=document.createElement('button');
+      topo.id='fyCategoryBackTop';
+      topo.type='button';
+      topo.innerHTML=iconeVoltar()+'<span>Voltar para a página principal</span>';
+      topo.onclick=()=>window.fyVoltarCategoria();
+      secao.insertBefore(topo,secao.firstChild);
+    }
+    let rodape=document.getElementById('fyCategoryBackBottom');
+    if(!rodape){
+      rodape=document.createElement('button');
+      rodape.id='fyCategoryBackBottom';
+      rodape.type='button';
+      rodape.textContent='VOLTAR PARA A PÁGINA PRINCIPAL';
+      rodape.onclick=()=>window.fyVoltarCategoria();
+      grade.insertAdjacentElement('afterend',rodape);
+    }
+  }
+
+  function entrarModoCategoria(){
+    const secao=document.getElementById('novidades');
+    if(!secao)return;
+    const primeiraEntrada=!categoriaAberta;
+    categoriaAberta=true;
+    secao.classList.add('fy-category-active');
+    document.body.classList.add('fy-categoria-aberta');
+    criarRetornos();
+    const grade=document.getElementById('listaProdutos');
+    if(grade){
+      grade.style.setProperty('display','grid','important');
+      grade.style.setProperty('visibility','visible','important');
+      grade.style.setProperty('opacity','1','important');
+    }
+    if(primeiraEntrada&&!history.state?.fyCategory){
+      history.pushState({fyCategory:true},'',location.href.split('#')[0]+'#categoria');
+    }
+  }
+
+  function restaurarPaginaPrincipal(){
+    categoriaAberta=false;
+    document.body.classList.remove('fy-categoria-aberta');
+    const secao=document.getElementById('novidades');
+    if(secao)secao.classList.remove('fy-category-active');
+    document.getElementById('fyCategoryToolbar')?.remove();
+    document.getElementById('fyCategoryBackTop')?.remove();
+    document.getElementById('fyCategoryBackBottom')?.remove();
+    document.querySelectorAll('.fy-clean-cat-top>button').forEach(botao=>{
+      botao.classList.remove('fy-categoria-ativa');
+      botao.setAttribute('aria-pressed','false');
+    });
+    if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();
+    const loja=document.getElementById('loja');
+    if(loja)loja.style.display='block';
+    window.scrollTo({top:0,left:0,behavior:'smooth'});
+  }
+
+  window.fyVoltarCategoria=function(direto){
+    if(!direto&&history.state?.fyCategory){
+      history.back();
+      return;
+    }
+    restaurarPaginaPrincipal();
+  };
+
+  function envolver(nome){
+    const original=window[nome];
+    if(typeof original!=='function'||original.__fyCategoria42)return;
+    const novo=function(){
+      const retorno=original.apply(this,arguments);
+      requestAnimationFrame(entrarModoCategoria);
+      return retorno;
+    };
+    novo.__fyCategoria42=true;
+    window[nome]=novo;
+  }
+
+  function iniciar(){
+    ['selecionarSubcategoria','mostrarProdutosDezFY','selecionarSubcategoriaDezFY','filtrarPorMarcaHome','filtrarProximoValidade','fyAbrirOfertasComoCategoria','fyAbrirKitsComoCategoria','fyFiltrarOfertasCategoria','fyFiltrarKitsCategoria'].forEach(envolver);
+  }
+
+  window.addEventListener('popstate',()=>{
+    if(categoriaAberta&&!history.state?.fyCategory)restaurarPaginaPrincipal();
+  });
+
+  document.addEventListener('touchstart',evento=>{
+    if(!categoriaAberta||evento.touches.length!==1)return;
+    const toque=evento.touches[0];
+    toqueX=toque.clientX;toqueY=toque.clientY;
+    rastreando=toqueX<=34;
+  },{passive:true});
+  document.addEventListener('touchend',evento=>{
+    if(!rastreando||!categoriaAberta)return;
+    rastreando=false;
+    const toque=evento.changedTouches[0];
+    const dx=toque.clientX-toqueX,dy=Math.abs(toque.clientY-toqueY);
+    if(dx>=85&&dy<=70)window.fyVoltarCategoria();
+  },{passive:true});
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});
+  else iniciar();
+  document.documentElement.setAttribute('data-fy-versao','42');
+})();
+</script>
 </body>
 </html>
