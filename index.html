@@ -8948,9 +8948,8 @@ Promo&#xE7;&#xF5;es de datas especiais
   <div id="fyAuthGate" class="fy-auth-gate carregando" aria-live="polite">
     <div class="fy-auth-card">
       <div class="fy-auth-brand">FOR YOU</div>
-      <h2>Bem-vinda &#xE0; For You</h2>
-      <div class="fy-auth-account-name">Minha conta</div>
-      <p id="fyAuthIntro">Entre para acompanhar seus pedidos, endere&#xE7;os e favoritos.</p>
+      <h2>Minha conta</h2>
+      <p id="fyAuthIntro">Entre para acompanhar seus pedidos e favoritos.</p>
 
       <div class="fy-auth-tabs" role="tablist">
         <button type="button" id="fyAuthTabEntrar" class="ativo" onclick="fyMostrarAuth('entrar')">ENTRAR</button>
@@ -21695,6 +21694,136 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   #paginaConta .fy-auth-gate{width:calc(100% - 24px)!important;margin:18px auto 40px!important}
   #paginaConta .fy-auth-card{padding:24px 18px 26px!important;border-radius:16px!important}
   #paginaConta .fy-auth-card h2{font-size:29px!important}
+}
+</style>
+<style id="fy-minha-conta-sem-cartao-final">
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
+/* Visual aberto e leve, sem cartão */
+#paginaConta .fy-auth-gate{
+  width:calc(100% - 36px)!important;
+  max-width:420px!important;
+  margin:32px auto 64px!important;
+  padding:0!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+}
+#paginaConta .fy-auth-card{
+  width:100%!important;
+  padding:20px 0 30px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaConta .fy-auth-brand{margin-bottom:20px!important;font-family:'DM Sans',Arial,sans-serif!important}
+#paginaConta .fy-auth-card h2{
+  margin:0 0 8px!important;
+  color:var(--fy-texto)!important;
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:34px!important;
+  font-weight:400!important;
+}
+#paginaConta .fy-auth-account-name{display:none!important}
+#paginaConta .fy-auth-card>p{margin:0 auto 26px!important;font-family:'DM Sans',Arial,sans-serif!important;font-size:12px!important}
+#paginaConta .fy-auth-tabs{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:24px!important;
+  padding:0!important;
+  margin:0 0 24px!important;
+  background:transparent!important;
+  border-bottom:1px solid var(--fy-linha)!important;
+  border-radius:0!important;
+}
+#paginaConta .fy-auth-tabs button{
+  padding:11px 4px!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:2px solid transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:var(--fy-muted)!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+}
+#paginaConta .fy-auth-tabs button.ativo{
+  color:var(--fy-vinho)!important;
+  border-bottom-color:var(--fy-vinho)!important;
+}
+#paginaConta .fy-auth-form{grid-template-columns:1fr!important;gap:16px!important;font-family:'DM Sans',Arial,sans-serif!important}
+#paginaConta .fy-auth-form label{gap:7px!important;color:var(--fy-texto)!important;font-size:11px!important;font-weight:500!important;letter-spacing:0!important}
+#paginaConta .fy-auth-form input{
+  height:48px!important;
+  padding:0 2px!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid var(--fy-linha)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+}
+#paginaConta .fy-auth-form input:focus{border-bottom-color:var(--fy-vinho)!important;box-shadow:none!important}
+#paginaConta .fy-auth-submit{
+  grid-column:1!important;
+  height:48px!important;
+  margin-top:8px!important;
+  border-radius:999px!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+}
+
+/* Favoritos no mesmo estilo aberto */
+#paginaFavoritos{font-family:'DM Sans',Arial,sans-serif!important}
+#paginaFavoritos .favoritos-hero{
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid var(--fy-linha)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:24px 0 28px!important;
+}
+#paginaFavoritos .favoritos-hero h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-weight:400!important;
+}
+#paginaFavoritos .favoritos-resumo{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+}
+#paginaFavoritos .produto-card,
+#paginaFavoritos .card-produto,
+#paginaFavoritos .produto,
+#paginaFavoritos .favoritos-vazio{
+  box-shadow:none!important;
+  border-color:var(--fy-linha)!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+}
+
+/* Carrinho no mesmo estilo aberto */
+#fyCarrinhoPagina{font-family:'DM Sans',Arial,sans-serif!important}
+#fyCarrinhoPagina .fy-cp-header h1{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-weight:400!important;
+}
+#fyCarrinhoPagina .fy-cp-box,
+#fyCarrinhoPagina .fy-cp-summary{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#fyCarrinhoPagina .fy-cp-box{border-bottom:1px solid var(--fy-linha)!important}
+#fyCarrinhoPagina .fy-cp-summary{border-top:1px solid var(--fy-linha)!important}
+#fyCarrinhoPagina button,
+#fyCarrinhoPagina input{font-family:'DM Sans',Arial,sans-serif!important}
+
+@media(max-width:600px){
+  #paginaConta .fy-auth-gate{width:calc(100% - 36px)!important;margin:22px auto 44px!important}
+  #paginaConta .fy-auth-card{padding:16px 0 24px!important}
+  #paginaConta .fy-auth-card h2{font-size:30px!important}
+  #paginaFavoritos .favoritos-hero{padding:18px 0 22px!important}
 }
 </style>
 </body>
