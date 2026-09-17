@@ -8959,6 +8959,7 @@ Promo&#xE7;&#xF5;es de datas especiais
       <form id="fyAuthLogin" class="fy-auth-form" onsubmit="return fySupabaseEntrar(event)">
         <label>E-mail<input id="fyLoginEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
         <label>Senha<input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"></label>
+        <button type="button" id="fyEsqueciSenha" class="fy-auth-forgot" onclick="fyRecuperarSenha()">Esqueci minha senha</button>
         <button type="submit" class="fy-auth-submit">ENTRAR NA MINHA CONTA</button>
         <div id="fyLoginMsg" class="fy-auth-msg"></div>
       </form>
@@ -8971,6 +8972,13 @@ Promo&#xE7;&#xF5;es de datas especiais
         <label>Confirmar senha<input id="fyCadConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a senha novamente"></label>
         <button type="submit" class="fy-auth-submit">CRIAR MINHA CONTA</button>
         <div id="fyCadastroMsg" class="fy-auth-msg"></div>
+      </form>
+
+      <form id="fyAuthRecovery" class="fy-auth-form" onsubmit="return fySalvarNovaSenha(event)" hidden>
+        <label>Nova senha<input id="fyRecoverySenha" type="password" autocomplete="new-password" minlength="6" required placeholder="M&#xED;nimo de 6 caracteres"></label>
+        <label>Confirmar nova senha<input id="fyRecoveryConfirmar" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite novamente"></label>
+        <button type="submit" class="fy-auth-submit">SALVAR NOVA SENHA</button>
+        <div id="fyRecoveryMsg" class="fy-auth-msg"></div>
       </form>
 
       <div id="fyAuthLoading" class="fy-auth-loading">Verificando seu acesso...</div>
@@ -21268,14 +21276,50 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.fyMostrarAuth=function(tipo){
     const cadastro=tipo==='cadastrar';
     $('fyAuthLogin').hidden=cadastro;$('fyAuthCadastro').hidden=!cadastro;
+    if($('fyAuthRecovery'))$('fyAuthRecovery').hidden=true;
+    const abas=document.querySelector('#paginaConta .fy-auth-tabs');if(abas)abas.style.display='';
+    if($('fyAuthIntro'))$('fyAuthIntro').textContent='Entre para acompanhar seus pedidos e favoritos.';
     $('fyAuthTabEntrar').classList.toggle('ativo',!cadastro);$('fyAuthTabCadastrar').classList.toggle('ativo',cadastro);
-    mensagem('fyLoginMsg','');mensagem('fyCadastroMsg','');
+    mensagem('fyLoginMsg','');mensagem('fyCadastroMsg','');mensagem('fyRecoveryMsg','');
   };
   window.fySupabaseEntrar=async function(event){
     event.preventDefault();const form=event.currentTarget,email=valor('fyLoginEmail').toLowerCase(),senha=valor('fyLoginSenha');
     mensagem('fyLoginMsg','Entrando...');bloquear(form,true);
     try{const {data,error}=await sb.auth.signInWithPassword({email,password:senha});if(error)throw error;await aplicarSessao(data.user);}
     catch(e){mensagem('fyLoginMsg',traduzirErro(e));}
+    finally{bloquear(form,false);}return false;
+  };
+  window.fyRecuperarSenha=async function(){
+    const email=valor('fyLoginEmail').toLowerCase(),botao=$('fyEsqueciSenha');
+    if(!email){mensagem('fyLoginMsg','Digite seu e-mail acima para recuperar a senha.');$('fyLoginEmail')?.focus();return;}
+    mensagem('fyLoginMsg','Enviando o e-mail de recupera\u00E7\u00E3o...');if(botao)botao.disabled=true;
+    try{
+      const redirecionamento=location.origin+location.pathname+'#minha-conta';
+      const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirecionamento});
+      if(error)throw error;
+      mensagem('fyLoginMsg','Enviamos um link para seu e-mail. Abra o link para criar uma nova senha.',true);
+    }catch(e){mensagem('fyLoginMsg',traduzirErro(e));}
+    finally{if(botao)botao.disabled=false;}
+  };
+  function mostrarRecuperacao(){
+    mostrarLogada(false);
+    if($('fyAuthLogin'))$('fyAuthLogin').hidden=true;
+    if($('fyAuthCadastro'))$('fyAuthCadastro').hidden=true;
+    if($('fyAuthRecovery'))$('fyAuthRecovery').hidden=false;
+    if(document.querySelector('#paginaConta .fy-auth-tabs'))document.querySelector('#paginaConta .fy-auth-tabs').style.display='none';
+    if($('fyAuthIntro'))$('fyAuthIntro').textContent='Crie uma nova senha para voltar a acessar sua conta.';
+    mensagem('fyRecoveryMsg','');setTimeout(()=>$('fyRecoverySenha')?.focus(),50);
+  }
+  window.fySalvarNovaSenha=async function(event){
+    event.preventDefault();const form=event.currentTarget,nova=valor('fyRecoverySenha'),confirmar=valor('fyRecoveryConfirmar');
+    if(nova.length<6)return mensagem('fyRecoveryMsg','A senha precisa ter pelo menos 6 caracteres.'),false;
+    if(nova!==confirmar)return mensagem('fyRecoveryMsg','As senhas n\u00E3o s\u00E3o iguais.'),false;
+    mensagem('fyRecoveryMsg','Salvando sua nova senha...');bloquear(form,true);
+    try{
+      const {error}=await sb.auth.updateUser({password:nova});if(error)throw error;
+      mensagem('fyRecoveryMsg','Senha alterada com sucesso!',true);form.reset();
+      const {data}=await sb.auth.getSession();setTimeout(()=>aplicarSessao(data?.session?.user||null),700);
+    }catch(e){mensagem('fyRecoveryMsg',traduzirErro(e));}
     finally{bloquear(form,false);}return false;
   };
   window.fySupabaseCadastrar=async function(event){
@@ -21368,9 +21412,14 @@ body.fy-pagina-exclusiva .pagina.ativa{
     limparSenhasAntigas();
     sb=clienteSupabase();
     if(!sb){$('fyAuthGate')?.classList.remove('carregando');mensagem('fyLoginMsg','A conex\u00E3o da conta ainda n\u00E3o est\u00E1 dispon\u00EDvel. Atualize a p\u00E1gina.');return;}
-    const {data}=await sb.auth.getSession();await aplicarSessao(data?.session?.user||null);
-    const retorno=sb.auth.onAuthStateChange((evento,sessao)=>setTimeout(()=>aplicarSessao(sessao?.user||null),0));
+    const retorno=sb.auth.onAuthStateChange((evento,sessao)=>{
+      if(evento==='PASSWORD_RECOVERY')setTimeout(mostrarRecuperacao,0);
+      else setTimeout(()=>aplicarSessao(sessao?.user||null),0);
+    });
     assinaturaAuth=retorno?.data?.subscription||null;
+    const {data}=await sb.auth.getSession();
+    const retornoRecuperacao=/type=recovery/i.test(location.hash+location.search);
+    if(retornoRecuperacao&&data?.session)mostrarRecuperacao();else await aplicarSessao(data?.session?.user||null);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});else iniciar();
 })();
@@ -21772,6 +21821,20 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   font-size:10px!important;
   font-weight:500!important;
 }
+#paginaConta .fy-auth-forgot{
+  justify-self:end!important;
+  margin:-7px 0 0!important;
+  padding:3px 0!important;
+  background:transparent!important;
+  border:0!important;
+  color:var(--fy-vinho)!important;
+  font-family:'DM Sans',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  text-decoration:underline!important;
+  text-underline-offset:3px!important;
+}
+#paginaConta .fy-auth-forgot:disabled{opacity:.55!important}
 
 /* Favoritos no mesmo estilo aberto */
 #paginaFavoritos{font-family:'DM Sans',Arial,sans-serif!important}
