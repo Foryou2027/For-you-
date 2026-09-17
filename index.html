@@ -8921,13 +8921,13 @@ Promo&#xE7;&#xF5;es de datas especiais
 
 <div class="favoritos-hero">
   <div>
-    <small>SEUS QUERIDINHOS</small>
-    <h2>Meus favoritos &#x2661;</h2>
+    <small>SEUS ESCOLHIDOS</small>
+    <h2>Favoritos</h2>
     <p>Guarde aqui os produtos que voc&#xEA; amou e encontre tudo rapidinho quando quiser comprar.</p>
   </div>
   <div class="favoritos-resumo">
     <strong id="favoritosTotalPagina">0</strong>
-    <span>salvos</span>
+    <span>produtos</span>
   </div>
 </div>
 
@@ -22623,6 +22623,234 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   #fyCarrinhoPagina .fy-cp-body{padding-left:12px!important;padding-right:12px!important}
   #fyCarrinhoPagina #fyCpItems .item{grid-template-columns:92px minmax(0,1fr)!important;gap:11px!important;padding:12px!important}
   #fyCarrinhoPagina #fyCpItems .item-img{width:92px!important;height:116px!important}
+}
+</style>
+<style id="fy-favoritos-clean-final">
+/* Favoritos — versão clean aprovada */
+#paginaFavoritos{
+  background:#fbf5f7!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+#paginaFavoritos>.voltar{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  color:#8d1739!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+#paginaFavoritos .favoritos-hero{
+  width:calc(100% - 44px)!important;
+  max-width:760px!important;
+  margin:0 auto 25px!important;
+  padding:30px 0 25px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid #e6d9de!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#paginaFavoritos .favoritos-hero small{
+  margin-bottom:7px!important;
+  color:#8d1739!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.22em!important;
+}
+#paginaFavoritos .favoritos-hero h2{
+  margin:0!important;
+  color:#33262b!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:31px!important;
+  font-weight:600!important;
+  line-height:1.15!important;
+  letter-spacing:-.035em!important;
+}
+#paginaFavoritos .favoritos-hero p{
+  margin:9px 0 0!important;
+  color:#806f75!important;
+  font-size:13px!important;
+  line-height:1.5!important;
+}
+#paginaFavoritos .favoritos-resumo{
+  min-width:auto!important;
+  display:flex!important;
+  align-items:baseline!important;
+  gap:5px!important;
+  padding:0 0 3px!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  white-space:nowrap!important;
+}
+#paginaFavoritos .favoritos-resumo strong,
+#paginaFavoritos .favoritos-resumo span{
+  display:inline!important;
+  color:#806f75!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:400!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+#paginaFavoritos #listaFavoritos{
+  width:calc(100% - 44px)!important;
+  max-width:760px!important;
+  margin:0 auto 50px!important;
+}
+#paginaFavoritos .produtos{
+  width:100%!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:18px!important;
+  padding:0!important;
+}
+#paginaFavoritos .produto{
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+#paginaFavoritos .produto:hover{box-shadow:none!important;transform:none!important}
+#paginaFavoritos .produto-img{
+  height:225px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:linear-gradient(145deg,#fdf2f5,#f2dbe2)!important;
+  border:0!important;
+  border-radius:14px!important;
+}
+#paginaFavoritos .produto-img img{
+  width:100%!important;
+  height:100%!important;
+  padding:12px!important;
+  object-fit:contain!important;
+  background:transparent!important;
+  border-radius:0!important;
+}
+#paginaFavoritos .favoritar{
+  top:11px!important;
+  right:11px!important;
+  z-index:3!important;
+  width:42px!important;
+  height:42px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:rgba(255,255,255,.92)!important;
+  border:0!important;
+  border-radius:50%!important;
+  color:#8d1739!important;
+  font-size:21px!important;
+  box-shadow:none!important;
+}
+#paginaFavoritos .produto-info{padding:17px!important}
+#paginaFavoritos .marca{
+  margin:0 0 6px!important;
+  color:#806f75!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  letter-spacing:.11em!important;
+  text-transform:uppercase!important;
+}
+#paginaFavoritos .nome{
+  min-height:39px!important;
+  color:#33262b!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  line-height:1.4!important;
+}
+#paginaFavoritos .produto-meta,
+#paginaFavoritos .estoque,
+#paginaFavoritos .preco-antigo,
+#paginaFavoritos .desconto-percentual{display:none!important}
+#paginaFavoritos .preco-linha{margin:12px 0 14px!important}
+#paginaFavoritos .preco{
+  color:#8d1739!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:17px!important;
+  font-weight:600!important;
+}
+#paginaFavoritos .adicionar{
+  width:100%!important;
+  min-height:46px!important;
+  margin:0!important;
+  padding:0 8px!important;
+  background:#8d1739!important;
+  border:0!important;
+  border-radius:11px!important;
+  color:#fff!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  letter-spacing:.04em!important;
+}
+
+/* Estado sem favoritos */
+#paginaFavoritos .favoritos-vazio{
+  max-width:520px!important;
+  margin:20px auto 0!important;
+  padding:48px 24px!important;
+  background:#fff!important;
+  border:1px solid #e6d9de!important;
+  border-radius:16px!important;
+  box-shadow:none!important;
+  text-align:center!important;
+}
+#paginaFavoritos .favoritos-vazio .fav-empty-icon{
+  width:58px!important;
+  height:58px!important;
+  margin:0 auto 17px!important;
+  background:#f8e9ee!important;
+  color:#8d1739!important;
+  font-size:27px!important;
+}
+#paginaFavoritos .favoritos-vazio h3{
+  color:#33262b!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:20px!important;
+  font-weight:600!important;
+}
+#paginaFavoritos .favoritos-vazio p{color:#806f75!important;font-size:13px!important}
+#paginaFavoritos .favoritos-vazio button{
+  min-height:46px!important;
+  padding:0 20px!important;
+  background:#8d1739!important;
+  border:0!important;
+  border-radius:11px!important;
+  color:#fff!important;
+  font-family:'Montserrat',Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+}
+
+@media(max-width:520px){
+  #paginaFavoritos .favoritos-hero,
+  #paginaFavoritos #listaFavoritos{width:calc(100% - 28px)!important}
+  #paginaFavoritos .favoritos-hero{align-items:flex-start!important;padding:22px 0 20px!important}
+  #paginaFavoritos .favoritos-hero h2{font-size:27px!important}
+  #paginaFavoritos .favoritos-hero p{display:none!important}
+  #paginaFavoritos .produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  #paginaFavoritos .produto-img{height:176px!important}
+  #paginaFavoritos .produto-img img{padding:7px!important}
+  #paginaFavoritos .produto-info{padding:13px!important}
+  #paginaFavoritos .nome{min-height:51px!important;font-size:13px!important}
+  #paginaFavoritos .preco{font-size:15px!important}
+  #paginaFavoritos .adicionar{min-height:44px!important;font-size:9px!important;line-height:1.25!important}
+  #paginaFavoritos .favoritar{width:40px!important;height:40px!important}
+  #paginaFavoritos .favoritos-vazio{padding:40px 18px!important}
 }
 </style>
 </body>
