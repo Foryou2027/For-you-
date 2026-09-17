@@ -9523,10 +9523,41 @@ Promo&#xE7;&#xF5;es de datas especiais
       </div>
       <div style="overflow:auto;margin-top:15px"><table class="admin-table"><thead><tr><th>Produto</th><th>Pre&#xE7;o</th><th>Estoque</th><th>Status</th></tr></thead><tbody id="adminTabelaProdutos"></tbody></table></div>
     </div>
-    <div class="admin-card">
-      <h3>Pedidos e rastreamento</h3>
-      <p style="font-size:10px;color:#777;margin-bottom:12px">Atualize o status de cada pedido. A mudan&#xE7;a tamb&#xE9;m aparece em Minha Conta &#x2192; Meus pedidos.</p>
-      <div id="adminTabelaPedidos"></div>
+    <div class="admin-card fy-admin-pedidos-card">
+      <div class="fy-admin-pedidos-cabecalho">
+        <div><h3>Pedidos</h3><p>Acompanhe e atualize cada venda.</p></div>
+      </div>
+      <div class="fy-admin-pedidos-workspace">
+        <div class="fy-admin-pedidos-lista">
+          <h4>Pedidos recentes</h4>
+          <div id="adminTabelaPedidos"></div>
+        </div>
+        <aside class="fy-admin-pedido-detalhe" id="fyAdminPedidoDetalhe">
+          <div class="fy-admin-pedido-vazio">Selecione um pedido para ver os detalhes.</div>
+          <div class="fy-admin-pedido-conteudo" hidden>
+            <h4 id="fyAdminPedidoNumero">Pedido</h4>
+            <p id="fyAdminPedidoCliente">Cliente</p>
+            <div class="fy-admin-pedido-linha"><span>Total</span><strong id="fyAdminPedidoTotal">R$ 0,00</strong></div>
+            <div class="fy-admin-pedido-linha"><span>Entrega</span><strong id="fyAdminPedidoEntrega">&#x2014;</strong></div>
+            <div class="fy-admin-pedido-linha"><span>Pagamento</span><strong id="fyAdminPedidoPagamento">&#x2014;</strong></div>
+            <div class="fy-admin-pedido-linha"><span>Produtos</span><strong id="fyAdminPedidoItens">&#x2014;</strong></div>
+            <label class="fy-admin-pedido-campo">Status do pedido
+              <select id="fyAdminPedidoStatus">
+                <option value="1">Pedido recebido</option>
+                <option value="2">Pagamento aprovado</option>
+                <option value="3">Preparando</option>
+                <option value="4">Enviado</option>
+                <option value="5">Entregue</option>
+              </select>
+            </label>
+            <label class="fy-admin-pedido-campo">C&#xF3;digo de rastreio
+              <input id="fyAdminPedidoRastreio" placeholder="Adicione ap&#xF3;s o envio">
+            </label>
+            <button class="fy-admin-pedido-salvar" type="button" onclick="fyAdminSalvarPedido()">SALVAR ATUALIZA&#xC7;&#xC3;O</button>
+            <div class="fy-admin-pedido-feedback" id="fyAdminPedidoFeedback"></div>
+          </div>
+        </aside>
+      </div>
     </div>
     <div class="admin-card">
       <h3>Relat&#xF3;rios r&#xE1;pidos</h3>
@@ -12572,7 +12603,9 @@ function renderAdmin(){
   const cuponsAtivos=cupons.filter(c=>c&&c.ativo!==false);
   document.getElementById('adminCuponsAtivos').textContent=cuponsAtivos.length+' cupom(ns) ativo(s).';
   const pedidosEl=document.getElementById('adminTabelaPedidos');
-  pedidosEl.innerHTML=pedidos.length?pedidos.slice(0,12).map(p=>{const e=Math.max(1,Math.min(5,Number(p.etapa||1)));const status=p.statusTexto||['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'][e-1];const rastreio=String(p.codigoRastreio||'');return `<div style="padding:12px 0;border-bottom:1px solid #eee"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><strong>${p.numero||'Pedido'}</strong> \u2022 ${moeda(Number(p.total||0))}<br><span style="font-size:10px;color:#777">${p.cliente?.nome||p.clienteEmail||''} \u2022 ${status}</span><br><span style="font-size:9px;color:#999">Rastreio: ${rastreio||'n\u00E3o informado'}</span></div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><select onchange="atualizarStatusPedido('${p.id}',this.value)" style="padding:7px;border:1px solid #ddd;border-radius:8px"><option value="1" ${e===1?'selected':''}>Pedido recebido</option><option value="2" ${e===2?'selected':''}>Pagamento aprovado</option><option value="3" ${e===3?'selected':''}>Preparando</option><option value="4" ${e===4?'selected':''}>Enviado</option><option value="5" ${e===5?'selected':''}>Entregue</option></select><button type="button" onclick="adicionarRastreioPedido('${p.id}')" style="padding:7px;border:1px solid #351f27;background:#fff;border-radius:8px;font-size:8px">${rastreio?'EDITAR RASTREIO':'+ RASTREIO'}</button></div></div></div>`}).join(''):'<p style="color:#777">Ainda n\u00E3o existem pedidos registrados.</p>';
+  window.FY_ADMIN_PEDIDOS=pedidos;
+  pedidosEl.innerHTML=pedidos.length?pedidos.slice(0,12).map(p=>{const e=Math.max(1,Math.min(5,Number(p.etapa||1)));const status=p.statusTexto||['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'][e-1];return `<button class="fy-admin-pedido-item" type="button" data-pedido-id="${p.id}"><span><strong>${p.numero||'Pedido'} \u00B7 ${p.cliente?.nome||p.clienteEmail||'Cliente'}</strong><small>${p.data||'Data n\u00E3o informada'} \u00B7 ${(p.itens||[]).length} produto(s)</small><em>${status}</em></span><span class="fy-admin-pedido-valor"><strong>${moeda(Number(p.total||0))}</strong><small>${p.pagamento||'Pagamento'}</small></span></button>`}).join(''):'<p class="fy-admin-pedidos-vazio">Ainda n\u00E3o existem pedidos registrados.</p>';
+  setTimeout(()=>{if(typeof window.fyAdminSelecionarPedido==='function'){const id=window.FY_ADMIN_PEDIDO_SELECIONADO||pedidos[0]?.id;if(id)window.fyAdminSelecionarPedido(id);}},0);
   document.getElementById('adminRelatorios').innerHTML=`<p><strong>Faturamento registrado:</strong> ${moeda(faturamento)}</p><p><strong>Ticket m\u00E9dio:</strong> ${pedidos.length?moeda(faturamento/pedidos.length):moeda(0)}</p><p><strong>Produtos cadastrados:</strong> ${produtos.length}</p>`;
 }
 
@@ -23655,6 +23688,179 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     },80);
   };
   document.documentElement.setAttribute('data-fy-versao','31');
+})();
+</script>
+<style id="fy-admin-pedidos-clean-final-css">
+#paginaAdmin{
+  --fy-admin-vinho:#8d1739;
+  --fy-admin-texto:#33262b;
+  --fy-admin-suave:#806f75;
+  --fy-admin-linha:#e6d9de;
+  --fy-admin-fundo:#fbf5f7;
+  --fy-admin-rosa:#f8e9ee;
+  background:#fbf5f7!important;
+  color:var(--fy-admin-texto)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+}
+#paginaAdmin .fy-admin-pedidos-card{
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid var(--fy-admin-linha)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  box-shadow:0 14px 38px rgba(73,42,52,.07)!important;
+}
+#paginaAdmin .fy-admin-pedidos-cabecalho{
+  display:flex!important;
+  align-items:end!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+  padding:20px!important;
+  border-bottom:1px solid var(--fy-admin-linha)!important;
+}
+#paginaAdmin .fy-admin-pedidos-cabecalho h3{
+  margin:0 0 5px!important;
+  color:var(--fy-admin-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:20px!important;
+  font-weight:500!important;
+}
+#paginaAdmin .fy-admin-pedidos-cabecalho p{margin:0!important;color:var(--fy-admin-suave)!important;font-size:11px!important}
+#paginaAdmin .fy-admin-pedidos-workspace{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr)!important;min-height:430px!important}
+#paginaAdmin .fy-admin-pedidos-lista{min-width:0!important;border-right:1px solid var(--fy-admin-linha)!important}
+#paginaAdmin .fy-admin-pedidos-lista h4{
+  margin:0!important;
+  padding:15px 17px!important;
+  border-bottom:1px solid var(--fy-admin-linha)!important;
+  color:var(--fy-admin-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:13px!important;
+  font-weight:500!important;
+}
+#paginaAdmin .fy-admin-pedido-item{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:14px!important;
+  width:100%!important;
+  padding:16px 17px!important;
+  border:0!important;
+  border-bottom:1px solid var(--fy-admin-linha)!important;
+  color:var(--fy-admin-texto)!important;
+  background:#fff!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  text-align:left!important;
+  cursor:pointer!important;
+}
+#paginaAdmin .fy-admin-pedido-item:hover,
+#paginaAdmin .fy-admin-pedido-item.ativo{background:var(--fy-admin-rosa)!important}
+#paginaAdmin .fy-admin-pedido-item strong{font-size:12px!important;font-weight:500!important}
+#paginaAdmin .fy-admin-pedido-item small{display:block!important;margin-top:4px!important;color:var(--fy-admin-suave)!important;font-size:10px!important}
+#paginaAdmin .fy-admin-pedido-item em{display:block!important;margin-top:7px!important;color:var(--fy-admin-vinho)!important;font-size:10px!important;font-style:normal!important;font-weight:500!important}
+#paginaAdmin .fy-admin-pedido-valor{text-align:right!important;white-space:nowrap!important}
+#paginaAdmin .fy-admin-pedidos-vazio{padding:22px!important;color:var(--fy-admin-suave)!important;font-size:11px!important}
+#paginaAdmin .fy-admin-pedido-detalhe{padding:19px!important;background:var(--fy-admin-fundo)!important}
+#paginaAdmin .fy-admin-pedido-vazio{display:grid!important;min-height:260px!important;place-items:center!important;color:var(--fy-admin-suave)!important;font-size:11px!important;text-align:center!important}
+#paginaAdmin .fy-admin-pedido-conteudo h4{
+  margin:0 0 4px!important;
+  color:var(--fy-admin-texto)!important;
+  font-family:'Montserrat','Inter',Arial,sans-serif!important;
+  font-size:17px!important;
+  font-weight:500!important;
+}
+#paginaAdmin .fy-admin-pedido-conteudo>p{margin:0 0 15px!important;color:var(--fy-admin-suave)!important;font-size:11px!important}
+#paginaAdmin .fy-admin-pedido-linha{
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:13px!important;
+  padding:10px 0!important;
+  border-bottom:1px solid var(--fy-admin-linha)!important;
+  color:var(--fy-admin-suave)!important;
+  font-size:11px!important;
+}
+#paginaAdmin .fy-admin-pedido-linha strong{max-width:64%!important;color:var(--fy-admin-texto)!important;font-weight:500!important;text-align:right!important}
+#paginaAdmin .fy-admin-pedido-campo{display:grid!important;gap:6px!important;margin-top:14px!important;color:var(--fy-admin-suave)!important;font-size:10px!important}
+#paginaAdmin .fy-admin-pedido-campo select,
+#paginaAdmin .fy-admin-pedido-campo input{
+  width:100%!important;
+  min-height:44px!important;
+  padding:0 12px!important;
+  border:1px solid var(--fy-admin-linha)!important;
+  border-radius:11px!important;
+  color:var(--fy-admin-texto)!important;
+  background:#fff!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:11px!important;
+}
+#paginaAdmin .fy-admin-pedido-salvar{
+  width:100%!important;
+  min-height:46px!important;
+  margin-top:15px!important;
+  border:1px solid var(--fy-admin-vinho)!important;
+  border-radius:999px!important;
+  color:#fff!important;
+  background:var(--fy-admin-vinho)!important;
+  font-family:'Inter',Arial,sans-serif!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  letter-spacing:.4px!important;
+}
+#paginaAdmin .fy-admin-pedido-feedback{min-height:18px!important;margin-top:8px!important;color:var(--fy-admin-vinho)!important;font-size:10px!important;text-align:center!important}
+@media(max-width:800px){
+  #paginaAdmin .fy-admin-pedidos-workspace{grid-template-columns:1fr!important}
+  #paginaAdmin .fy-admin-pedidos-lista{border-right:0!important;border-bottom:1px solid var(--fy-admin-linha)!important}
+  #paginaAdmin .fy-admin-pedido-detalhe{padding:17px!important}
+}
+@media(max-width:520px){
+  #paginaAdmin .fy-admin-pedidos-card{border-radius:17px!important}
+  #paginaAdmin .fy-admin-pedido-item{padding:14px!important}
+}
+</style>
+<script id="fy-admin-pedidos-clean-final-js">
+(function(){
+  const pegarPedidos=()=>{try{return JSON.parse(localStorage.getItem('forYouPedidos')||'[]')}catch(e){return[]}};
+  const moedaAdmin=valor=>Number(valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  window.fyAdminSelecionarPedido=function(id){
+    const pedidos=pegarPedidos(),pedido=pedidos.find(item=>String(item.id)===String(id));if(!pedido)return;
+    window.FY_ADMIN_PEDIDO_SELECIONADO=pedido.id;
+    document.querySelectorAll('#paginaAdmin .fy-admin-pedido-item').forEach(item=>item.classList.toggle('ativo',String(item.dataset.pedidoId)===String(pedido.id)));
+    const detalhe=document.getElementById('fyAdminPedidoDetalhe');if(!detalhe)return;
+    detalhe.querySelector('.fy-admin-pedido-vazio').style.display='none';detalhe.querySelector('.fy-admin-pedido-conteudo').hidden=false;
+    document.getElementById('fyAdminPedidoNumero').textContent=pedido.numero||'Pedido';
+    document.getElementById('fyAdminPedidoCliente').textContent=pedido.cliente?.nome||pedido.clienteEmail||'Cliente';
+    document.getElementById('fyAdminPedidoTotal').textContent=moedaAdmin(pedido.total);
+    const frete=pedido.freteDetalhes;document.getElementById('fyAdminPedidoEntrega').textContent=frete?frete.servico+' · '+(frete.prazo||'Prazo a confirmar')+' dias':pedido.entrega||'Entrega';
+    document.getElementById('fyAdminPedidoPagamento').textContent=pedido.pagamento||'Pagamento';
+    document.getElementById('fyAdminPedidoItens').textContent=(pedido.itens||[]).map(item=>Number(item.quantidade||1)+'x '+item.nome).join(', ')||'Nenhum item';
+    document.getElementById('fyAdminPedidoStatus').value=String(Math.max(1,Math.min(5,Number(pedido.etapa||1))));
+    document.getElementById('fyAdminPedidoRastreio').value=pedido.codigoRastreio||'';
+    document.getElementById('fyAdminPedidoFeedback').textContent='';
+  };
+  window.fyAdminSalvarPedido=function(){
+    if(typeof window.adminAutenticado==='function'&&!window.adminAutenticado()){if(typeof window.abrirAdminLogin==='function')window.abrirAdminLogin();return;}
+    const id=window.FY_ADMIN_PEDIDO_SELECIONADO;if(!id)return;
+    const pedidos=pegarPedidos(),pedido=pedidos.find(item=>String(item.id)===String(id));if(!pedido)return;
+    const etapa=Number(document.getElementById('fyAdminPedidoStatus').value||1),rastreio=String(document.getElementById('fyAdminPedidoRastreio').value||'').trim();
+    const textos=['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'];
+    pedido.etapa=etapa;pedido.status=['recebido','pagamento_aprovado','preparando','enviado','entregue'][etapa-1];pedido.statusTexto=textos[etapa-1];pedido.codigoRastreio=rastreio;pedido.atualizadoEm=new Date().toLocaleString('pt-BR');
+    localStorage.setItem('forYouPedidos',JSON.stringify(pedidos));
+    const email=String(pedido.clienteEmail||pedido.cliente?.email||'').toLowerCase();
+    if(email&&typeof window.contasSalvas==='function'){
+      const contas=window.contasSalvas(),conta=contas.find(item=>String(item.email||'').toLowerCase()===email);
+      if(conta){
+        conta.pedidos=(conta.pedidos||[]).map(item=>String(item.id)===String(id)?{...item,etapa:pedido.etapa,status:pedido.status,statusTexto:pedido.statusTexto,codigoRastreio:rastreio,atualizadoEm:pedido.atualizadoEm}:item);
+        if(typeof window.salvarContas==='function')window.salvarContas(contas);
+        if(window.contaAtual&&String(window.contaAtual.email||'').toLowerCase()===email)localStorage.setItem('forYouConta',JSON.stringify(conta));
+      }
+    }
+    if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();
+    if(typeof window.renderAdmin==='function')window.renderAdmin();
+    if(typeof window.fyAviso==='function')window.fyAviso('Atualização salva','O pedido e o acompanhamento da cliente foram atualizados.','sucesso');
+  };
+  document.addEventListener('click',function(evento){
+    const item=evento.target.closest&&evento.target.closest('#paginaAdmin .fy-admin-pedido-item');
+    if(item)window.fyAdminSelecionarPedido(item.dataset.pedidoId);
+  });
+  document.documentElement.setAttribute('data-fy-versao','32');
 })();
 </script>
 </body>
