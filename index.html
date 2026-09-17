@@ -12565,8 +12565,11 @@ const ADMIN_PASSWORD='ForYouAdmin2026';
 function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1';}
 function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');if(card)card.style.display=adminAutenticado()?'block':'none';}
 let toquesAdminLogo=0,ultimoToqueAdminLogo=0;
-function iniciarAcessoAdminLogo(){const agora=Date.now();if(agora-ultimoToqueAdminLogo>1800)toquesAdminLogo=0;ultimoToqueAdminLogo=agora;toquesAdminLogo++;if(toquesAdminLogo>=5){toquesAdminLogo=0;abrirAdminLogin();}}
-document.addEventListener('DOMContentLoaded',function(){const logo=document.getElementById('adminSecretLogo');if(logo){logo.style.cursor='pointer';logo.addEventListener('click',iniciarAcessoAdminLogo);}});
+function iniciarAcessoAdminLogo(){const agora=Date.now();if(agora-ultimoToqueAdminLogo>3000)toquesAdminLogo=0;ultimoToqueAdminLogo=agora;toquesAdminLogo++;if(toquesAdminLogo>=5){toquesAdminLogo=0;abrirAdminLogin();}}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('#adminSecretLogo,.fy-brand-logo').forEach(logo=>{logo.style.cursor='pointer';logo.addEventListener('click',iniciarAcessoAdminLogo);});
+  if(location.hash.toLowerCase()==='#admin')setTimeout(abrirAdminLogin,250);
+});
 function abrirAdminLogin(){if(adminAutenticado()){abrirAdmin();return;}const senha=prompt('Acesso restrito \u00E0 administra\u00E7\u00E3o\nDigite a senha:');if(senha===null)return;if(senha!==ADMIN_PASSWORD){alert('Senha incorreta.');return;}sessionStorage.setItem('forYouAdminAuth','1');atualizarAcessoAdmin();abrirAdmin();}
 // Acesso administrativo discreto: Ctrl + Shift + A
 document.addEventListener('keydown',function(event){if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==='a'){event.preventDefault();abrirAdminLogin();}});
@@ -23860,7 +23863,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     const item=evento.target.closest&&evento.target.closest('#paginaAdmin .fy-admin-pedido-item');
     if(item)window.fyAdminSelecionarPedido(item.dataset.pedidoId);
   });
-  document.documentElement.setAttribute('data-fy-versao','32');
+  document.documentElement.setAttribute('data-fy-versao','33');
 })();
 </script>
 </body>
