@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>FOR YOU | Beleza</title>
+<meta name="theme-color" content="#8f1f40">
+<meta name="application-name" content="For You">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="For You">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icone-for-you-192.png">
 <link rel="preload" as="image" href="logo-for-you-nova.png?v=16092026" fetchpriority="high">
 <link rel="preload" as="image" href="banner-beleza-realca.png" fetchpriority="high">
 
@@ -9717,6 +9724,7 @@ com carinho.
 <h3>ATENDIMENTO</h3>
 
 <a href="#" onclick="abrirWhatsApp();return false;">WhatsApp: (11) 98694-3367</a>
+<button class="fy-instalar-link" type="button" onclick="fyInstalarAplicativo()">Instalar aplicativo</button>
 <a href="#" onclick="abrirPolitica('trocas');return false;">Trocas e devolu&#xE7;&#xF5;es</a>
 <a href="#" onclick="abrirPolitica('privacidade');return false;">Privacidade</a>
 
@@ -24863,6 +24871,73 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
 </style>
 <script id="fy-whatsapp-oficial-v45-js">
 document.documentElement.setAttribute('data-fy-versao','45');
+</script>
+<style id="fy-pwa-v46-css">
+.fy-instalar-link{
+  display:block;margin:0 0 8px;padding:0;border:0;background:transparent;color:inherit;
+  font:inherit;text-align:left;text-decoration:none;cursor:pointer;
+}
+.fy-instalar-link:hover{text-decoration:underline}
+.fy-pwa-modal{
+  position:fixed;inset:0;z-index:12000;display:none;align-items:flex-end;justify-content:center;
+  padding:18px;background:rgba(35,23,28,.42);backdrop-filter:blur(3px);
+}
+.fy-pwa-modal.ativo{display:flex}
+.fy-pwa-card{
+  position:relative;width:min(440px,100%);padding:27px 24px 23px;border-radius:24px;
+  background:#fff;color:#2f2226;box-shadow:0 24px 70px rgba(47,34,38,.24);text-align:center;
+}
+.fy-pwa-fechar{position:absolute;right:13px;top:11px;width:36px;height:36px;border:0;background:transparent;color:#6f5e64;font-size:25px;cursor:pointer}
+.fy-pwa-icone{width:70px;height:70px;margin:0 auto 17px;border-radius:18px;overflow:hidden;box-shadow:0 8px 22px rgba(143,31,64,.16)}
+.fy-pwa-icone img{display:block;width:100%;height:100%;object-fit:cover}
+.fy-pwa-card small{display:block;margin-bottom:7px;color:#bd7187;font-size:10px;font-weight:800;letter-spacing:.18em}
+.fy-pwa-card h2{margin:0;color:#2f2226;font:500 27px/1.15 Georgia,'Times New Roman',serif}
+.fy-pwa-card p{margin:11px auto 18px;max-width:340px;color:#806f75;font-size:13px;line-height:1.55}
+.fy-pwa-passos{display:grid;gap:9px;margin:0 0 17px;text-align:left}
+.fy-pwa-passo{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:13px;background:#fff7f9;color:#4b3940;font-size:12px}
+.fy-pwa-passo b{width:25px;height:25px;flex:0 0 25px;display:grid;place-items:center;border-radius:50%;background:#8f1f40;color:#fff;font-size:11px}
+.fy-pwa-ok{width:100%;min-height:46px;border:0;border-radius:999px;background:#8f1f40;color:#fff;font-size:11px;font-weight:800;letter-spacing:.09em;cursor:pointer}
+@media(display-mode:standalone){.fy-instalar-link{display:none!important}}
+</style>
+<script id="fy-pwa-v46-js">
+(()=>{
+  let pedidoInstalacao=null;
+  const estaInstalado=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+  const ehIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+  function fechar(){document.getElementById('fyPwaModal')?.classList.remove('ativo')}
+  function modal(tipo){
+    let el=document.getElementById('fyPwaModal');
+    if(!el){
+      el=document.createElement('div');el.id='fyPwaModal';el.className='fy-pwa-modal';
+      el.innerHTML='<div class="fy-pwa-card" role="dialog" aria-modal="true" aria-labelledby="fyPwaTitulo"><button class="fy-pwa-fechar" type="button" aria-label="Fechar">×</button><div class="fy-pwa-icone"><img src="./icone-for-you-192.png" alt=""></div><small>FOR YOU NO CELULAR</small><h2 id="fyPwaTitulo">Instale nossa loja</h2><p id="fyPwaTexto"></p><div class="fy-pwa-passos" id="fyPwaPassos"></div><button class="fy-pwa-ok" type="button">ENTENDI</button></div>';
+      el.querySelector('.fy-pwa-fechar').onclick=fechar;el.querySelector('.fy-pwa-ok').onclick=fechar;
+      el.addEventListener('click',e=>{if(e.target===el)fechar()});document.body.appendChild(el);
+    }
+    const texto=el.querySelector('#fyPwaTexto'),passos=el.querySelector('#fyPwaPassos');
+    if(tipo==='ios'){
+      texto.textContent='No iPhone, faça estes passos no Safari:';
+      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Toque no botão Compartilhar na parte inferior.</div><div class="fy-pwa-passo"><b>2</b>Escolha “Adicionar à Tela de Início”.</div><div class="fy-pwa-passo"><b>3</b>Toque em “Adicionar”.</div>';
+    }else{
+      texto.textContent='Abra o menu do navegador e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.';
+      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Abra o menu do navegador.</div><div class="fy-pwa-passo"><b>2</b>Escolha instalar ou adicionar à tela inicial.</div>';
+    }
+    el.classList.add('ativo');
+  }
+  window.fyInstalarAplicativo=async function(){
+    if(estaInstalado()){alert('A For You já está instalada neste celular.');return}
+    if(pedidoInstalacao){
+      pedidoInstalacao.prompt();
+      try{await pedidoInstalacao.userChoice}catch(e){}
+      pedidoInstalacao=null;return;
+    }
+    modal(ehIOS()?'ios':'outro');
+  };
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pedidoInstalacao=e});
+  window.addEventListener('appinstalled',()=>{pedidoInstalacao=null;document.querySelectorAll('.fy-instalar-link').forEach(b=>b.style.display='none')});
+  if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(()=>{}))}
+  if(estaInstalado())document.querySelectorAll('.fy-instalar-link').forEach(b=>b.style.display='none');
+  document.documentElement.setAttribute('data-fy-versao','46');
+})();
 </script>
 </body>
 </html>
