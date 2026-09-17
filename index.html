@@ -24195,5 +24195,110 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
   document.documentElement.setAttribute('data-fy-versao','40');
 })();
 </script>
+<style id="fy-conta-icones-v41-css">
+/* Ícones lineares e somente quatro acessos principais. */
+#paginaConta .fy2-nav-item.fy-nav-oculto{display:none!important}
+#paginaConta .fy2-sidebar{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+}
+#paginaConta .fy2-nav-item:not(.fy2-logout){grid-row:1!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout) .fy2-nav-icon{
+  display:grid!important;
+  place-items:center!important;
+  color:#8d1739!important;
+  font-size:0!important;
+}
+#paginaConta .fy2-nav-icon svg{
+  display:block!important;
+  width:21px!important;
+  height:21px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.65!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+#paginaConta .fy2-logout .fy2-nav-icon svg{width:18px!important;height:18px!important}
+#paginaConta .fy2-nav-item:not(.fy2-logout).ativo .fy2-nav-icon,
+#paginaConta .fy2-nav-item:not(.fy2-logout).active .fy2-nav-icon{color:#8d1739!important}
+#paginaConta .fy2-content{display:block!important;visibility:visible!important;opacity:1!important}
+@media(max-width:370px){
+  #paginaConta .fy2-nav-item:not(.fy2-logout)>span:not(.fy2-nav-icon){font-size:9px!important}
+  #paginaConta .fy2-nav-icon svg{width:19px!important;height:19px!important}
+}
+</style>
+<script id="fy-conta-icones-v41-js">
+(()=>{
+  const icones={
+    pedidos:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m4.5 7.7 7.5 4.2 7.5-4.2M12 12v9"/></svg>',
+    dados:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg>',
+    enderecos:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5.2-8 11-8 11S4 15.2 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
+    favoritos:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5.8c-2.1-2.2-5.5-2.2-7.6 0L12 7l-1.2-1.2a5.3 5.3 0 0 0-7.6 7.4L12 22l8.8-8.8a5.3 5.3 0 0 0 0-7.4Z"/></svg>',
+    sair:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>'
+  };
+
+  function chaveDoBotao(botao){
+    const acao=String(botao.getAttribute('onclick')||'');
+    if(acao.includes('pedidosConta'))return 'pedidos';
+    if(acao.includes('dadosConta'))return 'dados';
+    if(acao.includes('enderecosConta'))return 'enderecos';
+    if(acao.includes('abrirFavoritos'))return 'favoritos';
+    return '';
+  }
+
+  function prepararNavegacao(){
+    const pagina=document.getElementById('paginaConta');
+    if(!pagina)return;
+    const botoes=[...pagina.querySelectorAll('.fy2-sidebar .fy2-nav-item')];
+    let pedidos=null;
+    let ativoOculto=false;
+    botoes.forEach(botao=>{
+      if(botao.classList.contains('fy2-logout')){
+        const icon=botao.querySelector('.fy2-nav-icon');
+        if(icon&&icon.innerHTML!==icones.sair)icon.innerHTML=icones.sair;
+        return;
+      }
+      const chave=chaveDoBotao(botao);
+      const principal=Boolean(chave);
+      botao.classList.toggle('fy-nav-oculto',!principal);
+      botao.hidden=!principal;
+      if(!principal){
+        botao.style.setProperty('display','none','important');
+        if(botao.classList.contains('ativo')||botao.classList.contains('active'))ativoOculto=true;
+        return;
+      }
+      botao.style.removeProperty('display');
+      botao.dataset.fyContaTab=chave;
+      if(chave==='pedidos')pedidos=botao;
+      const icon=botao.querySelector('.fy2-nav-icon');
+      if(icon&&icon.innerHTML!==icones[chave])icon.innerHTML=icones[chave];
+    });
+    const principalAtivo=botoes.some(botao=>!botao.hidden&&(botao.classList.contains('ativo')||botao.classList.contains('active')));
+    if(pedidos&&(!principalAtivo||ativoOculto)&&typeof window.abrirAbaConta==='function'){
+      window.abrirAbaConta('pedidosConta',pedidos);
+    }
+  }
+
+  const iniciar=()=>{
+    prepararNavegacao();
+    const abrirAnterior=window.abrirConta;
+    if(typeof abrirAnterior==='function'&&!abrirAnterior.__fyIcones41){
+      const abrirNovo=function(){
+        const retorno=abrirAnterior.apply(this,arguments);
+        setTimeout(prepararNavegacao,30);
+        return retorno;
+      };
+      abrirNovo.__fyIcones41=true;
+      window.abrirConta=abrirNovo;
+    }
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});
+  else iniciar();
+  window.addEventListener('pageshow',prepararNavegacao);
+  document.documentElement.setAttribute('data-fy-versao','41');
+})();
+</script>
 </body>
 </html>
