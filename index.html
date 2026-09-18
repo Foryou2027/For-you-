@@ -24939,5 +24939,97 @@ document.documentElement.setAttribute('data-fy-versao','45');
   document.documentElement.setAttribute('data-fy-versao','46');
 })();
 </script>
+<!-- AJUSTE VISUAL DA HOME: cabeçalho clean e responsivo -->
+<style id="fy-home-visual-clean-v1">
+:root{
+  --fy-clean-bg:#fbf8f6;
+  --fy-clean-ink:#302629;
+  --fy-clean-rose:#b97883;
+  --fy-clean-line:#eee3e2;
+}
+
+body{background:var(--fy-clean-bg)!important;color:var(--fy-clean-ink)!important}
+
+/* Barra superior mais leve */
+.topo{
+  background:var(--fy-clean-ink)!important;
+  padding:8px 14px!important;
+  font-size:9px!important;
+  letter-spacing:1.35px!important;
+}
+
+/* Cabeçalho sem frase extra abaixo/acima da marca */
+header{
+  background:rgba(255,255,255,.97)!important;
+  border-bottom:1px solid var(--fy-clean-line)!important;
+  box-shadow:0 5px 22px rgba(48,38,41,.045)!important;
+}
+.header{max-width:1280px!important;padding:15px 28px 12px!important}
+.fy-header-slogan{display:none!important}
+.header-top{align-items:center!important;gap:18px!important}
+.logo{flex:0 0 150px!important;width:150px!important}
+.fy-brand-logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;height:74px!important;overflow:hidden!important}
+.fy-brand-logo img{width:150px!important;max-width:150px!important;height:auto!important;object-fit:contain!important}
+
+/* Busca mais espaçosa e delicada */
+.fy-busca-topo{flex:1 1 auto!important;min-width:180px!important}
+.busca{max-width:560px!important;margin:0 auto!important}
+.busca-linha{height:44px!important;border:1px solid #e8dfe0!important;border-radius:24px!important;background:#fcfaf9!important;box-shadow:none!important;padding:0 8px 0 16px!important}
+.busca-linha:focus-within{border-color:var(--fy-clean-rose)!important;box-shadow:0 0 0 3px rgba(185,120,131,.10)!important}
+.busca-linha input{font-size:12px!important;color:var(--fy-clean-ink)!important}
+.busca-linha input::placeholder{color:#9b8d91!important}
+.fy-search-submit{width:34px!important;height:34px!important;border-radius:50%!important;background:var(--fy-clean-ink)!important;color:#fff!important;font-size:13px!important}
+
+/* Ações superiores: ícones simples, com menos peso visual */
+.acoes{gap:6px!important;align-items:center!important}
+.fy-top-action{min-width:62px!important;padding:5px 6px!important;color:var(--fy-clean-ink)!important;border:0!important;background:transparent!important}
+.fy-top-action:hover{background:#fff4f5!important;color:var(--fy-clean-rose)!important;border-radius:12px!important}
+.fy-action-label{font-size:8px!important;letter-spacing:.15px!important}
+.fy-heart-icon,.fy-user-icon{width:21px!important;height:21px!important;stroke-width:1.55!important}
+.fy-cart-symbol{font-size:23px!important;line-height:21px!important}
+.contador,.contador-favoritos{background:var(--fy-clean-rose)!important;border-color:#fff!important}
+
+/* Navegação com aparência de loja organizada */
+.menu-principal{border-top:1px solid #f5eeee!important;background:#fff!important}
+.fy-main-nav{max-width:800px!important;margin:auto!important;justify-content:center!important;gap:38px!important;padding:11px 16px!important}
+.fy-main-nav a{font-size:10px!important;letter-spacing:1.1px!important;color:#4c3b40!important}
+.fy-main-nav a:hover{color:var(--fy-clean-rose)!important}
+
+/* Ajuste visual do primeiro banner */
+.fy-banner-r10,.hero-premium,.hero-novo{
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.hero-content-premium h2,.hero-novo .hero-content-premium h2{
+  color:var(--fy-clean-ink)!important;
+  text-shadow:none!important;
+}
+.hero-actions .btn-hero-primary,.hero-novo .btn-hero-primary{
+  background:var(--fy-clean-ink)!important;
+  border-color:var(--fy-clean-ink)!important;
+  border-radius:999px!important;
+}
+.hero-actions .btn-hero-secondary{border-radius:999px!important}
+
+@media(max-width:700px){
+  .topo{font-size:8px!important;letter-spacing:1px!important;padding:7px 8px!important}
+  .header{padding:8px 11px 10px!important}
+  .header-top{gap:6px 8px!important}
+  .header-top .logo{width:96px!important;flex-basis:96px!important}
+  .fy-brand-logo{width:96px!important;height:74px!important}
+  .fy-brand-logo img{width:112px!important;max-width:112px!important}
+  .fy-busca-topo{min-width:0!important}
+  .busca-linha{height:39px!important;padding-left:12px!important}
+  .fy-search-submit{width:30px!important;height:30px!important;font-size:11px!important}
+  .acoes{gap:1px!important}
+  .fy-top-action{min-width:34px!important;padding:4px 2px!important}
+  .fy-action-label{display:none!important}
+  .fy-heart-icon,.fy-user-icon{width:20px!important;height:20px!important}
+  .fy-cart-symbol{font-size:21px!important}
+  .fy-main-nav{justify-content:flex-start!important;gap:24px!important;overflow-x:auto!important;white-space:nowrap!important;padding:10px 14px!important;scrollbar-width:none!important}
+  .fy-main-nav::-webkit-scrollbar{display:none!important}
+  .fy-main-nav a{font-size:9px!important;letter-spacing:.8px!important}
+}
+</style>
 </body>
 </html>
