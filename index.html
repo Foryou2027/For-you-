@@ -25147,5 +25147,97 @@ header{
 })();
 </script>
 
+
+<script id="fy-frete-unico-v33">
+(function(){
+  const KEY='forYouFreteEscolhidoV33';
+
+  function moedaNumero(txt){
+    if(typeof txt==='number') return txt;
+    const n=String(txt||'').replace(/[^\d,.-]/g,'').replace(/\./g,'').replace(',','.');
+    return Number(n)||0;
+  }
+
+  function guardarFrete(){
+    let escolhido=null;
+
+    document.querySelectorAll('#paginaCarrinhoFY input[type="radio"]:checked, #fyCarrinhoPagina input[type="radio"]:checked, #paginaCarrinhoV17 input[type="radio"]:checked').forEach(function(radio){
+      const linha=radio.closest('.entrega,.fy-frete-opcao,.fy-cp-frete-opcao,.shipping-option,label');
+      if(!linha)return;
+      const texto=(linha.innerText||'').trim();
+      const nome=(linha.querySelector('.entrega-nome,strong,b')?.textContent||texto.split('\n')[0]||'Entrega').trim();
+      const valorTxt=(linha.querySelector('.valor-entrega,[data-valor],.preco')?.textContent||texto.match(/R\$\s*[\d.,]+/)?.[0]||'0');
+      escolhido={nome:nome,valor:moedaNumero(valorTxt),texto:texto};
+    });
+
+    if(!escolhido && typeof entregaSelecionada!=='undefined' && entregaSelecionada){
+      escolhido={
+        nome:String(entregaSelecionada),
+        valor:typeof freteAtual!=='undefined'?Number(freteAtual||0):0,
+        texto:String(entregaSelecionada)
+      };
+    }
+
+    if(escolhido) localStorage.setItem(KEY,JSON.stringify(escolhido));
+    return escolhido;
+  }
+
+  function aplicarFreteNoCheckout(){
+    let f=null;
+    try{f=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+    if(!f)return;
+
+    if(typeof freteAtual!=='undefined') freteAtual=Number(f.valor||0);
+    window.freteAtual=Number(f.valor||0);
+    window.FY_FRETE_CALCULADO=true;
+
+    const nome=String(f.nome||f.texto||'Entrega');
+    const low=nome.toLowerCase();
+    const tipo=low.includes('sedex')||low.includes('express')?'expressa':'padrao';
+    if(typeof entregaSelecionada!=='undefined') entregaSelecionada=tipo;
+    window.entregaSelecionada=tipo;
+
+    const area=document.querySelector('#paginaCheckout .fy-checkout-frete-linha, #paginaCheckout .entregas, #paginaCheckout [data-passo="1"]');
+    if(area){
+      area.innerHTML='<div class="fy-frete-ja-escolhido" style="padding:14px;border:1px solid #ead9de;border-radius:12px;background:#fff"><strong>'+nome+'</strong><div style="margin-top:5px;font-size:12px;color:#777">Frete escolhido na sacola</div></div>';
+    }
+
+    const frete=document.getElementById('checkoutFrete');
+    if(frete) frete.textContent=Number(f.valor||0)>0
+      ? Number(f.valor).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
+      : 'Grátis';
+
+    if(typeof renderCheckout==='function'){
+      try{renderCheckout()}catch(e){}
+    }
+  }
+
+  const abrirAnterior=window.fyAbrirCheckoutDireto;
+  window.fyAbrirCheckoutDireto=async function(){
+    const f=guardarFrete();
+    if(!f){
+      alert('Escolha uma opção de entrega antes de finalizar a compra.');
+      return;
+    }
+    if(typeof abrirAnterior==='function') await abrirAnterior();
+    setTimeout(aplicarFreteNoCheckout,50);
+  };
+
+  window.fyFinalizarCompra=window.fyAbrirCheckoutDireto;
+  window.finalizarCompraV17=window.fyAbrirCheckoutDireto;
+
+  /* Evita novo cálculo automático dentro do checkout. */
+  const calcularOriginal=window.calcularFreteCheckout;
+  window.calcularFreteCheckout=async function(){
+    let f=null;
+    try{f=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+    if(f){aplicarFreteNoCheckout();return f;}
+    if(typeof calcularOriginal==='function') return calcularOriginal.apply(this,arguments);
+  };
+
+  document.documentElement.setAttribute('data-fy-versao','33');
+})();
+</script>
+
 </body>
 </html>
