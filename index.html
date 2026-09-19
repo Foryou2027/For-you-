@@ -25513,5 +25513,94 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 })();
 </script>
 
+
+<style id="fy-mobile-frete-sem-duplicar-v37">
+/*
+  V37 — correção SOMENTE visual para celular.
+  Não altera cálculo, preço, prazo, SuperFrete ou seleção da modalidade.
+*/
+@media (max-width: 768px){
+  /* Se versões antigas da área de frete estiverem presentes junto da atual,
+     mantém somente a área oficial da sacola. */
+  body:has(#paginaCarrinhoFY) #fyCarrinhoPagina .fy-frete-opcoes,
+  body:has(#paginaCarrinhoFY) #paginaCarrinhoV17 .fy-frete-opcoes,
+  body:has(#paginaCarrinhoFY) #fyCarrinhoPagina .entregas,
+  body:has(#paginaCarrinhoFY) #paginaCarrinhoV17 .entregas{
+    display:none!important;
+  }
+}
+</style>
+
+<script id="fy-mobile-frete-sem-duplicar-v37">
+(function(){
+  function mobile(){ return window.matchMedia('(max-width: 768px)').matches; }
+
+  function assinatura(el){
+    const txt=(el.innerText||'')
+      .replace(/\s+/g,' ')
+      .replace(/Selecionar/gi,'')
+      .trim()
+      .toLowerCase();
+    return txt;
+  }
+
+  function removerDuplicadosVisuais(){
+    if(!mobile()) return;
+
+    const raiz =
+      document.querySelector('#paginaCarrinhoFY') ||
+      document.querySelector('#fyCarrinhoPagina') ||
+      document.querySelector('#paginaCarrinhoV17');
+
+    if(!raiz) return;
+
+    /* Procura opções dentro de cada lista separadamente.
+       Só esconde uma opção quando o conteúdo visível é realmente idêntico. */
+    const listas = raiz.querySelectorAll(
+      '.fy-frete-opcoes,.fy-cp-entregas,.entregas,[class*="frete-opcoes"],[class*="entrega-opcoes"]'
+    );
+
+    listas.forEach(function(lista){
+      const candidatos=[...lista.children].filter(function(el){
+        const t=(el.innerText||'').trim();
+        return t && /R\$\s*[\d.,]+/.test(t);
+      });
+
+      const vistos=new Set();
+      candidatos.forEach(function(el){
+        const sig=assinatura(el);
+        if(!sig) return;
+        if(vistos.has(sig)){
+          el.style.setProperty('display','none','important');
+          el.setAttribute('data-fy-duplicado-mobile','1');
+        }else{
+          vistos.add(sig);
+          if(el.getAttribute('data-fy-duplicado-mobile')==='1'){
+            el.style.removeProperty('display');
+            el.removeAttribute('data-fy-duplicado-mobile');
+          }
+        }
+      });
+    });
+  }
+
+  let timer;
+  function agendar(){
+    clearTimeout(timer);
+    timer=setTimeout(removerDuplicadosVisuais,40);
+  }
+
+  document.addEventListener('DOMContentLoaded',agendar);
+  document.addEventListener('click',agendar);
+  window.addEventListener('resize',agendar);
+
+  const obs=new MutationObserver(agendar);
+  obs.observe(document.documentElement,{subtree:true,childList:true});
+
+  setTimeout(removerDuplicadosVisuais,250);
+  document.documentElement.setAttribute('data-fy-versao','37');
+})();
+</script>
+
 </body>
 </html>
