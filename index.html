@@ -25092,5 +25092,77 @@ header{
   .fy-main-nav a{font-size:9px!important;letter-spacing:.8px!important}
 }
 </style>
+
+<script id="fy-fix-finalizacao-pagbank-v31">
+(function(){
+  async function abrirCheckoutForYou(){
+    if(!Array.isArray(window.carrinho) && typeof carrinho !== 'undefined'){
+      window.carrinho = carrinho;
+    }
+
+    const sacola = (typeof carrinho !== 'undefined' && Array.isArray(carrinho))
+      ? carrinho
+      : (Array.isArray(window.carrinho) ? window.carrinho : []);
+
+    if(!sacola.length){
+      alert('Sua sacola está vazia. Adicione um produto para continuar.');
+      return;
+    }
+
+    const botao = document.querySelector(
+      '.fy-cp-checkout,.fy-cart-page-finalizar,.fy17-checkout,.fy-finalizar-compra'
+    );
+    const textoOriginal = botao?.textContent;
+
+    if(botao){
+      botao.disabled = true;
+      botao.textContent = 'ABRINDO CHECKOUT...';
+    }
+
+    try{
+      /* Fecha somente as telas de carrinho antigas antes de abrir o checkout. */
+      [
+        'fyCarrinhoPagina',
+        'paginaCarrinhoFY',
+        'paginaCarrinhoV17'
+      ].forEach(function(id){
+        const el = document.getElementById(id);
+        if(el) el.classList.remove('ativa','ativo','aberto');
+      });
+
+      document.body.classList.remove('fy-cart-open','carrinho-aberto');
+
+      if(typeof window.abrirCheckout !== 'function'){
+        throw new Error('O checkout da loja não foi carregado. Atualize a página e tente novamente.');
+      }
+
+      await window.abrirCheckout();
+
+      /* Garantia visual: se o checkout foi carregado, ele precisa ficar visível. */
+      const checkout = document.getElementById('paginaCheckout');
+      if(checkout){
+        checkout.classList.add('ativa');
+        document.body.classList.add('fy-area-interna');
+        window.scrollTo({top:0,left:0,behavior:'auto'});
+      }
+    }catch(e){
+      console.error('Erro ao abrir checkout:', e);
+      alert(e?.message || 'Não foi possível abrir a finalização. Tente novamente.');
+    }finally{
+      if(botao){
+        botao.disabled = false;
+        botao.textContent = textoOriginal || 'FINALIZAR COMPRA';
+      }
+    }
+  }
+
+  /* Esta é a versão final usada por todos os botões antigos da loja. */
+  window.fyFinalizarCompra = abrirCheckoutForYou;
+  window.finalizarCompraV17 = abrirCheckoutForYou;
+
+  document.documentElement.setAttribute('data-fy-versao','31');
+})();
+</script>
+
 </body>
 </html>
