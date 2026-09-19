@@ -25239,5 +25239,83 @@ header{
 })();
 </script>
 
+
+<style id="fy-pagbank-ui-v34">
+#paginaCheckout .pagamento-opcoes,
+#paginaCheckout .fy-pagamento-grid,
+#paginaCheckout .pagamento-detalhes,
+#paginaCheckout .fy-pix-box,
+#paginaCheckout .pix-box,
+#paginaCheckout [class*="pix-manual"]{display:none!important}
+#fyPagBankPagamentoV34{
+  display:block!important;background:#fff;border:1px solid #ead9de;border-radius:18px;
+  padding:22px;margin:12px 0 4px;text-align:left
+}
+#fyPagBankPagamentoV34 h3{margin:0 0 8px;font-size:20px;color:#351f27}
+#fyPagBankPagamentoV34 p{margin:0;color:#776a6f;font-size:13px;line-height:1.6}
+#fyPagBankPagamentoV34 .fy-pagbank-seguro{
+  margin-top:14px;padding:12px;border-radius:12px;background:#fff8fa;
+  color:#66585d;font-size:11px
+}
+#paginaCheckout .fy-checkout-confirmar{font-size:0!important}
+#paginaCheckout .fy-checkout-confirmar::after{content:"CONTINUAR PARA O PAGBANK";font-size:11px!important}
+</style>
+
+<script id="fy-pagbank-ui-v34">
+(function(){
+  function limparPagamentoAntigo(){
+    const pagina=document.getElementById('paginaCheckout');
+    if(!pagina)return;
+
+    const textos=[
+      'Pagamento via Pix',
+      'envie o comprovante pelo WhatsApp',
+      'VALOR DO PEDIDO',
+      'FAVORECIDA',
+      'CHAVE PIX'
+    ];
+
+    pagina.querySelectorAll('div,section,article,aside').forEach(function(el){
+      const t=(el.innerText||'').trim();
+      if(!t)return;
+      if(textos.some(x=>t.includes(x)) && el.children.length < 20){
+        el.style.display='none';
+      }
+    });
+
+    let box=document.getElementById('fyPagBankPagamentoV34');
+    if(!box){
+      box=document.createElement('div');
+      box.id='fyPagBankPagamentoV34';
+      box.innerHTML=
+        '<h3>Pagamento seguro</h3>'+
+        '<p>Ao continuar, você será direcionada ao ambiente seguro do PagBank para escolher e concluir o pagamento.</p>'+
+        '<div class="fy-pagbank-seguro">🔒 Pagamento processado pelo PagBank. Seus dados de pagamento não ficam expostos nesta página.</div>';
+
+      const confirmar=pagina.querySelector('.fy-checkout-confirmar');
+      const acoes=confirmar?.closest('.checkout-acoes');
+      if(acoes) acoes.parentNode.insertBefore(box,acoes);
+      else pagina.appendChild(box);
+    }
+  }
+
+  document.addEventListener('click',function(e){
+    if(e.target.closest && e.target.closest('#paginaCheckout .checkout-etapa,#paginaCheckout .fy-checkout-proximo')){
+      setTimeout(limparPagamentoAntigo,30);
+    }
+  });
+
+  const obs=new MutationObserver(function(){
+    if(document.getElementById('paginaCheckout')?.classList.contains('ativa')){
+      limparPagamentoAntigo();
+    }
+  });
+  obs.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+
+  limparPagamentoAntigo();
+  document.documentElement.setAttribute('data-fy-versao','34');
+})();
+</script>
+
 </body>
 </html>
