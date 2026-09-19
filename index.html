@@ -13,7 +13,7 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icone-for-you-192.png">
 <link rel="preload" as="image" href="logo-for-you-nova.png?v=16092026" fetchpriority="high">
-<link rel="preload" as="image" href="banner-for-you-escolhido.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="banner-for-you-sem-faixa.jpg" fetchpriority="high">
 
 <!-- Evita que o celular exiba a estrutura sem os estilos durante o carregamento. -->
 <style id="fy-critical-loading">
@@ -8697,7 +8697,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
       <a href="#novidades" aria-label="Beleza que realÃ§a o seu melhor">
-        <img decoding="async" src="banner-for-you-escolhido.jpg" alt="Beleza que realÃ§a o seu melhor">
+        <img decoding="async" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
       </a>
     </div>
   </div>
@@ -25517,5 +25517,39 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </script>
 
 <script id="fy-versao-v39">document.documentElement.setAttribute("data-fy-versao","39");</script>
+
+<!-- Ajuste localizado: banner desktop amplo; celular preservado -->
+<style id="fy-banner-desktop-amplo-sem-faixa-20260919">
+@media (min-width: 801px) {
+  .fy-banner-r10 {
+    width: calc(100% - 32px) !important;
+    max-width: 1380px !important;
+    margin: 14px auto 4px !important;
+    padding: 0 !important;
+  }
+  .fy-banner-r10-viewport {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    background: transparent !important;
+  }
+  .fy-banner-r10-track, .fy-banner-r10-track > a {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  .fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+  }
+}
+</style>
 </body>
 </html>
