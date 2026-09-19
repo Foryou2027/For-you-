@@ -25410,5 +25410,108 @@ header{
 })();
 </script>
 
+
+<style id="fy-checkout-etapas-v36">
+/* O aviso PagBank só aparece na etapa de pagamento/confirmar. */
+#fyPagBankPagamentoV34{display:none!important}
+html[data-fy-checkout-etapa="2"] #fyPagBankPagamentoV34,
+html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
+</style>
+
+<script id="fy-checkout-fluxo-v36">
+(function(){
+  const FRETE_KEY='forYouFreteEscolhidoV33';
+
+  function lerFrete(){
+    try{return JSON.parse(localStorage.getItem(FRETE_KEY)||'null')}catch(e){return null}
+  }
+
+  function garantirFrete(){
+    const f=lerFrete();
+    if(!f)return false;
+
+    const nome=String(f.nome||f.texto||'Entrega');
+    const low=nome.toLowerCase();
+    const tipo=(low.includes('sedex')||low.includes('express'))?'expressa':'padrao';
+    const valor=Number(f.valor||0);
+
+    try{ entregaSelecionada=tipo; }catch(e){}
+    try{ freteAtual=valor; }catch(e){}
+    window.entregaSelecionada=tipo;
+    window.freteAtual=valor;
+    window.FY_FRETE_CALCULADO=true;
+
+    const cep=String(document.getElementById('checkoutCEP')?.value||'').replace(/\D/g,'');
+    if(cep.length===8)window.FY_FRETE_CEP=cep;
+
+    return true;
+  }
+
+  function etapaAtualVisual(){
+    const etapas=[...document.querySelectorAll('#paginaCheckout .checkout-etapa')];
+    const i=etapas.findIndex(x=>x.classList.contains('ativa'));
+    return i<0?0:i;
+  }
+
+  function sincronizarEtapa(){
+    const i=etapaAtualVisual();
+    document.documentElement.setAttribute('data-fy-checkout-etapa',String(i));
+    garantirFrete();
+  }
+
+  /* Corrige especificamente o avanço da etapa Entrega quando o frete veio da sacola. */
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest && e.target.closest('#paginaCheckout .fy-checkout-proximo');
+    if(!btn)return;
+
+    const etapa=etapaAtualVisual();
+    if(etapa!==1)return;
+
+    const f=lerFrete();
+    if(!f)return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    garantirFrete();
+
+    if(typeof window.fyCheckoutIrPara==='function'){
+      window.fyCheckoutIrPara(2,true);
+      setTimeout(sincronizarEtapa,20);
+    }
+  },true);
+
+  /* Mantém o estado interno do frete correto ao abrir/reabrir o checkout. */
+  const abrir=window.fyAbrirCheckoutDireto;
+  if(typeof abrir==='function'){
+    window.fyAbrirCheckoutDireto=async function(){
+      const r=await abrir.apply(this,arguments);
+      garantirFrete();
+      setTimeout(sincronizarEtapa,30);
+      return r;
+    };
+    window.fyFinalizarCompra=window.fyAbrirCheckoutDireto;
+    window.finalizarCompraV17=window.fyAbrirCheckoutDireto;
+  }
+
+  document.addEventListener('click',function(e){
+    if(e.target.closest && e.target.closest('#paginaCheckout .checkout-etapa,#paginaCheckout .fy-checkout-proximo,#paginaCheckout .fy-checkout-voltar')){
+      setTimeout(sincronizarEtapa,30);
+    }
+  });
+
+  const obs=new MutationObserver(function(){
+    if(document.getElementById('paginaCheckout')?.classList.contains('ativa')){
+      sincronizarEtapa();
+    }
+  });
+  obs.observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:['class']});
+
+  garantirFrete();
+  sincronizarEtapa();
+  document.documentElement.setAttribute('data-fy-versao','36');
+})();
+</script>
+
 </body>
 </html>
