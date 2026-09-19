@@ -20774,15 +20774,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(!Array.isArray(carrinho)||!carrinho.length)throw new Error('Adicione produtos \u00E0 sacola antes de calcular.');
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
     if(!sb)throw new Error('A conex\u00E3o de entrega ainda n\u00E3o est\u00E1 dispon\u00EDvel.');
-    const requisicao=sb.functions.invoke('calcular-frete',{body:{cep:limpo,itens:itensCotacao(),valorPedido:subtotalCarrinho()}});
-    let relogio;
-    const limite=new Promise((_,reject)=>{
-      relogio=setTimeout(()=>reject(new Error('A consulta de entrega demorou demais. Confira sua conexão e tente novamente.')),18000);
-    });
-    let resultado;
-    try{resultado=await Promise.race([requisicao,limite]);}
-    finally{clearTimeout(relogio);}
-    const {data,error}=resultado;
+    const {data,error}=await sb.functions.invoke('calcular-frete',{body:{cep:limpo,itens:itensCotacao(),valorPedido:subtotalCarrinho()}});
     if(error)throw new Error(error.message||'Falha ao consultar a SuperFrete.');
     if(data?.erro)throw new Error(data.erro);
     const lista=opcoesValidas(data?.opcoes);
@@ -20797,7 +20789,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
       expressa:rapida?{...rapida,preco:rapida._preco,prazo:rapida._prazo,nome:rapida._nome,gratis}:null
     };
     window.FY_FRETE_CALCULADO=true;window.FY_FRETE_CEP=limpo;
-    valoresFrete={padrao:economica._preco,expressa:rapida?rapida._preco:economica._preco};
+    valoresFrete={padrao:economica._preco,expressa:rapida?rapida._preco:null};
     return window.FY_FRETES;
   }
   function textoPrazo(op){return op.prazo?op.prazo+' dia'+(op.prazo===1?'':'s')+' \u00FAteis':'Prazo informado pela transportadora'}
@@ -20806,14 +20798,12 @@ body.fy-pagina-exclusiva .pagina.ativa{
     const botoes=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao');
     if(!botoes||botoes.length<2)return;
     botoes[0].innerHTML='\u{1F69A} '+fretes.padrao.nome+'<br><small>'+textoPrazo(fretes.padrao)+' \u2022 '+valorExibido(fretes.padrao)+'</small>';
-    if(fretes.expressa){
-      botoes[1].hidden=false;
-      botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';
-    }else{botoes[1].hidden=true;}
+    if(fretes.expressa){botoes[1].hidden=false;botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';}
+    else{botoes[1].hidden=true;}
   }
   function renderOpcoes(alvo,fretes,origem){
     if(!alvo)return;
-    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].filter(tipo=>fretes[tipo]).map(tipo=>{
+    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].filter(tipo=>!!fretes[tipo]).map(tipo=>{
       const op=fretes[tipo];return '<button type="button" class="fy-superfrete-opcao" data-tipo="'+tipo+'"><span><strong>'+op.nome+'</strong><small>'+textoPrazo(op)+'</small></span><span>'+valorExibido(op)+'</span></button>';
     }).join('')+'</div>';
     alvo.querySelectorAll('.fy-superfrete-opcao').forEach(btn=>btn.addEventListener('click',()=>{
@@ -25524,9 +25514,6 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 })();
 </script>
 
-
-
-
-
+<script id="fy-versao-v39">document.documentElement.setAttribute("data-fy-versao","39");</script>
 </body>
 </html>
