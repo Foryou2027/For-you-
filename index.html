@@ -21255,22 +21255,83 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endere\u00E7o salvo.';return;}
     if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma op\u00E7\u00E3o de entrega antes de confirmar.';return;}
     if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
-    const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');const textoBotao=botao?.textContent;
-    if(botao){botao.disabled=true;botao.textContent='REGISTRANDO PEDIDO...';}
+
+    const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');
+    const textoBotao=botao?.textContent;
+    if(botao){botao.disabled=true;botao.textContent='ABRINDO PAGBANK...';}
+
     const itensAntes=carrinho.map(item=>({...item}));
+
     try{
       const codigoCupom=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
-      const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:codigoCupom==='BEMVINDA10'?codigoCupom:'',itens:itensAntes.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}))}});
-      if(error)throw new Error(await mensagemErroFuncao(error)||'N\u00E3o foi poss\u00EDvel registrar o pedido.');if(data?.erro)throw new Error(data.erro);if(!data?.pedido)throw new Error('O pedido n\u00E3o foi confirmado pelo servidor.');
+
+      // 1) Registra o pedido normalmente no Supabase.
+      const {data,error}=await sb.functions.invoke('criar-pedido',{
+        body:{
+          cep,
+          tipo_frete:entregaSelecionada,
+          cupom:codigoCupom==='BEMVINDA10'?codigoCupom:'',
+          itens:itensAntes.map(item=>({
+            produto_id:Number(item.id),
+            quantidade:Number(item.quantidade||1),
+            variante:item.variante||item.sabor||item.cor||''
+          }))
+        }
+      });
+
+      if(error)throw new Error(await mensagemErroFuncao(error)||'N\u00E3o foi poss\u00EDvel registrar o pedido.');
+      if(data?.erro)throw new Error(data.erro);
+      if(!data?.pedido)throw new Error('O pedido n\u00E3o foi confirmado pelo servidor.');
+
       const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
       localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
-      carrinho.length=0;if(typeof salvar==='function')salvar();else localStorage.setItem('forYouCarrinho','[]');
-      localStorage.setItem('forYouCarrinho','[]');localStorage.removeItem('forYouCupomCarrinho');if(typeof atualizar==='function')atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();
-      await window.fyCarregarPedidosSupabase();mostrarPedidoSucesso(pedido);
-      const end=pedido.endereco||{},perfil={nome:$('checkoutNome')?.value||'',email:$('checkoutEmail')?.value||'',telefone:$('checkoutTelefone')?.value||''};
-      abrirWhatsAppPedido(pedido,perfil.nome,perfil.email,perfil.telefone,end.logradouro||$('checkoutEndereco')?.value||'',end.numero||$('checkoutNumero')?.value||'',end.cep||cep,pedido.total);
-    }catch(e){console.warn(e);if(msg)msg.textContent=e.message||'N\u00E3o foi poss\u00EDvel registrar o pedido. Tente novamente.';}
-    finally{if(botao){botao.disabled=false;botao.textContent=textoBotao||'CONFIRMAR PEDIDO';}}
+
+      // 2) Cria o checkout no PagBank Sandbox.
+      // O carrinho N\u00C3O \u00E9 apagado aqui. Ele permanece salvo caso o PagBank apresente erro.
+      const referenciaPedido=String(
+        pedido?.id || pedido?.numero || pedido?.codigo || `FORYOU-${Date.now()}`
+      );
+
+      const itensPagBank=itensAntes.map((item,index)=>({
+        reference_id:String(item.id || index+1),
+        name:String(item.nome || item.name || 'Produto For You').substring(0,100),
+        quantity:Math.max(1,Number(item.quantidade||item.quantity||1)),
+        preco:Number(item.preco ?? item.price ?? 0)
+      }));
+
+      if(itensPagBank.some(item=>!Number.isFinite(item.preco)||item.preco<=0)){
+        throw new Error('N\u00E3o foi poss\u00EDvel identificar o valor de um dos produtos do carrinho.');
+      }
+
+      const {data:pagbank,error:erroPagBank}=await sb.functions.invoke('criar-checkout-pagbank',{
+        body:{
+          reference_id:`FORYOU-${referenciaPedido}`,
+          items:itensPagBank
+        }
+      });
+
+      if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'N\u00E3o foi poss\u00EDvel abrir o pagamento PagBank.');
+      if(pagbank?.error)throw new Error(pagbank.error);
+      if(!pagbank?.payment_url)throw new Error('O PagBank n\u00E3o retornou o link de pagamento.');
+
+      // Guarda os dados para retomarmos o pedido quando o PagBank devolver a cliente para a loja.
+      localStorage.setItem('forYouPagBankPendente',JSON.stringify({
+        pedido_id:pedido?.id||null,
+        checkout_id:pagbank.checkout_id||null,
+        reference_id:pagbank.reference_id||`FORYOU-${referenciaPedido}`,
+        criado_em:new Date().toISOString()
+      }));
+
+      if(msg)msg.textContent='Abrindo o ambiente seguro do PagBank...';
+
+      // 3) Redireciona para o checkout seguro retornado pelo PagBank.
+      window.location.href=pagbank.payment_url;
+
+    }catch(e){
+      console.warn(e);
+      if(msg)msg.textContent=e.message||'N\u00E3o foi poss\u00EDvel abrir o pagamento. Tente novamente.';
+      if(botao){botao.disabled=false;botao.textContent=textoBotao||'CONFIRMAR PEDIDO';}
+    }
   };
   window.fyFinalizarCompra=function(){
     if(!Array.isArray(carrinho)||!carrinho.length){alert('Sua sacola est\u00E1 vazia. Adicione um produto para continuar.');return;}
