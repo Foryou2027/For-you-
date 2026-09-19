@@ -25602,5 +25602,124 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 })();
 </script>
 
+
+<script id="fy-superfrete-sem-modalidade-repetida-v38">
+(function(){
+  /*
+    V38 — corrige a causa real da repetição:
+    o código antigo transformava 1 resultado da SuperFrete em
+    "padrão" + "expressa", repetindo a mesma transportadora/serviço.
+  */
+
+  function assinatura(op){
+    if(!op)return '';
+    const nome=String(op.nome||op._nome||op.name||op.service||'').trim().toLowerCase();
+    const preco=Number(op.preco??op._preco??op.price??op.custom_price??0).toFixed(2);
+    const prazo=String(op.prazo??op._prazo??op.delivery_time??op.custom_delivery_time??'');
+    return nome+'|'+preco+'|'+prazo;
+  }
+
+  function fretesUnicos(fretes){
+    if(!fretes)return [];
+    const lista=[];
+    ['padrao','expressa'].forEach(function(tipo){
+      const op=fretes[tipo];
+      if(!op)return;
+      const sig=assinatura(op);
+      if(!lista.some(x=>x.sig===sig))lista.push({tipo:tipo,op:op,sig:sig});
+    });
+    return lista;
+  }
+
+  function dinheiro(v){
+    return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  }
+
+  function prazo(op){
+    const p=Number(op?.prazo||op?._prazo||0);
+    return p ? p+' dia'+(p===1?'':'s')+' úteis' : 'Prazo informado pela transportadora';
+  }
+
+  function valor(op){
+    return op?.gratis ? 'GRÁTIS' : dinheiro(op?.preco??op?._preco??0);
+  }
+
+  function selecionar(tipo,op,alvo){
+    if(alvo){
+      alvo.querySelectorAll('.fy-superfrete-opcao').forEach(b=>b.classList.remove('ativa'));
+      const btn=alvo.querySelector('.fy-superfrete-opcao[data-tipo="'+tipo+'"]');
+      if(btn)btn.classList.add('ativa');
+    }
+    try{entregaSelecionada=tipo}catch(e){}
+    try{freteAtual=op?.gratis?0:Number(op?.preco??op?._preco??0)}catch(e){}
+    window.entregaSelecionada=tipo;
+    window.freteAtual=op?.gratis?0:Number(op?.preco??op?._preco??0);
+  }
+
+  function corrigirLista(alvo){
+    if(!alvo)return;
+    const botoes=[...alvo.querySelectorAll('.fy-superfrete-opcao')];
+    const vistos=new Set();
+
+    botoes.forEach(function(btn){
+      const texto=(btn.innerText||'').replace(/\s+/g,' ').trim().toLowerCase();
+      if(vistos.has(texto)){
+        btn.remove();
+      }else{
+        vistos.add(texto);
+      }
+    });
+
+    const restantes=alvo.querySelectorAll('.fy-superfrete-opcao');
+    if(restantes.length===1){
+      const titulo=alvo.querySelector(':scope > strong');
+      if(titulo)titulo.textContent='Entrega disponível:';
+    }
+  }
+
+  /* Depois que qualquer cálculo terminar, elimina a modalidade realmente idêntica.
+     Funciona tanto no computador quanto no celular, sem inventar uma segunda opção. */
+  const obs=new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      const alvo=m.target.closest?.('#fy18CepResultado,#checkoutFreteResultado,#enderecoBox') ||
+                 (m.target.matches?.('#fy18CepResultado,#checkoutFreteResultado,#enderecoBox')?m.target:null);
+      if(alvo)corrigirLista(alvo);
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded',function(){
+    obs.observe(document.body,{subtree:true,childList:true});
+    ['fy18CepResultado','checkoutFreteResultado','enderecoBox'].forEach(id=>corrigirLista(document.getElementById(id)));
+  });
+
+  if(document.body)obs.observe(document.body,{subtree:true,childList:true});
+
+  /* Também salva corretamente a escolha feita nos botões da SuperFrete.
+     A versão antiga procurava apenas radio buttons. */
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest?.('.fy-superfrete-opcao');
+    if(!btn)return;
+
+    setTimeout(function(){
+      const tipo=btn.dataset.tipo||'padrao';
+      const op=window.FY_FRETES?.[tipo];
+      if(!op)return;
+
+      selecionar(tipo,op,btn.closest('.fy-frete-resultado,.fy18-feedback,#enderecoBox'));
+
+      localStorage.setItem('forYouFreteEscolhidoV33',JSON.stringify({
+        nome:String(op.nome||op._nome||'Entrega'),
+        valor:op.gratis?0:Number(op.preco??op._preco??0),
+        prazo:Number(op.prazo??op._prazo??0),
+        tipo:tipo,
+        texto:(btn.innerText||'').trim()
+      }));
+    },0);
+  },true);
+
+  document.documentElement.setAttribute('data-fy-versao','38');
+})();
+</script>
+
 </body>
 </html>
