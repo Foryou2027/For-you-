@@ -20774,7 +20774,15 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(!Array.isArray(carrinho)||!carrinho.length)throw new Error('Adicione produtos \u00E0 sacola antes de calcular.');
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
     if(!sb)throw new Error('A conex\u00E3o de entrega ainda n\u00E3o est\u00E1 dispon\u00EDvel.');
-    const {data,error}=await sb.functions.invoke('calcular-frete',{body:{cep:limpo,itens:itensCotacao(),valorPedido:subtotalCarrinho()}});
+    const requisicao=sb.functions.invoke('calcular-frete',{body:{cep:limpo,itens:itensCotacao(),valorPedido:subtotalCarrinho()}});
+    let relogio;
+    const limite=new Promise((_,reject)=>{
+      relogio=setTimeout(()=>reject(new Error('A consulta de entrega demorou demais. Confira sua conexão e tente novamente.')),18000);
+    });
+    let resultado;
+    try{resultado=await Promise.race([requisicao,limite]);}
+    finally{clearTimeout(relogio);}
+    const {data,error}=resultado;
     if(error)throw new Error(error.message||'Falha ao consultar a SuperFrete.');
     if(data?.erro)throw new Error(data.erro);
     const lista=opcoesValidas(data?.opcoes);
@@ -20782,14 +20790,14 @@ body.fy-pagina-exclusiva .pagina.ativa{
     lista.sort((a,b)=>a._preco-b._preco);
     const economica=lista[0];
     const porPrazo=[...lista].sort((a,b)=>(a._prazo||999)-(b._prazo||999)||a._preco-b._preco);
-    const rapida=porPrazo.find(o=>o!==economica)||economica;
+    const rapida=porPrazo.find(o=>o!==economica)||null;
     const gratis=subtotalCarrinho()>=LIMITE_FRETE_GRATIS;
     window.FY_FRETES={
       padrao:{...economica,preco:economica._preco,prazo:economica._prazo,nome:economica._nome,gratis},
-      expressa:{...rapida,preco:rapida._preco,prazo:rapida._prazo,nome:rapida._nome,gratis}
+      expressa:rapida?{...rapida,preco:rapida._preco,prazo:rapida._prazo,nome:rapida._nome,gratis}:null
     };
     window.FY_FRETE_CALCULADO=true;window.FY_FRETE_CEP=limpo;
-    valoresFrete={padrao:economica._preco,expressa:rapida._preco};
+    valoresFrete={padrao:economica._preco,expressa:rapida?rapida._preco:economica._preco};
     return window.FY_FRETES;
   }
   function textoPrazo(op){return op.prazo?op.prazo+' dia'+(op.prazo===1?'':'s')+' \u00FAteis':'Prazo informado pela transportadora'}
@@ -20798,11 +20806,14 @@ body.fy-pagina-exclusiva .pagina.ativa{
     const botoes=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao');
     if(!botoes||botoes.length<2)return;
     botoes[0].innerHTML='\u{1F69A} '+fretes.padrao.nome+'<br><small>'+textoPrazo(fretes.padrao)+' \u2022 '+valorExibido(fretes.padrao)+'</small>';
-    botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';
+    if(fretes.expressa){
+      botoes[1].hidden=false;
+      botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';
+    }else{botoes[1].hidden=true;}
   }
   function renderOpcoes(alvo,fretes,origem){
     if(!alvo)return;
-    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].map(tipo=>{
+    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].filter(tipo=>fretes[tipo]).map(tipo=>{
       const op=fretes[tipo];return '<button type="button" class="fy-superfrete-opcao" data-tipo="'+tipo+'"><span><strong>'+op.nome+'</strong><small>'+textoPrazo(op)+'</small></span><span>'+valorExibido(op)+'</span></button>';
     }).join('')+'</div>';
     alvo.querySelectorAll('.fy-superfrete-opcao').forEach(btn=>btn.addEventListener('click',()=>{
@@ -25514,212 +25525,8 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </script>
 
 
-<style id="fy-mobile-frete-sem-duplicar-v37">
-/*
-  V37 — correção SOMENTE visual para celular.
-  Não altera cálculo, preço, prazo, SuperFrete ou seleção da modalidade.
-*/
-@media (max-width: 768px){
-  /* Se versões antigas da área de frete estiverem presentes junto da atual,
-     mantém somente a área oficial da sacola. */
-  body:has(#paginaCarrinhoFY) #fyCarrinhoPagina .fy-frete-opcoes,
-  body:has(#paginaCarrinhoFY) #paginaCarrinhoV17 .fy-frete-opcoes,
-  body:has(#paginaCarrinhoFY) #fyCarrinhoPagina .entregas,
-  body:has(#paginaCarrinhoFY) #paginaCarrinhoV17 .entregas{
-    display:none!important;
-  }
-}
-</style>
-
-<script id="fy-mobile-frete-sem-duplicar-v37">
-(function(){
-  function mobile(){ return window.matchMedia('(max-width: 768px)').matches; }
-
-  function assinatura(el){
-    const txt=(el.innerText||'')
-      .replace(/\s+/g,' ')
-      .replace(/Selecionar/gi,'')
-      .trim()
-      .toLowerCase();
-    return txt;
-  }
-
-  function removerDuplicadosVisuais(){
-    if(!mobile()) return;
-
-    const raiz =
-      document.querySelector('#paginaCarrinhoFY') ||
-      document.querySelector('#fyCarrinhoPagina') ||
-      document.querySelector('#paginaCarrinhoV17');
-
-    if(!raiz) return;
-
-    /* Procura opções dentro de cada lista separadamente.
-       Só esconde uma opção quando o conteúdo visível é realmente idêntico. */
-    const listas = raiz.querySelectorAll(
-      '.fy-frete-opcoes,.fy-cp-entregas,.entregas,[class*="frete-opcoes"],[class*="entrega-opcoes"]'
-    );
-
-    listas.forEach(function(lista){
-      const candidatos=[...lista.children].filter(function(el){
-        const t=(el.innerText||'').trim();
-        return t && /R\$\s*[\d.,]+/.test(t);
-      });
-
-      const vistos=new Set();
-      candidatos.forEach(function(el){
-        const sig=assinatura(el);
-        if(!sig) return;
-        if(vistos.has(sig)){
-          el.style.setProperty('display','none','important');
-          el.setAttribute('data-fy-duplicado-mobile','1');
-        }else{
-          vistos.add(sig);
-          if(el.getAttribute('data-fy-duplicado-mobile')==='1'){
-            el.style.removeProperty('display');
-            el.removeAttribute('data-fy-duplicado-mobile');
-          }
-        }
-      });
-    });
-  }
-
-  let timer;
-  function agendar(){
-    clearTimeout(timer);
-    timer=setTimeout(removerDuplicadosVisuais,40);
-  }
-
-  document.addEventListener('DOMContentLoaded',agendar);
-  document.addEventListener('click',agendar);
-  window.addEventListener('resize',agendar);
-
-  const obs=new MutationObserver(agendar);
-  obs.observe(document.documentElement,{subtree:true,childList:true});
-
-  setTimeout(removerDuplicadosVisuais,250);
-  document.documentElement.setAttribute('data-fy-versao','37');
-})();
-</script>
 
 
-<script id="fy-superfrete-sem-modalidade-repetida-v38">
-(function(){
-  /*
-    V38 — corrige a causa real da repetição:
-    o código antigo transformava 1 resultado da SuperFrete em
-    "padrão" + "expressa", repetindo a mesma transportadora/serviço.
-  */
-
-  function assinatura(op){
-    if(!op)return '';
-    const nome=String(op.nome||op._nome||op.name||op.service||'').trim().toLowerCase();
-    const preco=Number(op.preco??op._preco??op.price??op.custom_price??0).toFixed(2);
-    const prazo=String(op.prazo??op._prazo??op.delivery_time??op.custom_delivery_time??'');
-    return nome+'|'+preco+'|'+prazo;
-  }
-
-  function fretesUnicos(fretes){
-    if(!fretes)return [];
-    const lista=[];
-    ['padrao','expressa'].forEach(function(tipo){
-      const op=fretes[tipo];
-      if(!op)return;
-      const sig=assinatura(op);
-      if(!lista.some(x=>x.sig===sig))lista.push({tipo:tipo,op:op,sig:sig});
-    });
-    return lista;
-  }
-
-  function dinheiro(v){
-    return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-  }
-
-  function prazo(op){
-    const p=Number(op?.prazo||op?._prazo||0);
-    return p ? p+' dia'+(p===1?'':'s')+' úteis' : 'Prazo informado pela transportadora';
-  }
-
-  function valor(op){
-    return op?.gratis ? 'GRÁTIS' : dinheiro(op?.preco??op?._preco??0);
-  }
-
-  function selecionar(tipo,op,alvo){
-    if(alvo){
-      alvo.querySelectorAll('.fy-superfrete-opcao').forEach(b=>b.classList.remove('ativa'));
-      const btn=alvo.querySelector('.fy-superfrete-opcao[data-tipo="'+tipo+'"]');
-      if(btn)btn.classList.add('ativa');
-    }
-    try{entregaSelecionada=tipo}catch(e){}
-    try{freteAtual=op?.gratis?0:Number(op?.preco??op?._preco??0)}catch(e){}
-    window.entregaSelecionada=tipo;
-    window.freteAtual=op?.gratis?0:Number(op?.preco??op?._preco??0);
-  }
-
-  function corrigirLista(alvo){
-    if(!alvo)return;
-    const botoes=[...alvo.querySelectorAll('.fy-superfrete-opcao')];
-    const vistos=new Set();
-
-    botoes.forEach(function(btn){
-      const texto=(btn.innerText||'').replace(/\s+/g,' ').trim().toLowerCase();
-      if(vistos.has(texto)){
-        btn.remove();
-      }else{
-        vistos.add(texto);
-      }
-    });
-
-    const restantes=alvo.querySelectorAll('.fy-superfrete-opcao');
-    if(restantes.length===1){
-      const titulo=alvo.querySelector(':scope > strong');
-      if(titulo)titulo.textContent='Entrega disponível:';
-    }
-  }
-
-  /* Depois que qualquer cálculo terminar, elimina a modalidade realmente idêntica.
-     Funciona tanto no computador quanto no celular, sem inventar uma segunda opção. */
-  const obs=new MutationObserver(function(muts){
-    muts.forEach(function(m){
-      const alvo=m.target.closest?.('#fy18CepResultado,#checkoutFreteResultado,#enderecoBox') ||
-                 (m.target.matches?.('#fy18CepResultado,#checkoutFreteResultado,#enderecoBox')?m.target:null);
-      if(alvo)corrigirLista(alvo);
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded',function(){
-    obs.observe(document.body,{subtree:true,childList:true});
-    ['fy18CepResultado','checkoutFreteResultado','enderecoBox'].forEach(id=>corrigirLista(document.getElementById(id)));
-  });
-
-  if(document.body)obs.observe(document.body,{subtree:true,childList:true});
-
-  /* Também salva corretamente a escolha feita nos botões da SuperFrete.
-     A versão antiga procurava apenas radio buttons. */
-  document.addEventListener('click',function(e){
-    const btn=e.target.closest?.('.fy-superfrete-opcao');
-    if(!btn)return;
-
-    setTimeout(function(){
-      const tipo=btn.dataset.tipo||'padrao';
-      const op=window.FY_FRETES?.[tipo];
-      if(!op)return;
-
-      selecionar(tipo,op,btn.closest('.fy-frete-resultado,.fy18-feedback,#enderecoBox'));
-
-      localStorage.setItem('forYouFreteEscolhidoV33',JSON.stringify({
-        nome:String(op.nome||op._nome||'Entrega'),
-        valor:op.gratis?0:Number(op.preco??op._preco??0),
-        prazo:Number(op.prazo??op._prazo??0),
-        tipo:tipo,
-        texto:(btn.innerText||'').trim()
-      }));
-    },0);
-  },true);
-
-  document.documentElement.setAttribute('data-fy-versao','38');
-})();
-</script>
 
 </body>
 </html>
