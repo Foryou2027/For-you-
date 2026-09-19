@@ -25518,36 +25518,39 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 <script id="fy-versao-v39">document.documentElement.setAttribute("data-fy-versao","39");</script>
 
-<!-- Ajuste localizado: banner desktop em tamanho intermediario; celular preservado -->
+<!-- Ajuste apenas no PC: banner mais largo, sem aumentar a altura. -->
 <style id="fy-banner-desktop-amplo-sem-faixa-20260919">
 @media (min-width: 801px) {
   .fy-banner-r10 {
-    width: calc(100% - 32px) !important;
-    max-width: 760px !important;
+    width: calc(100% - 28px) !important;
+    max-width: 1360px !important;
     margin: 14px auto 4px !important;
     padding: 0 !important;
   }
   .fy-banner-r10-viewport {
     width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
     aspect-ratio: auto !important;
-    background: transparent !important;
+    overflow: hidden !important;
   }
-  .fy-banner-r10-track, .fy-banner-r10-track > a {
-    width: 100% !important;
-    min-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
+  .fy-banner-r10-track,
+  .fy-banner-r10-track > a {
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
   }
   .fy-banner-r10-track > a > img {
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
     aspect-ratio: auto !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 }
 </style>
