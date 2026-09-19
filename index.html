@@ -8482,7 +8482,7 @@ function fyFiltrarKits(botao,filtro){
         <small id="fyCpCupomMsg"></small>
       </div>
       <div class="fy-cp-row fy-cp-total"><span>Total</span><strong id="fyCpTotal">R$ 0,00</strong></div>
-      <button class="fy-cp-checkout" type="button" onclick="fyFinalizarCompra()">FINALIZAR COMPRA</button>
+      <button class="fy-cp-checkout" type="button" onclick="fyAbrirCheckoutDireto()">FINALIZAR COMPRA</button>
       <div class="fy-cp-safe">&#x1F512; Compra segura &#x2022; Seus dados protegidos</div>
     </aside>
   </div>
@@ -8507,7 +8507,7 @@ function fyFiltrarKits(botao,filtro){
         <div class="fy-cart-page-row"><span>Desconto</span><strong id="fyPageDesconto">R$ 0,00</strong></div>
         <div class="fy-cart-page-row"><span>Frete</span><strong id="fyPageFrete">A calcular</strong></div>
         <div class="fy-cart-page-row fy-cart-page-total"><span>Total</span><strong id="fyPageTotal">R$ 0,00</strong></div>
-        <button type="button" class="fy-cart-page-finalizar" onclick="fyFinalizarCompra()">FINALIZAR COMPRA</button>
+        <button type="button" class="fy-cart-page-finalizar" onclick="fyAbrirCheckoutDireto()">FINALIZAR COMPRA</button>
         <div class="fy-cart-page-seguro">&#x1F512; Compra segura &#x2022; Seus dados protegidos</div>
       </aside>
     </div>
@@ -25088,5 +25088,64 @@ header{
   .fy-main-nav a{font-size:9px!important;letter-spacing:.8px!important}
 }
 </style>
-\n<script id="fy-checkout-pagbank-canonico-v31">\n(function(){\n  async function finalizarForYou(){\n    const sacola=(typeof carrinho!=='undefined'&&Array.isArray(carrinho))?carrinho:[];\n    if(!sacola.length){alert('Sua sacola está vazia. Adicione um produto para continuar.');return;}\n    if(typeof window.abrirCheckout!=='function'){alert('O checkout ainda não carregou. Atualize a página e tente novamente.');return;}\n    await window.abrirCheckout();\n  }\n  window.fyFinalizarCompra=finalizarForYou;\n  window.finalizarCompraV17=finalizarForYou;\n  document.documentElement.setAttribute('data-fy-versao','31');\n})();\n</script>\n</body>
+\n
+<script id="fy-checkout-canonico-v32">
+(function(){
+  window.fyAbrirCheckoutDireto = async function(){
+    const sacola = (typeof carrinho !== 'undefined' && Array.isArray(carrinho)) ? carrinho : [];
+    if(!sacola.length){
+      alert('Sua sacola está vazia. Adicione um produto para continuar.');
+      return;
+    }
+
+    try{
+      if(typeof fecharCarrinho === 'function') fecharCarrinho();
+
+      ['fyCarrinhoPagina','paginaCarrinhoFY','paginaCarrinhoV17'].forEach(function(id){
+        const el=document.getElementById(id);
+        if(el){
+          el.classList.remove('ativa','ativo','aberto');
+          el.style.display='none';
+        }
+      });
+
+      if(typeof fecharTodasPaginas === 'function') fecharTodasPaginas();
+
+      const checkout=document.getElementById('paginaCheckout');
+      if(!checkout) throw new Error('A tela de finalização não foi encontrada.');
+
+      checkout.style.display='block';
+      checkout.classList.add('ativa');
+      document.body.classList.add('fy-area-interna');
+
+      if(typeof preencherCheckout === 'function'){
+        try{ preencherCheckout(); }catch(e){}
+      }
+      if(typeof renderCheckout === 'function'){
+        try{ renderCheckout(); }catch(e){}
+      }
+
+      const pix=document.querySelector('#paginaCheckout .fy-pagamento-grid .pagamento-opcao:not(:disabled)');
+      if(pix && typeof selecionarPagamento === 'function'){
+        try{ selecionarPagamento('PIX',pix); }catch(e){}
+      }
+
+      if(typeof window.fyCheckoutIrPara === 'function'){
+        try{ window.fyCheckoutIrPara(0,true); }catch(e){}
+      }
+
+      window.scrollTo({top:0,left:0,behavior:'auto'});
+    }catch(e){
+      console.error('FY checkout v32:',e);
+      alert(e && e.message ? e.message : 'Não foi possível abrir a finalização.');
+    }
+  };
+
+  window.fyFinalizarCompra = window.fyAbrirCheckoutDireto;
+  window.finalizarCompraV17 = window.fyAbrirCheckoutDireto;
+  document.documentElement.setAttribute('data-fy-versao','32');
+})();
+</script>
+
+</body>
 </html>
