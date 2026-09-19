@@ -25317,5 +25317,98 @@ header{
 })();
 </script>
 
+
+<script id="fy-cep-auto-v35">
+(function(){
+  const $=id=>document.getElementById(id);
+
+  async function buscarEnderecoCEP(cep){
+    cep=String(cep||'').replace(/\D/g,'');
+    if(cep.length!==8)return null;
+
+    const resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');
+    if(!resposta.ok)throw new Error('Não foi possível consultar o CEP.');
+    const dados=await resposta.json();
+    if(dados.erro)throw new Error('CEP não encontrado.');
+    return dados;
+  }
+
+  function preencherCampo(ids,valor){
+    for(const id of ids){
+      const el=$(id);
+      if(el){
+        el.value=valor||'';
+        el.dispatchEvent(new Event('input',{bubbles:true}));
+        el.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    }
+  }
+
+  async function preencherEnderecoAutomatico(){
+    const cepEl=$('checkoutCEP');
+    if(!cepEl)return;
+
+    const cep=cepEl.value.replace(/\D/g,'');
+    if(cep.length!==8)return;
+
+    const msg=$('checkoutMensagem');
+    try{
+      if(msg)msg.textContent='Buscando endereço...';
+
+      const d=await buscarEnderecoCEP(cep);
+
+      preencherCampo(['checkoutEndereco','checkoutRua','checkoutLogradouro'],d.logradouro);
+      preencherCampo(['checkoutBairro'],d.bairro);
+      preencherCampo(['checkoutCidade'],d.localidade);
+      preencherCampo(['checkoutEstado','checkoutUF'],d.uf);
+
+      localStorage.setItem('forYouEnderecoCheckout',JSON.stringify({
+        cep,
+        endereco:d.logradouro||'',
+        bairro:d.bairro||'',
+        cidade:d.localidade||'',
+        estado:d.uf||''
+      }));
+
+      if(msg)msg.textContent=d.logradouro
+        ? 'Endereço encontrado. Agora informe apenas o número e, se precisar, o complemento.'
+        : 'CEP encontrado. Informe a rua e o número.';
+
+      const numero=$('checkoutNumero');
+      if(numero)numero.focus();
+
+    }catch(e){
+      if(msg)msg.textContent=e.message||'Não foi possível buscar o endereço.';
+    }
+  }
+
+  function prepararCEP(){
+    const cep=$('checkoutCEP');
+    if(!cep||cep.dataset.fyCepAuto==='1')return;
+    cep.dataset.fyCepAuto='1';
+
+    cep.addEventListener('input',function(){
+      let v=this.value.replace(/\D/g,'').slice(0,8);
+      if(v.length>5)v=v.slice(0,5)+'-'+v.slice(5);
+      this.value=v;
+      if(v.replace(/\D/g,'').length===8)preencherEnderecoAutomatico();
+    });
+
+    cep.addEventListener('blur',function(){
+      if(this.value.replace(/\D/g,'').length===8)preencherEnderecoAutomatico();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',prepararCEP);
+  setTimeout(prepararCEP,300);
+
+  const obs=new MutationObserver(prepararCEP);
+  obs.observe(document.documentElement,{subtree:true,childList:true});
+
+  window.fyBuscarEnderecoCheckout=preencherEnderecoAutomatico;
+  document.documentElement.setAttribute('data-fy-versao','35');
+})();
+</script>
+
 </body>
 </html>
