@@ -8638,13 +8638,19 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 </div>
 <div class="dropdown" id="dropdown-face">
 <h3>Face</h3>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Base');return false;">Base</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Corretivo');return false;">Corretivo</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Primer');return false;">Primer</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Contorno');return false;">Contorno</a>
 <a href="#produtos" onclick="selecionarSubcategoria('face','Blush');return false;">Blush</a>
 <a href="#produtos" onclick="selecionarSubcategoria('face','Iluminador');return false;">Iluminador</a>
-<a href="#produtos" onclick="selecionarSubcategoria('face','Contorno');return false;">Contorno</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','P&#xF3; compacto');return false;">P&#xF3; compacto</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','P&#xF3; solto');return false;">P&#xF3; solto</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Fixador de maquiagem');return false;">Fixador de maquiagem</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','Paleta facial');return false;">Paleta facial</a>
 <a href="#produtos" onclick="selecionarSubcategoria('face','Bronzer');return false;">Bronzer</a>
-<a href="#produtos" onclick="selecionarSubcategoria('face','P&#xF3;');return false;">P&#xF3;</a>
-<a href="#produtos" onclick="selecionarSubcategoria('face','Primer');return false;">Primer</a>
 <a href="#produtos" onclick="selecionarSubcategoria('face','Bruma');return false;">Bruma</a>
+<a href="#produtos" onclick="selecionarSubcategoria('face','P&#xF3;');return false;">P&#xF3;</a>
 <a href="#produtos" onclick="selecionarSubcategoria('face','Fixador');return false;">Fixador</a>
 <a class="menu-ver-todos" href="#produtos" onclick="selecionarSubcategoria('face','');return false;">Ver todos</a>
 </div>
@@ -8685,7 +8691,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
   <button onclick="abrirSubmenuHomeFY('skincare')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="16" rx="12" ry="5"/><path d="M12 16v19c0 5 24 5 24 0V16M12 25c7 4 17 4 24 0"/></svg></span><b>Skincare</b></button>
   <button onclick="abrirSubmenuHomeFY('olhos')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M5 25c10-13 28-13 38 0-10 13-28 13-38 0Z"/><circle cx="24" cy="25" r="7"/><circle cx="24" cy="25" r="2"/></svg></span><b>Olhos</b></button>
   <button onclick="selecionarSubcategoria('corpo','Cabelo');return false"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M14 39c-8-13 7-17 2-30M24 39c-8-13 7-17 2-30M34 39c-8-13 7-17 2-30"/></svg></span><b>Cabelos</b></button>
-  <button onclick="abrirSubmenuHomeFY('face')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M10 37 30 17l6 6-20 20H9l1-6Z"/><path d="m29 18 5-8 5 5-4 8M12 36l5 5"/></svg></span><b>Maquiagem</b></button>
+  <button onclick="abrirSubmenuHomeFY('face')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M10 37 30 17l6 6-20 20H9l1-6Z"/><path d="m29 18 5-8 5 5-4 8M12 36l5 5"/></svg></span><b>Face</b></button>
   <button onclick="abrirSubmenuHomeFY('acessorios')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M9 18h30v23H9zM17 18v-5c0-7 14-7 14 0v5"/><path d="M17 24v3M31 24v3"/></svg></span><b>Acess&#xF3;rios</b></button>
   <button onclick="abrirSubmenuHomeFY('corpo')"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M24 41c-2-8-1-14 0-20M24 29c-8-1-13-6-14-13 8 0 13 4 14 13ZM24 24c6-2 10-7 10-14-7 2-10 7-10 14ZM25 34c7-1 12-5 13-11-7 0-12 4-13 11Z"/></svg></span><b>Corpo e Banho</b></button>
   <button onclick="document.getElementById('marcas')?.scrollIntoView({behavior:'smooth'})"><span class="fy-cat-desenho"><svg viewBox="0 0 48 48"><path d="M7 12h22l12 12-17 17L7 24V12Z"/><circle cx="17" cy="20" r="3"/></svg></span><b>Marcas</b></button>
@@ -15732,7 +15738,7 @@ function limparFiltroSubcategoria(){
     pele:["Base","Corretivo","Primer","Bruma","P\u00F3 Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
     skincare:["Sabonete Facial","Hidratante","S\u00E9rum","Esfoliante","\u00C1gua Micelar","Protetor Solar","M\u00E1scara Facial","T\u00F4nico","\u00C1rea dos Olhos","\u00D3leos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","M\u00E1scara de C\u00EDlios","Delineador","L\u00E1pis de Olho","C\u00EDlios","Cola para C\u00EDlios","Sobrancelhas"],
-    face:["Blush","Iluminador","Contorno","Bronzer","P\u00F3","Primer","Bruma","Fixador"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","P\u00F3 compacto","P\u00F3 solto","Fixador de maquiagem","Paleta facial","Bronzer","Bruma","P\u00F3","Fixador"],
     acessorios:["Pinc\u00E9is","Esponjas","Necessaires","Espelhos","Acess\u00F3rios de Cabelo","Pin\u00E7as","Organizadores"],
     corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","\u00D3leo Corporal","Desodorante","Cuidados para M\u00E3os"]
   };
@@ -19730,11 +19736,11 @@ body.fy-pagina-exclusiva .pagina.ativa{
     pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
     skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó compacto","Pó solto","Fixador de maquiagem","Paleta facial","Bronzer","Bruma","Pó","Fixador"],
     acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
     corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
   };
-  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Maquiagem",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo e Banho"};
 
   function obterMenu(){
     let box=document.getElementById("fyHomeSubmenu");
@@ -19835,11 +19841,11 @@ body.fy-pagina-exclusiva .pagina.ativa{
     pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
     skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Blush","Iluminador","Contorno","Bronzer","Pó","Primer","Bruma","Fixador"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó compacto","Pó solto","Fixador de maquiagem","Paleta facial","Bronzer","Bruma","Pó","Fixador"],
     acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
     corpo:["Todos de Corpo","Cabelo","Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
   };
-  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Maquiagem",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo e Banho"};
 
   function precoDoCard(card){
     const el=card.querySelector('.preco,.produto-preco,[data-preco]');
@@ -19895,7 +19901,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
           pele:'Encontre seus favoritos para uma pele linda',
           skincare:'Cuidados especiais para a sua rotina',
           olhos:'Destaque o seu olhar',
-          face:'Tudo para completar a sua maquiagem',
+          face:'Produtos para o rosto',
           acessorios:'Acessórios para facilitar sua rotina de beleza',
           corpo:'Cuidados para o corpo e cabelos'
         };
