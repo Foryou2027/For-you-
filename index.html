@@ -25518,8 +25518,9 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 <script id="fy-versao-v39">document.documentElement.setAttribute("data-fy-versao","39");</script>
 
-<!-- Ajuste apenas no PC: banner mais largo, sem aumentar a altura. -->
-<style id="fy-banner-desktop-amplo-sem-faixa-20260919">
+<!-- Ajuste final: banner horizontal sem cortar, benefícios inteiros, PC e celular. -->
+<style id="fy-banner-beneficios-completos-final-20260920">
+/* Computador: largura aprovada, altura preservada, sem recorte da foto. */
 @media (min-width: 801px) {
   .fy-banner-r10 {
     width: calc(100% - 28px) !important;
@@ -25544,19 +25545,16 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   .fy-banner-r10-track > a > img {
     display: block !important;
     width: 100% !important;
-    max-width: 100% !important;
     height: 380px !important;
-    min-height: 0 !important;
+    max-width: 100% !important;
     max-height: 380px !important;
     aspect-ratio: auto !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
+    transform: none !important;
   }
 }
-</style>
-
-<!-- FOR YOU: mantém o banner horizontal no celular, exibe a foto inteira e mostra todos os benefícios. -->
-<style id="fy-banner-horizontal-celular-20260920">
+/* Celular: mesmo formato horizontal, foto toda visível. */
 @media (max-width: 800px) {
   .fy-banner-r10 {
     width: calc(100% - 16px) !important;
@@ -25582,25 +25580,40 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     display: block !important;
     width: 100% !important;
     height: 100% !important;
+    max-width: 100% !important;
     max-height: none !important;
     aspect-ratio: auto !important;
     object-fit: contain !important;
     object-position: center center !important;
     transform: none !important;
   }
+}
+/* Faixa de benefícios: a imagem original inteira, sem rolagem ou corte. */
+.fy-beneficios-imagem {
+  width: calc(100% - 28px) !important;
+  max-width: 1360px !important;
+  margin: 8px auto 12px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
+  line-height: 0 !important;
+}
+.fy-beneficios-imagem img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+@media (max-width: 800px) {
   .fy-beneficios-imagem {
     width: calc(100% - 16px) !important;
-    margin: 8px auto 12px !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    border-radius: 10px !important;
-  }
-  .fy-beneficios-imagem img {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin: 0 auto !important;
+    max-width: calc(100% - 16px) !important;
+    overflow: visible !important;
   }
 }
 </style>
