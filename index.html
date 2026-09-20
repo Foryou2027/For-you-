@@ -25518,9 +25518,8 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 <script id="fy-versao-v39">document.documentElement.setAttribute("data-fy-versao","39");</script>
 
-<!-- Ajuste final: banner horizontal sem cortar, benefícios inteiros, PC e celular. -->
-<style id="fy-banner-beneficios-completos-final-20260920">
-/* Computador: largura aprovada, altura preservada, sem recorte da foto. */
+<!-- Ajuste apenas no PC: banner mais largo, sem aumentar a altura. -->
+<style id="fy-banner-desktop-amplo-sem-faixa-20260919">
 @media (min-width: 801px) {
   .fy-banner-r10 {
     width: calc(100% - 28px) !important;
@@ -25545,115 +25544,41 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   .fy-banner-r10-track > a > img {
     display: block !important;
     width: 100% !important;
-    height: 380px !important;
     max-width: 100% !important;
+    height: 380px !important;
+    min-height: 0 !important;
     max-height: 380px !important;
     aspect-ratio: auto !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center center !important;
-    transform: none !important;
   }
 }
-/* Celular: mesmo formato horizontal, foto toda visível. */
-@media (max-width: 800px) {
-  .fy-banner-r10 {
-    width: calc(100% - 16px) !important;
-    max-width: none !important;
-    margin: 9px auto 3px !important;
-    padding: 0 !important;
-  }
-  .fy-banner-r10-viewport {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    aspect-ratio: 1360 / 380 !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-  }
-  .fy-banner-r10-track,
-  .fy-banner-r10-track > a {
-    height: 100% !important;
-    min-height: 0 !important;
-    max-height: none !important;
-  }
-  .fy-banner-r10-track > a > img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: none !important;
-    aspect-ratio: auto !important;
-    object-fit: contain !important;
-    object-position: center center !important;
-    transform: none !important;
-  }
-}
-/* Faixa de benefícios: a imagem original inteira, sem rolagem ou corte. */
+</style>
+
+<!-- Correção pontual: mantém as dimensões anteriores do banner; ajusta apenas a faixa de benefícios. -->
+<style id="fy-beneficios-sem-corte-20260920">
 .fy-beneficios-imagem {
   width: calc(100% - 28px) !important;
   max-width: 1360px !important;
+  height: auto !important;
   margin: 8px auto 12px !important;
   padding: 0 !important;
   overflow: visible !important;
-  height: auto !important;
-  line-height: 0 !important;
 }
-.fy-beneficios-imagem img {
+.fy-beneficios-imagem > img {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
   height: auto !important;
   max-height: none !important;
-  margin: 0 auto !important;
   object-fit: contain !important;
-  transform: none !important;
 }
 @media (max-width: 800px) {
   .fy-beneficios-imagem {
     width: calc(100% - 16px) !important;
     max-width: calc(100% - 16px) !important;
-    overflow: visible !important;
-  }
-}
-</style>
-
-<style id="fy-corrige-banner-mobile-20260920-v2">
-/* CORREÇÃO FINAL: no celular o banner volta a ficar proporcional, sem ficar miniaturizado */
-@media (max-width: 800px) {
-  .fy-banner-r10 {
-    width: calc(100% - 16px) !important;
-    max-width: none !important;
-    margin: 10px auto 8px !important;
-    padding: 0 !important;
-  }
-  .fy-banner-r10-viewport {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    aspect-ratio: auto !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    border-radius: 14px !important;
-  }
-  .fy-banner-r10-track,
-  .fy-banner-r10-track > a {
-    width: 100% !important;
-    min-width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-  }
-  .fy-banner-r10-track > a > img {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: none !important;
-    aspect-ratio: auto !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    transform: none !important;
+    overflow-x: hidden !important;
   }
 }
 </style>
