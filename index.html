@@ -28,6 +28,10 @@
 document.documentElement.classList.add('fy-ready');
 </script>
 
+<!-- Categorias: impede que o formato antigo apareça antes dos estilos finais. -->
+<style id="fy-categorias-sem-piscar-inicio">
+.fy-clean-cat-top { visibility:hidden!important; }
+</style>
 <!-- Estilo essencial carregado primeiro para impedir a tela mobile deformada. -->
 <style id="fy-mobile-critical-first">
 @media(max-width:700px){
@@ -20855,6 +20859,9 @@ body.fy-pagina-exclusiva .pagina.ativa{
   .fy-clean-cat-top>button:not(.fy-pill) .fy-cat-desenho svg{display:block!important;width:28px!important;height:28px!important;max-width:28px!important;max-height:28px!important;fill:none!important;stroke:#b91f49!important;stroke-width:1.65!important}
   .fy-clean-cat-top>button:not(.fy-pill) b{font:400 10px/1.15 Arial,sans-serif!important;color:#26191e!important;text-align:center!important}
 }
+</style>
+<style id="fy-categorias-sem-piscar-pronto">
+.fy-clean-cat-top { visibility:visible!important; }
 </style>
 <style id="fy-auth-supabase-definitivo-css">
 #paginaConta .fy2-account{display:none}
