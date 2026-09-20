@@ -1,6 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<!-- A sacola inicia fechada desde o PRIMEIRO desenho da página; o clique continua funcionando. -->
+<style id="fy-sacola-fechada-desde-inicio">
+#carrinho:not(.aberto) {
+  transform: translateX(105%) !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: none !important;
+}
+#fyCarrinhoPagina:not(.ativa),
+#paginaCarrinhoV17:not(.ativa) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+#overlay:not(.ativo) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+</style>
+<!-- Banner: aplica as dimensões já aprovadas ANTES de desenhar a página, para não piscar. -->
+<style id="fy-banner-sem-piscar-critico">
+@media (min-width: 801px) {
+  .fy-banner-r10 {
+    width: calc(100% - 28px) !important;
+    max-width: 1360px !important;
+    margin: 14px auto 4px !important;
+    padding: 0 !important;
+  }
+  .fy-banner-r10-viewport {
+    width: 100% !important;
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+  }
+  .fy-banner-r10-track,
+  .fy-banner-r10-track > a {
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
+  }
+  .fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 380px !important;
+    min-height: 0 !important;
+    max-height: 380px !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+@media (max-width: 800px) {
+  /* Mesma proporção horizontal do PC; largura acompanha a tela do celular. */
+  .fy-banner-r10 {
+    width: calc(100% - 16px) !important;
+    max-width: calc(100% - 16px) !important;
+    padding: 0 !important;
+  }
+  .fy-banner-r10-viewport {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: 1360 / 380 !important;
+    overflow: hidden !important;
+  }
+  .fy-banner-r10-track,
+  .fy-banner-r10-track > a {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  .fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25586,6 +25673,41 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     width: calc(100% - 16px) !important;
     max-width: calc(100% - 16px) !important;
     overflow-x: hidden !important;
+  }
+}
+</style>
+
+<!-- Mantém no celular o mesmo enquadramento horizontal do banner do PC. -->
+<style id="fy-banner-mesma-proporcao-pc-celular-final">
+@media (max-width: 800px) {
+  /* Mesma proporção horizontal do PC; largura acompanha a tela do celular. */
+  .fy-banner-r10 {
+    width: calc(100% - 16px) !important;
+    max-width: calc(100% - 16px) !important;
+    padding: 0 !important;
+  }
+  .fy-banner-r10-viewport {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: 1360 / 380 !important;
+    overflow: hidden !important;
+  }
+  .fy-banner-r10-track,
+  .fy-banner-r10-track > a {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  .fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 }
 </style>
