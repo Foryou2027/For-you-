@@ -25555,8 +25555,8 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 }
 </style>
 
-<!-- FOR YOU: banner horizontal no celular, sem alterar a imagem original nem o restante da loja. -->
-<style id="fy-banner-horizontal-celular-20260919">
+<!-- FOR YOU: mantém o banner horizontal no celular, exibe a foto inteira e mostra todos os benefícios. -->
+<style id="fy-banner-horizontal-celular-20260920">
 @media (max-width: 800px) {
   .fy-banner-r10 {
     width: calc(100% - 16px) !important;
@@ -25584,9 +25584,23 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     height: 100% !important;
     max-height: none !important;
     aspect-ratio: auto !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
     transform: none !important;
+  }
+  .fy-beneficios-imagem {
+    width: calc(100% - 16px) !important;
+    margin: 8px auto 12px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 10px !important;
+  }
+  .fy-beneficios-imagem img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
   }
 }
 </style>
