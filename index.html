@@ -25617,5 +25617,45 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 }
 </style>
+
+<style id="fy-corrige-banner-mobile-20260920-v2">
+/* CORREÇÃO FINAL: no celular o banner volta a ficar proporcional, sem ficar miniaturizado */
+@media (max-width: 800px) {
+  .fy-banner-r10 {
+    width: calc(100% - 16px) !important;
+    max-width: none !important;
+    margin: 10px auto 8px !important;
+    padding: 0 !important;
+  }
+  .fy-banner-r10-viewport {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+  }
+  .fy-banner-r10-track,
+  .fy-banner-r10-track > a {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  .fy-banner-r10-track > a > img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+  }
+}
+</style>
 </body>
 </html>
