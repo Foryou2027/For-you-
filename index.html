@@ -25332,5 +25332,77 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 }
 </style>
+<style id="fy-contador-coracao-feedback-final">
+#contadorCarrinho.fy-contador-pulso{animation:fyContadorPulso .42s ease}
+.acao-favoritos.fy-coracao-piscar .fy-heart-icon{
+  fill:#e32658!important;
+  stroke:#e32658!important;
+  animation:fyCoracaoPiscar .62s ease 2;
+}
+@keyframes fyContadorPulso{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.45)}
+  100%{transform:scale(1)}
+}
+@keyframes fyCoracaoPiscar{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.3);opacity:.35}
+}
+</style>
+<script id="fy-contador-coracao-feedback-final-js">
+(function(){
+  let quantidadeAnterior=-1;
+
+  function quantidadeNaSacola(){
+    try{
+      return (typeof carrinho!=='undefined'&&Array.isArray(carrinho)?carrinho:[])
+        .reduce((total,item)=>total+Math.max(0,Number(item.quantidade)||0),0);
+    }catch(e){return 0;}
+  }
+
+  function atualizarContadorSacola(animar=true){
+    const contador=document.getElementById('contadorCarrinho');
+    if(!contador)return;
+    const quantidade=quantidadeNaSacola();
+    contador.textContent=String(quantidade);
+    contador.hidden=false;
+    contador.style.display='flex';
+    contador.setAttribute('aria-label',quantidade+' produto'+(quantidade===1?'':'s')+' na sacola');
+    if(animar&&quantidadeAnterior>=0&&quantidade!==quantidadeAnterior){
+      contador.classList.remove('fy-contador-pulso');
+      void contador.offsetWidth;
+      contador.classList.add('fy-contador-pulso');
+    }
+    quantidadeAnterior=quantidade;
+  }
+
+  function piscarCoracao(){
+    const coracao=document.querySelector('.acao-favoritos');
+    if(!coracao)return;
+    coracao.classList.remove('fy-coracao-piscar');
+    void coracao.offsetWidth;
+    coracao.classList.add('fy-coracao-piscar');
+    setTimeout(()=>coracao.classList.remove('fy-coracao-piscar'),1350);
+  }
+
+  document.addEventListener('click',function(evento){
+    const alvo=evento.target.closest?.('.favoritar');
+    if(alvo&&!alvo.classList.contains('favoritado')){
+      setTimeout(piscarCoracao,20);
+    }
+    if(evento.target.closest?.('.adicionar, .remover, .quantidade button, [aria-label*="sacola" i], .carrinho-icon')){
+      setTimeout(()=>atualizarContadorSacola(true),40);
+      setTimeout(()=>atualizarContadorSacola(false),250);
+    }
+  },true);
+
+  window.addEventListener('storage',()=>atualizarContadorSacola(true));
+  window.addEventListener('load',()=>{
+    atualizarContadorSacola(false);
+    setTimeout(()=>atualizarContadorSacola(false),500);
+  });
+  document.addEventListener('DOMContentLoaded',()=>atualizarContadorSacola(false));
+})();
+</script>
 </body>
 </html>
