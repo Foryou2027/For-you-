@@ -25485,5 +25485,134 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 })();
 </script>
+<script id="fy-busca-inteligente-final-js">
+(function(){
+  const normalizarBusca=valor=>String(valor??'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+
+  const equivalencias={
+    labios:['labio','labios','boca'],
+    batom:['batom','lipstick'],
+    gloss:['gloss','brilho labial','lip gloss','lip oil'],
+    olhos:['olho','olhos'],
+    cilios:['cilio','cilios','mascara'],
+    sobrancelha:['sobrancelha','sobrancelhas'],
+    pele:['pele','face','rosto'],
+    cabelo:['cabelo','cabelos','capilar'],
+    hidratante:['hidratante','hidratacao','hidratacao'],
+    rosa:['rosa','rose','rose'],
+    vermelho:['vermelho','vermelha','red'],
+    promoção:['promocao','oferta','desconto']
+  };
+
+  function termosDaBusca(valor){
+    return normalizarBusca(valor).split(/\s+/).filter(Boolean);
+  }
+
+  function textoDoProduto(produto){
+    return normalizarBusca([
+      produto?.nome,produto?.marca,produto?.categoria,produto?.subcategoria,
+      produto?.descricao,produto?.rotuloVariante,produto?.validade,
+      JSON.stringify(produto?.variantes||[])
+    ].filter(Boolean).join(' '));
+  }
+
+  function variantesDoTermo(termo){
+    const grupo=Object.values(equivalencias).find(lista=>lista.some(item=>normalizarBusca(item)===termo));
+    return (grupo||[termo]).map(normalizarBusca);
+  }
+
+  function combina(produto,consulta){
+    const texto=textoDoProduto(produto);
+    return termosDaBusca(consulta).every(termo=>
+      variantesDoTermo(termo).some(opcao=>texto.includes(opcao))
+    );
+  }
+
+  function catalogoBusca(){
+    const fonte=Array.isArray(window.FOR_YOU_TODOS_PRODUTOS)&&window.FOR_YOU_TODOS_PRODUTOS.length
+      ? window.FOR_YOU_TODOS_PRODUTOS
+      : (typeof produtos!=='undefined'&&Array.isArray(produtos)?produtos:[]);
+    const unicos=new Map();
+    fonte.forEach(p=>{if(p&&p.ativo!==false)unicos.set(String(p.id),p)});
+    return [...unicos.values()];
+  }
+
+  function ordenarResultados(lista,consulta){
+    const busca=normalizarBusca(consulta);
+    return [...lista].sort((a,b)=>{
+      const na=normalizarBusca(a.nome),nb=normalizarBusca(b.nome);
+      const pa=na===busca?0:na.startsWith(busca)?1:na.includes(busca)?2:3;
+      const pb=nb===busca?0:nb.startsWith(busca)?1:nb.includes(busca)?2:3;
+      return pa-pb||na.localeCompare(nb,'pt-BR');
+    });
+  }
+
+  window.buscarProdutos=function(){
+    const campo=document.getElementById('busca');
+    const consulta=campo?.value.trim()||'';
+    if(typeof fecharSugestoesBusca==='function')fecharSugestoesBusca();
+
+    if(!consulta){
+      const resultado=document.getElementById('resultadoBusca');
+      if(resultado)resultado.textContent='';
+      if(typeof renderProdutos==='function')renderProdutos();
+      return;
+    }
+
+    if(typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(normalizarBusca(consulta));
+    const encontrados=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta);
+
+    document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
+    const loja=document.getElementById('loja');
+    if(loja)loja.style.display='block';
+
+    if(typeof renderProdutos==='function')renderProdutos(encontrados,true);
+    const grade=document.getElementById('listaProdutos');
+    const resultado=document.getElementById('resultadoBusca');
+    if(resultado){
+      resultado.textContent=encontrados.length
+        ? encontrados.length+' produto'+(encontrados.length===1?'':'s')+' encontrado'+(encontrados.length===1?'':'s')+' para “'+consulta+'”.'
+        : 'Nenhum produto encontrado para “'+consulta+'”.';
+    }
+    if(!encontrados.length&&grade){
+      grade.innerHTML='<div class="busca-vazia"><strong>Não encontramos esse produto.</strong><br>Tente outro nome, marca, categoria ou cor.</div>';
+    }
+    (resultado||grade)?.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+
+  window.renderSugestoesBusca=function(){
+    const campo=document.getElementById('busca');
+    const caixa=document.getElementById('buscaSugestoes');
+    if(!campo||!caixa)return;
+    const consulta=campo.value.trim();
+    if(!consulta){
+      caixa.innerHTML='';
+      caixa.classList.remove('aberta');
+      return;
+    }
+    const lista=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta).slice(0,7);
+    caixa.innerHTML=lista.length
+      ? lista.map(p=>'<button type="button" class="busca-sugestao" data-fy-id="'+String(p.id).replace(/"/g,'&quot;')+'"><span>'+String(p.nome||'Produto')+'</span><small>'+String(p.marca||p.categoria||'Produto')+'</small></button>').join('')
+      : '<div class="busca-sugestao"><span>Nenhum produto encontrado</span><small>Tente nome, marca, categoria ou cor</small></div>';
+    caixa.classList.add('aberta');
+  };
+
+  document.addEventListener('click',function(evento){
+    const item=evento.target.closest?.('.busca-sugestao[data-fy-id]');
+    if(!item)return;
+    const produto=catalogoBusca().find(p=>String(p.id)===item.dataset.fyId);
+    if(!produto)return;
+    const campo=document.getElementById('busca');
+    if(campo)campo.value=produto.nome;
+    window.buscarProdutos();
+  });
+
+  document.addEventListener('input',function(evento){
+    if(evento.target?.id==='busca')setTimeout(window.renderSugestoesBusca,0);
+  });
+})();
+</script>
 </body>
 </html>
