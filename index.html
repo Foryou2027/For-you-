@@ -16538,7 +16538,7 @@ document.addEventListener("DOMContentLoaded", function () {
      if(!user){r.textContent="Entre na sua conta para usar o cupom de primeira compra.";return;}
      const {count,error}=await sb.from('pedidos').select('id',{count:'exact',head:true}).eq('cliente_id',user.id);
      if(error)throw error;
-     if(Number(count||0)>0){r.textContent="Este cupom \u00E9 exclusivo para a primeira compra.";return;}
+     if(Number(count||0)>0){r.textContent="N\u00E3o foi poss\u00EDvel aplicar: esta conta j\u00E1 realizou uma compra. O cupom BEMVINDA10 pode ser usado somente uma vez, na primeira compra.";return;}
      localStorage.setItem('forYouCupomCarrinho','BEMVINDA10');
      r.textContent=`Cupom aplicado! Voc\u00EA ganhou ${moeda(valor*.10)} de desconto.`;
      if(typeof window.fyRenderCarrinhoPagina==='function')window.fyRenderCarrinhoPagina();
@@ -25402,6 +25402,87 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     setTimeout(()=>atualizarContadorSacola(false),500);
   });
   document.addEventListener('DOMContentLoaded',()=>atualizarContadorSacola(false));
+})();
+</script>
+<script id="fy-validacao-cep-mensagens-final-js">
+(function(){
+  async function validarCEPInformado(valor){
+    const cep=String(valor||'').replace(/\D/g,'');
+    if(cep.length!==8){
+      throw new Error('CEP incompleto. Digite os 8 números e confira se não houve erro.');
+    }
+    let resposta;
+    try{
+      resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');
+    }catch(e){
+      throw new Error('Não foi possível consultar o CEP agora. Verifique sua internet e tente novamente.');
+    }
+    if(!resposta.ok){
+      throw new Error('Não foi possível consultar o CEP agora. Tente novamente em alguns instantes.');
+    }
+    const dados=await resposta.json();
+    if(dados?.erro){
+      throw new Error('CEP não encontrado. Confira os números digitados e tente novamente.');
+    }
+    return dados;
+  }
+
+  function mostrarErro(id,mensagem){
+    const alvo=document.getElementById(id);
+    if(alvo){
+      alvo.textContent=mensagem;
+      alvo.style.color='#a7274d';
+      alvo.setAttribute('role','alert');
+    }
+    if(typeof window.fyAviso==='function'){
+      window.fyAviso('Confira o CEP',mensagem,'erro');
+    }
+  }
+
+  const calcularCarrinho=window.fy18CalcularCep;
+  if(typeof calcularCarrinho==='function'){
+    window.fy18CalcularCep=async function(){
+      const valor=document.getElementById('fy18Cep')?.value||'';
+      try{
+        await validarCEPInformado(valor);
+        const alvo=document.getElementById('fy18CepResultado');
+        if(alvo)alvo.style.removeProperty('color');
+        return await calcularCarrinho.apply(this,arguments);
+      }catch(e){
+        mostrarErro('fy18CepResultado',e.message||'Confira o CEP digitado.');
+      }
+    };
+  }
+
+  const calcularCheckout=window.calcularFreteCheckout;
+  if(typeof calcularCheckout==='function'){
+    window.calcularFreteCheckout=async function(){
+      const valor=document.getElementById('checkoutCEP')?.value||'';
+      try{
+        await validarCEPInformado(valor);
+        const alvo=document.getElementById('checkoutFreteResultado');
+        if(alvo)alvo.style.removeProperty('color');
+        return await calcularCheckout.apply(this,arguments);
+      }catch(e){
+        mostrarErro('checkoutFreteResultado',e.message||'Confira o CEP digitado.');
+      }
+    };
+  }
+
+  const buscarCepAntigo=window.buscarCEP;
+  if(typeof buscarCepAntigo==='function'){
+    window.buscarCEP=async function(){
+      const valor=document.getElementById('cep')?.value||'';
+      try{
+        await validarCEPInformado(valor);
+        return await buscarCepAntigo.apply(this,arguments);
+      }catch(e){
+        const box=document.getElementById('enderecoBox');
+        if(box){box.textContent=e.message||'Confira o CEP digitado.';box.style.color='#a7274d';}
+        if(typeof window.fyAviso==='function')window.fyAviso('Confira o CEP',e.message||'Confira o CEP digitado.','erro');
+      }
+    };
+  }
 })();
 </script>
 </body>
