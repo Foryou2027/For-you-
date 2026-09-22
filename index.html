@@ -20497,16 +20497,13 @@ body.fy-pagina-exclusiva .pagina.ativa{
     const lista=opcoesValidas(data?.opcoes);
     if(!lista.length)throw new Error('Nenhuma op\u00E7\u00E3o de entrega foi encontrada para este CEP.');
     lista.sort((a,b)=>a._preco-b._preco);
-    const economica=lista[0];
-    const porPrazo=[...lista].sort((a,b)=>(a._prazo||999)-(b._prazo||999)||a._preco-b._preco);
-    const rapida=porPrazo.find(o=>o!==economica)||null;
     const gratis=subtotalCarrinho()>=LIMITE_FRETE_GRATIS;
-    window.FY_FRETES={
-      padrao:{...economica,preco:economica._preco,prazo:economica._prazo,nome:economica._nome,gratis},
-      expressa:rapida?{...rapida,preco:rapida._preco,prazo:rapida._prazo,nome:rapida._nome,gratis}:null
-    };
+    window.FY_FRETES=Object.fromEntries(lista.map((op,i)=>[
+      'frete_'+i,
+      {...op,preco:op._preco,prazo:op._prazo,nome:op._nome,gratis}
+    ]));
     window.FY_FRETE_CALCULADO=true;window.FY_FRETE_CEP=limpo;
-    valoresFrete={padrao:economica._preco,expressa:rapida?rapida._preco:null};
+    valoresFrete={padrao:lista[0]?._preco||0,expressa:lista[1]?._preco||null};
     return window.FY_FRETES;
   }
   function textoPrazo(op){return op.prazo?op.prazo+' dia'+(op.prazo===1?'':'s')+' \u00FAteis':'Prazo informado pela transportadora'}
@@ -20514,20 +20511,20 @@ body.fy-pagina-exclusiva .pagina.ativa{
   function atualizarBotoesCheckout(fretes){
     const botoes=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao');
     if(!botoes||botoes.length<2)return;
-    botoes[0].innerHTML='\u{1F69A} '+fretes.padrao.nome+'<br><small>'+textoPrazo(fretes.padrao)+' \u2022 '+valorExibido(fretes.padrao)+'</small>';
-    if(fretes.expressa){botoes[1].hidden=false;botoes[1].innerHTML='\u26A1 '+fretes.expressa.nome+'<br><small>'+textoPrazo(fretes.expressa)+' \u2022 '+valorExibido(fretes.expressa)+'</small>';}
-    else{botoes[1].hidden=true;}
+    botoes[0].hidden=true;
+    botoes[1].hidden=true;
   }
   function renderOpcoes(alvo,fretes,origem){
     if(!alvo)return;
-    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+['padrao','expressa'].filter(tipo=>!!fretes[tipo]).map(tipo=>{
+    const tipos=Object.keys(fretes).filter(tipo=>!!fretes[tipo]);
+    alvo.innerHTML='<strong>Escolha a entrega:</strong><div class="fy-superfrete-opcoes">'+tipos.map(tipo=>{
       const op=fretes[tipo];return '<button type="button" class="fy-superfrete-opcao" data-tipo="'+tipo+'"><span><strong>'+op.nome+'</strong><small>'+textoPrazo(op)+'</small></span><span>'+valorExibido(op)+'</span></button>';
     }).join('')+'</div>';
     alvo.querySelectorAll('.fy-superfrete-opcao').forEach(btn=>btn.addEventListener('click',()=>{
       alvo.querySelectorAll('.fy-superfrete-opcao').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');
       const tipo=btn.dataset.tipo;entregaSelecionada=tipo;freteAtual=fretes[tipo].gratis?0:Number(fretes[tipo].preco||0);
       if(origem==='checkout'){
-        const b=document.querySelectorAll('#paginaCheckout .pagamento-opcoes')[0]?.querySelectorAll('.pagamento-opcao')[tipo==='expressa'?1:0];if(b)selecionarCheckoutEntrega(tipo,b);
+        selecionarCheckoutEntrega(tipo,btn);
       }else{atualizar();if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();}
       if(typeof renderCheckout==='function')renderCheckout();
     }));
