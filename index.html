@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>
+if(window.matchMedia&&window.matchMedia('(max-width:800px)').matches){
+  document.documentElement.classList.add('fy-mobile-carregando');
+}
+</script>
+<style id="fy-mobile-estabilidade-critica">
+@media(max-width:800px){
+  html.fy-mobile-carregando{background:#fff8fa!important}
+  html.fy-mobile-carregando::before{
+    content:'FOR YOU';
+    position:fixed;
+    inset:0;
+    z-index:2147483647;
+    display:grid;
+    place-items:center;
+    background:#fff8fa;
+    color:#8d1739;
+    font:500 23px/1 Georgia,serif;
+    letter-spacing:5px;
+  }
+  html.fy-mobile-carregando body{visibility:hidden!important}
+  html.fy-mobile-carregando *,
+  html.fy-mobile-carregando *::before,
+  html.fy-mobile-carregando *::after{
+    animation:none!important;
+    transition:none!important;
+  }
+  .fy-banner-r10,
+  .fy-banner-r10-viewport,
+  .fy-banner-r10-track,
+  .fy-banner-r10-track>a{
+    contain:layout paint!important;
+  }
+  .fy-banner-r10-viewport{
+    aspect-ratio:1360/380!important;
+    height:auto!important;
+  }
+  .fy-banner-r10-track>a>img{
+    aspect-ratio:1360/380!important;
+  }
+  .produto-img{aspect-ratio:1/1!important;overflow:hidden!important}
+}
+</style>
 <!-- A sacola inicia fechada desde o PRIMEIRO desenho da página; o clique continua funcionando. -->
 <style id="fy-sacola-fechada-desde-inicio">
 #carrinho:not(.aberto) {
@@ -8788,7 +8831,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
       <a href="#novidades" aria-label="Beleza que realÃ§a o seu melhor">
-        <img decoding="async" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
+        <img decoding="async" loading="eager" fetchpriority="high" width="1360" height="380" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
       </a>
     </div>
   </div>
@@ -25612,6 +25655,99 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   document.addEventListener('input',function(evento){
     if(evento.target?.id==='busca')setTimeout(window.renderSugestoesBusca,0);
   });
+})();
+</script>
+<script id="fy-mobile-estabilidade-final-js">
+(function(){
+  let liberado=false;
+  function liberarLayoutMobile(){
+    if(liberado)return;
+    liberado=true;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      document.documentElement.classList.remove('fy-mobile-carregando');
+      document.documentElement.classList.add('fy-mobile-pronto');
+    }));
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',liberarLayoutMobile,{once:true});
+  }else{
+    liberarLayoutMobile();
+  }
+  window.addEventListener('pageshow',liberarLayoutMobile,{once:true});
+  setTimeout(liberarLayoutMobile,1800);
+})();
+</script>
+<style id="fy-mobile-sem-carregamento-em-blocos-final">
+/*
+  No Safari/iPhone, content-visibility:auto com altura intrinseca de 620px
+  fazia a home surgir em etapas e criava grandes espacos vazios durante a rolagem.
+  No celular desenhamos a home completa desde a primeira exibicao.
+*/
+@media (max-width:800px){
+  #loja > section,
+  #loja > section:not(#inicio),
+  #marcas,
+  #novidades{
+    content-visibility:visible!important;
+    contain-intrinsic-size:none!important;
+    contain:none!important;
+  }
+
+  #marcas{
+    min-height:0!important;
+    height:auto!important;
+    padding-top:28px!important;
+    padding-bottom:24px!important;
+  }
+  #marcas .fy-loved-brands-title{
+    margin:0 0 18px!important;
+  }
+  #marcas .fy-brands-grid{
+    min-height:72px!important;
+    height:auto!important;
+  }
+
+  #novidades{
+    min-height:0!important;
+    height:auto!important;
+  }
+  #novidades #listaProdutos:empty{
+    min-height:0!important;
+  }
+}
+</style>
+<script id="fy-mobile-sem-carregamento-em-blocos-final-js">
+(function(){
+  function completarHomeMobile(){
+    if(!window.matchMedia||!window.matchMedia('(max-width:800px)').matches)return;
+
+    /* As marcas sao locais e devem aparecer sem depender da consulta de produtos. */
+    try{
+      const marcas=document.getElementById('listaMarcasHome');
+      if(marcas&&!marcas.children.length&&typeof window.renderMarcasHome==='function'){
+        window.renderMarcasHome();
+      }
+    }catch(e){}
+
+    /* Atualiza novidades assim que os dados estiverem disponiveis. */
+    try{
+      const grade=document.getElementById('listaProdutos');
+      if(grade&&!grade.children.length){
+        if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();
+        else if(typeof window.renderProdutos==='function')window.renderProdutos();
+      }
+    }catch(e){}
+
+    document.documentElement.classList.add('fy-mobile-home-completa');
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',completarHomeMobile,{once:true});
+  }else completarHomeMobile();
+  window.addEventListener('load',completarHomeMobile,{once:true});
+  window.addEventListener('pageshow',completarHomeMobile);
+  setTimeout(completarHomeMobile,300);
+  setTimeout(completarHomeMobile,1000);
 })();
 </script>
 </body>
