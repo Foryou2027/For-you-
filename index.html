@@ -9683,7 +9683,7 @@ Promo&#xE7;&#xF5;es de datas especiais
             <label class="fy-admin-pedido-campo">Status do pedido
               <select id="fyAdminPedidoStatus">
                 <option value="1">Pedido recebido</option>
-                <option value="2">Pagamento aprovado</option>
+                <option value="2" disabled>Pagamento aprovado (automático)</option>
                 <option value="3">Preparando</option>
                 <option value="4">Enviado</option>
                 <option value="5">Entregue</option>
@@ -12353,8 +12353,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharPoliti
 ========================= */
 function abrirFidelidade(){fecharTodasPaginas();document.getElementById('paginaFidelidade').classList.add('ativa');renderFidelidade();window.scrollTo({top:0,behavior:'smooth'});}
 function renderFidelidade(){const conta=contaSalva();const pontos=conta&&Number(conta.pontos||0)||0;const el=document.getElementById('pontosCliente');if(el)el.textContent=pontos.toLocaleString('pt-BR');const nivel=pontos>=1000?'FOR YOU DIAMOND':pontos>=500?'FOR YOU GOLD':'FOR YOU';const prox=pontos>=1000?0:pontos>=500?1000-pontos:500-pontos;const pct=pontos>=1000?100:Math.min(100,(pontos%500)/5);const n=document.getElementById('nivelCliente');const b=document.getElementById('barraPontos');const t=document.getElementById('textoProgresso');if(n)n.textContent='N\u00EDvel '+nivel;if(b)b.style.width=pct+'%';if(t)t.textContent=prox?`Faltam ${prox} pontos para o pr\u00F3ximo n\u00EDvel.`:'Voc\u00EA alcan\u00E7ou o n\u00EDvel m\u00E1ximo atual.';}
-const ADMIN_PASSWORD='';
-function adminAutenticado(){return sessionStorage.getItem('forYouAdminAuth')==='1'&&Boolean(sessionStorage.getItem('forYouAdminPassword'));}
+sessionStorage.removeItem('forYouAdminPassword');
+sessionStorage.removeItem('forYouAdminAuth');
+let fyAdminAutorizado=false;
+function adminAutenticado(){return fyAdminAutorizado;}
 function atualizarAcessoAdmin(){const card=document.getElementById('adminCard');if(card)card.style.display=adminAutenticado()?'block':'none';}
 let toquesAdminLogo=0,ultimoToqueAdminLogo=0;
 function iniciarAcessoAdminLogo(){const agora=Date.now();if(agora-ultimoToqueAdminLogo>3000)toquesAdminLogo=0;ultimoToqueAdminLogo=agora;toquesAdminLogo++;if(toquesAdminLogo>=5){toquesAdminLogo=0;abrirAdminLogin();}}
@@ -12364,24 +12366,22 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 async function abrirAdminLogin(){
   if(adminAutenticado()){abrirAdmin();return;}
-  const senha=prompt('Acesso restrito \u00E0 administra\u00E7\u00E3o\nDigite a senha:');
-  if(senha===null)return;
   try{
-    if(typeof window.fyAdminApiComSenha!=='function')throw new Error('A conex\u00E3o administrativa ainda n\u00E3o carregou.');
-    await window.fyAdminApiComSenha(senha,'listar');
-    sessionStorage.setItem('forYouAdminPassword',senha);
-    sessionStorage.setItem('forYouAdminAuth','1');
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    const {data:{user}}=await sb.auth.getUser();
+    if(!user){alert('Entre na sua conta da loja para acessar o painel.');abrirConta();return;}
+    await window.fyAdminApi('listar');
+    fyAdminAutorizado=true;
     atualizarAcessoAdmin();
     abrirAdmin();
   }catch(error){
-    sessionStorage.removeItem('forYouAdminPassword');
-    sessionStorage.removeItem('forYouAdminAuth');
-    alert(error&&error.message?error.message:'Senha incorreta ou painel indispon\u00EDvel.');
+    fyAdminAutorizado=false;
+    alert(error?.message||'Esta conta não tem acesso ao painel.');
   }
 }
 // Acesso administrativo discreto: Ctrl + Shift + A
 document.addEventListener('keydown',function(event){if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==='a'){event.preventDefault();abrirAdminLogin();}});
-function sairAdmin(){sessionStorage.removeItem('forYouAdminAuth');sessionStorage.removeItem('forYouAdminPassword');fecharTodasPaginas();atualizarAcessoAdmin();alert('Voc\u00EA saiu do Painel Administrativo.');}
+function sairAdmin(){fyAdminAutorizado=false;fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
 function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');window.renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
 function renderAdmin(){
   if(!adminAutenticado())return;
@@ -23306,23 +23306,21 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   const etapaTexto=['Pedido recebido','Pagamento aprovado','Preparando','Enviado','Entregue'];
   const dinheiro=valor=>Number(valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 
-  async function chamarAdmin(senha,acao='listar',dados={}){
-    if(!cfg.url)throw new Error('A conex\u00E3o com o painel n\u00E3o est\u00E1 configurada.');
+  async function chamarAdmin(acao='listar',dados={}){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!cfg.url||!sb)throw new Error('A conexão com o painel não está disponível.');
+    const {data:{session},error:authError}=await sb.auth.getSession();
+    if(authError||!session?.access_token)throw new Error('Entre na sua conta novamente.');
     const resposta=await fetch(endpoint,{
       method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'apikey':cfg.anonKey||'',
-        'x-admin-password':senha||''
-      },
+      headers:{'Content-Type':'application/json','apikey':cfg.anonKey||'',Authorization:'Bearer '+session.access_token},
       body:JSON.stringify({acao,...dados})
     });
     let retorno={};try{retorno=await resposta.json()}catch(e){}
-    if(!resposta.ok)throw new Error(retorno.error||(resposta.status===401?'Senha incorreta.':'N\u00E3o foi poss\u00EDvel acessar os pedidos.'));
+    if(!resposta.ok)throw new Error(retorno.error||'Não foi possível acessar os pedidos.');
     return retorno;
   }
-  window.fyAdminApiComSenha=chamarAdmin;
-  window.fyAdminApi=(acao,dados)=>chamarAdmin(sessionStorage.getItem('forYouAdminPassword')||'',acao,dados);
+  window.fyAdminApi=chamarAdmin;
 
   function normalizarPedido(p){
     const endereco=p.endereco_entrega&&typeof p.endereco_entrega==='object'?p.endereco_entrega:{};
@@ -23377,7 +23375,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
       colocar('adminPendentes',pendentes);
       colocar('adminClientesNovos',pedidosHoje.length);
       if(lista){
-        lista.innerHTML=pedidos.length?pedidos.map(p=>`<button class="fy-admin-pedido-item" type="button" data-pedido-id="${p.id}"><span><strong>${p.numero} \u00B7 ${p.cliente.nome}</strong><small>${p.data} \u00B7 ${p.itens.length} produto(s)</small><em>${p.statusTexto}</em></span><span class="fy-admin-pedido-valor"><strong>${dinheiro(p.total)}</strong><small>${p.pagamento}</small></span></button>`).join(''):'<p class="fy-admin-pedidos-vazio">Ainda n\u00E3o existem pedidos registrados.</p>';
+        lista.innerHTML=pedidos.length?pedidos.map(p=>`<button class="fy-admin-pedido-item" type="button" data-pedido-id="${fyTextoSeguro(p.id)}"><span><strong>${fyTextoSeguro(p.numero)} \u00B7 ${fyTextoSeguro(p.cliente.nome)}</strong><small>${fyTextoSeguro(p.data)} \u00B7 ${p.itens.length} produto(s)</small><em>${fyTextoSeguro(p.statusTexto)}</em></span><span class="fy-admin-pedido-valor"><strong>${dinheiro(p.total)}</strong><small>${fyTextoSeguro(p.pagamento)}</small></span></button>`).join(''):'<p class="fy-admin-pedidos-vazio">Ainda n\u00E3o existem pedidos registrados.</p>';
       }
     }catch(error){
       if(lista)lista.innerHTML='<p class="fy-admin-pedidos-vazio">N\u00E3o foi poss\u00EDvel carregar os pedidos. Saia do painel e entre novamente.</p>';
