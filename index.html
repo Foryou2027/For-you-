@@ -25547,51 +25547,76 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 })();
 </script>
+<style id="fy-busca-sugestoes-visual-final">
+.busca{position:relative!important;z-index:220!important}
+.busca-sugestoes{
+  position:absolute!important;
+  left:0!important;right:0!important;top:calc(100% + 7px)!important;
+  display:none!important;
+  background:#fff!important;
+  border:1px solid #eadfe2!important;
+  border-radius:16px!important;
+  box-shadow:0 18px 45px rgba(53,31,39,.14)!important;
+  overflow:hidden!important;
+  max-height:min(520px,70vh)!important;
+  overflow-y:auto!important;
+  z-index:9999!important;
+}
+.busca-sugestoes.aberta{display:block!important}
+.fy-busca-atalhos{padding:11px 12px 8px!important;border-bottom:1px solid #f2e8eb!important}
+.fy-busca-atalhos-titulo{display:block!important;margin:0 0 8px!important;font-size:8px!important;font-weight:800!important;letter-spacing:1.2px!important;text-transform:uppercase!important;color:#9c858c!important}
+.fy-busca-atalhos-lista{display:flex!important;gap:7px!important;flex-wrap:wrap!important}
+.fy-busca-atalho{border:1px solid #edcfd8!important;background:#fff8fa!important;color:#713446!important;border-radius:999px!important;padding:8px 10px!important;font-size:9px!important;font-weight:700!important;line-height:1!important}
+.fy-busca-produtos-titulo{padding:11px 13px 6px!important;font-size:8px!important;font-weight:800!important;letter-spacing:1.2px!important;text-transform:uppercase!important;color:#9c858c!important}
+.busca-sugestao.fy-busca-produto{width:100%!important;border:0!important;border-bottom:1px solid #f4e8eb!important;background:#fff!important;display:grid!important;grid-template-columns:52px minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;padding:10px 12px!important;text-align:left!important;color:#26191e!important}
+.busca-sugestao.fy-busca-produto:hover{background:#fff9fb!important}
+.fy-busca-img{width:52px!important;height:52px!important;border-radius:10px!important;overflow:hidden!important;background:#faf5f6!important;display:block!important}
+.fy-busca-img img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+.fy-busca-info{min-width:0!important}
+.fy-busca-info strong{display:block!important;font-size:10px!important;line-height:1.3!important;font-weight:700!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.fy-busca-info small{display:block!important;margin-top:3px!important;font-size:8px!important;color:#907c82!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.fy-busca-preco{font-size:10px!important;font-weight:800!important;color:#b83f61!important;white-space:nowrap!important}
+.fy-busca-vazio{padding:16px!important;text-align:center!important;color:#8a767d!important;font-size:10px!important}
+@media(max-width:800px){
+  .busca-sugestoes{position:fixed!important;left:10px!important;right:10px!important;top:146px!important;max-height:calc(100dvh - 160px)!important;border-radius:15px!important}
+  .fy-busca-atalho{min-height:38px!important;padding:9px 11px!important}
+  .busca-sugestao.fy-busca-produto{grid-template-columns:56px minmax(0,1fr) auto!important;min-height:72px!important}
+  .fy-busca-img{width:56px!important;height:56px!important}
+  .fy-busca-info strong{font-size:11px!important}
+  .fy-busca-preco{font-size:11px!important}
+}
+</style>
 <script id="fy-busca-inteligente-final-js">
 (function(){
   const normalizarBusca=valor=>String(valor??'')
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const escapar=valor=>String(valor??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const moedaBusca=valor=>Number(valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 
   const equivalencias={
-    labios:['labio','labios','boca'],
-    batom:['batom','lipstick'],
-    gloss:['gloss','brilho labial','lip gloss','lip oil'],
-    olhos:['olho','olhos'],
-    cilios:['cilio','cilios','mascara'],
-    sobrancelha:['sobrancelha','sobrancelhas'],
-    pele:['pele','face','rosto'],
-    cabelo:['cabelo','cabelos','capilar'],
-    hidratante:['hidratante','hidratacao','hidratacao'],
-    rosa:['rosa','rose','rose'],
-    vermelho:['vermelho','vermelha','red'],
-    promoção:['promocao','oferta','desconto']
+    labios:['labio','labios','boca'],batom:['batom','lipstick'],
+    gloss:['gloss','brilho labial','lip gloss','lip oil'],olhos:['olho','olhos'],
+    cilios:['cilio','cilios','mascara'],sobrancelha:['sobrancelha','sobrancelhas'],
+    pele:['pele','face','rosto'],cabelo:['cabelo','cabelos','capilar'],
+    hidratante:['hidratante','hidratacao'],rosa:['rosa','rose'],
+    vermelho:['vermelho','vermelha','red'],promocao:['promocao','oferta','desconto']
   };
 
-  function termosDaBusca(valor){
-    return normalizarBusca(valor).split(/\s+/).filter(Boolean);
-  }
-
+  function termosDaBusca(valor){return normalizarBusca(valor).split(/\s+/).filter(Boolean)}
   function textoDoProduto(produto){
-    return normalizarBusca([
-      produto?.nome,produto?.marca,produto?.categoria,produto?.subcategoria,
-      produto?.descricao,produto?.rotuloVariante,produto?.validade,
-      JSON.stringify(produto?.variantes||[])
-    ].filter(Boolean).join(' '));
+    return normalizarBusca([produto?.nome,produto?.marca,produto?.categoria,produto?.subcategoria,
+      produto?.descricao,produto?.rotuloVariante,produto?.validade,JSON.stringify(produto?.variantes||[])]
+      .filter(Boolean).join(' '));
   }
-
   function variantesDoTermo(termo){
     const grupo=Object.values(equivalencias).find(lista=>lista.some(item=>normalizarBusca(item)===termo));
     return (grupo||[termo]).map(normalizarBusca);
   }
-
   function combina(produto,consulta){
     const texto=textoDoProduto(produto);
-    return termosDaBusca(consulta).every(termo=>
-      variantesDoTermo(termo).some(opcao=>texto.includes(opcao))
-    );
+    return termosDaBusca(consulta).every(termo=>variantesDoTermo(termo).some(opcao=>texto.includes(opcao)));
   }
-
   function catalogoBusca(){
     const fonte=Array.isArray(window.FOR_YOU_TODOS_PRODUTOS)&&window.FOR_YOU_TODOS_PRODUTOS.length
       ? window.FOR_YOU_TODOS_PRODUTOS
@@ -25600,79 +25625,132 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     fonte.forEach(p=>{if(p&&p.ativo!==false)unicos.set(String(p.id),p)});
     return [...unicos.values()];
   }
-
   function ordenarResultados(lista,consulta){
     const busca=normalizarBusca(consulta);
     return [...lista].sort((a,b)=>{
       const na=normalizarBusca(a.nome),nb=normalizarBusca(b.nome);
       const pa=na===busca?0:na.startsWith(busca)?1:na.includes(busca)?2:3;
       const pb=nb===busca?0:nb.startsWith(busca)?1:nb.includes(busca)?2:3;
-      return pa-pb||na.localeCompare(nb,'pt-BR');
+      return pa-pb||Number(a.preco||0)-Number(b.preco||0)||na.localeCompare(nb,'pt-BR');
     });
   }
+  function imagemBusca(produto){
+    try{return typeof fyImagemSegura==='function'?fyImagemSegura(produto?.imagem):String(produto?.imagem||'')}catch(e){return String(produto?.imagem||'')}
+  }
+  function gerarAtalhos(consulta){
+    const q=normalizarBusca(consulta), catalogo=catalogoBusca();
+    if(!q)return [];
+    const candidatos=[];
+    const base=ordenarResultados(catalogo.filter(p=>combina(p,consulta)),consulta);
+    const marcas=[...new Set(base.map(p=>String(p.marca||'').trim()).filter(Boolean))].slice(0,2);
+    marcas.forEach(m=>candidatos.push({rotulo:consulta+' '+m,consulta:consulta+' '+m}));
 
-  window.buscarProdutos=function(){
+    const cores=['rosa','vermelho','nude','marrom','chocolate','transparente','preto'];
+    cores.forEach(cor=>{
+      const termo=consulta+' '+cor;
+      if(catalogo.some(p=>combina(p,termo)))candidatos.push({rotulo:termo,consulta:termo});
+    });
+
+    [10,15,20,25,30].forEach(limite=>{
+      if(base.some(p=>Number(p.preco||0)>0&&Number(p.preco||0)<=limite)){
+        candidatos.push({rotulo:consulta+' até R$'+limite,consulta:consulta,precoMax:limite});
+      }
+    });
+
+    const vistos=new Set();
+    return candidatos.filter(x=>{
+      const chave=normalizarBusca(x.rotulo);
+      if(!chave||vistos.has(chave))return false;
+      vistos.add(chave);return true;
+    }).slice(0,5);
+  }
+
+  window.buscarProdutos=function(opcoes){
     const campo=document.getElementById('busca');
-    const consulta=campo?.value.trim()||'';
+    const consulta=(opcoes?.consulta??campo?.value??'').trim();
+    const precoMax=Number(opcoes?.precoMax||0);
     if(typeof fecharSugestoesBusca==='function')fecharSugestoesBusca();
-
     if(!consulta){
       const resultado=document.getElementById('resultadoBusca');
       if(resultado)resultado.textContent='';
       if(typeof renderProdutos==='function')renderProdutos();
       return;
     }
-
+    if(campo)campo.value=consulta+(precoMax?' até R$'+precoMax:'');
     if(typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(normalizarBusca(consulta));
-    const encontrados=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta);
+    let encontrados=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta);
+    if(precoMax)encontrados=encontrados.filter(p=>Number(p.preco||0)<=precoMax);
 
     document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
-    const loja=document.getElementById('loja');
-    if(loja)loja.style.display='block';
-
+    const loja=document.getElementById('loja'); if(loja)loja.style.display='block';
     if(typeof renderProdutos==='function')renderProdutos(encontrados,true);
-    const grade=document.getElementById('listaProdutos');
-    const resultado=document.getElementById('resultadoBusca');
+    const grade=document.getElementById('listaProdutos'),resultado=document.getElementById('resultadoBusca');
+    const exibida=consulta+(precoMax?' até R$'+precoMax:'');
     if(resultado){
       resultado.textContent=encontrados.length
-        ? encontrados.length+' produto'+(encontrados.length===1?'':'s')+' encontrado'+(encontrados.length===1?'':'s')+' para “'+consulta+'”.'
-        : 'Nenhum produto encontrado para “'+consulta+'”.';
+        ? encontrados.length+' produto'+(encontrados.length===1?'':'s')+' encontrado'+(encontrados.length===1?'':'s')+' para “'+exibida+'”.'
+        : 'Nenhum produto encontrado para “'+exibida+'”.';
     }
-    if(!encontrados.length&&grade){
-      grade.innerHTML='<div class="busca-vazia"><strong>Não encontramos esse produto.</strong><br>Tente outro nome, marca, categoria ou cor.</div>';
-    }
+    if(!encontrados.length&&grade)grade.innerHTML='<div class="busca-vazia"><strong>Não encontramos esse produto.</strong><br>Tente outro nome, marca, categoria, cor ou faixa de preço.</div>';
     (resultado||grade)?.scrollIntoView({behavior:'smooth',block:'start'});
   };
 
   window.renderSugestoesBusca=function(){
-    const campo=document.getElementById('busca');
-    const caixa=document.getElementById('buscaSugestoes');
+    const campo=document.getElementById('busca'),caixa=document.getElementById('buscaSugestoes');
     if(!campo||!caixa)return;
     const consulta=campo.value.trim();
-    if(!consulta){
-      caixa.innerHTML='';
-      caixa.classList.remove('aberta');
-      return;
+    if(!consulta){caixa.innerHTML='';caixa.classList.remove('aberta');return;}
+
+    const lista=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta).slice(0,6);
+    const atalhos=gerarAtalhos(consulta);
+    let html='';
+    if(atalhos.length){
+      html+='<div class="fy-busca-atalhos"><span class="fy-busca-atalhos-titulo">Sugestões</span><div class="fy-busca-atalhos-lista">'+
+        atalhos.map((x,i)=>'<button type="button" class="fy-busca-atalho" data-fy-atalho="'+i+'">'+escapar(x.rotulo)+'</button>').join('')+
+        '</div></div>';
+      caixa._fyAtalhos=atalhos;
+    }else caixa._fyAtalhos=[];
+
+    if(lista.length){
+      html+='<div class="fy-busca-produtos-titulo">Produtos</div>'+
+        lista.map(p=>'<button type="button" class="busca-sugestao fy-busca-produto" data-fy-id="'+escapar(p.id)+'">'+
+          '<span class="fy-busca-img"><img loading="lazy" decoding="async" src="'+escapar(imagemBusca(p))+'" alt=""></span>'+
+          '<span class="fy-busca-info"><strong>'+escapar(p.nome||'Produto')+'</strong><small>'+escapar(p.marca||p.categoria||'Produto')+'</small></span>'+
+          '<span class="fy-busca-preco">'+escapar(moedaBusca(p.preco))+'</span></button>').join('');
+    }else{
+      html+='<div class="fy-busca-vazio"><strong>Nenhum produto encontrado.</strong><br>Tente nome, marca, categoria ou cor.</div>';
     }
-    const lista=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta).slice(0,7);
-    caixa.innerHTML=lista.length
-      ? lista.map(p=>'<button type="button" class="busca-sugestao" data-fy-id="'+String(p.id).replace(/"/g,'&quot;')+'"><span>'+String(p.nome||'Produto')+'</span><small>'+String(p.marca||p.categoria||'Produto')+'</small></button>').join('')
-      : '<div class="busca-sugestao"><span>Nenhum produto encontrado</span><small>Tente nome, marca, categoria ou cor</small></div>';
-    caixa.classList.add('aberta');
+    caixa.innerHTML=html;caixa.classList.add('aberta');
   };
 
   document.addEventListener('click',function(evento){
+    const atalho=evento.target.closest?.('.fy-busca-atalho[data-fy-atalho]');
+    if(atalho){
+      const caixa=document.getElementById('buscaSugestoes');
+      const x=caixa?._fyAtalhos?.[Number(atalho.dataset.fyAtalho)];
+      if(x){window.buscarProdutos(x);caixa.classList.remove('aberta')}
+      return;
+    }
     const item=evento.target.closest?.('.busca-sugestao[data-fy-id]');
-    if(!item)return;
-    const produto=catalogoBusca().find(p=>String(p.id)===item.dataset.fyId);
-    if(!produto)return;
-    const campo=document.getElementById('busca');
-    if(campo)campo.value=produto.nome;
-    window.buscarProdutos();
+    if(item){
+      const produto=catalogoBusca().find(p=>String(p.id)===item.dataset.fyId);
+      if(!produto)return;
+      document.getElementById('buscaSugestoes')?.classList.remove('aberta');
+      if(typeof abrirProduto==='function')abrirProduto(produto.id);
+      else{const campo=document.getElementById('busca');if(campo)campo.value=produto.nome;window.buscarProdutos()}
+      return;
+    }
+    if(!evento.target.closest?.('.busca'))document.getElementById('buscaSugestoes')?.classList.remove('aberta');
   });
 
+  let timerBusca;
   document.addEventListener('input',function(evento){
-    if(evento.target?.id==='busca')setTimeout(window.renderSugestoesBusca,0);
+    if(evento.target?.id!=='busca')return;
+    clearTimeout(timerBusca);
+    timerBusca=setTimeout(window.renderSugestoesBusca,80);
+  });
+  document.addEventListener('focusin',function(evento){
+    if(evento.target?.id==='busca'&&evento.target.value.trim())window.renderSugestoesBusca();
   });
 })();
 </script>
