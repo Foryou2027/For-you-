@@ -16555,28 +16555,58 @@ document.addEventListener("DOMContentLoaded", function () {
  }
  function recomendar(){
    const box=document.getElementById("fy18Recomendados"); if(!box)return;
+   const titulo=box.closest(".fy18-recommend")?.querySelector("h2");
    let lista=[];
    try{
-     if(typeof produtos!=="undefined" && Array.isArray(produtos)) lista=produtos.slice(0,3);
-   }catch(e){}
+     const idsNoCarrinho=new Set((Array.isArray(carrinho)?carrinho:[]).map(it=>String(it.id)));
+     const falta=Math.max(0,META_FRETE-subtotal());
+     const catalogo=(typeof produtos!=="undefined"&&Array.isArray(produtos)?produtos:[])
+       .filter(p=>p&&p.ativo!==false&&!idsNoCarrinho.has(String(p.id)))
+       .filter(p=>Number(p.preco||p.price||0)>0)
+       .filter(p=>p.estoque==null||Number(p.estoque)>0);
+
+     const baratos=catalogo.filter(p=>Number(p.preco||p.price||0)<=30);
+     const base=baratos.length>=4?baratos:catalogo;
+     const alvo=falta>0?Math.min(falta,30):10;
+     lista=base
+       .slice()
+       .sort((a,b)=>{
+         const pa=Number(a.preco||a.price||0), pb=Number(b.preco||b.price||0);
+         const da=Math.abs(pa-alvo), db=Math.abs(pb-alvo);
+         return da-db || pa-pb;
+       })
+       .slice(0,4);
+
+     if(titulo){
+       titulo.textContent=falta>0?'Complete seu pedido':'Você também pode gostar';
+     }
+   }catch(e){lista=[];}
+
    if(!lista.length){
-     box.innerHTML='<div style="font-size:9px;color:#888">As recomenda\u00E7\u00F5es aparecer\u00E3o aqui conforme os produtos forem cadastrados.</div>';
+     box.innerHTML='<div class="fy18-empty-rec">Nenhuma sugestão disponível agora.</div>';
+     window.fy18Rec=[];
      return;
    }
+
    box.innerHTML=lista.map((p,i)=>`
      <div class="fy18-product">
-       ${p.imagem||p.img?`<img loading="lazy" decoding="async" decoding="async" src="${p.imagem||p.img}" alt="">`:''}
+       <div class="fy18-product-img">${p.imagem||p.img?`<img loading="lazy" decoding="async" src="${p.imagem||p.img}" alt="${String(p.nome||p.name||'Produto').replace(/\"/g,'&quot;')}">`:'<span>FOR YOU</span>'}</div>
        <strong>${p.nome||p.name||"Produto"}</strong>
        <small>${moeda(p.preco||p.price)}</small>
-       <button onclick="fy18AdicionarRecomendado(${i})">ADICIONAR \u00C0 SACOLA</button>
+       <button type="button" onclick="fy18AdicionarRecomendado(${i})">+ ADICIONAR</button>
      </div>`).join("");
    window.fy18Rec=lista;
  }
+ window.fy18AtualizarSugestoes=function(){
+   atualizar();
+   recomendar();
+ };
  window.fy18AdicionarRecomendado=function(i){
    const p=window.fy18Rec?.[i]; if(!p)return;
-   if(typeof adicionarCarrinho==="function") adicionarCarrinho(p.id ?? p);
+   if(typeof window.adicionar==="function") window.adicionar(p.nome||p.name||"Produto",Number(p.preco||p.price||0),p.id);
+   else if(typeof adicionarCarrinho==="function") adicionarCarrinho(p.id ?? p);
    else if(typeof adicionarAoCarrinho==="function") adicionarAoCarrinho(p.id ?? p);
-   setTimeout(atualizar,100);
+   setTimeout(function(){atualizar();recomendar();},60);
  };
  window.fy18AplicarCupom=async function(){
    const codigo=(document.getElementById("fy18Cupom")?.value||"").trim().toUpperCase();
@@ -17943,6 +17973,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     try{if(typeof atualizar==='function')atualizar();}catch(e){console.warn('Carrinho lateral:',e);}
     try{if(typeof fyRenderPaginaCarrinho==='function')fyRenderPaginaCarrinho();}catch(e){console.warn('P\u00E1gina antiga da sacola:',e);}
     try{if(typeof fyRenderCarrinhoPagina==='function')fyRenderCarrinhoPagina();}catch(e){console.warn('Minha Sacola:',e);}
+    try{if(typeof window.fy18AtualizarSugestoes==='function')window.fy18AtualizarSugestoes();}catch(e){console.warn('Sugestoes da sacola:',e);}
   }
 
   function abrirSacolaUnificada(){
@@ -25742,6 +25773,28 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   html,body{content-visibility:visible!important}
   #loja{min-height:0!important}
   #loja>section{content-visibility:visible!important;contain-intrinsic-size:none!important}
+}
+</style>
+
+<style id="fy-sugestoes-carrinho-v19">
+/* FOR YOU — sugestões leves e responsivas na Minha Sacola */
+#fyCarrinhoPagina .fy18-recommend,#paginaCarrinhoV17 .fy18-recommend{display:block!important;margin:18px 0 4px!important;padding:0!important}
+#fyCarrinhoPagina .fy18-recommend h2,#paginaCarrinhoV17 .fy18-recommend h2{margin:0 0 5px!important;font:400 21px/1.2 Georgia,serif!important;color:#2f2529!important}
+#fyCarrinhoPagina .fy18-recommend h2::after,#paginaCarrinhoV17 .fy18-recommend h2::after{content:'Itens pequenos que podem ajudar você a chegar no frete grátis.';display:block;margin-top:5px;font:400 9px/1.45 Arial,sans-serif;color:#8b7b81}
+#fyCarrinhoPagina .fy18-products,#paginaCarrinhoV17 .fy18-products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important}
+#fyCarrinhoPagina .fy18-product,#paginaCarrinhoV17 .fy18-product{min-width:0!important;padding:9px!important;border:1px solid #eee4e7!important;border-radius:13px!important;background:#fff!important;box-shadow:none!important;display:flex!important;flex-direction:column!important}
+#fyCarrinhoPagina .fy18-product-img,#paginaCarrinhoV17 .fy18-product-img{aspect-ratio:1/1!important;border-radius:9px!important;overflow:hidden!important;background:#fff6f8!important;display:grid!important;place-items:center!important;margin-bottom:7px!important}
+#fyCarrinhoPagina .fy18-product-img img,#paginaCarrinhoV17 .fy18-product-img img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+#fyCarrinhoPagina .fy18-product-img span,#paginaCarrinhoV17 .fy18-product-img span{font:700 8px Arial,sans-serif!important;letter-spacing:1px!important;color:#b7909b!important}
+#fyCarrinhoPagina .fy18-product strong,#paginaCarrinhoV17 .fy18-product strong{display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;min-height:30px!important;font:600 10px/1.35 Arial,sans-serif!important;color:#33282c!important}
+#fyCarrinhoPagina .fy18-product small,#paginaCarrinhoV17 .fy18-product small{display:block!important;margin:5px 0 7px!important;font:800 11px Arial,sans-serif!important;color:#9b5167!important}
+#fyCarrinhoPagina .fy18-product button,#paginaCarrinhoV17 .fy18-product button{margin-top:auto!important;width:100%!important;min-height:33px!important;border:0!important;border-radius:999px!important;background:#f7e7ec!important;color:#7d2942!important;font:800 7.5px Arial,sans-serif!important;letter-spacing:.45px!important;cursor:pointer!important}
+#fyCarrinhoPagina .fy18-product button:active,#paginaCarrinhoV17 .fy18-product button:active{transform:scale(.98)!important}
+#fyCarrinhoPagina .fy18-empty-rec,#paginaCarrinhoV17 .fy18-empty-rec{padding:12px 0;font-size:9px;color:#888}
+@media(max-width:700px){
+ #fyCarrinhoPagina .fy18-products,#paginaCarrinhoV17 .fy18-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ #fyCarrinhoPagina .fy18-recommend h2,#paginaCarrinhoV17 .fy18-recommend h2{font-size:19px!important}
+ #fyCarrinhoPagina .fy18-product,#paginaCarrinhoV17 .fy18-product{padding:8px!important}
 }
 </style>
 </body>
