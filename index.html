@@ -14821,11 +14821,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     const conta=contaSalva();
     if(conta){conta.pedidos=r.data.map(o=>({id:o.id,numero:o.numero,data:new Date(o.data_pedido).toLocaleDateString('pt-BR'),status:o.status,etapa:o.etapa,statusTexto:o.status==='confirmado'?'Pedido recebido':o.status,pagamentoStatus:o.pagamento_status,total:Number(o.total),subtotal:Number(o.subtotal),desconto:Number(o.desconto),frete:Number(o.frete),parcelas:o.parcelas,itens:o.itens,entrega:o.entrega,pagamento:o.pagamento,cliente:o.cliente,endereco:o.endereco,codigoRastreio:o.codigo_rastreio||'',atualizadoEm:o.atualizado_em&&new Date(o.atualizado_em).toLocaleString('pt-BR')}));salvarConta(conta);renderPedidosConta();}
   }
-  async function syncSupabaseOrder(pedido){
-    if(!sb||!pedido||!contaAtual)return;
-    const u=await window.FOR_YOU_AUTH.user();if(!u)return;
-    await sb.from('orders').upsert({id:pedido.id.startsWith('pedido_')?undefined:pedido.id,user_id:u.id,numero:pedido.numero,status:pedido.status,etapa:pedido.etapa,pagamento:pedido.pagamento,pagamento_status:pedido.pagamentoStatus,parcelas:pedido.parcelas,subtotal:pedido.subtotal,desconto:pedido.desconto,frete:pedido.frete,total:pedido.total,entrega:pedido.entrega,itens:pedido.itens,endereco:pedido.endereco,cliente:pedido.cliente,data_pedido:pedido.dataISO,atualizado_em:new Date().toISOString()},{onConflict:'id'});
-  }
+  // Pedidos e pagamentos oficiais são gravados somente por funções protegidas no servidor.
+  // O navegador não pode criar ou alterar status, valor, desconto ou frete na tabela orders.
   function salvarFavoritosLocalSeguro(){
     localStorage.setItem(chaveContaDados('Favoritos'),JSON.stringify(favoritos));
     if(!contaAtual) localStorage.setItem('forYouFavoritos',JSON.stringify(favoritos));
@@ -14857,8 +14854,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   // intercepta cadastro/login e usa Auth. Os dados de conta n\u00E3o s\u00E3o gravados com senha.
   const salvarFavoritosOriginal=window.salvarFavoritos;
   window.salvarFavoritos=function(){salvarFavoritosOriginal();if(sb&&contaAtual)window.FOR_YOU_AUTH.user().then(u=>u&&syncSupabaseFavorites(u.id)).catch(()=>{});};
-  const mostrarPedidoSucessoOriginal=window.mostrarPedidoSucesso;
-  window.mostrarPedidoSucesso=function(pedido){mostrarPedidoSucessoOriginal(pedido);if(sb)syncSupabaseOrder(pedido).catch(e=>console.warn('Pedido n\u00E3o sincronizado no Supabase',e));};
 
   const cadastroOriginal=window.cadastrarConta;
   window.cadastrarConta=async function(event){
