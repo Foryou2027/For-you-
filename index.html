@@ -25797,5 +25797,200 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
  #fyCarrinhoPagina .fy18-product,#paginaCarrinhoV17 .fy18-product{padding:8px!important}
 }
 </style>
+
+
+<!-- FOR YOU — galeria de produto mobile aprimorada 23-09-2026 -->
+<style id="fy-galeria-produto-v2">
+#fySafeModal .fy-safe-media{position:relative!important;overflow:visible!important}
+#fySafeModal #fySafeImg{cursor:zoom-in!important;user-select:none!important;-webkit-user-drag:none!important;touch-action:pan-y!important}
+#fySafeModal .fy-gallery-arrow{position:absolute!important;top:42%!important;transform:translateY(-50%)!important;width:38px!important;height:38px!important;border:0!important;border-radius:50%!important;background:rgba(255,255,255,.94)!important;color:#402a32!important;box-shadow:0 4px 18px rgba(45,24,31,.13)!important;display:grid!important;place-items:center!important;font-size:22px!important;line-height:1!important;z-index:5!important}
+#fySafeModal .fy-gallery-prev{left:9px!important}
+#fySafeModal .fy-gallery-next{right:9px!important}
+#fySafeModal .fy-gallery-counter{position:absolute!important;right:12px!important;top:12px!important;z-index:5!important;padding:6px 10px!important;border-radius:999px!important;background:rgba(45,29,35,.75)!important;color:#fff!important;font:700 10px/1 Arial,sans-serif!important;letter-spacing:.3px!important;backdrop-filter:blur(4px)!important}
+#fySafeModal .fy-gallery-hint{display:none;margin:7px 0 0;text-align:center;font:500 9px/1.35 Arial,sans-serif;color:#9a8990}
+#fySafeModal .fy-safe-thumbs{scroll-snap-type:x proximity!important;scrollbar-width:none!important}
+#fySafeModal .fy-safe-thumbs::-webkit-scrollbar{display:none!important}
+#fySafeModal .fy-safe-thumbs button{scroll-snap-align:start!important}
+#fyZoomProduto{position:fixed;inset:0;z-index:2147483647;background:rgba(20,15,17,.94);display:none;align-items:center;justify-content:center;padding:18px}
+#fyZoomProduto.aberto{display:flex}
+#fyZoomProduto img{display:block;max-width:96vw;max-height:91vh;width:auto;height:auto;object-fit:contain;cursor:zoom-out;touch-action:pinch-zoom;user-select:none;-webkit-user-drag:none}
+#fyZoomProduto .fy-zoom-close{position:fixed;right:16px;top:16px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;color:#321f26;font-size:26px;line-height:1;z-index:2}
+#fyZoomProduto .fy-zoom-label{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font:500 9px Arial,sans-serif;white-space:nowrap}
+
+/* Também melhora a galeria da página de detalhe antiga, caso ela seja usada. */
+#paginaProduto .detalhe-img{position:relative!important}
+#paginaProduto #fyFotoProdutoPrincipal{cursor:zoom-in!important;touch-action:pan-y!important;user-select:none!important;-webkit-user-drag:none!important}
+#paginaProduto .fy-produto-miniaturas{scroll-snap-type:x proximity!important;scrollbar-width:none!important}
+#paginaProduto .fy-produto-miniaturas::-webkit-scrollbar{display:none!important}
+#paginaProduto .fy-produto-miniaturas button{scroll-snap-align:start!important}
+#paginaProduto .fy-detail-counter{position:absolute;top:12px;right:12px;z-index:6;padding:6px 10px;border-radius:999px;background:rgba(45,29,35,.72);color:#fff;font:700 10px Arial,sans-serif}
+
+@media(max-width:700px){
+ #fySafeModal .fy-gallery-arrow{width:34px!important;height:34px!important;font-size:20px!important;top:40%!important}
+ #fySafeModal .fy-gallery-hint{display:block!important}
+ #fySafeModal .fy-safe-media>img{height:300px!important}
+ #fySafeModal .fy-safe-thumbs{gap:7px!important;padding:3px 3px 6px!important}
+ #fySafeModal .fy-safe-thumbs button{flex:0 0 58px!important;width:58px!important;height:58px!important}
+ #fyZoomProduto{padding:8px!important}
+ #fyZoomProduto img{max-width:100vw!important;max-height:92vh!important}
+}
+</style>
+
+<div id="fyZoomProduto" aria-hidden="true">
+  <button type="button" class="fy-zoom-close" aria-label="Fechar imagem ampliada">×</button>
+  <img id="fyZoomProdutoImg" alt="Imagem ampliada do produto">
+  <div class="fy-zoom-label">Toque fora da foto para fechar</div>
+</div>
+
+<script id="fy-galeria-produto-v2-js">
+(function(){
+  let touchInicioX=0;
+  let touchInicioY=0;
+
+  function urlsGaleriaModal(){
+    const thumbs=Array.from(document.querySelectorAll('#fySafeThumbs button'));
+    const urls=thumbs.map(b=>b.dataset.src||b.querySelector('img')?.src).filter(Boolean);
+    const atual=document.getElementById('fySafeImg')?.src;
+    if(!urls.length&&atual)urls.push(atual);
+    return [...new Set(urls)];
+  }
+
+  function indiceAtual(urls){
+    const img=document.getElementById('fySafeImg');
+    if(!img||!urls.length)return 0;
+    const atual=img.src;
+    let i=urls.findIndex(u=>{
+      try{return new URL(u,location.href).href===atual}catch(e){return u===atual}
+    });
+    return i<0?0:i;
+  }
+
+  function selecionarIndice(deltaOuIndice, absoluto){
+    const urls=urlsGaleriaModal();
+    if(urls.length<2)return;
+    const atual=indiceAtual(urls);
+    const proximo=absoluto ? deltaOuIndice : (atual+deltaOuIndice+urls.length)%urls.length;
+    const src=urls[Math.max(0,Math.min(urls.length-1,proximo))];
+    if(typeof window.fySelecionarFoto==='function')window.fySelecionarFoto(src);
+    else document.getElementById('fySafeImg').src=src;
+    atualizarUI();
+  }
+
+  function atualizarUI(){
+    const media=document.querySelector('#fySafeModal .fy-safe-media');
+    const img=document.getElementById('fySafeImg');
+    if(!media||!img)return;
+    const urls=urlsGaleriaModal();
+    let counter=media.querySelector('.fy-gallery-counter');
+    let prev=media.querySelector('.fy-gallery-prev');
+    let next=media.querySelector('.fy-gallery-next');
+    let hint=media.querySelector('.fy-gallery-hint');
+
+    if(!counter){counter=document.createElement('span');counter.className='fy-gallery-counter';media.appendChild(counter)}
+    if(!prev){prev=document.createElement('button');prev.type='button';prev.className='fy-gallery-arrow fy-gallery-prev';prev.innerHTML='‹';prev.setAttribute('aria-label','Foto anterior');prev.onclick=e=>{e.stopPropagation();selecionarIndice(-1,false)};media.appendChild(prev)}
+    if(!next){next=document.createElement('button');next.type='button';next.className='fy-gallery-arrow fy-gallery-next';next.innerHTML='›';next.setAttribute('aria-label','Próxima foto');next.onclick=e=>{e.stopPropagation();selecionarIndice(1,false)};media.appendChild(next)}
+    if(!hint){hint=document.createElement('div');hint.className='fy-gallery-hint';hint.textContent='Deslize para ver mais fotos • toque para ampliar';const thumbs=document.getElementById('fySafeThumbs');if(thumbs)thumbs.insertAdjacentElement('afterend',hint);else media.appendChild(hint)}
+
+    const temMais=urls.length>1;
+    counter.style.display=temMais?'block':'none';
+    prev.style.display=temMais?'grid':'none';
+    next.style.display=temMais?'grid':'none';
+    hint.style.display=temMais?'block':'none';
+    if(temMais)counter.textContent=(indiceAtual(urls)+1)+' / '+urls.length;
+
+    document.querySelectorAll('#fySafeThumbs button').forEach((b,i)=>{
+      b.setAttribute('aria-label','Ver foto '+(i+1)+' de '+urls.length);
+      b.onclick=function(e){
+        e.preventDefault();
+        const src=b.dataset.src||b.querySelector('img')?.src;
+        if(src&&typeof window.fySelecionarFoto==='function')window.fySelecionarFoto(src);
+        atualizarUI();
+      };
+    });
+  }
+
+  function abrirZoom(src){
+    if(!src)return;
+    const zoom=document.getElementById('fyZoomProduto');
+    const foto=document.getElementById('fyZoomProdutoImg');
+    if(!zoom||!foto)return;
+    foto.src=src;
+    zoom.classList.add('aberto');
+    zoom.setAttribute('aria-hidden','false');
+  }
+  function fecharZoom(){
+    const zoom=document.getElementById('fyZoomProduto');
+    if(!zoom)return;
+    zoom.classList.remove('aberto');
+    zoom.setAttribute('aria-hidden','true');
+  }
+
+  const zoom=document.getElementById('fyZoomProduto');
+  zoom?.querySelector('.fy-zoom-close')?.addEventListener('click',fecharZoom);
+  zoom?.addEventListener('click',e=>{if(e.target===zoom||e.target.id==='fyZoomProdutoImg')fecharZoom()});
+
+  document.addEventListener('click',function(e){
+    const img=e.target.closest&&e.target.closest('#fySafeImg,#fyFotoProdutoPrincipal');
+    if(img){e.preventDefault();abrirZoom(img.src)}
+  });
+
+  document.addEventListener('touchstart',function(e){
+    const img=e.target.closest&&e.target.closest('#fySafeImg');
+    if(!img||!e.touches||!e.touches[0])return;
+    touchInicioX=e.touches[0].clientX;
+    touchInicioY=e.touches[0].clientY;
+  },{passive:true});
+
+  document.addEventListener('touchend',function(e){
+    const img=e.target.closest&&e.target.closest('#fySafeImg');
+    if(!img||!e.changedTouches||!e.changedTouches[0])return;
+    const dx=e.changedTouches[0].clientX-touchInicioX;
+    const dy=e.changedTouches[0].clientY-touchInicioY;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.25){
+      selecionarIndice(dx<0?1:-1,false);
+    }
+  },{passive:true});
+
+  /* Atualiza contador quando a miniatura ou uma variante troca a foto. */
+  const observar=function(){
+    const img=document.getElementById('fySafeImg');
+    if(!img||img.dataset.fyGaleriaObservada)return;
+    img.dataset.fyGaleriaObservada='1';
+    new MutationObserver(atualizarUI).observe(img,{attributes:true,attributeFilter:['src']});
+  };
+
+  const abrirOriginal=window.fyAbrirProduto;
+  if(typeof abrirOriginal==='function'&&!abrirOriginal.__fyGaleriaV2){
+    const wrapper=function(id){
+      const r=abrirOriginal.apply(this,arguments);
+      requestAnimationFrame(()=>{observar();atualizarUI()});
+      return r;
+    };
+    wrapper.__fyGaleriaV2=true;
+    window.fyAbrirProduto=wrapper;
+    window.abrirProduto=wrapper;
+  }
+
+  /* Suporte para a página antiga de detalhe, se for acionada por outro trecho. */
+  function prepararDetalheAntigo(){
+    const principal=document.getElementById('fyFotoProdutoPrincipal');
+    const caixa=principal?.closest('.detalhe-img');
+    const thumbs=Array.from(caixa?.querySelectorAll('[data-foto-indice]')||[]);
+    if(!principal||!caixa||thumbs.length<2)return;
+    let c=caixa.querySelector('.fy-detail-counter');
+    if(!c){c=document.createElement('span');c.className='fy-detail-counter';caixa.appendChild(c)}
+    const sync=()=>{const ativo=thumbs.findIndex(b=>b.classList.contains('ativa'));c.textContent=((ativo<0?0:ativo)+1)+' / '+thumbs.length};
+    thumbs.forEach(b=>b.addEventListener('click',()=>setTimeout(sync,0)));
+    let sx=0,sy=0;
+    principal.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+    principal.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.25){let i=thumbs.findIndex(b=>b.classList.contains('ativa'));if(i<0)i=0;i=(i+(dx<0?1:-1)+thumbs.length)%thumbs.length;thumbs[i].click()}},{passive:true});
+    sync();
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{observar();prepararDetalheAntigo()});
+  new MutationObserver(()=>{observar();prepararDetalheAntigo()}).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
