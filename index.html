@@ -21068,22 +21068,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
         pedido?.id || pedido?.numero || pedido?.codigo || `FORYOU-${Date.now()}`
       );
 
-      const itensPagBank=itensAntes.map((item,index)=>({
-        reference_id:String(item.id || index+1),
-        name:String(item.nome || item.name || 'Produto For You').substring(0,100),
-        quantity:Math.max(1,Number(item.quantidade||item.quantity||1)),
-        preco:Number(item.preco ?? item.price ?? 0)
-      }));
-
-      if(itensPagBank.some(item=>!Number.isFinite(item.preco)||item.preco<=0)){
-        throw new Error('N\u00E3o foi poss\u00EDvel identificar o valor de um dos produtos do carrinho.');
-      }
-
       const {data:pagbank,error:erroPagBank}=await sb.functions.invoke('criar-checkout-pagbank',{
-        body:{
-          reference_id:`FORYOU-${referenciaPedido}`,
-          items:itensPagBank
-        }
+        body:{pedido_id:pedido.id}
       });
 
       if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'N\u00E3o foi poss\u00EDvel abrir o pagamento PagBank.');
