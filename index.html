@@ -8439,6 +8439,13 @@ header .logo .fy-brand-logo span:not(.fy-visually-hidden),header .logo .fy-logo-
 header .header-top .logo{width:76px!important;min-width:76px!important;max-width:76px!important;flex:0 0 76px!important}
 @media(max-width:700px){header .header-top .logo{width:64px!important;min-width:64px!important;max-width:64px!important;flex:0 0 64px!important}header .logo .fy-brand-logo{width:64px!important;height:74px!important}header .logo .fy-brand-logo img{top:-1px!important;width:246px!important;min-width:246px!important;max-width:none!important}}
 </style>
+<style id="fy-favorito-pagina-produto">
+#paginaProduto .detalhe-img{position:relative}
+#paginaProduto .fy-favorito-detalhe{position:absolute;top:14px;right:14px;z-index:5;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid #eee1e5;border-radius:50%;background:#fff;color:#6e5960;font:30px/1 Arial,sans-serif;box-shadow:0 4px 14px rgba(53,31,39,.12);cursor:pointer}
+#paginaProduto .fy-favorito-detalhe.favoritado{color:#e32636}
+#paginaProduto .fy-favorito-detalhe:focus-visible{outline:2px solid #e32636;outline-offset:2px}
+@media(max-width:800px){#paginaProduto .fy-favorito-detalhe{top:10px;right:10px}}
+</style>
 </head>
 
 
@@ -10753,6 +10760,14 @@ mostrarFeedbackFavorito(adicionando);
 salvarFavoritos();
 atualizarContadorFavoritos();
 
+const botaoDetalhe=document.querySelector('.fy-favorito-detalhe');
+if(botaoDetalhe && String(botaoDetalhe.dataset.produtoId)===String(id)){
+  botaoDetalhe.classList.toggle('favoritado',adicionando);
+  botaoDetalhe.textContent=adicionando?'♥':'♡';
+  botaoDetalhe.setAttribute('aria-pressed',String(adicionando));
+  botaoDetalhe.setAttribute('aria-label',adicionando?'Remover dos favoritos':'Adicionar aos favoritos');
+}
+
 atualizarAcessoAdmin();
 
 renderProdutos();
@@ -11222,6 +11237,8 @@ src="${produto.imagem}"
 alt="${produto.nome}"
 >
 
+<button type="button" class="fy-favorito-detalhe ${favorito?'favoritado':''}" data-produto-id="${produto.id}" onclick="event.stopPropagation();alternarFavorito(${produto.id})" aria-label="${favorito?'Remover dos favoritos':'Adicionar aos favoritos'}" aria-pressed="${favorito?'true':'false'}">${favorito?'♥':'♡'}</button>
+
 ${fotosProduto.length>1?`<div class="fy-produto-miniaturas">${fotosProduto.map((foto,i)=>`<button type="button" class="${i===0?'ativa':''}" onclick="trocarFotoProduto('${foto}',this)" aria-label="Ver foto ${i+1} de ${produto.nome}"><img loading="lazy" decoding="async" decoding="async" src="${foto}" alt=""></button>`).join('')}</div>`:''}
 
 </div>
@@ -11277,13 +11294,6 @@ class="btn-detalhe"
 onclick="adicionarDetalhe(${produto.id})"
 >
 ADICIONAR AO CARRINHO
-</button>
-
-<button
-class="btn-fav-detalhe"
-onclick="alternarFavorito(${produto.id});abrirProduto(${produto.id})"
->
-${favorito?"\u2665":"\u2661"}
 </button>
 
 <button class="compartilhar-produto" onclick="compartilharProduto(${produto.id})">\u2197\uFE0F COMPARTILHAR</button>
