@@ -26139,3 +26139,259 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 </body>
 </html>
+
+<!-- FOR YOU — VARIAÇÕES VISÍVEIS POR BOTÕES (23/09/2026) -->
+<style id="fy-variacoes-botoes-final">
+#fySafeVariantWrap{
+  margin:18px 0 8px!important;
+}
+#fySafeVariantLabel{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin-bottom:10px!important;
+  font:700 11px/1.3 "Trebuchet MS",Arial,sans-serif!important;
+  letter-spacing:.2px!important;
+  color:#36252b!important;
+}
+#fySafeVariantLabel .fy-variante-escolhida{
+  font-weight:500!important;
+  color:#9a6b79!important;
+}
+#fySafeVariants{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+}
+#fySafeVariants button{
+  position:relative!important;
+  min-width:48px!important;
+  min-height:42px!important;
+  padding:10px 14px!important;
+  border:1px solid #ddcbd0!important;
+  border-radius:11px!important;
+  background:#fff!important;
+  color:#39262d!important;
+  font:700 11px/1.2 "Trebuchet MS",Arial,sans-serif!important;
+  box-shadow:none!important;
+  transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease!important;
+}
+#fySafeVariants button:hover:not(:disabled){
+  border-color:#d7839d!important;
+  background:#fff8fa!important;
+}
+#fySafeVariants button.ativa{
+  border:2px solid #c8446c!important;
+  background:#fff0f4!important;
+  color:#8f2345!important;
+  padding:9px 13px!important;
+}
+#fySafeVariants button.ativa::after{
+  content:'✓';
+  display:inline-grid;
+  place-items:center;
+  width:15px;
+  height:15px;
+  margin-left:7px;
+  border-radius:50%;
+  background:#c8446c;
+  color:#fff;
+  font-size:9px;
+  vertical-align:1px;
+}
+#fySafeVariants button:disabled,
+#fySafeVariants button.fy-variante-indisponivel{
+  opacity:.46!important;
+  cursor:not-allowed!important;
+  text-decoration:line-through!important;
+  background:#f8f6f7!important;
+  color:#85777b!important;
+  border-color:#e8dfe2!important;
+}
+#fySafeVariants button .fy-variante-status{
+  display:block!important;
+  margin-top:3px!important;
+  font-size:8px!important;
+  font-weight:600!important;
+  color:#a17c87!important;
+  text-decoration:none!important;
+}
+#fyVarianteSelectWrap{
+  display:none;
+  margin-top:8px;
+}
+#fyVarianteSelect{
+  width:100%;
+  min-height:46px;
+  padding:0 13px;
+  border:1px solid #ddcbd0;
+  border-radius:12px;
+  background:#fff;
+  color:#39262d;
+  font-size:14px;
+  outline:none;
+}
+#fyVarianteSelect:focus{border-color:#c8446c}
+@media(max-width:700px){
+  #fySafeVariants{gap:9px!important}
+  #fySafeVariants button{
+    min-width:54px!important;
+    min-height:44px!important;
+    padding:10px 13px!important;
+    font-size:12px!important;
+  }
+}
+</style>
+<script id="fy-variacoes-botoes-final-js">
+(function(){
+  const MAX_BOTOES=8;
+
+  function indisponivel(v){
+    if(!v)return false;
+    if(v.ativo===false || v.disponivel===false)return true;
+    const temEstoque=Object.prototype.hasOwnProperty.call(v,'estoque') || Object.prototype.hasOwnProperty.call(v,'stock');
+    const estoque=Number(v.estoque ?? v.stock);
+    return temEstoque && Number.isFinite(estoque) && estoque<=0;
+  }
+
+  function nomeVariante(v,i){
+    return String(v?.nome ?? v?.cor ?? v?.sabor ?? v?.valor ?? v?.label ?? ('Opção '+(i+1))).trim();
+  }
+
+  function atualizarRotulo(p,indice){
+    const label=document.getElementById('fySafeVariantLabel');
+    if(!label)return;
+    const titulo=String(p?.rotuloVariante||'Escolha uma opção');
+    if(indice==null || indice<0){
+      label.textContent=titulo;
+      return;
+    }
+    const v=p.variantes[indice];
+    label.innerHTML='';
+    const esquerda=document.createElement('span');
+    esquerda.textContent=titulo;
+    const escolhida=document.createElement('span');
+    escolhida.className='fy-variante-escolhida';
+    escolhida.textContent=nomeVariante(v,indice);
+    label.append(esquerda,escolhida);
+  }
+
+  function garantirSelect(){
+    const wrap=document.getElementById('fySafeVariantWrap');
+    if(!wrap)return null;
+    let box=document.getElementById('fyVarianteSelectWrap');
+    if(!box){
+      box=document.createElement('div');
+      box.id='fyVarianteSelectWrap';
+      const select=document.createElement('select');
+      select.id='fyVarianteSelect';
+      select.setAttribute('aria-label','Escolher variação do produto');
+      select.addEventListener('change',function(){
+        const indice=Number(this.value);
+        if(Number.isInteger(indice) && indice>=0 && typeof window.fySelecionarVariante==='function'){
+          window.fySelecionarVariante(indice);
+        }
+      });
+      box.appendChild(select);
+      wrap.appendChild(box);
+    }
+    return box;
+  }
+
+  function renderizarVariantes(p){
+    const area=document.getElementById('fySafeVariants');
+    const wrap=document.getElementById('fySafeVariantWrap');
+    if(!area || !wrap)return;
+    const variantes=Array.isArray(p?.variantes)?p.variantes:[];
+    const selectWrap=garantirSelect();
+    const select=document.getElementById('fyVarianteSelect');
+
+    wrap.style.display=variantes.length?'block':'none';
+    if(!variantes.length){
+      area.innerHTML='';
+      if(selectWrap)selectWrap.style.display='none';
+      return;
+    }
+
+    atualizarRotulo(p,-1);
+
+    if(variantes.length<=MAX_BOTOES){
+      area.style.display='flex';
+      if(selectWrap)selectWrap.style.display='none';
+      area.innerHTML='';
+      variantes.forEach((v,i)=>{
+        const b=document.createElement('button');
+        b.type='button';
+        b.dataset.indice=String(i);
+        const off=indisponivel(v);
+        b.disabled=off;
+        if(off)b.classList.add('fy-variante-indisponivel');
+        const nome=document.createElement('span');
+        nome.textContent=nomeVariante(v,i);
+        b.appendChild(nome);
+        if(off){
+          const st=document.createElement('span');
+          st.className='fy-variante-status';
+          st.textContent='Esgotado';
+          b.appendChild(st);
+        }
+        b.addEventListener('click',()=>{
+          if(off)return;
+          if(typeof window.fySelecionarVariante==='function')window.fySelecionarVariante(i);
+          atualizarRotulo(p,i);
+        });
+        area.appendChild(b);
+      });
+    }else{
+      area.style.display='none';
+      if(selectWrap)selectWrap.style.display='block';
+      if(select){
+        select.innerHTML='<option value="">Selecione uma opção</option>';
+        variantes.forEach((v,i)=>{
+          const o=document.createElement('option');
+          o.value=String(i);
+          o.textContent=nomeVariante(v,i)+(indisponivel(v)?' — Esgotado':'');
+          o.disabled=indisponivel(v);
+          select.appendChild(o);
+        });
+      }
+    }
+  }
+
+  const abrirOriginal=window.fyAbrirProduto || window.abrirProduto;
+  if(typeof abrirOriginal==='function'){
+    const abrirComVariacoes=function(id){
+      const retorno=abrirOriginal.call(this,id);
+      setTimeout(()=>{
+        try{
+          const catalogo=(typeof produtos!=='undefined'&&Array.isArray(produtos))?produtos:[];
+          const p=catalogo.find(x=>String(x.id)===String(id));
+          if(p)renderizarVariantes(p);
+        }catch(e){console.warn('Variações:',e)}
+      },0);
+      return retorno;
+    };
+    window.fyAbrirProduto=abrirComVariacoes;
+    window.abrirProduto=abrirComVariacoes;
+  }
+
+  const selecionarOriginal=window.fySelecionarVariante;
+  if(typeof selecionarOriginal==='function'){
+    window.fySelecionarVariante=function(indice){
+      const resposta=selecionarOriginal.call(this,indice);
+      try{
+        const botoes=document.querySelectorAll('#fySafeVariants button');
+        botoes.forEach((b,i)=>b.classList.toggle('ativa',i===Number(indice)));
+        const select=document.getElementById('fyVarianteSelect');
+        if(select)select.value=String(indice);
+        const catalogo=(typeof produtos!=='undefined'&&Array.isArray(produtos))?produtos:[];
+        const nomeAtual=document.getElementById('fySafeNome')?.textContent||'';
+        const p=catalogo.find(x=>String(x.nome||'')===String(nomeAtual));
+        if(p)atualizarRotulo(p,Number(indice));
+      }catch(e){}
+      return resposta;
+    };
+  }
+})();
+</script>
