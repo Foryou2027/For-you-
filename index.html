@@ -9733,36 +9733,11 @@ required
 <!-- =========================
      SEGURAN&#xC7;A E CONFIAN&#xC7;A
 ========================= -->
-<section class="seguranca">
-  <div class="seguranca-inner">
-    <div class="seguranca-topo">
-      <small>COMPRE COM TRANQUILIDADE</small>
-      <h2>Seguran&#xE7;a e confian&#xE7;a</h2>
-      <p>Tudo para voc&#xEA; comprar com seguran&#xE7;a e tranquilidade.</p>
-    </div>
-
-    <div class="seguranca-cards">
-      <div class="seguranca-card" onclick="abrirPolitica('seguranca')">
-        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg></div>
-        <strong>Compra segura</strong><span>Seus dados protegidos.</span>
-      </div>
-      <div class="seguranca-card" onclick="abrirPolitica('privacidade')">
-        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.7 7.7-7 10-4.3-2.3-7-5.5-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-3.7"/></svg></div>
-        <strong>Privacidade</strong><span>Respeitamos seus dados.</span>
-      </div>
-      <div class="seguranca-card" onclick="abrirPolitica('trocas')">
-        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-8a5 5 0 0 0-5 5"/><path d="m17 4 3 3-3 3"/><path d="M4 17h8a5 5 0 0 0 5-5"/><path d="m7 20-3-3 3-3"/></svg></div>
-        <strong>Trocas f&#xE1;ceis</strong><span>Processo simples.</span>
-      </div>
-      <div class="seguranca-card" onclick="abrirPolitica('pagamento')">
-        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="m15.5 15 1.2 1.2 2.3-2.5"/></svg></div>
-        <strong>Pagamento seguro</strong><span>Compra protegida.</span>
-      </div>
-      <div class="seguranca-card" onclick="abrirPolitica('termos')">
-        <div class="seguranca-icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h4"/><path d="M10 12h5M10 16h5"/></svg></div>
-        <strong>Termos de uso</strong><span>Tudo transparente.</span>
-      </div>
-    </div>
+<section class="seguranca fy-selos-discretos" aria-label="Informações da loja">
+  <div class="fy-selos-inner">
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pagamento seguro</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.7 7.7-7 10-4.3-2.3-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>Produtos originais</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>Envio para todo o Brasil</span>
   </div>
 </section>
 
@@ -16671,15 +16646,6 @@ document.addEventListener("DOMContentLoaded", function () {
  window.fyFecharPolitica=function(){const pg=document.getElementById("fyPoliticaPagina");if(pg)pg.classList.remove("ativa");document.body.style.overflow="";};
 
  document.addEventListener("DOMContentLoaded",function(){
-   /* confian\u00E7a perto dos bot\u00F5es de compra */
-   document.querySelectorAll(".adicionar-carrinho,.btn-add,.add,.comprar-agora,.btn-comprar").forEach(function(btn){
-     if(btn.parentElement && !btn.parentElement.querySelector(".fy-trust-strip")){
-       const t=document.createElement("div");t.className="fy-trust-strip";
-       t.innerHTML="<span>\u{1F512} Compra segura</span><span>\u{1F4E6} Enviamos para todo Brasil</span><span>\u{1F4B3} Pagamento protegido</span>";
-       btn.insertAdjacentElement("afterend",t);
-     }
-   });
-
    /* links institucionais no rodap\u00E9 */
    const footer=document.querySelector("footer");
    if(footer && !footer.querySelector(".fy-footer-links-extra")){
@@ -26256,6 +26222,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 <style id="fy-filtros-mobile-20260923">
 #fyMobileFilterBar{display:none}
 #fyMobileFilterBackdrop{display:none}
+#fyMobileFilterSheet{display:none!important}
 @media(max-width:800px){
   #fyMobileFilterBar{
     display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -26275,7 +26242,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     transform:translateY(105%);transition:transform .24s ease;max-height:86%;overflow:auto;
     box-shadow:0 -18px 45px rgba(53,31,39,.14)
   }
-  #fyMobileFilterSheet.ativo{transform:translateY(0)}
+  #fyMobileFilterSheet.ativo{display:block!important;transform:translateY(0)}
   .fy-mf-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
   .fy-mf-head h3{margin:0;font:600 19px/1.2 Arial,sans-serif;color:#251b1f}
   .fy-mf-close{width:42px;height:42px;border:0;border-radius:50%;background:#fff5f7;font-size:22px;color:#5b414a}
@@ -26994,3 +26961,11 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   if(window.__FY_CATALOGO_CARREGADO){montarIndice();abrirLink()}
 })();
 </script>
+
+<style id="fy-selos-discretos-css">
+.seguranca.fy-selos-discretos{margin:0!important;padding:18px 16px!important;border-top:1px solid #eee4e7!important;border-bottom:1px solid #eee4e7!important;background:#fff!important}
+.fy-selos-inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 32px;max-width:1100px;margin:auto}
+.fy-selos-inner span{display:inline-flex;align-items:center;gap:7px;color:#695b60;font:500 11px/1.35 Inter,Arial,sans-serif;white-space:nowrap}
+.fy-selos-inner svg{width:17px;height:17px;fill:none;stroke:#af7788;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:600px){.fy-selos-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.fy-selos-inner span{flex-direction:column;gap:4px;text-align:center;white-space:normal;font-size:9px}.fy-selos-inner svg{width:18px;height:18px}}
+</style>
