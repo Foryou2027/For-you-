@@ -12365,7 +12365,8 @@ async function abrirAdminLogin(){
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
     const {data:{user}}=await sb.auth.getUser();
     if(!user){alert('Entre na sua conta da loja para acessar o painel.');abrirConta();return;}
-    await window.fyAdminApi('listar');
+    const primeiraLista=await window.fyAdminApi('listar');
+    window.FY_ADMIN_BOOTSTRAP=primeiraLista;
     fyAdminAutorizado=true;
     atualizarAcessoAdmin();
     abrirAdmin();
@@ -23333,7 +23334,12 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
       body:JSON.stringify({acao,...dados})
     });
     let retorno={};try{retorno=await resposta.json()}catch(e){}
-    if(!resposta.ok)throw new Error(retorno.error||'Não foi possível acessar os pedidos.');
+    if(!resposta.ok){
+      const detalhe=retorno.error||retorno.erro||retorno.message;
+      if(resposta.status===404)throw new Error('A função admin-pedidos não foi encontrada no Supabase. Confira se ela está publicada.');
+      throw new Error(detalhe||`Erro ${resposta.status} ao consultar o painel.`);
+    }
+    if(retorno.error||retorno.erro)throw new Error(retorno.error||retorno.erro);
     return retorno;
   }
   window.fyAdminApi=chamarAdmin;
@@ -23374,7 +23380,8 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     const lista=document.getElementById('adminTabelaPedidos');
     if(lista)lista.innerHTML='<p class="fy-admin-pedidos-vazio">Carregando pedidos...</p>';
     try{
-      const retorno=await window.fyAdminApi('listar');
+      const retorno=window.FY_ADMIN_BOOTSTRAP||await window.fyAdminApi('listar');
+      window.FY_ADMIN_BOOTSTRAP=null;
       const pedidos=(retorno.pedidos||[]).map(normalizarPedido);
       window.FY_ADMIN_PEDIDOS=pedidos;
       const hoje=new Date().toLocaleDateString('pt-BR');
@@ -23394,7 +23401,11 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
         lista.innerHTML=pedidos.length?pedidos.map(p=>`<button class="fy-admin-pedido-item" type="button" data-pedido-id="${fyTextoSeguro(p.id)}"><span><strong>${fyTextoSeguro(p.numero)} \u00B7 ${fyTextoSeguro(p.cliente.nome)}</strong><small>${fyTextoSeguro(p.data)} \u00B7 ${p.itens.length} produto(s)</small><em>${fyTextoSeguro(p.statusTexto)}</em></span><span class="fy-admin-pedido-valor"><strong>${dinheiro(p.total)}</strong><small>${fyTextoSeguro(p.pagamento)}</small></span></button>`).join(''):'<p class="fy-admin-pedidos-vazio">Ainda n\u00E3o existem pedidos registrados.</p>';
       }
     }catch(error){
-      if(lista)lista.innerHTML='<p class="fy-admin-pedidos-vazio">N\u00E3o foi poss\u00EDvel carregar os pedidos. Saia do painel e entre novamente.</p>';
+      window.FY_ADMIN_BOOTSTRAP=null;
+      if(lista){lista.innerHTML='';const aviso=document.createElement('div');aviso.className='fy-admin-pedidos-vazio';
+        const mensagem=document.createElement('p');mensagem.textContent=error.message||'Não foi possível carregar os pedidos.';
+        const tentar=document.createElement('button');tentar.type='button';tentar.textContent='TENTAR NOVAMENTE';
+        tentar.addEventListener('click',()=>window.renderAdmin());aviso.append(mensagem,tentar);lista.appendChild(aviso);}
       if(typeof window.fyAviso==='function')window.fyAviso('Painel indispon\u00EDvel',error.message||'Confira a conex\u00E3o com o Supabase.','erro');
     }
   };
@@ -26968,4 +26979,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 .fy-selos-inner span{display:inline-flex;align-items:center;gap:7px;color:#695b60;font:500 11px/1.35 Inter,Arial,sans-serif;white-space:nowrap}
 .fy-selos-inner svg{width:17px;height:17px;fill:none;stroke:#af7788;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:600px){.fy-selos-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.fy-selos-inner span{flex-direction:column;gap:4px;text-align:center;white-space:normal;font-size:9px}.fy-selos-inner svg{width:18px;height:18px}}
+</style>
+<style id="fy-admin-erro-retry-css">
+#paginaAdmin .fy-admin-pedidos-vazio button{margin-top:10px;padding:9px 14px;border:1px solid #d9bdc7;border-radius:999px;background:#fff;color:#7b3b51;font:600 10px Inter,Arial,sans-serif;cursor:pointer}
 </style>
