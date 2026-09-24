@@ -1,29 +1,16 @@
 {
   "id": "./",
-  "name": "For You by Dé",
+  "name": "For You by Dé | Loja de Beleza",
   "short_name": "For You",
-  "description": "Maquiagem, skincare, corpo, acessórios e achadinhos escolhidos com carinho.",
-  "lang": "pt-BR",
-  "dir": "ltr",
+  "description": "Beleza para você, direto no celular.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#fff8fa",
   "theme_color": "#8f1f40",
-  "categories": ["shopping", "beauty", "lifestyle"],
+  "lang": "pt-BR",
   "icons": [
-    {
-      "src": "./icone-for-you-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icone-for-you-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src":"./icone-for-you-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icone-for-you-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
