@@ -42,6 +42,18 @@
   .produto-img{aspect-ratio:1/1!important;overflow:hidden!important}
 }
 </style>
+<!-- FOR YOU: dimensoes estaveis ja no primeiro desenho do celular. -->
+<style id="fy-mobile-layout-primeiro-desenho-2409">
+@media (max-width:800px) {
+  .fy-banner-r10 { display:block!important; margin:8px auto 2px!important; padding:0!important; width:calc(100% - 16px)!important; max-width:calc(100% - 16px)!important; min-height:0!important; }
+  .fy-banner-r10-viewport { display:block!important; position:relative!important; width:100%!important; height:auto!important; min-height:0!important; max-height:none!important; aspect-ratio:1360 / 380!important; overflow:hidden!important; transition:none!important; }
+  .fy-banner-r10-track { display:flex!important; width:100%!important; height:100%!important; min-height:0!important; align-items:stretch!important; }
+  .fy-banner-r10-track > a { display:block!important; flex:0 0 100%!important; width:100%!important; height:100%!important; min-height:0!important; overflow:hidden!important; }
+  .fy-banner-r10-track > a > img { display:block!important; width:100%!important; height:100%!important; min-height:0!important; max-height:none!important; aspect-ratio:1360 / 380!important; object-fit:contain!important; object-position:center!important; }
+  .fy-clean-cat-top { visibility:visible!important; opacity:1!important; display:flex!important; height:auto!important; min-height:0!important; max-height:105px!important; margin:3px auto 5px!important; padding:8px 12px!important; overflow-x:auto!important; overflow-y:hidden!important; flex-wrap:nowrap!important; align-items:flex-start!important; }
+  .fy-clean-cat-top > button:not(.fy-pill) { flex:0 0 66px!important; width:66px!important; min-width:66px!important; min-height:0!important; margin:0!important; }
+}
+</style>
 <!-- A sacola inicia fechada desde o PRIMEIRO desenho da página; o clique continua funcionando. -->
 <style id="fy-sacola-fechada-desde-inicio">
 #carrinho:not(.aberto) {
@@ -161,7 +173,7 @@ document.documentElement.classList.add('fy-ready');
 
 <!-- Categorias: impede que o formato antigo apareça antes dos estilos finais. -->
 <style id="fy-categorias-sem-piscar-inicio">
-.fy-clean-cat-top { visibility:hidden!important; }
+.fy-clean-cat-top { visibility:visible!important; }
 </style>
 <!-- Estilo essencial carregado primeiro para impedir a tela mobile deformada. -->
 <style id="fy-mobile-critical-first">
@@ -26525,6 +26537,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 })();
 </script>
 
+
 </body>
 </html>
 
@@ -26982,4 +26995,15 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 <style id="fy-admin-erro-retry-css">
 #paginaAdmin .fy-admin-pedidos-vazio button{margin-top:10px;padding:9px 14px;border:1px solid #d9bdc7;border-radius:999px;background:#fff;color:#7b3b51;font:600 10px Inter,Arial,sans-serif;cursor:pointer}
+</style>
+<!-- FOR YOU: ajuste final exclusivo do celular para evitar regras antigas conflitantes. -->
+<style id="fy-mobile-banner-categorias-sem-vazio-2409">
+@media (max-width:800px) {
+  #inicio.fy-banner-r10 { margin:8px auto 2px!important; min-height:0!important; height:auto!important; padding:0!important; }
+  #inicio .fy-banner-r10-viewport { width:100%!important; height:auto!important; min-height:0!important; max-height:none!important; aspect-ratio:1360 / 380!important; transition:none!important; overflow:hidden!important; }
+  #inicio .fy-banner-r10-track { height:100%!important; min-height:0!important; align-items:stretch!important; }
+  #inicio .fy-banner-r10-track > a { height:100%!important; min-height:0!important; }
+  #inicio .fy-banner-r10-track > a > img { width:100%!important; height:100%!important; aspect-ratio:1360 / 380!important; object-fit:contain!important; }
+  nav.fy-clean-cat-top { visibility:visible!important; opacity:1!important; display:flex!important; height:auto!important; min-height:0!important; max-height:105px!important; margin:3px auto 5px!important; padding:8px 12px!important; overflow-x:auto!important; overflow-y:hidden!important; }
+}
 </style>
