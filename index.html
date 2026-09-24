@@ -134,12 +134,15 @@
 
 <title>FOR YOU | Beleza</title>
 <meta name="theme-color" content="#8f1f40">
+<meta name="description" content="For You by Dé: beleza para você, direto no celular.">
 <meta name="application-name" content="For You">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="For You">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icone-for-you-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icone-for-you-192.png">
 <link rel="preload" as="image" href="logo-for-you-nova.png?v=16092026" fetchpriority="high">
 <link rel="preload" as="image" href="banner-for-you-sem-faixa.jpg" fetchpriority="high">
 
@@ -10380,7 +10383,7 @@ data-favoritar-produto="1"
 ${favorito ? "\u2665":"\u2661"}
 </button>
 
-<img loading="lazy" decoding="async" src="${fyImagemSegura(produto.imagem)}" alt="${fyTextoSeguro(produto.nome)}">
+<img loading="lazy" decoding="async" width="480" height="480" sizes="(max-width: 800px) 45vw, 240px" src="${fyImagemSegura(produto.imagem)}" alt="${fyTextoSeguro(produto.nome)}">
 
 </div>
 
@@ -12450,24 +12453,16 @@ function adminPromocao(){const nome=prompt('Digite o nome do produto:');if(!nome
    INICIALIZAR
 ========================= */
 
-renderProdutos();
-
-renderOfertas();
-
-renderKits();
-
-renderMaisVendidos();
-renderUltimasUnidades();
-renderRecentes();
-renderRecomendados();
+/* O catálogo real desenha a home após carregar; páginas internas desenham ao abrir. */
 inicializarBuscaProfissional();
 atualizarBanner();
-atualizarMinhaConta();
-renderPedidosConta();
 atualizar();
 
 
-setInterval(()=>{if(typeof atualizarDashboardAdminV6==="function") atualizarDashboardAdminV6();},1500);
+setInterval(()=>{
+  if(document.hidden||!document.getElementById('paginaAdmin')?.classList.contains('ativa'))return;
+  if(typeof atualizarDashboardAdminV6==='function')atualizarDashboardAdminV6();
+},15000);
 
 function atualizarDashboardAdminV6(){
   if(!adminAutenticado()) return;
@@ -12596,7 +12591,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       box.querySelector('.fill').style.width=pct+'%';
       box.querySelector('small').textContent=total>=threshold?'Voc\u00EA ganhou frete gr\u00E1tis!':'Falta R$ '+(threshold-total).toFixed(2).replace('.',',')+' para ganhar frete gr\u00E1tis.';
     }
-    update(); setInterval(update,1200);
+    update(); setInterval(()=>{if(!document.hidden&&cart.getClientRects().length)update()},10000);
   }
 
   document.addEventListener('DOMContentLoaded',()=>{
@@ -17938,7 +17933,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     titulo(marca,lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','COMPRE POR MARCA');
     renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
   };
-  document.addEventListener('DOMContentLoaded',window.renderNovidadesHome);
+  /* O carregador do catálogo chama renderNovidadesHome após receber os dados. */
 })();
 </script>
 
@@ -18697,9 +18692,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     };
   }
 
-  document.addEventListener("DOMContentLoaded", function(){
-    setTimeout(() => { try{ window.renderKits(); }catch(e){} }, 300);
-  });
+  /* A lista de kits é desenhada apenas quando a cliente abre a seção. */
 })();
 </script>
 
@@ -18748,9 +18741,17 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     if(window.__FY_CATALOGO_CARREGANDO || window.__FY_CATALOGO_CARREGADO) return;
     window.__FY_CATALOGO_CARREGANDO=true;
 
-    let todos=[], inicio=0, tamanho=1000;
+    const chaveCache='fy-catalogo-v41';
+    try{
+      const salvo=JSON.parse(sessionStorage.getItem(chaveCache)||'null');
+      if(salvo&&Date.now()-salvo.em<60000&&Array.isArray(salvo.dados)){
+        aplicarCatalogo(salvo.dados);
+        return;
+      }
+    }catch(e){}
+    let todos=[], inicio=0, tamanho=500;
     while(true){
-      const {data,error}=await sb.from("produtos").select("*")
+      const {data,error}=await sb.from("produtos").select("id,nome,marca,categoria,subcategoria,preco,preco_antigo,nota,estoque,imagem,galeria,variantes,rotulo_variante,descricao,validade,proximo_validade,achadinho_de,escolha_de,destaque_de,novidade,ativo")
         .eq("ativo",true).order("id",{ascending:true})
         .range(inicio,inicio+tamanho-1);
       if(error){window.__FY_CATALOGO_CARREGANDO=false;console.error("Erro cat\u00E1logo:",error.message);return;}
@@ -18760,6 +18761,11 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       inicio+=tamanho;
     }
 
+    try{sessionStorage.setItem(chaveCache,JSON.stringify({em:Date.now(),dados:todos}))}catch(e){}
+    aplicarCatalogo(todos);
+  }
+
+  function aplicarCatalogo(todos){
     produtos=todos.map(normalizar);
     window.FOR_YOU_TODOS_PRODUTOS=produtos;
     window.FOR_YOU_KITS=produtos.filter(ehKit);
@@ -18776,7 +18782,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     window.__FY_CATALOGO_CARREGANDO=false;
     window.__FY_CATALOGO_CARREGADO=true;
     document.documentElement.classList.add('fy-catalogo-pronto');
-    console.log("FOR YOU: "+produtos.length+" produtos ativos carregados do Supabase.");
+    console.log("FOR YOU: "+produtos.length+" produtos ativos prontos.");
   }
 
   window.carregarProdutosSupabase=carregarCatalogoTotal;
@@ -24794,6 +24800,13 @@ document.documentElement.setAttribute('data-fy-versao','45');
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pedidoInstalacao=e});
   window.addEventListener('appinstalled',()=>{pedidoInstalacao=null;document.querySelectorAll('.fy-instalar-link').forEach(b=>b.style.display='none')});
   if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(()=>{}))}
+  function avisarConexao(){
+    let aviso=document.getElementById('fyPwaOffline');
+    if(!aviso){aviso=document.createElement('div');aviso.id='fyPwaOffline';aviso.setAttribute('role','status');aviso.textContent='Sem conexão. Você pode ver a loja salva, mas compras e dados da conta precisam de internet.';document.body.appendChild(aviso)}
+    aviso.hidden=navigator.onLine;
+  }
+  window.addEventListener('online',avisarConexao);window.addEventListener('offline',avisarConexao);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',avisarConexao,{once:true});else avisarConexao();
   if(estaInstalado())document.querySelectorAll('.fy-instalar-link').forEach(b=>b.style.display='none');
   document.documentElement.setAttribute('data-fy-versao','46');
 })();
@@ -26795,4 +26808,70 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 <style id="fy-pedido-previsao-css">
 #paginaConta .fy-pedido-previsao{margin:0 0 14px;padding:11px 13px;border-radius:10px;background:#fbf5f7;color:#4b3640;font:500 12px/1.45 Inter,Arial,sans-serif}
 #paginaConta .pedido-rastreio button{cursor:pointer}
+</style>
+<style id="fy-visitante-css">
+#paginaCheckout .fy-visitante-opcoes{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:14px;border-radius:12px;background:#fbf5f7;color:#4b3640;font:12px/1.5 Inter,Arial,sans-serif}
+#paginaCheckout .fy-visitante-opcoes button{padding:8px 12px;border:1px solid #ead9de;border-radius:999px;background:#fff;color:#8d1739;cursor:pointer}
+#paginaCheckout .fy-visitante-extra{display:grid;grid-template-columns:2fr 2fr 1fr;gap:8px;margin-top:8px}
+#paginaCheckout .fy-visitante-extra[hidden]{display:none}
+#paginaCheckout .fy-visitante-extra input{min-width:0;padding:12px;border:1px solid #ead9de;border-radius:9px}
+@media(max-width:600px){#paginaCheckout .fy-visitante-extra{grid-template-columns:1fr 1fr}#paginaCheckout #fyVisitanteEstado{grid-column:span 2}}
+</style>
+<script id="fy-compra-visitante">
+(function(){
+  const $=id=>document.getElementById(id);
+  function construir(){
+    const form=document.querySelector('#paginaCheckout .fy-checkout-passo[data-passo="0"] .checkout-form');
+    if(!form||$('fyVisitanteExtra'))return;
+    const aviso=document.createElement('div');aviso.className='fy-visitante-opcoes';
+    aviso.innerHTML='<span>Você pode continuar sem criar uma conta. Informe seus dados de entrega abaixo.</span><button type="button" id="fyVisitanteEntrar">JÁ TENHO CONTA</button>';
+    form.parentNode.insertBefore(aviso,form);
+    const extra=document.createElement('div');extra.id='fyVisitanteExtra';extra.className='fy-visitante-extra';
+    extra.innerHTML='<input id="fyVisitanteBairro" autocomplete="address-level3" placeholder="Bairro" aria-label="Bairro"><input id="fyVisitanteCidade" autocomplete="address-level2" placeholder="Cidade" aria-label="Cidade"><input id="fyVisitanteEstado" autocomplete="address-level1" maxlength="2" placeholder="UF" aria-label="Estado">';
+    form.after(extra);
+    $('fyVisitanteEntrar').addEventListener('click',()=>{if(typeof window.abrirConta==='function')window.abrirConta()});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',construir,{once:true});else construir();
+  async function registrarVisitante(){
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;
+    if(!sb)throw new Error('A conexão da loja está indisponível.');
+    const {data:sessao,error:erroSessao}=await sb.auth.getUser();
+    if(erroSessao&&!/missing|session/i.test(erroSessao.message||''))throw erroSessao;
+    if(sessao?.user&&!sessao.user.is_anonymous)return;
+    const valor=id=>String($(id)?.value||'').trim();
+    const nome=valor('checkoutNome'),email=valor('checkoutEmail'),telefone=valor('checkoutTelefone');
+    const cep=valor('checkoutCEP').replace(/\D/g,''),numero=valor('checkoutNumero'),logradouro=valor('checkoutEndereco');
+    const bairro=valor('fyVisitanteBairro'),cidade=valor('fyVisitanteCidade'),estado=valor('fyVisitanteEstado').toUpperCase();
+    if(nome.length<2||!/^\S+@\S+\.\S+$/.test(email)||telefone.replace(/\D/g,'').length<10||cep.length!==8||!logradouro||!numero||!bairro||!cidade||!/^[A-Z]{2}$/.test(estado)){
+      throw new Error('Preencha nome, e-mail, telefone e endereço completo, incluindo bairro, cidade e UF.');
+    }
+    let user=sessao?.user;
+    if(!user){
+      const resposta=await sb.auth.signInAnonymously();
+      if(resposta.error)throw new Error('Compra como visitante indisponível. Ative o acesso anônimo no Supabase Auth.');
+      user=resposta.data.user;
+    }
+    const perfil=await sb.from('clientes').upsert({id:user.id,nome,email,telefone},{onConflict:'id'});
+    if(perfil.error)throw new Error('Não foi possível salvar os dados do pedido: '+perfil.error.message);
+    const endereco={cliente_id:user.id,destinatario:nome,apelido:'Entrega',principal:true,cep,numero,logradouro,bairro,cidade,estado,complemento:valor('checkoutComplemento')};
+    const existente=await sb.from('enderecos').select('id').eq('cliente_id',user.id).limit(1).maybeSingle();
+    if(existente.error)throw existente.error;
+    const salvo=existente.data?.id
+      ? await sb.from('enderecos').update(endereco).eq('id',existente.data.id)
+      : await sb.from('enderecos').insert(endereco);
+    if(salvo.error)throw new Error('Não foi possível salvar o endereço de entrega: '+salvo.error.message);
+  }
+  const confirmarAnterior=window.confirmarPedido;
+  window.confirmarPedido=async function(){
+    const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');
+    if(botao?.disabled)return;
+    if(botao)botao.disabled=true;
+    try{await registrarVisitante();return await confirmarAnterior.apply(this,arguments)}
+    catch(e){const msg=$('checkoutMensagem');if(msg)msg.textContent=e.message||'Não foi possível continuar como visitante.';if(botao)botao.disabled=false}
+  };
+})();
+</script>
+<style id="fy-pwa-offline-css">
+#fyPwaOffline[hidden]{display:none!important}
+#fyPwaOffline{position:fixed;left:12px;right:12px;bottom:12px;z-index:12001;max-width:580px;margin:auto;padding:12px 16px;border-radius:12px;background:#49333b;color:#fff;box-shadow:0 8px 25px #0003;font:12px/1.4 Inter,Arial,sans-serif;text-align:center}
 </style>
