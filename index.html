@@ -8459,6 +8459,47 @@ header .header-top .logo{width:76px!important;min-width:76px!important;max-width
 #paginaProduto .fy-favorito-detalhe:focus-visible{outline:2px solid #e32636;outline-offset:2px}
 @media(max-width:800px){#paginaProduto .fy-favorito-detalhe{top:10px;right:10px}}
 </style>
+<!-- FOR YOU: correção única do banner no celular — proporção natural, sem zoom ou altura fixa. -->
+<style id="fy-banner-mobile-proporcao-natural-2409">
+@media (max-width:800px) {
+  html body #inicio.fy-banner-r10 {
+    display:block!important; width:calc(100% - 16px)!important;
+    max-width:calc(100% - 16px)!important; height:auto!important;
+    min-height:0!important; margin:8px auto 3px!important;
+    padding:0!important; overflow:visible!important; contain:none!important;
+  }
+  html body #inicio.fy-banner-r10 .fy-banner-r10-viewport {
+    display:block!important; width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    aspect-ratio:auto!important; overflow:hidden!important;
+    border-radius:14px!important; contain:none!important;
+    transition:none!important;
+  }
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track {
+    display:flex!important; width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    align-items:flex-start!important; contain:none!important;
+  }
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track > a {
+    display:block!important; position:relative!important;
+    flex:0 0 100%!important; width:100%!important;
+    min-width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    overflow:hidden!important; contain:none!important;
+  }
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track > a > img {
+    display:block!important; position:static!important;
+    width:100%!important; min-width:0!important; max-width:100%!important;
+    height:auto!important; min-height:0!important; max-height:none!important;
+    aspect-ratio:auto!important; object-fit:contain!important;
+    object-position:center center!important; transform:none!important; margin:0!important;
+  }
+  html body #inicio + nav.fy-clean-cat-top {
+    visibility:visible!important; opacity:1!important;
+    margin-top:3px!important; min-height:0!important;
+  }
+}
+</style>
 </head>
 
 
@@ -8851,7 +8892,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
       <a href="#novidades" aria-label="Beleza que realÃ§a o seu melhor">
-        <img decoding="async" loading="eager" fetchpriority="high" width="1360" height="380" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
+        <img decoding="async" loading="eager" fetchpriority="high" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
       </a>
     </div>
   </div>
@@ -26539,75 +26580,47 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 
 
-<!-- FOR YOU: ajuste mobile final: banner inteiro, sem zoom nem corte. -->
-<style id="fy-banner-mobile-inteiro-final-2409">
+<!-- FOR YOU: correção única do banner no celular — proporção natural, sem zoom ou altura fixa. -->
+<style id="fy-banner-mobile-proporcao-natural-2409">
 @media (max-width:800px) {
-  #inicio.fy-banner-r10 {
-    display:block!important;
-    width:calc(100% - 16px)!important;
-    max-width:calc(100% - 16px)!important;
-    height:auto!important;
-    min-height:0!important;
-    margin:8px auto 3px!important;
-    padding:0!important;
-    overflow:visible!important;
+  html body #inicio.fy-banner-r10 {
+    display:block!important; width:calc(100% - 16px)!important;
+    max-width:calc(100% - 16px)!important; height:auto!important;
+    min-height:0!important; margin:8px auto 3px!important;
+    padding:0!important; overflow:visible!important; contain:none!important;
   }
-  #inicio .fy-banner-r10-viewport {
-    display:block!important;
-    position:relative!important;
-    width:100%!important;
-    height:auto!important;
-    min-height:0!important;
-    max-height:none!important;
-    aspect-ratio:1360 / 380!important;
-    overflow:hidden!important;
-    border-radius:14px!important;
-    background:#fff8fa!important;
+  html body #inicio.fy-banner-r10 .fy-banner-r10-viewport {
+    display:block!important; width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    aspect-ratio:auto!important; overflow:hidden!important;
+    border-radius:14px!important; contain:none!important;
+    transition:none!important;
   }
-  #inicio .fy-banner-r10-track {
-    display:flex!important;
-    width:100%!important;
-    height:100%!important;
-    min-height:0!important;
-    align-items:stretch!important;
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track {
+    display:flex!important; width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    align-items:flex-start!important; contain:none!important;
   }
-  #inicio .fy-banner-r10-track > a {
-    display:block!important;
-    position:relative!important;
-    flex:0 0 100%!important;
-    width:100%!important;
-    min-width:100%!important;
-    height:100%!important;
-    min-height:0!important;
-    overflow:hidden!important;
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track > a {
+    display:block!important; position:relative!important;
+    flex:0 0 100%!important; width:100%!important;
+    min-width:100%!important; height:auto!important;
+    min-height:0!important; max-height:none!important;
+    overflow:hidden!important; contain:none!important;
   }
-  #inicio .fy-banner-r10-track > a > img,
-  #inicio .fy-banner-r10-track > a > img[src*="banner-for-you-sem-faixa"] {
-    display:block!important;
-    position:static!important;
-    left:auto!important;
-    top:auto!important;
-    width:100%!important;
-    min-width:0!important;
-    max-width:100%!important;
-    height:100%!important;
-    min-height:0!important;
-    max-height:100%!important;
-    aspect-ratio:1360 / 380!important;
-    object-fit:contain!important;
-    object-position:center center!important;
-    transform:none!important;
-    margin:0!important;
+  html body #inicio.fy-banner-r10 .fy-banner-r10-track > a > img {
+    display:block!important; position:static!important;
+    width:100%!important; min-width:0!important; max-width:100%!important;
+    height:auto!important; min-height:0!important; max-height:none!important;
+    aspect-ratio:auto!important; object-fit:contain!important;
+    object-position:center center!important; transform:none!important; margin:0!important;
   }
-  #inicio + nav.fy-clean-cat-top {
-    margin-top:3px!important;
-    min-height:0!important;
-    visibility:visible!important;
-    opacity:1!important;
+  html body #inicio + nav.fy-clean-cat-top {
+    visibility:visible!important; opacity:1!important;
+    margin-top:3px!important; min-height:0!important;
   }
 }
 </style>
-
 </body>
 </html>
 
@@ -27066,16 +27079,3 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 <style id="fy-admin-erro-retry-css">
 #paginaAdmin .fy-admin-pedidos-vazio button{margin-top:10px;padding:9px 14px;border:1px solid #d9bdc7;border-radius:999px;background:#fff;color:#7b3b51;font:600 10px Inter,Arial,sans-serif;cursor:pointer}
 </style>
-<!-- FOR YOU: ajuste final exclusivo do celular para evitar regras antigas conflitantes. -->
-<style id="fy-mobile-banner-categorias-sem-vazio-2409">
-@media (max-width:800px) {
-  #inicio.fy-banner-r10 { margin:8px auto 2px!important; min-height:0!important; height:auto!important; padding:0!important; }
-  #inicio .fy-banner-r10-viewport { width:100%!important; height:auto!important; min-height:0!important; max-height:none!important; aspect-ratio:1360 / 380!important; transition:none!important; overflow:hidden!important; }
-  #inicio .fy-banner-r10-track { height:100%!important; min-height:0!important; align-items:stretch!important; }
-  #inicio .fy-banner-r10-track > a { height:100%!important; min-height:0!important; }
-  #inicio .fy-banner-r10-track > a > img { width:100%!important; height:100%!important; aspect-ratio:1360 / 380!important; object-fit:contain!important; }
-  nav.fy-clean-cat-top { visibility:visible!important; opacity:1!important; display:flex!important; height:auto!important; min-height:0!important; max-height:105px!important; margin:3px auto 5px!important; padding:8px 12px!important; overflow-x:auto!important; overflow-y:hidden!important; }
-}
-</style>
-
-
