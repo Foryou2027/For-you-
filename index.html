@@ -10326,6 +10326,7 @@ function enviarAvaliacao(){
 function fyTextoSeguro(valor){return String(valor??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function fyImagemUrl(valor){const url=String(valor||'').trim();try{const destino=new URL(url,location.href);return url&&/^https?:$/.test(destino.protocol)?destino.href:''}catch(e){return ''}}
 function fyImagemSegura(valor){return fyTextoSeguro(fyImagemUrl(valor))}
+function fyLinkProduto(id){const url=new URL(location.pathname,location.origin);url.searchParams.set('produto',String(id));return url.pathname+url.search}
 function renderAvaliacoes(){
  const c=document.getElementById("listaAvaliacoes"); if(!c||!window.produtoAtualDetalhe)return; const lista=obterAvaliacoes();
  const media=lista.reduce((s,a)=>s+Number(a.nota),0)/lista.length; const positivas=Math.round(lista.filter(a=>a.nota>=4).length/lista.length*100);
@@ -10393,9 +10394,7 @@ ${favorito ? "\u2665":"\u2661"}
 ${fyTextoSeguro(produto.marca)}
 </div>
 
-<div class="nome">
-${fyTextoSeguro(produto.nome)}
-</div>
+<div class="nome"><a class="fy-link-produto" href="${fyTextoSeguro(fyLinkProduto(produto.id))}" data-fy-link-produto="${fyTextoSeguro(produto.id)}">${fyTextoSeguro(produto.nome)}</a></div>
 
 <div class="produto-meta">
   <div class="produto-avaliacao"><strong>\u2605\u2605\u2605\u2605\u2605</strong> ${Number(produto.nota||0).toFixed(1).replace(".",",")}</div>
@@ -18782,6 +18781,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     window.__FY_CATALOGO_CARREGANDO=false;
     window.__FY_CATALOGO_CARREGADO=true;
     document.documentElement.classList.add('fy-catalogo-pronto');
+    document.dispatchEvent(new Event('fy-catalogo-pronto'));
     console.log("FOR YOU: "+produtos.length+" produtos ativos prontos.");
   }
 
@@ -26875,3 +26875,122 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 #fyPwaOffline[hidden]{display:none!important}
 #fyPwaOffline{position:fixed;left:12px;right:12px;bottom:12px;z-index:12001;max-width:580px;margin:auto;padding:12px 16px;border-radius:12px;background:#49333b;color:#fff;box-shadow:0 8px 25px #0003;font:12px/1.4 Inter,Arial,sans-serif;text-align:center}
 </style>
+<style id="fy-seo-produto-css">
+.fy-link-produto{color:inherit;text-decoration:none}
+.fy-link-produto:hover,.fy-link-produto:focus-visible{text-decoration:underline}
+#fySeoCatalogo{max-width:1200px;margin:20px auto;padding:0 20px;color:#5b4a50;font:12px/1.5 Inter,Arial,sans-serif}
+#fySeoCatalogo summary{cursor:pointer}
+#fySeoCatalogo nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px 16px;padding:14px 0}
+#fySeoCatalogo a{color:inherit}
+</style>
+<script id="fy-seo-produto-js">
+(function(){
+  const nomeLoja='For You by Dé';
+  const tituloInicial=document.title;
+  const descricaoInicial='Encontre maquiagem, cuidados e acessórios na For You by Dé.';
+  let abrindoURL=false;
+  function catalogo(){try{return Array.isArray(produtos)?produtos:[]}catch(e){return []}}
+  function meta(seletor,atributo,valor){
+    let el=document.head.querySelector(seletor);
+    if(!el){el=document.createElement('meta');el.setAttribute(atributo,valor);document.head.appendChild(el)}
+    return el;
+  }
+  function canonical(url){
+    let el=document.head.querySelector('link[rel="canonical"]');
+    if(!el){el=document.createElement('link');el.rel='canonical';document.head.appendChild(el)}
+    el.href=url;
+  }
+  function urlProduto(id){
+    const url=new URL(location.pathname,location.origin);
+    url.searchParams.set('produto',String(id));
+    return url.href;
+  }
+  function descricao(p){
+    const texto=String(p.descricao||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    return (texto||`${p.nome} da marca ${p.marca||nomeLoja}. Confira preço e disponibilidade na For You.`).slice(0,160);
+  }
+  function atualizar(p){
+    const link=p?urlProduto(p.id):new URL(location.pathname,location.origin).href;
+    const texto=p?descricao(p):descricaoInicial;
+    document.title=p?`${p.nome} | ${p.marca||nomeLoja} | ${nomeLoja}`:tituloInicial;
+    meta('meta[name="description"]','name','description').content=texto;
+    meta('meta[property="og:title"]','property','og:title').content=document.title;
+    meta('meta[property="og:description"]','property','og:description').content=texto;
+    meta('meta[property="og:url"]','property','og:url').content=link;
+    canonical(link);
+    const imagem=p?String(p.imagem||''):'';
+    if(imagem){
+      try{meta('meta[property="og:image"]','property','og:image').content=new URL(imagem,location.href).href}catch(e){}
+    }else document.head.querySelector('meta[property="og:image"]')?.remove();
+    document.getElementById('fyProdutoJsonLd')?.remove();
+    if(!p)return;
+    const valor=Number(p.preco),img=[];
+    for(const foto of [p.imagem,...(Array.isArray(p.galeria)?p.galeria:[])]){
+      try{if(foto){const u=new URL(foto,location.href);if(/^https?:$/.test(u.protocol)&&!img.includes(u.href))img.push(u.href)}}catch(e){}
+    }
+    const produto={
+      '@context':'https://schema.org','@type':'Product',
+      name:String(p.nome),description:texto,sku:String(p.id),url:link,
+      ...(img.length?{image:img}:{}),
+      ...(p.marca?{brand:{'@type':'Brand',name:String(p.marca)}}:{}),
+      offers:{'@type':'Offer',url:link,priceCurrency:'BRL',
+        price:Number.isFinite(valor)?valor.toFixed(2):'0.00',
+        availability:Number(p.estoque)>0?'https://schema.org/InStock':'https://schema.org/OutOfStock',
+        itemCondition:'https://schema.org/NewCondition'}
+    };
+    const script=document.createElement('script');script.id='fyProdutoJsonLd';script.type='application/ld+json';
+    script.textContent=JSON.stringify(produto).replace(/</g,'\\u003c');document.head.appendChild(script);
+  }
+  const abrirAnterior=window.fyAbrirProduto||window.abrirProduto;
+  if(typeof abrirAnterior==='function'){
+    const abrir=function(id){
+      const p=catalogo().find(x=>String(x.id)===String(id));
+      if(!p)return abrirAnterior.apply(this,arguments);
+      if(!abrindoURL&&new URLSearchParams(location.search).get('produto')!==String(p.id)){
+        history.pushState({fyProduto:String(p.id)},'',urlProduto(p.id));
+      }
+      atualizar(p);
+      return abrirAnterior.apply(this,arguments);
+    };
+    window.fyAbrirProduto=abrir;window.abrirProduto=abrir;
+  }
+  const fecharAnterior=window.fyFecharProduto;
+  if(typeof fecharAnterior==='function')window.fyFecharProduto=function(){
+    const retorno=fecharAnterior.apply(this,arguments);
+    if(new URLSearchParams(location.search).has('produto'))history.replaceState(null,'',location.pathname);
+    atualizar(null);return retorno;
+  };
+  function abrirLink(){
+    const id=new URLSearchParams(location.search).get('produto');
+    if(!id){atualizar(null);return}
+    const p=catalogo().find(x=>String(x.id)===String(id));
+    if(!p)return;
+    abrindoURL=true;
+    try{window.fyAbrirProduto?.(p.id)}finally{abrindoURL=false}
+  }
+  function montarIndice(){
+    const footer=document.querySelector('footer');if(!footer||document.getElementById('fySeoCatalogo'))return;
+    const lista=catalogo().filter(p=>p&&p.ativo!==false&&p.imagem);
+    if(!lista.length)return;
+    const caixa=document.createElement('details');caixa.id='fySeoCatalogo';
+    const resumo=document.createElement('summary');resumo.textContent='Ver todos os produtos';
+    const nav=document.createElement('nav');nav.setAttribute('aria-label','Catálogo de produtos');
+    lista.forEach(p=>{
+      const a=document.createElement('a');a.href=urlProduto(p.id);a.dataset.fyLinkProduto=String(p.id);
+      a.textContent=String(p.nome||'Produto');nav.appendChild(a);
+    });
+    caixa.append(resumo,nav);footer.appendChild(caixa);
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest?.('a[data-fy-link-produto]');
+    if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0)return;
+    e.preventDefault();window.fyAbrirProduto?.(a.dataset.fyLinkProduto);
+  });
+  document.addEventListener('fy-catalogo-pronto',()=>{montarIndice();abrirLink()});
+  window.addEventListener('popstate',()=>{
+    if(new URLSearchParams(location.search).has('produto'))abrirLink();
+    else{document.getElementById('fySafeModal')?.classList.remove('aberto');document.body.style.overflow='';atualizar(null)}
+  });
+  if(window.__FY_CATALOGO_CARREGADO){montarIndice();abrirLink()}
+})();
+</script>
