@@ -18018,6 +18018,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
     try{fecharMenu()}catch(e){}try{fecharSubmenuHomeFY()}catch(e){}
   };
+  window.mostrarTodosProdutos=function(){
+    if(!window.__FY_CATALOGO_CARREGADO){
+      document.addEventListener('fy-catalogo-pronto',window.mostrarTodosProdutos,{once:true});
+      return;
+    }
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p&&p.ativo!==false);
+    titulo('Todos os Produtos',lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','CATÁLOGO COMPLETO');
+    renderLista(lista);
+    document.getElementById('fyCategoryToolbar')?.remove();
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+  };
   window.mostrarProdutosDezFY=function(){
     const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p.ativo!==false&&Number(p.preco)<=10);
     titulo('Produtos de R$ 10',lista.length+' achadinho'+(lista.length===1?'':'s')+' por at\u00E9 R$ 10.','ACHADINHOS');
