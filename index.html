@@ -18003,7 +18003,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     const cat=normalizar(categoria),sub=normalizar(subcategoria);
     const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>{
       const pc=normalizar(p.categoria),ps=normalizar(p.subcategoria);
-      return p.ativo!==false&&(sub?ps===sub:pc===cat);
+      const nome=normalizar(p.nome);
+      const bruma=/\bbruma\b/.test(nome)||ps==="bruma";
+      const ehPo=sub==="po" && (/(^|\s)po(s)?(\s|$)/.test(nome) || /^(po|po facial|po compacto|po solto|po translucido|po banana|po finalizador)$/.test(ps));
+      const ehFixador=(sub==="fixador"||sub==="fixador de maquiagem") && !bruma &&
+        (ps==="fixador"||ps==="fixador de maquiagem"||/\bfixador(a)?\b/.test(nome));
+      const combinaSub=sub==="bruma" ? bruma :
+        (sub==="fixador"||sub==="fixador de maquiagem") ? ehFixador : (ehPo||ps===sub);
+      return p.ativo!==false&&(sub?combinaSub:pc===cat);
     });
     titulo(subcategoria||('Produtos de '+categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.',(categoria||'CATEGORIA').toUpperCase());
     renderLista(lista);
@@ -19646,10 +19653,10 @@ body.fy-pagina-exclusiva .pagina.ativa{
 (function(){
   const dados={
     labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
-    pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    pele:["Base","Corretivo","Primer","Bruma","Pó","Blush","Contorno","Bronzer","Iluminador","Fixador"],
     skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó compacto","Pó solto","Fixador de maquiagem","Paleta facial","Bronzer","Bruma","Pó","Fixador"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó","Paleta facial","Bronzer","Bruma","Fixador"],
     acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
     corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
   };
@@ -19751,10 +19758,10 @@ body.fy-pagina-exclusiva .pagina.ativa{
 (function(){
   const subcategorias={
     labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
-    pele:["Base","Corretivo","Primer","Bruma","Pó Facial","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    pele:["Base","Corretivo","Primer","Bruma","Pó","Blush","Contorno","Bronzer","Iluminador","Fixador"],
     skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
     olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó compacto","Pó solto","Fixador de maquiagem","Paleta facial","Bronzer","Bruma","Pó","Fixador"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó","Paleta facial","Bronzer","Bruma","Fixador"],
     acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
     corpo:["Todos de Corpo","Cabelo","Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
   };
