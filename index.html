@@ -18000,17 +18000,25 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(!lista.length&&grade())grade().innerHTML='<div class="fy-novidades-vazio"><span>\u2661</span><strong>Novidades chegando</strong><p>Os pr\u00F3ximos lan\u00E7amentos da FOR YOU aparecer\u00E3o aqui.</p></div>';
   };
   window.selecionarSubcategoria=function(categoria,subcategoria){
+    if(!window.__FY_CATALOGO_CARREGADO){
+      document.addEventListener('fy-catalogo-pronto',()=>window.selecionarSubcategoria(categoria,subcategoria),{once:true});
+      return;
+    }
     const cat=normalizar(categoria),sub=normalizar(subcategoria);
     const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>{
       const pc=normalizar(p.categoria),ps=normalizar(p.subcategoria);
       const nome=normalizar(p.nome);
+      const mesmaCategoria=!cat ||
+        (cat==="face"||cat==="pele" ? (pc==="face"||pc==="pele") :
+         cat==="cabelo" ? (pc==="cabelo" || (pc==="corpo" && /cabel|capilar|shampoo|condicionador|gelatina/.test(ps+" "+nome))) :
+         pc===cat);
       const bruma=/\bbruma\b/.test(nome)||ps==="bruma";
       const ehPo=sub==="po" && (/(^|\s)po(s)?(\s|$)/.test(nome) || /^(po|po facial|po compacto|po solto|po translucido|po banana|po finalizador)$/.test(ps));
       const ehFixador=(sub==="fixador"||sub==="fixador de maquiagem") && !bruma &&
         (ps==="fixador"||ps==="fixador de maquiagem"||/\bfixador(a)?\b/.test(nome));
       const combinaSub=sub==="bruma" ? bruma :
         (sub==="fixador"||sub==="fixador de maquiagem") ? ehFixador : (ehPo||ps===sub);
-      return p.ativo!==false&&(sub?combinaSub:pc===cat);
+      return p.ativo!==false&&mesmaCategoria&&(!sub||combinaSub);
     });
     titulo(subcategoria||('Produtos de '+categoria),lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.',(categoria||'CATEGORIA').toUpperCase());
     renderLista(lista);
