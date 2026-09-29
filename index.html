@@ -10223,7 +10223,7 @@ APLICAR
 
 <div class="cupons-disponiveis">
   <h4>CUPONS DISPON&#xCD;VEIS</h4>
-  <div class="cupom-card"><span><strong>FORYOU10</strong><br>10% de desconto</span><button onclick="usarCupom('FORYOU10')">USAR</button></div>
+  <div class="cupom-card"><span><strong>BEMVINDA10</strong><br>10% na primeira compra a partir de R$ 100</span><button onclick="usarCupom('BEMVINDA10')">USAR</button></div>
   <div class="cupom-card"><span><strong>BEMVINDA</strong><br>15% de desconto</span><button onclick="usarCupom('BEMVINDA')">USAR</button></div>
 </div>
 
@@ -10308,6 +10308,10 @@ expressa:0
 };
 
 let descontoAtual = 0;
+function fyDescontoEmReais(subtotal){
+  return subtotal>=100&&localStorage.getItem('forYouCupomCarrinho')==='BEMVINDA10'
+    ?Math.round(subtotal*10)/100:0;
+}
 
 let cupomAplicado = "";
 
@@ -10727,7 +10731,7 @@ function atualizar(){
     const el=document.getElementById(id);
     if(el)el.textContent=quantidade;
   });
-  const desconto=subtotal*descontoAtual;
+  const desconto=fyDescontoEmReais(subtotal);
   const subtotalEl=document.getElementById("subtotal");
   const descontoEl=document.getElementById("desconto");
   const freteEl=document.getElementById("frete");
@@ -11535,7 +11539,8 @@ function selecionarPagamento(tipo,btn){
   const box=document.getElementById('pagamentoDetalhes');
   if(!box)return;
   if(tipo==='PIX'){
-    const total=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0)-carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0)*descontoAtual+freteAtual;
+    const subtotalPix=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);
+    const total=subtotalPix-fyDescontoEmReais(subtotalPix)+freteAtual;
     box.innerHTML=`<div class="pagamento-extra pix-extra"><strong>\u{1F4A0} Pagamento via Pix</strong><p>Ao confirmar, seu pedido ser\u00E1 registrado. Fa\u00E7a a transfer\u00EAncia no aplicativo do seu banco e envie o comprovante pelo WhatsApp.</p><div class="fy-pix-box"><span class="fy-pix-label">VALOR DO PEDIDO</span><strong class="fy-pix-total">${moeda(total)}</strong><span class="fy-pix-label">FAVORECIDA</span><strong>D\u00E9bora Cristina Lima Pereira</strong><span class="fy-pix-label">CHAVE PIX \u2022 TELEFONE</span><span>(11) 98694-3367</span><div class="fy-pix-code"><input id="pixCodigo" value="+5511986943367" readonly><button class="fy-copy" type="button" onclick="copiarPix()">COPIAR CHAVE PIX</button></div><small>O pagamento ser\u00E1 conferido manualmente. O status mudar\u00E1 depois da confirma\u00E7\u00E3o.</small></div></div>`;
   }
   atualizarRevisaoCheckout();
@@ -11558,12 +11563,13 @@ function atualizarRevisaoCheckout(){
   const endereco=document.getElementById('checkoutEndereco')?.value.trim()||'\u2014';
   const numero=document.getElementById('checkoutNumero')?.value.trim()||'\u2014';
   const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);
-  const desconto=subtotal*descontoAtual; const total=subtotal-desconto+freteAtual;
+  const desconto=fyDescontoEmReais(subtotal);
+  const total=subtotal-desconto+freteAtual;
   el.innerHTML=`<div><strong>Cliente:</strong> ${fyTextoSeguro(nome)}</div><div><strong>Entrega:</strong> ${fyTextoSeguro(endereco)}, ${fyTextoSeguro(numero)}</div><div><strong>Pagamento:</strong> ${fyTextoSeguro(pagamentoSelecionado)}</div><div><strong>Total:</strong> ${moeda(total)}</div>`;
 }
 function renderCheckout(){
   const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0);
-  const desconto=subtotal*descontoAtual;
+  const desconto=fyDescontoEmReais(subtotal);
   const total=subtotal-desconto+freteAtual;
   const itens=document.getElementById('checkoutItens');
   if(itens){itens.innerHTML=carrinho.map(p=>`<div class="checkout-item-mini"><div><strong>${fyTextoSeguro(p.nome)}</strong><br><span>${Math.max(0,Number(p.quantidade)||0)} \u00D7 ${moeda(p.preco)}</span></div><strong>${moeda(p.preco*p.quantidade)}</strong></div>`).join('');}
@@ -11582,7 +11588,7 @@ function confirmarPedido(){
   if(pagamentoSelecionado!=='PIX'){document.getElementById('checkoutMensagem').textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
   const indisponivel=carrinho.find(item=>{const p=encontrarProduto(item.id);return !p || Number(p.estoque||0)<Number(item.quantidade||0);});
   if(indisponivel){document.getElementById('checkoutMensagem').textContent='Um dos produtos n\u00E3o possui estoque suficiente. Atualize o carrinho antes de continuar.';return;}
-  const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0),desconto=subtotal*descontoAtual,total=subtotal-desconto+freteAtual;
+  const subtotal=carrinho.reduce((s,p)=>s+p.preco*p.quantidade,0),desconto=fyDescontoEmReais(subtotal),total=subtotal-desconto+freteAtual;
   let todosPedidos=[];try{todosPedidos=JSON.parse(localStorage.getItem('forYouPedidos')||'[]');}catch(e){todosPedidos=[];}
   const sequencia=todosPedidos.reduce((m,p)=>Math.max(m,parseInt(String(p.numero||'').replace(/\D/g,''))||0),0)+1;
   const numeroPedido=String(sequencia).padStart(4,'0');
@@ -12134,49 +12140,23 @@ atualizar();
 ========================= */
 
 function aplicarCupom(){
-
-const input =
-document.getElementById("cupom");
-
-const mensagem =
-document.getElementById("cupomMsg");
-
-const cupom =
-input.value
-.trim()
-.toUpperCase();
-
-if(cupom==="FORYOU10"){
-
-descontoAtual=0.10;
-
-cupomAplicado=cupom;
-
-mensagem.textContent=
-"\u2713 Cupom aplicado! Voc\u00EA ganhou 10% de desconto.";
-
-}else if(cupom==="BEMVINDA"){
-
-descontoAtual=0.15;
-
-cupomAplicado=cupom;
-
-mensagem.textContent=
-"\u2713 Cupom aplicado! Voc\u00EA ganhou 15% de desconto.";
-
-}else{
-
-descontoAtual=0;
-
-cupomAplicado="";
-
-mensagem.textContent=
-"\u274C Cupom inv\u00E1lido.";
-
-}
-
-atualizar();
-
+  const input=document.getElementById('cupom');
+  const mensagem=document.getElementById('cupomMsg');
+  const codigo=String(input?.value||'').trim().toUpperCase();
+  const subtotal=carrinho.reduce((s,p)=>s+Number(p.preco||0)*Number(p.quantidade||0),0);
+  if(codigo==='BEMVINDA10'&&subtotal>=100){
+    localStorage.setItem('forYouCupomCarrinho',codigo);
+    descontoAtual=0.10;
+    cupomAplicado=codigo;
+    if(mensagem)mensagem.textContent='Cupom aplicado. A elegibilidade será confirmada ao finalizar.';
+  }else{
+    localStorage.removeItem('forYouCupomCarrinho');
+    descontoAtual=0;
+    cupomAplicado='';
+    if(mensagem)mensagem.textContent=codigo==='BEMVINDA10'?'O mínimo em produtos é R$ 100,00.':'Cupom inválido.';
+  }
+  atualizar();
+  if(typeof renderCheckout==='function')renderCheckout();
 }
 
 
@@ -12286,7 +12266,7 @@ moeda(valor)+
 });
 
 const desconto=
-subtotal*descontoAtual;
+fyDescontoEmReais(subtotal);
 
 mensagem+=
 "\n*RESUMO*\n";
@@ -12936,9 +12916,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   function updateSummary(c){
     const subtotal=c.reduce((s,x)=>s+(Number(x.price)||0)*(x.qty||1),0);
-    const discount=c.reduce((s,x)=>s+Math.max(0,(Number(x.oldPrice)||0)-(Number(x.price)||0))*(x.qty||1),0);
+    // O preço atual já inclui promoções; não subtraia o preço antigo novamente.
+    const discount=0;
     const shipping=subtotal>=THRESHOLD||!subtotal?0:0;
-    const coupon=Number(localStorage.getItem(COUPON_KEY)||0);
+    const coupon=subtotal>=100&&localStorage.getItem('forYouCupomCarrinho')==='BEMVINDA10'?Math.round(subtotal*10)/100:0;
     document.getElementById('fy17Subtotal').textContent=money(subtotal);
     document.getElementById('fy17Discount').textContent='\u2212 '+money(discount+coupon);
     document.getElementById('fy17Shipping').textContent=subtotal>=THRESHOLD?'Gr\u00E1tis':'A calcular';
@@ -12958,12 +12939,16 @@ document.addEventListener("DOMContentLoaded",()=>{
   window.salvarDepoisV17=function(i){const c=getCart();const x=c.splice(i,1)[0];let s=JSON.parse(localStorage.getItem('foryou_saved_later_v17')||'[]');s.push(x);localStorage.setItem('foryou_saved_later_v17',JSON.stringify(s));saveCart(c);render();}
   window.adicionarV17=function(x){const c=getCart();const found=c.find(y=>y.id===x.id||y.name===x.name);if(found)found.qty=(found.qty||1)+1;else c.push({...x,qty:1});saveCart(c);render();}
   window.aplicarCupomV17=function(){
-    const input=document.getElementById('fy17CouponInput'), msg=document.getElementById('fy17CouponMessage');
-    const code=(input.value||'').trim().toUpperCase();
-    // Demo-ready validation; actual coupons can later be loaded from the admin/backend.
-    const coupons={'BEMVINDO10':10,'FORYOU10':10};
-    if(coupons[code]){localStorage.setItem(COUPON_KEY,coupons[code]);msg.textContent='\u2713 Cupom aplicado: '+money(coupons[code])+' de desconto.';msg.style.color='#2c8a55';}
-    else{localStorage.removeItem(COUPON_KEY);msg.textContent=code?'Cupom n\u00E3o encontrado.':'Digite seu cupom.';msg.style.color='#b21e53';}
+    const input=document.getElementById('fy17CouponInput'),msg=document.getElementById('fy17CouponMessage');
+    const code=String(input?.value||'').trim().toUpperCase();
+    const subtotal=getCart().reduce((t,x)=>t+Number(x.price||0)*Number(x.qty||1),0);
+    if(code==='BEMVINDA10'&&subtotal>=100){
+      localStorage.setItem('forYouCupomCarrinho',code);
+      if(msg){msg.textContent='Cupom aplicado. A elegibilidade será confirmada ao finalizar.';msg.style.color='#2c8a55';}
+    }else{
+      localStorage.removeItem('forYouCupomCarrinho');
+      if(msg){msg.textContent=code==='BEMVINDA10'?'O mínimo em produtos é R$ 100,00.':'Cupom inválido.';msg.style.color='#b21e53';}
+    }
     render();
   };
   window.finalizarCompraV17=function(){
@@ -16743,7 +16728,7 @@ document.addEventListener("DOMContentLoaded", function () {
    try{
      const {data:{user}}=await sb.auth.getUser();
      if(!user){r.textContent="Entre na sua conta para usar o cupom de primeira compra.";return;}
-     const {count,error}=await sb.from('pedidos').select('id',{count:'exact',head:true}).eq('cliente_id',user.id);
+     const {count,error}=await sb.from('pedidos').select('id',{count:'exact',head:true}).eq('cliente_id',user.id).in('status_pagamento',['aguardando_pagamento','em_analise','pago','estornado']);
      if(error)throw error;
      if(Number(count||0)>0){r.textContent="N\u00E3o foi poss\u00EDvel aplicar: esta conta j\u00E1 realizou uma compra. O cupom BEMVINDA10 pode ser usado somente uma vez, na primeira compra.";return;}
      localStorage.setItem('forYouCupomCarrinho','BEMVINDA10');
