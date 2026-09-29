@@ -26538,7 +26538,6 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 <script id="fy-avise-estoque-js">
 (function(){
-  const CHAVE_LOCAL='forYouAvisosEstoquePendentes';
 
   function textoSeguro(v){return String(v??'').replace(/[<>]/g,'');}
   function produtoAtual(){
@@ -26597,15 +26596,6 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     modal.classList.remove('ativo'); modal.setAttribute('aria-hidden','true');
   }
 
-  function guardarLocal(registro){
-    try{
-      const lista=JSON.parse(localStorage.getItem(CHAVE_LOCAL)||'[]');
-      const semDuplicar=lista.filter(x=>!(String(x.produto_id)===String(registro.produto_id)&&String(x.email).toLowerCase()===String(registro.email).toLowerCase()));
-      semDuplicar.push(registro);
-      localStorage.setItem(CHAVE_LOCAL,JSON.stringify(semDuplicar));
-    }catch(e){}
-  }
-
   async function salvarAviso(evento){
     evento.preventDefault();
     const modal=garantirModal();
@@ -26617,21 +26607,19 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
       msg.textContent='Digite um e-mail válido.'; return;
     }
     btn.disabled=true; btn.textContent='CADASTRANDO...'; msg.textContent='';
-    const registro={produto_id:p.id,produto_nome:p.nome||'',email,criado_em:new Date().toISOString(),ativo:true};
+    const registro={produto_id:p.id,produto_nome:String(p.nome||'').slice(0,200),email,avisado:false,criado_em:new Date().toISOString()};
     try{
       const sb=window.FOR_YOU_SUPABASE_CLIENT;
       if(!sb)throw new Error('Conexão indisponível');
       const {error}=await sb.from('avisos_estoque').insert(registro);
       if(error)throw error;
-      guardarLocal(registro);
       msg.style.color='#2e7b55';
       msg.textContent='Pronto! Seu aviso foi cadastrado.';
       btn.textContent='CADASTRADO ✓';
       setTimeout(fecharModal,1300);
     }catch(e){
-      guardarLocal(registro);
       msg.style.color='#9a3657';
-      msg.textContent='O aviso ficou salvo neste aparelho, mas ainda falta ativar a tabela avisos_estoque no Supabase para o envio automático.';
+      msg.textContent='Não foi possível cadastrar o aviso. Tente novamente mais tarde.';
       btn.disabled=false; btn.textContent='TENTAR NOVAMENTE';
     }
   }
