@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<style id="fy-acesso-privado">
-html:not(.fy-liberado) body > :not(#fyPortaria){visibility:hidden!important}
-#fyPortaria{position:fixed;inset:0;z-index:2147483647;background:#fff8fa;display:grid;place-items:center;padding:20px;font:14px Arial,sans-serif;color:#45343a}
-html.fy-liberado #fyPortaria{display:none!important}
-#fyPortaria form{background:white;max-width:380px;width:100%;box-sizing:border-box;padding:30px;border-radius:18px;box-shadow:0 10px 40px #351f2720}
-#fyPortaria h1{font-size:25px;text-align:center;margin:0 0 10px;color:#a74b70}
-#fyPortaria p{line-height:1.5;text-align:center}
-#fyPortaria label{display:block;margin:15px 0 5px}
-#fyPortaria input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ddd;border-radius:7px;font-size:16px}
-#fyPortaria button{width:100%;padding:12px;margin-top:20px;border:0;border-radius:7px;background:#d988a6;color:white;font-weight:bold;cursor:pointer}
-#fyPortaria button:disabled{opacity:.6}
-#fyPortaria .erro{color:#a52642;min-height:18px}
-</style>
 <script>
 /* Mobile: mostra a estrutura imediatamente; o conteudo dinamico entra sem bloquear a pagina inteira. */
 </script>
@@ -9235,7 +9222,7 @@ Promo&#xE7;&#xF5;es de datas especiais
 
       <div class="fy-auth-tabs" role="tablist">
         <button type="button" id="fyAuthTabEntrar" class="ativo" onclick="fyMostrarAuth('entrar')">ENTRAR</button>
-        
+        <button type="button" id="fyAuthTabCadastrar" onclick="fyMostrarAuth('cadastrar')">CRIAR CONTA</button>
       </div>
 
       <form id="fyAuthLogin" class="fy-auth-form" onsubmit="return fySupabaseEntrar(event)">
@@ -9243,11 +9230,11 @@ Promo&#xE7;&#xF5;es de datas especiais
         <label>Senha<span class="fy-password-field"><input id="fyLoginSenha" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"><button type="button" class="fy-password-toggle" onclick="fyAlternarSenha(this)" aria-label="Mostrar senha"></button></span></label>
         <button type="button" id="fyEsqueciSenha" class="fy-auth-forgot" onclick="fyRecuperarSenha()">Esqueci minha senha</button>
         <button type="submit" class="fy-auth-submit">ENTRAR</button>
-        
+        <div class="fy-auth-switch-copy">Ainda n&#xE3;o tem uma conta? <button type="button" onclick="fyMostrarAuth('cadastrar')">Criar conta</button></div>
         <div id="fyLoginMsg" class="fy-auth-msg"></div>
       </form>
 
-      <form id="fyAuthCadastro" class="fy-auth-form" onsubmit="return false" hidden>
+      <form id="fyAuthCadastro" class="fy-auth-form" onsubmit="return fySupabaseCadastrar(event)" hidden>
         <label>Nome completo<input id="fyCadNome" autocomplete="name" required placeholder="Seu nome completo"></label>
         <label>E-mail<input id="fyCadEmail" type="email" autocomplete="email" required placeholder="seu@email.com"></label>
         <label>Telefone<input id="fyCadTelefone" type="tel" autocomplete="tel" required placeholder="(00) 00000-0000"></label>
@@ -26738,48 +26725,6 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 }
 </style>
-<div id="fyPortaria" role="dialog" aria-label="Acesso à loja">
- <form id="fyPortariaForm">
-  <h1>FOR YOU</h1>
-  <p>Loja exclusiva para pessoas autorizadas. Entre com a conta que recebeu o convite.</p>
-  <label for="fyPortariaEmail">E-mail</label><input id="fyPortariaEmail" type="email" autocomplete="email" required>
-  <label for="fyPortariaSenha">Senha</label><input id="fyPortariaSenha" type="password" autocomplete="current-password" required>
-  <button id="fyPortariaBotao" type="submit">ENTRAR NA LOJA</button>
-  <p id="fyPortariaMsg" class="erro" aria-live="polite"></p>
- </form>
-</div>
-<script id="fy-portaria-js">
-(function(){
- const form=document.getElementById('fyPortariaForm'),msg=document.getElementById('fyPortariaMsg');
- const sb=window.FOR_YOU_SUPABASE_CLIENT;
- function trancar(mensagem){document.documentElement.classList.remove('fy-liberado');if(mensagem)msg.textContent=mensagem;}
- async function conferir(){
-   trancar();
-   if(!sb){trancar('Não foi possível conectar. Atualize a página.');return;}
-   try{
-     const {data:{session}}=await sb.auth.getSession();
-     if(!session)return;
-     const {data,error}=await sb.rpc('fy_acesso_autorizado');
-     if(error)throw error;
-     if(data===true){msg.textContent='';document.documentElement.classList.add('fy-liberado');return;}
-     await sb.auth.signOut();trancar('Esta conta ainda não foi autorizada.');
-   }catch(e){trancar('Não foi possível verificar seu acesso. Tente novamente.');}
- }
- if(!sb){trancar('Não foi possível conectar. Atualize a página.');return;}
- sb.auth.onAuthStateChange(()=>setTimeout(conferir,0));
- form.addEventListener('submit',async function(e){
-   e.preventDefault();msg.textContent='Verificando acesso...';
-   const btn=document.getElementById('fyPortariaBotao');btn.disabled=true;
-   try{
-     const {error}=await sb.auth.signInWithPassword({email:document.getElementById('fyPortariaEmail').value.trim(),password:document.getElementById('fyPortariaSenha').value});
-     if(error){trancar('E-mail ou senha incorretos, ou convite ainda não confirmado.');return;}
-     await conferir();
-   }catch(e){trancar('Não foi possível entrar. Tente novamente.');}
-   finally{btn.disabled=false;}
- });
- conferir();
-})();
-</script>
 </body>
 </html>
 
