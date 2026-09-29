@@ -19182,6 +19182,13 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       existente=carrinho.find(function(item){
         return id!=null&&String(item.id)===String(id);
       })||carrinho.find(function(item){return item.nome===nomeFinal;});
+      var disponivel=Number(base&&base.estoque);
+      if(!base||base.ativo===false||!Number.isFinite(disponivel)||disponivel<1){
+        alert('Este produto está sem estoque no momento.');return;
+      }
+      if(Number(existente&&existente.quantidade||0)>=disponivel){
+        alert('Você já colocou todas as unidades disponíveis na sacola.');return;
+      }
       if(existente){
         existente.quantidade=Number(existente.quantidade||1)+1;
       }else{
@@ -21225,6 +21232,18 @@ body.fy-pagina-exclusiva .pagina.ativa{
       if(pendente&&pendente.assinatura!==assinatura)throw new Error('Há um pedido anterior aguardando pagamento. Confira Meus Pedidos antes de iniciar outra compra.');
       let pedidoId=pendente?.pedido_id;
       if(!pedidoId){
+        const ids=[...new Set(itens.map(i=>i.produto_id))];
+        if(ids.some(id=>!Number.isSafeInteger(id)||id<=0)||itens.some(i=>!Number.isSafeInteger(i.quantidade)||i.quantidade<1))throw new Error('Há um produto inválido na sacola. Remova o item e adicione novamente.');
+        const {data:atuais,error:erroCatalogo}=await sb.from('produtos').select('id,nome,preco,estoque,ativo').in('id',ids);
+        if(erroCatalogo)throw new Error('Não foi possível conferir o estoque agora. Tente novamente em instantes.');
+        const porId=new Map((atuais||[]).map(p=>[Number(p.id),p]));
+        for(const id of ids){
+          const produto=porId.get(id);
+          const quantidade=itens.filter(i=>i.produto_id===id).reduce((total,i)=>total+i.quantidade,0);
+          if(!produto||produto.ativo===false||Number(produto.estoque)<quantidade)throw new Error((produto?.nome||'Um produto')+' não tem a quantidade solicitada. Confira sua sacola.');
+          const itensLocais=carrinho.filter(i=>Number(i.id)===id);
+          if(itensLocais.some(i=>Math.abs(Number(i.preco)-Number(produto.preco))>0.009))throw new Error('O preço de '+produto.nome+' mudou. Atualize a loja e confira o valor antes de pagar.');
+        }
         const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:cupom==='BEMVINDA10'?cupom:'',itens}});
         if(error)throw new Error(await mensagemErroFuncao(error)||'Não foi possível registrar o pedido. Confira Meus Pedidos antes de tentar novamente.');
         if(data?.erro)throw new Error(data.erro);
