@@ -21196,76 +21196,58 @@ body.fy-pagina-exclusiva .pagina.ativa{
   async function mensagemErroFuncao(error){
     try{const json=await error?.context?.json();return json?.erro||json?.message||error?.message}catch(e){return error?.message}
   }
+  // Um pedido pendente é salvo antes de chamar o PagBank para permitir retentativas.
+  let fyConfirmacaoEmAndamento=false;
+  const FY_PENDENTE='forYouPagBankPendente';
+  const fyLerPendente=()=>{try{return JSON.parse(localStorage.getItem(FY_PENDENTE)||'null')}catch(e){return null}};
   window.confirmarPedido=async function(){
     const msg=$('checkoutMensagem');if(msg)msg.textContent='';
-    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho est\u00E1 vazio.');return;}
-    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb){if(msg)msg.textContent='A conex\u00E3o da loja ainda n\u00E3o est\u00E1 dispon\u00EDvel.';return;}
-    const {data:{user}}=await sb.auth.getUser();if(!user){alert('Sua sess\u00E3o expirou. Entre novamente.');if(typeof abrirConta==='function')abrirConta();return;}
+    if(fyConfirmacaoEmAndamento)return;
+    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho está vazio.');return;}
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb){if(msg)msg.textContent='A conexão da loja ainda não está disponível.';return;}
+    const {data:{user},error:authError}=await sb.auth.getUser();
+    if(authError||!user){alert('Sua sessão expirou. Entre novamente.');if(typeof abrirConta==='function')abrirConta();return;}
     const cep=String($('checkoutCEP')?.value||'').replace(/\D/g,'');
-    if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endere\u00E7o salvo.';return;}
-    if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma op\u00E7\u00E3o de entrega antes de confirmar.';return;}
-    if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento dispon\u00EDvel \u00E9 Pix.';return;}
+    if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endereço salvo.';return;}
+    if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma opção de entrega antes de confirmar.';return;}
+    if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento disponível é Pix.';return;}
 
     const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');
     const textoBotao=botao?.textContent;
+    fyConfirmacaoEmAndamento=true;
     if(botao){botao.disabled=true;botao.textContent='ABRINDO PAGBANK...';}
-
-    const itensAntes=carrinho.map(item=>({...item}));
-
     try{
-      const codigoCupom=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
-
-      // 1) Registra o pedido normalmente no Supabase.
-      const {data,error}=await sb.functions.invoke('criar-pedido',{
-        body:{
-          cep,
-          tipo_frete:entregaSelecionada,
-          cupom:codigoCupom==='BEMVINDA10'?codigoCupom:'',
-          itens:itensAntes.map(item=>({
-            produto_id:Number(item.id),
-            quantidade:Number(item.quantidade||1),
-            variante:item.variante||item.sabor||item.cor||''
-          }))
-        }
-      });
-
-      if(error)throw new Error(await mensagemErroFuncao(error)||'N\u00E3o foi poss\u00EDvel registrar o pedido.');
-      if(data?.erro)throw new Error(data.erro);
-      if(!data?.pedido)throw new Error('O pedido n\u00E3o foi confirmado pelo servidor.');
-
-      const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
-      localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
-
-      // 2) Cria o checkout no PagBank Sandbox.
-      // O carrinho N\u00C3O \u00E9 apagado aqui. Ele permanece salvo caso o PagBank apresente erro.
-      const referenciaPedido=String(
-        pedido?.id || pedido?.numero || pedido?.codigo || `FORYOU-${Date.now()}`
-      );
-
-      const {data:pagbank,error:erroPagBank}=await sb.functions.invoke('criar-checkout-pagbank',{
-        body:{pedido_id:pedido.id}
-      });
-
-      if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'N\u00E3o foi poss\u00EDvel abrir o pagamento PagBank.');
+      const cupom=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
+      const itens=carrinho.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}));
+      const assinatura=JSON.stringify({usuario:user.id,cep,frete:entregaSelecionada,cupom:cupom==='BEMVINDA10'?cupom:'',itens});
+      let pendente=fyLerPendente();
+      if(pendente&&pendente.usuario_id!==user.id)throw new Error('Há uma compra pendente de outra conta neste navegador. Entre na conta correspondente antes de continuar.');
+      if(pendente&&pendente.assinatura!==assinatura)throw new Error('Há um pedido anterior aguardando pagamento. Confira Meus Pedidos antes de iniciar outra compra.');
+      let pedidoId=pendente?.pedido_id;
+      if(!pedidoId){
+        const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:cupom==='BEMVINDA10'?cupom:'',itens}});
+        if(error)throw new Error(await mensagemErroFuncao(error)||'Não foi possível registrar o pedido. Confira Meus Pedidos antes de tentar novamente.');
+        if(data?.erro)throw new Error(data.erro);
+        if(!data?.pedido?.id)throw new Error('Não foi possível confirmar o número do pedido. Confira Meus Pedidos antes de tentar novamente.');
+        pedidoId=data.pedido.id;
+        const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
+        localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
+        pendente={pedido_id:pedidoId,usuario_id:user.id,assinatura,criado_em:new Date().toISOString()};
+        localStorage.setItem(FY_PENDENTE,JSON.stringify(pendente));
+      }
+      // A função no servidor precisa conferir titularidade e estado do pedido.
+      const {data:pagbank,error:erroPagBank}=await sb.functions.invoke('criar-checkout-pagbank',{body:{pedido_id:pedidoId}});
+      if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'Não foi possível abrir o pagamento PagBank. Tente novamente para retomar o mesmo pedido.');
       if(pagbank?.error)throw new Error(pagbank.error);
-      if(!pagbank?.payment_url)throw new Error('O PagBank n\u00E3o retornou o link de pagamento.');
-
-      // Guarda os dados para retomarmos o pedido quando o PagBank devolver a cliente para a loja.
-      localStorage.setItem('forYouPagBankPendente',JSON.stringify({
-        pedido_id:pedido?.id||null,
-        checkout_id:pagbank.checkout_id||null,
-        reference_id:pagbank.reference_id||`FORYOU-${referenciaPedido}`,
-        criado_em:new Date().toISOString()
-      }));
-
+      if(!pagbank?.payment_url||!/^https:\/\//i.test(pagbank.payment_url))throw new Error('O PagBank não retornou um link de pagamento válido.');
+      localStorage.setItem(FY_PENDENTE,JSON.stringify({...pendente,checkout_id:pagbank.checkout_id||null,reference_id:pagbank.reference_id||null}));
       if(msg)msg.textContent='Abrindo o ambiente seguro do PagBank...';
-
-      // 3) Redireciona para o checkout seguro retornado pelo PagBank.
-      window.location.href=pagbank.payment_url;
-
+      window.location.assign(pagbank.payment_url);
     }catch(e){
       console.warn(e);
-      if(msg)msg.textContent=e.message||'N\u00E3o foi poss\u00EDvel abrir o pagamento. Tente novamente.';
+      if(msg)msg.textContent=e.message||'Não foi possível abrir o pagamento. Tente novamente.';
+    }finally{
+      fyConfirmacaoEmAndamento=false;
       if(botao){botao.disabled=false;botao.textContent=textoBotao||'CONFIRMAR PEDIDO';}
     }
   };
