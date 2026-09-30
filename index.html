@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script id="fy-privacidade-config-3009">
+(function(){
+  const key='fyPrivacidadeV1', prazo=180*24*60*60*1000;
+  window.fyPermiteHistorico=function(){try{const p=JSON.parse(localStorage.getItem(key)||'null');return p?.versao===1&&p.historico===true&&Date.now()-p.em<prazo;}catch(e){return false;}};
+  if(!window.fyPermiteHistorico())['forYouRecentes','forYouHistoricoBuscas'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+  // Tokens antigos não são copiados: é necessário autenticar novamente.
+  try{const chaves=Object.keys(localStorage);chaves.filter(k=>/^sb-.*-auth-token(?:-code-verifier)?$/.test(k)).forEach(k=>localStorage.removeItem(k));localStorage.removeItem('forYouEnderecoCheckout');['forYouContaAtual','forYouConta','forYouContas','forYouNome','forYouEmail'].forEach(k=>localStorage.removeItem(k));}catch(e){}
+  const memoria=new Map();
+  window.fyAuthStorage={getItem(k){try{return sessionStorage.getItem(k);}catch(e){return memoria.get(k)||null;}},setItem(k,v){try{sessionStorage.setItem(k,v);}catch(e){memoria.set(k,v);}},removeItem(k){try{sessionStorage.removeItem(k);}catch(e){}memoria.delete(k);}};
+})();
+</script>
+
 <script>
 /* Mobile: mostra a estrutura imediatamente; o conteudo dinamico entra sem bloquear a pagina inteira. */
 </script>
@@ -5187,18 +5200,18 @@ button,a,input,select,textarea{touch-action:manipulation}
 function atualizarClubFY(){
  const el=document.getElementById('clubConteudoFY'); if(!el)return;
  let fav=0; try{fav=JSON.parse(localStorage.getItem('forYouFavoritos')||'[]').length}catch(e){}
- const nome=localStorage.getItem('forYouNome')||'cliente';
+ const nome=sessionStorage.getItem('forYouNome')||'cliente';
  el.innerHTML=`<div class="club-card-fy"><h2>FOR YOU Club \u2726</h2><p>Ol\u00E1, ${nome}! Quanto mais voc\u00EA compra, mais benef\u00EDcios desbloqueia.</p><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>Pr\u00F3ximo n\u00EDvel</span><strong>650 / 1.000 pontos</strong></div><div class="club-progress-fy"><span></span></div><div class="club-benefits-fy"><div class="club-benefit-fy"><b>\u2661 ${fav}</b><br><small>Favoritos salvos</small></div><div class="club-benefit-fy"><b>+10%</b><br><small>Cupons exclusivos</small></div><div class="club-benefit-fy"><b>Frete</b><br><small>Benef\u00EDcios especiais</small></div></div></div>`;
 }
 function salvarCadastroFY(){
  const n=document.getElementById('fyNome'); const e=document.getElementById('fyEmail'); if(!n||!e)return;
  if(!n.value.trim()||!e.value.trim()){alert('Preencha nome e e-mail.');return;}
- localStorage.setItem('forYouNome',n.value.trim()); localStorage.setItem('forYouEmail',e.value.trim());
+ sessionStorage.setItem('forYouNome',n.value.trim()); sessionStorage.setItem('forYouEmail',e.value.trim());
  const s=document.getElementById('contaSaudacao'); if(s)s.textContent='Ol\u00E1, '+n.value.trim()+' \u{1F497}';
  atualizarClubFY(); alert('Cadastro salvo com sucesso!');
 }
 function prepararContaFY(){
- const n=localStorage.getItem('forYouNome')||''; const e=localStorage.getItem('forYouEmail')||'';
+ const n=sessionStorage.getItem('forYouNome')||''; const e=sessionStorage.getItem('forYouEmail')||'';
  const a=document.getElementById('fyNome'),b=document.getElementById('fyEmail'); if(a)a.value=n;if(b)b.value=e;
  atualizarClubFY();
 }
@@ -10315,7 +10328,7 @@ function fyDescontoEmReais(subtotal){
 
 let cupomAplicado = "";
 
-let contaAtual = JSON.parse(localStorage.getItem("forYouContaAtual")) || null;
+let contaAtual = JSON.parse(sessionStorage.getItem("forYouContaAtual")) || null;
 let recentes = JSON.parse(localStorage.getItem("forYouRecentes")) || [];
 let estrelaSelecionada = 5;
 const banners = [
@@ -10390,8 +10403,9 @@ function atualizarBanner(){
 function mudarBanner(direcao){bannerAtual=(bannerAtual+direcao+banners.length)%banners.length;atualizarBanner();}
 /* Carrossel de banners desativado: apenas o primeiro banner. */
 
-function salvarRecentes(){localStorage.setItem("forYouRecentes",JSON.stringify(recentes));}
+function salvarRecentes(){if(!window.fyPermiteHistorico())return;localStorage.setItem("forYouRecentes",JSON.stringify(recentes));}
 function adicionarRecente(id){
+  if(!window.fyPermiteHistorico())return;
   recentes=[id,...recentes.filter(x=>x!==id)].slice(0,6); salvarRecentes(); renderRecentes();
 }
 function renderRecentes(){
@@ -10546,8 +10560,9 @@ function mostrarTodosProdutos(){
   if(btn)btn.textContent="MOSTRANDO TODOS OS PRODUTOS";
   document.getElementById("novidades")?.scrollIntoView({behavior:"smooth"});
 }
-function historicoBuscas(){try{return JSON.parse(localStorage.getItem("forYouHistoricoBuscas")||"[]")}catch(e){return []}}
+function historicoBuscas(){if(!window.fyPermiteHistorico())return [];try{return JSON.parse(localStorage.getItem("forYouHistoricoBuscas")||"[]")}catch(e){return []}}
 function salvarHistoricoBusca(termo){
+  if(!window.fyPermiteHistorico())return;
   if(!termo)return;
   let h=historicoBuscas().filter(x=>x!==termo); h.unshift(termo); h=h.slice(0,6);
   localStorage.setItem("forYouHistoricoBuscas",JSON.stringify(h));
@@ -11692,7 +11707,7 @@ function adicionarRastreioPedido(id){
   p.codigoRastreio=codigo.trim();
   localStorage.setItem('forYouPedidos',JSON.stringify(pedidos));
   const email=String(p.clienteEmail||p.cliente?.email||'').toLowerCase();
-  if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,codigoRastreio:p.codigoRastreio}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){localStorage.setItem('forYouConta',JSON.stringify(conta));}}}
+  if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,codigoRastreio:p.codigoRastreio}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){sessionStorage.setItem('forYouConta',JSON.stringify(conta));}}}
   renderAdmin();renderPedidosConta();alert(p.codigoRastreio?'C\u00F3digo de rastreio salvo!':'C\u00F3digo de rastreio removido.');
 }
 
@@ -11704,7 +11719,7 @@ function atualizarStatusPedido(id, etapa){
   p.etapa=Number(etapa);p.status=['recebido','pagamento_aprovado','preparando','enviado','entregue'][p.etapa-1];p.statusTexto=mapa[p.etapa];p.atualizadoEm=new Date().toLocaleString('pt-BR');
   localStorage.setItem('forYouPedidos',JSON.stringify(pedidos));
   const email=String(p.clienteEmail||p.cliente?.email||'').toLowerCase();
-  if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,etapa:p.etapa,status:p.status,statusTexto:p.statusTexto,atualizadoEm:p.atualizadoEm}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){localStorage.setItem('forYouConta',JSON.stringify(conta));}}}
+  if(email){const lista=contasSalvas();const conta=lista.find(c=>String(c.email||'').toLowerCase()===email);if(conta){conta.pedidos=(conta.pedidos||[]).map(x=>x.id===id?{...x,etapa:p.etapa,status:p.status,statusTexto:p.statusTexto,atualizadoEm:p.atualizadoEm}:x);salvarContas(lista);if(contaAtual&&String(contaAtual.email||'').toLowerCase()===email){sessionStorage.setItem('forYouConta',JSON.stringify(conta));}}}
   renderAdmin();renderPedidosConta();alert('Status do pedido '+p.numero+' atualizado para: '+p.statusTexto+'.');
 }
 
@@ -14889,7 +14904,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 (function(){
   const CFG=window.FOR_YOU_SUPABASE||{url:'',anonKey:''};
   let sb=null;
-  if(window.supabase && CFG.url && CFG.anonKey){try{sb=window.supabase.createClient(CFG.url,CFG.anonKey);window.FOR_YOU_SUPABASE_CLIENT=sb;}catch(e){console.warn('Supabase n\u00E3o inicializado',e)}}
+  if(window.supabase && CFG.url && CFG.anonKey){try{sb=window.supabase.createClient(CFG.url,CFG.anonKey,{auth:{storage:window.fyAuthStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.FOR_YOU_SUPABASE_CLIENT=sb;}catch(e){console.warn('Supabase n\u00E3o inicializado',e)}}
   window.FOR_YOU_DATA={enabled:!!sb,client:sb};
 
   // Sele\u00E7\u00E3o da D\u00E9: usa produtos marcados como destaque; se ainda n\u00E3o houver,
@@ -18474,17 +18489,17 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>
 function contasSalvas(){
   try{
-    const lista=JSON.parse(localStorage.getItem("forYouContas")||"null");
+    const lista=JSON.parse(sessionStorage.getItem("forYouContas")||"null");
     if(Array.isArray(lista)) return lista;
-    const antiga=JSON.parse(localStorage.getItem("forYouConta")||"null");
+    const antiga=JSON.parse(sessionStorage.getItem("forYouConta")||"null");
     if(antiga && antiga.email){
-      localStorage.setItem("forYouContas",JSON.stringify([antiga]));
+      sessionStorage.setItem("forYouContas",JSON.stringify([antiga]));
       return [antiga];
     }
   }catch(e){}
   return [];
 }
-function salvarContas(lista){ localStorage.setItem("forYouContas",JSON.stringify(lista)); }
+function salvarContas(lista){ sessionStorage.setItem("forYouContas",JSON.stringify(lista)); }
 function contaSalva(){
   const lista=contasSalvas();
   if(!contaAtual) return null;
@@ -18495,11 +18510,11 @@ function salvarConta(conta){
   const i=lista.findIndex(c=>String(c.email||"").toLowerCase()===String(conta.email||"").toLowerCase());
   if(i>=0) lista[i]=conta; else lista.push(conta);
   salvarContas(lista);
-  localStorage.setItem("forYouConta",JSON.stringify(conta));
+  sessionStorage.setItem("forYouConta",JSON.stringify(conta));
 }
 function salvarContaAtual(){
-  if(contaAtual) localStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual));
-  else localStorage.removeItem("forYouContaAtual");
+  if(contaAtual) sessionStorage.setItem("forYouContaAtual",JSON.stringify(contaAtual));
+  else sessionStorage.removeItem("forYouContaAtual");
 }
 function atualizarMinhaConta(){
   const loginBox=document.getElementById("contaLoginBox"), cadastroBox=document.getElementById("contaCadastroBox"), logada=document.getElementById("contaLogada");
@@ -18528,7 +18543,7 @@ function cadastrarConta(event){
   const lista=contasSalvas();
   if(lista.some(c=>String(c.email||"").toLowerCase()===email)){msg.textContent="J\u00E1 existe uma conta com este e-mail.";return false;}
   const conta={nome,email,telefone,endereco,senha,pedidos:[]};
-  lista.push(conta); salvarContas(lista); localStorage.setItem("forYouConta",JSON.stringify(conta));
+  lista.push(conta); salvarContas(lista); sessionStorage.setItem("forYouConta",JSON.stringify(conta));
   contaAtual={nome,email,telefone,endereco}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
   document.getElementById("contaMensagem").textContent="Conta criada com sucesso! \u{1F495}"; return false;
 }
@@ -18539,7 +18554,7 @@ function fazerLogin(event){
   if(!conta){msg.textContent="Conta n\u00E3o encontrada. Confira o e-mail ou cadastre-se.";return false;}
   if(conta.senha!==senha){msg.textContent="E-mail ou senha incorretos.";return false;}
   contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone||"",endereco:conta.endereco||""};
-  localStorage.setItem("forYouConta",JSON.stringify(conta)); salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
+  sessionStorage.setItem("forYouConta",JSON.stringify(conta)); salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); renderProdutos(); renderOfertas(); renderKits(); renderMaisVendidos(); renderRecomendados();
   document.getElementById("contaMensagem").textContent="Login realizado com sucesso! \u{1F495}"; return false;
 }
 function sairDaConta(){
@@ -18570,7 +18585,7 @@ function editarDadosConta(){
   if(novoEmail!==String(conta.email).toLowerCase() && lista.some(c=>String(c.email||"").toLowerCase()===novoEmail)){alert("Este e-mail j\u00E1 est\u00E1 sendo usado por outra conta.");return;}
   const antigoEmail=conta.email;
   conta.nome=nome.trim();conta.email=novoEmail;conta.telefone=telefone.trim();
-  const i=lista.findIndex(c=>String(c.email||"").toLowerCase()===String(antigoEmail||"").toLowerCase()); if(i>=0) lista[i]=conta; else lista.push(conta); salvarContas(lista); localStorage.setItem("forYouConta",JSON.stringify(conta));
+  const i=lista.findIndex(c=>String(c.email||"").toLowerCase()===String(antigoEmail||"").toLowerCase()); if(i>=0) lista[i]=conta; else lista.push(conta); salvarContas(lista); sessionStorage.setItem("forYouConta",JSON.stringify(conta));
   contaAtual={nome:conta.nome,email:conta.email,telefone:conta.telefone,endereco:conta.endereco||""}; salvarContaAtual(); carregarDadosDaConta(); atualizarMinhaConta(); atualizar(); document.getElementById("contaMensagem").textContent="Dados atualizados com sucesso!";
 }
 function editarEnderecoConta(){const conta=contaSalva();if(!conta)return;const endereco=prompt("Endere\u00E7o completo:",conta.endereco||"");if(endereco===null||!endereco.trim())return;conta.endereco=endereco.trim();salvarConta(conta);contaAtual.endereco=conta.endereco;salvarContaAtual();alert("Endere\u00E7o atualizado com sucesso!");}
@@ -20847,10 +20862,10 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
   function limparSenhasAntigas(){
     try{
-      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
-      if(Array.isArray(lista))localStorage.setItem('forYouContas',JSON.stringify(lista.map(item=>{const copia={...item};delete copia.senha;return copia;})));
-      const antiga=JSON.parse(localStorage.getItem('forYouConta')||'null');
-      if(antiga){delete antiga.senha;localStorage.setItem('forYouConta',JSON.stringify(antiga));}
+      const lista=JSON.parse(sessionStorage.getItem('forYouContas')||'[]');
+      if(Array.isArray(lista))sessionStorage.setItem('forYouContas',JSON.stringify(lista.map(item=>{const copia={...item};delete copia.senha;return copia;})));
+      const antiga=JSON.parse(sessionStorage.getItem('forYouConta')||'null');
+      if(antiga){delete antiga.senha;sessionStorage.setItem('forYouConta',JSON.stringify(antiga));}
     }catch(e){}
   }
   function iniciais(nome){
@@ -20858,14 +20873,14 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
   function guardarCompatibilidade(perfil){
     contaAtual={nome:perfil.nome||'',email:perfil.email||'',telefone:perfil.telefone||'',endereco:''};
-    try{localStorage.setItem('forYouContaAtual',JSON.stringify(contaAtual));}catch(e){}
+    try{sessionStorage.setItem('forYouContaAtual',JSON.stringify(contaAtual));}catch(e){}
     try{
-      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
+      const lista=JSON.parse(sessionStorage.getItem('forYouContas')||'[]');
       const semSenha={nome:perfil.nome||'',email:perfil.email||'',telefone:perfil.telefone||'',pedidos:[]};
       const i=lista.findIndex(x=>String(x.email||'').toLowerCase()===String(perfil.email||'').toLowerCase());
       if(i>=0)lista[i]={...lista[i],...semSenha,senha:undefined};else lista.push(semSenha);
-      localStorage.setItem('forYouContas',JSON.stringify(lista));
-      localStorage.setItem('forYouConta',JSON.stringify(semSenha));
+      sessionStorage.setItem('forYouContas',JSON.stringify(lista));
+      sessionStorage.setItem('forYouConta',JSON.stringify(semSenha));
     }catch(e){}
   }
   function preencherConta(perfil){
@@ -20917,7 +20932,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   async function aplicarSessao(usuario){
     if(processandoSessao)return;processandoSessao=true;
     try{
-      if(!usuario){contaAtual=null;try{localStorage.removeItem('forYouContaAtual');localStorage.removeItem('forYouConta');}catch(e){}mostrarLogada(false);return;}
+      if(!usuario){contaAtual=null;try{sessionStorage.removeItem('forYouContaAtual');sessionStorage.removeItem('forYouConta');}catch(e){}mostrarLogada(false);return;}
       await carregarPerfil(usuario);
     }catch(e){console.warn('N\u00E3o foi poss\u00EDvel carregar o perfil',e);mostrarLogada(false);mensagem('fyLoginMsg','N\u00E3o foi poss\u00EDvel carregar sua conta. Tente novamente.');}
     finally{processandoSessao=false;}
@@ -21061,7 +21076,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   async function sair(){
     if(!confirm('Deseja sair da sua conta neste dispositivo?'))return;
     await sb.auth.signOut();contaAtual=null;
-    try{localStorage.removeItem('forYouContaAtual');localStorage.removeItem('forYouConta');}catch(e){}
+    try{sessionStorage.removeItem('forYouContaAtual');sessionStorage.removeItem('forYouConta');}catch(e){}
     mostrarLogada(false);window.fyMostrarAuth('entrar');
   }
   window.sairContaV14=sair;window.sairDaConta=sair;
@@ -21127,11 +21142,11 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
   function guardarPedidosCompatibilidade(pedidos,email){
     try{
-      const lista=JSON.parse(localStorage.getItem('forYouContas')||'[]');
+      const lista=JSON.parse(sessionStorage.getItem('forYouContas')||'[]');
       let conta=lista.find(c=>String(c.email||'').toLowerCase()===String(email||'').toLowerCase());
       if(!conta){conta={nome:contaAtual?.nome||'',email:email||'',telefone:contaAtual?.telefone||'',pedidos:[]};lista.push(conta);}
       conta.pedidos=pedidos;delete conta.senha;
-      localStorage.setItem('forYouContas',JSON.stringify(lista));localStorage.setItem('forYouConta',JSON.stringify(conta));
+      sessionStorage.setItem('forYouContas',JSON.stringify(lista));sessionStorage.setItem('forYouConta',JSON.stringify(conta));
     }catch(e){console.warn('N\u00E3o foi poss\u00EDvel atualizar o hist\u00F3rico local.',e);}
   }
   function atualizarResumoPedidos(pedidos){
@@ -23442,7 +23457,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
       if(conta){
         conta.pedidos=(conta.pedidos||[]).map(item=>String(item.id)===String(id)?{...item,etapa:pedido.etapa,status:pedido.status,statusTexto:pedido.statusTexto,codigoRastreio:rastreio,atualizadoEm:pedido.atualizadoEm}:item);
         if(typeof window.salvarContas==='function')window.salvarContas(contas);
-        if(window.contaAtual&&String(window.contaAtual.email||'').toLowerCase()===email)localStorage.setItem('forYouConta',JSON.stringify(conta));
+        if(window.contaAtual&&String(window.contaAtual.email||'').toLowerCase()===email)sessionStorage.setItem('forYouConta',JSON.stringify(conta));
       }
     }
     if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();
@@ -25297,7 +25312,7 @@ header{
       preencherCampo(['checkoutCidade'],d.localidade);
       preencherCampo(['checkoutEstado','checkoutUF'],d.uf);
 
-      localStorage.setItem('forYouEnderecoCheckout',JSON.stringify({
+      sessionStorage.setItem('forYouEnderecoCheckout',JSON.stringify({
         cep,
         endereco:d.logradouro||'',
         bairro:d.bairro||'',
@@ -27195,3 +27210,33 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
  }
 }
 </style>
+
+
+<style id="fy-privacidade-estilo">
+#fyPrivacidadeAviso[hidden],#fyPrivacidadeDetalhes[hidden]{display:none!important}
+#fyPrivacidadeAviso{position:fixed;bottom:14px;left:14px;right:14px;margin:auto;max-width:650px;z-index:2147483000;background:#fff8fa;color:#40343a;padding:18px;border-radius:14px;box-shadow:0 4px 24px #0002;font:14px/1.5 Arial,sans-serif}
+#fyPrivacidadeAviso p{margin:6px 0 12px}#fyPrivacidadeAviso button,#fyPrivacidadeAbrir{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:9px 12px;background:#f3dce5;color:#40343a}
+#fyPrivacidadeAviso .fy-privacy-actions{display:flex;flex-wrap:wrap;gap:8px}#fyPrivacidadeAviso button{flex:1}
+#fyPrivacidadeAbrir{display:block;margin:18px auto;font:12px Arial,sans-serif}
+#fyPrivacidadeDetalhes{margin:12px 0;max-height:35vh;overflow:auto}
+</style>
+<button id="fyPrivacidadeAbrir" type="button">Preferências de privacidade</button>
+<section id="fyPrivacidadeAviso" role="region" aria-label="Preferências de privacidade" hidden>
+<strong>Sua privacidade na For You</strong>
+<p>Usamos armazenamento necessário para login, sacola, favoritos e compras. Com sua permissão, também lembramos buscas e produtos vistos neste navegador.</p>
+<div id="fyPrivacidadeDetalhes" hidden><p>O login e os dados locais da conta ficam na sessão da aba. Sacola e favoritos podem permanecer neste navegador. Dados fornecidos na compra são enviados aos serviços de cadastro, entrega e pagamento usados pela loja. Esta preferência controla somente o histórico de buscas e produtos vistos na loja; não altera o funcionamento de sites externos de pagamento. Você pode mudar sua escolha aqui a qualquer momento. A preferência será solicitada novamente após 180 dias.</p></div>
+<div class="fy-privacy-actions"><button type="button" id="fyPrivacidadeNecessarios">Somente necessários</button><button type="button" id="fyPrivacidadePermitir">Permitir histórico</button><button type="button" id="fyPrivacidadeMais" aria-expanded="false" aria-controls="fyPrivacidadeDetalhes">Saiba mais</button></div>
+</section>
+<script id="fy-privacidade-interface-3009">
+(function(){
+const box=document.getElementById('fyPrivacidadeAviso'),abrir=document.getElementById('fyPrivacidadeAbrir'),key='fyPrivacidadeV1';
+function mostrar(){box.hidden=false;}
+function escolher(historico){try{localStorage.setItem(key,JSON.stringify({versao:1,historico,em:Date.now()}));}catch(e){}if(!historico){['forYouRecentes','forYouHistoricoBuscas'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});try{recentes=[];if(typeof renderRecentes==='function')renderRecentes();if(typeof renderSugestoesBusca==='function')renderSugestoesBusca();}catch(e){}}box.hidden=true;abrir.focus();}
+abrir.addEventListener('click',mostrar);
+document.getElementById('fyPrivacidadeNecessarios').addEventListener('click',()=>escolher(false));
+document.getElementById('fyPrivacidadePermitir').addEventListener('click',()=>escolher(true));
+document.getElementById('fyPrivacidadeMais').addEventListener('click',function(){const d=document.getElementById('fyPrivacidadeDetalhes');d.hidden=!d.hidden;this.setAttribute('aria-expanded',String(!d.hidden));});
+try{const p=JSON.parse(localStorage.getItem(key)||'null');if(!p||p.versao!==1||!Number.isFinite(p.em)||Date.now()-p.em>180*24*60*60*1000)mostrar();}catch(e){mostrar();}
+window.addEventListener('storage',e=>{if(e.key===key&&!window.fyPermiteHistorico()){try{recentes=[];if(typeof renderRecentes==='function')renderRecentes();}catch(e){}}});
+})();
+</script>
