@@ -18857,10 +18857,10 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     if(window.__FY_CATALOGO_CARREGANDO || window.__FY_CATALOGO_CARREGADO) return;
     window.__FY_CATALOGO_CARREGANDO=true;
 
-    const chaveCache='fy-catalogo-v41';
+    const chaveCache='fy-catalogo-v46';
     try{
-      const salvo=JSON.parse(sessionStorage.getItem(chaveCache)||'null');
-      if(salvo&&Date.now()-salvo.em<300000&&Array.isArray(salvo.dados)){
+      const salvo=JSON.parse(localStorage.getItem(chaveCache)||'null');
+      if(salvo&&Date.now()-salvo.em<600000&&Array.isArray(salvo.dados)){
         aplicarCatalogo(salvo.dados);
         return;
       }
@@ -18877,7 +18877,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       inicio+=tamanho;
     }
 
-    try{sessionStorage.setItem(chaveCache,JSON.stringify({em:Date.now(),dados:todos}))}catch(e){}
+    try{localStorage.setItem(chaveCache,JSON.stringify({em:Date.now(),dados:todos}))}catch(e){}
     aplicarCatalogo(todos);
   }
 
@@ -27586,4 +27586,70 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
  const render=window.renderAdmin;window.renderAdmin=async function(){const resultado=await render?.apply(this,arguments);preparar();return resultado;};
 })();
 
+</script>
+
+
+<!-- FOR YOU 30/09: correção final do nome + carregamento mobile, sem alterar o visual aprovado -->
+<style id="fy-mobile-final-nome-performance-v46">
+@media(max-width:700px){
+  /* Mantém o nome FOR YOU sempre visível acima da busca. Vence regras antigas que o escondiam. */
+  .header-top::before{
+    content:"FOR YOU" !important;
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    grid-column:1 / -1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    height:auto !important;
+    margin:2px 0 9px !important;
+    padding:0 !important;
+    text-align:center !important;
+    font-family:Georgia,"Times New Roman",serif !important;
+    font-size:27px !important;
+    line-height:1 !important;
+    font-weight:400 !important;
+    letter-spacing:5px !important;
+    color:#351f27 !important;
+    white-space:nowrap !important;
+  }
+  /* A arte antiga da logo não ocupa espaço no mobile; o nome acima da busca é a marca visível. */
+  .header-top .logo{display:none !important;}
+
+  /* Remove filtros/efeitos caros no primeiro desenho. */
+  header,.fy-header-v13{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+  .fy-clean-cat-top{-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .fy-clean-cat-top::-webkit-scrollbar{display:none;}
+  .product-card,.produto-card,.produto,.card{filter:none !important;backdrop-filter:none !important;}
+
+  /* Seções abaixo da primeira dobra só são desenhadas quando se aproximam da tela. */
+  #marcas,#ofertas,#kits,.produtos,.products-grid,.grid-produtos,.vitrine-produtos,footer{
+    content-visibility:auto !important;
+    contain-intrinsic-size:1px 520px;
+  }
+}
+</style>
+<script id="fy-mobile-final-performance-v46">
+(function(){
+  /* Evita que rotinas visuais antigas rodem várias vezes durante a abertura. */
+  if(window.__FY_MOBILE_FINAL_V46)return;
+  window.__FY_MOBILE_FINAL_V46=true;
+
+  if(matchMedia('(max-width:700px)').matches){
+    /* Em iPhone, não anima rolagem/layout na abertura. */
+    document.documentElement.style.scrollBehavior='auto';
+
+    /* Imagens fora do topo carregam de forma preguiçosa sem alterar as do banner/cabeçalho. */
+    const aplicarLazy=function(){
+      document.querySelectorAll('main img:not(.fy-banner-r10-track img)').forEach(function(img){
+        if(!img.closest('.fy-banner-r10')){
+          if(!img.hasAttribute('loading'))img.loading='lazy';
+          if(!img.hasAttribute('decoding'))img.decoding='async';
+        }
+      });
+    };
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',aplicarLazy,{once:true});
+    else aplicarLazy();
+  }
+})();
 </script>
