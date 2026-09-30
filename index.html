@@ -27435,3 +27435,40 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
 })();
 
 </script>
+
+<style id="fy-pedidos-operacao-css">#fyPedidosBarra{display:flex;gap:8px;flex-wrap:wrap;padding:12px}#fyPedidosBarra input{flex:1;min-width:150px}#fyPedidosBarra input,#fyPedidosBarra select{padding:10px;border:1px solid #e7d8df;border-radius:8px;background:white;color:#40343a;font:14px Arial,sans-serif}#fyPedidosBarra button,#fyPedidoCopiar{padding:10px;border:0;border-radius:8px;background:#f1dce5;color:#40343a;cursor:pointer}#fyPedidoContador{width:100%;font:11px Arial,sans-serif;color:#766570}.fy-pagamento-real{font-size:10px!important;color:#654957!important}#fyPedidoCopiar{margin-top:6px;font-size:12px}#fyAdminPedidoFeedback{font-size:12px!important;text-align:left!important;line-height:1.5!important}#fyAdminPedidoStatus option:disabled{color:#999}</style>
+<script id="fy-pedidos-operacao">
+(()=>{
+ const $=id=>document.getElementById(id),pagos=['pago','aprovado','paid'];
+ const pagamento={aguardando_pagamento:'Aguardando pagamento',em_analise:'Em análise',pago:'Pagamento confirmado',aprovado:'Pagamento confirmado',paid:'Pagamento confirmado',recusado:'Pagamento recusado',cancelado:'Pagamento cancelado',estornado:'Pagamento estornado',expirado:'Pagamento expirado'};
+ const etapas={recebido:0,pagamento_aprovado:0,aprovado:0,preparando:1,em_preparacao:1,enviado:2,entregue:3};
+ const valores=['recebido','preparando','enviado','entregue'];
+ let salvando=false;
+ const selecionado=()=>window.FY_ADMIN_PEDIDOS?.find(p=>String(p.id)===String(window.FY_ADMIN_PEDIDO_SELECIONADO));
+ function feedback(t){const e=$('fyAdminPedidoFeedback');if(e)e.textContent=t;}
+ function filtro(){const termo=($('fyPedidoBusca')?.value||'').trim().toLocaleLowerCase('pt-BR'),status=$('fyPedidoFiltro')?.value||'todos';let qtd=0;
+ document.querySelectorAll('#adminTabelaPedidos .fy-admin-pedido-item').forEach(el=>{const p=window.FY_ADMIN_PEDIDOS?.find(p=>String(p.id)===el.dataset.pedidoId);const texto=[p?.numero,p?.id,p?.cliente?.nome,p?.clienteEmail].join(' ').toLocaleLowerCase('pt-BR');const mostra=texto.includes(termo)&&(status==='todos'||(status==='pagos'?pagos.includes(p?.status_pagamento):status===p?.status_pedido));el.hidden=!mostra;el.style.setProperty('display',mostra?'flex':'none','important');if(mostra)qtd++;});if($('fyPedidoContador'))$('fyPedidoContador').textContent=qtd+' pedido(s) exibido(s). Lista dos 200 mais recentes.';}
+ function preparar(){const lista=$('adminTabelaPedidos');if(!lista)return;let barra=$('fyPedidosBarra');if(!barra){barra=document.createElement('div');barra.id='fyPedidosBarra';barra.innerHTML='<input id="fyPedidoBusca" placeholder="Buscar pedido ou cliente" aria-label="Buscar pedido ou cliente"><select id="fyPedidoFiltro" aria-label="Filtrar pedidos"><option value="todos">Todos</option><option value="pagos">Pagamento confirmado</option><option value="recebido">Recebidos</option><option value="preparando">Preparando</option><option value="enviado">Enviados</option><option value="entregue">Entregues</option></select><button type="button" id="fyPedidosAtualizar">Atualizar pedidos</button><small id="fyPedidoContador"></small>';lista.before(barra);$('fyPedidoBusca').addEventListener('input',filtro);$('fyPedidoFiltro').addEventListener('change',filtro);$('fyPedidosAtualizar').addEventListener('click',async()=>{if(salvando)return;if(!confirm('Atualizar a lista? Edicoes de envio ainda nao salvas serao descartadas.'))return;await window.renderAdmin();});}
+ document.querySelectorAll('#adminTabelaPedidos .fy-admin-pedido-item').forEach(el=>{const p=window.FY_ADMIN_PEDIDOS?.find(p=>String(p.id)===el.dataset.pedidoId);if(!p)return;let badge=el.querySelector('.fy-pagamento-real');if(!badge){badge=document.createElement('small');badge.className='fy-pagamento-real';el.querySelector('.fy-admin-pedido-valor')?.append(badge);}badge.textContent=pagamento[p.status_pagamento]||p.status_pagamento||'Pagamento a confirmar';});filtro();
+ const input=$('fyAdminPedidoRastreio');if(input&&!$('fyPedidoCopiar')){const b=document.createElement('button');b.id='fyPedidoCopiar';b.type='button';b.textContent='Copiar rastreio';b.addEventListener('click',async()=>{const codigo=input.value.trim();if(!codigo){feedback('Informe um codigo de rastreamento.');return;}try{await navigator.clipboard.writeText(codigo);feedback('Codigo copiado.');}catch(e){input.focus();input.select();feedback('Selecione e copie o codigo.');}});input.after(b);}
+ }
+ const selecionar=window.fyAdminSelecionarPedido;
+ window.fyAdminSelecionarPedido=function(id){selecionar?.(id);preparar();const p=selecionado();if(!p)return;
+ const status=String(p.status_pagamento||'').toLowerCase(),pago=pagos.includes(status),fase=etapas[p.status_pedido],select=$('fyAdminPedidoStatus');
+ $('fyAdminPedidoPagamento').textContent=(pagamento[status]||status||'Pagamento a confirmar')+' · '+(p.forma_pagamento||p.pagamento||'');
+ select.replaceChildren();valores.forEach((v,i)=>{const o=document.createElement('option');o.value=v;o.textContent=['Recebido','Preparando','Enviado','Entregue'][i];o.disabled=(fase!==undefined&&i<fase)||(!pago&&i>0);select.append(o);});select.value=valores[fase??0];
+ const b=document.querySelector('#paginaAdmin .fy-admin-pedido-salvar');if(b)b.disabled= fase===undefined;
+ feedback(!pago?'O envio sera liberado quando o pagamento for confirmado pelo PagBank.':'Atualize a etapa e informe o rastreamento ao enviar.');
+ };
+ window.fyAdminSalvarPedido=async function(){if(salvando)return;const p=selecionado();if(!p)return;if(!window.adminAutenticado?.()){await window.abrirAdminLogin?.();return;}
+ const status=$('fyAdminPedidoStatus').value,codigo=$('fyAdminPedidoRastreio').value.trim();if(!valores.includes(status)){feedback('Selecione a etapa de entrega.');return;}
+ if(status!=='recebido'&&!pagos.includes(String(p.status_pagamento).toLowerCase())){feedback('Aguarde a confirmacao do pagamento pelo PagBank.');return;}
+ if(['enviado','entregue'].includes(status)&&!codigo){feedback('Informe o codigo de rastreamento.');return;}
+ if(codigo&&!/^[A-Za-z0-9-]{1,80}$/.test(codigo)){feedback('Confira o codigo de rastreamento: use letras, numeros ou hifen.');return;}
+ salvando=true;const b=document.querySelector('#paginaAdmin .fy-admin-pedido-salvar');if(b){b.disabled=true;b.textContent='SALVANDO...';}feedback('Salvando atualizacao...');
+ try{await window.fyAdminApi('atualizar',{pedido_id:p.id,status_pedido:status,codigo_rastreio:codigo,esperado_atualizado_em:p.atualizado_em??null});await window.renderAdmin();window.fyAdminSelecionarPedido(p.id);feedback('Etapa de entrega e rastreamento salvos.');}catch(e){feedback(e.message||'Nao foi possivel salvar.');}finally{salvando=false;if(b){b.disabled=false;b.textContent='SALVAR ATUALIZACAO';}}
+ };
+ const render=window.renderAdmin;window.renderAdmin=async function(){const resultado=await render?.apply(this,arguments);preparar();return resultado;};
+})();
+
+</script>
