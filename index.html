@@ -27240,3 +27240,31 @@ try{const p=JSON.parse(localStorage.getItem(key)||'null');if(!p||p.versao!==1||!
 window.addEventListener('storage',e=>{if(e.key===key&&!window.fyPermiteHistorico()){try{recentes=[];if(typeof renderRecentes==='function')renderRecentes();}catch(e){}}});
 })();
 </script>
+
+
+<script id="fy-logo-acesso-admin-3009">
+(()=>{
+  let verificando=false;
+  function inicio(){if(typeof window.mostrarLoja==='function')window.mostrarLoja();else window.scrollTo({top:0,behavior:'smooth'});}
+  document.addEventListener('click',async event=>{
+    const logo=event.target?.closest?.('header .fy-brand-logo,#adminSecretLogo');
+    if(!logo)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    if(verificando)return;
+    verificando=true;logo.setAttribute('aria-busy','true');
+    try{
+      const sb=window.FOR_YOU_SUPABASE_CLIENT;
+      if(!sb){inicio();return;}
+      const {data,error}=await sb.auth.getUser();
+      if(error||!data?.user){fyAdminAutorizado=false;inicio();return;}
+      const permissao=await sb.rpc('fy_eh_admin');
+      if(permissao.error){fyAdminAutorizado=false;alert('Não foi possível verificar o acesso ao painel. Tente novamente.');return;}
+      if(permissao.data!==true){fyAdminAutorizado=false;inicio();return;}
+      // Reutiliza o fluxo que valida também o acesso à API administrativa.
+      fyAdminAutorizado=false;
+      await window.abrirAdminLogin();
+    }catch(e){fyAdminAutorizado=false;alert('Não foi possível verificar o acesso ao painel. Tente novamente.');}
+    finally{verificando=false;logo.removeAttribute('aria-busy');}
+  },true);
+})();
+</script>
