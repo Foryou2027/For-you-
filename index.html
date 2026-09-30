@@ -8826,6 +8826,12 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
   </a>
 </div>
 
+<!-- Nome da marca no espaço acima da busca (somente celular). -->
+<div class="fy-brand-name-mobile" aria-hidden="true">
+  <div class="fy-brand-name-text">FOR YOU</div>
+  <div class="fy-brand-name-deco"><span></span><b>♥</b><span></span></div>
+</div>
+
 <div class="fy-busca-topo">
   <div class="busca">
     <div class="busca-linha">
@@ -26746,6 +26752,67 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 }
 </style>
+
+<style id="fy-brand-name-mobile-final">
+/* Apenas acrescenta o nome FOR YOU no espaço acima da busca no celular.
+   Não altera funções, links, busca, carrinho, favoritos ou conta. */
+.fy-brand-name-mobile{display:none;}
+@media(max-width:700px){
+  .header-top{position:relative!important;}
+  .fy-brand-name-mobile{
+    display:flex!important;
+    position:absolute!important;
+    left:50%!important;
+    top:17px!important;
+    transform:translateX(-50%)!important;
+    z-index:3!important;
+    width:max-content!important;
+    max-width:42vw!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    pointer-events:none!important;
+    user-select:none!important;
+  }
+  .fy-brand-name-text{
+    font-family:Georgia,"Times New Roman",serif!important;
+    font-size:24px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:3.2px!important;
+    color:#8d1739!important;
+    white-space:nowrap!important;
+  }
+  .fy-brand-name-deco{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:8px!important;
+    margin-top:8px!important;
+    width:100%!important;
+  }
+  .fy-brand-name-deco span{
+    display:block!important;
+    width:31px!important;
+    height:1px!important;
+    background:#dca0af!important;
+  }
+  .fy-brand-name-deco b{
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+    font:400 10px/1 Arial,sans-serif!important;
+    color:#a51e45!important;
+  }
+}
+@media(max-width:380px){
+  .fy-brand-name-mobile{top:20px!important;}
+  .fy-brand-name-text{font-size:21px!important;letter-spacing:2.7px!important;}
+  .fy-brand-name-deco{margin-top:7px!important;gap:6px!important;}
+  .fy-brand-name-deco span{width:25px!important;}
+}
+</style>
+
 </body>
 </html>
 
