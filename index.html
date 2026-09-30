@@ -12934,7 +12934,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     // O preço atual já inclui promoções; não subtraia o preço antigo novamente.
     const discount=0;
     const shipping=subtotal>=THRESHOLD||!subtotal?0:0;
-    const coupon=subtotal>=100&&localStorage.getItem('forYouCupomCarrinho')==='BEMVINDA10'?Math.round(subtotal*10)/100:0;
+    const coupon=fyDescontoEmReais(subtotal);
     document.getElementById('fy17Subtotal').textContent=money(subtotal);
     document.getElementById('fy17Discount').textContent='\u2212 '+money(discount+coupon);
     document.getElementById('fy17Shipping').textContent=subtotal>=THRESHOLD?'Gr\u00E1tis':'A calcular';
@@ -16452,9 +16452,7 @@ function fyRenderCarrinhoPagina(){
   }
   const subtotal=lista.reduce((s,it)=>s+fyCartPrice(it)*fyCartQty(it),0);
   let codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
-  if(codigo==='BEMVINDA10'&&subtotal<100){localStorage.removeItem('forYouCupomCarrinho');codigo='';}
-  const percentual=codigo==='BEMVINDA10'&&subtotal>=100?0.10:0;
-  const valorDesconto=subtotal*percentual;
+  const valorDesconto=fyDescontoEmReais(subtotal);
   const freteCalculado=!!window.FY_FRETE_CALCULADO;
   const valorFrete=freteCalculado?Number(freteAtual||0):0;
   document.getElementById("fyCpSubtotal").textContent=fyBRL(subtotal);
@@ -16649,7 +16647,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="fy18-box">
       <div class="fy18-title">CUPOM DE PRIMEIRA COMPRA</div>
       <div class="fy18-row"><input id="fy18Cupom" placeholder="Digite seu cupom"><button onclick="fy18AplicarCupom()">APLICAR</button></div>
-      <div class="fy18-feedback" id="fy18CupomResultado">Use BEMVINDA10 e ganhe 10% em compras a partir de R$ 100.</div>
+      <div class="fy18-feedback" id="fy18CupomResultado">Digite o codigo do seu cupom para conferir o desconto.</div>
     </div>
     <div class="fy18-recommend">
       <h2>Voc\u00EA tamb\u00E9m pode gostar</h2>
@@ -21226,7 +21224,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     try{
       const cupom=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
       const itens=carrinho.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}));
-      const assinatura=JSON.stringify({usuario:user.id,cep,frete:entregaSelecionada,cupom:cupom==='BEMVINDA10'?cupom:'',itens});
+      const assinatura=JSON.stringify({usuario:user.id,cep,frete:entregaSelecionada,cupom:cupom,itens});
       let pendente=fyLerPendente();
       if(pendente&&pendente.usuario_id!==user.id)throw new Error('Há uma compra pendente de outra conta neste navegador. Entre na conta correspondente antes de continuar.');
       if(pendente&&pendente.assinatura!==assinatura)throw new Error('Há um pedido anterior aguardando pagamento. Confira Meus Pedidos antes de iniciar outra compra.');
@@ -21244,7 +21242,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
           const itensLocais=carrinho.filter(i=>Number(i.id)===id);
           if(itensLocais.some(i=>Math.abs(Number(i.preco)-Number(produto.preco))>0.009))throw new Error('O preço de '+produto.nome+' mudou. Atualize a loja e confira o valor antes de pagar.');
         }
-        const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:cupom==='BEMVINDA10'?cupom:'',itens}});
+        const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:cupom,itens}});
         if(error)throw new Error(await mensagemErroFuncao(error)||'Não foi possível registrar o pedido. Confira Meus Pedidos antes de tentar novamente.');
         if(data?.erro)throw new Error(data.erro);
         if(!data?.pedido?.id)throw new Error('Não foi possível confirmar o número do pedido. Confira Meus Pedidos antes de tentar novamente.');
@@ -27267,4 +27265,101 @@ window.addEventListener('storage',e=>{if(e.key===key&&!window.fyPermiteHistorico
     finally{verificando=false;logo.removeAttribute('aria-busy');}
   },true);
 })();
+</script>
+
+<style id="fy-cupons-admin-css">#fyCuponsAdmin{margin:24px 0;padding:18px;background:#fff8fa;border-radius:12px;font:14px/1.5 Arial,sans-serif;color:#40343a}#fyCuponsAdmin h2{font-size:20px}#fyCupomForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}#fyCupomForm label{display:flex;flex-direction:column;gap:4px}#fyCupomForm input,#fyCupomForm select{min-width:0;padding:10px;border:1px solid #e7d9df;border-radius:8px;background:white;color:#40343a}#fyCupomForm .fy-cupom-check{flex-direction:row;align-items:center}#fyCuponsAdmin button{padding:10px 12px;background:#f1dce5;color:#40343a;border:0;border-radius:8px;cursor:pointer}#fyCuponsAdmin button:disabled{opacity:.6}#fyCuponsAdmin .fy-cupom-acoes{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}.fy-cupom-linha{display:flex;align-items:center;gap:8px;padding:12px 0;border-top:1px solid #eadce2}.fy-cupom-linha>div{flex:1}.fy-cupom-linha p{font-size:12px;margin:4px 0}#fyCupomAdminMsg{min-height:20px}@media(max-width:500px){#fyCupomForm{grid-template-columns:1fr}.fy-cupom-linha{flex-wrap:wrap}.fy-cupom-linha>div{flex-basis:100%}}</style>
+<script id="fy-cupons-painel-checkout">
+(()=>{
+const sb=()=>window.FOR_YOU_SUPABASE_CLIENT;
+let validado=null;
+const moeda=n=>Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+window.fyDescontoEmReais=function(subtotal){
+ const codigo=(localStorage.getItem('forYouCupomCarrinho')||'').toUpperCase();
+ if(!validado||validado.codigo!==codigo||Date.now()-validado.em>300000||subtotal<Number(validado.minimo))return 0;
+ return Math.min(subtotal,Math.round((validado.tipo==='percentual'?subtotal*Number(validado.valor)/100:Number(validado.valor))*100)/100);
+};
+function subtotal(){try{const lista=typeof fyGetCart==='function'?fyGetCart():carrinho;return lista.reduce((s,x)=>s+(typeof fyCartPrice==='function'?fyCartPrice(x):Number(x.preco))* (typeof fyCartQty==='function'?fyCartQty(x):Number(x.quantidade||1)),0);}catch(e){return 0;}}
+function atualizarTotais(){for(const fn of ['fyRenderCarrinhoPagina','atualizar','renderCarrinho','fy18AtualizarSugestoes']){try{if(typeof window[fn]==='function')window[fn]();}catch(e){}}}
+async function aplicar(campoId,msgId){
+ const campo=document.getElementById(campoId),msg=document.getElementById(msgId);
+ const codigo=String(campo?.value||'').trim().toUpperCase();
+ validado=null;localStorage.removeItem('forYouCupomCarrinho');
+ function aviso(t,ok=false){if(msg){msg.textContent=t;msg.classList.toggle('fy-cupom-ok',ok);msg.classList.toggle('fy-cupom-erro',!ok);}}
+ if(!codigo){aviso('Digite o codigo do cupom.');atualizarTotais();return;}
+ aviso('Conferindo cupom...');
+ try{
+ const cliente=sb();if(!cliente)throw Error('Conexao indisponivel.');
+ const {data:auth,error:errAuth}=await cliente.auth.getUser();if(errAuth||!auth?.user)throw Error('Entre na sua conta para aplicar o cupom.');
+ const {data,error}=await cliente.rpc('fy_validar_cupom',{p_codigo:codigo,p_subtotal:subtotal()});
+ if(error)throw Error('Nao foi possivel validar o cupom. Tente novamente.');
+ if(!data?.valido)throw Error(data?.erro||'Cupom indisponivel.');
+ validado={...data,em:Date.now()};localStorage.setItem('forYouCupomCarrinho',data.codigo);
+ atualizarTotais();aviso('Cupom aplicado: '+moeda(data.desconto)+' de desconto. Confirmaremos as regras ao finalizar.',true);
+ }catch(e){atualizarTotais();aviso(e.message);}
+}
+window.fy18AplicarCupom=()=>aplicar('fy18Cupom','fy18CupomResultado');
+window.fyAplicarCupomPagina=()=>aplicar('fyCpCupom','fyCpCupomMsg');
+window.aplicarCupomV17=()=>aplicar('fy17CouponInput','fy17CouponMessage');
+window.aplicarCupom=()=>aplicar('cupom','cupomMsg');
+// Sessao e elegibilidade devem ser revalidadas depois de atualizar a pagina.
+localStorage.removeItem('forYouCupomCarrinho');
+const conectar=()=>{const cliente=sb();if(cliente)cliente.auth.onAuthStateChange((evento)=>{if(evento==='SIGNED_OUT'){validado=null;localStorage.removeItem('forYouCupomCarrinho');}});};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',conectar);else conectar();
+let carregando=false;
+function mensagem(t){const el=document.getElementById('fyCupomAdminMsg');if(el)el.textContent=t;}
+async function autorizado(){const cliente=sb();if(!cliente)throw Error('Conexao indisponivel.');const {data,error}=await cliente.rpc('fy_eh_admin');if(error||data!==true)throw Error('Esta conta nao tem acesso ao painel.');return cliente;}
+async function listar(){
+ if(carregando)return;carregando=true;
+ try{
+ const cliente=await autorizado();const {data,error}=await cliente.from('fy_cupons').select('*').order('criado_em',{ascending:false});
+ if(error)throw Error('Nao foi possivel carregar os cupons. Confira se a configuracao SQL foi executada.');
+ const lista=document.getElementById('fyCuponsLista');if(!lista)return;lista.replaceChildren();
+ for(const c of data||[]){
+ const row=document.createElement('div');row.className='fy-cupom-linha';
+ const texto=document.createElement('div'),titulo=document.createElement('strong'),detalhe=document.createElement('p');
+ titulo.textContent=c.codigo+' · '+(c.tipo==='percentual'?Number(c.valor)+'%':moeda(c.valor));
+ detalhe.textContent=(c.ativo?'Ativo':'Desativado')+' | Minimo '+moeda(c.minimo)+' | '+(c.validade?'Ate '+new Date(c.validade).toLocaleString('pt-BR'):'Sem vencimento')+' | '+(c.limite?'Limite: '+c.limite+' pedidos':'Sem limite de usos')+(c.primeira_compra?' | Primeira compra':'');
+ texto.append(titulo,detalhe);row.append(texto);
+ const editar=document.createElement('button');editar.type='button';editar.textContent='Editar';editar.addEventListener('click',()=>preencher(c));row.append(editar);
+ const ativar=document.createElement('button');ativar.type='button';ativar.textContent=c.ativo?'Desativar':'Ativar';ativar.addEventListener('click',async()=>{ativar.disabled=true;try{const cli=await autorizado();const {data,error}=await cli.from('fy_cupons').update({ativo:!c.ativo}).eq('codigo',c.codigo).select('codigo');if(error||!data?.length)throw Error('Nao foi possivel alterar o cupom.');await listar();mensagem('Cupom atualizado.');}catch(e){mensagem(e.message);}finally{ativar.disabled=false;}});row.append(ativar);lista.append(row);
+ }
+ if(!data?.length)lista.textContent='Nenhum cupom cadastrado.';
+ const contador=document.getElementById('adminCuponsAtivos');if(contador)contador.textContent=(data||[]).filter(c=>c.ativo&&(!c.validade||new Date(c.validade)>new Date())).length+' cupom(ns) ativo(s).';
+ }catch(e){mensagem(e.message);}finally{carregando=false;}
+}
+function preencher(c){const f=document.getElementById('fyCupomForm');f.elements.codigo.value=c.codigo;f.elements.codigo.readOnly=true;f.dataset.editar=c.codigo;for(const k of ['tipo','valor','minimo','limite'])f.elements[k].value=c[k]??'';f.elements.primeira_compra.checked=c.primeira_compra;f.elements.ativo.checked=c.ativo;const d=c.validade?new Date(c.validade):null;f.elements.validade.value=d?new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16):'';f.scrollIntoView({behavior:'smooth',block:'center'});}
+function limpar(){const f=document.getElementById('fyCupomForm');f.reset();delete f.dataset.editar;f.elements.codigo.readOnly=false;}
+function montar(){
+ const painel=document.querySelector('#paginaAdmin .painel-admin');if(!painel)return;
+ if(document.getElementById('fyCuponsAdmin')){listar();return;}
+ const secao=document.createElement('section');secao.id='fyCuponsAdmin';
+ secao.innerHTML=`<h2>Cupons de desconto</h2><p>Cadastre descontos para usar na loja. Pedidos aguardando pagamento reservam um uso do cupom.</p>
+ <form id="fyCupomForm"><label>Codigo<input name="codigo" required pattern="[A-Za-z0-9_-]{3,30}" maxlength="30" placeholder="EX.: DEBORA10"></label>
+ <label>Tipo<select name="tipo"><option value="percentual">Porcentagem (%)</option><option value="fixo">Valor em reais (R$)</option></select></label>
+ <label>Desconto<input name="valor" type="number" min="0.01" step="0.01" required></label>
+ <label>Compra minima (R$)<input name="minimo" type="number" min="0" step="0.01" value="0" required></label>
+ <label>Validade (opcional)<input name="validade" type="datetime-local"></label>
+ <label>Limite total de pedidos (opcional)<input name="limite" type="number" min="1" step="1"></label>
+ <label class="fy-cupom-check"><input name="primeira_compra" type="checkbox"> Somente primeira compra</label>
+ <label class="fy-cupom-check"><input name="ativo" type="checkbox" checked> Cupom ativo</label>
+ <div class="fy-cupom-acoes"><button type="submit">Salvar cupom</button><button type="button" id="fyCupomNovo">Novo cupom</button><button type="button" id="fyCupomRecarregar">Atualizar lista</button></div></form>
+ <p id="fyCupomAdminMsg" role="status" aria-live="polite"></p><div id="fyCuponsLista"></div>`;
+ painel.append(secao);
+ secao.querySelector('#fyCupomNovo').addEventListener('click',limpar);secao.querySelector('#fyCupomRecarregar').addEventListener('click',listar);
+ secao.querySelector('form').addEventListener('submit',async event=>{
+ event.preventDefault();const f=event.currentTarget,b=f.querySelector('[type=submit]');if(b.disabled)return;b.disabled=true;
+ try{
+ const c={codigo:f.elements.codigo.value.trim().toUpperCase(),tipo:f.elements.tipo.value,valor:Number(f.elements.valor.value),minimo:Number(f.elements.minimo.value),validade:f.elements.validade.value?new Date(f.elements.validade.value).toISOString():null,limite:f.elements.limite.value?Number(f.elements.limite.value):null,primeira_compra:f.elements.primeira_compra.checked,ativo:f.elements.ativo.checked};
+ if(!/^[A-Z0-9_-]{3,30}$/.test(c.codigo)||!Number.isFinite(c.valor)||c.valor<=0||(c.tipo==='percentual'&&c.valor>100)||!Number.isFinite(c.minimo)||c.minimo<0||(c.limite!==null&&(!Number.isSafeInteger(c.limite)||c.limite<1)))throw Error('Confira o codigo, valor, minimo e limite.');
+ const cliente=await autorizado();let consulta;
+ if(f.dataset.editar){const {codigo,...campos}=c;consulta=cliente.from('fy_cupons').update(campos).eq('codigo',f.dataset.editar).select('codigo');}else consulta=cliente.from('fy_cupons').insert(c).select('codigo');
+ const {data,error}=await consulta;if(error?.code==='23505')throw Error('Esse codigo ja existe. Use Editar na lista.');if(error||!data?.length)throw Error('Nao foi possivel salvar. Confira a configuracao SQL e o acesso administrativo.');
+ limpar();await listar();mensagem('Cupom salvo com sucesso.');
+ }catch(e){mensagem(e.message);}finally{b.disabled=false;}
+ });listar();
+}
+const render=window.renderAdmin;window.renderAdmin=async function(){const resultado=typeof render==='function'?await render.apply(this,arguments):undefined;montar();return resultado;};
+const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserver(()=>{if(pagina.classList.contains('ativa'))montar();}).observe(pagina,{attributes:true,attributeFilter:['class']});
+})();
+
 </script>
