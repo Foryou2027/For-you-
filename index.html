@@ -27834,3 +27834,97 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   }
 })();
 </script>
+
+<!-- FOR YOU 30/09: restauração definitiva da logo aprovada no mobile -->
+<style id="fy-restaura-logo-aprovada-v47">
+@media(max-width:700px){
+  /* Remove o FOR YOU artificial criado pelo patch anterior. */
+  .header-top::before{
+    content:none!important;
+    display:none!important;
+  }
+
+  /* Recoloca a arte/logo da menina à esquerda. */
+  .header-top .logo{
+    display:block!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    width:78px!important;
+    min-width:78px!important;
+    height:82px!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+  .fy-brand-logo{
+    display:block!important;
+    width:78px!important;
+    height:82px!important;
+    background:none!important;
+    overflow:hidden!important;
+    position:relative!important;
+  }
+  .fy-brand-logo img{
+    display:block!important;
+    width:305px!important;
+    max-width:none!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+    transform:translateX(-2px)!important;
+    margin:0!important;
+  }
+
+  /* Mantém o nome central exatamente separado dos ícones. */
+  .fy-wordmark-center{
+    display:flex!important;
+    grid-column:2!important;
+    grid-row:1!important;
+    align-self:center!important;
+    justify-self:center!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+  }
+  .fy-wordmark-title{
+    font-family:Georgia,"Times New Roman",serif!important;
+    font-size:29px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:5px!important;
+    color:#a83f61!important;
+    white-space:nowrap!important;
+  }
+
+  /* Linhas + coração no mesmo vinho/rosa do modelo aprovado. */
+  .fy-wordmark-ornament{
+    width:100px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:6px!important;
+    margin-top:6px!important;
+    color:#b34f6d!important;
+  }
+  .fy-wordmark-ornament span{
+    display:block!important;
+    height:1px!important;
+    flex:1!important;
+    background:#d9a0b1!important;
+  }
+  .fy-wordmark-ornament b{
+    font-size:0!important;
+    color:#b34f6d!important;
+    line-height:1!important;
+  }
+  .fy-wordmark-ornament b::before{
+    content:"♥"!important;
+    font-family:Georgia,"Times New Roman",serif!important;
+    font-size:13px!important;
+    font-weight:400!important;
+    color:#b34f6d!important;
+  }
+}
+</style>
