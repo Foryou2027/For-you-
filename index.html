@@ -7,7 +7,7 @@
   const key='fyPrivacidadeV1', prazo=180*24*60*60*1000;
   window.fyPermiteHistorico=function(){try{const p=JSON.parse(localStorage.getItem(key)||'null');return p?.versao===1&&p.historico===true&&Date.now()-p.em<prazo;}catch(e){return false;}};
   if(!window.fyPermiteHistorico())['forYouRecentes','forYouHistoricoBuscas'].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
-  // Tokens antigos não são copiados: é necessário autenticar novamente.
+  // Tokens antigos nÃ£o sÃ£o copiados: Ã© necessÃ¡rio autenticar novamente.
   try{const chaves=Object.keys(localStorage);chaves.filter(k=>/^sb-.*-auth-token(?:-code-verifier)?$/.test(k)).forEach(k=>localStorage.removeItem(k));localStorage.removeItem('forYouEnderecoCheckout');['forYouContaAtual','forYouConta','forYouContas','forYouNome','forYouEmail'].forEach(k=>localStorage.removeItem(k));}catch(e){}
   const memoria=new Map();
   window.fyAuthStorage={getItem(k){try{return sessionStorage.getItem(k);}catch(e){return memoria.get(k)||null;}},setItem(k,v){try{sessionStorage.setItem(k,v);}catch(e){memoria.set(k,v);}},removeItem(k){try{sessionStorage.removeItem(k);}catch(e){}memoria.delete(k);}};
@@ -67,7 +67,7 @@
   .fy-clean-cat-top > button:not(.fy-pill) { flex:0 0 66px!important; width:66px!important; min-width:66px!important; min-height:0!important; margin:0!important; }
 }
 </style>
-<!-- A sacola inicia fechada desde o PRIMEIRO desenho da página; o clique continua funcionando. -->
+<!-- A sacola inicia fechada desde o PRIMEIRO desenho da pÃ¡gina; o clique continua funcionando. -->
 <style id="fy-sacola-fechada-desde-inicio">
 #carrinho:not(.aberto) {
   transform: translateX(105%) !important;
@@ -87,7 +87,7 @@
   pointer-events: none !important;
 }
 </style>
-<!-- Banner: aplica as dimensões já aprovadas ANTES de desenhar a página, para não piscar. -->
+<!-- Banner: aplica as dimensÃµes jÃ¡ aprovadas ANTES de desenhar a pÃ¡gina, para nÃ£o piscar. -->
 <style id="fy-banner-sem-piscar-critico">
 @media (min-width: 801px) {
   .fy-banner-r10 {
@@ -123,7 +123,7 @@
   }
 }
 @media (max-width: 800px) {
-  /* Mesma proporção horizontal do PC; largura acompanha a tela do celular. */
+  /* Mesma proporÃ§Ã£o horizontal do PC; largura acompanha a tela do celular. */
   .fy-banner-r10 {
     width: calc(100% - 16px) !important;
     max-width: calc(100% - 16px) !important;
@@ -159,7 +159,7 @@
 
 <title>FOR YOU | Beleza</title>
 <meta name="theme-color" content="#8f1f40">
-<meta name="description" content="For You by Dé: beleza para você, direto no celular.">
+<meta name="description" content="For You by DÃ©: beleza para vocÃª, direto no celular.">
 <meta name="application-name" content="For You">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,7 +184,7 @@
 document.documentElement.classList.add('fy-ready');
 </script>
 
-<!-- Categorias: impede que o formato antigo apareça antes dos estilos finais. -->
+<!-- Categorias: impede que o formato antigo apareÃ§a antes dos estilos finais. -->
 <style id="fy-categorias-sem-piscar-inicio">
 .fy-clean-cat-top { visibility:visible!important; }
 </style>
@@ -8457,7 +8457,7 @@ border-radius:999px;font-size:6px;font-weight:800;letter-spacing:.5px;color:#777
 </style>
 
 
-<!-- FOR YOU: logo somente imagem, sem legenda; ajuste final do cabeçalho -->
+<!-- FOR YOU: logo somente imagem, sem legenda; ajuste final do cabeÃ§alho -->
 <style id="fy-logo-imagem-unica-20260919">
 header .logo .fy-brand-logo{position:relative!important;display:block!important;flex:none!important;width:76px!important;height:86px!important;min-width:0!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#fff!important;background-image:none!important;box-shadow:none!important;border:0!important;font-size:0!important;line-height:0!important}
 header .logo .fy-brand-logo img{position:absolute!important;display:block!important;visibility:visible!important;top:-2px!important;left:50%!important;width:292px!important;min-width:292px!important;max-width:none!important;height:auto!important;object-fit:initial!important;transform:translateX(-50%)!important}
@@ -8472,7 +8472,7 @@ header .header-top .logo{width:76px!important;min-width:76px!important;max-width
 #paginaProduto .fy-favorito-detalhe:focus-visible{outline:2px solid #e32636;outline-offset:2px}
 @media(max-width:800px){#paginaProduto .fy-favorito-detalhe{top:10px;right:10px}}
 </style>
-<!-- FOR YOU: correção única do banner no celular — proporção natural, sem zoom ou altura fixa. -->
+<!-- FOR YOU: correÃ§Ã£o Ãºnica do banner no celular â€” proporÃ§Ã£o natural, sem zoom ou altura fixa. -->
 <style id="fy-banner-mobile-proporcao-natural-2409">
 @media (max-width:800px) {
   html body #inicio.fy-banner-r10 {
@@ -8828,7 +8828,7 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 
 <div class="fy-wordmark-center" aria-label="FOR YOU">
   <div class="fy-wordmark-title">FOR YOU</div>
-  <div class="fy-wordmark-ornament" aria-hidden="true"><span></span><b>♡</b><span></span></div>
+  <div class="fy-wordmark-ornament" aria-hidden="true"><span></span><b>â™¡</b><span></span></div>
 </div>
 
 <div class="fy-busca-topo">
@@ -8985,8 +8985,8 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 <section class="fy-banner-r10" id="inicio" aria-label="Destaques da FOR YOU">
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
-      <a href="#novidades" aria-label="Beleza que realÃ§a o seu melhor">
-        <img decoding="async" loading="eager" fetchpriority="high" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
+      <a href="#novidades" aria-label="Beleza que realÃƒÂ§a o seu melhor">
+        <img decoding="async" loading="eager" fetchpriority="high" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃƒÂ§a o seu melhor">
       </a>
     </div>
   </div>
@@ -9831,7 +9831,7 @@ Promo&#xE7;&#xF5;es de datas especiais
             <label class="fy-admin-pedido-campo">Status do pedido
               <select id="fyAdminPedidoStatus">
                 <option value="1">Pedido recebido</option>
-                <option value="2" disabled>Pagamento aprovado (automático)</option>
+                <option value="2" disabled>Pagamento aprovado (automÃ¡tico)</option>
                 <option value="3">Preparando</option>
                 <option value="4">Enviado</option>
                 <option value="5">Entregue</option>
@@ -9880,7 +9880,7 @@ required
 <!-- =========================
      SEGURAN&#xC7;A E CONFIAN&#xC7;A
 ========================= -->
-<section class="seguranca fy-selos-discretos" aria-label="Informações da loja">
+<section class="seguranca fy-selos-discretos" aria-label="InformaÃ§Ãµes da loja">
   <div class="fy-selos-inner">
     <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Pagamento seguro</span>
     <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.7 7.7-7 10-4.3-2.3-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>Produtos originais</span>
@@ -10301,8 +10301,8 @@ const VALOR_FRETE_GRATIS = 150;
 let produtos = [];
 
 const catalogoPadraoFY = [...produtos];
-/* Produtos antigos que o navegador guardou não são reexibidos na vitrine.
-   Nenhum dado do navegador ou do Supabase é apagado por esta alteração. */
+/* Produtos antigos que o navegador guardou nÃ£o sÃ£o reexibidos na vitrine.
+   Nenhum dado do navegador ou do Supabase Ã© apagado por esta alteraÃ§Ã£o. */
 
 /* =========================
    ESTADOS
@@ -10899,7 +10899,7 @@ atualizarContadorFavoritos();
 const botaoDetalhe=document.querySelector('.fy-favorito-detalhe');
 if(botaoDetalhe && String(botaoDetalhe.dataset.produtoId)===String(id)){
   botaoDetalhe.classList.toggle('favoritado',adicionando);
-  botaoDetalhe.textContent=adicionando?'♥':'♡';
+  botaoDetalhe.textContent=adicionando?'â™¥':'â™¡';
   botaoDetalhe.setAttribute('aria-pressed',String(adicionando));
   botaoDetalhe.setAttribute('aria-label',adicionando?'Remover dos favoritos':'Adicionar aos favoritos');
 }
@@ -11373,7 +11373,7 @@ src="${fyImagemSegura(produto.imagem)}"
 alt="${fyTextoSeguro(produto.nome)}"
 >
 
-<button type="button" class="fy-favorito-detalhe ${favorito?'favoritado':''}" data-produto-id="${fyTextoSeguro(produto.id)}" data-favoritar-detalhe="1" aria-label="${favorito?'Remover dos favoritos':'Adicionar aos favoritos'}" aria-pressed="${favorito?'true':'false'}">${favorito?'♥':'♡'}</button>
+<button type="button" class="fy-favorito-detalhe ${favorito?'favoritado':''}" data-produto-id="${fyTextoSeguro(produto.id)}" data-favoritar-detalhe="1" aria-label="${favorito?'Remover dos favoritos':'Adicionar aos favoritos'}" aria-pressed="${favorito?'true':'false'}">${favorito?'â™¥':'â™¡'}</button>
 
 ${fotosProduto.length>1?`<div class="fy-produto-miniaturas">${fotosProduto.map((foto,i)=>`<button type="button" class="${i===0?'ativa':''}" data-foto-indice="${i}" aria-label="Ver foto ${i+1} de ${fyTextoSeguro(produto.nome)}"><img loading="lazy" decoding="async" src="${fyImagemSegura(foto)}" alt=""></button>`).join('')}</div>`:''}
 
@@ -11666,16 +11666,16 @@ function renderPedidosConta(){
     const seguro=v=>fyTextoSeguro(String(v??''));
     const prazo=Number(String(p.freteDetalhes?.prazo||'').match(/\d+/)?.[0]);
     const inicio=new Date(p.dataISO||p.dataIso||'');
-    let previsao='Previsão informada após a postagem';
+    let previsao='PrevisÃ£o informada apÃ³s a postagem';
     if(p.etapa>=5)previsao='Pedido entregue';
     else if(Number.isFinite(prazo)&&prazo>0&&prazo<=90&&!Number.isNaN(inicio.getTime())){
       const data=new Date(inicio);let uteis=0;
       while(uteis<prazo){data.setDate(data.getDate()+1);if(data.getDay()!==0&&data.getDay()!==6)uteis++;}
-      previsao='Previsão estimada: '+data.toLocaleDateString('pt-BR')+' (dias úteis; feriados podem alterar o prazo)';
+      previsao='PrevisÃ£o estimada: '+data.toLocaleDateString('pt-BR')+' (dias Ãºteis; feriados podem alterar o prazo)';
     }
     const correios=/correios/i.test(String(p.freteDetalhes?.servico||''));
     const botaoRastreio=rastreio
-      ? `<div class="pedido-rastreio"><div><span class="rastreio-icon">\u{1F69A}</span><div><strong>C\u00F3digo de rastreio</strong><span>${seguro(rastreio)}</span></div></div><button type="button" data-fy-rastreio="${seguro(rastreio)}" data-fy-correios="${correios?'1':'0'}">${correios?'COPIAR E ACOMPANHAR':'COPIAR CÓDIGO'}</button></div>`
+      ? `<div class="pedido-rastreio"><div><span class="rastreio-icon">\u{1F69A}</span><div><strong>C\u00F3digo de rastreio</strong><span>${seguro(rastreio)}</span></div></div><button type="button" data-fy-rastreio="${seguro(rastreio)}" data-fy-correios="${correios?'1':'0'}">${correios?'COPIAR E ACOMPANHAR':'COPIAR CÃ“DIGO'}</button></div>`
       : `<div class="pedido-rastreio indisponivel"><div><span class="rastreio-icon">\u{1F69A}</span><div><strong>C\u00F3digo de rastreio</strong><span>Dispon\u00EDvel ap\u00F3s o envio do pedido.</span></div></div></div>`;
     return `<div class="conta-pedido pedido-rastreamento-card">
       <div class="conta-pedido-top"><strong>${seguro(p.numero||'Pedido')}</strong><span class="pedido-badge">${moeda(Number(p.total||0))}</span></div>
@@ -11700,7 +11700,7 @@ document.addEventListener('click',evento=>{
   if(botao){
     acompanharPedido(botao.dataset.fyRastreio);
     if(botao.dataset.fyCorreios==='1')window.open('https://rastreamento.correios.com.br/app/index.php','_blank','noopener');
-    else {const antes=botao.textContent;botao.textContent='CÓDIGO COPIADO';setTimeout(()=>botao.textContent=antes,2500);}
+    else {const antes=botao.textContent;botao.textContent='CÃ“DIGO COPIADO';setTimeout(()=>botao.textContent=antes,2500);}
   }
 });
 
@@ -12168,12 +12168,12 @@ function aplicarCupom(){
     localStorage.setItem('forYouCupomCarrinho',codigo);
     descontoAtual=0.10;
     cupomAplicado=codigo;
-    if(mensagem)mensagem.textContent='Cupom aplicado. A elegibilidade será confirmada ao finalizar.';
+    if(mensagem)mensagem.textContent='Cupom aplicado. A elegibilidade serÃ¡ confirmada ao finalizar.';
   }else{
     localStorage.removeItem('forYouCupomCarrinho');
     descontoAtual=0;
     cupomAplicado='';
-    if(mensagem)mensagem.textContent=codigo==='BEMVINDA10'?'O mínimo em produtos é R$ 100,00.':'Cupom inválido.';
+    if(mensagem)mensagem.textContent=codigo==='BEMVINDA10'?'O mÃ­nimo em produtos Ã© R$ 100,00.':'Cupom invÃ¡lido.';
   }
   atualizar();
   if(typeof renderCheckout==='function')renderCheckout();
@@ -12495,7 +12495,7 @@ async function abrirAdminLogin(){
     const {data:{user}}=await sb.auth.getUser();
     if(!user){alert('Entre na sua conta da loja para acessar o painel.');abrirConta();return;}
     const {data:ehAdmin,error:erroAdmin}=await sb.rpc('fy_eh_admin');
-    if(erroAdmin||ehAdmin!==true)throw new Error('Esta conta não tem acesso ao painel.');
+    if(erroAdmin||ehAdmin!==true)throw new Error('Esta conta nÃ£o tem acesso ao painel.');
     const primeiraLista=await window.fyAdminApi('listar');
     window.FY_ADMIN_BOOTSTRAP=primeiraLista;
     fyAdminAutorizado=true;
@@ -12503,12 +12503,12 @@ async function abrirAdminLogin(){
     abrirAdmin();
   }catch(error){
     fyAdminAutorizado=false;
-    alert(error?.message||'Esta conta não tem acesso ao painel.');
+    alert(error?.message||'Esta conta nÃ£o tem acesso ao painel.');
   }
 }
 // Acesso administrativo discreto: Ctrl + Shift + A
 document.addEventListener('keydown',function(event){if(event.ctrlKey&&event.shiftKey&&event.key.toLowerCase()==='a'){event.preventDefault();abrirAdminLogin();}});
-function sairAdmin(){fyAdminAutorizado=false;fecharTodasPaginas();atualizarAcessoAdmin();alert('Você saiu do Painel Administrativo.');}
+function sairAdmin(){fyAdminAutorizado=false;fecharTodasPaginas();atualizarAcessoAdmin();alert('VocÃª saiu do Painel Administrativo.');}
 function abrirAdmin(){if(!adminAutenticado()){abrirAdminLogin();return;}fecharTodasPaginas();document.getElementById('paginaAdmin').classList.add('ativa');window.renderAdmin();window.scrollTo({top:0,behavior:'smooth'});}
 function renderAdmin(){
   if(!adminAutenticado())return;
@@ -12559,7 +12559,7 @@ function adminPromocao(){const nome=prompt('Digite o nome do produto:');if(!nome
    INICIALIZAR
 ========================= */
 
-/* O catálogo real desenha a home após carregar; páginas internas desenham ao abrir. */
+/* O catÃ¡logo real desenha a home apÃ³s carregar; pÃ¡ginas internas desenham ao abrir. */
 inicializarBuscaProfissional();
 atualizarBanner();
 atualizar();
@@ -12919,7 +12919,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   function escapeHTML(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   function updateSummary(c){
     const subtotal=c.reduce((s,x)=>s+(Number(x.price)||0)*(x.qty||1),0);
-    // O preço atual já inclui promoções; não subtraia o preço antigo novamente.
+    // O preÃ§o atual jÃ¡ inclui promoÃ§Ãµes; nÃ£o subtraia o preÃ§o antigo novamente.
     const discount=0;
     const shipping=subtotal>=THRESHOLD||!subtotal?0:0;
     const coupon=fyDescontoEmReais(subtotal);
@@ -12947,10 +12947,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     const subtotal=getCart().reduce((t,x)=>t+Number(x.price||0)*Number(x.qty||1),0);
     if(code==='BEMVINDA10'&&subtotal>=100){
       localStorage.setItem('forYouCupomCarrinho',code);
-      if(msg){msg.textContent='Cupom aplicado. A elegibilidade será confirmada ao finalizar.';msg.style.color='#2c8a55';}
+      if(msg){msg.textContent='Cupom aplicado. A elegibilidade serÃ¡ confirmada ao finalizar.';msg.style.color='#2c8a55';}
     }else{
       localStorage.removeItem('forYouCupomCarrinho');
-      if(msg){msg.textContent=code==='BEMVINDA10'?'O mínimo em produtos é R$ 100,00.':'Cupom inválido.';msg.style.color='#b21e53';}
+      if(msg){msg.textContent=code==='BEMVINDA10'?'O mÃ­nimo em produtos Ã© R$ 100,00.':'Cupom invÃ¡lido.';msg.style.color='#b21e53';}
     }
     render();
   };
@@ -13114,7 +13114,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   });
   document.addEventListener('DOMContentLoaded',()=>setTimeout(renderExtra,400));
-  // Agrupa alterações e ignora as mudanças feitas pelo próprio complemento.
+  // Agrupa alteraÃ§Ãµes e ignora as mudanÃ§as feitas pelo prÃ³prio complemento.
   let extraPendente=null;
   const target=document.getElementById('paginaCarrinhoV17');
   const observer=new MutationObserver(()=>{
@@ -14949,8 +14949,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     const conta=contaSalva();
     if(conta){conta.pedidos=r.data.map(o=>({id:o.id,numero:o.numero,data:new Date(o.data_pedido).toLocaleDateString('pt-BR'),status:o.status,etapa:o.etapa,statusTexto:o.status==='confirmado'?'Pedido recebido':o.status,pagamentoStatus:o.pagamento_status,total:Number(o.total),subtotal:Number(o.subtotal),desconto:Number(o.desconto),frete:Number(o.frete),parcelas:o.parcelas,itens:o.itens,entrega:o.entrega,pagamento:o.pagamento,cliente:o.cliente,endereco:o.endereco,codigoRastreio:o.codigo_rastreio||'',atualizadoEm:o.atualizado_em&&new Date(o.atualizado_em).toLocaleString('pt-BR')}));salvarConta(conta);renderPedidosConta();}
   }
-  // Pedidos e pagamentos oficiais são gravados somente por funções protegidas no servidor.
-  // O navegador não pode criar ou alterar status, valor, desconto ou frete na tabela orders.
+  // Pedidos e pagamentos oficiais sÃ£o gravados somente por funÃ§Ãµes protegidas no servidor.
+  // O navegador nÃ£o pode criar ou alterar status, valor, desconto ou frete na tabela orders.
   function salvarFavoritosLocalSeguro(){
     localStorage.setItem(chaveContaDados('Favoritos'),JSON.stringify(favoritos));
     if(!contaAtual) localStorage.setItem('forYouFavoritos',JSON.stringify(favoritos));
@@ -16696,12 +16696,12 @@ document.addEventListener("DOMContentLoaded", function () {
        .slice(0,4);
 
      if(titulo){
-       titulo.textContent=falta>0?'Complete seu pedido':'Você também pode gostar';
+       titulo.textContent=falta>0?'Complete seu pedido':'VocÃª tambÃ©m pode gostar';
      }
    }catch(e){lista=[];}
 
    if(!lista.length){
-     box.innerHTML='<div class="fy18-empty-rec">Nenhuma sugestão disponível agora.</div>';
+     box.innerHTML='<div class="fy18-empty-rec">Nenhuma sugestÃ£o disponÃ­vel agora.</div>';
      window.fy18Rec=[];
      return;
    }
@@ -17608,11 +17608,41 @@ const itens=(typeof produtos!=="undefined"&&Array.isArray(produtos))?produtos.fi
 let produtoAtual=null;
 let varianteAtual=null;
 const dinheiro=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-function fotosProduto(p){return [...new Set([p.imagem,...(Array.isArray(p.galeria)?p.galeria:[])].filter(Boolean))]}
+// Resolve somente fotos explicitamente vinculadas Ã  opÃ§Ã£o; nÃ£o presume a ordem da galeria.
+function fotoOpcaoFY(valor){
+  if(typeof valor==='string')return valor.trim();
+  if(!valor||typeof valor!=='object')return '';
+  for(const campo of ['imagem','image','foto','image_url','imagem_url','foto_url','url','src']){
+    if(typeof valor[campo]==='string'&&valor[campo].trim())return valor[campo].trim();
+  }
+  return '';
+}
+function listaFotosFY(valor){
+  if(typeof valor==='string'){try{valor=JSON.parse(valor)}catch(e){return [valor].filter(Boolean)}}
+  return Array.isArray(valor)?valor:[];
+}
+function fotoVarianteFY(p,v){
+  const direta=fotoOpcaoFY(v)||listaFotosFY(v?.galeria||v?.imagens||v?.fotos).map(fotoOpcaoFY).find(Boolean);
+  if(direta)return direta;
+  const normalizar=t=>String(t??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const nomes=[v?.nome,v?.cor,v?.sabor,v?.valor,v?.label].map(normalizar).filter(Boolean);
+  const vinculada=listaFotosFY(p.galeria).find(f=>f&&typeof f==='object'&&[f.variante,f.cor,f.nome,f.label].some(n=>n!=null&&nomes.includes(normalizar(n))));
+  return fotoOpcaoFY(vinculada)||'';
+}
+function fotosProduto(p){return [...new Set([fotoOpcaoFY(p.imagem),...listaFotosFY(p.galeria).map(fotoOpcaoFY),...(Array.isArray(p.variantes)?p.variantes:[]).map(v=>fotoVarianteFY(p,v))].filter(Boolean))]}
 function selecionarFoto(src){fySafeImg.src=src;document.querySelectorAll('#fySafeThumbs button').forEach(b=>b.classList.toggle('ativa',b.dataset.src===src))}
-function montarFotos(p){const fotos=fotosProduto(p);fySafeThumbs.innerHTML=fotos.length>1?fotos.map((src,i)=>'<button type="button" class="'+(i===0?'ativa':'')+'" data-src="'+src+'" onclick="fySelecionarFoto(\''+src+'\')"><img loading="lazy" decoding="async" src="'+src+'" alt=""></button>').join(''):'';selecionarFoto(p.imagem)}
+function montarFotos(p){const fotos=fotosProduto(p);fySafeThumbs.innerHTML=fotos.length>1?fotos.map((src,i)=>'<button type="button" class="'+(i===0?'ativa':'')+'" data-src="'+src+'" onclick="fySelecionarFoto(\''+src+'\')"><img loading="lazy" decoding="async" src="'+src+'" alt=""></button>').join(''):'';selecionarFoto(fotos[0]||'')}
 window.fySelecionarFoto=selecionarFoto;
-window.fySelecionarVariante=function(indice){if(!produtoAtual||!produtoAtual.variantes)return;varianteAtual=produtoAtual.variantes[indice];document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>b.classList.toggle('ativa',i===indice));if(varianteAtual.imagem)selecionarFoto(varianteAtual.imagem)};
+window.fySelecionarVariante=function(indice){
+  indice=Number(indice);
+  if(!produtoAtual||!Array.isArray(produtoAtual.variantes)||!Number.isInteger(indice)||indice<0||indice>=produtoAtual.variantes.length)return;
+  varianteAtual=produtoAtual.variantes[indice];
+  document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>b.classList.toggle('ativa',i===indice));
+  const foto=fotoVarianteFY(produtoAtual,varianteAtual)||fotoOpcaoFY(produtoAtual.imagem)||fotosProduto(produtoAtual)[0];
+  if(foto)selecionarFoto(foto);
+  const nome=varianteAtual?.nome||varianteAtual?.cor||varianteAtual?.sabor||'';
+  fySafeImg.alt=produtoAtual.nome+(nome?' â€” '+nome:'');
+};
 window.fyAbrirProduto=function(id){
   const catalogoAtual=(typeof produtos!=="undefined"&&Array.isArray(produtos))?produtos:itens;
   const p=catalogoAtual.find(x=>Number(x.id)===Number(id));
@@ -18031,7 +18061,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       return;
     }
     const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p&&p.ativo!==false);
-    titulo('Todos os Produtos',lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','CATÁLOGO COMPLETO');
+    titulo('Todos os Produtos',lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','CATÃLOGO COMPLETO');
     renderLista(lista);
     document.getElementById('fyCategoryToolbar')?.remove();
     document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
@@ -18053,7 +18083,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     titulo(marca,lista.length+' produto'+(lista.length===1?'':'s')+' encontrado'+(lista.length===1?'':'s')+'.','COMPRE POR MARCA');
     renderLista(lista);document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
   };
-  /* O carregador do catálogo chama renderNovidadesHome após receber os dados. */
+  /* O carregador do catÃ¡logo chama renderNovidadesHome apÃ³s receber os dados. */
 })();
 </script>
 
@@ -18812,7 +18842,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     };
   }
 
-  /* A lista de kits é desenhada apenas quando a cliente abre a seção. */
+  /* A lista de kits Ã© desenhada apenas quando a cliente abre a seÃ§Ã£o. */
 })();
 </script>
 
@@ -19181,10 +19211,10 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       })||carrinho.find(function(item){return item.nome===nomeFinal;});
       var disponivel=Number(base&&base.estoque);
       if(!base||base.ativo===false||!Number.isFinite(disponivel)||disponivel<1){
-        alert('Este produto está sem estoque no momento.');return;
+        alert('Este produto estÃ¡ sem estoque no momento.');return;
       }
       if(Number(existente&&existente.quantidade||0)>=disponivel){
-        alert('Você já colocou todas as unidades disponíveis na sacola.');return;
+        alert('VocÃª jÃ¡ colocou todas as unidades disponÃ­veis na sacola.');return;
       }
       if(existente){
         existente.quantidade=Number(existente.quantidade||1)+1;
@@ -19208,7 +19238,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
 
   function mostrarConfirmacaoAdicionado(nome){
     if(typeof window.fyAviso==='function'){
-      window.fyAviso('Produto adicionado','O item já está na sua sacola.','carrinho');
+      window.fyAviso('Produto adicionado','O item jÃ¡ estÃ¡ na sua sacola.','carrinho');
       return;
     }
     var aviso=document.getElementById('fyAvisoCarrinhoFinal');
@@ -19271,7 +19301,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   });
 })();
 </script>
-<!-- Visual clean: avaliaÃ§Ãµes, newsletter, seguranÃ§a e rodapÃ© -->
+<!-- Visual clean: avaliaÃƒÂ§ÃƒÂµes, newsletter, seguranÃƒÂ§a e rodapÃƒÂ© -->
 <style>
 .fy-home-reviews{
   max-width:1200px!important;
@@ -19538,9 +19568,9 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.addEventListener("hashchange",iniciarRotaExclusiva);
 })();
 </script>
-<!-- CorreÃ§Ã£o final: estado inicial da loja, carrinho e logo -->
+<!-- CorreÃƒÂ§ÃƒÂ£o final: estado inicial da loja, carrinho e logo -->
 <style id="fy-correcao-carregamento-final">
-/* O carrinho completo comeÃ§a sempre fechado e sÃ³ aparece apÃ³s clique explÃ­cito. */
+/* O carrinho completo comeÃƒÂ§a sempre fechado e sÃƒÂ³ aparece apÃƒÂ³s clique explÃƒÂ­cito. */
 #fyCarrinhoPagina{
   display:none!important;
   visibility:hidden!important;
@@ -19552,7 +19582,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   pointer-events:auto!important;
 }
 
-/* Usa a arte da logo como fundo para evitar que texto alternativo apareÃ§a no lugar dela. */
+/* Usa a arte da logo como fundo para evitar que texto alternativo apareÃƒÂ§a no lugar dela. */
 .fy-brand-logo{
   width:220px!important;
   height:112px!important;
@@ -19591,7 +19621,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(overlay)overlay.classList.remove('aberto','ativo','open');
     document.body.style.overflow='';
 
-    /* Hash antigo de carrinho nÃ£o pode reabrir a sacola apÃ³s atualizar. */
+    /* Hash antigo de carrinho nÃƒÂ£o pode reabrir a sacola apÃƒÂ³s atualizar. */
     if(/^#(?:carrinho|sacola|minha-sacola)$/i.test(window.location.hash)){
       history.replaceState(null,'',window.location.pathname+window.location.search);
     }
@@ -19677,15 +19707,15 @@ body.fy-pagina-exclusiva .pagina.ativa{
 <script id="fy-category-inline-menu-v1-script">
 (function(){
   const dados={
-    labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
-    pele:["Base","Corretivo","Primer","Bruma","Pó","Blush","Contorno","Bronzer","Iluminador","Fixador"],
-    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
-    olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó","Paleta facial","Bronzer","Bruma","Fixador"],
-    acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
-    corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
+    labios:["Batom","Gloss","Lip Tint","Lip Balm","LÃ¡pis de Boca","Hidratante Labial","Ã“leo Labial","Delineador Labial"],
+    pele:["Base","Corretivo","Primer","Bruma","PÃ³","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    skincare:["Sabonete Facial","Hidratante","SÃ©rum","Esfoliante","Ãgua Micelar","Protetor Solar","MÃ¡scara Facial","TÃ´nico","Ãrea dos Olhos","Ã“leos Faciais","Lip Care"],
+    olhos:["Paletas","Sombras","MÃ¡scara de CÃ­lios","Delineador","LÃ¡pis de Olho","CÃ­lios","Cola para CÃ­lios","Sobrancelhas"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","PÃ³","Paleta facial","Bronzer","Bruma","Fixador"],
+    acessorios:["PincÃ©is","Esponjas","Necessaires","Espelhos","AcessÃ³rios de Cabelo","PinÃ§as","Organizadores"],
+    corpo:["Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Ã“leo Corporal","Desodorante","Cuidados para MÃ£os"]
   };
-  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+  const nomes={labios:"LÃ¡bios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"AcessÃ³rios",corpo:"Corpo e Banho"};
 
   function obterMenu(){
     let box=document.getElementById("fyHomeSubmenu");
@@ -19703,7 +19733,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     }).join("");
     box.innerHTML='<div class="fy-home-submenu-card">'+
       '<div class="fy-home-submenu-head"><div><small>COMPRE POR CATEGORIA</small><h3>'+ (nomes[cat]||cat) +'</h3></div>'+
-      '<button class="fy-home-submenu-close" type="button" aria-label="Fechar categorias">×</button></div>'+
+      '<button class="fy-home-submenu-close" type="button" aria-label="Fechar categorias">Ã—</button></div>'+
       '<div class="fy-home-submenu-grid">'+itens+'</div>'+
       '<button class="fy-home-submenu-all" type="button">Ver todos de '+(nomes[cat]||cat)+'</button></div>';
 
@@ -19726,7 +19756,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   });
 })();
 </script>
-<!-- FOR YOU: clique na categoria abre diretamente a página de produtos -->
+<!-- FOR YOU: clique na categoria abre diretamente a pÃ¡gina de produtos -->
 <style id="fy-category-direct-page-v1">
   /* A antiga caixa de categorias deixa de ser usada. */
   #fyHomeSubmenu{display:none!important}
@@ -19782,15 +19812,15 @@ body.fy-pagina-exclusiva .pagina.ativa{
 <script id="fy-category-direct-page-v1-script">
 (function(){
   const subcategorias={
-    labios:["Batom","Gloss","Lip Tint","Lip Balm","Lápis de Boca","Hidratante Labial","Óleo Labial","Delineador Labial"],
-    pele:["Base","Corretivo","Primer","Bruma","Pó","Blush","Contorno","Bronzer","Iluminador","Fixador"],
-    skincare:["Sabonete Facial","Hidratante","Sérum","Esfoliante","Água Micelar","Protetor Solar","Máscara Facial","Tônico","Área dos Olhos","Óleos Faciais","Lip Care"],
-    olhos:["Paletas","Sombras","Máscara de Cílios","Delineador","Lápis de Olho","Cílios","Cola para Cílios","Sobrancelhas"],
-    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","Pó","Paleta facial","Bronzer","Bruma","Fixador"],
-    acessorios:["Pincéis","Esponjas","Necessaires","Espelhos","Acessórios de Cabelo","Pinças","Organizadores"],
-    corpo:["Todos de Corpo","Cabelo","Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Óleo Corporal","Desodorante","Cuidados para Mãos"]
+    labios:["Batom","Gloss","Lip Tint","Lip Balm","LÃ¡pis de Boca","Hidratante Labial","Ã“leo Labial","Delineador Labial"],
+    pele:["Base","Corretivo","Primer","Bruma","PÃ³","Blush","Contorno","Bronzer","Iluminador","Fixador"],
+    skincare:["Sabonete Facial","Hidratante","SÃ©rum","Esfoliante","Ãgua Micelar","Protetor Solar","MÃ¡scara Facial","TÃ´nico","Ãrea dos Olhos","Ã“leos Faciais","Lip Care"],
+    olhos:["Paletas","Sombras","MÃ¡scara de CÃ­lios","Delineador","LÃ¡pis de Olho","CÃ­lios","Cola para CÃ­lios","Sobrancelhas"],
+    face:["Base","Corretivo","Primer","Contorno","Blush","Iluminador","PÃ³","Paleta facial","Bronzer","Bruma","Fixador"],
+    acessorios:["PincÃ©is","Esponjas","Necessaires","Espelhos","AcessÃ³rios de Cabelo","PinÃ§as","Organizadores"],
+    corpo:["Todos de Corpo","Cabelo","Body Splash","Hidratante Corporal","Esfoliante Corporal","Sabonete Corporal","Ã“leo Corporal","Desodorante","Cuidados para MÃ£os"]
   };
-  const nomes={labios:"Lábios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"Acessórios",corpo:"Corpo e Banho"};
+  const nomes={labios:"LÃ¡bios",pele:"Pele",skincare:"Skincare",olhos:"Olhos",face:"Face",acessorios:"AcessÃ³rios",corpo:"Corpo e Banho"};
 
   function precoDoCard(card){
     const el=card.querySelector('.preco,.produto-preco,[data-preco]');
@@ -19809,7 +19839,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 
   function montarFiltros(categoria,selecionada){
-    /* O catálogo real do Supabase usa a seção #novidades para exibir categorias. */
+    /* O catÃ¡logo real do Supabase usa a seÃ§Ã£o #novidades para exibir categorias. */
     const heading=document.querySelector('#novidades>.titulo') || document.querySelector('#paginaSubcategoriaFY .fy-subcat-heading');
     if(!heading)return;
     let barra=document.getElementById('fyCategoryToolbar');
@@ -19819,8 +19849,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
     }
     const itens=(subcategorias[categoria]||[]).filter(x=>x!=="Todos de Corpo");
     barra.innerHTML='<div class="fy-category-chips"></div><select class="fy-category-sort" aria-label="Ordenar produtos">'+
-      '<option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preço</option>'+
-      '<option value="maior">Maior preço</option><option value="az">Nome: A–Z</option></select>';
+      '<option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preÃ§o</option>'+
+      '<option value="maior">Maior preÃ§o</option><option value="az">Nome: Aâ€“Z</option></select>';
     const chips=barra.querySelector('.fy-category-chips');
     ['Todos'].concat(itens).forEach(function(nome){
       const botao=document.createElement('button');botao.type='button';botao.className='fy-category-chip';botao.textContent=nome;
@@ -19842,12 +19872,12 @@ body.fy-pagina-exclusiva .pagina.ativa{
       if(titulo)titulo.textContent=nomes[categoria]||categoria;
       if(descricao){
         const chamadas={
-          labios:'Encontre seus favoritos para os lábios',
+          labios:'Encontre seus favoritos para os lÃ¡bios',
           pele:'Encontre seus favoritos para uma pele linda',
           skincare:'Cuidados especiais para a sua rotina',
           olhos:'Destaque o seu olhar',
           face:'Produtos para o rosto',
-          acessorios:'Acessórios para facilitar sua rotina de beleza',
+          acessorios:'AcessÃ³rios para facilitar sua rotina de beleza',
           corpo:'Cuidados para o corpo e cabelos'
         };
         descricao.textContent=chamadas[categoria]||'Encontre seus produtos favoritos';
@@ -19858,7 +19888,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     };
   }
 
-  /* Clique principal: vai direto aos produtos, sem abrir caixa intermediária. */
+  /* Clique principal: vai direto aos produtos, sem abrir caixa intermediÃ¡ria. */
   window.abrirSubmenuHomeFY=function(categoria){window.selecionarSubcategoria(categoria,'')};
   window.fecharSubmenuHomeFY=function(){};
 })();
@@ -19880,7 +19910,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     const grade=document.getElementById('listaProdutos');if(!grade)return;
     grade.innerHTML='';
     lista.forEach(function(p){try{if(typeof criarCard==='function')grade.appendChild(criarCard(p))}catch(e){}});
-    if(!lista.length)grade.innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Nenhum produto encontrado</strong><p>Novos produtos serão adicionados em breve.</p></div>';
+    if(!lista.length)grade.innerHTML='<div class="fy-novidades-vazio"><span>â™¡</span><strong>Nenhum produto encontrado</strong><p>Novos produtos serÃ£o adicionados em breve.</p></div>';
   }
   function prepararPagina(titulo,frase){
     try{fyFecharPaginaDestaque('fyPaginaOfertas')}catch(e){}
@@ -19895,7 +19925,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     const heading=document.querySelector('#novidades>.titulo');if(!heading)return;
     let barra=document.getElementById('fyCategoryToolbar');
     if(!barra){barra=document.createElement('div');barra.id='fyCategoryToolbar';barra.className='fy-category-toolbar';heading.insertAdjacentElement('afterend',barra)}
-    barra.innerHTML='<div class="fy-category-chips"></div><select class="fy-category-sort" aria-label="Ordenar produtos"><option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preço</option><option value="maior">Maior preço</option><option value="az">Nome: A–Z</option></select>';
+    barra.innerHTML='<div class="fy-category-chips"></div><select class="fy-category-sort" aria-label="Ordenar produtos"><option value="novidades">Ordenar por: Novidades</option><option value="menor">Menor preÃ§o</option><option value="maior">Maior preÃ§o</option><option value="az">Nome: Aâ€“Z</option></select>';
     const area=barra.querySelector('.fy-category-chips');
     opcoes.forEach(function(item){
       const b=document.createElement('button');b.type='button';b.className='fy-category-chip'+(item.valor===selecionada?' ativo':'');b.textContent=item.nome;b.onclick=function(){acao(item.valor)};area.appendChild(b);
@@ -19918,8 +19948,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(filtro==='validade')lista=base.filter(p=>p.proximoValidade||p.proximo_validade);
     if(filtro==='queima')lista=base.filter(p=>Number(p.estoque)>0&&Number(p.estoque)<=5);
     if(filtro==='datas')lista=base.filter(p=>/presente|natal|comemor|dia das|kit/.test(N((p.nome||'')+' '+(p.subcategoria||''))));
-    prepararPagina('Ofertas','Encontre ofertas especiais para você');render(lista);
-    criarBarra([{nome:'Todos',valor:'todos'},{nome:'Próximo ao vencimento',valor:'validade'},{nome:'Queima de estoque',valor:'queima'},{nome:'Datas comemorativas',valor:'datas'}],filtro,window.fyFiltrarOfertasCategoria);
+    prepararPagina('Ofertas','Encontre ofertas especiais para vocÃª');render(lista);
+    criarBarra([{nome:'Todos',valor:'todos'},{nome:'PrÃ³ximo ao vencimento',valor:'validade'},{nome:'Queima de estoque',valor:'queima'},{nome:'Datas comemorativas',valor:'datas'}],filtro,window.fyFiltrarOfertasCategoria);
     document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
   };
   window.fyAbrirOfertasComoCategoria=function(){window.fyFiltrarOfertasCategoria('todos')};
@@ -19927,14 +19957,14 @@ body.fy-pagina-exclusiva .pagina.ativa{
   window.fyFiltrarKitsCategoria=function(filtro){
     const base=catalogo().filter(p=>p&&p.ativo!==false&&ehKit(p));
     const lista=filtro==='todos'?base:base.filter(p=>Math.abs(Number(p.preco||0)-Number(filtro))<0.01);
-    prepararPagina('Kits Promocionais','Combinações especiais para você aproveitar mais por menos');render(lista);
+    prepararPagina('Kits Promocionais','CombinaÃ§Ãµes especiais para vocÃª aproveitar mais por menos');render(lista);
     criarBarra([{nome:'Todos',valor:'todos'},{nome:'Kits de R$ 15',valor:'15'},{nome:'Kits de R$ 25',valor:'25'}],filtro,window.fyFiltrarKitsCategoria);
     document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
   };
   window.fyAbrirKitsComoCategoria=function(){window.fyFiltrarKitsCategoria('todos')};
 })();
 </script>
-<!-- Correção definitiva: exibe a logo real do cabeçalho pela tag IMG -->
+<!-- CorreÃ§Ã£o definitiva: exibe a logo real do cabeÃ§alho pela tag IMG -->
 <style id="fy-header-logo-direct-final">
 .header-top .logo{
   display:flex!important;
@@ -20086,7 +20116,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
-<!-- Passo 4 de 7: interação e categoria selecionada -->
+<!-- Passo 4 de 7: interaÃ§Ã£o e categoria selecionada -->
 <style id="fy-categorias-passo-4-final">
 .fy-clean-cat-top>button:not(.fy-pill){
   border-radius:12px!important;
@@ -20153,9 +20183,9 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 })();
 </script>
-<!-- Passo 5 de 7: página inicial mais curta e organizada -->
+<!-- Passo 5 de 7: pÃ¡gina inicial mais curta e organizada -->
 <style id="fy-home-passo-5-final">
-/* Avaliações e newsletter ficam fora da página inicial compacta. */
+/* AvaliaÃ§Ãµes e newsletter ficam fora da pÃ¡gina inicial compacta. */
 #avaliacoesClientes,
 .newsletter{
   display:none!important;
@@ -20346,7 +20376,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
-<!-- Passo 7 de 7: revisão final para celular -->
+<!-- Passo 7 de 7: revisÃ£o final para celular -->
 <style id="fy-mobile-passo-7-final">
 @media(max-width:700px){
   html,body{
@@ -20358,7 +20388,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     box-sizing:border-box!important;
   }
 
-  /* Cabeçalho: logo e ações na primeira linha, busca na segunda. */
+  /* CabeÃ§alho: logo e aÃ§Ãµes na primeira linha, busca na segunda. */
   .header{
     width:100%!important;
     padding:7px 11px 10px!important;
@@ -20447,7 +20477,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     font-size:16px!important;
   }
 
-  /* Categorias em uma única linha com rolagem suave. */
+  /* Categorias em uma Ãºnica linha com rolagem suave. */
   .fy-clean-cat-top{
     justify-content:flex-start!important;
     width:100%!important;
@@ -20504,7 +20534,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     object-position:center!important;
   }
 
-  /* Seções e títulos sem excesso de espaço. */
+  /* SeÃ§Ãµes e tÃ­tulos sem excesso de espaÃ§o. */
   .secao{
     width:100%!important;
     max-width:100%!important;
@@ -20522,7 +20552,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     line-height:1.5!important;
   }
 
-  /* Marcas e benefícios adaptados à largura do aparelho. */
+  /* Marcas e benefÃ­cios adaptados Ã  largura do aparelho. */
   .fy-loved-brands-section{
     padding-left:12px!important;
     padding-right:12px!important;
@@ -20558,7 +20588,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
     max-width:100%!important;
   }
 
-  /* Rodapé e botão flutuante não invadem o conteúdo. */
+  /* RodapÃ© e botÃ£o flutuante nÃ£o invadem o conteÃºdo. */
   .footer-grid{
     grid-template-columns:1fr!important;
     gap:24px!important;
@@ -20588,7 +20618,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   }
 }
 </style>
-<!-- Logo do cabeçalho: somente o desenho, sem o nome inferior -->
+<!-- Logo do cabeÃ§alho: somente o desenho, sem o nome inferior -->
 <style id="fy-logo-somente-desenho-final">
 .fy-brand-logo{
   position:relative!important;
@@ -20647,7 +20677,7 @@ body.fy-pagina-exclusiva .pagina.ativa{
   .fy-pix-code .fy-copy{width:100%}
 }
 </style>
-<!-- Ajuste final: amplia somente o desenho da logo no cabeçalho -->
+<!-- Ajuste final: amplia somente o desenho da logo no cabeÃ§alho -->
 <style id="fy-logo-desenho-maior-final">
 .header-top .logo{max-width:118px!important}
 .fy-brand-logo{
@@ -21200,21 +21230,21 @@ body.fy-pagina-exclusiva .pagina.ativa{
   async function mensagemErroFuncao(error){
     try{const json=await error?.context?.json();return json?.erro||json?.message||error?.message}catch(e){return error?.message}
   }
-  // Um pedido pendente é salvo antes de chamar o PagBank para permitir retentativas.
+  // Um pedido pendente Ã© salvo antes de chamar o PagBank para permitir retentativas.
   let fyConfirmacaoEmAndamento=false;
   const FY_PENDENTE='forYouPagBankPendente';
   const fyLerPendente=()=>{try{return JSON.parse(localStorage.getItem(FY_PENDENTE)||'null')}catch(e){return null}};
   window.confirmarPedido=async function(){
     const msg=$('checkoutMensagem');if(msg)msg.textContent='';
     if(fyConfirmacaoEmAndamento)return;
-    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho está vazio.');return;}
-    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb){if(msg)msg.textContent='A conexão da loja ainda não está disponível.';return;}
+    if(!Array.isArray(carrinho)||!carrinho.length){alert('Seu carrinho estÃ¡ vazio.');return;}
+    const sb=window.FOR_YOU_SUPABASE_CLIENT;if(!sb){if(msg)msg.textContent='A conexÃ£o da loja ainda nÃ£o estÃ¡ disponÃ­vel.';return;}
     const {data:{user},error:authError}=await sb.auth.getUser();
-    if(authError||!user){alert('Sua sessão expirou. Entre novamente.');if(typeof abrirConta==='function')abrirConta();return;}
+    if(authError||!user){alert('Sua sessÃ£o expirou. Entre novamente.');if(typeof abrirConta==='function')abrirConta();return;}
     const cep=String($('checkoutCEP')?.value||'').replace(/\D/g,'');
-    if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endereço salvo.';return;}
-    if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma opção de entrega antes de confirmar.';return;}
-    if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento disponível é Pix.';return;}
+    if(cep.length!==8){if(msg)msg.textContent='Confira o CEP do endereÃ§o salvo.';return;}
+    if(!window.FY_FRETE_CALCULADO||window.FY_FRETE_CEP!==cep||!['padrao','expressa'].includes(entregaSelecionada)){if(msg)msg.textContent='Calcule o frete e escolha uma opÃ§Ã£o de entrega antes de confirmar.';return;}
+    if(pagamentoSelecionado!=='PIX'){if(msg)msg.textContent='No momento, a forma de pagamento disponÃ­vel Ã© Pix.';return;}
 
     const botao=document.querySelector('#paginaCheckout .fy-checkout-confirmar');
     const textoBotao=botao?.textContent;
@@ -21225,43 +21255,43 @@ body.fy-pagina-exclusiva .pagina.ativa{
       const itens=carrinho.map(item=>({produto_id:Number(item.id),quantidade:Number(item.quantidade||1),variante:item.variante||item.sabor||item.cor||''}));
       const assinatura=JSON.stringify({usuario:user.id,cep,frete:entregaSelecionada,cupom:cupom,itens});
       let pendente=fyLerPendente();
-      if(pendente&&pendente.usuario_id!==user.id)throw new Error('Há uma compra pendente de outra conta neste navegador. Entre na conta correspondente antes de continuar.');
-      if(pendente&&pendente.assinatura!==assinatura)throw new Error('Há um pedido anterior aguardando pagamento. Confira Meus Pedidos antes de iniciar outra compra.');
+      if(pendente&&pendente.usuario_id!==user.id)throw new Error('HÃ¡ uma compra pendente de outra conta neste navegador. Entre na conta correspondente antes de continuar.');
+      if(pendente&&pendente.assinatura!==assinatura)throw new Error('HÃ¡ um pedido anterior aguardando pagamento. Confira Meus Pedidos antes de iniciar outra compra.');
       let pedidoId=pendente?.pedido_id;
       if(!pedidoId){
         const ids=[...new Set(itens.map(i=>i.produto_id))];
-        if(ids.some(id=>!Number.isSafeInteger(id)||id<=0)||itens.some(i=>!Number.isSafeInteger(i.quantidade)||i.quantidade<1))throw new Error('Há um produto inválido na sacola. Remova o item e adicione novamente.');
+        if(ids.some(id=>!Number.isSafeInteger(id)||id<=0)||itens.some(i=>!Number.isSafeInteger(i.quantidade)||i.quantidade<1))throw new Error('HÃ¡ um produto invÃ¡lido na sacola. Remova o item e adicione novamente.');
         const {data:atuais,error:erroCatalogo}=await sb.from('produtos').select('id,nome,preco,estoque,ativo').in('id',ids);
-        if(erroCatalogo)throw new Error('Não foi possível conferir o estoque agora. Tente novamente em instantes.');
+        if(erroCatalogo)throw new Error('NÃ£o foi possÃ­vel conferir o estoque agora. Tente novamente em instantes.');
         const porId=new Map((atuais||[]).map(p=>[Number(p.id),p]));
         for(const id of ids){
           const produto=porId.get(id);
           const quantidade=itens.filter(i=>i.produto_id===id).reduce((total,i)=>total+i.quantidade,0);
-          if(!produto||produto.ativo===false||Number(produto.estoque)<quantidade)throw new Error((produto?.nome||'Um produto')+' não tem a quantidade solicitada. Confira sua sacola.');
+          if(!produto||produto.ativo===false||Number(produto.estoque)<quantidade)throw new Error((produto?.nome||'Um produto')+' nÃ£o tem a quantidade solicitada. Confira sua sacola.');
           const itensLocais=carrinho.filter(i=>Number(i.id)===id);
-          if(itensLocais.some(i=>Math.abs(Number(i.preco)-Number(produto.preco))>0.009))throw new Error('O preço de '+produto.nome+' mudou. Atualize a loja e confira o valor antes de pagar.');
+          if(itensLocais.some(i=>Math.abs(Number(i.preco)-Number(produto.preco))>0.009))throw new Error('O preÃ§o de '+produto.nome+' mudou. Atualize a loja e confira o valor antes de pagar.');
         }
         const {data,error}=await sb.functions.invoke('criar-pedido',{body:{cep,tipo_frete:entregaSelecionada,cupom:cupom,itens}});
-        if(error)throw new Error(await mensagemErroFuncao(error)||'Não foi possível registrar o pedido. Confira Meus Pedidos antes de tentar novamente.');
+        if(error)throw new Error(await mensagemErroFuncao(error)||'NÃ£o foi possÃ­vel registrar o pedido. Confira Meus Pedidos antes de tentar novamente.');
         if(data?.erro)throw new Error(data.erro);
-        if(!data?.pedido?.id)throw new Error('Não foi possível confirmar o número do pedido. Confira Meus Pedidos antes de tentar novamente.');
+        if(!data?.pedido?.id)throw new Error('NÃ£o foi possÃ­vel confirmar o nÃºmero do pedido. Confira Meus Pedidos antes de tentar novamente.');
         pedidoId=data.pedido.id;
         const pedido=mapearPedido({...data.pedido,itens_pedido:data.pedido.itens||[]});
         localStorage.setItem('forYouUltimoPedido',JSON.stringify(pedido));
         pendente={pedido_id:pedidoId,usuario_id:user.id,assinatura,criado_em:new Date().toISOString()};
         localStorage.setItem(FY_PENDENTE,JSON.stringify(pendente));
       }
-      // A função no servidor precisa conferir titularidade e estado do pedido.
+      // A funÃ§Ã£o no servidor precisa conferir titularidade e estado do pedido.
       const {data:pagbank,error:erroPagBank}=await sb.functions.invoke('criar-checkout-pagbank',{body:{pedido_id:pedidoId}});
-      if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'Não foi possível abrir o pagamento PagBank. Tente novamente para retomar o mesmo pedido.');
+      if(erroPagBank)throw new Error(await mensagemErroFuncao(erroPagBank)||'NÃ£o foi possÃ­vel abrir o pagamento PagBank. Tente novamente para retomar o mesmo pedido.');
       if(pagbank?.error)throw new Error(pagbank.error);
-      if(!pagbank?.payment_url||!/^https:\/\//i.test(pagbank.payment_url))throw new Error('O PagBank não retornou um link de pagamento válido.');
+      if(!pagbank?.payment_url||!/^https:\/\//i.test(pagbank.payment_url))throw new Error('O PagBank nÃ£o retornou um link de pagamento vÃ¡lido.');
       localStorage.setItem(FY_PENDENTE,JSON.stringify({...pendente,checkout_id:pagbank.checkout_id||null,reference_id:pagbank.reference_id||null}));
       if(msg)msg.textContent='Abrindo o ambiente seguro do PagBank...';
       window.location.assign(pagbank.payment_url);
     }catch(e){
       console.warn(e);
-      if(msg)msg.textContent=e.message||'Não foi possível abrir o pagamento. Tente novamente.';
+      if(msg)msg.textContent=e.message||'NÃ£o foi possÃ­vel abrir o pagamento. Tente novamente.';
     }finally{
       fyConfirmacaoEmAndamento=false;
       if(botao){botao.disabled=false;botao.textContent=textoBotao||'CONFIRMAR PEDIDO';}
@@ -21278,8 +21308,8 @@ body.fy-pagina-exclusiva .pagina.ativa{
     if(!aviso){aviso=document.createElement('div');aviso.id='fyAvisoAbrindoCheckout';aviso.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:999999;background:#8f1739;color:#fff;padding:12px 20px;border-radius:999px;font:700 10px Arial,sans-serif;letter-spacing:.5px;box-shadow:0 8px 25px rgba(80,20,40,.25)';document.body.appendChild(aviso);}
     aviso.textContent='ABRINDO FINALIZA\u00C7\u00C3O...';aviso.style.display='block';setTimeout(()=>{aviso.style.display='none'},3500);
   }
-  /* Finalização v31: não intercepta mais o clique em fase de captura.
-     Os próprios botões chamam fyFinalizarCompra(), evitando conflito com as versões antigas. */
+  /* FinalizaÃ§Ã£o v31: nÃ£o intercepta mais o clique em fase de captura.
+     Os prÃ³prios botÃµes chamam fyFinalizarCompra(), evitando conflito com as versÃµes antigas. */
 })();
 </script>
 <style id="fy-areas-como-pagina-nova-final">
@@ -21421,7 +21451,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 }
 </style>
 <style id="fy-minha-conta-passo-1-card-compacto">
-/* Passo 1: cartão de acesso mais compacto e centralizado */
+/* Passo 1: cartÃ£o de acesso mais compacto e centralizado */
 #paginaConta .fy-auth-gate{
   width:calc(100% - 32px)!important;
   max-width:500px!important;
@@ -21457,7 +21487,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 </style>
 <style id="fy-minha-conta-sem-cartao-final">
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap');
-/* Visual aberto e leve, sem cartão */
+/* Visual aberto e leve, sem cartÃ£o */
 #paginaConta .fy-auth-gate{
   width:calc(100% - 36px)!important;
   max-width:420px!important;
@@ -21688,7 +21718,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   color:#33262b!important;
 }
 
-/* Minha Conta: visual leve, centralizado e sem cartão pesado */
+/* Minha Conta: visual leve, centralizado e sem cartÃ£o pesado */
 #paginaConta .fy-auth-gate{
   width:calc(100% - 44px)!important;
   max-width:410px!important;
@@ -21811,7 +21841,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   font-weight:700!important;
 }
 
-/* Mesma fonte em Minha Conta após o login */
+/* Mesma fonte em Minha Conta apÃ³s o login */
 #paginaConta .fy2-header h1,
 #paginaConta .fy2-panel h2{
   font-family:'Montserrat',Arial,sans-serif!important;
@@ -21855,7 +21885,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 }
 </style>
 <style id="fy-minha-conta-logada-clean-final">
-/* Área da cliente após o login — versão clean aprovada */
+/* Ãrea da cliente apÃ³s o login â€” versÃ£o clean aprovada */
 #paginaConta .fy2-account{
   width:calc(100% - 44px)!important;
   max-width:930px!important;
@@ -22112,7 +22142,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 }
 </style>
 <style id="fy-carrinho-mobile-clean-final">
-/* Carrinho mobile — versão clean aprovada */
+/* Carrinho mobile â€” versÃ£o clean aprovada */
 #fyCarrinhoPagina{
   background:#fbf5f7!important;
   color:#33262b!important;
@@ -22205,7 +22235,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 #fyCarrinhoPagina .fy-cp-total strong{color:#8d1739!important;font-size:21px!important}
 #fyCarrinhoPagina .fy-cp-cupom{display:none!important}
 
-/* Benefício de frete, CEP e cupom */
+/* BenefÃ­cio de frete, CEP e cupom */
 #fyCarrinhoPagina .fy18-commercial{margin:16px 0!important;gap:10px!important}
 #fyCarrinhoPagina .fy18-box{
   padding:14px!important;
@@ -22312,7 +22342,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     overflow:hidden!important;
     font-size:0!important;
   }
-  #fyCarrinhoPagina #fyCpItems .remover::before{content:'×'!important;font-size:21px!important}
+  #fyCarrinhoPagina #fyCpItems .remover::before{content:'Ã—'!important;font-size:21px!important}
   #fyCarrinhoPagina .fy-cp-summary{position:static!important;margin-top:4px!important;padding:0!important;border:0!important}
 }
 
@@ -22323,7 +22353,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 }
 </style>
 <style id="fy-favoritos-clean-final">
-/* Favoritos — versão clean aprovada */
+/* Favoritos â€” versÃ£o clean aprovada */
 #paginaFavoritos{
   background:#fbf5f7!important;
   color:#33262b!important;
@@ -22656,7 +22686,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     aviso.className='fy-global-notice';
     aviso.setAttribute('role','status');
     aviso.setAttribute('aria-live','polite');
-    aviso.innerHTML='<span class="fy-global-notice-icon" aria-hidden="true">♡</span><div class="fy-global-notice-copy"><strong>Aviso</strong><span></span></div><button type="button" class="fy-global-notice-close" aria-label="Fechar aviso">×</button>';
+    aviso.innerHTML='<span class="fy-global-notice-icon" aria-hidden="true">â™¡</span><div class="fy-global-notice-copy"><strong>Aviso</strong><span></span></div><button type="button" class="fy-global-notice-close" aria-label="Fechar aviso">Ã—</button>';
     aviso.querySelector('button').addEventListener('click',fechar);
     document.body.appendChild(aviso);
     return aviso;
@@ -22665,7 +22695,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     const aviso=criar();
     const classe=tipo==='erro'?'erro':tipo==='sucesso'?'sucesso':'';
     aviso.className='fy-global-notice '+classe;
-    aviso.querySelector('.fy-global-notice-icon').textContent=tipo==='erro'?'!':tipo==='sucesso'?'✓':tipo==='carrinho'?'🛒':'♡';
+    aviso.querySelector('.fy-global-notice-icon').textContent=tipo==='erro'?'!':tipo==='sucesso'?'âœ“':tipo==='carrinho'?'ðŸ›’':'â™¡';
     aviso.querySelector('strong').textContent=String(titulo||'Aviso');
     aviso.querySelector('.fy-global-notice-copy span').textContent=String(mensagem||'');
     requestAnimationFrame(function(){aviso.classList.add('ativo')});
@@ -22678,12 +22708,12 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
   window.alert=function(texto){
     const mensagem=String(texto==null?'':texto).replace(/\s+/g,' ').trim();
     const minuscula=mensagem.toLowerCase();
-    let tipo='info',titulo='Atenção';
+    let tipo='info',titulo='AtenÃ§Ã£o';
     if(/sucesso|adicionad|salv|atualizad|pronta|realizad|copiad/.test(minuscula)){
       tipo='sucesso';titulo=/produto.*adicionad/.test(minuscula)?'Produto adicionado':'Tudo certo';
-    }else if(/cep/.test(minuscula)&&/válido|invalido|inválido/.test(minuscula)){
+    }else if(/cep/.test(minuscula)&&/vÃ¡lido|invalido|invÃ¡lido/.test(minuscula)){
       tipo='erro';titulo='Confira o CEP';
-    }else if(/não foi|nao foi|incorret|expirou|vazi|preencha|precisa|iguais|encontrad/.test(minuscula)){
+    }else if(/nÃ£o foi|nao foi|incorret|expirou|vazi|preencha|precisa|iguais|encontrad/.test(minuscula)){
       tipo='erro';titulo='Confira os dados';
     }
     window.fyAviso(titulo,mensagem,tipo);
@@ -22774,14 +22804,14 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     painel.className='fy-loading-live';
     painel.setAttribute('role','status');
     painel.setAttribute('aria-live','polite');
-    painel.innerHTML='<div class="fy-loading-live-row"><span class="fy-loading-live-spinner" aria-hidden="true"></span><div class="fy-loading-live-copy"><strong>Carregando...</strong><span>Aguarde só um instante.</span></div></div><div class="fy-loading-live-progress" aria-hidden="true"></div>';
+    painel.innerHTML='<div class="fy-loading-live-row"><span class="fy-loading-live-spinner" aria-hidden="true"></span><div class="fy-loading-live-copy"><strong>Carregando...</strong><span>Aguarde sÃ³ um instante.</span></div></div><div class="fy-loading-live-progress" aria-hidden="true"></div>';
     document.body.appendChild(painel);
     return painel;
   }
   window.fyMostrarCarregamento=function(titulo,mensagem){
     const painel=criar();operacoes++;
     painel.querySelector('strong').textContent=String(titulo||'Carregando...');
-    painel.querySelector('.fy-loading-live-copy span').textContent=String(mensagem||'Aguarde só um instante.');
+    painel.querySelector('.fy-loading-live-copy span').textContent=String(mensagem||'Aguarde sÃ³ um instante.');
     requestAnimationFrame(function(){painel.classList.add('ativo')});
   };
   window.fyOcultarCarregamento=function(){
@@ -22800,10 +22830,10 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     window[nome]=envolvida;
   }
   envolver('fySupabaseEntrar','Entrando...','Estamos acessando sua conta.');
-  envolver('calcularFreteCheckout','Calculando entrega...','Consultando as melhores opções para seu CEP.');
-  envolver('fy18CalcularCep','Calculando entrega...','Consultando as melhores opções para seu CEP.');
-  envolver('buscarCEP','Calculando entrega...','Consultando o endereço e as opções para seu CEP.');
-  envolver('confirmarPedido','Finalizando pedido...','Salvando seu pedido com segurança.');
+  envolver('calcularFreteCheckout','Calculando entrega...','Consultando as melhores opÃ§Ãµes para seu CEP.');
+  envolver('fy18CalcularCep','Calculando entrega...','Consultando as melhores opÃ§Ãµes para seu CEP.');
+  envolver('buscarCEP','Calculando entrega...','Consultando o endereÃ§o e as opÃ§Ãµes para seu CEP.');
+  envolver('confirmarPedido','Finalizando pedido...','Salvando seu pedido com seguranÃ§a.');
   document.documentElement.setAttribute('data-fy-versao','29');
 })();
 </script>
@@ -23014,7 +23044,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     raiz.querySelectorAll('.checkout-etapa').forEach((botao,i)=>{
       botao.classList.toggle('ativa',i===etapaAtual);botao.classList.toggle('concluida',i<etapaAtual);
       botao.setAttribute('aria-current',i===etapaAtual?'step':'false');
-      botao.querySelector('span').textContent=i<etapaAtual?'✓':String(i+1);
+      botao.querySelector('span').textContent=i<etapaAtual?'âœ“':String(i+1);
     });
     const voltar=raiz.querySelector('.fy-checkout-voltar'),proximo=raiz.querySelector('.fy-checkout-proximo'),confirmar=raiz.querySelector('.fy-checkout-confirmar');
     const textos=['CONTINUAR PARA ENTREGA','CONTINUAR PARA PAGAMENTO','REVISAR PEDIDO'];
@@ -23030,10 +23060,10 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
       const ids=['checkoutNome','checkoutEmail','checkoutTelefone','checkoutCEP','checkoutEndereco','checkoutNumero'];
       const faltando=ids.some(id=>!String(document.getElementById(id)?.value||'').trim());
       const cep=String(document.getElementById('checkoutCEP')?.value||'').replace(/\D/g,'');
-      if(faltando||cep.length!==8){mensagem('Confira seus dados e o endereço antes de continuar.');return false;}
+      if(faltando||cep.length!==8){mensagem('Confira seus dados e o endereÃ§o antes de continuar.');return false;}
     }
     if(etapaAtual===1&&(!window.FY_FRETE_CALCULADO||!['padrao','expressa'].includes(window.entregaSelecionada||entregaSelecionada))){
-      mensagem('Calcule o frete e escolha uma opção de entrega.');return false;
+      mensagem('Calcule o frete e escolha uma opÃ§Ã£o de entrega.');return false;
     }
     if(etapaAtual===2&&(window.pagamentoSelecionado||pagamentoSelecionado)!=='PIX'){
       mensagem('Escolha a forma de pagamento para continuar.');return false;
@@ -23433,7 +23463,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     document.getElementById('fyAdminPedidoNumero').textContent=pedido.numero||'Pedido';
     document.getElementById('fyAdminPedidoCliente').textContent=pedido.cliente?.nome||pedido.clienteEmail||'Cliente';
     document.getElementById('fyAdminPedidoTotal').textContent=moedaAdmin(pedido.total);
-    const frete=pedido.freteDetalhes;document.getElementById('fyAdminPedidoEntrega').textContent=frete?frete.servico+' · '+(frete.prazo||'Prazo a confirmar')+' dias':pedido.entrega||'Entrega';
+    const frete=pedido.freteDetalhes;document.getElementById('fyAdminPedidoEntrega').textContent=frete?frete.servico+' Â· '+(frete.prazo||'Prazo a confirmar')+' dias':pedido.entrega||'Entrega';
     document.getElementById('fyAdminPedidoPagamento').textContent=pedido.pagamento||'Pagamento';
     document.getElementById('fyAdminPedidoItens').textContent=(pedido.itens||[]).map(item=>Number(item.quantidade||1)+'x '+item.nome).join(', ')||'Nenhum item';
     document.getElementById('fyAdminPedidoStatus').value=String(Math.max(1,Math.min(5,Number(pedido.etapa||1))));
@@ -23459,7 +23489,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     }
     if(typeof window.renderPedidosConta==='function')window.renderPedidosConta();
     if(typeof window.renderAdmin==='function')window.renderAdmin();
-    if(typeof window.fyAviso==='function')window.fyAviso('Atualização salva','O pedido e o acompanhamento da cliente foram atualizados.','sucesso');
+    if(typeof window.fyAviso==='function')window.fyAviso('AtualizaÃ§Ã£o salva','O pedido e o acompanhamento da cliente foram atualizados.','sucesso');
   };
   document.addEventListener('click',function(evento){
     const item=evento.target.closest&&evento.target.closest('#paginaAdmin .fy-admin-pedido-item');
@@ -23480,7 +23510,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 
   async function chamarAdmin(acao='listar',dados={}){
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
-    if(!cfg.url||!sb)throw new Error('A conexão com o painel não está disponível.');
+    if(!cfg.url||!sb)throw new Error('A conexÃ£o com o painel nÃ£o estÃ¡ disponÃ­vel.');
     const {data:{session},error:authError}=await sb.auth.getSession();
     if(authError||!session?.access_token)throw new Error('Entre na sua conta novamente.');
     const resposta=await fetch(endpoint,{
@@ -23491,7 +23521,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     let retorno={};try{retorno=await resposta.json()}catch(e){}
     if(!resposta.ok){
       const detalhe=retorno.error||retorno.erro||retorno.message;
-      if(resposta.status===404)throw new Error('A função admin-pedidos não foi encontrada no Supabase. Confira se ela está publicada.');
+      if(resposta.status===404)throw new Error('A funÃ§Ã£o admin-pedidos nÃ£o foi encontrada no Supabase. Confira se ela estÃ¡ publicada.');
       throw new Error(detalhe||`Erro ${resposta.status} ao consultar o painel.`);
     }
     if(retorno.error||retorno.erro)throw new Error(retorno.error||retorno.erro);
@@ -23558,7 +23588,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
     }catch(error){
       window.FY_ADMIN_BOOTSTRAP=null;
       if(lista){lista.innerHTML='';const aviso=document.createElement('div');aviso.className='fy-admin-pedidos-vazio';
-        const mensagem=document.createElement('p');mensagem.textContent=error.message||'Não foi possível carregar os pedidos.';
+        const mensagem=document.createElement('p');mensagem.textContent=error.message||'NÃ£o foi possÃ­vel carregar os pedidos.';
         const tentar=document.createElement('button');tentar.type='button';tentar.textContent='TENTAR NOVAMENTE';
         tentar.addEventListener('click',()=>window.renderAdmin());aviso.append(mensagem,tentar);lista.appendChild(aviso);}
       if(typeof window.fyAviso==='function')window.fyAviso('Painel indispon\u00EDvel',error.message||'Confira a conex\u00E3o com o Supabase.','erro');
@@ -23592,7 +23622,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 })();
 </script>
 <style id="fy-novidades-clean-v36">
-/* Novidades da semana — versão mobile clean aprovada */
+/* Novidades da semana â€” versÃ£o mobile clean aprovada */
 #novidades.fy-novidades-clean-home{
   padding:34px clamp(16px,3vw,42px) 46px!important;
   background:#fff!important;
@@ -23769,7 +23799,7 @@ body.fy-area-interna #paginaCarrinhoV17.ativa{margin-top:0!important}
 })();
 </script>
 <style id="fy-admin-tela-branca-v37-css">
-/* Recuperação do painel: a página ativa nunca pode permanecer invisível. */
+/* RecuperaÃ§Ã£o do painel: a pÃ¡gina ativa nunca pode permanecer invisÃ­vel. */
 body.fy-admin-aberto{min-height:100vh!important;background:#fff9fb!important;overflow:auto!important}
 body.fy-admin-aberto > #paginaAdmin.ativa{
   display:block!important;
@@ -23843,7 +23873,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
       if(typeof abrirAnterior==='function')abrirAnterior.apply(this,arguments);
       return;
     }
-    avisoPainel('Carregando informações do painel...');
+    avisoPainel('Carregando informaÃ§Ãµes do painel...');
     window.scrollTo({top:0,left:0,behavior:'auto'});
     Promise.resolve().then(()=>{
       if(typeof window.renderAdmin==='function')return window.renderAdmin();
@@ -23852,7 +23882,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
       exibirEstruturaAdmin();
     }).catch(erro=>{
       console.error('Falha ao carregar o painel administrativo:',erro);
-      avisoPainel('O painel foi aberto, mas alguns dados não carregaram. Atualize a página e tente novamente.');
+      avisoPainel('O painel foi aberto, mas alguns dados nÃ£o carregaram. Atualize a pÃ¡gina e tente novamente.');
       exibirEstruturaAdmin();
     });
     setTimeout(exibirEstruturaAdmin,250);
@@ -23905,7 +23935,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
 })();
 </script>
 <style id="fy-conta-compacta-e-atalhos-v39-css">
-/* Minha conta compacta — versão aprovada */
+/* Minha conta compacta â€” versÃ£o aprovada */
 #paginaConta{
   --fy39-vinho:#8d1739;
   --fy39-rosa:#f8e9ee;
@@ -24125,7 +24155,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
     const eyebrow=pagina.querySelector('.fy2-eyebrow');
     const intro=pagina.querySelector('.fy2-header p');
     if(eyebrow&&eyebrow.textContent!=='MINHA CONTA')eyebrow.textContent='MINHA CONTA';
-    const textoIntro='Acompanhe suas compras e cuide dos seus dados em um só lugar.';
+    const textoIntro='Acompanhe suas compras e cuide dos seus dados em um sÃ³ lugar.';
     if(intro&&intro.textContent!==textoIntro)intro.textContent=textoIntro;
     const saudacao=document.getElementById('contaSaudacao');
     if(saudacao){
@@ -24133,7 +24163,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
       if(limpa&&saudacao.textContent!==limpa)saudacao.textContent=limpa;
     }
     const voltar=pagina.querySelector(':scope > .voltar');
-    if(voltar&&voltar.textContent.trim()!=='← Loja')voltar.textContent='← Loja';
+    if(voltar&&voltar.textContent.trim()!=='â† Loja')voltar.textContent='â† Loja';
     const sair=pagina.querySelector('.fy2-logout > span:not(.fy2-nav-icon)');
     if(sair&&sair.textContent.trim()!=='Sair')sair.textContent='Sair';
     const vazio=pagina.querySelector('#listaPedidosConta .fy2-empty');
@@ -24168,7 +24198,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
 })();
 </script>
 <style id="fy-performance-v40-css">
-/* Renderiza as seções longas da home somente quando se aproximam da tela. */
+/* Renderiza as seÃ§Ãµes longas da home somente quando se aproximam da tela. */
 @supports (content-visibility:auto){
   #loja > section:not(#inicio){
     content-visibility:auto;
@@ -24205,7 +24235,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
 })();
 </script>
 <style id="fy-conta-icones-v41-css">
-/* Ícones lineares e somente quatro acessos principais. */
+/* Ãcones lineares e somente quatro acessos principais. */
 #paginaConta .fy2-nav-item.fy-nav-oculto{display:none!important}
 #paginaConta .fy2-sidebar{
   display:grid!important;
@@ -24310,7 +24340,7 @@ body.fy-admin-aberto > #paginaAdmin.ativa > .painel-admin{
 })();
 </script>
 <style id="fy-categorias-voltar-v42-css">
-/* Categoria: produtos visíveis e retorno claro para a página principal. */
+/* Categoria: produtos visÃ­veis e retorno claro para a pÃ¡gina principal. */
 #novidades.fy-category-active>#listaProdutos,
 #novidades.fy-category-active>#listaProdutos:last-child{
   display:grid!important;
@@ -24379,7 +24409,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
       topo=document.createElement('button');
       topo.id='fyCategoryBackTop';
       topo.type='button';
-      topo.innerHTML=iconeVoltar()+'<span>Voltar para a página principal</span>';
+      topo.innerHTML=iconeVoltar()+'<span>Voltar para a pÃ¡gina principal</span>';
       topo.onclick=()=>window.fyVoltarCategoria();
       secao.insertBefore(topo,secao.firstChild);
     }
@@ -24388,7 +24418,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
       rodape=document.createElement('button');
       rodape.id='fyCategoryBackBottom';
       rodape.type='button';
-      rodape.textContent='VOLTAR PARA A PÁGINA PRINCIPAL';
+      rodape.textContent='VOLTAR PARA A PÃGINA PRINCIPAL';
       rodape.onclick=()=>window.fyVoltarCategoria();
       grade.insertAdjacentElement('afterend',rodape);
     }
@@ -24479,7 +24509,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
 })();
 </script>
 <style id="fy-conta-refinada-v43-css">
-/* Área da cliente mais compacta e sem caixas pesadas. */
+/* Ãrea da cliente mais compacta e sem caixas pesadas. */
 #paginaConta{position:relative!important}
 #paginaConta > .voltar{
   width:auto!important;
@@ -24754,7 +24784,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
   function notificar(p,antes,agora){
     try{
       if('Notification'in window&&Notification.permission==='granted'){
-        new Notification('Seu favorito baixou de preço!',{
+        new Notification('Seu favorito baixou de preÃ§o!',{
           body:(p.nome||'Produto')+': de '+dinheiro(antes)+' por '+dinheiro(agora),
           icon:p.imagem||undefined,tag:'fy-preco-'+normalizarId(p.id)
         });
@@ -24765,7 +24795,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
     let el=document.getElementById('fyPriceToast');
     if(!el){
       el=document.createElement('div');el.id='fyPriceToast';el.className='fy-price-toast';
-      el.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7M8 7l4-4 4 4M12 3v13"/><path d="m8 13 4 4 4-4"/></svg><div><strong>Um favorito baixou de preço</strong><span>Abra Favoritos para conferir a oferta.</span></div><button type="button" aria-label="Fechar">×</button>';
+      el.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7M8 7l4-4 4 4M12 3v13"/><path d="m8 13 4 4 4-4"/></svg><div><strong>Um favorito baixou de preÃ§o</strong><span>Abra Favoritos para conferir a oferta.</span></div><button type="button" aria-label="Fechar">Ã—</button>';
       el.querySelector('button').onclick=()=>el.classList.remove('ativo');
       el.onclick=e=>{if(e.target.tagName!=='BUTTON'&&typeof window.abrirFavoritos==='function')window.abrirFavoritos()};
       document.body.appendChild(el);
@@ -24778,7 +24808,7 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
     let badge=btn.querySelector('.fy-fav-price-badge');
     if(!qtd){if(badge)badge.remove();return}
     if(!badge){badge=document.createElement('span');badge.className='fy-fav-price-badge';btn.appendChild(badge)}
-    badge.textContent=qtd>9?'9+':qtd;badge.setAttribute('aria-label',qtd+' alerta de preço');
+    badge.textContent=qtd>9?'9+':qtd;badge.setAttribute('aria-label',qtd+' alerta de preÃ§o');
   }
   function marcarLido(assinatura){
     const lista=alertas();lista.forEach(a=>{if(a.assinatura===assinatura)a.lido=true});salvarAlertas(lista);
@@ -24788,14 +24818,14 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
     try{const p=catalogo().get(normalizarId(id));if(p&&typeof window.abrirDetalhe==='function')window.abrirDetalhe(p.id)}catch(e){}
   };
   window.fyAtivarAvisosPreco=async function(){
-    if(!('Notification'in window)){alert('Este navegador não oferece avisos. Os alertas continuarão aparecendo dentro da loja.');return}
+    if(!('Notification'in window)){alert('Este navegador nÃ£o oferece avisos. Os alertas continuarÃ£o aparecendo dentro da loja.');return}
     try{
       const permissao=await Notification.requestPermission();
       if(permissao==='granted'){
-        new Notification('Avisos ativados',{body:'Você verá um aviso quando um favorito baixar de preço enquanto visitar a loja.'});
+        new Notification('Avisos ativados',{body:'VocÃª verÃ¡ um aviso quando um favorito baixar de preÃ§o enquanto visitar a loja.'});
         renderPainel();
-      }else alert('Os avisos do navegador não foram autorizados. Os alertas continuarão salvos em Favoritos.');
-    }catch(e){alert('Não foi possível ativar o aviso neste navegador.');}
+      }else alert('Os avisos do navegador nÃ£o foram autorizados. Os alertas continuarÃ£o salvos em Favoritos.');
+    }catch(e){alert('NÃ£o foi possÃ­vel ativar o aviso neste navegador.');}
   };
   function renderPainel(){
     const pagina=document.getElementById('paginaFavoritos'),listaFav=document.getElementById('listaFavoritos');if(!pagina||!listaFav)return;
@@ -24804,11 +24834,11 @@ body.fy-categoria-aberta #novidades{min-height:100vh!important}
     const pendentes=alertas().filter(a=>!a.lido);
     const permitido=('Notification'in window&&Notification.permission==='granted');
     box.className='fy-price-watch'+(pendentes.length?' tem-alerta':'');
-    box.innerHTML='<div class="fy-price-watch-main"><div class="fy-price-watch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="m8 13 4 4 4-4M12 17V3"/><path d="M8 7h8"/></svg></div><div class="fy-price-watch-copy"><strong>'+(pendentes.length?pendentes.length+(pendentes.length===1?' favorito baixou de preço':' favoritos baixaram de preço'):'Seus favoritos ficam salvos')+'</strong><span>'+(pendentes.length?'Confira antes que a oferta termine.':'Nós comparamos os valores e avisamos aqui quando entrarem em oferta.')+'</span></div></div>'+(!permitido?'<button class="fy-price-watch-btn" type="button" onclick="fyAtivarAvisosPreco()">ATIVAR AVISOS</button>':'');
+    box.innerHTML='<div class="fy-price-watch-main"><div class="fy-price-watch-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="m8 13 4 4 4-4M12 17V3"/><path d="M8 7h8"/></svg></div><div class="fy-price-watch-copy"><strong>'+(pendentes.length?pendentes.length+(pendentes.length===1?' favorito baixou de preÃ§o':' favoritos baixaram de preÃ§o'):'Seus favoritos ficam salvos')+'</strong><span>'+(pendentes.length?'Confira antes que a oferta termine.':'NÃ³s comparamos os valores e avisamos aqui quando entrarem em oferta.')+'</span></div></div>'+(!permitido?'<button class="fy-price-watch-btn" type="button" onclick="fyAtivarAvisosPreco()">ATIVAR AVISOS</button>':'');
     let painel=document.getElementById('fyPriceAlertList');
     if(!painel){painel=document.createElement('div');painel.id='fyPriceAlertList';painel.className='fy-price-alert-list';box.insertAdjacentElement('afterend',painel)}
     if(!pendentes.length){painel.innerHTML='';return}
-    painel.innerHTML=pendentes.slice(0,4).map(a=>'<article class="fy-price-alert">'+(a.imagem?'<img src="'+String(a.imagem).replace(/"/g,'&quot;')+'" alt="">':'<div></div>')+'<div><strong>'+String(a.nome).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))+'</strong><span>'+dinheiro(a.precoAntes)+' → '+dinheiro(a.precoAgora)+'</span></div><button type="button" onclick="fyAbrirFavoritoComAlerta('+JSON.stringify(a.id).replace(/"/g,'&quot;')+','+JSON.stringify(a.assinatura).replace(/"/g,'&quot;')+')">VER PRODUTO</button></article>').join('');
+    painel.innerHTML=pendentes.slice(0,4).map(a=>'<article class="fy-price-alert">'+(a.imagem?'<img src="'+String(a.imagem).replace(/"/g,'&quot;')+'" alt="">':'<div></div>')+'<div><strong>'+String(a.nome).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))+'</strong><span>'+dinheiro(a.precoAntes)+' â†’ '+dinheiro(a.precoAgora)+'</span></div><button type="button" onclick="fyAbrirFavoritoComAlerta('+JSON.stringify(a.id).replace(/"/g,'&quot;')+','+JSON.stringify(a.assinatura).replace(/"/g,'&quot;')+')">VER PRODUTO</button></article>').join('');
   }
 
   function instalar(){
@@ -24906,22 +24936,22 @@ document.documentElement.setAttribute('data-fy-versao','45');
     let el=document.getElementById('fyPwaModal');
     if(!el){
       el=document.createElement('div');el.id='fyPwaModal';el.className='fy-pwa-modal';
-      el.innerHTML='<div class="fy-pwa-card" role="dialog" aria-modal="true" aria-labelledby="fyPwaTitulo"><button class="fy-pwa-fechar" type="button" aria-label="Fechar">×</button><div class="fy-pwa-icone"><img src="./icone-for-you-192.png" alt=""></div><small>FOR YOU NO CELULAR</small><h2 id="fyPwaTitulo">Instale nossa loja</h2><p id="fyPwaTexto"></p><div class="fy-pwa-passos" id="fyPwaPassos"></div><button class="fy-pwa-ok" type="button">ENTENDI</button></div>';
+      el.innerHTML='<div class="fy-pwa-card" role="dialog" aria-modal="true" aria-labelledby="fyPwaTitulo"><button class="fy-pwa-fechar" type="button" aria-label="Fechar">Ã—</button><div class="fy-pwa-icone"><img src="./icone-for-you-192.png" alt=""></div><small>FOR YOU NO CELULAR</small><h2 id="fyPwaTitulo">Instale nossa loja</h2><p id="fyPwaTexto"></p><div class="fy-pwa-passos" id="fyPwaPassos"></div><button class="fy-pwa-ok" type="button">ENTENDI</button></div>';
       el.querySelector('.fy-pwa-fechar').onclick=fechar;el.querySelector('.fy-pwa-ok').onclick=fechar;
       el.addEventListener('click',e=>{if(e.target===el)fechar()});document.body.appendChild(el);
     }
     const texto=el.querySelector('#fyPwaTexto'),passos=el.querySelector('#fyPwaPassos');
     if(tipo==='ios'){
-      texto.textContent='No iPhone, faça estes passos no Safari:';
-      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Toque no botão Compartilhar na parte inferior.</div><div class="fy-pwa-passo"><b>2</b>Escolha “Adicionar à Tela de Início”.</div><div class="fy-pwa-passo"><b>3</b>Toque em “Adicionar”.</div>';
+      texto.textContent='No iPhone, faÃ§a estes passos no Safari:';
+      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Toque no botÃ£o Compartilhar na parte inferior.</div><div class="fy-pwa-passo"><b>2</b>Escolha â€œAdicionar Ã  Tela de InÃ­cioâ€.</div><div class="fy-pwa-passo"><b>3</b>Toque em â€œAdicionarâ€.</div>';
     }else{
-      texto.textContent='Abra o menu do navegador e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.';
-      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Abra o menu do navegador.</div><div class="fy-pwa-passo"><b>2</b>Escolha instalar ou adicionar à tela inicial.</div>';
+      texto.textContent='Abra o menu do navegador e escolha â€œInstalar aplicativoâ€ ou â€œAdicionar Ã  tela inicialâ€.';
+      passos.innerHTML='<div class="fy-pwa-passo"><b>1</b>Abra o menu do navegador.</div><div class="fy-pwa-passo"><b>2</b>Escolha instalar ou adicionar Ã  tela inicial.</div>';
     }
     el.classList.add('ativo');
   }
   window.fyInstalarAplicativo=async function(){
-    if(estaInstalado()){alert('A For You já está instalada neste celular.');return}
+    if(estaInstalado()){alert('A For You jÃ¡ estÃ¡ instalada neste celular.');return}
     if(pedidoInstalacao){
       pedidoInstalacao.prompt();
       try{await pedidoInstalacao.userChoice}catch(e){}
@@ -24934,7 +24964,7 @@ document.documentElement.setAttribute('data-fy-versao','45');
   if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{scope:'./'}).catch(()=>{}))}
   function avisarConexao(){
     let aviso=document.getElementById('fyPwaOffline');
-    if(!aviso){aviso=document.createElement('div');aviso.id='fyPwaOffline';aviso.setAttribute('role','status');aviso.textContent='Sem conexão. Você pode ver a loja salva, mas compras e dados da conta precisam de internet.';document.body.appendChild(aviso)}
+    if(!aviso){aviso=document.createElement('div');aviso.id='fyPwaOffline';aviso.setAttribute('role','status');aviso.textContent='Sem conexÃ£o. VocÃª pode ver a loja salva, mas compras e dados da conta precisam de internet.';document.body.appendChild(aviso)}
     aviso.hidden=navigator.onLine;
   }
   window.addEventListener('online',avisarConexao);window.addEventListener('offline',avisarConexao);
@@ -24943,7 +24973,7 @@ document.documentElement.setAttribute('data-fy-versao','45');
   document.documentElement.setAttribute('data-fy-versao','46');
 })();
 </script>
-<!-- AJUSTE VISUAL DA HOME: cabeçalho clean e responsivo -->
+<!-- AJUSTE VISUAL DA HOME: cabeÃ§alho clean e responsivo -->
 <style id="fy-home-visual-clean-v1">
 :root{
   --fy-clean-bg:#fbf8f6;
@@ -24962,7 +24992,7 @@ body{background:var(--fy-clean-bg)!important;color:var(--fy-clean-ink)!important
   letter-spacing:1.35px!important;
 }
 
-/* Cabeçalho sem frase extra abaixo/acima da marca */
+/* CabeÃ§alho sem frase extra abaixo/acima da marca */
 header{
   background:rgba(255,255,255,.97)!important;
   border-bottom:1px solid var(--fy-clean-line)!important;
@@ -24975,7 +25005,7 @@ header{
 .fy-brand-logo{display:flex!important;align-items:center!important;justify-content:flex-start!important;height:74px!important;overflow:hidden!important}
 .fy-brand-logo img{width:150px!important;max-width:150px!important;height:auto!important;object-fit:contain!important}
 
-/* Busca mais espaçosa e delicada */
+/* Busca mais espaÃ§osa e delicada */
 .fy-busca-topo{flex:1 1 auto!important;min-width:180px!important}
 .busca{max-width:560px!important;margin:0 auto!important}
 .busca-linha{height:44px!important;border:1px solid #e8dfe0!important;border-radius:24px!important;background:#fcfaf9!important;box-shadow:none!important;padding:0 8px 0 16px!important}
@@ -24984,7 +25014,7 @@ header{
 .busca-linha input::placeholder{color:#9b8d91!important}
 .fy-search-submit{width:34px!important;height:34px!important;border-radius:50%!important;background:var(--fy-clean-ink)!important;color:#fff!important;font-size:13px!important}
 
-/* Ações superiores: ícones simples, com menos peso visual */
+/* AÃ§Ãµes superiores: Ã­cones simples, com menos peso visual */
 .acoes{gap:6px!important;align-items:center!important}
 .fy-top-action{min-width:62px!important;padding:5px 6px!important;color:var(--fy-clean-ink)!important;border:0!important;background:transparent!important}
 .fy-top-action:hover{background:#fff4f5!important;color:var(--fy-clean-rose)!important;border-radius:12px!important}
@@ -24993,7 +25023,7 @@ header{
 .fy-cart-symbol{font-size:23px!important;line-height:21px!important}
 .contador,.contador-favoritos{background:var(--fy-clean-rose)!important;border-color:#fff!important}
 
-/* Navegação com aparência de loja organizada */
+/* NavegaÃ§Ã£o com aparÃªncia de loja organizada */
 .menu-principal{border-top:1px solid #f5eeee!important;background:#fff!important}
 .fy-main-nav{max-width:800px!important;margin:auto!important;justify-content:center!important;gap:38px!important;padding:11px 16px!important}
 .fy-main-nav a{font-size:10px!important;letter-spacing:1.1px!important;color:#4c3b40!important}
@@ -25041,7 +25071,7 @@ header{
   window.fyAbrirCheckoutDireto = async function(){
     const sacola = (typeof carrinho !== 'undefined' && Array.isArray(carrinho)) ? carrinho : [];
     if(!sacola.length){
-      alert('Sua sacola está vazia. Adicione um produto para continuar.');
+      alert('Sua sacola estÃ¡ vazia. Adicione um produto para continuar.');
       return;
     }
 
@@ -25059,7 +25089,7 @@ header{
       if(typeof fecharTodasPaginas === 'function') fecharTodasPaginas();
 
       const checkout=document.getElementById('paginaCheckout');
-      if(!checkout) throw new Error('A tela de finalização não foi encontrada.');
+      if(!checkout) throw new Error('A tela de finalizaÃ§Ã£o nÃ£o foi encontrada.');
 
       checkout.style.display='block';
       checkout.classList.add('ativa');
@@ -25084,7 +25114,7 @@ header{
       window.scrollTo({top:0,left:0,behavior:'auto'});
     }catch(e){
       console.error('FY checkout v32:',e);
-      alert(e && e.message ? e.message : 'Não foi possível abrir a finalização.');
+      alert(e && e.message ? e.message : 'NÃ£o foi possÃ­vel abrir a finalizaÃ§Ã£o.');
     }
   };
 
@@ -25152,7 +25182,7 @@ header{
     const frete=document.getElementById('checkoutFrete');
     if(frete) frete.textContent=Number(f.valor||0)>0
       ? Number(f.valor).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
-      : 'Grátis';
+      : 'GrÃ¡tis';
 
     if(typeof renderCheckout==='function'){
       try{renderCheckout()}catch(e){}
@@ -25163,7 +25193,7 @@ header{
   window.fyAbrirCheckoutDireto=async function(){
     const f=guardarFrete();
     if(!f){
-      alert('Escolha uma opção de entrega antes de finalizar a compra.');
+      alert('Escolha uma opÃ§Ã£o de entrega antes de finalizar a compra.');
       return;
     }
     if(typeof abrirAnterior==='function') await abrirAnterior();
@@ -25173,7 +25203,7 @@ header{
   window.fyFinalizarCompra=window.fyAbrirCheckoutDireto;
   window.finalizarCompraV17=window.fyAbrirCheckoutDireto;
 
-  /* Evita novo cálculo automático dentro do checkout. */
+  /* Evita novo cÃ¡lculo automÃ¡tico dentro do checkout. */
   const calcularOriginal=window.calcularFreteCheckout;
   window.calcularFreteCheckout=async function(){
     let f=null;
@@ -25236,8 +25266,8 @@ header{
       box.id='fyPagBankPagamentoV34';
       box.innerHTML=
         '<h3>Pagamento seguro</h3>'+
-        '<p>Ao continuar, você será direcionada ao ambiente seguro do PagBank para escolher e concluir o pagamento.</p>'+
-        '<div class="fy-pagbank-seguro">🔒 Pagamento processado pelo PagBank. Seus dados de pagamento não ficam expostos nesta página.</div>';
+        '<p>Ao continuar, vocÃª serÃ¡ direcionada ao ambiente seguro do PagBank para escolher e concluir o pagamento.</p>'+
+        '<div class="fy-pagbank-seguro">ðŸ”’ Pagamento processado pelo PagBank. Seus dados de pagamento nÃ£o ficam expostos nesta pÃ¡gina.</div>';
 
       const confirmar=pagina.querySelector('.fy-checkout-confirmar');
       const acoes=confirmar?.closest('.checkout-acoes');
@@ -25275,9 +25305,9 @@ header{
     if(cep.length!==8)return null;
 
     const resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');
-    if(!resposta.ok)throw new Error('Não foi possível consultar o CEP.');
+    if(!resposta.ok)throw new Error('NÃ£o foi possÃ­vel consultar o CEP.');
     const dados=await resposta.json();
-    if(dados.erro)throw new Error('CEP não encontrado.');
+    if(dados.erro)throw new Error('CEP nÃ£o encontrado.');
     return dados;
   }
 
@@ -25301,7 +25331,7 @@ header{
 
     const msg=$('checkoutMensagem');
     try{
-      if(msg)msg.textContent='Buscando endereço...';
+      if(msg)msg.textContent='Buscando endereÃ§o...';
 
       const d=await buscarEnderecoCEP(cep);
 
@@ -25319,14 +25349,14 @@ header{
       }));
 
       if(msg)msg.textContent=d.logradouro
-        ? 'Endereço encontrado. Agora informe apenas o número e, se precisar, o complemento.'
-        : 'CEP encontrado. Informe a rua e o número.';
+        ? 'EndereÃ§o encontrado. Agora informe apenas o nÃºmero e, se precisar, o complemento.'
+        : 'CEP encontrado. Informe a rua e o nÃºmero.';
 
       const numero=$('checkoutNumero');
       if(numero)numero.focus();
 
     }catch(e){
-      if(msg)msg.textContent=e.message||'Não foi possível buscar o endereço.';
+      if(msg)msg.textContent=e.message||'NÃ£o foi possÃ­vel buscar o endereÃ§o.';
     }
   }
 
@@ -25361,7 +25391,7 @@ header{
 
 
 <style id="fy-checkout-etapas-v36">
-/* O aviso PagBank só aparece na etapa de pagamento/confirmar. */
+/* O aviso PagBank sÃ³ aparece na etapa de pagamento/confirmar. */
 #fyPagBankPagamentoV34{display:none!important}
 html[data-fy-checkout-etapa="2"] #fyPagBankPagamentoV34,
 html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
@@ -25408,7 +25438,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     garantirFrete();
   }
 
-  /* Corrige especificamente o avanço da etapa Entrega quando o frete veio da sacola. */
+  /* Corrige especificamente o avanÃ§o da etapa Entrega quando o frete veio da sacola. */
   document.addEventListener('click',function(e){
     const btn=e.target.closest && e.target.closest('#paginaCheckout .fy-checkout-proximo');
     if(!btn)return;
@@ -25430,7 +25460,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     }
   },true);
 
-  /* Mantém o estado interno do frete correto ao abrir/reabrir o checkout. */
+  /* MantÃ©m o estado interno do frete correto ao abrir/reabrir o checkout. */
   const abrir=window.fyAbrirCheckoutDireto;
   if(typeof abrir==='function'){
     window.fyAbrirCheckoutDireto=async function(){
@@ -25502,7 +25532,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 }
 </style>
 
-<!-- Correção pontual: mantém as dimensões anteriores do banner; ajusta apenas a faixa de benefícios. -->
+<!-- CorreÃ§Ã£o pontual: mantÃ©m as dimensÃµes anteriores do banner; ajusta apenas a faixa de benefÃ­cios. -->
 <style id="fy-beneficios-sem-corte-20260920">
 .fy-beneficios-imagem {
   width: calc(100% - 28px) !important;
@@ -25530,10 +25560,10 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 }
 </style>
 
-<!-- Mantém no celular o mesmo enquadramento horizontal do banner do PC. -->
+<!-- MantÃ©m no celular o mesmo enquadramento horizontal do banner do PC. -->
 <style id="fy-banner-mesma-proporcao-pc-celular-final">
 @media (max-width: 800px) {
-  /* Mesma proporção horizontal do PC; largura acompanha a tela do celular. */
+  /* Mesma proporÃ§Ã£o horizontal do PC; largura acompanha a tela do celular. */
   .fy-banner-r10 {
     width: calc(100% - 16px) !important;
     max-width: calc(100% - 16px) !important;
@@ -25641,20 +25671,20 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   async function validarCEPInformado(valor){
     const cep=String(valor||'').replace(/\D/g,'');
     if(cep.length!==8){
-      throw new Error('CEP incompleto. Digite os 8 números e confira se não houve erro.');
+      throw new Error('CEP incompleto. Digite os 8 nÃºmeros e confira se nÃ£o houve erro.');
     }
     let resposta;
     try{
       resposta=await fetch('https://viacep.com.br/ws/'+cep+'/json/');
     }catch(e){
-      throw new Error('Não foi possível consultar o CEP agora. Verifique sua internet e tente novamente.');
+      throw new Error('NÃ£o foi possÃ­vel consultar o CEP agora. Verifique sua internet e tente novamente.');
     }
     if(!resposta.ok){
-      throw new Error('Não foi possível consultar o CEP agora. Tente novamente em alguns instantes.');
+      throw new Error('NÃ£o foi possÃ­vel consultar o CEP agora. Tente novamente em alguns instantes.');
     }
     const dados=await resposta.json();
     if(dados?.erro){
-      throw new Error('CEP não encontrado. Confira os números digitados e tente novamente.');
+      throw new Error('CEP nÃ£o encontrado. Confira os nÃºmeros digitados e tente novamente.');
     }
     return dados;
   }
@@ -25823,7 +25853,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
     [10,15,20,25,30].forEach(limite=>{
       if(base.some(p=>Number(p.preco||0)>0&&Number(p.preco||0)<=limite)){
-        candidatos.push({rotulo:consulta+' até R$'+limite,consulta:consulta,precoMax:limite});
+        candidatos.push({rotulo:consulta+' atÃ© R$'+limite,consulta:consulta,precoMax:limite});
       }
     });
 
@@ -25846,7 +25876,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
       if(typeof renderProdutos==='function')renderProdutos();
       return;
     }
-    if(campo)campo.value=consulta+(precoMax?' até R$'+precoMax:'');
+    if(campo)campo.value=consulta+(precoMax?' atÃ© R$'+precoMax:'');
     if(typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(normalizarBusca(consulta));
     let encontrados=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta);
     if(precoMax)encontrados=encontrados.filter(p=>Number(p.preco||0)<=precoMax);
@@ -25855,13 +25885,13 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     const loja=document.getElementById('loja'); if(loja)loja.style.display='block';
     if(typeof renderProdutos==='function')renderProdutos(encontrados,true);
     const grade=document.getElementById('listaProdutos'),resultado=document.getElementById('resultadoBusca');
-    const exibida=consulta+(precoMax?' até R$'+precoMax:'');
+    const exibida=consulta+(precoMax?' atÃ© R$'+precoMax:'');
     if(resultado){
       resultado.textContent=encontrados.length
-        ? encontrados.length+' produto'+(encontrados.length===1?'':'s')+' encontrado'+(encontrados.length===1?'':'s')+' para “'+exibida+'”.'
-        : 'Nenhum produto encontrado para “'+exibida+'”.';
+        ? encontrados.length+' produto'+(encontrados.length===1?'':'s')+' encontrado'+(encontrados.length===1?'':'s')+' para â€œ'+exibida+'â€.'
+        : 'Nenhum produto encontrado para â€œ'+exibida+'â€.';
     }
-    if(!encontrados.length&&grade)grade.innerHTML='<div class="busca-vazia"><strong>Não encontramos esse produto.</strong><br>Tente outro nome, marca, categoria, cor ou faixa de preço.</div>';
+    if(!encontrados.length&&grade)grade.innerHTML='<div class="busca-vazia"><strong>NÃ£o encontramos esse produto.</strong><br>Tente outro nome, marca, categoria, cor ou faixa de preÃ§o.</div>';
     (resultado||grade)?.scrollIntoView({behavior:'smooth',block:'start'});
   };
 
@@ -25875,7 +25905,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     const atalhos=gerarAtalhos(consulta);
     let html='';
     if(atalhos.length){
-      html+='<div class="fy-busca-atalhos"><span class="fy-busca-atalhos-titulo">Sugestões</span><div class="fy-busca-atalhos-lista">'+
+      html+='<div class="fy-busca-atalhos"><span class="fy-busca-atalhos-titulo">SugestÃµes</span><div class="fy-busca-atalhos-lista">'+
         atalhos.map((x,i)=>'<button type="button" class="fy-busca-atalho" data-fy-atalho="'+i+'">'+escapar(x.rotulo)+'</button>').join('')+
         '</div></div>';
       caixa._fyAtalhos=atalhos;
@@ -26025,10 +26055,10 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 
 <style id="fy-sugestoes-carrinho-v19">
-/* FOR YOU — sugestões leves e responsivas na Minha Sacola */
+/* FOR YOU â€” sugestÃµes leves e responsivas na Minha Sacola */
 #fyCarrinhoPagina .fy18-recommend,#paginaCarrinhoV17 .fy18-recommend{display:block!important;margin:18px 0 4px!important;padding:0!important}
 #fyCarrinhoPagina .fy18-recommend h2,#paginaCarrinhoV17 .fy18-recommend h2{margin:0 0 5px!important;font:400 21px/1.2 Georgia,serif!important;color:#2f2529!important}
-#fyCarrinhoPagina .fy18-recommend h2::after,#paginaCarrinhoV17 .fy18-recommend h2::after{content:'Itens pequenos que podem ajudar você a chegar no frete grátis.';display:block;margin-top:5px;font:400 9px/1.45 Arial,sans-serif;color:#8b7b81}
+#fyCarrinhoPagina .fy18-recommend h2::after,#paginaCarrinhoV17 .fy18-recommend h2::after{content:'Itens pequenos que podem ajudar vocÃª a chegar no frete grÃ¡tis.';display:block;margin-top:5px;font:400 9px/1.45 Arial,sans-serif;color:#8b7b81}
 #fyCarrinhoPagina .fy18-products,#paginaCarrinhoV17 .fy18-products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important}
 #fyCarrinhoPagina .fy18-product,#paginaCarrinhoV17 .fy18-product{min-width:0!important;padding:9px!important;border:1px solid #eee4e7!important;border-radius:13px!important;background:#fff!important;box-shadow:none!important;display:flex!important;flex-direction:column!important}
 #fyCarrinhoPagina .fy18-product-img,#paginaCarrinhoV17 .fy18-product-img{aspect-ratio:1/1!important;border-radius:9px!important;overflow:hidden!important;background:#fff6f8!important;display:grid!important;place-items:center!important;margin-bottom:7px!important}
@@ -26047,7 +26077,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 
 
-<!-- FOR YOU — galeria de produto mobile aprimorada 23-09-2026 -->
+<!-- FOR YOU â€” galeria de produto mobile aprimorada 23-09-2026 -->
 <style id="fy-galeria-produto-v2">
 #fySafeModal .fy-safe-media{position:relative!important;overflow:visible!important}
 #fySafeModal #fySafeImg{cursor:zoom-in!important;user-select:none!important;-webkit-user-drag:none!important;touch-action:pan-y!important}
@@ -26065,7 +26095,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 #fyZoomProduto .fy-zoom-close{position:fixed;right:16px;top:16px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;color:#321f26;font-size:26px;line-height:1;z-index:2}
 #fyZoomProduto .fy-zoom-label{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font:500 9px Arial,sans-serif;white-space:nowrap}
 
-/* Também melhora a galeria da página de detalhe antiga, caso ela seja usada. */
+/* TambÃ©m melhora a galeria da pÃ¡gina de detalhe antiga, caso ela seja usada. */
 #paginaProduto .detalhe-img{position:relative!important}
 #paginaProduto #fyFotoProdutoPrincipal{cursor:zoom-in!important;touch-action:pan-y!important;user-select:none!important;-webkit-user-drag:none!important}
 #paginaProduto .fy-produto-miniaturas{scroll-snap-type:x proximity!important;scrollbar-width:none!important}
@@ -26085,7 +26115,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 
 <div id="fyZoomProduto" aria-hidden="true">
-  <button type="button" class="fy-zoom-close" aria-label="Fechar imagem ampliada">×</button>
+  <button type="button" class="fy-zoom-close" aria-label="Fechar imagem ampliada">Ã—</button>
   <img id="fyZoomProdutoImg" alt="Imagem ampliada do produto">
   <div class="fy-zoom-label">Toque fora da foto para fechar</div>
 </div>
@@ -26135,9 +26165,9 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     let hint=media.querySelector('.fy-gallery-hint');
 
     if(!counter){counter=document.createElement('span');counter.className='fy-gallery-counter';media.appendChild(counter)}
-    if(!prev){prev=document.createElement('button');prev.type='button';prev.className='fy-gallery-arrow fy-gallery-prev';prev.innerHTML='‹';prev.setAttribute('aria-label','Foto anterior');prev.onclick=e=>{e.stopPropagation();selecionarIndice(-1,false)};media.appendChild(prev)}
-    if(!next){next=document.createElement('button');next.type='button';next.className='fy-gallery-arrow fy-gallery-next';next.innerHTML='›';next.setAttribute('aria-label','Próxima foto');next.onclick=e=>{e.stopPropagation();selecionarIndice(1,false)};media.appendChild(next)}
-    if(!hint){hint=document.createElement('div');hint.className='fy-gallery-hint';hint.textContent='Deslize para ver mais fotos • toque para ampliar';const thumbs=document.getElementById('fySafeThumbs');if(thumbs)thumbs.insertAdjacentElement('afterend',hint);else media.appendChild(hint)}
+    if(!prev){prev=document.createElement('button');prev.type='button';prev.className='fy-gallery-arrow fy-gallery-prev';prev.innerHTML='â€¹';prev.setAttribute('aria-label','Foto anterior');prev.onclick=e=>{e.stopPropagation();selecionarIndice(-1,false)};media.appendChild(prev)}
+    if(!next){next=document.createElement('button');next.type='button';next.className='fy-gallery-arrow fy-gallery-next';next.innerHTML='â€º';next.setAttribute('aria-label','PrÃ³xima foto');next.onclick=e=>{e.stopPropagation();selecionarIndice(1,false)};media.appendChild(next)}
+    if(!hint){hint=document.createElement('div');hint.className='fy-gallery-hint';hint.textContent='Deslize para ver mais fotos â€¢ toque para ampliar';const thumbs=document.getElementById('fySafeThumbs');if(thumbs)thumbs.insertAdjacentElement('afterend',hint);else media.appendChild(hint)}
 
     const temMais=urls.length>1;
     counter.style.display=temMais?'block':'none';
@@ -26219,13 +26249,13 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     window.abrirProduto=wrapper;
   }
 
-  /* Suporte para a página antiga de detalhe, se for acionada por outro trecho. */
+  /* Suporte para a pÃ¡gina antiga de detalhe, se for acionada por outro trecho. */
   function prepararDetalheAntigo(){
     const principal=document.getElementById('fyFotoProdutoPrincipal');
     const caixa=principal?.closest('.detalhe-img');
     const thumbs=Array.from(caixa?.querySelectorAll('[data-foto-indice]')||[]);
     if(!principal||!caixa||thumbs.length<2)return;
-    // Os elementos já preparados mantêm seus eventos; novas miniaturas são preparadas novamente.
+    // Os elementos jÃ¡ preparados mantÃªm seus eventos; novas miniaturas sÃ£o preparadas novamente.
     if(principal.__fyGaleriaThumbs&&principal.__fyGaleriaThumbs.length===thumbs.length&&
        thumbs.every((b,i)=>principal.__fyGaleriaThumbs[i]===b))return;
     if(principal.__fyGaleriaCleanup)principal.__fyGaleriaCleanup();
@@ -26450,11 +26480,11 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 <div id="fyMobileFilterBackdrop" aria-hidden="true"></div>
 <div id="fyMobileFilterSheet" role="dialog" aria-modal="true" aria-label="Filtros de produtos">
-  <div class="fy-mf-head"><h3>Filtrar produtos</h3><button class="fy-mf-close" type="button" aria-label="Fechar filtros">×</button></div>
+  <div class="fy-mf-head"><h3>Filtrar produtos</h3><button class="fy-mf-close" type="button" aria-label="Fechar filtros">Ã—</button></div>
   <div class="fy-mf-group"><label class="fy-mf-label" for="fyMfMarca">Marca</label><select id="fyMfMarca" class="fy-mf-select"><option value="">Todas as marcas</option></select></div>
-  <div class="fy-mf-group"><span class="fy-mf-label">Preço</span><div class="fy-mf-chips" data-grupo="preco"><button class="fy-mf-chip ativo" data-value="" type="button">Todos</button><button class="fy-mf-chip" data-value="0-10" type="button">Até R$10</button><button class="fy-mf-chip" data-value="10-20" type="button">R$10–20</button><button class="fy-mf-chip" data-value="20-40" type="button">R$20–40</button><button class="fy-mf-chip" data-value="40-999999" type="button">Acima de R$40</button></div></div>
+  <div class="fy-mf-group"><span class="fy-mf-label">PreÃ§o</span><div class="fy-mf-chips" data-grupo="preco"><button class="fy-mf-chip ativo" data-value="" type="button">Todos</button><button class="fy-mf-chip" data-value="0-10" type="button">AtÃ© R$10</button><button class="fy-mf-chip" data-value="10-20" type="button">R$10â€“20</button><button class="fy-mf-chip" data-value="20-40" type="button">R$20â€“40</button><button class="fy-mf-chip" data-value="40-999999" type="button">Acima de R$40</button></div></div>
   <div class="fy-mf-group"><label class="fy-mf-label" for="fyMfCategoria">Categoria</label><select id="fyMfCategoria" class="fy-mf-select"><option value="">Todas as categorias</option></select></div>
-  <div class="fy-mf-group"><span class="fy-mf-label">Promoção</span><div class="fy-mf-chips" data-grupo="promocao"><button class="fy-mf-chip ativo" data-value="" type="button">Todas</button><button class="fy-mf-chip" data-value="sim" type="button">Em promoção</button></div></div>
+  <div class="fy-mf-group"><span class="fy-mf-label">PromoÃ§Ã£o</span><div class="fy-mf-chips" data-grupo="promocao"><button class="fy-mf-chip ativo" data-value="" type="button">Todas</button><button class="fy-mf-chip" data-value="sim" type="button">Em promoÃ§Ã£o</button></div></div>
   <div class="fy-mf-group"><span class="fy-mf-label">Novidade</span><div class="fy-mf-chips" data-grupo="novidade"><button class="fy-mf-chip ativo" data-value="" type="button">Todas</button><button class="fy-mf-chip" data-value="sim" type="button">Novidades</button></div></div>
   <div class="fy-mf-group"><span class="fy-mf-label">Disponibilidade</span><div class="fy-mf-chips" data-grupo="estoque"><button class="fy-mf-chip ativo" data-value="" type="button">Todos</button><button class="fy-mf-chip" data-value="disponivel" type="button">Em estoque</button><button class="fy-mf-chip" data-value="esgotado" type="button">Esgotados</button></div></div>
   <div class="fy-mf-actions"><button id="fyMfReset" class="fy-mf-reset" type="button">Limpar</button><button id="fyMfApply" class="fy-mf-apply" type="button">VER PRODUTOS</button></div>
@@ -26468,7 +26498,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   function alvo(){return document.getElementById('novidades')||document.querySelector('.secao')||document.querySelector('main')||document.body}
   function montarBarra(){
     if(document.getElementById('fyMobileFilterBar'))return;
-    const bar=document.createElement('div');bar.id='fyMobileFilterBar';bar.innerHTML='<button id="fyMobileFilterOpen" type="button">☰ Filtrar <span id="fyMobileFilterCount">0</span></button><button id="fyMobileFilterClear" type="button">Limpar</button>';
+    const bar=document.createElement('div');bar.id='fyMobileFilterBar';bar.innerHTML='<button id="fyMobileFilterOpen" type="button">â˜° Filtrar <span id="fyMobileFilterCount">0</span></button><button id="fyMobileFilterClear" type="button">Limpar</button>';
     const a=alvo();a.insertBefore(bar,a.firstChild);
   }
   function popular(){
@@ -26575,10 +26605,10 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     modal.setAttribute('aria-hidden','true');
     modal.innerHTML=`
       <div class="fy-avise-card" role="dialog" aria-modal="true" aria-labelledby="fyAviseTitulo">
-        <button type="button" class="fy-avise-fechar" aria-label="Fechar">×</button>
+        <button type="button" class="fy-avise-fechar" aria-label="Fechar">Ã—</button>
         <small>PRODUTO ESGOTADO</small>
         <h3 id="fyAviseTitulo">Avise-me quando voltar</h3>
-        <p>Cadastre seu e-mail e avisaremos quando este produto estiver disponível novamente.</p>
+        <p>Cadastre seu e-mail e avisaremos quando este produto estiver disponÃ­vel novamente.</p>
         <div class="fy-avise-produto">
           <img id="fyAviseImagem" alt="">
           <div><strong id="fyAviseNome"></strong><span id="fyAviseMarca"></span></div>
@@ -26625,22 +26655,22 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     const msg=modal.querySelector('#fyAviseMsg');
     const btn=modal.querySelector('.fy-avise-enviar');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-      msg.textContent='Digite um e-mail válido.'; return;
+      msg.textContent='Digite um e-mail vÃ¡lido.'; return;
     }
     btn.disabled=true; btn.textContent='CADASTRANDO...'; msg.textContent='';
     const registro={produto_id:p.id,produto_nome:String(p.nome||'').slice(0,200),email,avisado:false,criado_em:new Date().toISOString()};
     try{
       const sb=window.FOR_YOU_SUPABASE_CLIENT;
-      if(!sb)throw new Error('Conexão indisponível');
+      if(!sb)throw new Error('ConexÃ£o indisponÃ­vel');
       const {error}=await sb.from('avisos_estoque').insert(registro);
       if(error)throw error;
       msg.style.color='#2e7b55';
       msg.textContent='Pronto! Seu aviso foi cadastrado.';
-      btn.textContent='CADASTRADO ✓';
+      btn.textContent='CADASTRADO âœ“';
       setTimeout(fecharModal,1300);
     }catch(e){
       msg.style.color='#9a3657';
-      msg.textContent='Não foi possível cadastrar o aviso. Tente novamente mais tarde.';
+      msg.textContent='NÃ£o foi possÃ­vel cadastrar o aviso. Tente novamente mais tarde.';
       btn.disabled=false; btn.textContent='TENTAR NOVAMENTE';
     }
   }
@@ -26693,7 +26723,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 
 
-<!-- FOR YOU: correção única do banner no celular — proporção natural, sem zoom ou altura fixa. -->
+<!-- FOR YOU: correÃ§Ã£o Ãºnica do banner no celular â€” proporÃ§Ã£o natural, sem zoom ou altura fixa. -->
 <style id="fy-banner-mobile-proporcao-natural-2409">
 @media (max-width:800px) {
   html body #inicio.fy-banner-r10 {
@@ -26739,14 +26769,14 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 
 
 
-<!-- FOR YOU | correção visual mobile 30/09/2026: busca única + primeira pintura imediata -->
+<!-- FOR YOU | correÃ§Ã£o visual mobile 30/09/2026: busca Ãºnica + primeira pintura imediata -->
 <style id="fy-mobile-busca-unica-e-pintura-imediata-3009">
 @media (max-width:800px){
-  /* Não esconde a página inteira enquanto o JS inicia. */
+  /* NÃ£o esconde a pÃ¡gina inteira enquanto o JS inicia. */
   html.fy-mobile-carregando body{visibility:visible!important;}
   html.fy-mobile-carregando::before{display:none!important;content:none!important;}
 
-  /* Uma única cápsula para a busca. A função continua a mesma. */
+  /* Uma Ãºnica cÃ¡psula para a busca. A funÃ§Ã£o continua a mesma. */
   .fy-busca-topo .busca{
     width:100%!important;
     max-width:none!important;
@@ -26800,7 +26830,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 
 
-<!-- FOR YOU | performance mobile 30/09/2026 — sem alterar o visual -->
+<!-- FOR YOU | performance mobile 30/09/2026 â€” sem alterar o visual -->
 <style id="fy-performance-mobile-3009">
 @media (max-width:800px){
   /* Evita animacoes antigas em blocos pesados; o banner continua funcional. */
@@ -26833,7 +26863,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </script>
 
 <style id="fy-header-aprovado-final-3009">
-/* Cabeçalho aprovado: menina à esquerda + FOR YOU central + ações à direita + busca abaixo. */
+/* CabeÃ§alho aprovado: menina Ã  esquerda + FOR YOU central + aÃ§Ãµes Ã  direita + busca abaixo. */
 .header-top{position:relative!important}
 .fy-wordmark-center{
   display:flex!important;
@@ -26875,7 +26905,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   color:#b34f6d!important;
 }
 
-/* O arquivo logo-for-you-nova.png contém a arte; aqui mostramos somente a menina do lado esquerdo. */
+/* O arquivo logo-for-you-nova.png contÃ©m a arte; aqui mostramos somente a menina do lado esquerdo. */
 .fy-brand-logo{
   background:none!important;
   overflow:hidden!important;
@@ -27011,7 +27041,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </body>
 </html>
 
-<!-- FOR YOU — VARIAÇÕES VISÍVEIS POR BOTÕES (23/09/2026) -->
+<!-- FOR YOU â€” VARIAÃ‡Ã•ES VISÃVEIS POR BOTÃ•ES (23/09/2026) -->
 <style id="fy-variacoes-botoes-final">
 #fySafeVariantWrap{
   margin:18px 0 8px!important;
@@ -27059,7 +27089,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   padding:9px 13px!important;
 }
 #fySafeVariants button.ativa::after{
-  content:'✓';
+  content:'âœ“';
   display:inline-grid;
   place-items:center;
   width:15px;
@@ -27127,13 +27157,13 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
 
   function nomeVariante(v,i){
-    return String(v?.nome ?? v?.cor ?? v?.sabor ?? v?.valor ?? v?.label ?? ('Opção '+(i+1))).trim();
+    return String(v?.nome ?? v?.cor ?? v?.sabor ?? v?.valor ?? v?.label ?? ('OpÃ§Ã£o '+(i+1))).trim();
   }
 
   function atualizarRotulo(p,indice){
     const label=document.getElementById('fySafeVariantLabel');
     if(!label)return;
-    const titulo=String(p?.rotuloVariante||'Escolha uma opção');
+    const titulo=String(p?.rotuloVariante||'Escolha uma opÃ§Ã£o');
     if(indice==null || indice<0){
       label.textContent=titulo;
       return;
@@ -27157,7 +27187,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
       box.id='fyVarianteSelectWrap';
       const select=document.createElement('select');
       select.id='fyVarianteSelect';
-      select.setAttribute('aria-label','Escolher variação do produto');
+      select.setAttribute('aria-label','Escolher variaÃ§Ã£o do produto');
       select.addEventListener('change',function(){
         const indice=Number(this.value);
         if(Number.isInteger(indice) && indice>=0 && typeof window.fySelecionarVariante==='function'){
@@ -27218,11 +27248,11 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
       area.style.display='none';
       if(selectWrap)selectWrap.style.display='block';
       if(select){
-        select.innerHTML='<option value="">Selecione uma opção</option>';
+        select.innerHTML='<option value="">Selecione uma opÃ§Ã£o</option>';
         variantes.forEach((v,i)=>{
           const o=document.createElement('option');
           o.value=String(i);
-          o.textContent=nomeVariante(v,i)+(indisponivel(v)?' — Esgotado':'');
+          o.textContent=nomeVariante(v,i)+(indisponivel(v)?' â€” Esgotado':'');
           o.disabled=indisponivel(v);
           select.appendChild(o);
         });
@@ -27239,7 +27269,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
           const catalogo=(typeof produtos!=='undefined'&&Array.isArray(produtos))?produtos:[];
           const p=catalogo.find(x=>String(x.id)===String(id));
           if(p)renderizarVariantes(p);
-        }catch(e){console.warn('Variações:',e)}
+        }catch(e){console.warn('VariaÃ§Ãµes:',e)}
       },0);
       return retorno;
     };
@@ -27285,7 +27315,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     const form=document.querySelector('#paginaCheckout .fy-checkout-passo[data-passo="0"] .checkout-form');
     if(!form||$('fyVisitanteExtra'))return;
     const aviso=document.createElement('div');aviso.className='fy-visitante-opcoes';
-    aviso.innerHTML='<span>Você pode continuar sem criar uma conta. Informe seus dados de entrega abaixo.</span><button type="button" id="fyVisitanteEntrar">JÁ TENHO CONTA</button>';
+    aviso.innerHTML='<span>VocÃª pode continuar sem criar uma conta. Informe seus dados de entrega abaixo.</span><button type="button" id="fyVisitanteEntrar">JÃ TENHO CONTA</button>';
     form.parentNode.insertBefore(aviso,form);
     const extra=document.createElement('div');extra.id='fyVisitanteExtra';extra.className='fy-visitante-extra';
     extra.innerHTML='<input id="fyVisitanteBairro" autocomplete="address-level3" placeholder="Bairro" aria-label="Bairro"><input id="fyVisitanteCidade" autocomplete="address-level2" placeholder="Cidade" aria-label="Cidade"><input id="fyVisitanteEstado" autocomplete="address-level1" maxlength="2" placeholder="UF" aria-label="Estado">';
@@ -27295,7 +27325,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',construir,{once:true});else construir();
   async function registrarVisitante(){
     const sb=window.FOR_YOU_SUPABASE_CLIENT;
-    if(!sb)throw new Error('A conexão da loja está indisponível.');
+    if(!sb)throw new Error('A conexÃ£o da loja estÃ¡ indisponÃ­vel.');
     const {data:sessao,error:erroSessao}=await sb.auth.getUser();
     if(erroSessao&&!/missing|session/i.test(erroSessao.message||''))throw erroSessao;
     if(sessao?.user&&!sessao.user.is_anonymous)return;
@@ -27304,23 +27334,23 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     const cep=valor('checkoutCEP').replace(/\D/g,''),numero=valor('checkoutNumero'),logradouro=valor('checkoutEndereco');
     const bairro=valor('fyVisitanteBairro'),cidade=valor('fyVisitanteCidade'),estado=valor('fyVisitanteEstado').toUpperCase();
     if(nome.length<2||!/^\S+@\S+\.\S+$/.test(email)||telefone.replace(/\D/g,'').length<10||cep.length!==8||!logradouro||!numero||!bairro||!cidade||!/^[A-Z]{2}$/.test(estado)){
-      throw new Error('Preencha nome, e-mail, telefone e endereço completo, incluindo bairro, cidade e UF.');
+      throw new Error('Preencha nome, e-mail, telefone e endereÃ§o completo, incluindo bairro, cidade e UF.');
     }
     let user=sessao?.user;
     if(!user){
       const resposta=await sb.auth.signInAnonymously();
-      if(resposta.error)throw new Error('Compra como visitante indisponível. Ative o acesso anônimo no Supabase Auth.');
+      if(resposta.error)throw new Error('Compra como visitante indisponÃ­vel. Ative o acesso anÃ´nimo no Supabase Auth.');
       user=resposta.data.user;
     }
     const perfil=await sb.from('clientes').upsert({id:user.id,nome,email,telefone},{onConflict:'id'});
-    if(perfil.error)throw new Error('Não foi possível salvar os dados do pedido: '+perfil.error.message);
+    if(perfil.error)throw new Error('NÃ£o foi possÃ­vel salvar os dados do pedido: '+perfil.error.message);
     const endereco={cliente_id:user.id,destinatario:nome,apelido:'Entrega',principal:true,cep,numero,logradouro,bairro,cidade,estado,complemento:valor('checkoutComplemento')};
     const existente=await sb.from('enderecos').select('id').eq('cliente_id',user.id).limit(1).maybeSingle();
     if(existente.error)throw existente.error;
     const salvo=existente.data?.id
       ? await sb.from('enderecos').update(endereco).eq('id',existente.data.id)
       : await sb.from('enderecos').insert(endereco);
-    if(salvo.error)throw new Error('Não foi possível salvar o endereço de entrega: '+salvo.error.message);
+    if(salvo.error)throw new Error('NÃ£o foi possÃ­vel salvar o endereÃ§o de entrega: '+salvo.error.message);
   }
   const confirmarAnterior=window.confirmarPedido;
   window.confirmarPedido=async function(){
@@ -27328,7 +27358,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     if(botao?.disabled)return;
     if(botao)botao.disabled=true;
     try{await registrarVisitante();return await confirmarAnterior.apply(this,arguments)}
-    catch(e){const msg=$('checkoutMensagem');if(msg)msg.textContent=e.message||'Não foi possível continuar como visitante.';if(botao)botao.disabled=false}
+    catch(e){const msg=$('checkoutMensagem');if(msg)msg.textContent=e.message||'NÃ£o foi possÃ­vel continuar como visitante.';if(botao)botao.disabled=false}
   };
 })();
 </script>
@@ -27346,9 +27376,9 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 </style>
 <script id="fy-seo-produto-js">
 (function(){
-  const nomeLoja='For You by Dé';
+  const nomeLoja='For You by DÃ©';
   const tituloInicial=document.title;
-  const descricaoInicial='Encontre maquiagem, cuidados e acessórios na For You by Dé.';
+  const descricaoInicial='Encontre maquiagem, cuidados e acessÃ³rios na For You by DÃ©.';
   let abrindoURL=false;
   function catalogo(){try{return Array.isArray(produtos)?produtos:[]}catch(e){return []}}
   function meta(seletor,atributo,valor){
@@ -27368,7 +27398,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   }
   function descricao(p){
     const texto=String(p.descricao||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-    return (texto||`${p.nome} da marca ${p.marca||nomeLoja}. Confira preço e disponibilidade na For You.`).slice(0,160);
+    return (texto||`${p.nome} da marca ${p.marca||nomeLoja}. Confira preÃ§o e disponibilidade na For You.`).slice(0,160);
   }
   function atualizar(p){
     const link=p?urlProduto(p.id):new URL(location.pathname,location.origin).href;
@@ -27435,7 +27465,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
     if(!lista.length)return;
     const caixa=document.createElement('details');caixa.id='fySeoCatalogo';
     const resumo=document.createElement('summary');resumo.textContent='Ver todos os produtos';
-    const nav=document.createElement('nav');nav.setAttribute('aria-label','Catálogo de produtos');
+    const nav=document.createElement('nav');nav.setAttribute('aria-label','CatÃ¡logo de produtos');
     lista.forEach(p=>{
       const a=document.createElement('a');a.href=urlProduto(p.id);a.dataset.fyLinkProduto=String(p.id);
       a.textContent=String(p.nome||'Produto');nav.appendChild(a);
@@ -27514,12 +27544,12 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 #fyPrivacidadeAbrir{display:block;margin:18px auto;font:12px Arial,sans-serif}
 #fyPrivacidadeDetalhes{margin:12px 0;max-height:35vh;overflow:auto}
 </style>
-<button id="fyPrivacidadeAbrir" type="button">Preferências de privacidade</button>
-<section id="fyPrivacidadeAviso" role="region" aria-label="Preferências de privacidade" hidden>
+<button id="fyPrivacidadeAbrir" type="button">PreferÃªncias de privacidade</button>
+<section id="fyPrivacidadeAviso" role="region" aria-label="PreferÃªncias de privacidade" hidden>
 <strong>Sua privacidade na For You</strong>
-<p>Usamos armazenamento necessário para login, sacola, favoritos e compras. Com sua permissão, também lembramos buscas e produtos vistos neste navegador.</p>
-<div id="fyPrivacidadeDetalhes" hidden><p>O login e os dados locais da conta ficam na sessão da aba. Sacola e favoritos podem permanecer neste navegador. Dados fornecidos na compra são enviados aos serviços de cadastro, entrega e pagamento usados pela loja. Esta preferência controla somente o histórico de buscas e produtos vistos na loja; não altera o funcionamento de sites externos de pagamento. Você pode mudar sua escolha aqui a qualquer momento. A preferência será solicitada novamente após 180 dias.</p></div>
-<div class="fy-privacy-actions"><button type="button" id="fyPrivacidadeNecessarios">Somente necessários</button><button type="button" id="fyPrivacidadePermitir">Permitir histórico</button><button type="button" id="fyPrivacidadeMais" aria-expanded="false" aria-controls="fyPrivacidadeDetalhes">Saiba mais</button></div>
+<p>Usamos armazenamento necessÃ¡rio para login, sacola, favoritos e compras. Com sua permissÃ£o, tambÃ©m lembramos buscas e produtos vistos neste navegador.</p>
+<div id="fyPrivacidadeDetalhes" hidden><p>O login e os dados locais da conta ficam na sessÃ£o da aba. Sacola e favoritos podem permanecer neste navegador. Dados fornecidos na compra sÃ£o enviados aos serviÃ§os de cadastro, entrega e pagamento usados pela loja. Esta preferÃªncia controla somente o histÃ³rico de buscas e produtos vistos na loja; nÃ£o altera o funcionamento de sites externos de pagamento. VocÃª pode mudar sua escolha aqui a qualquer momento. A preferÃªncia serÃ¡ solicitada novamente apÃ³s 180 dias.</p></div>
+<div class="fy-privacy-actions"><button type="button" id="fyPrivacidadeNecessarios">Somente necessÃ¡rios</button><button type="button" id="fyPrivacidadePermitir">Permitir histÃ³rico</button><button type="button" id="fyPrivacidadeMais" aria-expanded="false" aria-controls="fyPrivacidadeDetalhes">Saiba mais</button></div>
 </section>
 <script id="fy-privacidade-interface-3009">
 (function(){
@@ -27552,12 +27582,12 @@ window.addEventListener('storage',e=>{if(e.key===key&&!window.fyPermiteHistorico
       const {data,error}=await sb.auth.getUser();
       if(error||!data?.user){fyAdminAutorizado=false;inicio();return;}
       const permissao=await sb.rpc('fy_eh_admin');
-      if(permissao.error){fyAdminAutorizado=false;alert('Não foi possível verificar o acesso ao painel. Tente novamente.');return;}
+      if(permissao.error){fyAdminAutorizado=false;alert('NÃ£o foi possÃ­vel verificar o acesso ao painel. Tente novamente.');return;}
       if(permissao.data!==true){fyAdminAutorizado=false;inicio();return;}
-      // Reutiliza o fluxo que valida também o acesso à API administrativa.
+      // Reutiliza o fluxo que valida tambÃ©m o acesso Ã  API administrativa.
       fyAdminAutorizado=false;
       await window.abrirAdminLogin();
-    }catch(e){fyAdminAutorizado=false;alert('Não foi possível verificar o acesso ao painel. Tente novamente.');}
+    }catch(e){fyAdminAutorizado=false;alert('NÃ£o foi possÃ­vel verificar o acesso ao painel. Tente novamente.');}
     finally{verificando=false;logo.removeAttribute('aria-busy');}
   },true);
 })();
@@ -27613,7 +27643,7 @@ async function listar(){
  for(const c of data||[]){
  const row=document.createElement('div');row.className='fy-cupom-linha';
  const texto=document.createElement('div'),titulo=document.createElement('strong'),detalhe=document.createElement('p');
- titulo.textContent=c.codigo+' · '+(c.tipo==='percentual'?Number(c.valor)+'%':moeda(c.valor));
+ titulo.textContent=c.codigo+' Â· '+(c.tipo==='percentual'?Number(c.valor)+'%':moeda(c.valor));
  detalhe.textContent=(c.ativo?'Ativo':'Desativado')+' | Minimo '+moeda(c.minimo)+' | '+(c.validade?'Ate '+new Date(c.validade).toLocaleString('pt-BR'):'Sem vencimento')+' | '+(c.limite?'Limite: '+c.limite+' pedidos':'Sem limite de usos')+(c.primeira_compra?' | Primeira compra':'');
  texto.append(titulo,detalhe);row.append(texto);
  const editar=document.createElement('button');editar.type='button';editar.textContent='Editar';editar.addEventListener('click',()=>preencher(c));row.append(editar);
@@ -27694,7 +27724,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
  if(!itens.length){lista.textContent='Nenhum produto encontrado.';return;}
  for(const p of itens){const card=document.createElement('article');card.className='fy-gestao-item';
  if(p.imagem){try{const img=document.createElement('img');img.src=urlFoto(p.imagem);img.alt=p.nome;img.loading='lazy';card.append(img);}catch(e){}}
- const info=document.createElement('div'),nome=document.createElement('strong'),detalhe=document.createElement('p'),status=document.createElement('small');nome.textContent=p.nome;detalhe.textContent=p.marca+' · '+p.categoria+' · '+dinheiro(p.preco);status.textContent=(p.ativo?'Publicado':'Desativado')+' · Estoque: '+p.estoque+(Number(p.estoque)<=0?' · Esgotado':Number(p.estoque)<=5?' · Estoque baixo':'');info.append(nome,detalhe,status);card.append(info);
+ const info=document.createElement('div'),nome=document.createElement('strong'),detalhe=document.createElement('p'),status=document.createElement('small');nome.textContent=p.nome;detalhe.textContent=p.marca+' Â· '+p.categoria+' Â· '+dinheiro(p.preco);status.textContent=(p.ativo?'Publicado':'Desativado')+' Â· Estoque: '+p.estoque+(Number(p.estoque)<=0?' Â· Esgotado':Number(p.estoque)<=5?' Â· Estoque baixo':'');info.append(nome,detalhe,status);card.append(info);
  const acoes=document.createElement('div');acoes.className='fy-gestao-acoes';acoes.append(botao('Editar',()=>abrir(p)),botao('Estoque',()=>{abrir(p);$('fyProdutoForm').elements.estoque.focus();}),botao(p.ativo?'Desativar':'Ativar',()=>alternar(p)));card.append(acoes);lista.append(card);}
  }
  async function carregar(){if(ocupado)return;ocupado=true;mensagem('Carregando produtos...');try{const sb=await cliente();let todos=[],inicio=0;while(true){const {data,error}=await sb.from('produtos').select(cols).order('id',{ascending:true}).range(inicio,inicio+499);if(error)throw Error('Nao foi possivel carregar os produtos. Confira a configuracao SQL e o acesso da conta.');todos.push(...data);if(data.length<500)break;inicio+=500;}registros=todos;renderLista();mensagem('Lista atualizada.');}catch(e){mensagem(e.message);}finally{ocupado=false;}}
@@ -27715,10 +27745,10 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
  const sec=document.createElement('section');sec.id='fyGestaoProdutos';sec.innerHTML=`<h2>Produtos e estoque</h2><p>Cadastre e edite os produtos da loja.</p><div class="fy-gestao-barra"><button type="button" id="fyGestaoNovo">+ Cadastrar produto</button><button type="button" id="fyGestaoAtualizar">Atualizar lista</button><input id="fyGestaoBusca" aria-label="Buscar produtos no painel" placeholder="Buscar nome, marca ou categoria"><select id="fyGestaoFiltro" aria-label="Filtrar estoque"><option value="todos">Todos os produtos</option><option value="baixo">Estoque baixo (ate 5)</option><option value="esgotado">Esgotados</option><option value="inativo">Desativados</option></select></div><p id="fyGestaoMensagem" role="status" aria-live="polite"></p><small id="fyGestaoContador"></small><div id="fyGestaoLista"></div>`;
  const nav=painel.querySelector('.admin-nav-v7');if(nav)nav.after(sec);else painel.prepend(sec);
  const antigo=$('adminProdutosSec');if(antigo){antigo.hidden=true;antigo.style.setProperty('display','none','important');}
- const dialog=document.createElement('dialog');dialog.id='fyProdutoDialog';dialog.setAttribute('aria-labelledby','fyProdutoTitulo');dialog.innerHTML=`<form id="fyProdutoForm"><div class="fy-produto-topo"><h2 id="fyProdutoTitulo">Cadastrar produto</h2><button type="button" id="fyProdutoFechar" aria-label="Fechar formulario">×</button></div><div class="fy-produto-campos">
- <label>Nome<input name="nome" maxlength="250" required></label><label>Marca<input name="marca" maxlength="100" required></label><label>Categoria<input name="categoria" list="fyProdutoCategorias" required><datalist id="fyProdutoCategorias"><option>Lábios</option><option>Pele</option><option>Olhos</option><option>Skincare</option><option>Face</option><option>Acessórios</option><option>Corpo</option><option>Cabelo</option><option>Kits</option></datalist></label><label>Subcategoria<input name="subcategoria" placeholder="Ex.: Gloss, pó, shampoo"></label>
+ const dialog=document.createElement('dialog');dialog.id='fyProdutoDialog';dialog.setAttribute('aria-labelledby','fyProdutoTitulo');dialog.innerHTML=`<form id="fyProdutoForm"><div class="fy-produto-topo"><h2 id="fyProdutoTitulo">Cadastrar produto</h2><button type="button" id="fyProdutoFechar" aria-label="Fechar formulario">Ã—</button></div><div class="fy-produto-campos">
+ <label>Nome<input name="nome" maxlength="250" required></label><label>Marca<input name="marca" maxlength="100" required></label><label>Categoria<input name="categoria" list="fyProdutoCategorias" required><datalist id="fyProdutoCategorias"><option>LÃ¡bios</option><option>Pele</option><option>Olhos</option><option>Skincare</option><option>Face</option><option>AcessÃ³rios</option><option>Corpo</option><option>Cabelo</option><option>Kits</option></datalist></label><label>Subcategoria<input name="subcategoria" placeholder="Ex.: Gloss, pÃ³, shampoo"></label>
  <label>Preco (R$)<input name="preco" type="number" min="0.01" step="0.01" required></label><label>Preco anterior (opcional)<input name="preco_antigo" type="number" min="0.01" step="0.01"></label><label>Quantidade em estoque<input name="estoque" type="number" min="0" step="1" required></label><label>Validade (opcional)<input name="validade" type="date"></label>
- <label class="fy-produto-full">Foto do celular<input id="fyProdutoUpload" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG ou WebP · ate 5 MB</small></label><label class="fy-produto-full">Link da foto principal<input name="imagem" type="url" placeholder="https://..."></label><img id="fyProdutoPreview" alt="Previa da foto principal" hidden>
+ <label class="fy-produto-full">Foto do celular<input id="fyProdutoUpload" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG ou WebP Â· ate 5 MB</small></label><label class="fy-produto-full">Link da foto principal<input name="imagem" type="url" placeholder="https://..."></label><img id="fyProdutoPreview" alt="Previa da foto principal" hidden>
  <label class="fy-produto-full">Outras fotos (um link por linha)<textarea name="galeria"></textarea></label><label>Nome da opcao<input name="rotulo_variante" placeholder="Ex.: Cor ou Sabor"></label><label>Opcoes (uma por linha)<textarea name="variantes" placeholder="Baunilha&#10;Chocolate"></textarea><small>O estoque acima e o total do produto.</small></label><label class="fy-produto-full">Descricao<textarea name="descricao" rows="4"></textarea></label>
  <label class="fy-produto-check"><input name="ativo" type="checkbox" checked> Publicado na loja</label><label class="fy-produto-check"><input name="novidade" type="checkbox"> Novidade</label><label class="fy-produto-check"><input name="proximo_validade" type="checkbox"> Proximo da validade</label></div><p id="fyProdutoMensagem" role="status" aria-live="polite"></p><button type="submit">Salvar produto</button></form>`;document.body.append(dialog);
  $('fyGestaoNovo').addEventListener('click',()=>abrir());$('fyGestaoAtualizar').addEventListener('click',carregar);$('fyGestaoBusca').addEventListener('input',renderLista);$('fyGestaoFiltro').addEventListener('change',renderLista);$('fyProdutoFechar').addEventListener('click',fechar);$('fyProdutoForm').addEventListener('submit',salvar);$('fyProdutoForm').elements.imagem.addEventListener('input',preview);$('fyProdutoUpload').addEventListener('change',enviarFoto);dialog.addEventListener('cancel',e=>{e.preventDefault();fechar();});
@@ -27736,7 +27766,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
 <script id="fy-pedidos-operacao">
 (()=>{
  const $=id=>document.getElementById(id),pagos=['pago','aprovado','paid'];
- const pagamento={aguardando_pagamento:'Aguardando pagamento',em_analise:'Em análise',pago:'Pagamento confirmado',aprovado:'Pagamento confirmado',paid:'Pagamento confirmado',recusado:'Pagamento recusado',cancelado:'Pagamento cancelado',estornado:'Pagamento estornado',expirado:'Pagamento expirado'};
+ const pagamento={aguardando_pagamento:'Aguardando pagamento',em_analise:'Em anÃ¡lise',pago:'Pagamento confirmado',aprovado:'Pagamento confirmado',paid:'Pagamento confirmado',recusado:'Pagamento recusado',cancelado:'Pagamento cancelado',estornado:'Pagamento estornado',expirado:'Pagamento expirado'};
  const etapas={recebido:0,pagamento_aprovado:0,aprovado:0,preparando:1,em_preparacao:1,enviado:2,entregue:3};
  const valores=['recebido','preparando','enviado','entregue'];
  let salvando=false;
@@ -27751,7 +27781,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
  const selecionar=window.fyAdminSelecionarPedido;
  window.fyAdminSelecionarPedido=function(id){selecionar?.(id);preparar();const p=selecionado();if(!p)return;
  const status=String(p.status_pagamento||'').toLowerCase(),pago=pagos.includes(status),fase=etapas[p.status_pedido],select=$('fyAdminPedidoStatus');
- $('fyAdminPedidoPagamento').textContent=(pagamento[status]||status||'Pagamento a confirmar')+' · '+(p.forma_pagamento||p.pagamento||'');
+ $('fyAdminPedidoPagamento').textContent=(pagamento[status]||status||'Pagamento a confirmar')+' Â· '+(p.forma_pagamento||p.pagamento||'');
  select.replaceChildren();valores.forEach((v,i)=>{const o=document.createElement('option');o.value=v;o.textContent=['Recebido','Preparando','Enviado','Entregue'][i];o.disabled=(fase!==undefined&&i<fase)||(!pago&&i>0);select.append(o);});select.value=valores[fase??0];
  const b=document.querySelector('#paginaAdmin .fy-admin-pedido-salvar');if(b)b.disabled= fase===undefined;
  feedback(!pago?'O envio sera liberado quando o pagamento for confirmado pelo PagBank.':'Atualize a etapa e informe o rastreamento ao enviar.');
@@ -27770,10 +27800,10 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
 </script>
 
 
-<!-- FOR YOU 30/09: correção final do nome + carregamento mobile, sem alterar o visual aprovado -->
+<!-- FOR YOU 30/09: correÃ§Ã£o final do nome + carregamento mobile, sem alterar o visual aprovado -->
 <style id="fy-mobile-final-nome-performance-v46">
 @media(max-width:700px){
-  /* Mantém o nome FOR YOU sempre visível acima da busca. Vence regras antigas que o escondiam. */
+  /* MantÃ©m o nome FOR YOU sempre visÃ­vel acima da busca. Vence regras antigas que o escondiam. */
   .header-top::before{
     content:"FOR YOU" !important;
     display:block !important;
@@ -27794,7 +27824,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     color:#351f27 !important;
     white-space:nowrap !important;
   }
-  /* A arte antiga da logo não ocupa espaço no mobile; o nome acima da busca é a marca visível. */
+  /* A arte antiga da logo nÃ£o ocupa espaÃ§o no mobile; o nome acima da busca Ã© a marca visÃ­vel. */
   .header-top .logo{display:none !important;}
 
   /* Remove filtros/efeitos caros no primeiro desenho. */
@@ -27803,7 +27833,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   .fy-clean-cat-top::-webkit-scrollbar{display:none;}
   .product-card,.produto-card,.produto,.card{filter:none !important;backdrop-filter:none !important;}
 
-  /* Seções abaixo da primeira dobra só são desenhadas quando se aproximam da tela. */
+  /* SeÃ§Ãµes abaixo da primeira dobra sÃ³ sÃ£o desenhadas quando se aproximam da tela. */
   #marcas,#ofertas,#kits,.produtos,.products-grid,.grid-produtos,.vitrine-produtos,footer{
     content-visibility:auto !important;
     contain-intrinsic-size:1px 520px;
@@ -27812,15 +27842,15 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
 </style>
 <script id="fy-mobile-final-performance-v46">
 (function(){
-  /* Evita que rotinas visuais antigas rodem várias vezes durante a abertura. */
+  /* Evita que rotinas visuais antigas rodem vÃ¡rias vezes durante a abertura. */
   if(window.__FY_MOBILE_FINAL_V46)return;
   window.__FY_MOBILE_FINAL_V46=true;
 
   if(matchMedia('(max-width:700px)').matches){
-    /* Em iPhone, não anima rolagem/layout na abertura. */
+    /* Em iPhone, nÃ£o anima rolagem/layout na abertura. */
     document.documentElement.style.scrollBehavior='auto';
 
-    /* Imagens fora do topo carregam de forma preguiçosa sem alterar as do banner/cabeçalho. */
+    /* Imagens fora do topo carregam de forma preguiÃ§osa sem alterar as do banner/cabeÃ§alho. */
     const aplicarLazy=function(){
       document.querySelectorAll('main img:not(.fy-banner-r10-track img)').forEach(function(img){
         if(!img.closest('.fy-banner-r10')){
@@ -27835,7 +27865,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
 })();
 </script>
 
-<!-- FOR YOU 30/09: restauração definitiva da logo aprovada no mobile -->
+<!-- FOR YOU 30/09: restauraÃ§Ã£o definitiva da logo aprovada no mobile -->
 <style id="fy-restaura-logo-aprovada-v47">
 @media(max-width:700px){
   /* Remove o FOR YOU artificial criado pelo patch anterior. */
@@ -27844,7 +27874,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     display:none!important;
   }
 
-  /* Recoloca a arte/logo da menina à esquerda. */
+  /* Recoloca a arte/logo da menina Ã  esquerda. */
   .header-top .logo{
     display:block!important;
     grid-column:1!important;
@@ -27874,7 +27904,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     margin:0!important;
   }
 
-  /* Mantém o nome central exatamente separado dos ícones. */
+  /* MantÃ©m o nome central exatamente separado dos Ã­cones. */
   .fy-wordmark-center{
     display:flex!important;
     grid-column:2!important;
@@ -27898,7 +27928,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     white-space:nowrap!important;
   }
 
-  /* Linhas + coração no mesmo vinho/rosa do modelo aprovado. */
+  /* Linhas + coraÃ§Ã£o no mesmo vinho/rosa do modelo aprovado. */
   .fy-wordmark-ornament{
     width:100px!important;
     display:flex!important;
@@ -27920,7 +27950,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     line-height:1!important;
   }
   .fy-wordmark-ornament b::before{
-    content:"♥"!important;
+    content:"â™¥"!important;
     font-family:Georgia,"Times New Roman",serif!important;
     font-size:13px!important;
     font-weight:400!important;
