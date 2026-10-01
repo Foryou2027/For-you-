@@ -28040,6 +28040,7 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   }
   window.selecionarSubcategoria=function(categoria,subcategoria){
     if(!catalogoPronto(()=>window.selecionarSubcategoria(categoria,subcategoria)))return;
+    window.__fyCategoriaAtual=categoria||'';
     const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p&&p.ativo!==false&&!ehKit(p)&&mesmaCategoria(p,categoria)&&mesmaSubcategoria(p,subcategoria));
     abrirLoja();
     desenhar(lista);
@@ -28054,6 +28055,10 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
     abrirLoja();desenhar(lista);cabecalho('Todos os Produtos',lista.length,'CATÁLOGO COMPLETO');
     document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
   };
-  window.limparFiltroSubcategoria=window.mostrarTodosProdutos;
+  window.limparFiltroSubcategoria=function(){
+    const categoria=window.__fyCategoriaAtual||'';
+    if(categoria)window.selecionarSubcategoria(categoria,'');
+    else window.mostrarTodosProdutos();
+  };
 })();
 </script>
