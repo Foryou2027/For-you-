@@ -17911,7 +17911,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       return item;
     });
 
+    const nomeNormalizadoCapa = String(p.nome||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+    const marcaNormalizadaCapa = String(p.marca||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+    const capaSoulPoTranslucido =
+      nomeNormalizadoCapa === 'po translucido 10g' &&
+      marcaNormalizadaCapa.includes('soul cosmeticos') &&
+      galeria.length > 1
+        ? galeria[1]
+        : '';
+
     const imagemPrincipal =
+      capaSoulPoTranslucido ||
       corrigirImagemProdutoFY(p.imagem) ||
       (galeria.length ? galeria[0] : "");
 
@@ -18895,7 +18905,10 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       if(Array.isArray(item.galeria))item.galeria=item.galeria.map(corrigirImagem).filter(Boolean);
       return item;
     });
-    const imagemPrincipal=corrigirImagem(p.imagem)||galeria[0]||'';
+    const nomeNormalizadoCapa=String(p.nome||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+    const marcaNormalizadaCapa=String(p.marca||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+    const capaSoulPoTranslucido=(nomeNormalizadoCapa==='po translucido 10g'&&marcaNormalizadaCapa.includes('soul cosmeticos')&&galeria.length>1)?galeria[1]:'';
+    const imagemPrincipal=capaSoulPoTranslucido||corrigirImagem(p.imagem)||galeria[0]||'';
 
     return {
       id:p.id, nome:p.nome||"Produto", marca:p.marca||"FOR YOU",
@@ -18918,7 +18931,8 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
     if(window.__FY_CATALOGO_CARREGANDO || window.__FY_CATALOGO_CARREGADO) return;
     window.__FY_CATALOGO_CARREGANDO=true;
 
-    const chaveCache='fy-catalogo-v47-imagens-estoque5';
+    const chaveCache='fy-catalogo-v48-capa-produtos';
+    try{localStorage.removeItem('fy-catalogo-v47-imagens-estoque5');}catch(e){}
     try{
       const salvo=JSON.parse(localStorage.getItem(chaveCache)||'null');
       if(salvo&&Date.now()-salvo.em<600000&&Array.isArray(salvo.dados)){
