@@ -27985,3 +27985,75 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   }
 }
 </style>
+
+<!-- FOR YOU — correção definitiva de categorias e “Ver todos” 01-10-2026 -->
+<script id="fy-categorias-ver-todos-final">
+(function(){
+  const normalizar=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const ehKit=p=>{
+    const cat=normalizar(p?.categoria),sub=normalizar(p?.subcategoria),nome=normalizar(p?.nome);
+    return cat==='kit'||cat==='kits'||sub.startsWith('kit')||nome.startsWith('kit ');
+  };
+  const mesmaCategoria=(p,categoria)=>{
+    const cat=normalizar(categoria),pc=normalizar(p?.categoria),ps=normalizar(p?.subcategoria),nome=normalizar(p?.nome);
+    if(!cat)return true;
+    if(cat==='pele'||cat==='face')return pc==='pele'||pc==='face';
+    if(cat==='cabelo')return pc==='cabelo'||(pc==='corpo'&&/cabel|capilar|shampoo|condicionador|gelatina/.test(ps+' '+nome));
+    return pc===cat;
+  };
+  const mesmaSubcategoria=(p,subcategoria)=>{
+    let sub=normalizar(subcategoria);
+    if(!sub||sub==='todos'||sub.startsWith('todos de '))return true;
+    const ps=normalizar(p?.subcategoria),nome=normalizar(p?.nome);
+    const familiaPo=sub==='po'||sub.startsWith('po ');
+    if(familiaPo)return ps==='po'||ps.startsWith('po ')||/(^|\s)po(s)?(\s|$)/.test(nome);
+    if(sub==='bruma')return ps==='bruma'||/(^|\s)bruma(s)?(\s|$)/.test(nome);
+    if(sub==='fixador'||sub==='fixador de maquiagem'){
+      return !/(^|\s)bruma(s)?(\s|$)/.test(nome)&&
+        (ps==='fixador'||ps==='fixador de maquiagem'||/(^|\s)fixador(a)?(\s|$)/.test(nome));
+    }
+    return ps===sub;
+  };
+  function abrirLoja(){
+    document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
+    const loja=document.getElementById('loja');if(loja)loja.style.display='block';
+    document.body.classList.remove('fy-area-interna');
+  }
+  function cabecalho(titulo,quantidade,tag){
+    const box=document.querySelector('#novidades>.titulo');
+    if(!box)return;
+    const small=box.querySelector('small'),h=box.querySelector('h2'),p=box.querySelector('p');
+    if(small)small.textContent=tag;
+    if(h)h.textContent=titulo;
+    if(p)p.textContent=quantidade+' produto'+(quantidade===1?'':'s')+' encontrado'+(quantidade===1?'':'s')+'.';
+  }
+  function desenhar(lista){
+    const grade=document.getElementById('listaProdutos');if(!grade)return;
+    grade.innerHTML='';
+    lista.forEach(p=>grade.appendChild(criarCard(p)));
+    if(!lista.length)grade.innerHTML='<div class="fy-novidades-vazio"><span>♡</span><strong>Nenhum produto nesta categoria</strong><p>Novos produtos serão adicionados em breve.</p></div>';
+  }
+  function catalogoPronto(acao){
+    if(window.__FY_CATALOGO_CARREGADO)return true;
+    document.addEventListener('fy-catalogo-pronto',acao,{once:true});
+    return false;
+  }
+  window.selecionarSubcategoria=function(categoria,subcategoria){
+    if(!catalogoPronto(()=>window.selecionarSubcategoria(categoria,subcategoria)))return;
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p&&p.ativo!==false&&!ehKit(p)&&mesmaCategoria(p,categoria)&&mesmaSubcategoria(p,subcategoria));
+    abrirLoja();
+    desenhar(lista);
+    const titulo=normalizar(subcategoria)&&normalizar(subcategoria)!=='todos' ? subcategoria : 'Todos os produtos';
+    cabecalho(titulo,lista.length,String(categoria||'CATEGORIA').toUpperCase());
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
+    try{fecharMenu()}catch(e){}try{fecharSubmenuHomeFY()}catch(e){}
+  };
+  window.mostrarTodosProdutos=function(){
+    if(!catalogoPronto(window.mostrarTodosProdutos))return;
+    const lista=(Array.isArray(produtos)?produtos:[]).filter(p=>p&&p.ativo!==false&&!ehKit(p));
+    abrirLoja();desenhar(lista);cabecalho('Todos os Produtos',lista.length,'CATÁLOGO COMPLETO');
+    document.getElementById('novidades')?.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  window.limparFiltroSubcategoria=window.mostrarTodosProdutos;
+})();
+</script>
