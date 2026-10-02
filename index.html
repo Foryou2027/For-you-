@@ -17624,20 +17624,36 @@ function listaFotosFY(valor){
 function fotoVarianteFY(p,v){
   const direta=fotoOpcaoFY(v)||listaFotosFY(v?.galeria||v?.imagens||v?.fotos).map(fotoOpcaoFY).find(Boolean);
   if(direta)return direta;
-  const normalizar=t=>String(t??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-  const nomes=[v?.nome,v?.cor,v?.sabor,v?.valor,v?.label].map(normalizar).filter(Boolean);
-  const vinculada=listaFotosFY(p.galeria).find(f=>f&&typeof f==='object'&&[f.variante,f.cor,f.nome,f.label].some(n=>n!=null&&nomes.includes(normalizar(n))));
-  return fotoOpcaoFY(vinculada)||'';
+  const normalizar=t=>String(t??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const nomes=[v?.nome,v?.name,v?.cor,v?.sabor,v?.valor,v?.label].map(normalizar).filter(Boolean);
+  const galeria=listaFotosFY(p.galeria);
+  const vinculada=galeria.find(f=>f&&typeof f==='object'&&[f.variante,f.cor,f.nome,f.name,f.label,f.sabor].some(n=>n!=null&&nomes.includes(normalizar(n))));
+  if(fotoOpcaoFY(vinculada))return fotoOpcaoFY(vinculada);
+  // Only an explicit zero-based photo index establishes a positional link.
+  const indice=v?.indice_foto??v?.foto_index;
+  if(indice!==undefined && indice!==null && String(indice).trim()!=='' && Number.isInteger(Number(indice)) && Number(indice)>=0){
+    const foto=fotoOpcaoFY(galeria[Number(indice)]);
+    if(foto)return foto;
+  }
+  // Match named files only when exactly one image identifies this option.
+  const candidatas=galeria.map(fotoOpcaoFY).filter(src=>{
+    let arquivo=src.split(/[?#]/)[0].split('/').pop()||'';
+    try{arquivo=decodeURIComponent(arquivo)}catch(e){}
+    const nomeArquivo=' '+normalizar(arquivo.replace(/\.[^.]+$/,''))+' ';
+    return nomes.some(nome=>nomeArquivo.includes(' '+nome+' '));
+  });
+  const unicas=[...new Set(candidatas)];
+  return unicas.length===1?unicas[0]:'';
 }
 function fotosProduto(p){return [...new Set([fotoOpcaoFY(p.imagem),...listaFotosFY(p.galeria).map(fotoOpcaoFY),...(Array.isArray(p.variantes)?p.variantes:[]).map(v=>fotoVarianteFY(p,v))].filter(Boolean))]}
-function selecionarFoto(src){fySafeImg.src=src;document.querySelectorAll('#fySafeThumbs button').forEach(b=>b.classList.toggle('ativa',b.dataset.src===src))}
+function selecionarFoto(src){fySafeImg.removeAttribute('srcset');fySafeImg.src=src;document.querySelectorAll('#fySafeThumbs button').forEach(b=>b.classList.toggle('ativa',b.dataset.src===src))}
 function montarFotos(p){const fotos=fotosProduto(p);fySafeThumbs.innerHTML=fotos.length>1?fotos.map((src,i)=>'<button type="button" class="'+(i===0?'ativa':'')+'" data-src="'+src+'" onclick="fySelecionarFoto(\''+src+'\')"><img loading="lazy" decoding="async" src="'+src+'" alt=""></button>').join(''):'';selecionarFoto(fotos[0]||'')}
 window.fySelecionarFoto=selecionarFoto;
 window.fySelecionarVariante=function(indice){
   indice=Number(indice);
   if(!produtoAtual||!Array.isArray(produtoAtual.variantes)||!Number.isInteger(indice)||indice<0||indice>=produtoAtual.variantes.length)return;
   varianteAtual=produtoAtual.variantes[indice];
-  document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>b.classList.toggle('ativa',i===indice));
+  document.querySelectorAll('#fySafeVariants button').forEach((b,i)=>{b.classList.toggle('ativa',i===indice);b.setAttribute('aria-pressed',String(i===indice));});
   const foto=fotoVarianteFY(produtoAtual,varianteAtual)||fotoOpcaoFY(produtoAtual.imagem)||fotosProduto(produtoAtual)[0];
   if(foto)selecionarFoto(foto);
   const nome=varianteAtual?.nome||varianteAtual?.cor||varianteAtual?.sabor||'';
@@ -17886,6 +17902,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <script id="foryou-supabase-products">
 (function(){
   function corrigirImagemProdutoFY(url){
+    if(url && typeof url==='object'){
+      const registro={...url};
+      for(const campo of ['imagem','image','foto','image_url','imagem_url','foto_url','url','src']){
+        if(typeof registro[campo]==='string')registro[campo]=corrigirImagemProdutoFY(registro[campo]);
+      }
+      return registro;
+    }
     return String(url||'').trim()
       .replace('https://SEU_PROJECT_REF.supabase.co/storage/v1/object/public/produtos/',
                'https://gqsmewyjwhoajhozjkqu.supabase.co/storage/v1/object/public/Produtos/');
@@ -18886,6 +18909,13 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
   }
 
   function corrigirImagem(url){
+    if(url && typeof url==='object'){
+      const registro={...url};
+      for(const campo of ['imagem','image','foto','image_url','imagem_url','foto_url','url','src']){
+        if(typeof registro[campo]==='string')registro[campo]=corrigirImagem(registro[campo]);
+      }
+      return registro;
+    }
     return String(url||'').trim()
       .replace('https://SEU_PROJECT_REF.supabase.co/storage/v1/object/public/produtos/',
                'https://gqsmewyjwhoajhozjkqu.supabase.co/storage/v1/object/public/Produtos/');
@@ -27230,6 +27260,7 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
       select.id='fyVarianteSelect';
       select.setAttribute('aria-label','Escolher variação do produto');
       select.addEventListener('change',function(){
+        if(this.value==='')return;
         const indice=Number(this.value);
         if(Number.isInteger(indice) && indice>=0 && typeof window.fySelecionarVariante==='function'){
           window.fySelecionarVariante(indice);
