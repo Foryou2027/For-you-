@@ -10068,13 +10068,14 @@ onclick="fecharCarrinho()"
 
 <div class="carrinho-header">
 
-<div><small class="fy-cart-kicker">SUA COMPRA</small><h2>Minha sacola</h2></div>
+<div class="fy10-cart-heading"><span class="fy10-cart-bag" aria-hidden="true">♡</span><div><small class="fy-cart-kicker">FOR YOU • BELEZA</small><h2>Meu Carrinho</h2><p class="fy10-cart-subtitle">Confira seus produtos e finalize sua compra</p></div></div>
 
 <button type="button" class="fechar" id="btnFecharCarrinho" aria-label="Fechar carrinho" title="Fechar carrinho">&#xD7;</button>
 
 </div>
 
 
+<div class="fy10-cart-steps" aria-label="Etapas da compra"><span class="fy10-step-active">① Carrinho</span><span>② Entrega</span><span>③ Pagamento</span></div>
 <div class="itens" id="itens"></div>
 
 
@@ -10295,7 +10296,7 @@ APLICAR
 
 
 <button class="whatsapp" onclick="abrirCheckout()">FINALIZAR PEDIDO</button>
-<button type="button" class="fy-finalizar-compra" onclick="fyFinalizarCompra()">Finalizar compra</button>
+<button type="button" class="fy-finalizar-compra" onclick="fyFinalizarCompra()">♧ &nbsp; Finalizar compra &nbsp; →</button>
 <button type="button" class="fy-continuar-comprando" onclick="fyContinuarComprando()">Continuar comprando</button>
 <div class="fy-seguranca-sacola">&#x1F512; Compra segura &#x2022; Seus dados protegidos</div>
 
@@ -27346,6 +27347,87 @@ nav.fy-clean-cat-top > button:not(.fy-pill):focus-visible {
 }
 @media(min-width:801px){.fy6-bottom-nav{display:none!important}}
 @media(prefers-reduced-motion:reduce){.fy6-bottom-nav *{transition:none!important}}
+</style>
+
+
+<style id="fy10-cart-rose-elegance">
+/* Etapa 10 — redesenho visual do carrinho lateral.
+   Reutiliza integralmente os handlers, campos e cálculos já existentes. */
+#carrinho.carrinho{
+ --fy10-wine:#632632;--fy10-rose:#bf4267;--fy10-border:#f0d6dd;
+ background:linear-gradient(145deg,#fffafc 0%,#fff4f7 72%,#fff9fa 100%)!important;
+ color:#482b34!important;
+ width:min(490px,100vw)!important;
+ max-width:100vw!important;
+ box-shadow:-20px 0 65px rgba(72,22,41,.17)!important;
+ border-left:1px solid #f1d4dd!important;
+ padding:0!important;
+ overflow-x:hidden!important;
+}
+#carrinho .carrinho-header{
+ background:linear-gradient(115deg,#fffafd,#fff1f5)!important;
+ padding:22px 22px 16px!important;
+ border-bottom:1px solid var(--fy10-border)!important;
+ align-items:flex-start!important;
+ position:relative;
+}
+#carrinho .fy10-cart-heading{display:flex;align-items:center;gap:12px;min-width:0}
+#carrinho .fy10-cart-bag{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid #e7adbf;border-radius:13px;background:#fff0f5;color:#ba3d63;font-size:27px}
+#carrinho .fy-cart-kicker{display:block;font-size:10px!important;letter-spacing:1.7px!important;color:#b16b80!important;margin-bottom:3px!important}
+#carrinho .carrinho-header h2{font-family:Georgia,serif!important;font-size:27px!important;line-height:1.15!important;color:#642c3a!important;margin:0!important}
+#carrinho .fy10-cart-subtitle{font:12px/1.45 Arial,sans-serif!important;color:#806771!important;margin:5px 0 0!important}
+#carrinho .fechar{font-size:25px!important;width:36px;height:36px;line-height:1;border:1px solid #f0d6df!important;border-radius:50%!important;background:white!important;color:#743749!important;flex:none}
+#carrinho .fy10-cart-steps{display:flex;align-items:center;justify-content:space-between;gap:7px;padding:14px 20px;border-bottom:1px solid var(--fy10-border);background:#fff9fb;font:600 11px/1.3 Arial,sans-serif;color:#a58b94}
+#carrinho .fy10-cart-steps span{white-space:nowrap}
+#carrinho .fy10-cart-steps .fy10-step-active{color:#b4385f}
+#carrinho .itens{padding:9px 18px 16px!important;min-height:95px!important;background:transparent!important;overflow:visible!important;flex:0 0 auto!important}
+#carrinho .item{display:flex!important;gap:13px!important;align-items:center!important;padding:13px 2px!important;border-bottom:1px solid #eed8df!important;background:transparent!important}
+#carrinho .item-img{width:86px!important;height:88px!important;min-width:86px!important;border-radius:12px!important;overflow:hidden!important;background:#fbe9ee!important;display:grid!important;place-items:center!important}
+#carrinho .item-img img{width:100%!important;height:100%!important;object-fit:contain!important}
+#carrinho .item-dados{min-width:0!important;flex:1!important}
+#carrinho .item-dados strong{font:600 14px/1.35 Arial,sans-serif!important;color:#4a2a35!important;overflow-wrap:anywhere}
+#carrinho .item-preco{font:700 15px/1.4 Arial,sans-serif!important;color:#a92c54!important;margin:7px 0!important}
+#carrinho .quantidade{display:inline-flex!important;align-items:center!important;gap:0!important;border:1px solid #ebcdd7!important;background:#fff!important;border-radius:9px!important;overflow:hidden!important;min-height:34px!important}
+#carrinho .quantidade button{width:34px!important;height:34px!important;min-height:34px!important;background:transparent!important;border:0!important;border-radius:0!important;color:#71374a!important;font-size:17px!important}
+#carrinho .quantidade span{padding:0 8px!important;font:600 12px Arial,sans-serif!important}
+#carrinho .remover{color:#b14b6a!important;font-size:11px!important;padding:8px 0!important;margin:4px 0 0!important}
+#carrinho .frete-gratis{padding:14px 20px!important;background:#fff2f6!important;border-top:1px solid var(--fy10-border)!important;border-bottom:1px solid var(--fy10-border)!important}
+#carrinho .frete-gratis p{font:600 12px/1.5 Arial,sans-serif!important;color:#794657!important;margin:0 0 9px!important}
+#carrinho .barra{height:7px!important;border-radius:30px!important;background:#edd6de!important}
+#carrinho .barra-progresso{background:linear-gradient(90deg,#e795ad,#ba4168)!important;border-radius:30px!important}
+#carrinho .frete,#carrinho .cupom{margin:12px 15px!important;padding:18px!important;background:rgba(255,255,255,.9)!important;border:1px solid var(--fy10-border)!important;border-radius:16px!important;box-shadow:0 3px 15px rgba(110,39,62,.035)!important}
+#carrinho .frete h3,#carrinho .cupom h3{font:700 12px/1.4 Arial,sans-serif!important;color:#753448!important;letter-spacing:.6px!important;margin:0 0 12px!important}
+#carrinho .cep-linha,#carrinho .cupom-linha{display:flex!important;gap:8px!important}
+#carrinho input:not([type="radio"]){background:#fffafb!important;border:1px solid #ead1da!important;border-radius:9px!important;min-height:42px!important;color:#5e3947!important;font-size:13px!important;min-width:0}
+#carrinho .cep-linha button,#carrinho .cupom-linha button,#carrinho .cupom-card button{background:#b94469!important;border:0!important;color:#fff!important;border-radius:9px!important;padding:0 15px!important;min-height:42px!important;font:700 11px Arial,sans-serif!important}
+#carrinho .cep-link{color:#b03d63!important;font-size:11px!important}
+#carrinho .endereco-box,#carrinho .entrega{border-color:#efd9e0!important;border-radius:10px!important}
+#carrinho .entrega-nome{color:#663b49!important}
+#carrinho .cupom-msg{font-size:12px!important}
+#carrinho .cupons-disponiveis{border-color:#f0d8df!important}
+#carrinho .cupom-card{border-color:#f0d8df!important;background:#fff9fb!important;border-radius:10px!important}
+#carrinho .resumo{margin:12px 15px 20px!important;padding:18px!important;background:#fffafb!important;border:1px solid #eacbd5!important;border-radius:17px!important;box-shadow:0 7px 22px rgba(112,39,62,.06)!important}
+#carrinho .resumo .linha{display:flex!important;justify-content:space-between!important;gap:12px!important;padding:7px 0!important;color:#4b3540!important;font-size:13px!important}
+#carrinho .resumo .linha strong{font-weight:700!important;color:#6d3042!important}
+#carrinho .resumo .linha.desconto strong{color:#c34065!important}
+#carrinho .resumo .linha.total{background:linear-gradient(90deg,#fbe9ee,#fff0f4)!important;border-radius:12px!important;padding:14px!important;margin:12px -5px!important;font-size:17px!important;color:#6d263b!important}
+#carrinho .resumo .linha.total strong{color:#872843!important;font-size:20px!important}
+#carrinho .resumo .fy-finalizar-compra{display:block!important;width:100%!important;background:linear-gradient(100deg,#d64d76,#ae3158)!important;color:#fff!important;border:0!important;border-radius:13px!important;min-height:52px!important;padding:13px!important;font:700 15px Arial,sans-serif!important;box-shadow:0 5px 12px rgba(176,47,88,.14)!important;margin:10px 0!important}
+#carrinho .resumo .fy-continuar-comprando{display:block!important;width:100%!important;border:1px solid #e7bccb!important;background:#fff!important;color:#943a58!important;border-radius:12px!important;min-height:42px!important;font-size:12px!important;margin:9px 0!important}
+#carrinho .fy-seguranca-sacola{font:11px/1.4 Arial,sans-serif!important;text-align:center!important;color:#826470!important;padding:10px 0!important}
+#carrinho .resumo button.whatsapp{border-radius:10px!important;min-height:42px!important;font-size:11px!important}
+#carrinho .resumo button.whatsapp:first-of-type{display:none!important} /* mantém ação única de checkout, sem remover JS */
+@media(max-width:800px){
+ #carrinho.carrinho{width:100vw!important;height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+ #carrinho .carrinho-header{padding:17px 16px 13px!important}
+ #carrinho .carrinho-header h2{font-size:24px!important}
+ #carrinho .fy10-cart-steps{padding:12px 14px!important;font-size:10px!important}
+ #carrinho .itens{padding:6px 12px 13px!important}
+ #carrinho .item-img{width:75px!important;min-width:75px!important;height:79px!important}
+ #carrinho .frete,#carrinho .cupom,#carrinho .resumo{margin-left:10px!important;margin-right:10px!important;padding:14px!important}
+ #carrinho .cep-linha button,#carrinho .cupom-linha button{padding:0 10px!important}
+}
+@media(prefers-reduced-motion:reduce){#carrinho *{scroll-behavior:auto!important;transition:none!important}}
 </style>
 
 </body>
