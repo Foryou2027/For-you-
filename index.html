@@ -8574,6 +8574,44 @@ header .header-top .logo{width:76px!important;min-width:76px!important;max-width
 }
 </style>
 
+
+<!-- FOR YOU: refinamento visual leve - etapa 4 -->
+<style id="fy-refinamento-visual-etapa4">
+/* Acabamento visual: somente CSS, sem alterar fluxos ou estrutura. */
+:root{--fy-v4-rosa:#b83f61;--fy-v4-escuro:#351f27;--fy-v4-borda:#ead9de;--fy-v4-sombra:0 10px 30px rgba(53,31,39,.07)}
+/* Produtos: bordas e profundidade suaves. */
+.produto{border-radius:19px;box-shadow:0 3px 14px rgba(53,31,39,.045);border-color:#f0dfe4}
+@media(hover:hover) and (pointer:fine){
+ .produto:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(53,31,39,.11)}
+ .adicionar:hover,.btn:hover,.btn-detalhe:hover{filter:brightness(1.08)}
+}
+.produto-info{padding:17px}
+.produto .nome{line-height:1.25}
+.produto .marca{letter-spacing:1.15px}
+.produto .preco{font-variant-numeric:tabular-nums}
+/* Botões principais com acabamento consistente. */
+.adicionar,.btn,.btn-detalhe,.conta-principal-btn{border-radius:11px;transition:background-color .2s ease,color .2s ease,box-shadow .2s ease,filter .2s ease}
+.adicionar{min-height:40px;border-color:#d9a4b3}
+.btn,.btn-detalhe,.conta-principal-btn{box-shadow:0 4px 12px rgba(53,31,39,.09)}
+/* Seções e textos: detalhes delicados sem reposicionar componentes. */
+.titulo h2{letter-spacing:-.4px;line-height:1.14}
+.titulo small{letter-spacing:2.4px}
+.produto-detalhe,.avaliacoes,.conta{border-radius:17px;box-shadow:var(--fy-v4-sombra)}
+/* Campos de entrada e acessibilidade. */
+input:not([type=checkbox]):not([type=radio]),select,textarea{transition:border-color .18s ease,box-shadow .18s ease}
+input:not([type=checkbox]):not([type=radio]):focus-visible,select:focus-visible,textarea:focus-visible{border-color:#b83f61;box-shadow:0 0 0 3px rgba(184,63,97,.12);outline:none}
+button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:2px solid #b83f61;outline-offset:3px}
+@media(max-width:800px){
+ .produto-info{padding:13px}
+ .titulo h2{letter-spacing:-.2px}
+ .produto{box-shadow:0 2px 10px rgba(53,31,39,.04)}
+}
+@media(prefers-reduced-motion:reduce){
+ .produto,.adicionar,.btn,.btn-detalhe,.conta-principal-btn{transition:none!important}
+ .produto:hover{transform:none!important}
+}
+</style>
+
 </head>
 
 
