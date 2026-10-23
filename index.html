@@ -14,25 +14,10 @@
 })();
 </script>
 
-<script>
-/* Mobile: mostra a estrutura imediatamente; o conteudo dinamico entra sem bloquear a pagina inteira. */
-</script>
+<!-- Mobile: estrutura visível desde o primeiro desenho; sem script bloqueante vazio. -->
 <style id="fy-mobile-estabilidade-critica">
 @media(max-width:800px){
   html.fy-mobile-carregando{background:#fff8fa!important}
-  html.fy-mobile-carregando::before{
-    content:'FOR YOU';
-    position:fixed;
-    inset:0;
-    z-index:2147483647;
-    display:grid;
-    place-items:center;
-    background:#fff8fa;
-    color:#8d1739;
-    font:500 23px/1 Georgia,serif;
-    letter-spacing:5px;
-  }
-  html.fy-mobile-carregando body{visibility:hidden!important}
   html.fy-mobile-carregando *,
   html.fy-mobile-carregando *::before,
   html.fy-mobile-carregando *::after{
