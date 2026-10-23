@@ -27132,6 +27132,147 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
 }
 </style>
 
+
+<!-- FOR YOU: acabamento visual das categorias - etapa 5; mantém HTML e eventos existentes -->
+<style id="fy-categorias-visual-etapa5">
+/* Esta seção atua apenas na navegação de categorias abaixo do banner. */
+nav.fy-clean-cat-top {
+  box-sizing: border-box !important;
+  width: min(100% - 32px, 1280px) !important;
+  max-width: 1280px !important;
+  margin: 16px auto 12px !important;
+  padding: 16px 12px 19px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 12px 16px !important;
+  background: linear-gradient(180deg, #fff 0%, #fff9fb 100%) !important;
+  border: 1px solid #f5e3e9 !important;
+  border-radius: 22px !important;
+  box-shadow: 0 8px 26px rgba(111, 37, 62, .045) !important;
+}
+nav.fy-clean-cat-top > button:not(.fy-pill) {
+  position: relative !important;
+  box-sizing: border-box !important;
+  flex: 0 0 104px !important;
+  width: 104px !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 9px !important;
+  padding: 4px 3px 7px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  color: #492431 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: transform .18s ease, background-color .18s ease !important;
+}
+nav.fy-clean-cat-top > button:not(.fy-pill)::after {
+  content: none !important;
+  display: none !important;
+}
+nav.fy-clean-cat-top > button:not(.fy-pill) .fy-cat-desenho {
+  display: grid !important;
+  place-items: center !important;
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+  border-radius: 50% !important;
+  border: 1px solid #f0cdd8 !important;
+  background: radial-gradient(circle at 34% 25%, #fff 0%, #ffe7ef 65%, #fbd2df 100%) !important;
+  color: #b82c5c !important;
+  box-shadow: 0 5px 12px rgba(159, 48, 86, .09), inset 0 2px 5px rgba(255,255,255,.9) !important;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease !important;
+}
+nav.fy-clean-cat-top .fy-cat-desenho svg {
+  width: 34px !important;
+  height: 34px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.65 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+nav.fy-clean-cat-top > button:not(.fy-pill) b {
+  color: #492431 !important;
+  font: 600 11px/1.35 "Trebuchet MS", Arial, sans-serif !important;
+  letter-spacing: .05px !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+@media (hover:hover) and (pointer:fine) {
+  nav.fy-clean-cat-top > button:not(.fy-pill):hover {
+    transform: translateY(-3px) !important;
+    background: #fff1f6 !important;
+  }
+  nav.fy-clean-cat-top > button:not(.fy-pill):hover .fy-cat-desenho {
+    transform: scale(1.045) !important;
+    border-color: #d989a4 !important;
+    box-shadow: 0 8px 17px rgba(159,48,86,.14) !important;
+  }
+}
+nav.fy-clean-cat-top > button:not(.fy-pill):focus-visible {
+  outline: 3px solid #b82c5c !important;
+  outline-offset: 3px !important;
+}
+@media (max-width: 800px) {
+  nav.fy-clean-cat-top {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 7px auto 9px !important;
+    padding: 13px 12px 15px !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #edb5c7 transparent;
+  }
+  nav.fy-clean-cat-top > button:not(.fy-pill) {
+    flex: 0 0 76px !important;
+    width: 76px !important;
+    min-width: 76px !important;
+    padding: 3px 2px 8px !important;
+    gap: 7px !important;
+    scroll-snap-align: start;
+  }
+  nav.fy-clean-cat-top > button:not(.fy-pill) .fy-cat-desenho {
+    width: 58px !important;
+    height: 58px !important;
+    min-width: 58px !important;
+    min-height: 58px !important;
+  }
+  nav.fy-clean-cat-top .fy-cat-desenho svg {
+    width: 29px !important;
+    height: 29px !important;
+  }
+  nav.fy-clean-cat-top > button:not(.fy-pill) b {
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  nav.fy-clean-cat-top > button:not(.fy-pill),
+  nav.fy-clean-cat-top .fy-cat-desenho {
+    transition: none !important;
+  }
+}
+</style>
+
 </body>
 </html>
 
