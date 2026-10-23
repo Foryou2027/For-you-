@@ -27273,6 +27273,81 @@ nav.fy-clean-cat-top > button:not(.fy-pill):focus-visible {
 }
 </style>
 
+
+<nav class="fy6-bottom-nav" aria-label="Navegação rápida no celular">
+ <button type="button" onclick="if(typeof mostrarLoja==='function')mostrarLoja();else window.scrollTo({top:0,behavior:'smooth'})" aria-label="Início">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3z"/></svg><span>Início</span></button>
+ <button type="button" onclick="document.querySelector('nav.fy-clean-cat-top')?.scrollIntoView({behavior:'smooth',block:'center'})" aria-label="Categorias">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Categorias</span></button>
+ <button type="button" onclick="if(typeof abrirFavoritos==='function')abrirFavoritos()" aria-label="Favoritos">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 0 0 0-7.6Z"/></svg><span>Favoritos</span></button>
+ <button type="button" onclick="if(typeof abrirCarrinho==='function')abrirCarrinho()" aria-label="Sacola">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Sacola</span></button>
+ <button type="button" onclick="if(typeof abrirConta==='function')abrirConta()" aria-label="Minha conta">
+ <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Conta</span></button>
+</nav>
+
+
+<!-- FOR YOU | Mobile-first - etapa 6: identidade, vitrine e navegação -->
+<style id="fy-mobile-first-etapa6">
+:root{--fy6-wine:#ad1042;--fy6-rose:#e92e66;--fy6-blush:#fff3f7;--fy6-line:#f1d8e0}
+@media (max-width:800px){
+  html{scroll-padding-top:90px}
+  body{padding-bottom:calc(73px + env(safe-area-inset-bottom,0px))!important;background:#fffafb!important}
+  .topo{font-size:10px!important;letter-spacing:.15px!important;padding:9px 8px!important;background:linear-gradient(95deg,#b80d43,#df275d)!important;color:white!important}
+  header{position:sticky!important;top:0!important;z-index:1000!important;background:linear-gradient(180deg,#fff5f8,#fff)!important;box-shadow:0 3px 12px rgba(92,23,46,.07)!important}
+  header .header{padding:8px 12px 11px!important;width:100%!important}
+  header .header-top{display:grid!important;grid-template-columns:50px minmax(0,1fr) 58px!important;grid-template-rows:62px auto!important;align-items:center!important;gap:4px 7px!important}
+  header .fy-header-slogan{display:none!important}
+  header .logo{grid-column:2!important;grid-row:1!important;justify-self:center!important;min-width:0!important;width:auto!important;max-width:100%!important}
+  header .fy-brand-logo{display:flex!important;align-items:center!important;justify-content:center!important;width:auto!important;max-width:100%!important;height:60px!important;overflow:visible!important}
+  header .fy-brand-logo img{display:none!important}
+  header .fy-brand-logo::before{content:"FOR YOU";display:block;color:#a40f3b;font:600 clamp(30px,9vw,46px)/1 Georgia,"Times New Roman",serif;letter-spacing:-1.7px;white-space:nowrap;text-shadow:0 1px 0 #fff}
+  header .fy-brand-logo::after{content:"—  B E L E Z A  ♥  —";position:absolute;margin-top:46px;color:#a40f3b;font:700 10px/1 Arial,sans-serif;letter-spacing:1.1px;white-space:nowrap}
+  header .fy-wordmark-center{display:none!important}
+  header .acoes{grid-column:3!important;grid-row:1!important;display:flex!important;justify-content:flex-end!important;gap:5px!important}
+  header .acoes>*:not(.carrinho-icon){display:none!important}
+  header .fy-busca-topo{grid-column:1/-1!important;grid-row:2!important;width:100%!important;margin:5px 0 0!important}
+  header .busca{width:100%!important;max-width:none!important;margin:0!important}
+  header .busca-linha{min-height:43px!important;border:1px solid #f0d8e0!important;border-radius:12px!important;box-shadow:0 2px 7px rgba(92,23,46,.03)!important}
+  header .busca input{font-size:13px!important;padding:11px 12px!important}
+  header .menu-principal{display:none!important}
+  .fy-banner-r10{margin:7px auto 6px!important;width:calc(100% - 16px)!important;max-width:calc(100% - 16px)!important;border-radius:13px!important;overflow:hidden!important;box-shadow:0 7px 20px rgba(132,24,60,.09)!important}
+  .fy-banner-r10-viewport{border-radius:13px!important}
+  nav.fy-clean-cat-top{width:100%!important;max-width:100%!important;padding:12px 10px 15px!important;margin:0 auto 8px!important;border:0!important;background:#fffafb!important;gap:8px!important;scroll-snap-type:x proximity!important}
+  nav.fy-clean-cat-top>button:not(.fy-pill){flex:0 0 80px!important;width:80px!important;min-width:80px!important;gap:7px!important;scroll-snap-align:start!important}
+  nav.fy-clean-cat-top>button:not(.fy-pill) .fy-cat-desenho{width:65px!important;height:65px!important;min-width:65px!important;min-height:65px!important;border-radius:50%!important;background:radial-gradient(circle at 28% 20%,#fff,#ffd9e5 72%,#f6afc5)!important;border:1px solid #e7a8bc!important;box-shadow:0 3px 8px rgba(133,24,58,.1)!important}
+  nav.fy-clean-cat-top .fy-cat-desenho svg{width:32px!important;height:32px!important;color:#b5164d!important}
+  nav.fy-clean-cat-top>button:not(.fy-pill) b{font-size:10px!important;color:#2e2025!important}
+  .fy-special-links{padding:8px 12px 11px!important;background:#fffafb!important}
+  .fy-special-link{border-radius:12px!important;min-height:42px!important}
+  .secao{padding:23px 12px!important}
+  .titulo{margin-bottom:17px!important}
+  .titulo h2{font:600 27px/1.2 Georgia,serif!important;color:#ac1242!important;text-align:left!important;margin:5px 0!important}
+  .titulo small,.titulo p{text-align:left!important}
+  .produtos{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;width:100%!important}
+  .produto{border-radius:13px!important;border:1px solid #f0d6df!important;box-shadow:0 3px 13px rgba(112,22,55,.055)!important;overflow:hidden!important}
+  .produto-img{height:auto!important;aspect-ratio:1/1!important;background:#fff2f6!important}
+  .produto-img img{width:100%!important;height:100%!important;object-fit:contain!important}
+  .produto-info{padding:10px!important}
+  .produto-info .nome{font:600 13px/1.35 "Trebuchet MS",Arial,sans-serif!important;min-height:34px!important}
+  .produto-info .preco{color:#bc164d!important;font-size:15px!important}
+  .produto-info .adicionar{background:linear-gradient(90deg,#eb346a,#d71c55)!important;color:#fff!important;border:0!important;border-radius:9px!important;min-height:39px!important;font-size:10px!important;margin-top:9px!important}
+  .beneficios{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;padding:12px!important}
+  .beneficio{min-height:92px!important;border-radius:12px!important}
+  .fy6-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1200;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:7px 4px calc(8px + env(safe-area-inset-bottom,0px));background:rgba(255,250,252,.98);border-top:1px solid #efd3dc;box-shadow:0 -4px 20px rgba(88,17,42,.08)}
+  .fy6-bottom-nav button{appearance:none;border:0;background:transparent;color:#50323c;display:flex;align-items:center;flex-direction:column;gap:4px;justify-content:center;min-width:0;min-height:49px;font:600 10px/1.1 Arial,sans-serif;cursor:pointer}
+  .fy6-bottom-nav button:first-child{color:#c81d52}
+  .fy6-bottom-nav svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .fy6-bottom-nav button:focus-visible{outline:2px solid #b71950;outline-offset:-2px;border-radius:8px}
+  .fy6-bottom-nav button span{white-space:nowrap}
+  .carrinho{z-index:1501!important}
+  #overlay{z-index:1500!important}
+}
+@media(min-width:801px){.fy6-bottom-nav{display:none!important}}
+@media(prefers-reduced-motion:reduce){.fy6-bottom-nav *{transition:none!important}}
+</style>
+
 </body>
 </html>
 
