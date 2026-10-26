@@ -1159,6 +1159,58 @@ html body nav.fy-clean-cat-top>button .fy-category-line-icon svg{width:35px!impo
 @media(hover:hover){html body nav.fy-clean-cat-top>button:hover .fy-category-line-icon{background:#f6e5ed!important;border-color:#cf9db1!important}}
 @media(max-width:800px){#fyCategorySheet .fy-category-list .fy-category-line-icon{width:44px;height:44px;border-radius:14px}}
 </style>
+<style id="fy-favoritos-lista-nova">/* Favoritos — coleção pessoal em formato de lista */
+html body #paginaFavoritos{max-width:1180px!important;padding:30px 26px 70px!important;margin:auto!important;background:#fff!important}
+html body:has(#paginaFavoritos.ativa){background:#fff!important}
+html body #paginaFavoritos>.voltar{font:500 11px var(--fy-ui-font)!important;color:#9a6c80!important;margin:0 0 26px!important;padding:8px 0!important;background:none!important;border:0!important}
+html body #paginaFavoritos .favoritos-hero{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;border:0!important;border-bottom:1px solid #eadce3!important;border-radius:0!important;background:none!important;box-shadow:none!important;padding:0 0 25px!important;margin:0 0 22px!important;width:100%!important}
+html body #paginaFavoritos .favoritos-hero small{display:none!important}
+html body #paginaFavoritos .favoritos-hero h2{font:500 31px/1.2 var(--fy-ui-font)!important;letter-spacing:-1.2px!important;margin:0 0 10px!important;color:#432e37!important}
+html body #paginaFavoritos .favoritos-hero p{display:block!important;font:400 12px/1.7 var(--fy-ui-font)!important;margin:0!important;color:#947c86!important;max-width:400px!important}
+html body #paginaFavoritos .favoritos-resumo{display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;flex-basis:auto!important;width:auto!important;min-width:0!important;min-height:0!important;padding:8px 12px!important;border:0!important;border-radius:7px!important;background:#fcf1f5!important;white-space:nowrap!important}
+html body #paginaFavoritos .favoritos-resumo strong{font:700 12px/1.5 var(--fy-ui-font)!important;color:#923451!important}
+html body #paginaFavoritos .favoritos-resumo span{font:400 10px/1.5 var(--fy-ui-font)!important;color:#a16c82!important}
+html body #paginaFavoritos #listaFavoritos>.produtos{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0 32px!important;width:100%!important;margin:0!important}
+html body #paginaFavoritos #listaFavoritos .produto{display:grid!important;grid-template-columns:125px minmax(0,1fr)!important;gap:20px!important;padding:23px 0!important;border:0!important;border-bottom:1px solid #eee3e8!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;align-items:start!important;overflow:visible!important}
+html body #paginaFavoritos #listaFavoritos .produto-img{position:relative!important;width:125px!important;height:150px!important;aspect-ratio:auto!important;min-height:0!important;border:0!important;border-radius:12px!important;background:#fff7fa!important;overflow:hidden!important}
+html body #paginaFavoritos #listaFavoritos .produto-img>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;padding:15px!important;box-sizing:border-box!important}
+html body #paginaFavoritos #listaFavoritos .produto-info{padding:4px 0 0!important;display:flex!important;flex-direction:column!important;gap:7px!important;min-width:0!important;align-items:flex-start!important}
+html body #paginaFavoritos #listaFavoritos .marca{font:500 9px/1.5 var(--fy-ui-font)!important;color:#a18290!important;letter-spacing:1px!important}
+html body #paginaFavoritos #listaFavoritos .nome,html body #paginaFavoritos #listaFavoritos .nome a{font:500 13px/1.6 var(--fy-ui-font)!important;min-height:0!important;height:auto!important;max-height:none!important;color:#513b45!important;text-decoration:none!important;margin:0!important;white-space:normal!important}
+html body #paginaFavoritos #listaFavoritos .preco{font:700 17px/1.4 var(--fy-ui-font)!important;color:#923451!important;margin:4px 0!important}
+html body #paginaFavoritos #listaFavoritos .adicionar{width:auto!important;max-width:100%!important;min-height:37px!important;background:#fff!important;color:#923451!important;border:1px solid #dfbccb!important;border-radius:7px!important;font:600 9px/1.4 var(--fy-ui-font)!important;letter-spacing:.3px!important;padding:9px 13px!important;margin:3px 0 0!important}
+html body #paginaFavoritos #listaFavoritos .favoritar{position:absolute!important;top:7px!important;right:7px!important;width:31px!important;height:31px!important;min-width:31px!important;min-height:31px!important;background:#fff!important;border:0!important;border-radius:50%!important;box-shadow:none!important;color:#d92845!important}
+html body #paginaFavoritos #listaFavoritos .favoritar svg{width:20px!important;height:20px!important}
+html body #paginaFavoritos #listaFavoritos .etiqueta{display:none!important}
+html body #paginaFavoritos #fyPriceWatch{display:flex!important;align-items:center!important;gap:12px!important;padding:13px 15px!important;margin:0 0 12px!important;border:0!important;border-radius:9px!important;background:#fff8fb!important;box-shadow:none!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy{flex:1!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy strong{font:500 11px/1.5 var(--fy-ui-font)!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy span{font:400 10px/1.5 var(--fy-ui-font)!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-btn{font-size:9px!important;padding:8px 10px!important;min-height:34px!important;white-space:nowrap!important}
+html body #paginaFavoritos .favoritos-vazio{border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;padding:65px 20px!important;text-align:center!important}
+html body #paginaFavoritos .fav-empty-icon{background:#fcf1f5!important;border:0!important;width:65px!important;height:65px!important;font-size:34px!important;margin:0 auto 22px!important;color:#b46d88!important}
+html body #paginaFavoritos .favoritos-vazio h3{font:500 22px/1.3 var(--fy-ui-font)!important;color:#503640!important;margin:0 0 12px!important}
+html body #paginaFavoritos .favoritos-vazio p{font:400 12px/1.8 var(--fy-ui-font)!important;max-width:310px!important;margin:0 auto 24px!important;color:#947d86!important}
+html body #paginaFavoritos .favoritos-vazio button{font:600 10px var(--fy-ui-font)!important;border-radius:8px!important;padding:13px 23px!important;background:#923451!important;color:#fff!important}
+@media(max-width:800px){
+ html body #paginaFavoritos{padding:22px 20px 100px!important}
+ html body #paginaFavoritos>.voltar{margin-bottom:20px!important}
+ html body #paginaFavoritos .favoritos-hero{gap:10px!important;align-items:flex-start!important;padding-bottom:21px!important;margin-bottom:18px!important}
+ html body #paginaFavoritos .favoritos-hero h2{font-size:27px!important}
+ html body #paginaFavoritos .favoritos-hero p{font-size:11px!important;max-width:225px!important}
+ html body #paginaFavoritos .favoritos-resumo{margin-top:4px!important;padding:7px 9px!important}
+ html body #paginaFavoritos #listaFavoritos>.produtos{grid-template-columns:1fr!important;gap:0!important}
+ html body #paginaFavoritos #listaFavoritos .produto{grid-template-columns:108px minmax(0,1fr)!important;gap:16px!important;padding:21px 0!important}
+ html body #paginaFavoritos #listaFavoritos .produto-img{width:108px!important;height:143px!important}
+ html body #paginaFavoritos #listaFavoritos .nome,html body #paginaFavoritos #listaFavoritos .nome a{font-size:12px!important}
+ html body #paginaFavoritos #listaFavoritos .preco{font-size:16px!important}
+ html body #paginaFavoritos #fyPriceWatch{gap:10px!important;flex-wrap:wrap!important}
+ html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy{min-width:180px!important}
+}
+html body:has(#paginaFavoritos.ativa) #inicio.fy-banner-r10{display:none!important}
+html body #paginaFavoritos .favoritos-resumo{flex-direction:row!important;align-self:flex-start!important}
+html body #paginaFavoritos #fyPriceWatch{width:100%!important;max-width:none!important;box-sizing:border-box!important}
+</style>
 </head>
 
 
@@ -1697,11 +1749,11 @@ Promo&#xE7;&#xF5;es de datas especiais
   <div>
     <small>SEUS ESCOLHIDOS</small>
     <h2>Favoritos</h2>
-    <p>Seus achadinhos salvos, prontos para quando você quiser.</p>
+    <p>Os produtos que você quer ver de novo.</p>
   </div>
   <div class="favoritos-resumo">
     <strong id="favoritosTotalPagina">0</strong>
-    <span>itens salvos</span>
+    <span>salvos</span>
   </div>
 </div>
 
