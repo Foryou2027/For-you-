@@ -558,6 +558,222 @@ html body .fy-wordmark-title,html body header .header .header-top .fy-wordmark-t
 
 html body #loja :is(#listaProdutos,#fyHomeOfertasGrid,#fyHomeKitsGrid,#fyHomeSelecaoGrid) .produto .produto-img{position:relative!important;width:100%!important;height:auto!important;min-height:0!important;min-width:0!important;aspect-ratio:1/1!important;flex:0 0 auto!important;overflow:hidden!important}
 html body #loja :is(#listaProdutos,#fyHomeOfertasGrid,#fyHomeKitsGrid,#fyHomeSelecaoGrid) .produto .produto-img img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;min-width:0!important;max-width:100%!important;max-height:100%!important;margin:0!important;padding:12px!important;box-sizing:border-box!important;object-fit:contain!important}
+
+/* FOR YOU — favoritos, conta e sacola com a mesma linguagem visual. */
+:root{--fy-area-rose:#a63c61;--fy-area-ink:#452f38;--fy-area-muted:#856b76;--fy-area-line:#eedce4;--fy-area-blush:#fff2f7}
+html body #paginaFavoritos,html body #paginaConta{max-width:1240px!important;width:100%!important;margin:0 auto!important;padding:30px 28px 65px!important;background:transparent!important}
+html body #paginaFavoritos>.voltar,html body #paginaConta>.voltar{display:inline-flex!important;align-items:center!important;min-height:44px!important;padding:6px 0!important;margin:0 0 22px!important;border:0!important;background:none!important;box-shadow:none!important;color:var(--fy-area-muted)!important;font:600 12px/1.4 var(--fy-ui-font)!important;letter-spacing:0!important}
+html body #paginaFavoritos .favoritos-hero{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:30px!important;padding:34px 38px!important;margin:0 0 26px!important;border:1px solid var(--fy-area-line)!important;border-radius:24px!important;background:linear-gradient(120deg,#fff0f6,#fffaf7)!important;box-shadow:none!important;text-align:left!important}
+html body #paginaFavoritos .favoritos-hero small{font:700 10px/1.5 var(--fy-ui-font)!important;letter-spacing:1.8px!important;color:#ac526f!important}
+html body #paginaFavoritos .favoritos-hero h2{font:400 42px/1.15 var(--fy-display-font)!important;letter-spacing:-.8px!important;color:var(--fy-area-ink)!important;margin:10px 0!important;text-transform:none!important}
+html body #paginaFavoritos .favoritos-hero p{font:400 14px/1.8 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important;max-width:490px!important;margin:0!important}
+html body #paginaFavoritos .favoritos-resumo{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;flex:0 0 116px!important;width:116px!important;min-height:116px!important;padding:16px!important;border:1px solid #efd7e2!important;border-radius:22px!important;background:#ffffffb8!important;box-shadow:none!important;color:var(--fy-area-rose)!important}
+html body #paginaFavoritos .favoritos-resumo strong{font:400 40px/1.1 var(--fy-display-font)!important}
+html body #paginaFavoritos .favoritos-resumo span{font:500 11px/1.5 var(--fy-ui-font)!important;margin-top:5px!important}
+html body #paginaFavoritos #listaFavoritos>.produtos{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:22px!important;padding:0!important;margin:24px 0 0!important}
+html body #paginaFavoritos #listaFavoritos .produto{display:flex!important;flex-direction:column!important;min-width:0!important;overflow:hidden!important;border:1px solid var(--fy-area-line)!important;border-radius:16px!important;background:#fff!important;box-shadow:0 5px 20px #75304906!important}
+html body #paginaFavoritos #listaFavoritos .produto-img{position:relative!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1/1!important;flex:0 0 auto!important;background:#fffafb!important}
+html body #paginaFavoritos #listaFavoritos .produto-img img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:100%!important;object-fit:contain!important;padding:15px!important}
+html body #paginaFavoritos #listaFavoritos .produto-info{display:flex!important;flex-direction:column!important;gap:8px!important;flex:1!important;padding:17px!important}
+html body #paginaFavoritos #listaFavoritos .marca{font:600 10px/1.4 var(--fy-ui-font)!important;letter-spacing:1px!important;color:var(--fy-area-muted)!important}
+html body #paginaFavoritos #listaFavoritos .nome,html body #paginaFavoritos #listaFavoritos .nome a{font:500 14px/1.6 var(--fy-ui-font)!important;letter-spacing:-.1px!important;color:var(--fy-area-ink)!important;height:auto!important;max-height:none!important;min-height:45px!important;overflow:visible!important;white-space:normal!important;-webkit-line-clamp:unset!important}
+html body #paginaFavoritos #listaFavoritos .preco{font:700 21px/1.3 var(--fy-ui-font)!important;letter-spacing:-.5px!important;color:#9d3157!important}
+html body #paginaFavoritos #listaFavoritos .adicionar{margin-top:auto!important;min-height:46px!important;padding:11px 8px!important;border-radius:10px!important;background:var(--fy-area-rose)!important;border-color:var(--fy-area-rose)!important;color:#fff!important;font:700 11px/1.4 var(--fy-ui-font)!important;letter-spacing:.2px!important}
+html body #paginaFavoritos #listaFavoritos .favoritar{display:grid!important;place-items:center!important;min-width:44px!important;min-height:44px!important;background:#fff!important;box-shadow:0 4px 12px #75304912!important}
+html body #paginaFavoritos #listaFavoritos .favoritar.favoritado{color:#e31b23!important;background:#fff1f4!important}
+html body #paginaFavoritos #listaFavoritos .estoque,html body #paginaFavoritos #listaFavoritos .produto-meta{display:none!important}
+html body #paginaFavoritos .favoritos-vazio{grid-column:1/-1!important;display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;padding:60px 24px!important;border:1px solid var(--fy-area-line)!important;border-radius:22px!important;background:#fff!important;box-shadow:none!important}
+html body #paginaFavoritos .fav-empty-icon{display:grid!important;place-items:center!important;width:82px!important;height:82px!important;border-radius:50%!important;background:#fff0f6!important;color:#bb6684!important;font-size:39px!important;margin:0 0 20px!important}
+html body #paginaFavoritos .favoritos-vazio h3{font:400 29px/1.25 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;max-width:390px!important;margin:0 0 13px!important}
+html body #paginaFavoritos .favoritos-vazio p{font:400 14px/1.8 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important;max-width:440px!important;margin:0!important}
+html body #paginaFavoritos .favoritos-vazio button{min-height:47px!important;margin-top:24px!important;padding:13px 26px!important;border:0!important;border-radius:11px!important;background:var(--fy-area-rose)!important;color:#fff!important;font:600 12px/1.4 var(--fy-ui-font)!important}
+html body #paginaFavoritos #fyPriceWatch{margin:0 0 20px!important;border:1px solid var(--fy-area-line)!important;border-radius:16px!important;background:#fff!important;box-shadow:none!important;padding:18px 20px!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy strong{font:600 13px/1.5 var(--fy-ui-font)!important;color:var(--fy-area-ink)!important}
+html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy span{font:400 12px/1.6 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important}
+html body #paginaFavoritos .fy-price-watch-btn{min-height:42px!important;border:1px solid #e4becd!important;background:#fff7fa!important;border-radius:10px!important;color:#9c3c5b!important;padding:10px 15px!important;font:600 10px/1.4 var(--fy-ui-font)!important;letter-spacing:.4px!important}
+/* Conta: a visibilidade continua sendo controlada pelo login existente. */
+html body #paginaConta #fyAuthGate{max-width:none!important;width:100%!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+html body #paginaConta #fyAuthGate .fy-area-auth-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;align-items:stretch;max-width:1080px;margin:0 auto}
+html body #paginaConta .fy-account-welcome{position:relative;overflow:hidden;padding:44px 38px;border:1px solid #edd5df;border-radius:24px;background:linear-gradient(145deg,#fce9f1,#fff6ef);color:var(--fy-area-ink)}
+html body #paginaConta .fy-account-welcome .fy-area-kicker{font:700 10px/1.6 var(--fy-ui-font);letter-spacing:2px;color:#ac526f}
+html body #paginaConta .fy-account-welcome h1{font:400 42px/1.15 var(--fy-display-font)!important;letter-spacing:-.8px!important;margin:18px 0!important;max-width:340px}
+html body #paginaConta .fy-account-welcome>p{font:400 14px/1.8 var(--fy-ui-font);color:var(--fy-area-muted);max-width:330px;margin:0}
+html body #paginaConta .fy-account-welcome ul{list-style:none;padding:30px 0 0;margin:0;display:grid;gap:23px}
+html body #paginaConta .fy-account-welcome li{display:grid;grid-template-columns:38px 1fr;gap:13px;align-items:center}
+html body #paginaConta .fy-account-welcome li>svg{width:24px;height:24px;fill:none;stroke:#b36380;stroke-width:1.5}
+html body #paginaConta .fy-account-welcome li strong{display:block;font:600 13px/1.5 var(--fy-ui-font);color:#704350}
+html body #paginaConta .fy-account-welcome li span{font:400 12px/1.6 var(--fy-ui-font);color:var(--fy-area-muted)}
+html body #paginaConta #fyAuthGate .fy-auth-card{width:100%!important;max-width:none!important;margin:0!important;padding:38px!important;border:1px solid var(--fy-area-line)!important;border-radius:24px!important;background:#fff!important;box-shadow:0 12px 45px #77364b07!important}
+html body #paginaConta #fyAuthGate .fy-auth-brand{font:600 10px/1.5 var(--fy-ui-font)!important;letter-spacing:2px!important;color:#b16c84!important;margin-bottom:14px!important}
+html body #paginaConta #fyAuthGate .fy-auth-card>h2{font:400 34px/1.2 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;margin:0 0 10px!important;letter-spacing:-.4px!important}
+html body #paginaConta #fyAuthGate #fyAuthIntro{font:400 13px/1.7 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important;margin:0 0 24px!important}
+html body #paginaConta #fyAuthGate .fy-auth-tabs{display:flex;gap:4px!important;background:#faf1f5!important;border:1px solid #f2e3e9!important;border-radius:12px!important;padding:4px!important;margin-bottom:25px!important}
+html body #paginaConta #fyAuthGate .fy-auth-tabs button{flex:1!important;border:0!important;border-radius:8px!important;min-height:42px!important;background:transparent!important;color:#9b7a88!important;font:600 11px/1.4 var(--fy-ui-font)!important;letter-spacing:.4px!important;box-shadow:none!important}
+html body #paginaConta #fyAuthGate .fy-auth-tabs button.ativo{background:#fff!important;color:#9c365a!important;box-shadow:0 2px 8px #7530490c!important}
+html body #paginaConta #fyAuthGate .fy-auth-form label{display:block!important;font:500 12px/1.5 var(--fy-ui-font)!important;color:#624550!important;margin:0 0 17px!important}
+html body #paginaConta #fyAuthGate .fy-auth-form input{display:block!important;width:100%!important;min-height:48px!important;padding:12px 14px!important;margin:7px 0 0!important;border:1px solid #e7d7df!important;border-radius:10px!important;background:#fffdfd!important;box-shadow:none!important;color:var(--fy-area-ink)!important;font:400 15px/1.4 var(--fy-ui-font)!important}
+html body #paginaConta #fyAuthGate .fy-password-field{display:block!important;position:relative!important}
+html body #paginaConta #fyAuthGate .fy-password-field input{padding-right:52px!important}
+html body #paginaConta #fyAuthGate .fy-password-toggle{position:absolute!important;right:4px!important;top:3px!important;width:42px!important;height:42px!important;margin:0!important;border:0!important;background:transparent!important;border-radius:8px!important}
+html body #paginaConta #fyAuthGate .fy-auth-forgot{font:500 12px/1.5 var(--fy-ui-font)!important;color:#a34d6b!important;margin:0 0 21px!important;padding:0!important}
+html body #paginaConta #fyAuthGate .fy-auth-submit{width:100%!important;min-height:49px!important;padding:14px 18px!important;border:0!important;border-radius:11px!important;background:var(--fy-area-rose)!important;color:#fff!important;font:700 12px/1.4 var(--fy-ui-font)!important;letter-spacing:.5px!important;box-shadow:none!important}
+html body #paginaConta #fyAuthGate .fy-auth-switch-copy{font:400 12px/1.7 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important;margin-top:19px!important;text-align:center!important}
+html body #paginaConta #fyAuthGate .fy-auth-switch-copy button{font:600 12px/1.7 var(--fy-ui-font)!important;color:#a53f62!important}
+html body #paginaConta #fyAuthGate .fy-auth-form[hidden]{display:none!important}
+html body #paginaConta .fy2-header{padding:30px 34px!important;border:1px solid #edd5df!important;border-radius:22px!important;background:linear-gradient(120deg,#fff0f6,#fffaf7)!important;margin:0 0 26px!important}
+html body #paginaConta .fy2-header h1{font:400 37px/1.2 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;margin:9px 0!important;letter-spacing:-.6px!important}
+html body #paginaConta .fy2-header p{font:400 13px/1.8 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important}
+html body #paginaConta .fy2-eyebrow,html body #paginaConta .fy2-section-kicker{font:700 10px/1.5 var(--fy-ui-font)!important;letter-spacing:1.5px!important;color:#ac637d!important}
+html body #paginaConta .fy2-profile{border:1px solid #efdbe3!important;background:#ffffffad!important;border-radius:16px!important;padding:14px!important}
+html body #paginaConta .fy2-profile-icon{background:#fff!important;color:#a14566!important;border:1px solid #efdbe3!important;border-radius:50%!important}
+html body #paginaConta .fy2-layout{grid-template-columns:225px minmax(0,1fr)!important;gap:24px!important;margin-top:0!important}
+html body #paginaConta .fy2-sidebar{padding:18px 12px!important;border:1px solid var(--fy-area-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:none!important}
+html body #paginaConta .fy2-sidebar-title{font:700 9px/1.5 var(--fy-ui-font)!important;letter-spacing:1.4px!important;color:#b48798!important;padding:6px 12px 14px!important}
+html body #paginaConta .fy2-nav-item{display:flex!important;align-items:center!important;gap:11px!important;min-height:46px!important;padding:12px!important;border:0!important;border-radius:10px!important;background:transparent!important;color:#806472!important;font:500 12px/1.4 var(--fy-ui-font)!important;margin-bottom:4px!important}
+html body #paginaConta .fy2-nav-item.ativo{background:#fff0f5!important;color:#9c365b!important;font-weight:600!important}
+html body #paginaConta .fy2-nav-icon{color:#b97892!important}
+html body #paginaConta .fy2-panel,html body #paginaConta .fy2-stat{border:1px solid var(--fy-area-line)!important;border-radius:16px!important;background:#fff!important;box-shadow:none!important}
+html body #paginaConta .fy2-panel{padding:24px!important}
+html body #paginaConta .fy2-panel h3,html body #paginaConta .fy2-welcome-row h2{font:400 27px/1.25 var(--fy-display-font)!important;letter-spacing:-.4px!important;color:var(--fy-area-ink)!important}
+html body #paginaConta .fy2-stat{padding:20px!important}
+html body #paginaConta .fy2-stat strong{font:600 28px/1.2 var(--fy-ui-font)!important;color:#9f3d60!important}
+html body #paginaConta .fy2-stat small{font:600 9px/1.5 var(--fy-ui-font)!important;letter-spacing:1px!important;color:#a17e8e!important}
+html body #paginaConta .fy2-stat-icon{background:#fff0f6!important;color:#b36582!important;border-radius:12px!important}
+html body #paginaConta .fy2-order-preview{background:#fff8fb!important;border:1px solid #f0dfe6!important;border-radius:12px!important;padding:20px!important}
+html body #paginaConta .fy2-order-preview strong{font:600 13px/1.5 var(--fy-ui-font)!important;color:#71525e!important}
+html body #paginaConta .fy2-order-preview p{font:400 12px/1.7 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important}
+html body #paginaConta .conta-tab-v14 input,html body #paginaConta .conta-tab-v14 select{min-height:46px!important;border:1px solid #e7d7df!important;border-radius:10px!important;background:#fffdfd!important;font:400 14px/1.5 var(--fy-ui-font)!important;padding:11px 13px!important}
+/* Sacola: lista, entrega e total com hierarquia clara. */
+html body #fyCarrinhoPagina{background:#fcf8fa!important}
+html body #fyCarrinhoPagina .fy-cp-header{background:#ffffffed!important;backdrop-filter:blur(12px);border-bottom:1px solid var(--fy-area-line)!important;padding:20px 32px!important;min-height:98px!important}
+html body #fyCarrinhoPagina .fy-cp-header h1{font:400 35px/1.15 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;letter-spacing:-.7px!important}
+html body #fyCarrinhoPagina .fy-cp-back{font:600 11px/1.5 var(--fy-ui-font)!important;color:#9a6c7f!important;letter-spacing:.2px!important;min-height:44px!important}
+html body #fyCarrinhoPagina .fy-cp-back::before{content:none!important}
+html body #fyCarrinhoPagina .fy-cp-close{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;border:1px solid #eddbe3!important;background:#fff8fb!important;color:#ac6782!important;border-radius:50%!important;font:400 25px/1 var(--fy-ui-font)!important}
+html body #fyCarrinhoPagina .fy-cp-body{display:grid!important;grid-template-columns:minmax(0,1fr) 370px!important;gap:24px!important;align-items:start!important;width:100%!important;max-width:1200px!important;padding:28px 24px 80px!important;margin:0 auto!important}
+html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box:first-child{background:#fff!important;border:1px solid var(--fy-area-line)!important;border-radius:20px!important;padding:25px!important;box-shadow:none!important;min-width:0!important}
+html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box>h2{display:block!important;font:400 27px/1.25 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;margin:0 0 20px!important;letter-spacing:-.3px!important}
+html body #fyCarrinhoPagina #fyBagCount{display:inline-block;font:500 11px/1.4 var(--fy-ui-font);padding:5px 10px;margin-left:9px;border:1px solid #eddce4;border-radius:99px;color:#a27689;vertical-align:middle}
+html body #fyCarrinhoPagina #fyCpItems .item{display:grid!important;grid-template-columns:100px minmax(0,1fr)!important;gap:18px!important;align-items:start!important;padding:24px 0!important;margin:0!important;border:0!important;border-bottom:1px solid #f2e7ec!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;position:relative!important}
+html body #fyCarrinhoPagina #fyCpItems .item:last-child{border-bottom:0!important;padding-bottom:0!important}
+html body #fyCarrinhoPagina #fyCpItems .item-img{width:100px!important;height:112px!important;min-width:100px!important;background:#fff8fb!important;border:1px solid #f3e6ec!important;border-radius:12px!important;overflow:hidden!important;display:grid!important;place-items:center!important}
+html body #fyCarrinhoPagina #fyCpItems .item-img img{width:100%!important;height:100%!important;object-fit:contain!important;padding:9px!important}
+html body #fyCarrinhoPagina #fyCpItems .item-dados{min-width:0!important;padding:0!important;display:flex!important;flex-direction:column!important;gap:8px!important}
+html body #fyCarrinhoPagina #fyCpItems .item-dados>strong{font:600 14px/1.65 var(--fy-ui-font)!important;color:var(--fy-area-ink)!important;white-space:normal!important;max-width:none!important;overflow:visible!important}
+html body #fyCarrinhoPagina #fyCpItems .item-preco{font:600 16px/1.4 var(--fy-ui-font)!important;color:#a54466!important;margin:0!important}
+html body #fyCarrinhoPagina #fyCpItems .quantidade{display:inline-flex!important;align-items:center!important;align-self:flex-start!important;border:1px solid #e8d6df!important;border-radius:10px!important;overflow:hidden!important;background:#fff!important;gap:0!important;margin:4px 0 0!important;padding:0!important;height:40px!important}
+html body #fyCarrinhoPagina #fyCpItems .quantidade button{display:grid!important;place-items:center!important;min-width:40px!important;width:40px!important;min-height:40px!important;height:40px!important;padding:0!important;border:0!important;background:#fff!important;color:#a6607b!important;font:500 19px/1 var(--fy-ui-font)!important;border-radius:0!important}
+html body #fyCarrinhoPagina #fyCpItems .quantidade span{min-width:32px!important;text-align:center!important;font:600 12px/1 var(--fy-ui-font)!important;color:#73535f!important}
+html body #fyCarrinhoPagina #fyCpItems .remover{align-self:flex-start!important;font:400 11px/1.5 var(--fy-ui-font)!important;color:#a48794!important;background:none!important;border:0!important;padding:6px 0!important;margin:0!important;text-decoration:underline!important;text-underline-offset:3px!important;min-height:32px!important}
+html body #fyCarrinhoPagina #fyCpItems .remover::before{content:none!important}
+html body #fyCarrinhoPagina .fy-cp-summary{padding:25px!important;background:#fff1f6!important;border:1px solid #edceda!important;border-radius:20px!important;box-shadow:none!important;position:sticky!important;top:125px!important}
+html body #fyCarrinhoPagina .fy-cp-summary>h2{display:block!important;font:400 27px/1.25 var(--fy-display-font)!important;margin:0 0 24px!important;color:var(--fy-area-ink)!important}
+html body #fyCarrinhoPagina .fy-cp-row{font:400 13px/1.5 var(--fy-ui-font)!important;margin:0!important;padding:9px 0!important;color:#906d7d!important;border:0!important}
+html body #fyCarrinhoPagina .fy-cp-row strong{font:600 14px/1.5 var(--fy-ui-font)!important;color:#684752!important}
+html body #fyCarrinhoPagina .fy-cp-cupom{display:none!important}
+html body #fyCarrinhoPagina .fy18-commercial{margin:18px 0!important;padding:0!important;border:0!important}
+html body #fyCarrinhoPagina .fy18-box{padding:17px 0!important;margin:0!important;border:0!important;border-top:1px solid #efd4df!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html body #fyCarrinhoPagina .fy18-title{font:700 10px/1.5 var(--fy-ui-font)!important;letter-spacing:1px!important;color:#a36980!important;margin-bottom:10px!important}
+html body #fyCarrinhoPagina .fy18-row{display:flex!important;gap:7px!important}
+html body #fyCarrinhoPagina .fy18-row input{width:100%!important;min-width:0!important;min-height:44px!important;padding:11px 12px!important;border:1px solid #e8c9d6!important;border-radius:10px!important;background:#fff!important;color:#71515f!important;font:400 13px/1.4 var(--fy-ui-font)!important}
+html body #fyCarrinhoPagina .fy18-row button{min-height:44px!important;min-width:84px!important;padding:10px 12px!important;border:1px solid #e4becd!important;border-radius:10px!important;background:#fff7fa!important;color:#9b3e60!important;font:700 10px/1.4 var(--fy-ui-font)!important;letter-spacing:.3px!important}
+html body #fyCarrinhoPagina .fy18-feedback{font:400 11px/1.7 var(--fy-ui-font)!important;color:#a07b8d!important;margin-top:9px!important}
+html body #fyCarrinhoPagina .fy-cp-total{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:21px 0 15px!important;margin-top:4px!important;border-top:1px solid #e5c5d2!important;font:600 13px/1.4 var(--fy-ui-font)!important;color:#6a4252!important}
+html body #fyCarrinhoPagina .fy-cp-total strong{font:700 28px/1.3 var(--fy-ui-font)!important;letter-spacing:-.8px!important;color:#9d375c!important}
+html body #fyCarrinhoPagina .fy-cp-checkout{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:51px!important;border:0!important;border-radius:12px!important;background:#a63c61!important;color:#fff!important;font:700 12px/1.4 var(--fy-ui-font)!important;letter-spacing:.5px!important;box-shadow:0 7px 17px #a63c6117!important}
+html body #fyCarrinhoPagina .fy-cp-safe{font:400 10px/1.6 var(--fy-ui-font)!important;color:#ad8799!important;text-align:center!important;margin-top:13px!important}
+html body #fyCarrinhoPagina .fy-area-frete-beneficio{margin:0 0 5px!important;padding:17px!important;border:1px solid #f0dce5!important;border-radius:13px!important;background:#fff7fa!important}
+html body #fyCarrinhoPagina .fy-area-frete-beneficio .fy18-title{margin-bottom:7px!important}
+html body #fyCarrinhoPagina .fy18-frete-msg{font:400 12px/1.7 var(--fy-ui-font)!important;color:#95677b!important}
+html body #fyCarrinhoPagina .fy18-frete-msg strong{font-weight:600!important;color:#a04667!important}
+html body #fyCarrinhoPagina .fy18-bar{height:5px!important;background:#f0dbe4!important;border-radius:5px!important;margin-top:12px!important;overflow:hidden!important}
+html body #fyCarrinhoPagina #fy18FreteBar{height:100%!important;background:#c16e8e!important;border-radius:5px!important}
+html body #fyCarrinhoPagina .fy-cp-body>.fy18-recommend{grid-column:1/-1!important;padding:25px!important;margin:0!important;border:1px solid var(--fy-area-line)!important;border-radius:20px!important;background:#fff!important;min-width:0!important}
+html body #fyCarrinhoPagina .fy18-recommend h2{display:block!important;font:400 27px/1.25 var(--fy-display-font)!important;color:var(--fy-area-ink)!important;margin:0 0 20px!important;letter-spacing:-.4px!important}
+html body #fyCarrinhoPagina .fy18-products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important}
+html body #fyCarrinhoPagina .fy18-product{display:flex!important;flex-direction:column!important;gap:9px!important;padding:12px!important;border:1px solid #f0e2e8!important;border-radius:13px!important;background:#fffdfd!important;min-width:0!important}
+html body #fyCarrinhoPagina .fy18-product-img{height:140px!important;background:#fffafb!important;border-radius:9px!important;overflow:hidden!important}
+html body #fyCarrinhoPagina .fy18-product-img img{width:100%!important;height:100%!important;object-fit:contain!important;padding:10px!important}
+html body #fyCarrinhoPagina .fy18-product>strong{font:500 12px/1.6 var(--fy-ui-font)!important;color:#745361!important;max-height:none!important;white-space:normal!important;overflow:visible!important}
+html body #fyCarrinhoPagina .fy18-product>small{font:700 14px/1.4 var(--fy-ui-font)!important;color:#a04465!important}
+html body #fyCarrinhoPagina .fy18-product button{min-height:40px!important;margin-top:auto!important;border:1px solid #e6c6d4!important;border-radius:9px!important;background:#fff3f8!important;color:#a04667!important;font:600 10px/1.4 var(--fy-ui-font)!important}
+html body #fyCarrinhoPagina .fy-cp-empty{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;min-height:330px!important;padding:45px 22px!important;background:#fff!important;border:0!important}
+html body #fyCarrinhoPagina .fy-cp-empty>.fy-area-empty-bag{display:grid;place-items:center;width:86px;height:86px;border:1px solid #efd5e0;border-radius:50%;background:#fff0f6;color:#b96d8a;margin-bottom:22px}
+html body #fyCarrinhoPagina .fy-area-empty-bag svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.3}
+html body #fyCarrinhoPagina .fy-cp-empty>strong{font:400 30px/1.25 var(--fy-display-font)!important;color:var(--fy-area-ink)!important}
+html body #fyCarrinhoPagina .fy-cp-empty>p{font:400 13px/1.8 var(--fy-ui-font)!important;color:var(--fy-area-muted)!important;max-width:310px;margin:12px 0 22px!important}
+html body #fyCarrinhoPagina .fy-cp-empty>button{min-height:47px;padding:12px 25px;border:0;border-radius:11px;background:#a63c61;color:#fff;font:600 12px/1.4 var(--fy-ui-font);cursor:pointer}
+html body #fyCarrinhoPagina[data-fy-empty="true"] .fy-cp-summary{display:none!important}
+html body #fyCarrinhoPagina[data-fy-empty="true"] .fy-cp-body>.fy-cp-box:first-child{grid-column:1/-1!important}
+html body #fyCarrinhoPagina[data-fy-empty="true"] .fy-area-frete-beneficio{display:none!important}
+@media(max-width:800px){
+ html body #paginaFavoritos,html body #paginaConta{padding:20px 14px 90px!important}
+ html body #paginaFavoritos .favoritos-hero{gap:15px!important;padding:24px 20px!important;border-radius:20px!important;margin-bottom:18px!important;align-items:flex-start!important}
+ html body #paginaFavoritos .favoritos-hero h2{font-size:34px!important;margin:9px 0!important}
+ html body #paginaFavoritos .favoritos-hero p{font-size:12px!important;line-height:1.75!important}
+ html body #paginaFavoritos .favoritos-resumo{flex-basis:73px!important;width:73px!important;min-height:86px!important;padding:12px 8px!important;border-radius:16px!important}
+ html body #paginaFavoritos .favoritos-resumo strong{font-size:29px!important}
+ html body #paginaFavoritos .favoritos-resumo span{font-size:9px!important}
+ html body #paginaFavoritos #listaFavoritos>.produtos{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+ html body #paginaFavoritos #listaFavoritos .produto-info{padding:12px!important;gap:7px!important}
+ html body #paginaFavoritos #listaFavoritos .nome,html body #paginaFavoritos #listaFavoritos .nome a{font-size:12px!important;min-height:54px!important}
+ html body #paginaFavoritos #listaFavoritos .preco{font-size:18px!important}
+ html body #paginaFavoritos #listaFavoritos .adicionar{font-size:10px!important;padding:10px 5px!important}
+ html body #paginaFavoritos .favoritos-vazio{padding:40px 20px!important}
+ html body #paginaFavoritos .favoritos-vazio h3{font-size:26px!important}
+ html body #paginaFavoritos #fyPriceWatch{padding:15px!important}
+ html body #paginaConta #fyAuthGate .fy-area-auth-layout{grid-template-columns:1fr;gap:16px}
+ html body #paginaConta .fy-account-welcome{padding:23px 22px;border-radius:19px}
+ html body #paginaConta .fy-account-welcome h1{font-size:31px!important;margin:10px 0!important}
+ html body #paginaConta .fy-account-welcome>p{font-size:12px;line-height:1.7;max-width:none}
+ html body #paginaConta .fy-account-welcome ul{display:none}
+ html body #paginaConta #fyAuthGate .fy-auth-card{padding:25px 22px!important;border-radius:19px!important}
+ html body #paginaConta #fyAuthGate .fy-auth-card>h2{font-size:30px!important}
+ html body #paginaConta #fyAuthGate .fy-auth-form input{font-size:16px!important}
+ html body #paginaConta .fy2-header{padding:23px 20px!important;border-radius:18px!important;gap:15px!important}
+ html body #paginaConta .fy2-header h1{font-size:30px!important}
+ html body #paginaConta .fy2-header p{font-size:12px!important}
+ html body #paginaConta .fy2-layout{grid-template-columns:1fr!important;gap:18px!important}
+ html body #paginaConta .fy2-sidebar{padding:10px!important;border-radius:15px!important}
+ html body #paginaConta .fy2-nav-item{font-size:11px!important;min-height:44px!important;padding:10px!important}
+ html body #paginaConta .fy2-panel{padding:20px!important}
+ html body #paginaConta .fy2-stat{padding:14px!important}
+ html body #paginaConta .fy2-stat strong{font-size:23px!important}
+ html body #paginaConta .conta-tab-v14 input,html body #paginaConta .conta-tab-v14 select{font-size:16px!important}
+ html body #fyCarrinhoPagina .fy-cp-header{padding:16px 14px!important;min-height:86px!important;grid-template-columns:44px minmax(0,1fr) 44px!important}
+ html body #fyCarrinhoPagina .fy-cp-header h1{font-size:30px!important}
+ html body #fyCarrinhoPagina .fy-cp-back{width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;font-size:0!important;overflow:hidden!important}
+ html body #fyCarrinhoPagina .fy-cp-back::after{content:'←';display:block;font:400 25px/40px var(--fy-ui-font);color:#b06b86}
+ html body #fyCarrinhoPagina .fy-cp-body{grid-template-columns:minmax(0,1fr)!important;padding:18px 13px 100px!important;gap:17px!important}
+ html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box:first-child{padding:20px 17px!important;border-radius:18px!important}
+ html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box>h2{font-size:25px!important;margin-bottom:18px!important}
+ html body #fyCarrinhoPagina #fyCpItems .item{grid-template-columns:80px minmax(0,1fr)!important;gap:13px!important;padding:20px 0!important}
+ html body #fyCarrinhoPagina #fyCpItems .item-img{width:80px!important;min-width:80px!important;height:96px!important;border-radius:10px!important}
+ html body #fyCarrinhoPagina #fyCpItems .item-dados>strong{font-size:12px!important;line-height:1.65!important}
+ html body #fyCarrinhoPagina #fyCpItems .item-preco{font-size:15px!important}
+ html body #fyCarrinhoPagina .fy-cp-summary{position:static!important;padding:23px 20px!important;border-radius:18px!important}
+ html body #fyCarrinhoPagina .fy-cp-summary>h2{font-size:25px!important}
+ html body #fyCarrinhoPagina .fy18-row input{font-size:16px!important}
+ html body #fyCarrinhoPagina .fy-cp-total strong{font-size:27px!important}
+ html body #fyCarrinhoPagina .fy-cp-body>.fy18-recommend{padding:22px 17px!important;border-radius:18px!important}
+ html body #fyCarrinhoPagina .fy18-recommend h2{font-size:25px!important}
+ html body #fyCarrinhoPagina .fy18-products{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ html body #fyCarrinhoPagina .fy18-product{padding:9px!important}
+ html body #fyCarrinhoPagina .fy18-product-img{height:120px!important}
+ html body #fyCarrinhoPagina .fy18-product>strong{font-size:11px!important}
+}
+html body #fyCarrinhoPagina .fy-area-cart-heading{text-align:center}
+html body #fyCarrinhoPagina .fy-area-cart-heading small{display:block;font:600 9px/1.5 var(--fy-ui-font);letter-spacing:1.7px;color:#bc8c9f;margin-bottom:5px}
+html body #fyCarrinhoPagina .fy-area-cart-heading h1{margin:0!important}
+@media(hover:hover){#paginaFavoritos .adicionar:hover,#paginaConta .fy-auth-submit:hover,#fyCarrinhoPagina .fy-cp-checkout:hover{filter:brightness(.95)}#paginaConta .fy2-nav-item:hover{background:#fff7fa!important}}
+@media(max-width:800px){html body #fyCarrinhoPagina .fy-area-cart-heading small{font-size:8px;letter-spacing:1.3px;margin-bottom:4px}}
+html body #paginaConta #fyAuthGate:not(.recuperando) .fy-auth-tabs{display:flex!important}
+html body #paginaConta #fyAuthGate.recuperando .fy-auth-tabs{display:none!important}
+html body #paginaConta .fy-password-toggle{transform:none!important;top:10px!important}
+html body #paginaFavoritos .favoritos-hero,html body #paginaFavoritos #listaFavoritos,html body #paginaFavoritos #listaFavoritos .produtos{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;box-sizing:border-box!important}
+@media(max-width:800px){html body #paginaFavoritos #fyPriceWatch{display:grid!important;grid-template-columns:34px minmax(0,1fr)!important;gap:12px!important}html body #paginaFavoritos #fyPriceWatch .fy-price-watch-btn{grid-column:2!important;justify-self:start!important}html body #paginaFavoritos #fyPriceWatch .fy-price-watch-copy{min-width:0!important}}
+html body #fyCarrinhoPagina[data-fy-empty="true"] .fy-cp-body>.fy18-recommend{display:none!important}
+
 </style>
 
 <!-- Fontes incluídas: Manrope e DM Serif Display.
@@ -883,7 +1099,7 @@ function fyFiltrarKits(botao,filtro){
 <div id="fyCarrinhoPagina" aria-hidden="true">
   <div class="fy-cp-header">
     <button class="fy-cp-back" type="button" onclick="fyFecharCarrinhoPagina()">&#x2190; CONTINUAR COMPRANDO</button>
-    <h1>Minha Sacola</h1>
+    <div class="fy-area-cart-heading"><small>ESCOLHIDOS POR VOCÊ</small><h1>Minha Sacola</h1></div>
     <button class="fy-cp-close" type="button" onclick="fyFecharCarrinhoPagina()">&#xD7;</button>
   </div>
   <div class="fy-cp-body">
@@ -1289,11 +1505,11 @@ Promo&#xE7;&#xF5;es de datas especiais
   <div>
     <small>SEUS ESCOLHIDOS</small>
     <h2>Favoritos</h2>
-    <p>Guarde aqui os produtos que voc&#xEA; amou e encontre tudo rapidinho quando quiser comprar.</p>
+    <p>Seus achadinhos salvos, prontos para quando você quiser.</p>
   </div>
   <div class="favoritos-resumo">
     <strong id="favoritosTotalPagina">0</strong>
-    <span>produtos</span>
+    <span>itens salvos</span>
   </div>
 </div>
 
@@ -1312,6 +1528,7 @@ Promo&#xE7;&#xF5;es de datas especiais
   <button class="voltar fy2-voltar" onclick="voltarLoja()">&#x2190; VOLTAR PARA A LOJA</button>
 
   <div id="fyAuthGate" class="fy-auth-gate carregando" aria-live="polite">
+<div class="fy-area-auth-layout"><aside class="fy-account-welcome" aria-label="Sua área na FOR YOU"><span class="fy-area-kicker">FOR YOU, DO SEU JEITO</span><h1>Seu cantinho de beleza.</h1><p>Entre para cuidar dos seus pedidos e deixar seus próximos favoritos sempre por perto.</p><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg><div><strong>Seus pedidos</strong><span>Acompanhe cada etapa da compra.</span></div></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><div><strong>Seus favoritos</strong><span>Encontre os achadinhos que você salvou.</span></div></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.7 7.7-7 10-4.3-2.3-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg><div><strong>Sua área pessoal</strong><span>Gerencie seus dados e endereços.</span></div></li></ul></aside>
     <div class="fy-auth-card">
       <div class="fy-auth-brand">FOR YOU</div>
       <h2>Minha conta</h2>
@@ -1350,6 +1567,7 @@ Promo&#xE7;&#xF5;es de datas especiais
       </form>
 
       <div id="fyAuthLoading" class="fy-auth-loading">Verificando seu acesso...</div>
+    </div>
     </div>
   </div>
 
@@ -11688,6 +11906,43 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   document.addEventListener('fy-catalogo-pronto',selecao);
   document.addEventListener('click',e=>{if(e.target.closest('.fy6-bottom-nav [aria-label="Início"],.fy-brand-logo'))requestAnimationFrame(selecao);},true);
   selecao();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script>
+<script id="fy-areas-visuais-refinadas">/* Apresentação das áreas pessoais. Valores, login e checkout continuam originais. */
+(()=>{
+ const $=id=>document.getElementById(id);
+ const bag='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg>';
+ function cart(){
+  const page=$('fyCarrinhoPagina'),body=page?.querySelector('.fy-cp-body'),items=$('fyCpItems');
+  if(!page||!body||!items)return;
+  const list=typeof window.fyGetCart==='function'?window.fyGetCart():[];
+  const qty=list.reduce((n,p)=>n+Math.max(0,Number(p.quantidade??p.qtd??1)||0),0);
+  page.dataset.fyEmpty=String(!list.length);
+  const box=items.closest('section'),heading=box?.querySelector(':scope > h2');
+  if(heading){heading.replaceChildren(document.createTextNode('Seus produtos '));const count=document.createElement('span');count.id='fyBagCount';count.textContent=qty+' '+(qty===1?'item':'itens');heading.append(count);}
+  const commercial=page.querySelector('.fy18-commercial');
+  const benefit=commercial?.querySelector('.fy18-box');
+  if(benefit&&benefit.querySelector('#fy18FreteMsg')){benefit.classList.add('fy-area-frete-beneficio');box.insertBefore(benefit,items);}
+  const recommended=page.querySelector('.fy18-recommend');
+  if(recommended&&recommended.parentElement!==body)body.append(recommended);
+  if(!list.length){
+   items.innerHTML='<div class="fy-cp-empty"><span class="fy-area-empty-bag">'+bag+'</span><strong>Vamos encontrar seus favoritos?</strong><p>Sua sacola ainda está vazia. Explore a loja e escolha os produtos que combinam com você.</p><button type="button" id="fyBagExplore">Explorar a loja</button></div>';
+   $('fyBagExplore').onclick=()=>window.fyIrInicio?.();
+  }
+ }
+ function start(){
+  const render=window.fyRenderCarrinhoPagina;
+  if(typeof render==='function')window.fyRenderCarrinhoPagina=function(){const r=render.apply(this,arguments);cart();return r;};
+  const back=document.querySelector('#fyCarrinhoPagina .fy-cp-back'),close=document.querySelector('#fyCarrinhoPagina .fy-cp-close');
+  back?.setAttribute('aria-label','Continuar comprando');close?.setAttribute('aria-label','Fechar sacola');
+  $('fy18Cep')?.setAttribute('aria-label','CEP para calcular entrega');$('fy18Cep')?.setAttribute('inputmode','numeric');
+  $('fy18Cupom')?.setAttribute('aria-label','Cupom de desconto');
+  const toggle=window.fyMostrarAuth;
+  if(typeof toggle==='function')window.fyMostrarAuth=function(tipo){const r=toggle.apply(this,arguments);['Entrar','Cadastrar'].forEach((x,i)=>$('fyAuthTab'+x)?.setAttribute('aria-selected',String((tipo==='cadastrar')===!!i)));return r;};
+  ['Entrar','Cadastrar'].forEach((x,i)=>{const b=$('fyAuthTab'+x);if(b){b.setAttribute('role','tab');b.setAttribute('aria-controls',i?'fyAuthCadastro':'fyAuthLogin');b.setAttribute('aria-selected',String(b.classList.contains('ativo')));}});
+  cart();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
