@@ -28767,5 +28767,68 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});else iniciar();
 })();
 </script>
+
+<style id="fy-navegacao-logo-corrigida">
+@media(max-width:800px){
+html body header .header .header-top{grid-template-columns:64px minmax(0,1fr)!important;grid-template-rows:76px auto!important;gap:8px 10px!important}
+html body header .header .header-top .logo{display:block!important;grid-column:1!important;grid-row:1!important;width:64px!important;height:74px!important;margin:0!important}
+html body header .header .header-top .fy-wordmark-center{grid-column:2!important;grid-row:1!important}
+html body header .header .header-top .fy-busca-topo{grid-column:1/-1!important;grid-row:2!important}
+}
+#fyCategoriasDialog{box-sizing:border-box;width:min(92vw,480px);max-height:80vh;overflow:auto;border:1px solid #efd3dc;border-radius:20px;padding:22px;background:#fffafb;color:#482b34;font-family:Arial,sans-serif}
+#fyCategoriasDialog::backdrop{background:rgba(45,20,30,.4)}
+#fyCategoriasDialog .fy-cat-dialog-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+#fyCategoriasDialog h2{margin:0;font-size:21px}
+#fyCategoriasDialog button{min-height:48px;border:1px solid #efd3dc;border-radius:12px;background:white;color:#842b49;padding:12px;font:600 14px Arial,sans-serif;cursor:pointer}
+#fyCategoriasDialog .fy-cat-dialog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+</style>
+<script id="fy-navegacao-corrigida">
+(()=>{
+ function inicio(){
+  document.getElementById('fyCategoriasDialog')?.close();
+  if(typeof window.fecharCarrinho==='function')window.fecharCarrinho();
+  if(typeof window.fecharMenu==='function')window.fecharMenu();
+  document.querySelectorAll('.pagina,.fy-pagina-destaque,#fy20Categoria,#fyCarrinhoPagina,#paginaCarrinhoFY,#fyPedidoSucesso,#fyPoliticaPagina,#paginaPedidoSucesso').forEach(p=>{
+   p.classList.remove('ativa','ativo');
+   if(p.id==='paginaAdmin')p.style.removeProperty('display');
+  });
+  document.body.classList.remove('fy-area-interna','fy-pagina-exclusiva','fy-admin-aberto','fy-categoria-aberta');
+  document.body.style.removeProperty('overflow');
+  document.documentElement.style.removeProperty('overflow');
+  document.getElementById('novidades')?.classList.remove('fy-category-active');
+  ['fyCategoryToolbar','fyCategoryBackTop','fyCategoryBackBottom'].forEach(id=>document.getElementById(id)?.remove());
+  document.querySelectorAll('.fy-clean-cat-top>button').forEach(b=>{b.classList.remove('fy-categoria-ativa');b.setAttribute('aria-pressed','false')});
+  window.__fyCategoriaAtual='';
+  const loja=document.getElementById('loja');if(loja)loja.style.display='block';
+  if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+  if(typeof window.renderNovidadesHome==='function')window.renderNovidadesHome();
+  window.scrollTo({top:0,left:0,behavior:'auto'});
+ }
+ function categorias(){
+  let dialog=document.getElementById('fyCategoriasDialog');
+  if(!dialog){
+   dialog=document.createElement('dialog');dialog.id='fyCategoriasDialog';dialog.setAttribute('aria-labelledby','fyCategoriasTitulo');
+   dialog.innerHTML='<div class="fy-cat-dialog-top"><h2 id="fyCategoriasTitulo">Categorias</h2><button type="button" aria-label="Fechar categorias">Fechar ×</button></div><div class="fy-cat-dialog-grid"></div>';
+   dialog.querySelector('button').onclick=()=>dialog.close();
+   const grid=dialog.querySelector('.fy-cat-dialog-grid');
+   document.querySelectorAll('nav.fy-clean-cat-top>button').forEach(original=>{
+    const b=document.createElement('button');b.type='button';b.textContent=original.querySelector('b')?.textContent||original.textContent.trim();
+    b.onclick=()=>{dialog.close();inicio();original.click()};grid.appendChild(b);
+   });
+   document.body.appendChild(dialog);
+  }
+  if(!dialog.open)dialog.showModal();
+ }
+ window.mostrarLoja=inicio;
+ window.fyIrInicio=inicio;
+ window.fyAbrirCategorias=categorias;
+ const barra=document.querySelector('nav.fy6-bottom-nav');
+ const home=barra?.querySelector('[aria-label="Início"]');
+ const cats=barra?.querySelector('[aria-label="Categorias"]');
+ if(home)home.setAttribute('onclick','fyIrInicio()');
+ if(cats)cats.setAttribute('onclick','fyAbrirCategorias()');
+})();
+</script>
+
 </body>
 </html>
