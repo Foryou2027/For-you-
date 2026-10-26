@@ -967,6 +967,89 @@ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 
 -->
+<style id="fy-visual-final">/* FOR YOU — acabamento visual da loja */
+:root{--fy-accent:#923451;--fy-blush:#fff5f8;--fy-ink:#30252a;--fy-line:#eadde2}
+html body{color:var(--fy-ink)}
+html body header .header{max-width:1320px!important;margin:auto!important;padding:18px 30px 12px!important}
+html body header .header-top{min-height:76px!important;row-gap:14px!important}
+html body header .fy-wordmark-title{font-size:40px!important;letter-spacing:7px!important;color:var(--fy-accent)!important}
+html body header .fy-wordmark-ornament{margin-top:5px!important}
+html body header .logo img{max-height:78px!important;width:auto!important}
+html body header .busca-linha{border:1px solid var(--fy-line)!important;box-shadow:none!important;border-radius:16px!important;background:#fff9fb!important;min-height:48px!important}
+html body header #busca{font-family:var(--fy-ui-font)!important;font-size:14px!important;color:#48363e!important}
+html body header .fy-search-icon{display:flex!important;align-items:center!important;color:var(--fy-accent)!important}
+html body header .fy-search-submit{background:transparent!important;color:var(--fy-accent)!important}
+html body header .fy-top-action{color:#49323c!important}
+html body header .fy-cart-symbol svg,html body header .fy-search-icon svg,html body header .fy-search-submit svg{width:24px!important;height:24px!important;stroke:currentColor;stroke-width:1.6;fill:none;display:block}
+html body .fy-banner-r10{max-width:1320px!important;margin:18px auto 22px!important;padding:0 24px!important;box-sizing:border-box!important}
+html body .fy-banner-r10-viewport{height:auto!important;aspect-ratio:3.3!important;border-radius:24px!important;overflow:hidden!important;background:#fae8e9!important}
+html body .fy-banner-r10-track,html body .fy-banner-r10-track>a{height:100%!important}
+html body .fy-banner-r10-track img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+.fy-hero-caption{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 4px 0}
+.fy-hero-caption p{font:400 25px/1.3 var(--fy-heading-font,'DM Serif Display',Georgia,serif);margin:0;color:#49303a}
+.fy-hero-caption button{border:0;border-bottom:1px solid #c89bab;background:transparent;color:#923451;padding:9px 0;font:600 12px var(--fy-ui-font);cursor:pointer;white-space:nowrap}
+html body #loja .produto,html body #paginaFavoritos .produto{border:1px solid #eee3e7!important;border-radius:18px!important;background:#fff!important;overflow:hidden!important;box-shadow:0 5px 22px #59304405!important;display:flex!important;flex-direction:column!important;min-width:0!important;transition:box-shadow .2s,border-color .2s!important}
+html body #loja .produto-img,html body #paginaFavoritos .produto-img{position:relative!important;width:100%!important;height:auto!important;aspect-ratio:1!important;min-height:0!important;background:linear-gradient(145deg,#fff,#fff8fb)!important;overflow:hidden!important}
+html body #loja .produto-img>img,html body #paginaFavoritos .produto-img>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;padding:17px!important;box-sizing:border-box!important;mix-blend-mode:multiply}
+html body #loja .produto-info,html body #paginaFavoritos .produto-info{padding:18px!important;display:flex!important;flex-direction:column!important;flex:1!important;gap:9px!important}
+html body #loja .produto .marca{font:600 9px/1.5 var(--fy-ui-font)!important;letter-spacing:1.2px!important;color:#8f7882!important;text-transform:uppercase!important}
+html body #loja .produto .nome{font:500 13px/1.65 var(--fy-ui-font)!important;min-height:44px!important;margin:0!important;color:#382b31!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden!important}
+html body #loja .produto .nome a{font:inherit!important;color:inherit!important;text-decoration:none!important}
+html body #loja .produto .preco{font:700 21px/1.4 var(--fy-ui-font)!important;color:var(--fy-accent)!important;margin:5px 0!important;letter-spacing:-.5px!important}
+html body #loja .produto .adicionar,html body #paginaFavoritos .produto .adicionar{background:var(--fy-accent)!important;color:white!important;border:0!important;border-radius:11px!important;min-height:46px!important;width:100%!important;margin-top:auto!important;font:600 11px/1.4 var(--fy-ui-font)!important;letter-spacing:.3px!important;padding:12px 7px!important}
+html body #loja .produto .favoritar,html body #paginaFavoritos .favoritar{width:39px!important;height:39px!important;border-radius:50%!important;background:#ffffffed!important;box-shadow:0 3px 12px #7734470a!important;top:12px!important;right:12px!important}
+html body #loja .produto .etiqueta{top:13px!important;left:12px!important;font-size:9px!important;padding:7px 9px!important;letter-spacing:.4px!important;background:#d86b8d!important;color:#fff!important}
+html body #loja #novidades,html body #fyHomePromos,html body #marcas{scroll-margin-top:24px}
+html body #loja .fy-home-eyebrow{color:#a4677d!important;letter-spacing:1.9px!important}
+html body #loja .fy-home-link{color:var(--fy-accent)!important}
+html body .fy6-bottom-nav>button{position:relative!important;isolation:isolate}
+html body .fy6-bottom-nav>button svg{position:relative!important;z-index:1!important;transition:color .15s!important}
+html body .fy6-bottom-nav>button[aria-current="page"]{color:var(--fy-accent)!important;font-weight:700!important}
+html body .fy6-bottom-nav>button[aria-current="page"]::before{content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);width:49px;height:33px;background:#f9e8ef;border-radius:13px;z-index:0}
+.fy-nav-qty{position:absolute;left:calc(50% + 7px);top:1px;z-index:3;min-width:16px;height:16px;padding:0 3px;border:2px solid #fff;border-radius:20px;background:#923451;color:white;font:700 9px/12px var(--fy-ui-font);box-sizing:content-box}
+.fy-nav-qty[hidden]{display:none!important}
+html body .favoritos-vazio,html body #fyCarrinhoPagina .fy-area-empty{background:linear-gradient(150deg,#fff,#fff7fa)!important;border:1px solid var(--fy-line)!important;border-radius:22px!important}
+html body button:focus-visible,html body a:focus-visible{outline:2px solid #923451!important;outline-offset:4px!important}
+@media(hover:hover){html body #loja .produto:hover{border-color:#d7afbe!important;box-shadow:0 10px 30px #6532470b!important}.fy-hero-caption button:hover{color:#571a30}.fy6-bottom-nav>button:hover{color:#923451!important}}
+@media(max-width:800px){
+ html body header .header{padding:15px 16px 12px!important}
+ html body header .header-top{min-height:0!important;gap:12px!important;grid-template-columns:1fr!important}
+ html body header .fy-wordmark-title{font-size:32px!important;letter-spacing:6px!important;line-height:1.25!important}
+ html body header .fy-wordmark-ornament{display:none!important}
+ html body header .fy-wordmark-center{padding:0!important;margin:0 auto!important}
+ html body header .acoes,html body header .logo,html body header .fy-header-slogan{display:none!important}
+ html body header .fy-busca-topo{width:100%!important;margin:0!important}
+ html body header .busca-linha{min-height:48px!important;border-radius:14px!important}
+ html body header #busca{font-size:14px!important}
+ html body .fy-banner-r10{padding:0 14px!important;margin:12px auto 20px!important}
+ html body .fy-banner-r10-viewport{aspect-ratio:2.65!important;border-radius:17px!important}
+ html body .fy-banner-r10-track img{object-position:58% center!important}
+ .fy-hero-caption{padding:14px 3px 0;gap:14px;align-items:flex-start}
+ .fy-hero-caption p{font-size:20px;max-width:205px;line-height:1.25}
+ .fy-hero-caption button{font-size:10px;padding:5px 0}
+ html body #loja .produto,html body #paginaFavoritos .produto{border-radius:15px!important}
+ html body #loja .produto-info,html body #paginaFavoritos .produto-info{padding:12px!important;gap:7px!important}
+ html body #loja .produto .nome{font-size:12px!important;line-height:1.55!important;min-height:38px!important}
+ html body #loja .produto .preco{font-size:18px!important}
+ html body #loja .produto .adicionar,html body #paginaFavoritos .produto .adicionar{font-size:9px!important;min-height:43px!important;border-radius:9px!important}
+ html body #loja .produto-img>img,html body #paginaFavoritos .produto-img>img{padding:12px!important}
+ html body #loja .produto .favoritar,html body #paginaFavoritos .favoritar{top:8px!important;right:7px!important;width:33px!important;height:33px!important}
+ html body #loja .produto .etiqueta{top:10px!important;left:8px!important;font-size:8px!important;padding:6px 7px!important}
+ html body .fy6-bottom-nav{background:#fffffff7!important;backdrop-filter:blur(12px);border-top:1px solid #ecdae2!important;box-shadow:0 -5px 25px #74334b07!important;padding-top:7px!important}
+ html body .fy6-bottom-nav>button{min-height:53px!important;gap:4px!important}
+ html body .fy6-bottom-nav>button>span{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){html body *{scroll-behavior:auto!important;transition:none!important}}
+html body header .header .header-top .fy-cart-symbol::before,html body header .header .header-top .fy-cart-symbol::after{content:none!important;display:none!important}
+html body header .header .header-top .fy-cart-symbol{display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important}
+html body header .header .header-top #btnAbrirCarrinho .fy-action-label{display:block!important;font:500 10px/1.5 var(--fy-ui-font)!important}
+.fy-hero-caption p{font-family:'DM Serif Display',Georgia,serif!important;font-weight:400!important}
+@media(max-width:800px){html body header .header .header-top .logo,html body header .header .header-top .acoes{display:none!important}html body header .header .header-top .fy-wordmark-center{position:static!important;transform:none!important;grid-column:1/-1!important;justify-self:center!important}html body header .header .header-top{display:flex!important;flex-direction:column!important;align-items:stretch!important;padding:0!important}}
+html body[data-fy-view="Favoritos"]>.fy-banner-r10,html body[data-fy-view="Minha conta"]>.fy-banner-r10,html body[data-fy-view="Sacola"]>.fy-banner-r10{display:none!important}
+.fy-hero-caption p{font-family:var(--fy-display-font)!important}
+html body #loja .produto .produto-info .nome{height:44px!important;max-height:44px!important;min-height:44px!important;overflow:hidden!important}
+@media(max-width:800px){html body #loja .produto .produto-info .nome{height:38px!important;max-height:38px!important;min-height:38px!important}}
+</style>
 </head>
 
 
@@ -1328,8 +1411,8 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
 <section class="fy-banner-r10" id="inicio" aria-label="Destaques da FOR YOU">
   <div class="fy-banner-r10-viewport">
     <div class="fy-banner-r10-track" id="fyBannerTrack">
-      <a href="#novidades" aria-label="Beleza que realÃ§a o seu melhor">
-        <img decoding="async" loading="eager" fetchpriority="high" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realÃ§a o seu melhor">
+      <a href="#novidades" aria-label="Beleza que realça o seu melhor">
+        <img decoding="async" loading="eager" fetchpriority="high" src="banner-for-you-sem-faixa.jpg" alt="Beleza que realça o seu melhor">
       </a>
     </div>
   </div>
@@ -11945,6 +12028,32 @@ const pagina=document.getElementById('paginaAdmin');if(pagina)new MutationObserv
   cart();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script>
+<script id="fy-acabamento-visual-completo">(()=>{
+function start(){
+const svg=(p)=>'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const search=svg('<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>');
+const bag=svg('<path d="M4 8h16l-1 13H5L4 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>');
+document.querySelectorAll('header .fy-search-icon,header .fy-search-submit').forEach(e=>e.innerHTML=search);
+const icon=document.querySelector('header .fy-cart-symbol');if(icon)icon.innerHTML=bag;
+const banner=document.querySelector('#inicio.fy-banner-r10');
+if(banner&&!banner.querySelector('.fy-hero-caption')){const caption=document.createElement('div');caption.className='fy-hero-caption';caption.innerHTML='<p>Encontre seu próximo favorito.</p><button type="button">Explorar a loja ↗</button>';caption.querySelector('button').onclick=()=>{if(typeof fyIrInicio==='function')fyIrInicio();document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});};banner.appendChild(caption);}
+const nav=document.querySelector('.fy6-bottom-nav');if(!nav)return;
+const buttons=[...nav.querySelectorAll(':scope>button')];const bagButton=nav.querySelector('[aria-label="Sacola"]');
+let badge=document.createElement('b');badge.className='fy-nav-qty';badge.hidden=true;bagButton?.appendChild(badge);
+const shown=e=>!!e&&getComputedStyle(e).display!=='none'&&e.getBoundingClientRect().height>0;
+function refresh(){let label='Início';if(document.getElementById('fyCategoriasDialog')?.open)label='Categorias';else if(shown(document.getElementById('fyCarrinhoPagina'))&&document.getElementById('fyCarrinhoPagina').getAttribute('aria-hidden')!=='true')label='Sacola';else if(shown(document.getElementById('paginaFavoritos')))label='Favoritos';else if(shown(document.getElementById('paginaConta')))label='Minha conta';
+if(document.body.dataset.fyView!==label)document.body.dataset.fyView=label;
+buttons.forEach(b=>{const active=b.getAttribute('aria-label')===label;if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+let n=0;try{if(typeof fyGetCart==='function')n=fyGetCart().reduce((a,p)=>a+Math.max(1,Number(p.quantidade||p.qtd||1)),0);}catch(e){}
+const text=n>99?'99+':String(n);if(badge.textContent!==text)badge.textContent=text;badge.hidden=!n;
+}
+let pending=false;const schedule=()=>{if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;refresh();});}};
+['paginaFavoritos','paginaConta','fyCarrinhoPagina','contadorCarrinho'].forEach(id=>{const e=document.getElementById(id);if(e)new MutationObserver(schedule).observe(e,{attributes:true,attributeFilter:['class','style','aria-hidden'],childList:id==='contadorCarrinho',subtree:id==='contadorCarrinho',characterData:id==='contadorCarrinho'});});
+document.addEventListener('click',()=>{schedule();setTimeout(schedule,180);},true);window.addEventListener('hashchange',schedule);refresh();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
 </script>
 </body>
