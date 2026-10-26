@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script id="fy-privacidade-config-3009">
 (function(){
@@ -139,7 +140,7 @@
   }
 }
 </style>
-<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>FOR YOU | Beleza</title>
@@ -25963,21 +25964,27 @@ html[data-fy-checkout-etapa="3"] #fyPagBankPagamentoV34{display:block!important}
   window.buscarProdutos=function(opcoes){
     const campo=document.getElementById('busca');
     const consulta=(opcoes?.consulta??campo?.value??'').trim();
-    const precoMax=Number(opcoes?.precoMax||0);
+    const precoMax=Number(opcoes?.precoMax??(campo?.dataset.fyConsultaPreco===consulta?campo.dataset.fyPrecoMax:0))||0;
+    if(campo){campo.dataset.fyConsultaPreco=consulta;campo.dataset.fyPrecoMax=String(precoMax);}
     if(typeof fecharSugestoesBusca==='function')fecharSugestoesBusca();
     if(!consulta){
       const resultado=document.getElementById('resultadoBusca');
       if(resultado)resultado.textContent='';
+      document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
+      const loja=document.getElementById('loja');if(loja)loja.style.display='block';
+      document.body.classList.remove('fy-area-interna');
       if(typeof renderProdutos==='function')renderProdutos();
       return;
     }
-    if(campo)campo.value=consulta+(precoMax?' até R$'+precoMax:'');
+    // Keep the query separate from the price shortcut so Enter repeats the same search.
+    if(campo)campo.value=consulta;
     if(typeof salvarHistoricoBusca==='function')salvarHistoricoBusca(normalizarBusca(consulta));
     let encontrados=ordenarResultados(catalogoBusca().filter(p=>combina(p,consulta)),consulta);
     if(precoMax)encontrados=encontrados.filter(p=>Number(p.preco||0)<=precoMax);
 
     document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
     const loja=document.getElementById('loja'); if(loja)loja.style.display='block';
+    document.body.classList.remove('fy-area-interna');
     if(typeof renderProdutos==='function')renderProdutos(encontrados,true);
     const grade=document.getElementById('listaProdutos'),resultado=document.getElementById('resultadoBusca');
     const exibida=consulta+(precoMax?' até R$'+precoMax:'');
@@ -27430,8 +27437,8 @@ nav.fy-clean-cat-top > button:not(.fy-pill):focus-visible {
 @media(prefers-reduced-motion:reduce){#carrinho *{scroll-behavior:auto!important;transition:none!important}}
 </style>
 
-</body>
-</html>
+
+
 
 <!-- FOR YOU — VARIAÇÕES VISÍVEIS POR BOTÕES (23/09/2026) -->
 <style id="fy-variacoes-botoes-final">
@@ -28444,3 +28451,68 @@ nav.fy-clean-cat-top .fy-cat-desenho .fy-cat-photo-v7{
 }
 nav.fy-clean-cat-top .fy-cat-desenho svg{display:none!important}
 </style>
+
+<!-- FOR YOU: revisão de legibilidade, consistência e acessibilidade. -->
+<style id="fy-revisao-usabilidade-2610">
+:root{--fy-ui-font:"Segoe UI",Arial,sans-serif;--fy-ui-text:#482b34;--fy-ui-muted:#765763;--fy-ui-border:#ead4dc}
+body{font-family:var(--fy-ui-font);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #8f1f40!important;outline-offset:3px!important}
+header .busca-linha:focus-within{border-color:#8f1f40!important;box-shadow:0 0 0 3px #8f1f4018!important}
+#novidades,#resultadoBusca{scroll-margin-top:180px}
+#resultadoBusca{color:var(--fy-ui-muted);line-height:1.6}
+#loja .produto{display:flex!important;flex-direction:column!important;border-radius:16px!important;border:1px solid var(--fy-ui-border)!important;background:#fff!important;box-shadow:0 3px 14px #63263208!important;min-width:0}
+#loja .produto-info{display:flex!important;flex-direction:column!important;flex:1!important;gap:5px;padding:16px!important}
+#loja .produto-info .nome{font:500 15px/1.5 var(--fy-ui-font)!important;color:var(--fy-ui-text)!important;min-height:45px!important;overflow-wrap:anywhere}
+#loja .produto-info .nome a{color:inherit!important;text-decoration:none}
+#loja .produto-info .nome a:hover{text-decoration:underline;text-underline-offset:3px}
+#loja .produto-info .marca{font:600 10px/1.4 var(--fy-ui-font)!important;letter-spacing:1px!important;color:var(--fy-ui-muted)!important}
+#loja .produto-info .preco{font:700 20px/1.35 var(--fy-ui-font)!important;font-variant-numeric:tabular-nums;color:#9c2449!important}
+#loja .produto-info .adicionar{margin-top:auto!important;min-height:44px!important;border-radius:10px!important;font:600 12px/1.3 var(--fy-ui-font)!important;letter-spacing:.3px!important}
+#loja .produto .favoritar{min-width:44px!important;min-height:44px!important}
+#loja .produto .produto-img img{object-fit:contain!important}
+.busca-vazia{grid-column:1/-1;padding:32px 20px;border:1px dashed var(--fy-ui-border);border-radius:14px;background:#fff8fa;text-align:center;line-height:1.8;color:var(--fy-ui-muted)}
+button:disabled{cursor:not-allowed}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ #loja .produto{transition:box-shadow .2s ease,border-color .2s ease!important}
+ #loja .produto:hover{box-shadow:0 8px 24px #63263214!important;border-color:#d7a8b8!important}
+}
+@media(max-width:800px){
+ header .busca input{font-size:16px!important;min-width:0!important}
+ #loja .produto-info{padding:11px!important;gap:5px}
+ #loja .produto-info .nome{font-size:13px!important;line-height:1.45!important;min-height:38px!important}
+ #loja .produto-info .preco{font-size:17px!important}
+ #loja .produto-info .adicionar{font-size:11px!important;padding:10px 6px!important}
+ .fy-clean-cat-top{max-height:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html:root{scroll-behavior:auto!important}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+<script id="fy-revisao-acessibilidade-2610">
+(()=>{
+ function iniciar(){
+  const campo=document.getElementById('busca');
+  if(campo){campo.type='search';campo.setAttribute('aria-label','Buscar produtos, marcas e categorias');campo.setAttribute('enterkeyhint','search');campo.setAttribute('aria-controls','buscaSugestoes');}
+  const resultado=document.getElementById('resultadoBusca');
+  if(resultado){resultado.setAttribute('role','status');resultado.setAttribute('aria-live','polite');resultado.setAttribute('aria-atomic','true');}
+  document.addEventListener('keydown',e=>{
+   if(e.key!=='Escape'||!e.target.closest?.('.busca'))return;
+   if(typeof fecharSugestoesBusca==='function')fecharSugestoesBusca();
+   document.getElementById('buscaSugestoes')?.classList.remove('aberta');
+  });
+  // The existing delegated product handlers remain responsible for the click.
+  document.addEventListener('focusin',e=>{
+   const botao=e.target.closest?.('button.favoritar');
+   if(!botao)return;
+   const ativo=botao.classList.contains('favoritado');
+   botao.setAttribute('aria-label',ativo?'Remover dos favoritos':'Adicionar aos favoritos');
+   botao.setAttribute('aria-pressed',String(ativo));
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar,{once:true});else iniciar();
+})();
+</script>
+</body>
+</html>
