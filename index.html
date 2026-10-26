@@ -1325,6 +1325,20 @@ html body #paginaConta .conta-tab-v14 input,html body #paginaConta .conta-tab-v1
 
 html body:has(#paginaConta.ativa) #inicio#inicio.fy-banner-r10,html body:has(#paginaFavoritos.ativa) #inicio#inicio.fy-banner-r10{display:none!important}
 </style>
+<style id="fy-banner-dez-estilo">#fyBannerDez{box-sizing:border-box;max-width:1272px;margin:0 auto 24px;padding:0 24px}
+.fy-ten-banner{width:100%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:31px 40px;background:#f9e8ee;border:1px solid #efd3df;border-radius:20px;color:#82334f;text-align:left;cursor:pointer;box-sizing:border-box}
+.fy-ten-banner::after{content:'';position:absolute;width:270px;height:270px;border:1px solid #dba5ba55;border-radius:50%;right:-60px;top:-120px;pointer-events:none}
+.fy-ten-copy{position:relative;z-index:1}
+.fy-ten-copy small{display:block;font:600 9px/1.5 var(--fy-ui-font);letter-spacing:2px;color:#b36c88;margin-bottom:10px}
+.fy-ten-copy strong{display:block;font:400 clamp(27px,3.5vw,43px)/1.15 var(--fy-display-font);letter-spacing:-.5px;color:#82334f}
+.fy-ten-copy>span{display:block;font:400 12px/1.7 var(--fy-ui-font);color:#ad748b;margin-top:10px}
+.fy-ten-right{display:flex;align-items:center;gap:30px;position:relative;z-index:1}
+.fy-ten-price{font:500 79px/1 var(--fy-ui-font);letter-spacing:-7px;color:#a8456b;white-space:nowrap}
+.fy-ten-price small{font:500 17px var(--fy-ui-font);letter-spacing:0;vertical-align:top;display:inline-block;margin:13px 6px 0 0}
+.fy-ten-cta{display:inline-flex;align-items:center;gap:15px;background:#923451;color:#fff;border-radius:8px;padding:14px 19px;font:600 11px var(--fy-ui-font);white-space:nowrap}
+html body:has(#paginaFavoritos.ativa) #fyBannerDez,html body:has(#paginaConta.ativa) #fyBannerDez,html body:has(#fyCarrinhoPagina[aria-hidden="false"]) #fyBannerDez,html body[data-fy-home="false"] #fyBannerDez{display:none!important}
+@media(max-width:800px){#fyBannerDez{padding:0 14px;margin:0 auto 19px}.fy-ten-banner{padding:23px 21px;gap:12px;border-radius:15px;align-items:center}.fy-ten-copy small{font-size:8px;letter-spacing:1.2px;margin-bottom:8px}.fy-ten-copy strong{font-size:26px;max-width:205px}.fy-ten-copy>span{font-size:10px;max-width:160px;margin-top:8px}.fy-ten-right{flex-direction:column;gap:12px;align-items:center}.fy-ten-price{font-size:57px;letter-spacing:-5px}.fy-ten-price small{font-size:12px;margin:8px 3px 0 0}.fy-ten-cta{font-size:9px;padding:11px 12px;gap:8px}.fy-ten-banner::after{width:190px;height:190px;top:-85px;right:-90px}}
+</style>
 </head>
 
 
@@ -1692,6 +1706,8 @@ ENVIO PARA TODO O BRASIL &#x2022; NOVIDADES E OFERTAS TODA SEMANA
     </div>
   </div>
 </section>
+<section id="fyBannerDez" aria-label="Beleza por dez reais"><button class="fy-ten-banner" type="button" onclick="fyVerSelecaoDez()" aria-label="Ver produtos de R$ 10"><span class="fy-ten-copy"><small>ACHADINHOS FOR YOU</small><strong>Beleza por R$ 10</strong><span>Achadinhos que cabem no bolso.</span></span><span class="fy-ten-right"><span class="fy-ten-price" aria-hidden="true"><small>R$</small>10</span><span class="fy-ten-cta">Ver produtos <span aria-hidden="true">↗</span></span></span></button></section>
+
 
 <!-- Categorias, Ofertas e Kits logo abaixo do primeiro banner -->
 <nav class="fy-clean-cat-top" aria-label="Categorias principais">
@@ -12379,6 +12395,17 @@ const keys=new Map();document.querySelectorAll('nav.fy-clean-cat-top>button').fo
 function update(){document.querySelectorAll('#fyCategorySheet .fy-category-list>button').forEach(b=>{if(b.querySelector('.fy-category-line-icon'))return;const img=b.querySelector('img');const i=icon(b.dataset.key||keys.get(b.textContent.replace('›','').trim())||'');if(img)img.replaceWith(i);else b.prepend(i);});}
 let pending=false;new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;update();});}).observe(document.body,{childList:true,subtree:true});update();
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();})();
+</script>
+<script id="fy-banner-dez-interacao">
+function fyVerSelecaoDez(){
+ if(typeof mostrarProdutosDezFY!=='function')return;
+ mostrarProdutosDezFY();
+ const lista=document.getElementById('listaProdutos');let count=0;
+ lista?.querySelectorAll('.produto').forEach(card=>{if(Number(card.dataset.preco)!==10)card.remove();else count++;});
+ const h=document.querySelector('#novidades h2');if(h)h.textContent='Beleza por R$ 10';
+ const p=document.getElementById('fyHomeIntro');if(p)p.textContent=count?count+' produtos por R$ 10 para você escolher.':'Novos achadinhos de R$ 10 aparecerão aqui em breve.';
+ document.getElementById('novidades')?.scrollIntoView({behavior:'smooth'});
+}
 </script>
 </body>
 </html>
