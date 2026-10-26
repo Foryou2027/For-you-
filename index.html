@@ -1050,6 +1050,60 @@ html body[data-fy-view="Favoritos"]>.fy-banner-r10,html body[data-fy-view="Minha
 html body #loja .produto .produto-info .nome{height:44px!important;max-height:44px!important;min-height:44px!important;overflow:hidden!important}
 @media(max-width:800px){html body #loja .produto .produto-info .nome{height:38px!important;max-height:38px!important;min-height:38px!important}}
 </style>
+<style id="fy-busca-categorias">/* Busca e navegação — FOR YOU */
+html body header .header .header-top .busca-linha{border:1px solid #dec5cf!important;background:#fff!important;border-radius:10px!important;min-height:52px!important;box-shadow:0 4px 18px #6d304507!important;padding:4px 5px 4px 15px!important;gap:10px!important}
+html body header .header .header-top .busca-linha #busca{min-width:0!important;padding:9px 0!important;font-size:14px!important;background:transparent!important}
+html body header .header .header-top .fy-search-submit{display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;width:44px!important;min-width:44px!important;height:42px!important;background:#923451!important;color:#fff!important;border:0!important;border-radius:7px!important;margin:0!important;transform:none!important}
+html body header .header .header-top .fy-search-submit svg{width:19px!important;height:19px!important}
+html body header .header .header-top .fy-search-icon{display:none!important}
+#fySearchLinks{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0 0;font-family:var(--fy-ui-font)}
+#fySearchLinks button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:10px 25px;border:1px solid #ead4dd;border-radius:9px;background:#fff8fb;color:#86334f;font:600 12px var(--fy-ui-font);cursor:pointer}
+#fySearchLinks button:first-child{background:#923451;color:white;border-color:#923451}
+#fySearchLinks svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html body #marcas,html body #loja #fyHomePromos>.fy-home-section-heading,html body #loja #fyHomePromos>.fy-home-promo-links{display:none!important}
+html body #loja #fyHomePromos{padding-top:0!important}
+#fyCategorySheet{box-sizing:border-box;width:min(900px,92vw);max-height:85dvh;margin:auto;padding:0;border:1px solid #ead7df;border-radius:23px;background:#fff;color:#382c31;box-shadow:0 25px 100px #3f192338;font-family:var(--fy-ui-font);overflow:hidden}
+#fyCategorySheet::backdrop{background:#2b15265e;backdrop-filter:blur(4px)}
+.fy-category-sheet-head{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:28px 30px;background:#fff7fa;border-bottom:1px solid #f0e2e8}
+.fy-category-sheet-head small{font-size:9px;letter-spacing:2px;color:#ad7187}
+.fy-category-sheet-head h2{font:400 34px/1.2 var(--fy-display-font);margin:6px 0 0}
+.fy-category-sheet-head button{width:40px;height:40px;border:1px solid #e9d4dd;border-radius:50%;background:white;color:#923451;font-size:24px;cursor:pointer}
+.fy-category-sheet-body{display:grid;grid-template-columns:270px minmax(0,1fr);max-height:calc(85dvh - 115px);overflow:auto}
+.fy-category-list{padding:18px;background:#fffafb;border-right:1px solid #f0e2e8;display:flex;flex-direction:column;gap:7px}
+.fy-category-list button{display:flex;align-items:center;gap:12px;width:100%;border:1px solid transparent;border-radius:12px;padding:10px;background:transparent;text-align:left;font:500 13px var(--fy-ui-font);color:#58434c;cursor:pointer}
+.fy-category-list button[aria-pressed="true"]{background:#f7e7ee;border-color:#ebccda;color:#923451;font-weight:700}
+.fy-category-list img{width:43px;height:43px;object-fit:cover;border-radius:50%;background:#f4e5eb}
+.fy-category-list .fy-category-arrow{margin-left:auto;font-size:19px}
+.fy-category-content{padding:30px}
+.fy-category-content>small{color:#a67487;letter-spacing:1.5px;font-size:9px}
+.fy-category-content h3{font:400 33px var(--fy-display-font);margin:7px 0 8px;color:#48303b}
+.fy-category-content p{font-size:12px;line-height:1.6;color:#957986;margin:0 0 22px}
+.fy-subcategory-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fy-subcategory-grid button{display:flex;align-items:center;justify-content:space-between;gap:10px;background:white;border:1px solid #ecdee4;border-radius:10px;min-height:47px;padding:12px 14px;color:#654653;text-align:left;font:500 12px var(--fy-ui-font);cursor:pointer}
+.fy-subcategory-grid button:hover{border-color:#c998ac;background:#fff8fb}
+.fy-category-all{margin-top:23px;width:100%;min-height:47px;border:0;border-radius:10px;background:#923451;color:#fff;font:600 12px var(--fy-ui-font);cursor:pointer}
+@media(max-width:800px){
+ #fySearchLinks{margin-top:10px;gap:9px}
+ #fySearchLinks button{flex:1;padding:10px 14px;min-height:42px;font-size:11px}
+ html body header .header .header-top .busca-linha{min-height:50px!important}
+ html body header .header .header-top .busca-linha #busca{font-size:13px!important}
+ #fyCategorySheet{width:100%;max-width:100%;height:auto;max-height:90dvh;margin:auto 0 0;border-radius:24px 24px 0 0;border-bottom:0}
+ .fy-category-sheet-head{padding:23px 20px 18px}
+ .fy-category-sheet-head h2{font-size:30px}
+ .fy-category-sheet-body{grid-template-columns:1fr;max-height:calc(90dvh - 105px)}
+ .fy-category-list{flex-direction:row;overflow-x:auto;padding:15px 16px;border-right:0;border-bottom:1px solid #f0e2e8;gap:8px;scrollbar-width:thin}
+ .fy-category-list button{flex:0 0 76px;flex-direction:column;gap:7px;text-align:center;padding:10px 6px;font-size:10px;white-space:nowrap}
+ .fy-category-list img{width:44px;height:44px}
+ .fy-category-list .fy-category-arrow{display:none}
+ .fy-category-content{padding:22px 20px 30px}
+ .fy-category-content h3{font-size:30px}
+ .fy-subcategory-grid{gap:9px}
+ .fy-subcategory-grid button{font-size:11px;min-height:46px;padding:11px}
+}
+html body header .header .header-top .busca-linha .fy-search-submit{opacity:1!important;visibility:visible!important;pointer-events:auto!important;min-width:44px!important;max-width:44px!important;flex:0 0 44px!important;box-sizing:border-box!important;padding:0!important}
+html body header .header .header-top .busca-linha #busca{flex:1 1 auto!important;width:auto!important}
+html body nav.fy-clean-cat-top>button[hidden]{display:none!important}
+</style>
 </head>
 
 
@@ -12055,6 +12109,40 @@ document.addEventListener('click',()=>{schedule();setTimeout(schedule,180);},tru
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
+</script>
+<script id="fy-busca-categorias-interacao">(()=>{function start(){
+ const search=document.getElementById('busca');if(search)search.placeholder='Busque seu próximo favorito';
+ const wrap=document.querySelector('.fy-busca-topo');
+ if(wrap&&!document.getElementById('fySearchLinks')){
+ const links=document.createElement('div');links.id='fySearchLinks';links.setAttribute('aria-label','Ofertas e kits');
+ links.innerHTML='<button type="button" data-offers><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 4 9-1 9 9-9 9-9-9Z"/><circle cx="8" cy="8" r="1.2"/></svg>Ofertas</button><button type="button" data-kits><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18v4H3zM5 12v9h14v-9M12 8v13"/><path d="M12 8c-7 0-7-7-3-5 2 1 3 5 3 5Zm0 0c7 0 7-7 3-5-2 1-3 5-3 5Z"/></svg>Kits promocionais</button>';
+ links.querySelector('[data-offers]').onclick=()=>document.getElementById('fyHomeOfertas')?.click();
+ links.querySelector('[data-kits]').onclick=()=>document.getElementById('fyHomeKits')?.click();wrap.appendChild(links);}
+ const originalSearch=window.buscarProdutos;
+ if(typeof originalSearch==='function')window.buscarProdutos=function(){const term=document.getElementById('busca')?.value||'';if(term.trim()&&typeof fyIrInicio==='function')fyIrInicio();if(search)search.value=term;const r=originalSearch.apply(this,arguments);if(term.trim()){const heading=document.querySelector('#novidades h2');if(heading)heading.textContent='Resultados da busca';}return r;};
+ const brands=document.getElementById('marcas');if(brands){brands.hidden=true;brands.setAttribute('aria-hidden','true');}
+ const cats=[...document.querySelectorAll('nav.fy-clean-cat-top>button')].filter(b=>!/^marcas$/i.test(b.textContent.trim()));
+ const labels={labios:'Lábios',pele:'Pele',skincare:'Skincare',olhos:'Olhos',cabelos:'Cabelos',face:'Face',acessorios:'Acessórios',corpo:'Corpo e Banho'};
+ let dialog,active;
+ const title=b=>b.querySelector('b')?.textContent?.trim()||b.textContent.trim();
+ const key=b=>{const h=b.getAttribute('onclick')||'';return h.match(/['"]([^'"]+)['"]/)?.[1]||'';};
+ function choose(b){active=b;const label=title(b);dialog.querySelectorAll('.fy-category-list button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.key===key(b))));
+ const panel=dialog.querySelector('.fy-category-content');panel.replaceChildren();
+ const small=document.createElement('small');small.textContent='EXPLORE POR CATEGORIA';const h=document.createElement('h3');h.textContent=label;const p=document.createElement('p');p.textContent='Escolha o que você procura ou veja todos os produtos.';panel.append(small,h,p);
+ const grid=document.createElement('div');grid.className='fy-subcategory-grid';
+ const source=document.getElementById('dropdown-'+key(b));
+ [...(source?.querySelectorAll('a:not(.menu-ver-todos)')||[])].forEach(a=>{const btn=document.createElement('button');btn.type='button';const t=document.createElement('span');t.textContent=a.textContent.trim();const arrow=document.createElement('span');arrow.textContent='↗';btn.append(t,arrow);btn.onclick=()=>{dialog.close();if(typeof fyIrInicio==='function')fyIrInicio();a.click();};grid.appendChild(btn);});
+ panel.appendChild(grid);const all=document.createElement('button');all.type='button';all.className='fy-category-all';all.textContent='Ver tudo em '+label;all.onclick=()=>{dialog.close();if(typeof fyIrInicio==='function')fyIrInicio();const a=source?.querySelector('.menu-ver-todos');if(a)a.click();else if(typeof selecionarSubcategoria==='function')selecionarSubcategoria(key(b),'');};panel.appendChild(all);
+ }
+ function open(k){if(!dialog){dialog=document.createElement('dialog');dialog.id='fyCategorySheet';dialog.setAttribute('aria-labelledby','fyNewCategoryTitle');dialog.innerHTML='<div class="fy-category-sheet-head"><div><small>DESCUBRA A FOR YOU</small><h2 id="fyNewCategoryTitle">Categorias</h2></div><button type="button" aria-label="Fechar categorias">×</button></div><div class="fy-category-sheet-body"><div class="fy-category-list" aria-label="Escolha uma categoria"></div><div class="fy-category-content"></div></div>';dialog.querySelector('.fy-category-sheet-head button').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});const list=dialog.querySelector('.fy-category-list');cats.forEach(b=>{const btn=document.createElement('button');btn.type='button';btn.dataset.key=key(b);const img=b.querySelector('img');if(img){const clone=img.cloneNode();clone.alt='';btn.appendChild(clone);}const t=document.createElement('span');t.textContent=title(b);const arrow=document.createElement('span');arrow.className='fy-category-arrow';arrow.textContent='›';btn.append(t,arrow);btn.onclick=()=>choose(b);list.appendChild(btn);});document.body.appendChild(dialog);}
+ choose(cats.find(b=>key(b)===k)||active||cats[0]);if(!dialog.open)dialog.showModal();}
+ window.fyAbrirCategorias=()=>open();
+ cats.forEach(b=>b.onclick=()=>open(key(b)));
+ const bottom=document.querySelector('.fy6-bottom-nav [aria-label="Categorias"]');if(bottom)bottom.onclick=()=>open();
+ const brandsButton=document.querySelector('nav.fy-clean-cat-top>button:last-child');if(brandsButton&&/^marcas$/i.test(title(brandsButton)))brandsButton.hidden=true;
+ document.querySelectorAll('a[href="#marcas"]').forEach(a=>{a.textContent='Categorias';a.href='#categorias';a.onclick=e=>{e.preventDefault();open();};});
+}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();})();
 </script>
 </body>
 </html>
