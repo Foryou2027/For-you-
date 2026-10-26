@@ -1147,6 +1147,18 @@ html body footer .fy-footer-links-extra{display:flex!important;flex-wrap:wrap!im
 html body footer .fy-footer-links-extra>button{font:400 10px/1.6 var(--fy-ui-font)!important;min-height:30px!important;border:0!important;background:transparent!important;color:#8a6c79!important;padding:4px 0!important;text-decoration:none!important}
 html body footer .fy-footer-links-extra>button:nth-child(1),html body footer .fy-footer-links-extra>button:nth-child(4),html body footer #fySeoCatalogo{display:none!important}
 </style>
+<style id="fy-categorias-icones">.fy-category-line-icon{display:grid;place-items:center;color:#933a59;background:#fff7fa;border:1px solid #e9d4de;border-radius:16px;width:58px;height:58px;box-sizing:border-box;flex-shrink:0}
+.fy-category-line-icon svg{width:31px;height:31px;display:block}
+html body nav.fy-clean-cat-top .fy-cat-desenho{display:grid!important;place-items:center!important;background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;width:72px!important;height:72px!important;overflow:visible!important}
+html body nav.fy-clean-cat-top .fy-cat-desenho::before,html body nav.fy-clean-cat-top .fy-cat-desenho::after{content:none!important;display:none!important}
+html body nav.fy-clean-cat-top>button .fy-category-line-icon{width:68px!important;height:68px!important;border-radius:21px!important;background:#fff9fb!important;box-shadow:none!important}
+html body nav.fy-clean-cat-top>button .fy-category-line-icon svg{width:35px!important;height:35px!important}
+#fyCategorySheet .fy-category-list .fy-category-line-icon{width:43px;height:43px;border-radius:12px;background:#fff;border-color:#efdee6}
+#fyCategorySheet .fy-category-list .fy-category-line-icon svg{width:25px;height:25px}
+#fyCategorySheet .fy-category-list button[aria-pressed="true"] .fy-category-line-icon{background:#923451;color:#fff;border-color:#923451}
+@media(hover:hover){html body nav.fy-clean-cat-top>button:hover .fy-category-line-icon{background:#f6e5ed!important;border-color:#cf9db1!important}}
+@media(max-width:800px){#fyCategorySheet .fy-category-list .fy-category-line-icon{width:44px;height:44px;border-radius:14px}}
+</style>
 </head>
 
 
@@ -12185,6 +12197,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  document.querySelectorAll('a[href="#marcas"]').forEach(a=>{a.textContent='Categorias';a.href='#categorias';a.onclick=e=>{e.preventDefault();open();};});
 }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();})();
+</script>
+<script id="fy-categorias-icones-interacao">(()=>{function start(){
+const drawings={
+labios:'<path d="M8 12h8v9H8zM9 12V6l6-3v9M8 17h8"/>',
+pele:'<path d="M7 9h10l1 12H6L7 9ZM9 9V5h6v4M10 5V3h4v2M10 14h4"/>',
+skincare:'<path d="M8 9h8v12H8zM10 9V5h4v4M10 5V3h7M17 3v2M10 15h4"/>',
+olhos:'<path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+cabelos:'<path d="M8 3h5a4 4 0 0 1 0 8H8V3ZM8 11v10M11 4v5M14 4v5M7 16h3M7 19h3"/>',
+face:'<path d="M6 9c0-5 12-5 12 0v4c0 5-4 8-6 8s-6-3-6-8V9ZM9 11h1M14 11h1M12 12v3M10 17h4"/>',
+acessorios:'<path d="M8 3h8v5a4 4 0 0 1-8 0V3ZM10 12h4v9h-4zM11 3v4M14 3v4"/>',
+corpo:'<path d="M8 9h8l2 12H6L8 9ZM10 9V5h4v4M10 5V3h8M18 3v2M10 15h4"/>'};
+function icon(key){let d=drawings[key];if(!d){if(/corpo|banho/.test(key))d=drawings.corpo;else d=drawings.acessorios;}const span=document.createElement('span');span.className='fy-category-line-icon';span.setAttribute('aria-hidden','true');span.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';return span;}
+const keys=new Map();document.querySelectorAll('nav.fy-clean-cat-top>button').forEach(b=>{const key=(b.getAttribute('onclick')||'').match(/['"]([^'"]+)['"]/)?.[1]||'';keys.set(b.textContent.trim(),key);const holder=b.querySelector('.fy-cat-desenho');if(holder)holder.replaceChildren(icon(key));});
+function update(){document.querySelectorAll('#fyCategorySheet .fy-category-list>button').forEach(b=>{if(b.querySelector('.fy-category-line-icon'))return;const img=b.querySelector('img');const i=icon(b.dataset.key||keys.get(b.textContent.replace('›','').trim())||'');if(img)img.replaceWith(i);else b.prepend(i);});}
+let pending=false;new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;update();});}).observe(document.body,{childList:true,subtree:true});update();
+}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();})();
 </script>
 </body>
 </html>
