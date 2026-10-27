@@ -12501,5 +12501,52 @@ function update(){document.querySelectorAll('#fyCategorySheet .fy-category-list>
 let pending=false;new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;update();});}).observe(document.body,{childList:true,subtree:true});update();
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();})();
 </script>
+<!-- FOR YOU | Painel lateral de categorias -->
+<style id="fy-lateral-categorias-style">
+#fyCatOverlay{position:fixed;inset:0;background:rgba(27,12,19,.55);z-index:99990;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+#fyCatOverlay.aberto{opacity:1;visibility:visible}
+#fyCatDrawer{position:fixed;right:0;top:0;bottom:0;width:min(470px,100vw);background:#faf5f0;color:#532438;z-index:99991;transform:translateX(105%);transition:transform .32s ease;box-shadow:-15px 0 50px #1c0c1830;display:flex;flex-direction:column;font-family:inherit}
+#fyCatDrawer.aberto{transform:translateX(0)}
+#fyCatDrawer .fy-drawer-top{padding:30px 28px 20px;border-bottom:1px solid #e8d7d7;display:flex;justify-content:space-between;align-items:flex-start}
+#fyCatDrawer .fy-drawer-top small{font-size:10px;letter-spacing:2px;color:#976477}
+#fyCatDrawer h2{font-family:Georgia,serif;font-weight:400;font-size:38px;margin:6px 0 0;color:#69223c}
+#fyCatDrawer .fy-close{border:1px solid #dec6cd;border-radius:50%;background:transparent;width:38px;height:38px;font-size:24px;color:#69223c;cursor:pointer}
+#fyCatDrawer .fy-drawer-scroll{overflow:auto;padding:18px 28px 35px;flex:1}
+#fyCatDrawer .fy-cat-link{display:flex;width:100%;justify-content:space-between;align-items:center;padding:16px 3px;border:0;border-bottom:1px solid #e9d9da;background:transparent;color:#4b2b37;text-align:left;font-size:15px;cursor:pointer}
+#fyCatDrawer .fy-cat-link:hover{color:#9b3b5a;padding-left:8px}
+#fyCatDrawer .fy-cat-all{margin-top:25px;width:100%;background:#70243e;color:white;border:0;border-radius:5px;padding:16px;cursor:pointer;letter-spacing:.5px}
+body.fy-cat-open{overflow:hidden}
+@media(max-width:600px){#fyCatDrawer{width:min(390px,92vw)}#fyCatDrawer .fy-drawer-top{padding:24px 20px 15px}#fyCatDrawer .fy-drawer-scroll{padding:12px 20px 28px}#fyCatDrawer h2{font-size:32px}}
+</style>
+<div id="fyCatOverlay" aria-hidden="true"></div>
+<aside id="fyCatDrawer" role="dialog" aria-modal="true" aria-label="Subcategorias" aria-hidden="true">
+ <div class="fy-drawer-top"><div><small>EXPLORE A FOR YOU</small><h2 id="fyCatTitle">Categorias</h2></div><button class="fy-close" type="button" aria-label="Fechar painel">×</button></div>
+ <div class="fy-drawer-scroll"><div id="fyCatItems"></div><button class="fy-cat-all" type="button">VER TODOS OS PRODUTOS →</button></div>
+</aside>
+<script id="fy-lateral-categorias-script">
+(function(){
+ const drawer=document.getElementById('fyCatDrawer'),overlay=document.getElementById('fyCatOverlay');
+ if(!drawer||!overlay)return;
+ const nomes={labios:'Lábios',pele:'Pele',skincare:'Skincare',olhos:'Olhos',cabelos:'Cabelos',corpo:'Corpo',acessorios:'Acessórios',face:'Face'};
+ let atual='',anterior=null;
+ function fechar(){drawer.classList.remove('aberto');overlay.classList.remove('aberto');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('fy-cat-open');if(anterior&&anterior.focus)anterior.focus()}
+ function abrir(cat){
+  anterior=document.activeElement;atual=cat;
+  document.getElementById('fyCatTitle').textContent=nomes[cat]||cat;
+  const orig=document.getElementById('dropdown-'+cat);
+  const links=orig?Array.from(orig.querySelectorAll('a')).filter(a=>!a.classList.contains('menu-ver-todos')):[];
+  const destino=document.getElementById('fyCatItems');destino.replaceChildren();
+  links.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='fy-cat-link';const nome=document.createElement('span');nome.textContent=a.textContent.trim();const seta=document.createElement('span');seta.textContent='›';b.append(nome,seta);b.addEventListener('click',()=>{fechar();a.click()});destino.appendChild(b)});
+  if(!links.length){const p=document.createElement('p');p.textContent='Explore todos os produtos desta categoria.';destino.appendChild(p)}
+  drawer.classList.add('aberto');overlay.classList.add('aberto');drawer.setAttribute('aria-hidden','false');document.body.classList.add('fy-cat-open');drawer.querySelector('.fy-close').focus();
+ }
+ window.abrirSubmenuHomeFY=abrir;window.fecharSubmenuHomeFY=fechar;
+ overlay.addEventListener('click',fechar);drawer.querySelector('.fy-close').addEventListener('click',fechar);
+ drawer.querySelector('.fy-cat-all').addEventListener('click',()=>{fechar();if(typeof window.selecionarSubcategoria==='function')window.selecionarSubcategoria(atual,'')});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('aberto'))fechar()});
+ document.addEventListener('click',e=>{const btn=e.target.closest('[onclick]');if(!btn||drawer.contains(btn))return;const code=btn.getAttribute('onclick')||'';const match=code.match(/abrirSubmenuHomeFY\(['"]([^'"]+)['"]\)/);if(match){e.preventDefault();e.stopImmediatePropagation();abrir(match[1])}},true);
+})();
+</script>
+
 </body>
 </html>
