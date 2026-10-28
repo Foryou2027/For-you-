@@ -12635,5 +12635,80 @@ body.fy-cat-open{overflow:hidden}
 })();
 </script>
 
+<style id="fy-categorias-pagina-mobile-css">
+#fyMobileCategoriesPage{display:none}
+@media(max-width:800px){
+html body dialog#fyMobileCategoriesPage[open]{display:flex!important;flex-direction:column!important;position:fixed!important;inset:0!important;width:100%!important;max-width:none!important;height:100dvh!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:#fff!important;color:#38252d!important;overflow:hidden!important;box-sizing:border-box!important;font-family:var(--fy-ui-font,Arial,sans-serif)!important}
+#fyMobileCategoriesPage::backdrop{background:#fff}
+#fyMobileCategoriesPage *{box-sizing:border-box}
+#fyMobileCategoriesPage .fy-mc-brand{text-align:center;padding:17px 12px 14px;color:#923451;font:400 27px/1.1 Georgia,serif;letter-spacing:5px;border-bottom:1px solid #f5e9ed;flex-shrink:0}
+#fyMobileCategoriesPage .fy-mc-header{position:relative;display:flex;align-items:center;justify-content:center;min-height:58px;padding:10px 74px;border-bottom:3px solid #f9e9ef;flex-shrink:0}
+#fyMobileCategoriesPage .fy-mc-header h2{font:600 20px/1.2 var(--fy-ui-font,Arial,sans-serif);margin:0;color:#30252b}
+#fyMobileCategoriesPage .fy-mc-back{position:absolute;left:10px;top:7px;min-height:44px;padding:7px 10px;border:0;background:none;color:#923451;font:500 14px/1.2 var(--fy-ui-font,Arial,sans-serif)}
+#fyMobileCategoriesPage .fy-mc-layout{display:grid;grid-template-columns:30% minmax(0,1fr);flex:1;min-height:0;overflow:hidden}
+#fyMobileCategoriesPage .fy-mc-tabs{overflow:auto;overscroll-behavior:contain;background:#fcf0f4;border-right:1px solid #efd8e1;padding:0 0 18px}
+#fyMobileCategoriesPage .fy-mc-tabs button{display:block;width:100%;min-height:66px;padding:16px 12px;text-align:left;background:transparent;border:0;border-bottom:1px solid #f0dce4;color:#70273f;font:500 13px/1.4 var(--fy-ui-font,Arial,sans-serif);overflow-wrap:break-word;cursor:pointer}
+#fyMobileCategoriesPage .fy-mc-tabs button[aria-selected="true"]{background:#923451;color:#fff;font-weight:600}
+#fyMobileCategoriesPage .fy-mc-panel{overflow:auto;overscroll-behavior:contain;padding:22px 14px 28px;min-width:0}
+#fyMobileCategoriesPage .fy-mc-eyebrow{font-size:9px;line-height:1.5;letter-spacing:1.4px;font-weight:600;color:#923451;margin:0 0 10px}
+#fyMobileCategoriesPage .fy-mc-panel h3{font:600 25px/1.2 var(--fy-ui-font,Arial,sans-serif);margin:0 0 10px;color:#30252b}
+#fyMobileCategoriesPage .fy-mc-help{font-size:12px;line-height:1.6;color:#80717a;margin:0 0 20px}
+#fyMobileCategoriesPage .fy-mc-option,#fyMobileCategoriesPage .fy-mc-all{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;min-height:48px;margin:0 0 10px;padding:12px;border:1px solid #efd5df;border-radius:8px;background:#fff;color:#392731;text-align:left;font:500 13px/1.4 var(--fy-ui-font,Arial,sans-serif);cursor:pointer}
+#fyMobileCategoriesPage .fy-mc-option span:last-child{font-size:22px;line-height:1;color:#923451;flex-shrink:0}
+#fyMobileCategoriesPage .fy-mc-all{background:#923451;color:#fff;border-color:#923451;margin-top:16px;font-weight:600}
+#fyMobileCategoriesPage button:focus-visible{outline:2px solid #923451;outline-offset:-3px}
+#fyMobileCategoriesPage .fy-mc-footer{display:flex;flex-shrink:0;border-top:1px solid #eedee4;background:#fff;padding:8px 4px calc(8px + env(safe-area-inset-bottom));gap:0}
+#fyMobileCategoriesPage .fy-mc-footer button{display:flex;flex:1;min-width:0;min-height:48px;align-items:center;justify-content:center;flex-direction:column;gap:4px;border:0;background:#fff;color:#52333f;border-radius:12px;padding:4px 2px;font:500 10px/1.2 var(--fy-ui-font,Arial,sans-serif)}
+#fyMobileCategoriesPage .fy-mc-footer button[aria-label="Categorias"]{color:#923451;background:#fbeaf1}
+#fyMobileCategoriesPage .fy-mc-footer svg{display:block;width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+}
+</style>
+<script id="fy-categorias-pagina-mobile-js">
+(()=>{
+function init(){
+ const mq=matchMedia('(max-width:800px)');
+ const entries=[['labios','Lábios'],['pele','Pele'],['skincare','Skincare'],['olhos','Olhos'],['cabelos','Cabelos'],['face','Face'],['acessorios','Acessórios'],['corpo','Corpo e Banho']];
+ const previousOpen=window.fyAbrirCategorias;
+ let page,selected='labios',previousFocus,pendingAction=null,ownsHistory=false;
+ const stateKey='fyMobileCategoriesPageV1';
+ function finish(){if(page?.open)page.close();document.body.classList.remove('fy-mobile-category-open');ownsHistory=false;const action=pendingAction;pendingAction=null;if(action)action();else if(previousFocus?.isConnected)previousFocus.focus();}
+ function close(action){pendingAction=action||null;if(ownsHistory&&history.state?.[stateKey]){history.back();}else finish();}
+ function productAction(action){close(()=>{if(typeof window.fyIrInicio==='function')window.fyIrInicio();action();});}
+ function render(key){
+  selected=key;const name=entries.find(x=>x[0]===key)?.[1]||key;
+  page.querySelectorAll('[role="tab"]').forEach(b=>{const on=b.dataset.category===key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+  const panel=page.querySelector('.fy-mc-panel');panel.setAttribute('aria-labelledby','fy-mc-tab-'+key);panel.replaceChildren();panel.scrollTop=0;
+  const small=document.createElement('p');small.className='fy-mc-eyebrow';small.textContent='EXPLORE A FOR YOU';
+  const h=document.createElement('h3');h.textContent=name;
+  const p=document.createElement('p');p.className='fy-mc-help';p.textContent='Escolha uma subcategoria';panel.append(small,h,p);
+  const source=document.getElementById('dropdown-'+key);
+  const links=Array.from(source?.querySelectorAll('a:not(.menu-ver-todos)')||[]);
+  function option(label,action){const b=document.createElement('button');b.type='button';b.className='fy-mc-option';const t=document.createElement('span');t.textContent=label;const a=document.createElement('span');a.textContent='›';a.setAttribute('aria-hidden','true');b.append(t,a);b.onclick=()=>productAction(action);panel.appendChild(b);}
+  links.forEach(a=>option(a.textContent.trim(),()=>a.click()));
+  if(key==='cabelos')option('Cuidados para cabelos',()=>window.selecionarSubcategoria?.('corpo','Cabelo'));
+  const all=document.createElement('button');all.type='button';all.className='fy-mc-all';all.textContent='Ver todos de '+name;
+  all.onclick=()=>productAction(()=>{if(key==='cabelos'){window.selecionarSubcategoria?.('corpo','Cabelo');return;}const a=source?.querySelector('.menu-ver-todos');if(a)a.click();else window.selecionarSubcategoria?.(key,'');});panel.appendChild(all);
+ }
+ function build(){
+  page=document.createElement('dialog');page.id='fyMobileCategoriesPage';page.setAttribute('aria-labelledby','fyMobileCategoriesTitle');
+  page.innerHTML='<div class="fy-mc-brand">FOR YOU</div><div class="fy-mc-header"><button type="button" class="fy-mc-back" aria-label="Voltar para a loja">‹ Voltar</button><h2 id="fyMobileCategoriesTitle">Categorias</h2></div><div class="fy-mc-layout"><nav class="fy-mc-tabs" role="tablist" aria-label="Categorias" aria-orientation="vertical"></nav><section class="fy-mc-panel" id="fyMobileSubcategories" role="tabpanel"></section></div><nav class="fy-mc-footer" aria-label="Navegação da loja"></nav>';
+  entries.forEach(([key,name],i)=>{const b=document.createElement('button');b.type='button';b.id='fy-mc-tab-'+key;b.dataset.category=key;b.setAttribute('role','tab');b.setAttribute('aria-controls','fyMobileSubcategories');b.textContent=name;b.onclick=()=>render(key);b.onkeydown=e=>{let next=i;if(e.key==='ArrowDown')next=(i+1)%entries.length;else if(e.key==='ArrowUp')next=(i+entries.length-1)%entries.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=entries.length-1;else return;e.preventDefault();render(entries[next][0]);page.querySelector('#fy-mc-tab-'+entries[next][0]).focus();};page.querySelector('.fy-mc-tabs').appendChild(b);});
+  document.querySelectorAll('.fy6-bottom-nav>button').forEach(original=>{const b=original.cloneNode(true);b.removeAttribute('onclick');b.removeAttribute('id');b.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));b.removeAttribute('aria-current');b.onclick=()=>{if(original.getAttribute('aria-label')==='Categorias')return;close(()=>original.click());};page.querySelector('.fy-mc-footer').appendChild(b);});
+  page.querySelector('.fy-mc-back').onclick=()=>close();page.addEventListener('cancel',e=>{e.preventDefault();close();});document.body.appendChild(page);
+ }
+ function open(key){if(!mq.matches){return previousOpen?.apply(window,arguments);}if(page?.open){if(key)render(key);return;}previousFocus=document.activeElement;if(!page)build();render(entries.some(x=>x[0]===key)?key:selected);
+  document.querySelectorAll('dialog[open]').forEach(d=>{if(d!==page)d.close();});window.fecharSubmenuHomeFY?.();
+  try{history.pushState({...history.state,[stateKey]:true},'',location.pathname+location.search+'#categorias');ownsHistory=true;}catch(e){ownsHistory=false;}
+  document.body.classList.add('fy-mobile-category-open');page.showModal();page.querySelector('.fy-mc-back').focus();
+ }
+ window.fyAbrirCategorias=function(){return mq.matches?open():previousOpen?.apply(this,arguments);};
+ window.addEventListener('click',e=>{if(!mq.matches)return;const b=e.target.closest?.('.fy6-bottom-nav button[aria-label="Categorias"]');if(b){e.preventDefault();e.stopImmediatePropagation();open();}},true);
+ window.addEventListener('popstate',()=>{if(page?.open&&!history.state?.[stateKey])finish();});
+ mq.addEventListener('change',()=>{if(!mq.matches&&page?.open)close();});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+
 </body>
 </html>
