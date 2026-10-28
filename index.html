@@ -742,7 +742,7 @@ html body #fyCarrinhoPagina[data-fy-empty="true"] .fy-area-frete-beneficio{displ
  html body #fyCarrinhoPagina .fy-cp-header{padding:16px 14px!important;min-height:86px!important;grid-template-columns:44px minmax(0,1fr) 44px!important}
  html body #fyCarrinhoPagina .fy-cp-header h1{font-size:30px!important}
  html body #fyCarrinhoPagina .fy-cp-back{width:40px!important;min-width:40px!important;height:40px!important;padding:0!important;font-size:0!important;overflow:hidden!important}
- html body #fyCarrinhoPagina .fy-cp-back::after{content:'â†';display:block;font:400 25px/40px var(--fy-ui-font);color:#b06b86}
+ html body #fyCarrinhoPagina .fy-cp-back::after{content:'\2190';display:block;font:400 25px/40px var(--fy-ui-font);color:#b06b86}
  html body #fyCarrinhoPagina .fy-cp-body{grid-template-columns:minmax(0,1fr)!important;padding:18px 13px 100px!important;gap:17px!important}
  html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box:first-child{padding:20px 17px!important;border-radius:18px!important}
  html body #fyCarrinhoPagina .fy-cp-body>.fy-cp-box>h2{font-size:25px!important;margin-bottom:18px!important}
@@ -1509,6 +1509,44 @@ html body nav#fyCategoriasDesktop#fyCategoriasDesktop.fy-clean-cat-top>button:nt
 html body nav#fyCategoriasDesktop#fyCategoriasDesktop.fy-clean-cat-top>button:nth-of-type(8) .fy-cat-desenho{background-position:-525.28px -57.88px!important}
 }
 </style>
+
+<style id="fy-mobile-conta-sacola-corrigidos">
+/* Ajustes de Conta e Sacola para celular. */
+@media(max-width:800px){
+html body #paginaConta{padding:12px 16px calc(96px + env(safe-area-inset-bottom))!important;}
+html body #paginaConta>.voltar{display:inline-flex!important;align-items:center!important;min-height:44px!important;margin:0 0 8px!important;padding:6px 0!important;font-size:13px!important;}
+html body #paginaConta .fy-area-auth-layout{gap:16px!important;}
+html body #paginaConta .fy-account-welcome{padding:0 0 14px!important;}
+html body #paginaConta .fy-account-welcome h1{font-size:23px!important;line-height:1.25!important;margin:0 0 6px!important;}
+html body #paginaConta .fy-account-welcome>p{font-size:12px!important;line-height:1.5!important;max-width:none!important;}
+html body #paginaConta #fyAuthGate .fy-auth-card{padding:18px 16px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-brand{margin-bottom:8px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-card h2{font-size:24px!important;margin-bottom:6px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-card>p{font-size:13px!important;line-height:1.5!important;margin:0 0 14px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-tabs{margin-bottom:14px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-tabs button{font-size:12px!important;min-height:44px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-form{gap:12px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-form[hidden]{display:none!important;}
+html body #paginaConta #fyAuthGate .fy-auth-card label{font-size:13px!important;line-height:1.4!important;gap:6px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-card input{height:44px!important;min-height:44px!important;font-size:16px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-submit{font-size:13px!important;min-height:46px!important;}
+html body #paginaConta #fyAuthGate .fy-auth-forgot,html body #paginaConta #fyAuthGate .fy-auth-switch-copy{font-size:12px!important;}
+html body #fyCarrinhoPagina .fy-cp-header{min-height:64px!important;padding:10px 16px!important;}
+html body #fyCarrinhoPagina .fy-cp-back{display:grid!important;place-items:center!important;width:44px!important;height:44px!important;padding:0!important;font-size:0!important;}
+html body #fyCarrinhoPagina .fy-cp-back::before{content:none!important;}
+html body #fyCarrinhoPagina .fy-cp-back::after{content:'\2190'!important;display:block!important;font:400 26px/1 sans-serif!important;}
+html body #fyCarrinhoPagina .fy-area-cart-heading h1{font-size:24px!important;}
+html body #fyCarrinhoPagina .fy-cp-body{padding:18px 16px calc(96px + env(safe-area-inset-bottom))!important;gap:20px!important;}
+html body #fyCarrinhoPagina .fy-cp-box>h2{font-size:18px!important;}
+html body #fyCarrinhoPagina .fy-cp-empty{min-height:0!important;padding:28px 12px!important;gap:0!important;}
+html body #fyCarrinhoPagina .fy-cp-empty>.fy-area-empty-bag{width:64px!important;height:64px!important;margin-bottom:16px!important;}
+html body #fyCarrinhoPagina .fy-area-empty-bag svg{width:28px!important;height:28px!important;}
+html body #fyCarrinhoPagina .fy-cp-empty>strong{font-size:25px!important;line-height:1.25!important;max-width:310px!important;}
+html body #fyCarrinhoPagina .fy-cp-empty>p{font-size:13px!important;line-height:1.6!important;margin:12px 0 18px!important;}
+html body #fyCarrinhoPagina .fy-cp-empty>button{min-height:46px!important;font-size:14px!important;padding:12px 22px!important;}
+}
+</style>
+
 </head>
 
 
@@ -9729,7 +9767,7 @@ function mostrarPedidosConta(){abrirConta();setTimeout(renderPedidosConta,50);}
       if(limpa&&saudacao.textContent!==limpa)saudacao.textContent=limpa;
     }
     const voltar=pagina.querySelector(':scope > .voltar');
-    if(voltar&&voltar.textContent.trim()!=='â† Loja')voltar.textContent='â† Loja';
+    if(voltar&&voltar.textContent.trim()!=='\u2190 Loja')voltar.textContent='\u2190 Loja';
     const sair=pagina.querySelector('.fy2-logout > span:not(.fy2-nav-icon)');
     if(sair&&sair.textContent.trim()!=='Sair')sair.textContent='Sair';
     const vazio=pagina.querySelector('#listaPedidosConta .fy2-empty');
